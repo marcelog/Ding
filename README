@@ -7,3 +7,5 @@ lack of spring-alike frameworks for php.
 
 Performance *is* a concern, but not now, because the framework is still in
 development. 
+--------------------------------------------------------------------------------
+Please see example.php for a very basic example of use.
