@@ -34,10 +34,25 @@ class BeanList
 	{
 	    $aspects = array();
         $aspectBean = (string)$simpleXmlAspect->attributes()->ref;
+        $type = (string)$simpleXmlAspect->attributes()->type;
+        if ($type == 'before') {
+            $type = AspectDefinition::ASPECT_BEFORE;
+        } else if ($type == 'after') {
+            $type = AspectDefinition::ASPECT_AFTER;
+        } else if ($type == 'afterThrowing') {
+            $type = AspectDefinition::ASPECT_AFTERTHROW;
+        } else if ($type == 'afterFinally') {
+            $type = AspectDefinition::ASPECT_AFTERFINALLY;
+        } else if ($type == 'around') {
+            $type = AspectDefinition::ASPECT_AROUND;
+        } else {
+            throw new BeanListException('Invalid aspect type');
+        }
         foreach ($simpleXmlAspect->pointcut as $pointcut) {
             $aspect = new AspectDefinition(
                 (string)$pointcut->attributes()->expression,
                 (string)$pointcut->attributes()->advice,
+                intval($type), 
                 $aspectBean 
 	        );
         }

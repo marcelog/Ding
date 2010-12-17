@@ -85,6 +85,12 @@ class AspectDefinition
     private $_advice;
     
     /**
+     * Aspect type (or when the advice should be invoked).
+     * @var integer
+     */
+    private $_type;
+    
+    /**
      * Returns pointcut name.
      * 
 	 * @return string
@@ -102,6 +108,16 @@ class AspectDefinition
     public function getAdvice()
     {
         return $this->_advice;
+    }
+
+    /**
+     * Returns advice type.
+     * 
+	 * @return integer
+     */
+    public function getType()
+    {
+        return $this->_type;
     }
     
     /**
@@ -126,6 +142,7 @@ class AspectDefinition
             . __CLASS__
             . ' Pointcut: ' . $this->getPointcut()
             . ' Advice: ' . $this->getAdvice()
+            . ' Type: ' . intval($this->getType())
             . ' Aspect: ' . $this->getBeanName()
             . ']'
         ;
@@ -134,16 +151,18 @@ class AspectDefinition
     /**
      * Constructor.
      * 
-     * @param string $pointcut Pointcut name.
-     * @param string $advice   Advice name (method name).
-     * @param string $beanName Aspect bean name.
+     * @param string  $pointcut Pointcut name.
+     * @param string  $advice   Advice name (method name).
+     * @param integer $type     Aspect type (see this class constants).
+     * @param string  $beanName Aspect bean name.
      * 
 	 * @return void
      */
-    public function __construct($pointcut, $advice, $beanName)
+    public function __construct($pointcut, $advice, $type, $beanName)
     {
         $this->_pointcut = $pointcut;
         $this->_beanName = $beanName;
         $this->_advice = $advice;
+        $this->_type = $type;
     }
 }
