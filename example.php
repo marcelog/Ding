@@ -2,8 +2,6 @@
 /**
  * Example using ding. See also beans.xml.
  * 
- * Run this like: /usr/bin/php -d include_path=.:src/mg/ding example.php
- *
  * PHP Version 5
  *
  * @category ding
@@ -17,6 +15,16 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Mandatory stuff to bootstrap ding. (START)
 ////////////////////////////////////////////////////////////////////////////////
+ini_set(
+	'include_path',
+    implode(
+        PATH_SEPARATOR,
+        array(
+            ini_get('include_path'),
+        	implode(DIRECTORY_SEPARATOR, array('src', 'mg', 'ding'))
+        )
+    )
+);
 require_once 'autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
 
