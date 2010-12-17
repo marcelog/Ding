@@ -1,0 +1,23 @@
+<beans>
+
+	<bean id="ComponentB" class="ClassB" scope="singleton">
+		<property name="aProperty">
+			<value>un string para componente b</value>
+		</property>
+		<property name="bProperty">
+			<value>un string para componente b</value>
+		</property>
+	</bean>
+
+	<bean id="ComponentA" class="ClassA" scope="singleton">
+		<property name="aComponent">
+			<ref bean="ComponentB"/>
+		</property>
+		<aspect ref="AspectA">
+			<pointcut expression="targetMethod" advice="anAdvice"/>
+		</aspect>
+	</bean>
+	
+	<bean id="AspectA" class="AspectA" scope="singleton">
+	</bean>
+</beans>
