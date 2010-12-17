@@ -2,10 +2,10 @@
 
 	<bean id="ComponentB" class="ClassB" scope="singleton">
 		<property name="aProperty">
-			<value>un string para componente b</value>
+			<value>Some string A</value>
 		</property>
 		<property name="bProperty">
-			<value>un string para componente b</value>
+			<value>Some string B</value>
 		</property>
 	</bean>
 
