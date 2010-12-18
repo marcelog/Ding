@@ -45,31 +45,31 @@ class BeanDefinition
      * Bean name
      * @var string
      */
-	private $_name;
+    private $_name;
 
     /**
      * Bean class name.
      * @var string
      */
-	private $_class;
+    private $_class;
 
     /**
      * Bean type (scope). See this class constants.
      * @var integer
      */
-	private $_scope;
+    private $_scope;
 
     /**
      * Properties to be di'ed to this bean.
      * @var BeanPropertyDefinition[]
      */
-	private $_properties;
+    private $_properties;
 
     /**
      * Aspects mapped to this bean.
      * @var AspectDefinition[]
      */
-	private $_aspects;
+    private $_aspects;
     
     /**
      * Returns true if this bean has mapped aspects.
@@ -81,17 +81,17 @@ class BeanDefinition
         return count($this->getAspects()) > 0;
     }
     
-	/**
-	 * Returns aspects for this bean.
-	 * 
-	 * @return AspectDefinition[]
-	 */
+    /**
+     * Returns aspects for this bean.
+     * 
+     * @return AspectDefinition[]
+     */
     public function getAspects()
     {
         return $this->_aspects;
     }
     
-	/**
+    /**
      * Returns bean type (scope). See this class constants.
      * 
      * @return integer
@@ -101,36 +101,36 @@ class BeanDefinition
         return $this->_scope;
     }
     
-	/**
+    /**
      * Returns bean name.
      * 
      * @return string
      */
     public function getName()
-	{
-		return $this->_name;
-	}
+    {
+        return $this->_name;
+    }
 
-	/**
+    /**
      * Returns bean class.
      * 
      * @return string
      */
-	public function getClass()
-	{
-		return $this->_class;
-	}
+    public function getClass()
+    {
+        return $this->_class;
+    }
 
-	/**
-	 * Returns properties for this bean.
-	 * 
-	 * @return BeanPropertyDefinition[]
-	 */
-	public function getProperties()
-	{
+    /**
+     * Returns properties for this bean.
+     * 
+     * @return BeanPropertyDefinition[]
+     */
+    public function getProperties()
+    {
         return $this->_properties;
-	}
-	
+    }
+    
     /**
      * Constructor.
      * 
@@ -141,15 +141,15 @@ class BeanDefinition
      * @param BeanPropertyDefinition[] $properties Bean properties definitions.
      * @param AspectDefinition[]       $aspects    Aspects definitions.
      * 
-	 * @return void
+     * @return void
      */
-	public function __construct(
-	    $name, $class, $scope, array $properties, array $aspects
-	) {
-		$this->_name = $name;
-		$this->_class = $class;
-		$this->_scope = $scope;
-		$this->_properties = $properties;
-		$this->_aspects = $aspects;
-	}
+    public function __construct(
+        $name, $class, $scope, array $properties, array $aspects
+    ) {
+        $this->_name = $name;
+        $this->_class = $class;
+        $this->_scope = $scope;
+        $this->_properties = $properties;
+        $this->_aspects = $aspects;
+    }
 }

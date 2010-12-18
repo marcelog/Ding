@@ -80,7 +80,7 @@ class MethodInvocation
     /**
      * Returns class name for the executed method.
      * 
-	 * @return string
+     * @return string
      */
     public function getClass()
     {
@@ -90,7 +90,7 @@ class MethodInvocation
     /**
      * Returns name for the executed method.
      * 
-	 * @return string
+     * @return string
      */
     public function getMethod()
     {
@@ -100,7 +100,7 @@ class MethodInvocation
     /**
      * Returns arguments for the executed method.
      * 
-	 * @return array
+     * @return array
      */
     public function getArguments()
     {
@@ -110,7 +110,7 @@ class MethodInvocation
     /**
      * Standard function, you know the drill.. 
      *
-	 * @return string
+     * @return string
      */
     public function __toString()
     {
@@ -133,7 +133,7 @@ class MethodInvocation
      * @param array  $args   Arguments used to invoke the aspected method.
      * @param mixed  $result Result from the execution of the aspected method.
      * 
-	 * @return void
+     * @return void
      */
     public function construct($class, $method, $args, $result)
     {

@@ -32,66 +32,66 @@ class BeanPropertyDefinition
      * other native type.
      * @var integer
      */
-	const PROPERTY_SIMPLE = 0;
+    const PROPERTY_SIMPLE = 0;
 
-	/**
+    /**
      * This constant represents a property that is another bean.
      * @var integer
      */
-	const PROPERTY_BEAN = 1;
+    const PROPERTY_BEAN = 1;
 
-	/**
-	 * Property name
-	 * @var string
-	 */
-	private $_name;
+    /**
+     * Property name
+     * @var string
+     */
+    private $_name;
 
-	/**
-	 * Property value (in the case of a bean property, this is the bean name).
-	 * @var string
-	 */
-	private $_value;
+    /**
+     * Property value (in the case of a bean property, this is the bean name).
+     * @var string
+     */
+    private $_value;
 
-	/**
-	 * Property type (see this class constants)
-	 * @var string
-	 */
-	private $_type;
-	
-	/**
-	 * Returns property value (or bean name in the case of a bean property).
-	 *
-	 * @return string
-	 */
-	public function getValue()
-	{
+    /**
+     * Property type (see this class constants)
+     * @var string
+     */
+    private $_type;
+    
+    /**
+     * Returns property value (or bean name in the case of a bean property).
+     *
+     * @return string
+     */
+    public function getValue()
+    {
         return $this->_value;
-	}
-	
-	/**
-	 * Returns property name
-	 *
-	 * @return string
-	 */
-	public function getName()
-	{
-		return $this->_name;
-	}
+    }
+    
+    /**
+     * Returns property name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
 
-	/**
-	 * Returns property type
-	 *
-	 * @return integer
-	 */
-	public function getType()
-	{
-		return $this->_type;
-	}
+    /**
+     * Returns property type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->_type;
+    }
 
     /**
      * Standard function, you know the drill.. 
      *
-	 * @return string
+     * @return string
      */
     public function __toString()
     {
@@ -112,12 +112,12 @@ class BeanPropertyDefinition
      * @param integer $type  Target property type (See this class constants).
      * @param string  $value Target property value.
      * 
-	 * @return void
+     * @return void
      */
     public function __construct($name, $type, $value)
-	{
-		$this->_name = $name;
-		$this->_type = $type;
-		$this->_value = $value;
-	}
+    {
+        $this->_name = $name;
+        $this->_type = $type;
+        $this->_value = $value;
+    }
 }

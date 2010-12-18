@@ -1,43 +1,100 @@
 <?php
+use Ding\Proxy;
 namespace Ding;
+/**
+ * So... php does not have such a thing.. and here's what it needs to be done
+ * to have a proxy class and any kind of "dynamic class".
+ * 
+ * PHP Version 5
+ *
+ * @category ding
+ * @package  aspect
+ * @author   Marcelo Gornstein <marcelog@gmail.com>
+ * @license  http://www.noneyet.ar/ Apache License 2.0
+ * @version  SVN: $Id$
+ * @link     http://www.noneyet.ar/
+ */
 
+/**
+ * So... php does not have such a thing.. and here's what it needs to be done
+ * to have a proxy class and any kind of "dynamic class".
+ *
+ * PHP Version 5
+ *
+ * @category ding
+ * @package  aspect
+ * @author   Marcelo Gornstein <marcelog@gmail.com>
+ * @license  http://www.noneyet.ar/ Apache License 2.0
+ * @link     http://www.noneyet.ar/
+ */
 class Proxy
 {
+    /**
+     * Number of proxy classes.
+     * @var integer
+     */
     private static $_proxyCount = 1;
+    
+    /**
+     * Proxy class template (i.e: the dynamic class)
+     * @var string
+     */
     private static $_proxyTemplate = <<<TEXT
-
 final class NEW_NAME extends CLASS_NAME {
-	private static \$_interceptors = array();
+    private static \$_interceptors = array();
 
-	public static function setInterceptor(Ding\InterceptorDefinition \$interceptor)
-	{
-		self::\$_interceptors[\$interceptor->getTargetMethod()->getName()][]
-			= \$interceptor
-		;
-	}
-	METHODS
+    /**
+     * This is used from the container to set the interceptors (aspects).
+     *
+     * @param InterceptorDefinition \$interceptor This holds the information
+     * needed to call the advices. You can call this as many times as you want.
+     *
+     * @return void
+     */
+    public static function setInterceptor(
+        Ding\InterceptorDefinition \$interceptor
+    ) {
+        self::\$_interceptors[\$interceptor->getTargetMethod()->getName()][]
+            = \$interceptor
+        ;
+    }
+    METHODS
 }
 TEXT;
 
+    /**
+     * Method template (i.e: effetively, the proxy methods).
+     * @var string
+     */
     private static $_methodTemplate = <<<TEXT
-	VISIBILITY ADDITIONAL function METHOD_NAME()
+    VISIBILITY ADDITIONAL function METHOD_NAME()
     {
-    	if (isset(self::\$_interceptors['METHOD_NAME'])) {
-    		foreach (self::\$_interceptors['METHOD_NAME'] as \$interceptor) {
-    			\$invocation = new Ding\MethodInvocation(
-    				__CLASS__, __METHOD__, func_get_args__, null
-    			);
-    			\$advice = \$interceptor->getInterceptorMethod();
-    			\$advice->invokeArgs(
-    				\$interceptor->getObjectInterceptor(), array(\$invocation)
-    			);
-    		}
-    	}
+        if (isset(self::\$_interceptors['METHOD_NAME'])) {
+            foreach (self::\$_interceptors['METHOD_NAME'] as \$interceptor) {
+                \$invocation = new Ding\MethodInvocation(
+                    __CLASS__, __METHOD__, func_get_args__, null
+                );
+                \$advice = \$interceptor->getInterceptorMethod();
+                \$advice->invokeArgs(
+                    \$interceptor->getObjectInterceptor(), array(\$invocation)
+                );
+            }
+        }
         \$method = new \ReflectionMethod('CLASS_NAME', 'METHOD_NAME');
         return \$method->invokeArgs(\$this, func_get_args());
     }
 TEXT;
 
+    /**
+     * This will return a proxy class source.
+     * 
+     * @param string          $newName     Name for the proxy class.
+     * @param ReflectionClass $targetClass Class to be proxied.
+     * 
+     * @see Proxy::$_proxyTemplate
+     * 
+     * @return string
+     */
     private static function _createClass($newName, \ReflectionClass $class)
     {
         $src = self::$_proxyTemplate;
@@ -51,6 +108,15 @@ TEXT;
         return $src;
     }
     
+    /**
+     * This will return a full proxy-method source.
+     * 
+     * @param \ReflectionMethod $method The method to be proxied.
+     * 
+     * @see Proxy::$_methodTemplate
+     * 
+     * @return string
+     */
     private static function _createMethod(\ReflectionMethod $method)
     {
         $visibility = '';
@@ -78,10 +144,22 @@ TEXT;
         $src = str_replace('VISIBILITY', $visibility, $src);
         $src = str_replace('ADDITIONAL', $additional, $src);
         $src = str_replace('METHOD_NAME', $name, $src);
-        $src = str_replace('CLASS_NAME', $method->getDeclaringClass()->getName(), $src);
+        $src = str_replace(
+        	'CLASS_NAME', $method->getDeclaringClass()->getName(), $src
+        );
         return $src;
     }
-    
+
+    /**
+     * This will give you an instance of a proxy class for any given class.
+     * 
+     * @param string $class Class to be proxied.
+     * 
+     * @todo Currently, final classes can't be proxied because the proxy class
+     * extends it (this may change in the near future).
+     * 
+     * @return object 
+     */
     public static function create($class)
     {
         $subject = new \ReflectionClass($class);

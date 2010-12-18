@@ -65,21 +65,21 @@ class Autoloader
     public static function register()
     {
         self::$_myClasses = array(
-        	'Ding\BeanDefinition' => implode(DIRECTORY_SEPARATOR, array('component')),
-        	'Ding\BeanList' => implode(DIRECTORY_SEPARATOR, array('component')),
-        	'Ding\BeanListException' => implode(DIRECTORY_SEPARATOR, array('component', 'exception')),
-        	'Ding\BeanPropertyDefinition' => implode(DIRECTORY_SEPARATOR, array('component')),
-        	'Ding\ContainerException'  => implode(DIRECTORY_SEPARATOR, array('container', 'exception')),
-        	'Ding\ContainerImpl' => implode(DIRECTORY_SEPARATOR, array('container', 'impl')),
-        	'Ding\IContainer' => implode(DIRECTORY_SEPARATOR, array('container')),
-        	'Ding\InterceptorDefinition' => implode(DIRECTORY_SEPARATOR, array('aspect')),
-        	'Ding\AspectDefinition' => implode(DIRECTORY_SEPARATOR, array('aspect')),
+            'Ding\BeanDefinition' => implode(DIRECTORY_SEPARATOR, array('component')),
+            'Ding\BeanList' => implode(DIRECTORY_SEPARATOR, array('component')),
+            'Ding\BeanListException' => implode(DIRECTORY_SEPARATOR, array('component', 'exception')),
+            'Ding\BeanPropertyDefinition' => implode(DIRECTORY_SEPARATOR, array('component')),
+            'Ding\ContainerException'  => implode(DIRECTORY_SEPARATOR, array('container', 'exception')),
+            'Ding\ContainerImpl' => implode(DIRECTORY_SEPARATOR, array('container', 'impl')),
+            'Ding\IContainer' => implode(DIRECTORY_SEPARATOR, array('container')),
+            'Ding\InterceptorDefinition' => implode(DIRECTORY_SEPARATOR, array('aspect')),
+            'Ding\AspectDefinition' => implode(DIRECTORY_SEPARATOR, array('aspect')),
             'Ding\Proxy' => implode(DIRECTORY_SEPARATOR, array('aspect')),
             'Ding\MethodInvocation' => implode(DIRECTORY_SEPARATOR, array('aspect')),
             'Ding\DingException' => implode(DIRECTORY_SEPARATOR, array('exception')),
             'Ding\IBeanFactory' => implode(DIRECTORY_SEPARATOR, array('component', 'factory')),
             'Ding\BeanFactoryException' => implode(DIRECTORY_SEPARATOR, array('component', 'factory', 'exception')),
-        	'Ding\BeanFactoryXmlImpl' => implode(DIRECTORY_SEPARATOR, array('component', 'factory', 'impl'))
+            'Ding\BeanFactoryXmlImpl' => implode(DIRECTORY_SEPARATOR, array('component', 'factory', 'impl'))
         );
         return spl_autoload_register('Autoloader::load');
     }

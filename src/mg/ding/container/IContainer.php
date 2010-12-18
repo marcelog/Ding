@@ -34,5 +34,5 @@ interface IContainer
      * 
      * @result object
      */
-	public function getBean($bean);
+    public function getBean($bean);
 }

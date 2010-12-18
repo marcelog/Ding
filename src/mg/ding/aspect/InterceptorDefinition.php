@@ -50,9 +50,15 @@ class InterceptorDefinition
     private $_objectInterceptor;
     
     /**
+     * Holds aspect definition.
+     * @var AspectDefinition
+     */
+    private $_aspectDefinition;
+    
+    /**
      * Return reflected target method.
      * 
-	 * @return ReflectionMethod
+     * @return ReflectionMethod
      */
     public function getTargetMethod()
     {
@@ -62,7 +68,7 @@ class InterceptorDefinition
     /**
      * Return reflected advice method.
      * 
-	 * @return ReflectionMethod
+     * @return ReflectionMethod
      */
     public function getInterceptorMethod()
     {
@@ -72,7 +78,7 @@ class InterceptorDefinition
     /**
      * Return reflected bean object to be invoked.
      * 
-	 * @return object
+     * @return object
      */
     public function getObjectInterceptor()
     {
@@ -82,7 +88,7 @@ class InterceptorDefinition
     /**
      * Standard function, you know the drill.. 
      *
-	 * @return string
+     * @return string
      */
     public function __toString()
     {
@@ -101,18 +107,20 @@ class InterceptorDefinition
      * 
      * @param ReflectionMethod $targetMethod      Method to be aspected.
      * @param ReflectionMethod $interceptorMethod Advice to run.
-     * @param Object		   $object            Bean to be invoked.
+     * @param Object           $object            Bean to be invoked.
+     * @param AspectDefinition $aspectDefinition  Aspect definition.
      * 
-	 * @return void
+     * @return void
      */
     public function __construct(
         \ReflectionMethod $targetMethod,
         \ReflectionMethod $interceptorMethod,
-        $object
+        $object,
+        AspectDefinition $aspectDefinition
     ) {
         $this->_targetMethod = $targetMethod;
         $this->_interceptorMethod = $interceptorMethod;
-        $this->_objectInterceptor = $object;
+        $this->_objectInterceptor = $object;        
+        $this->_aspectDefinition = $aspectDefinition;
     }
-    
 }

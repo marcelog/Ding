@@ -93,7 +93,7 @@ class AspectDefinition
     /**
      * Returns pointcut name.
      * 
-	 * @return string
+     * @return string
      */
     public function getPointcut()
     {
@@ -103,7 +103,7 @@ class AspectDefinition
     /**
      * Returns advice name.
      * 
-	 * @return string
+     * @return string
      */
     public function getAdvice()
     {
@@ -113,7 +113,7 @@ class AspectDefinition
     /**
      * Returns advice type.
      * 
-	 * @return integer
+     * @return integer
      */
     public function getType()
     {
@@ -123,7 +123,7 @@ class AspectDefinition
     /**
      * Returns bean name.
      * 
-	 * @return string
+     * @return string
      */
     public function getBeanName()
     {
@@ -133,7 +133,7 @@ class AspectDefinition
     /**
      * Standard function, you know the drill.. 
      *
-	 * @return string
+     * @return string
      */
     public function __toString()
     {
@@ -156,7 +156,7 @@ class AspectDefinition
      * @param integer $type     Aspect type (see this class constants).
      * @param string  $beanName Aspect bean name.
      * 
-	 * @return void
+     * @return void
      */
     public function __construct($pointcut, $advice, $type, $beanName)
     {

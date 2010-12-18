@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-NOTE: THIS FRAMEWORK IS NOT STILL SUITABLE FOR PRODUCTION ENVIRONMENTS.
+NOTE: THIS FRAMEWORK IS NOT YET SUITABLE FOR PRODUCTION ENVIRONMENTS.
       (However, you can still give it a try, it may suit your needs).
 --------------------------------------------------------------------------------
 This framework is a very young project, started on 12/16/2010 because of the
@@ -9,3 +9,11 @@ Performance *is* a concern, but not now, because the framework is still in
 development. 
 --------------------------------------------------------------------------------
 Please see example.php for a very basic example of use.
+--------------------------------------------------------------------------------
+Notes about the source:
+
+* If you're wondering why the first comment of the source files is repeated,
+it's because they're actually 2 different comments: one of the file, and one
+for the class.
+
+* Don't worry, performance will eventually be taken care of.

@@ -13,7 +13,19 @@
 		<property name="aComponent">
 			<ref bean="ComponentB"/>
 		</property>
-		<aspect ref="AspectA">
+		<aspect ref="AspectA" type="before">
+			<pointcut expression="targetMethod" advice="anAdvice"/>
+		</aspect>
+		<aspect ref="AspectA" type="after">
+			<pointcut expression="targetMethod" advice="anAdvice"/>
+		</aspect>
+		<aspect ref="AspectA" type="afterThrowing">
+			<pointcut expression="targetMethod" advice="anAdvice"/>
+		</aspect>
+		<aspect ref="AspectA" type="afterFinally">
+			<pointcut expression="targetMethod" advice="anAdvice"/>
+		</aspect>
+		<aspect ref="AspectA" type="around">
 			<pointcut expression="targetMethod" advice="anAdvice"/>
 		</aspect>
 	</bean>
