@@ -104,7 +104,7 @@ class AspectA
 ////////////////////////////////////////////////////////////////////////////////
 try
 {
-    $a = ContainerImpl::getInstance('beans.xml');
+    $a = ContainerImpl::getInstanceFromXml('beans.xml');
     $bean = $a->getBean('ComponentA');
     $bean->targetMethod('a', 1, array('1' => '2'));
 } catch(Exception $exception) {

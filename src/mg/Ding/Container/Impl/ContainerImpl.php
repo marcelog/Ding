@@ -17,6 +17,8 @@ use Ding\Container\IContainer;
 use Ding\Component\BeanDefinition;
 use Ding\Component\BeanList;
 use Ding\Component\BeanPropertyDefinition;
+use Ding\Component\Factory\BeanFactory;
+use Ding\Component\Factory\Impl\BeanFactoryXmlImpl;
 use Ding\Component\Exception\BeanListException;
 use Ding\Container\Exception\ContainerException;
 use Ding\Aspect\Proxy;
@@ -35,116 +37,52 @@ use Ding\Aspect\InterceptorDefinition;
  */
 class ContainerImpl implements IContainer
 {
-    private $_beanList = false;
+    /**
+     * Bean factory
+     * @var IBeanFactory
+     */
+    private $_factory = false;
+    
+    /**
+     * This one will hold our instantiaed beans.
+     * @var object[]
+     */
     private $_beans = false;
+    
+    /**
+     * Container instance.
+     * @var ContainerImpl
+     */
     private static $_containerInstance = false;
 
-    private function _getBeanList()
+    /**
+     * Returns factory in use.
+	 * @return IBeanFactory
+     */
+    private function _getFactory()
     {
-        return $this->_beanList;
+        return $this->_factory;
     }
 
-    private function _assemble($bean, BeanDefinition $def)
+    public function getBean($bean)
     {
-        foreach ($def->getProperties() as $property) {
-            $method = $this->_getSetterFor(
-                $def->getClass(), $property->getName()
-            );
-            switch ($property->getType())
-            {
-            case BeanPropertyDefinition::PROPERTY_BEAN:
-                $value = $this->getBean($property->getValue());
-                break; 
-            case BeanPropertyDefinition::PROPERTY_SIMPLE:
-                $value = $property->getValue();
-                break; 
-            default:
-                throw new ContainerException('Invalid property type');
-            }
-            $method->invoke($bean, $value);
-        }
+        $factory = $this->_getFactory();
+        return $factory->getBean($bean);
     }
     
-    private function _getSetterFor($class, $name)
-    {
-        $rClass = new \ReflectionClass($class);
-        return $rClass->getMethod('set' . ucfirst($name));
-    }
-    
-    private function _createBean(BeanDefinition $beanDefinition)
-    {
-        $beanClass = $beanDefinition->getClass();
-        if ($beanDefinition->hasAspects()) {
-            $bean = Proxy::create($beanClass);
-            foreach ($beanDefinition->getAspects() as $aspectDefinition) {
-                $aspect = $this->getBean($aspectDefinition->getBeanName());
-
-                $refAspect = new \ReflectionObject($aspect); 
-                $refObject = new \ReflectionObject($bean);
-                
-                $advice = $refAspect->getMethod($aspectDefinition->getAdvice());
-                $joinpoint = $refObject->getMethod($aspectDefinition->getPointcut());
-                
-                $interceptor = new InterceptorDefinition(
-                    $joinpoint, $advice, $aspect, $aspectDefinition
-                );
-                $bean::setInterceptor($interceptor);
-            }
-        } else {
-            /* @todo change this to a clone */
-            $bean = new $beanClass;
-        }
-        try
-        {
-            $this->_assemble($bean, $beanDefinition);
-        } catch(\ReflectionException $exception) {
-            throw new ContainerException('DI Error', 0, $exception);
-        }
-        return $bean;
-    }
-    
-    public function getBean($beanName)
-    {
-        $ret = false;
-        $beanList = $this->_getBeanList();
-        $beanDefinition = $beanList->getBean($beanName);
-        if (!$beanDefinition) {
-            throw new ContainerException('Unknown bean: ' . $beanName);
-        }
-        switch ($beanDefinition->getScope())
-        {
-        case BeanDefinition::BEAN_PROTOTYPE:
-            $ret = $this->_createBean($beanDefinition);
-            break;
-        case BeanDefinition::BEAN_SINGLETON:
-            if (!isset($this->_beans[$beanName])) {
-                $ret = $this->_createBean($beanDefinition);
-                $this->_beans[$beanName] = $ret;
-            } else {
-                $ret = $this->_beans[$beanName];
-            }
-            break;
-        default:
-            throw new ContainerException('Invalid bean scope');
-        }
-        return $ret;
-    }
-
-    public static function getInstance($filename)
+    public static function getInstanceFromXml($filename)
     {
         return
             self::$_containerInstance === false
-            ? new ContainerImpl($filename)
+            ? new ContainerImpl(new BeanFactoryXmlImpl($filename))
             : self::$_containerInstance
         ;
     }
 
-    protected function __construct($filename)
+    protected function __construct(BeanFactory $factory)
     {
         $this->_beans = array();
-        $list = new BeanList($filename);
-        $list->load();
-        $this->_beanList = $list;
+        $this->_factory = $factory;
         self::$_containerInstance = $this;
     }
 }
