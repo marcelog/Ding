@@ -55,6 +55,10 @@ class BeanFactoryXmlImpl extends BeanFactory
         return $errors;
     }
 
+    /**
+     * @throws BeanFactoryException
+     * @param unknown_type $filename
+     */
     private function _loadXml($filename)
     {
         libxml_use_internal_errors(true);
@@ -64,6 +68,10 @@ class BeanFactoryXmlImpl extends BeanFactory
         return simplexml_load_string(file_get_contents($filename));
     }
     
+    /**
+     * @throws BeanFactoryException
+     * @param unknown_type $filename
+     */
     private function _loadAspect($simpleXmlAspect)
     {
         $aspects = array();
@@ -108,6 +116,10 @@ class BeanFactoryXmlImpl extends BeanFactory
         );
     }
     
+    /**
+     * @throws BeanFactoryException
+     * @param unknown_type $filename
+     */
     private function _loadBean($simpleXmlBean)
     {
         $bName = (string)$simpleXmlBean->attributes()->id;

@@ -46,6 +46,17 @@ abstract class BeanFactory
      */
     private $_beans;
     
+    /**
+     * This will assembly a bean (inject dependencies, loading other needed
+     * beans in the way).
+     * 
+     * @param object         $bean Where to call 'setXXX' methods.
+     * @param BeanDefinition $def  Bean definition, used to get needed 
+     * properties.
+     * 
+     * @throws BeanFactoryException
+     * @return void
+     */
     private function _assemble($bean, BeanDefinition $def)
     {
         foreach ($def->getProperties() as $property) {
@@ -67,12 +78,24 @@ abstract class BeanFactory
         }
     }
     
+    /**
+     * Returns the method (a reflection method) used for di'ing stuff.
+     * 
+     * @param string $class Class name.
+     * @param string $name  Property name. If name is 'name', then this will
+     * return a method named 'setName'.
+     * 
+     * @return \ReflectionMethod
+     */
     private function _getSetterFor($class, $name)
     {
         $rClass = new \ReflectionClass($class);
         return $rClass->getMethod('set' . ucfirst($name));
     }
     
+    /**
+     * @throws BeanFactoryException
+     */
     private function _createBean(BeanDefinition $beanDefinition)
     {
         $beanClass = $beanDefinition->getClass();
@@ -100,7 +123,7 @@ abstract class BeanFactory
         {
             $this->_assemble($bean, $beanDefinition);
         } catch(\ReflectionException $exception) {
-            throw new ContainerException('DI Error', 0, $exception);
+            throw new BeanFactoryException('DI Error', 0, $exception);
         }
         return $bean;
     }
@@ -114,6 +137,14 @@ abstract class BeanFactory
      */
     public abstract function getBeanDefinition($beanName);
 
+    /**
+     * Returns a bean.
+     * 
+     * @param string $beanName Bean name.
+     * 
+     * @throws BeanFactoryException
+     * @return object
+     */
     public function getBean($beanName)
     {
         $ret = false;
@@ -140,11 +171,16 @@ abstract class BeanFactory
             }
             break;
         default:
-            throw new ContainerException('Invalid bean scope');
+            throw new BeanFactoryException('Invalid bean scope');
         }
         return $ret;
     }
     
+    /**
+     * Constructor.
+     * 
+     * @return void
+     */
     public function __construct()
     {
         $this->_beans = array();
