@@ -63,8 +63,6 @@ class ContainerImpl implements IContainer
      * 
      * @param string $bean Bean name.
      * 
-     * @see Ding\Container.IContainer::getBean()
-     * 
      * @return object
      */
     public function getBean($bean)
