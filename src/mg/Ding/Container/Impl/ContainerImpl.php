@@ -58,12 +58,29 @@ class ContainerImpl implements IContainer
         return $this->_factory;
     }
 
+    /**
+     * Returns a bean.
+     * 
+     * @param string $bean Bean name.
+     * 
+     * @see Ding\Container.IContainer::getBean()
+     * 
+     * @return object
+     */
     public function getBean($bean)
     {
         $factory = $this->_getFactory();
         return $factory->getBean($bean);
     }
     
+    /**
+     * This will return a container using a BeanFactoryXmlImpl with the
+     * given beans.xml file.
+     * 
+     * @param string $filename Absolute path to beans.xml
+     * 
+     * @return ContainerImpl
+     */
     public static function getInstanceFromXml($filename)
     {
         return
@@ -73,6 +90,13 @@ class ContainerImpl implements IContainer
         ;
     }
 
+    /**
+     * Constructor.
+     * 
+     * @param BeanFactory $factory Bean factory to be used.
+     * 
+     * @return void
+     */
     protected function __construct(BeanFactory $factory)
     {
         $this->_beans = array();

@@ -1,4 +1,17 @@
 <?php
+/**
+ * Generic bean factory.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Component
+ * @subpackage Factory
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @version    SVN: $Id$
+ * @link       http://www.noneyet.ar/
+ */
 namespace Ding\Component\Factory;
 
 use Ding\Component\BeanDefinition;
@@ -7,6 +20,18 @@ use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectDefinition;
 use Ding\Aspect\InterceptorDefinition;
 
+/**
+ * Generic bean factory.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Component
+ * @subpackage Factory
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @link       http://www.noneyet.ar/
+ */
 abstract class BeanFactory
 {
     /**
