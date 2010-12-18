@@ -5,14 +5,14 @@
  * PHP Version 5
  *
  * @category   ding
- * @package    component
+ * @package    bean
  * @subpackage factory.exception
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @version    SVN: $Id$
  * @link       http://www.noneyet.ar/
  */
-namespace Ding\Component\Factory\Exception;
+namespace Ding\Bean\Factory\Exception;
 use Ding\Exception;
 
 /**
@@ -21,7 +21,7 @@ use Ding\Exception;
  * PHP Version 5
  *
  * @category   ding
- * @package    component
+ * @package    bean
  * @subpackage factory.exception
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0

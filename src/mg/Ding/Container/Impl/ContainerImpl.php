@@ -14,13 +14,11 @@
 namespace Ding\Container\Impl;
 
 use Ding\Container\IContainer;
-use Ding\Component\BeanDefinition;
-use Ding\Component\BeanList;
-use Ding\Component\BeanPropertyDefinition;
-use Ding\Component\Factory\BeanFactory;
-use Ding\Component\Factory\Impl\BeanFactoryXmlImpl;
-use Ding\Component\Exception\BeanListException;
 use Ding\Container\Exception\ContainerException;
+
+use Ding\Bean\Factory\BeanFactory;
+use Ding\Bean\Factory\Impl\BeanFactoryXmlImpl;
+
 use Ding\Aspect\Proxy;
 use Ding\Aspect\InterceptorDefinition;
 

@@ -5,17 +5,18 @@
  * PHP Version 5
  *
  * @category   Ding
- * @package    Component
+ * @package    Bean
  * @subpackage Factory
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @version    SVN: $Id$
  * @link       http://www.noneyet.ar/
  */
-namespace Ding\Component\Factory;
+namespace Ding\Bean\Factory;
 
-use Ding\Component\BeanDefinition;
-use Ding\Component\BeanPropertyDefinition;
+use Ding\Bean\BeanDefinition;
+use Ding\Bean\BeanPropertyDefinition;
+
 use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectDefinition;
 use Ding\Aspect\InterceptorDefinition;
@@ -26,7 +27,7 @@ use Ding\Aspect\InterceptorDefinition;
  * PHP Version 5
  *
  * @category   Ding
- * @package    Component
+ * @package    Bean
  * @subpackage Factory
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0

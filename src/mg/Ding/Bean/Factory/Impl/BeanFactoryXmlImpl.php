@@ -5,18 +5,18 @@
  * PHP Version 5
  *
  * @category   Ding
- * @package    Component
+ * @package    Bean
  * @subpackage Factory.Impl
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @version    SVN: $Id$
  * @link       http://www.noneyet.ar/
  */
-namespace Ding\Component\Factory\Impl;
+namespace Ding\Bean\Factory\Impl;
 
-use Ding\Component\Factory\BeanFactory;
-use Ding\Component\BeanDefinition;
-use Ding\Component\BeanPropertyDefinition;
+use Ding\Bean\Factory\BeanFactory;
+use Ding\Bean\BeanDefinition;
+use Ding\Bean\BeanPropertyDefinition;
 use Ding\Aspect\AspectDefinition;
 
 /**
@@ -25,7 +25,7 @@ use Ding\Aspect\AspectDefinition;
  * PHP Version 5
  *
  * @category   Ding
- * @package    Component
+ * @package    Bean
  * @subpackage Factory.Impl
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
