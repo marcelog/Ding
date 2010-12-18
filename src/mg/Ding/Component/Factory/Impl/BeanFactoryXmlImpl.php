@@ -12,11 +12,15 @@ class BeanFactoryXmlImpl extends BeanFactory
     private $_filename;
     private $_simpleXml;
     
-    public function getBeanDefinition($bean)
+    public function getBeanDefinition($beanName)
     {
-        return isset($this->_beanDefs[$bean]) ? $this->_beanDefs[$bean] : false;
+        return
+            isset($this->_beanDefs[$beanName])
+            ? $this->_beanDefs[$beanName]
+            : false
+        ;
     }
-
+    
     private function _getXmlErrors()
     {
         $errors = '';
@@ -120,6 +124,7 @@ class BeanFactoryXmlImpl extends BeanFactory
 
     public function __construct($filename)
     {
+        parent::__construct();
         $this->_beanDefs = array();
         $this->_filename = $filename;
         $this->_load();

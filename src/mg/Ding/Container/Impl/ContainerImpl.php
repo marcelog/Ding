@@ -44,12 +44,6 @@ class ContainerImpl implements IContainer
     private $_factory = false;
     
     /**
-     * This one will hold our instantiaed beans.
-     * @var object[]
-     */
-    private $_beans = false;
-    
-    /**
      * Container instance.
      * @var ContainerImpl
      */
