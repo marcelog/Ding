@@ -12,11 +12,12 @@ Please see example.php for a very basic example of use.
 --------------------------------------------------------------------------------
 Notes about the source:
 
+* There is no official release yet! So expect changes and be patience, the
+work will get done. Also, performance will eventually be taken care of.
+
 * If you're wondering why the first comment of each source file is repeated,
 it's because they're actually 2 different comments: one for the file, and one
 for the class.
-
-* Don't worry, performance will eventually be taken care of.
 
 --------------------------------------------------------------------------------
 Using aspects:

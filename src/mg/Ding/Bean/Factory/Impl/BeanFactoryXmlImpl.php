@@ -118,8 +118,12 @@ class BeanFactoryXmlImpl extends BeanFactory
     }
     
     /**
+     * Returns a bean definition.
+     *  
+     * @param SimpleXMLElement $simpleXmlBean
+     * 
      * @throws BeanFactoryException
-     * @param unknown_type $filename
+     * @return BeanDefinition
      */
     private function _loadBean($simpleXmlBean)
     {
@@ -144,6 +148,12 @@ class BeanFactoryXmlImpl extends BeanFactory
         return new BeanDefinition($bName, $bClass, $bScope, $bProps, $bAspects);
     }
     
+    /**
+     * Initialize SimpleXML.
+     * 
+     * @throws BeanFactoryException
+     * @return void
+     */
     private function _load()
     {
         $this->_simpleXml = $this->_loadXml($this->_filename);
@@ -160,6 +170,13 @@ class BeanFactoryXmlImpl extends BeanFactory
         }
     }
 
+    /**
+     * Returns a instance for this factory.
+     * 
+     * @param string $filename beans.xml path.
+     *
+     * @return BeanFactoryXmlImpl
+     */
     public static function getInstance($filename)
     {
         if (self::$_instance == false) {
