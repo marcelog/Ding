@@ -36,7 +36,7 @@ class ContainerImpl implements IContainer
         return $this->_beanList;
     }
 
-    private function _di($bean, BeanDefinition $def)
+    private function _assemble($bean, BeanDefinition $def)
     {
         foreach ($def->getProperties() as $property) {
             $method = $this->_getSetterFor(
@@ -88,7 +88,7 @@ class ContainerImpl implements IContainer
         }
         try
         {
-            $this->_di($bean, $beanDefinition);
+            $this->_assemble($bean, $beanDefinition);
         } catch(\ReflectionException $exception) {
             throw new ContainerException('DI Error', 0, $exception);
         }

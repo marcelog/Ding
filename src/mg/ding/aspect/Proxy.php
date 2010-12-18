@@ -1,5 +1,4 @@
 <?php
-use Ding\Proxy;
 namespace Ding;
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
@@ -72,7 +71,7 @@ TEXT;
         if (isset(self::\$_interceptors['METHOD_NAME'])) {
             foreach (self::\$_interceptors['METHOD_NAME'] as \$interceptor) {
                 \$invocation = new Ding\MethodInvocation(
-                    __CLASS__, __METHOD__, func_get_args__, null
+                    __CLASS__, __METHOD__, func_get_args(), null
                 );
                 \$advice = \$interceptor->getInterceptorMethod();
                 \$advice->invokeArgs(
