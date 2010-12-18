@@ -1,6 +1,4 @@
 <?php
-namespace Ding;
-
 /**
  * Used as an argument to invoke the advice, so you can have all the details
  * about the invoked (aspected) method. In other words, your advice will be
@@ -8,13 +6,14 @@ namespace Ding;
  * 
  * PHP Version 5
  *
- * @category ding
- * @package  aspect
+ * @category Ding
+ * @package  Aspect
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
  * @link     http://www.noneyet.ar/
  */
+namespace Ding\Aspect;
 
 /**
  * Used as an argument to invoke the advice, so you can have all the details
@@ -23,8 +22,8 @@ namespace Ding;
  *
  * PHP Version 5
  *
- * @category ding
- * @package  aspect
+ * @category Ding
+ * @package  Aspect
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
@@ -54,6 +53,46 @@ class MethodInvocation
      * @var mixed
      */
     private $_result;
+    
+    /**
+     * Exception thrown by the target method. 
+     */
+    private $_exception;
+    
+    /**
+     * Call this one *from* your aspect, in order to proceed with the
+     * execution.
+     * 
+     * @param array $arguments Arguments to be used in the execution.
+     * 
+	 * @return void
+     */
+    public function proceed($arguments)
+    {
+        
+    }
+    
+    /**
+     * If the target method throws an exception, you can get it here.
+     * 
+	 * @return Exception
+     */
+    public function getException()
+    {
+        return $this->_exception;
+    }
+
+    /**
+     * Changes (updates) the exception for the execution of the aspected method.
+     * 
+     * @param Exception $value
+     * 
+     * @return void
+     */
+    public function setException(\Exception $exception)
+    {
+        $this->_exception = $exception;
+    }
     
     /**
      * Changes (updates) the result for the execution of the aspected method.
@@ -135,7 +174,7 @@ class MethodInvocation
      * 
      * @return void
      */
-    public function construct($class, $method, $args, $result)
+    public function construct($class, $method, $args)
     {
         $this->_class = $class;
         $this->_method = $method;

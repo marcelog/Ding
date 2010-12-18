@@ -17,3 +17,21 @@ it's because they're actually 2 different comments: one for the file, and one
 for the class.
 
 * Don't worry, performance will eventually be taken care of.
+
+--------------------------------------------------------------------------------
+Using aspects:
+=============
+
+You may use any of the following kind of aspects:
+
+* After: Will execute the advice right after the method execution.
+
+* Before: Will execute the advice right before the target method.
+
+* Around: Will execute the advice before and after the target method.
+
+* AfterThrowing: Will execute the advice only if the target method threw and
+exception.
+
+* AfterFinally: Will execute the advice after the target method execution, on
+normal and abnormal terminations (exceptions).

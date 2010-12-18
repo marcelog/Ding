@@ -1,26 +1,25 @@
 <?php
-namespace Ding;
-
 /**
  * Bean property definition.
  *
  * PHP Version 5
  *
- * @category ding
- * @package  component
+ * @category Ding
+ * @package  Component
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
  * @link     http://www.noneyet.ar/
  */
+namespace Ding\Component;
 
 /**
  * Bean property definition.
  *
  * PHP Version 5
  *
- * @category ding
- * @package  component
+ * @category Ding
+ * @package  Component
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/

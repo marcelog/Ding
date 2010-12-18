@@ -1,5 +1,5 @@
 <?php
-namespace Ding;
+namespace Ding\Component\Factory;
 
 interface IBeanFactory
 {

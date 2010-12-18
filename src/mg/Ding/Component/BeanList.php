@@ -1,6 +1,30 @@
 <?php
-namespace Ding;
+/**
+ * This class is a primitive kind of BeanFactoryXml and will go away soon.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Component
+ * @author   Marcelo Gornstein <marcelog@gmail.com>
+ * @license  http://www.noneyet.ar/ Apache License 2.0
+ * @version  SVN: $Id$
+ * @link     http://www.noneyet.ar/
+ */
+namespace Ding\Component;
+use Ding\Aspect\AspectDefinition;
 
+/**
+ * This class is a primitive kind of BeanFactoryXml and will go away soon.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Component
+ * @author   Marcelo Gornstein <marcelog@gmail.com>
+ * @license  http://www.noneyet.ar/ Apache License 2.0
+ * @link     http://www.noneyet.ar/
+ */
 class BeanList
 {
     private $_beans;

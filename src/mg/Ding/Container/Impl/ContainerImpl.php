@@ -1,26 +1,34 @@
 <?php
-namespace Ding;
-
 /**
  * Container implementation.
  *
  * PHP Version 5
  *
- * @category ding
- * @package  container
+ * @category Ding
+ * @package  Container
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
  * @link     http://www.noneyet.ar/
  */
+namespace Ding\Container\Impl;
+
+use Ding\Container\IContainer;
+use Ding\Component\BeanDefinition;
+use Ding\Component\BeanList;
+use Ding\Component\BeanPropertyDefinition;
+use Ding\Component\Exception\BeanListException;
+use Ding\Container\Exception\ContainerException;
+use Ding\Aspect\Proxy;
+use Ding\Aspect\InterceptorDefinition;
 
 /**
  * Container implementation.
  *
  * PHP Version 5
  *
- * @category ding
- * @package  container
+ * @category Ding
+ * @package  Container
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/

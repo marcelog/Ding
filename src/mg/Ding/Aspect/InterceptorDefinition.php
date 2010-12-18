@@ -1,6 +1,4 @@
 <?php
-namespace Ding;
-
 /**
  * This class is instantiated by the container. It will be used by the AOP
  * proxies to call the given advices from the given aspects (beans) whenever
@@ -8,13 +6,14 @@ namespace Ding;
  * 
  * PHP Version 5
  *
- * @category ding
- * @package  aspect
+ * @category Ding
+ * @package  Aspect
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
  * @link     http://www.noneyet.ar/
  */
+namespace Ding\Aspect;
 
 /**
  * This class is instantiated by the container. It will be used by the AOP
@@ -23,8 +22,8 @@ namespace Ding;
  *
  * PHP Version 5
  *
- * @category ding
- * @package  aspect
+ * @category Ding
+ * @package  Aspect
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
@@ -85,6 +84,16 @@ class InterceptorDefinition
         return $this->_objectInterceptor;
     }
 
+    /**
+     * Returns aspect definition.
+     * 
+	 * @return AspectDefinition
+     */
+    public function getAspectDefinition()
+    {
+        return $this->_aspectDefinition;
+    }
+    
     /**
      * Standard function, you know the drill.. 
      *

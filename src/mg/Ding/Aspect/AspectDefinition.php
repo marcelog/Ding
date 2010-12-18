@@ -1,6 +1,4 @@
 <?php
-namespace Ding;
-
 /**
  * This class is used when reading the bean definition. Aspects will be
  * constructed and applyed using this information, you may thing of this as
@@ -9,13 +7,14 @@ namespace Ding;
  *
  * PHP Version 5
  *
- * @category ding
- * @package  aspect
+ * @category Ding
+ * @package  Aspect
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
  * @link     http://www.noneyet.ar/
  */
+namespace Ding\Aspect;
 
 /**
  * This class is used when reading the bean definition. Aspects will be
@@ -25,8 +24,8 @@ namespace Ding;
  *
  * PHP Version 5
  *
- * @category ding
- * @package  aspect
+ * @category Ding
+ * @package  Aspect
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/

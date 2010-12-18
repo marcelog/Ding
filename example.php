@@ -4,7 +4,7 @@
  * 
  * PHP Version 5
  *
- * @category ding
+ * @category Ding
  * @package  global
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
@@ -21,12 +21,14 @@ ini_set(
         PATH_SEPARATOR,
         array(
             ini_get('include_path'),
-            implode(DIRECTORY_SEPARATOR, array('src', 'mg', 'ding'))
+            implode(DIRECTORY_SEPARATOR, array('src', 'mg'))
         )
     )
 );
-require_once 'autoloader/Autoloader.php'; // Include ding autoloader.
+require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
+use Ding\Container\Impl\ContainerImpl;
+use Ding\Aspect\MethodInvocation;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Normal operation follows... 
@@ -92,15 +94,17 @@ class ClassC
 
 class AspectA
 {
-    public function anAdvice(Ding\MethodInvocation $invocation)
+    public function anAdvice(MethodInvocation $invocation)
     {
-        echo "Aspected!\n";
+        echo "Before\n";
+        $invocation->proceed(array('b', 'c', 'd'));
+        echo "After\n";
     }
 }
 ////////////////////////////////////////////////////////////////////////////////
 try
 {
-    $a = Ding\ContainerImpl::getInstance('beans.xml');
+    $a = ContainerImpl::getInstance('beans.xml');
     $bean = $a->getBean('ComponentA');
     $bean->targetMethod('a', 1, array('1' => '2'));
 } catch(Exception $exception) {

@@ -1,18 +1,18 @@
 <?php
-namespace Ding;
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
  * to have a proxy class and any kind of "dynamic class".
  * 
  * PHP Version 5
  *
- * @category ding
- * @package  aspect
+ * @category Ding
+ * @package  Aspect
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
  * @link     http://www.noneyet.ar/
  */
+namespace Ding\Aspect;
 
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
@@ -20,8 +20,8 @@ namespace Ding;
  *
  * PHP Version 5
  *
- * @category ding
- * @package  aspect
+ * @category Ding
+ * @package  Aspect
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
@@ -39,6 +39,10 @@ class Proxy
      * @var string
      */
     private static $_proxyTemplate = <<<TEXT
+
+use Ding\Aspect\InterceptorDefinition;
+use Ding\Aspect\MethodInvocation;
+
 final class NEW_NAME extends CLASS_NAME {
     private static \$_interceptors = array();
 
@@ -51,7 +55,7 @@ final class NEW_NAME extends CLASS_NAME {
      * @return void
      */
     public static function setInterceptor(
-        Ding\InterceptorDefinition \$interceptor
+        InterceptorDefinition \$interceptor
     ) {
         self::\$_interceptors[\$interceptor->getTargetMethod()->getName()][]
             = \$interceptor
@@ -70,7 +74,7 @@ TEXT;
     {
         if (isset(self::\$_interceptors['METHOD_NAME'])) {
             foreach (self::\$_interceptors['METHOD_NAME'] as \$interceptor) {
-                \$invocation = new Ding\MethodInvocation(
+                \$invocation = new MethodInvocation(
                     __CLASS__, __METHOD__, func_get_args(), null
                 );
                 \$advice = \$interceptor->getInterceptorMethod();

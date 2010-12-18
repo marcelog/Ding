@@ -16,6 +16,7 @@
 		<aspect ref="AspectA" type="before">
 			<pointcut expression="targetMethod" advice="anAdvice"/>
 		</aspect>
+		<!-- 
 		<aspect ref="AspectA" type="after">
 			<pointcut expression="targetMethod" advice="anAdvice"/>
 		</aspect>
@@ -28,6 +29,7 @@
 		<aspect ref="AspectA" type="around">
 			<pointcut expression="targetMethod" advice="anAdvice"/>
 		</aspect>
+		-->
 	</bean>
 	
 	<bean id="AspectA" class="AspectA" scope="singleton">

@@ -1,26 +1,25 @@
 <?php
-namespace Ding;
-
 /**
  * Interface for a container.
  *
  * PHP Version 5
  *
- * @category ding
- * @package  container
+ * @category Ding
+ * @package  Container
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
  * @link     http://www.noneyet.ar/
  */
+namespace Ding\Container;
 
 /**
  * Interface for a container.
  *
  * PHP Version 5
  *
- * @category ding
- * @package  container
+ * @category Ding
+ * @package  Container
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
