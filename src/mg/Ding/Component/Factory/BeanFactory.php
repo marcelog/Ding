@@ -74,7 +74,12 @@ abstract class BeanFactory
             default:
                 throw new BeanFactoryException('Invalid property type');
             }
-            $method->invoke($bean, $value);
+            try
+            {
+                $method->invoke($bean, $value);
+            } catch (\ReflectionException $exception) {
+                throw new BeanFactoryException('Error calling: ' . $value);
+            }
         }
     }
     
@@ -94,7 +99,11 @@ abstract class BeanFactory
     }
     
     /**
+     * This will create a new bean, injecting all properties and applying all
+     * aspects.
+     * 
      * @throws BeanFactoryException
+     * @return object
      */
     private function _createBean(BeanDefinition $beanDefinition)
     {
@@ -181,7 +190,7 @@ abstract class BeanFactory
      * 
      * @return void
      */
-    public function __construct()
+    protected function __construct()
     {
         $this->_beans = array();
         $this->_beanDefs = array();

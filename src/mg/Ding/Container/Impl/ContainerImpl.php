@@ -85,7 +85,7 @@ class ContainerImpl implements IContainer
     {
         return
             self::$_containerInstance === false
-            ? new ContainerImpl(new BeanFactoryXmlImpl($filename))
+            ? new ContainerImpl(BeanFactoryXmlImpl::getInstance($filename))
             : self::$_containerInstance
         ;
     }

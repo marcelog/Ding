@@ -36,6 +36,7 @@ class BeanFactoryXmlImpl extends BeanFactory
     private $_beanDefs;
     private $_filename;
     private $_simpleXml;
+    private static $_instance = false;
     
     public function getBeanDefinition($beanName)
     {
@@ -159,7 +160,22 @@ class BeanFactoryXmlImpl extends BeanFactory
         }
     }
 
-    public function __construct($filename)
+    public static function getInstance($filename)
+    {
+        if (self::$_instance == false) {
+            self::$_instance = new BeanFactoryXmlImpl($filename);
+        }
+        return self::$_instance;
+    }
+    
+    /**
+     * Constructor.
+     * 
+     * @param
+     * 
+     * @return void
+     */
+    protected function __construct($filename)
     {
         parent::__construct();
         $this->_beanDefs = array();
