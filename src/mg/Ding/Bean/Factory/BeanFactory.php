@@ -111,10 +111,17 @@ abstract class BeanFactory
     private function _createBean(BeanDefinition $beanDefinition)
     {
         $beanClass = $beanDefinition->getClass();
+        $args = array();
+        foreach ($beanDefinition->getArguments() as $argument) {
+            if ($argument->isBean()) {
+                $args[] = $this->getBean($argument->getValue());
+            } else {
+                $args[] = $argument->getValue();
+            }
+        }
         if ($beanDefinition->hasAspects()) {
-            $bean = Proxy::create($beanClass);
             $dispatcher = new DispatcherImpl();
-            $bean::setDispatcher($dispatcher);
+            $bean = Proxy::create($beanClass, $dispatcher, $args);
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 if (
@@ -131,7 +138,8 @@ abstract class BeanFactory
             }
         } else {
             /* @todo change this to a clone */
-            $bean = new $beanClass;
+            $constructor = new \ReflectionClass($beanClass);
+            $bean = $constructor->newInstanceArgs($args);
         }
         try
         {

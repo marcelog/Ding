@@ -71,6 +71,12 @@ class BeanDefinition
     private $_aspects;
     
     /**
+     * Constructor arguments.
+     * @var BeanConstructorArgumentDefinition[]
+     */
+    private $_constructorArgs;
+    
+    /**
      * Returns true if this bean has mapped aspects.
      * 
      * @return boolean
@@ -129,6 +135,16 @@ class BeanDefinition
     {
         return $this->_properties;
     }
+
+    /**
+     * Returns arguments for this bean.
+     * 
+     * @return BeanConstructorArgumentDefinition[]
+     */
+    public function getArguments()
+    {
+        return $this->_constructorArgs;
+    }
     
     /**
      * Constructor.
@@ -139,16 +155,19 @@ class BeanDefinition
      * class constants.
      * @param BeanPropertyDefinition[] $properties Bean properties definitions.
      * @param AspectDefinition[]       $aspects    Aspects definitions.
+     * @param BeanConstructorArgumentDefinition[] $arguments Constructor args.
      * 
      * @return void
      */
     public function __construct(
-        $name, $class, $scope, array $properties, array $aspects
+        $name, $class, $scope, array $properties,
+        array $aspects, array $arguments
     ) {
         $this->_name = $name;
         $this->_class = $class;
         $this->_scope = $scope;
         $this->_properties = $properties;
         $this->_aspects = $aspects;
+        $this->_constructorArgs = $arguments;
     }
 }

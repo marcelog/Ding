@@ -14,6 +14,8 @@
  */
 namespace Ding\Aspect;
 
+use Ding\Aspect\Interceptor\IDispatcher;
+
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
  * to have a proxy class and any kind of "dynamic class".
@@ -25,6 +27,8 @@ namespace Ding\Aspect;
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
+ * 
+ * @todo Performance: Remove new MethodInvocation in proxied invocation.
  */
 class Proxy
 {
@@ -137,9 +141,9 @@ TEXT;
             $additional .= ' abstract ';
         }
         if ($method->isConstructor()) {
-            $name = ' __construct(';
+            $name = '__construct';
         } else if ($method->isDestructor()) {
-            $name = ' __destruct';
+            $name = '__destruct';
         }
         $src = self::$_methodTemplate;
         $src = str_replace('VISIBILITY', $visibility, $src);
@@ -154,20 +158,28 @@ TEXT;
     /**
      * This will give you an instance of a proxy class for any given class.
      * 
-     * @param string $class Class to be proxied.
+     * @param string      $class                Class to be proxied.
+     * @param IDispatcher $dispatcher           Dispatcher to invoke aspects.
+     * @param array       $constructorArguments Constructor arguments.
      * 
      * @todo Currently, final classes can't be proxied because the proxy class
      * extends it (this may change in the near future).
      * 
      * @return object 
      */
-    public static function create($class)
-    {
+    public static function create(
+        $class, IDispatcher $dispatcher = null, array $constructorArguments
+    ) {
         $subject = new \ReflectionClass($class);
         $proxyClassName = 'Proxy' . $subject->getName()  . self::$_proxyCount;
         $src = self::_createClass($proxyClassName, $subject);
         eval($src);
+        if ($dispatcher != null) {
+            $proxyClassName::setDispatcher($dispatcher);
+        }
         self::$_proxyCount++;
-        return new $proxyClassName();
+        $constructor = new \ReflectionClass($proxyClassName);
+        $proxyInstance = $constructor->newInstanceArgs($constructorArguments);
+        return new $proxyInstance;
     }
 }

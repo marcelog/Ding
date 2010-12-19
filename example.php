@@ -57,11 +57,17 @@ class ClassA extends ClassD
     {
         echo "Hello world $a $b $c \n";
     }
-    
+
+    public function __construct()
+    {
+    }
 }
 
-class ClassD {
-    
+class ClassD
+{
+    public function __construct()
+    {
+    }
 }
 
 class ClassB
@@ -93,10 +99,19 @@ class ClassB
     {
         throw new Exception('Pepe');
     }
+    public function __construct()
+    {
+        echo "ComponentB constructor called with args: \n";
+        var_dump(func_get_args());
+    }
 }
 
 class ClassC
 {
+
+    public function __construct()
+    {
+    }
 }
 
 class AspectA implements IMethodInterceptor
@@ -106,6 +121,10 @@ class AspectA implements IMethodInterceptor
         echo "Before1: " . $invocation->getOriginalInvocation() . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After\n";
+    }
+
+    public function __construct()
+    {
     }
 }
 
@@ -117,6 +136,10 @@ class AspectB implements IMethodInterceptor
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After2\n";
     }
+
+    public function __construct()
+    {
+    }
 }
 class AspectC implements IMethodInterceptor
 {
@@ -126,6 +149,10 @@ class AspectC implements IMethodInterceptor
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After3\n";
     }
+
+    public function __construct()
+    {
+    }
 }
 class AspectD implements IExceptionInterceptor
 {
@@ -134,6 +161,10 @@ class AspectD implements IExceptionInterceptor
         echo "Before4: " . $invocation->getOriginalInvocation() . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After4\n";
+    }
+
+    public function __construct()
+    {
     }
 }
 class AspectE implements IMethodInterceptor
@@ -148,6 +179,10 @@ class AspectE implements IMethodInterceptor
         } catch(Exception $e) {
             echo "Move along, nothing happened here.. \n";
         }
+    }
+
+    public function __construct()
+    {
     }
 }
 ////////////////////////////////////////////////////////////////////////////////

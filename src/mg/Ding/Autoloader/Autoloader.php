@@ -35,6 +35,8 @@ class Autoloader
      * Called by php to load a given class. Returns true if the class was
      * successfully loaded.
      * 
+     * @todo Performance: Try to get rid of implode() and str_replace() here.
+     * 
      * @return boolean
      */
     public static function load($class)

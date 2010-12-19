@@ -16,6 +16,7 @@ namespace Ding\Bean\Factory\Impl;
 
 use Ding\Bean\Factory\BeanFactory;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
+use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Aspect\AspectDefinition;
@@ -110,7 +111,21 @@ class BeanFactoryXmlImpl extends BeanFactory
             (string)$propName, $propType, (string)$propValue
         );
     }
-    
+
+    private function _loadConstructorArg($simpleXmlArg)
+    {
+        if (isset($simpleXmlArg->ref)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
+            $argValue = $simpleXmlArg->ref->attributes()->bean;  
+        } else {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
+            $argValue = $simpleXmlArg->value;  
+        }
+        return new BeanConstructorArgumentDefinition(
+            $argType, (string)$argValue
+        );
+    }
+        
     /**
      * Returns a bean definition.
      *  
@@ -133,13 +148,19 @@ class BeanFactoryXmlImpl extends BeanFactory
         }
         $bProps = array();
         $bAspects = array();
+        $constructorArgs = array();
         foreach ($simpleXmlBean->property as $property) {
             $bProps[] = $this->_loadProperty($property);
         }
         foreach ($simpleXmlBean->aspect as $aspect) {
             $bAspects[] = $this->_loadAspect($aspect);
         }
-        return new BeanDefinition($bName, $bClass, $bScope, $bProps, $bAspects);
+        foreach ($simpleXmlBean->{'constructor-arg'} as $arg) {
+            $constructorArgs[] = $this->_loadConstructorArg($arg);
+        }
+        return new BeanDefinition(
+            $bName, $bClass, $bScope, $bProps, $bAspects, $constructorArgs
+        );
     }
     
     /**

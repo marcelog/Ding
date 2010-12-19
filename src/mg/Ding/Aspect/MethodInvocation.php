@@ -98,6 +98,8 @@ class MethodInvocation
      * Call this one *from* your aspect, in order to proceed with the
      * execution.
      * 
+     * @todo Performance: Remove new ReflectionMethod here
+     * 
 	 * @return void
      */
     public function proceed()

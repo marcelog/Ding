@@ -1,6 +1,11 @@
 <beans>
-
 	<bean id="ComponentB" class="ClassB" scope="singleton">
+		<constructor-arg>
+			<value>"001"</value>
+		</constructor-arg>
+        <constructor-arg>
+            <ref bean="ComponentC"/>
+        </constructor-arg>
 		<property name="aProperty">
 			<value>Some string A</value>
 		</property>
@@ -30,6 +35,7 @@
 		</aspect>
 	</bean>
 	
+	<bean id="ComponentC" class="ClassC" scope="singleton"/>
 	<bean id="AspectA" class="AspectA" scope="singleton"/>
 	<bean id="AspectB" class="AspectB" scope="singleton"/>
 	<bean id="AspectC" class="AspectC" scope="singleton"/>
