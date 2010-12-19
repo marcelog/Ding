@@ -28,10 +28,17 @@ class Dispatcher implements IExceptionInterceptor, IMethodInterceptor
     public function invoke(MethodInvocation $invocation)
     {
         $interceptors = $this->getInterceptors($invocation->getMethod());
-        if ($interceptors != false) { 
-            foreach ($interceptors as $interceptor) {
-                $interceptor->invoke($invocation);
+        if ($interceptors != false) {
+            $total = count($interceptors);
+            $invocationChain = $invocation; 
+            for ($i = 0; $i < $total; $i++) {
+                $newInvocation = new MethodInvocation(
+                	get_class($interceptors[$i]), 'invoke',
+                    array($invocationChain), $interceptors[$i]
+                );
+                $invocationChain = $newInvocation;
             }
+            $invocationChain->proceed();
         } else {
             return $invocation->proceed();
         }
