@@ -40,27 +40,24 @@ class Proxy
      */
     private static $_proxyTemplate = <<<TEXT
 
-use Ding\Aspect\InterceptorDefinition;
+use Ding\Aspect\Interceptor\Dispatcher;
 use Ding\Aspect\MethodInvocation;
 
 final class NEW_NAME extends CLASS_NAME {
-    private static \$_interceptors = array();
+    private static \$_dispatcher = false;
 
     /**
-     * This is used from the container to set the interceptors (aspects).
+     * This is used from the container to set the dispatcher for the aspects.
      *
-     * @param InterceptorDefinition \$interceptor This holds the information
-     * needed to call the advices. You can call this as many times as you want.
+     * @param Dispatcher \$dispatcher Advice dispatcher.
      *
      * @return void
      */
-    public static function setInterceptor(
-        InterceptorDefinition \$interceptor
-    ) {
-        self::\$_interceptors[\$interceptor->getTargetMethod()->getName()][]
-            = \$interceptor
-        ;
+    public static function setDispatcher(Dispatcher \$dispatcher)
+    {
+        self::\$_dispatcher = \$dispatcher;
     }
+    
     METHODS
 }
 TEXT;
@@ -72,20 +69,11 @@ TEXT;
     private static $_methodTemplate = <<<TEXT
     VISIBILITY ADDITIONAL function METHOD_NAME()
     {
-        if (isset(self::\$_interceptors['METHOD_NAME'])) {
-            foreach (self::\$_interceptors['METHOD_NAME'] as \$interceptor) {
-                \$invocation = new MethodInvocation(
-                    __CLASS__, __METHOD__, func_get_args(), null
-                );
-                \$advice = \$interceptor->getInterceptorMethod();
-                \$advice->invokeArgs(
-                    \$interceptor->getObjectInterceptor(), array(\$invocation)
-                );
-            }
-        }
-        \$method = new \ReflectionMethod('CLASS_NAME', 'METHOD_NAME');
-        return \$method->invokeArgs(\$this, func_get_args());
-    }
+        \$invocation = new MethodInvocation(
+            'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this
+        );
+        return self::\$_dispatcher->invoke(\$invocation);
+	}
 TEXT;
 
     /**

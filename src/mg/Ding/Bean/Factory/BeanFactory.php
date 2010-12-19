@@ -19,7 +19,7 @@ use Ding\Bean\BeanPropertyDefinition;
 
 use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectDefinition;
-use Ding\Aspect\InterceptorDefinition;
+use Ding\Aspect\Interceptor\Dispatcher;
 
 /**
  * Generic bean factory.
@@ -111,19 +111,13 @@ abstract class BeanFactory
         $beanClass = $beanDefinition->getClass();
         if ($beanDefinition->hasAspects()) {
             $bean = Proxy::create($beanClass);
+            $dispatcher = new Dispatcher();
+            $bean::setDispatcher($dispatcher);
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
-
-                $refAspect = new \ReflectionObject($aspect); 
-                $refObject = new \ReflectionObject($bean);
-                
-                $advice = $refAspect->getMethod($aspectDefinition->getAdvice());
-                $joinpoint = $refObject->getMethod($aspectDefinition->getPointcut());
-                
-                $interceptor = new InterceptorDefinition(
-                    $joinpoint, $advice, $aspect, $aspectDefinition
+                $dispatcher->addMethodInterceptor(
+                    $aspectDefinition->getPointcut(), $aspect
                 );
-                $bean::setInterceptor($interceptor);
             }
         } else {
             /* @todo change this to a clone */

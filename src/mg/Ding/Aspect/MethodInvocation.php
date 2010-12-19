@@ -60,16 +60,23 @@ class MethodInvocation
     private $_exception;
     
     /**
+     * This invocation will be called onto this object.
+     * @var object
+     */
+    private $_object;
+    
+    /**
      * Call this one *from* your aspect, in order to proceed with the
      * execution.
      * 
-     * @param array $arguments Arguments to be used in the execution.
-     * 
 	 * @return void
      */
-    public function proceed($arguments)
+    public function proceed()
     {
-        
+        $target = new \ReflectionMethod(
+            $this->getClass(), $this->getMethod()
+        );
+        return $target->invokeArgs($this->getObject(), $this->getArguments());
     }
     
     /**
@@ -137,6 +144,16 @@ class MethodInvocation
     }
     
     /**
+     * Returns the target object for this method
+     * 
+     * @return object
+     */
+    public function getObject()
+    {
+        return $this->_object;
+    }
+    
+    /**
      * Returns arguments for the executed method.
      * 
      * @return array
@@ -171,14 +188,15 @@ class MethodInvocation
      * @param string $method Aspected method invoked.
      * @param array  $args   Arguments used to invoke the aspected method.
      * @param mixed  $result Result from the execution of the aspected method.
+     * @param object $object Target invocation object for method.
      * 
      * @return void
      */
-    public function construct($class, $method, $args)
+    public function __construct($class, $method, $args, $object)
     {
         $this->_class = $class;
         $this->_method = $method;
         $this->_args = $args;
-        $this->_result = $result;
+        $this->_object = $object;
     }
 }

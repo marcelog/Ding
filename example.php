@@ -29,6 +29,8 @@ require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Aspect\MethodInvocation;
+use Ding\Aspect\Interceptor\IMethodInterceptor;
+use Ding\Aspect\Interceptor\IExceptionInterceptor;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Normal operation follows... 
@@ -92,9 +94,9 @@ class ClassC
 {
 }
 
-class AspectA
+class AspectA implements IMethodInterceptor
 {
-    public function anAdvice(MethodInvocation $invocation)
+    public function invoke(MethodInvocation $invocation)
     {
         echo "Before\n";
         $invocation->proceed(array('b', 'c', 'd'));

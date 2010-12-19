@@ -94,7 +94,6 @@ class BeanFactoryXmlImpl extends BeanFactory
         foreach ($simpleXmlAspect->pointcut as $pointcut) {
             $aspect = new AspectDefinition(
                 (string)$pointcut->attributes()->expression,
-                (string)$pointcut->attributes()->advice,
                 intval($type), 
                 $aspectBean 
             );
