@@ -101,6 +101,14 @@ class DispatcherImpl implements IDispatcher
         return $this->_methodsExceptionIntercepted[$method];
     }
     
+    /**
+     * Will chain and return the result of the chained call of interceptors.
+     * 
+     * @param MethodInvocation $invocation   Original invocation to preserve.
+     * @param IInterceptor[]   $interceptors Array of interceptors.
+     * 
+     * @return mixed
+     */
     private function _callInterceptors(
         MethodInvocation $invocation, array $interceptors
     ) {

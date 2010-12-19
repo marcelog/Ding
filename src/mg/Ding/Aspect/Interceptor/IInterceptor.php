@@ -1,9 +1,7 @@
 <?php
 /**
- * Your aspect classes must implement this interface in order to work with
- * this framework. (In the case you're interested in running advices
- * after/before a method execution).
- *  
+ * Base interceptor.
+ *   
  * PHP Version 5
  *
  * @category   Ding
@@ -17,10 +15,9 @@
 namespace Ding\Aspect\Interceptor;
 
 use Ding\Aspect\MethodInvocation;
+
 /**
- * Your aspect classes must implement this interface in order to work with
- * this framework. (In the case you're interested in running advices
- * after/before a method execution).
+ * Base interceptor.
  * 
  * PHP Version 5
  *
@@ -31,7 +28,17 @@ use Ding\Aspect\MethodInvocation;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-interface IMethodInterceptor extends IInterceptor
+interface IInterceptor
 {
-
+    /**
+     * Will be called whenever necessary.
+     * 
+     * @param MethodInvocation $invocation In chained aspects, this will be
+     * the invocation for the next aspect after you call proceed(). Use
+     * getOriginalInvocation() to access the original aspected method call.
+     * 
+     * @see MethodInvocation::getOriginalInvocation()
+     * @return void
+     */
+    public function invoke(MethodInvocation $invocation);
 }

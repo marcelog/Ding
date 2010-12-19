@@ -31,18 +31,6 @@ use Ding\Aspect\MethodInvocation;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-interface IExceptionInterceptor
+interface IExceptionInterceptor extends IInterceptor
 {
-    /**
-     * Will be called when an exception is thrown. Use proceed() in order to
-     * continue the chain.
-     * 
-     * @param MethodInvocation $invocation In chained aspects, this will be
-     * the invocation for the next aspect after you call proceed(). Use
-     * getOriginalInvocation() to access the original aspected method call.
-     * 
-     * @see MethodInvocation::getOriginalInvocation()
-     * @return void
-     */
-    public function invoke(MethodInvocation $invocation);
 }

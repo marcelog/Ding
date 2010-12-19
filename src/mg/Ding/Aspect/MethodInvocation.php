@@ -213,14 +213,14 @@ class MethodInvocation
     /**
      * Constructor.
      * 
-     * @param string           $class  Class for the aspected method invoked.
-     * @param string           $method Aspected method invoked.
-     * @param array            $args   Arguments used to invoke the aspected
+     * @param string           $class   Class for the aspected method invoked.
+     * @param string           $method  Aspected method invoked.
+     * @param array            $args    Arguments used to invoke the aspected
      * method.
-     * @param mixed            $result Result from the execution of the
+     * @param mixed            $result  Result from the execution of the
      * aspected method.
-     * @param object           $object Target invocation object for method.
-     * @param MethodInvocation $invoke In a chained aspect call, this will
+     * @param object           $object  Target invocation object for method.
+     * @param MethodInvocation &$invoke In a chained aspect call, this will
      * be the access to the original (aspected) method call.  
      * 
      * @see MethodInvocation::getOriginalInvocation()
@@ -228,7 +228,7 @@ class MethodInvocation
      */
     public function __construct(
         $class, $method, $args, $object,
-        MethodInvocation $invoke = null
+        MethodInvocation &$invoke = null
     ) {
         $this->_class = $class;
         $this->_method = $method;
