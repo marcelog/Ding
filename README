@@ -23,16 +23,12 @@ for the class.
 Using aspects:
 =============
 
-You may use any of the following kind of aspects:
+In order to make aspects work, there's some kind of interceptors implementation.
+Currently, there are 2 available interceptors:
 
-* After: Will execute the advice right after the method execution.
-
-* Before: Will execute the advice right before the target method.
-
-* Around: Will execute the advice before and after the target method.
-
-* AfterThrowing: Will execute the advice only if the target method threw and
-exception.
-
-* AfterFinally: Will execute the advice after the target method execution, on
-normal and abnormal terminations (exceptions).
+* IMethodInterceptor: Implement this one to be called before every method
+ execution (use proceed() to continue the chained execution), resuming your
+ own afterwards.
+* IExceptionInterceptor: Implement this one to be called when an aspected
+ method throws an exception.
+ 

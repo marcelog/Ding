@@ -44,5 +44,5 @@ interface IExceptionInterceptor
      * @see MethodInvocation::getOriginalInvocation()
      * @return void
      */
-    public function invokeException(MethodInvocation $invocation);
+    public function invoke(MethodInvocation $invocation);
 }

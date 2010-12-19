@@ -33,38 +33,18 @@ namespace Ding\Aspect;
 class AspectDefinition
 {
     /**
-     * This kind of aspect will be run after the target method, only if the
-     * target method did not throw an exception.
+     * This kind of aspect will be run before the method call.
      * @var integer
      */
-    const ASPECT_AFTER = 0;
+    const ASPECT_METHOD = 0;
 
     /**
-     * This kind of aspect will be run before the target method.
+     * This kind of aspect will be run when the method throws an uncatched
+     * exception.
      * @var integer
      */
-    const ASPECT_BEFORE = 1;
+    const ASPECT_EXCEPTION = 1;
 
-    /**
-     * This kind of aspect will be run after the target method, only in case of
-     * an exception.
-     * @var integer
-     */
-    const ASPECT_AFTERTHROW = 2;
-
-    /**
-     * This kind of aspect will be run before and after the target method.
-     * @var integer
-     */
-    const ASPECT_AROUND = 3;
-
-    /**
-     * This kind of aspect will be run after the target method, regardless of
-     * execution result (normal or exception).
-     * @var integer
-     */
-    const ASPECT_AFTERFINALLY = 4;
-    
     /**
      * Target aspected method.
      * @var string

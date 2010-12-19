@@ -79,16 +79,10 @@ class BeanFactoryXmlImpl extends BeanFactory
         $aspects = array();
         $aspectBean = (string)$simpleXmlAspect->attributes()->ref;
         $type = (string)$simpleXmlAspect->attributes()->type;
-        if ($type == 'before') {
-            $type = AspectDefinition::ASPECT_BEFORE;
-        } else if ($type == 'after') {
-            $type = AspectDefinition::ASPECT_AFTER;
-        } else if ($type == 'afterThrowing') {
-            $type = AspectDefinition::ASPECT_AFTERTHROW;
-        } else if ($type == 'afterFinally') {
-            $type = AspectDefinition::ASPECT_AFTERFINALLY;
-        } else if ($type == 'around') {
-            $type = AspectDefinition::ASPECT_AROUND;
+        if ($type == 'method') {
+            $type = AspectDefinition::ASPECT_METHOD;
+        } else if ($type == 'exception') {
+            $type = AspectDefinition::ASPECT_EXCEPTION;
         } else {
             throw new BeanFactoryException('Invalid aspect type');
         }

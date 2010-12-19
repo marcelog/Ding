@@ -34,6 +34,12 @@ class DispatcherImpl implements IDispatcher
      * @var IMethodInterceptor[]
      */
     private $_methodsIntercepted;
+
+    /**
+     * Associated array for methods intercepted for exceptions.
+     * @var IExceptionInterceptor[]
+     */
+    private $_methodsExceptionIntercepted;
     
     /**
      * Adds a method interceptor to the chain of a given method name.
@@ -50,11 +56,26 @@ class DispatcherImpl implements IDispatcher
     }
 
     /**
+     * Adds a method interceptor to the chain of the exception interceptors
+     * for a given method name.
+     * 
+     * @param string                $method      Method name.
+     * @param IExceptionInterceptor $interceptor Interceptor to call.
+     * 
+     * @return void
+     */
+    public function addExceptionInterceptor(
+        $method, IExceptionInterceptor $interceptor
+    ) {
+        $this->_methodsExceptionIntercepted[$method][] = $interceptor;
+    }
+    
+    /**
      * Returns interceptors for a given method name or false if none was set.
      * 
      * @param string $method Method to check for.
      * 
-     * @return IMethodIntreceptor[]
+     * @return IMethodInterceptor[]
      */
     public function getInterceptors($method)
     {
@@ -63,7 +84,38 @@ class DispatcherImpl implements IDispatcher
         }
         return $this->_methodsIntercepted[$method];
     }
-
+    
+    /**
+     * Returns exception interceptors for a given method name or
+     * false if none was set.
+     * 
+     * @param string $method Method to check for.
+     * 
+     * @return IExceptionInterceptor[]
+     */
+    public function getExceptionInterceptors($method)
+    {
+        if (!isset($this->_methodsExceptionIntercepted[$method])) {
+            return false;
+        }
+        return $this->_methodsExceptionIntercepted[$method];
+    }
+    
+    private function _callInterceptors(
+        MethodInvocation $invocation, array $interceptors
+    ) {
+        $total = count($interceptors) - 1;
+        $invocationChain = $invocation; 
+        for ($i = $total; $i >= 0; $i--) {
+            $newInvocation = new MethodInvocation(
+                get_class($interceptors[$i]), 'invoke',
+                    array($invocationChain), $interceptors[$i], $invocation
+                );
+            $invocationChain = $newInvocation;
+        }
+        return $invocationChain->proceed();
+    }
+    
     /**
      * The proxy will call this method when an aspected method throws an
      * exception.
@@ -74,7 +126,14 @@ class DispatcherImpl implements IDispatcher
      */
     public function invokeException(MethodInvocation $invocation)
     {
-        
+        $interceptors = $this->getExceptionInterceptors(
+            $invocation->getMethod()
+        );
+        if ($interceptors != false) {
+            return $this->_callInterceptors($invocation, $interceptors);
+        } else {
+            return $invocation->proceed();
+        }
     }
     
     /**
@@ -88,16 +147,7 @@ class DispatcherImpl implements IDispatcher
     {
         $interceptors = $this->getInterceptors($invocation->getMethod());
         if ($interceptors != false) {
-            $total = count($interceptors) - 1;
-            $invocationChain = $invocation; 
-            for ($i = $total; $i >= 0; $i--) {
-                $newInvocation = new MethodInvocation(
-                	get_class($interceptors[$i]), 'invoke',
-                    array($invocationChain), $interceptors[$i], $invocation
-                );
-                $invocationChain = $newInvocation;
-            }
-            return $invocationChain->proceed();
+            return $this->_callInterceptors($invocation, $interceptors);
         } else {
             return $invocation->proceed();
         }

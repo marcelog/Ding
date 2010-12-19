@@ -7,19 +7,25 @@
 		<property name="bProperty">
 			<value>Some string B</value>
 		</property>
+		<aspect ref="AspectE" type="method">
+			<pointcut expression="targetMethod"/>
+		</aspect>
+		<aspect ref="AspectD" type="exception">
+			<pointcut expression="targetMethod"/>
+		</aspect>
 	</bean>
 
 	<bean id="ComponentA" class="ClassA" scope="singleton">
 		<property name="aComponent">
 			<ref bean="ComponentB"/>
 		</property>
-		<aspect ref="AspectA" type="before">
+		<aspect ref="AspectA" type="method">
 			<pointcut expression="targetMethod"/>
 		</aspect>
-		<aspect ref="AspectB" type="before">
+		<aspect ref="AspectB" type="method">
 			<pointcut expression="targetMethod"/>
 		</aspect>
-		<aspect ref="AspectC" type="before">
+		<aspect ref="AspectC" type="method">
 			<pointcut expression="targetMethod"/>
 		</aspect>
 	</bean>
@@ -27,4 +33,6 @@
 	<bean id="AspectA" class="AspectA" scope="singleton"/>
 	<bean id="AspectB" class="AspectB" scope="singleton"/>
 	<bean id="AspectC" class="AspectC" scope="singleton"/>
+	<bean id="AspectD" class="AspectD" scope="singleton"/>
+	<bean id="AspectE" class="AspectE" scope="singleton"/>
 </beans>

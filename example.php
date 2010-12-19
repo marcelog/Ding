@@ -88,6 +88,11 @@ class ClassB
     {
         return $this->_bProperty;
     }
+    
+    public function targetMethod()
+    {
+        throw new Exception('Pepe');
+    }
 }
 
 class ClassC
@@ -122,11 +127,36 @@ class AspectC implements IMethodInterceptor
         echo "After3\n";
     }
 }
+class AspectD implements IExceptionInterceptor
+{
+    public function invoke(MethodInvocation $invocation)
+    {
+        echo "Before4: " . $invocation->getOriginalInvocation() . "\n";
+        $invocation->proceed(array('b', 'c', 'd'));
+        echo "After4\n";
+    }
+}
+class AspectE implements IMethodInterceptor
+{
+    public function invoke(MethodInvocation $invocation)
+    {
+        try
+        {
+            echo "Before3: " . $invocation->getOriginalInvocation() . "\n";
+            $invocation->proceed(array('b', 'c', 'd'));
+            echo "After3\n";
+        } catch(Exception $e) {
+            echo "Move along, nothing happened here.. \n";
+        }
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////
 try
 {
     $a = ContainerImpl::getInstanceFromXml('beans.xml');
     $bean = $a->getBean('ComponentA');
+    $bean->targetMethod('a', 1, array('1' => '2'));
+    $bean = $a->getBean('ComponentB');
     $bean->targetMethod('a', 1, array('1' => '2'));
 } catch(Exception $exception) {
     echo $exception . "\n";

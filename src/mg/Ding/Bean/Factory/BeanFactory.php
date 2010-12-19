@@ -117,9 +117,17 @@ abstract class BeanFactory
             $bean::setDispatcher($dispatcher);
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
-                $dispatcher->addMethodInterceptor(
-                    $aspectDefinition->getPointcut(), $aspect
-                );
+                if (
+                    $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
+                ) {
+                    $dispatcher->addMethodInterceptor(
+                        $aspectDefinition->getPointcut(), $aspect
+                    );
+                } else {
+                    $dispatcher->addExceptionInterceptor(
+                        $aspectDefinition->getPointcut(), $aspect
+                    );
+                }
             }
         } else {
             /* @todo change this to a clone */
