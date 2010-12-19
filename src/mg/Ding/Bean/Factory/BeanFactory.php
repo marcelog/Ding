@@ -16,6 +16,7 @@ namespace Ding\Bean\Factory;
 
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
+use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectDefinition;

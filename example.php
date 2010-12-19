@@ -103,6 +103,16 @@ class AspectA implements IMethodInterceptor
         echo "After\n";
     }
 }
+
+class AspectB implements IMethodInterceptor
+{
+    public function invoke(MethodInvocation $invocation)
+    {
+        echo "Before2\n";
+        $invocation->proceed(array('b', 'c', 'd'));
+        echo "After2\n";
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////
 try
 {

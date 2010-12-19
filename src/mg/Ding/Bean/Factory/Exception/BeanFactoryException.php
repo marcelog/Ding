@@ -13,7 +13,7 @@
  * @link       http://www.noneyet.ar/
  */
 namespace Ding\Bean\Factory\Exception;
-use Ding\Exception;
+use Ding\Exception\DingException;
 
 /**
  * Factory exceptions extend this one.
