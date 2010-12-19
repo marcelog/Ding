@@ -40,20 +40,24 @@ class Proxy
      */
     private static $_proxyTemplate = <<<TEXT
 
-use Ding\Aspect\Interceptor\Dispatcher;
+use Ding\Aspect\Interceptor\IDispatcher;
 use Ding\Aspect\MethodInvocation;
 
 final class NEW_NAME extends CLASS_NAME {
+    /**
+     * Holds advice dispatcher.
+     * @var Dispatcher
+     */
     private static \$_dispatcher = false;
 
     /**
      * This is used from the container to set the dispatcher for the aspects.
      *
-     * @param Dispatcher \$dispatcher Advice dispatcher.
+     * @param IDispatcher \$dispatcher Advice dispatcher.
      *
      * @return void
      */
-    public static function setDispatcher(Dispatcher \$dispatcher)
+    public static function setDispatcher(IDispatcher \$dispatcher)
     {
         self::\$_dispatcher = \$dispatcher;
     }
@@ -72,7 +76,13 @@ TEXT;
         \$invocation = new MethodInvocation(
             'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this
         );
-        return self::\$_dispatcher->invoke(\$invocation);
+        try
+        {
+        	return self::\$_dispatcher->invoke(\$invocation);
+        } catch (Exception \$exception) {
+            \$invocation->setException(\$exception);
+        	self::\$_dispatcher->invokeException(\$invocation);
+        }
 	}
 TEXT;
 

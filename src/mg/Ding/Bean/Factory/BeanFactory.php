@@ -20,7 +20,8 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectDefinition;
-use Ding\Aspect\Interceptor\Dispatcher;
+use Ding\Aspect\Interceptor\IDispatcher;
+use Ding\Aspect\Interceptor\DispatcherImpl;
 
 /**
  * Generic bean factory.
@@ -112,7 +113,7 @@ abstract class BeanFactory
         $beanClass = $beanDefinition->getClass();
         if ($beanDefinition->hasAspects()) {
             $bean = Proxy::create($beanClass);
-            $dispatcher = new Dispatcher();
+            $dispatcher = new DispatcherImpl();
             $bean::setDispatcher($dispatcher);
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());

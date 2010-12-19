@@ -60,10 +60,38 @@ class MethodInvocation
     private $_exception;
     
     /**
+     * Original invocation.
+     * In the case of a chained aspect call, getArguments() and alike, will
+     * give you information about the calling aspect, and not the method 
+     * aspected itself (unless you are the last one in the chain). In order
+     * to access information for the original request
+     * @see MethodInvocation::getOriginalInvocation()
+     * @var MethodInvocation
+     */
+    private $_originalInvocation;
+    
+    /**
      * This invocation will be called onto this object.
      * @var object
      */
     private $_object;
+    
+    /**
+     * Returns information about the original invocation to the (aspected)
+     * method.
+     * 
+     * @see MethodInvocation::$_originalInvocation
+     * 
+     * @return MethodInvocation
+     */
+    public function getOriginalInvocation()
+    {
+        return
+            $this->_originalInvocation == null
+            ? $this
+            : $this->_originalInvocation
+        ;
+    }
     
     /**
      * Call this one *from* your aspect, in order to proceed with the
@@ -184,19 +212,27 @@ class MethodInvocation
     /**
      * Constructor.
      * 
-     * @param string $class  Class for the aspected method invoked.
-     * @param string $method Aspected method invoked.
-     * @param array  $args   Arguments used to invoke the aspected method.
-     * @param mixed  $result Result from the execution of the aspected method.
-     * @param object $object Target invocation object for method.
+     * @param string           $class  Class for the aspected method invoked.
+     * @param string           $method Aspected method invoked.
+     * @param array            $args   Arguments used to invoke the aspected
+     * method.
+     * @param mixed            $result Result from the execution of the
+     * aspected method.
+     * @param object           $object Target invocation object for method.
+     * @param MethodInvocation $invoke In a chained aspect call, this will
+     * be the access to the original (aspected) method call.  
      * 
+     * @see MethodInvocation::getOriginalInvocation()
      * @return void
      */
-    public function __construct($class, $method, $args, $object)
-    {
+    public function __construct(
+        $class, $method, $args, $object,
+        MethodInvocation $invoke = null
+    ) {
         $this->_class = $class;
         $this->_method = $method;
         $this->_args = $args;
         $this->_object = $object;
+        $this->_originalInvocation = $invoke;
     }
 }

@@ -19,8 +19,12 @@
 		<aspect ref="AspectB" type="before">
 			<pointcut expression="targetMethod"/>
 		</aspect>
+		<aspect ref="AspectC" type="before">
+			<pointcut expression="targetMethod"/>
+		</aspect>
 	</bean>
 	
 	<bean id="AspectA" class="AspectA" scope="singleton"/>
 	<bean id="AspectB" class="AspectB" scope="singleton"/>
+	<bean id="AspectC" class="AspectC" scope="singleton"/>
 </beans>

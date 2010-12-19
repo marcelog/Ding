@@ -98,7 +98,7 @@ class AspectA implements IMethodInterceptor
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before\n";
+        echo "Before1: " . $invocation->getOriginalInvocation() . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After\n";
     }
@@ -108,9 +108,18 @@ class AspectB implements IMethodInterceptor
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before2\n";
+        echo "Before2: " . $invocation->getOriginalInvocation() . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After2\n";
+    }
+}
+class AspectC implements IMethodInterceptor
+{
+    public function invoke(MethodInvocation $invocation)
+    {
+        echo "Before3: " . $invocation->getOriginalInvocation() . "\n";
+        $invocation->proceed(array('b', 'c', 'd'));
+        echo "After3\n";
     }
 }
 ////////////////////////////////////////////////////////////////////////////////
