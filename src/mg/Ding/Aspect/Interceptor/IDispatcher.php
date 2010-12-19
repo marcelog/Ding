@@ -29,6 +29,22 @@ use Ding\Aspect\MethodInvocation;
  */
 interface IDispatcher
 { 
+    /**
+     * The proxy will call this method when an aspected method throws an
+     * exception.
+     *
+     * @param MethodInvocation $invocation Method invocation "descriptor".
+     * 
+     * @return void
+     */
     public function invokeException(MethodInvocation $invocation);
+
+    /**
+     * The proxy will call this method when an aspected method is called.
+     *
+     * @param MethodInvocation $invocation Method invocation "descriptor".
+     * 
+     * @return void
+     */
     public function invoke(MethodInvocation $invocation);
 }

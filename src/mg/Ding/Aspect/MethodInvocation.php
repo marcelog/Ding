@@ -78,7 +78,8 @@ class MethodInvocation
     
     /**
      * Returns information about the original invocation to the (aspected)
-     * method.
+     * method. Will return itself as the original invocation if none was set
+     * at construction time.
      * 
      * @see MethodInvocation::$_originalInvocation
      * 

@@ -35,12 +35,27 @@ class DispatcherImpl implements IDispatcher
      */
     private $_methodsIntercepted;
     
+    /**
+     * Adds a method interceptor to the chain of a given method name.
+     * 
+     * @param string             $method      Method name.
+     * @param IMethodInterceptor $interceptor Interceptor to call.
+     * 
+     * @return void
+     */
     public function addMethodInterceptor(
         $method, IMethodInterceptor $interceptor
     ) {
         $this->_methodsIntercepted[$method][] = $interceptor;
     }
 
+    /**
+     * Returns interceptors for a given method name or false if none was set.
+     * 
+     * @param string $method Method to check for.
+     * 
+     * @return IMethodIntreceptor[]
+     */
     public function getInterceptors($method)
     {
         if (!isset($this->_methodsIntercepted[$method])) {
@@ -50,12 +65,12 @@ class DispatcherImpl implements IDispatcher
     }
 
     /**
-     * This will be called from the proxy. 
+     * The proxy will call this method when an aspected method throws an
+     * exception.
+     *
+     * @param MethodInvocation $invocation Method invocation "descriptor".
      * 
-     * @param MethodInvocation $invocation Metod invocation, this will be
-     * our chained request.
-     * 
-     * @return mixed
+     * @return void
      */
     public function invokeException(MethodInvocation $invocation)
     {
@@ -63,12 +78,11 @@ class DispatcherImpl implements IDispatcher
     }
     
     /**
-     * This will be called from the proxy. 
+     * The proxy will call this method when an aspected method is called.
+     *
+     * @param MethodInvocation $invocation Method invocation "descriptor".
      * 
-     * @param MethodInvocation $invocation Metod invocation, this will be
-     * our chained request.
-     * 
-     * @return mixed
+     * @return void
      */
     public function invoke(MethodInvocation $invocation)
     {
