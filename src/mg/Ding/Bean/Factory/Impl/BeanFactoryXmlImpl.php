@@ -35,11 +35,38 @@ use Ding\Aspect\AspectDefinition;
  */
 class BeanFactoryXmlImpl extends BeanFactory
 {
+    /**
+     * Bean definitions
+     * @var BeanDefinition[]
+     */
     private $_beanDefs;
+    
+    /**
+     * beans.xml file path.
+     * @var string
+     */
     private $_filename;
+    
+    /**
+     * SimpleXML object.
+     * @var SimpleXML
+     */
     private $_simpleXml;
+    
+    /**
+     * Current instance.
+     * @var BeanFactoryXmlImpl
+     */
     private static $_instance = false;
     
+    /**
+     * Called from the parent class to get a bean definition.
+     * 
+	 * @param string $beanName Bean name to get definition for.
+	 * 
+	 * @throws BeanFactoryException
+	 * @return BeanDefinition
+     */
     public function getBeanDefinition($beanName)
     {
         return
@@ -49,6 +76,11 @@ class BeanFactoryXmlImpl extends BeanFactory
         ;
     }
     
+    /**
+     * Gets xml errors.
+     * 
+     * @return string
+     */
     private function _getXmlErrors()
     {
         $errors = '';
@@ -59,8 +91,12 @@ class BeanFactoryXmlImpl extends BeanFactory
     }
 
     /**
+     * Initializes SimpleXML Object
+     * 
+     * @param string $filename
+     * 
      * @throws BeanFactoryException
-     * @param unknown_type $filename
+     * @return SimpleXML
      */
     private function _loadXml($filename)
     {
@@ -72,8 +108,12 @@ class BeanFactoryXmlImpl extends BeanFactory
     }
     
     /**
+     * Returns an aspect definition.
+     * 
+     * @param SimpleXML $simpleXmlAspect Aspect node.
+     * 
      * @throws BeanFactoryException
-     * @param unknown_type $filename
+     * @return AspectDefinition
      */
     private function _loadAspect($simpleXmlAspect)
     {
@@ -97,6 +137,14 @@ class BeanFactoryXmlImpl extends BeanFactory
         return $aspect;
     }
     
+    /**
+     * Returns a property definition.
+     * 
+     * @param SimpleXML $simpleXmlProperty Property node.
+     * 
+     * @throws BeanFactoryException
+     * @return BeanPropertyDefinition
+     */
     private function _loadProperty($simpleXmlProperty)
     {
         $propName = $simpleXmlProperty->attributes()->name;
@@ -112,6 +160,14 @@ class BeanFactoryXmlImpl extends BeanFactory
         );
     }
 
+    /**
+     * Returns a constructor argument definition.
+     * 
+     * @param SimpleXML $simpleXmlArg Argument node.
+     * 
+     * @throws BeanFactoryException
+     * @return BeanConstructorArgumentDefinition
+     */
     private function _loadConstructorArg($simpleXmlArg)
     {
         if (isset($simpleXmlArg->ref)) {
