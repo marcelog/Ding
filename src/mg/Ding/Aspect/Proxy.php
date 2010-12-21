@@ -171,7 +171,8 @@ TEXT;
         $class, IDispatcher $dispatcher = null, array $constructorArguments
     ) {
         $subject = new \ReflectionClass($class);
-        $proxyClassName = 'Proxy' . $subject->getName()  . self::$_proxyCount;
+        $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName())
+            . self::$_proxyCount;
         $src = self::_createClass($proxyClassName, $subject);
         eval($src);
         if ($dispatcher != null) {
