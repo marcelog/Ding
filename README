@@ -32,3 +32,7 @@ Currently, there are 2 available interceptors:
 * IExceptionInterceptor: Implement this one to be called when an aspected
  method throws an exception.
  
+
+ Collaborators:
+ ============
+agvstin | agu.gutierrez@gmail.com
