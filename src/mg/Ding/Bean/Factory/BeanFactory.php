@@ -139,7 +139,11 @@ abstract class BeanFactory
         } else {
             /* @todo change this to a clone */
             $constructor = new \ReflectionClass($beanClass);
-            $bean = $constructor->newInstanceArgs($args);
+            if (!empty($args)) {
+                $bean = $constructor->newInstanceArgs($args);
+            } else {
+                $bean = $constructor->newInstanceArgs();
+            }
         }
         try
         {
