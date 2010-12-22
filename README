@@ -18,11 +18,19 @@ work will get done. Also, performance will eventually be taken care of.
 * If you're wondering why the first comment of each source file is repeated,
 it's because they're actually 2 different comments: one for the file, and one
 for the class.
+--------------------------------------------------------------------------------
+DI
+==
+Features available:
+* Setter injection (values and/or references to other beans).
+* Constructor injection (values and/or references to other beans).
+* A bean can be: singleton or prototype (multiple instances).
+* Can create beans by specifying a static method of the bean class itself.
+* Can create beans by specifying another bean (and its method) as a factory.
 
 --------------------------------------------------------------------------------
-Using aspects:
-=============
-
+AOP
+===
 In order to make aspects work, there's some kind of interceptors implementation.
 Currently, there are 2 available interceptors:
 
