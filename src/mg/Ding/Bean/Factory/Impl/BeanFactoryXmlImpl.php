@@ -72,7 +72,7 @@ class BeanFactoryXmlImpl extends BeanFactory
         return
             isset($this->_beanDefs[$beanName])
             ? $this->_beanDefs[$beanName]
-            : false
+            : $this->_loadBean($beanName);
         ;
     }
     
@@ -185,13 +185,20 @@ class BeanFactoryXmlImpl extends BeanFactory
     /**
      * Returns a bean definition.
      *  
-     * @param SimpleXMLElement $simpleXmlBean
+     * @param string $beanName
      * 
      * @throws BeanFactoryException
      * @return BeanDefinition
      */
-    private function _loadBean($simpleXmlBean)
+    private function _loadBean($beanName)
     {
+        $simpleXmlBean = $this->_simpleXml->xpath("//bean[@id='$beanName']");
+        if (false === $simpleXmlBean) {
+            return false;
+        }
+        // asume valid xml (only one bean with that id)
+        $simpleXmlBean = $simpleXmlBean[0];
+
         $bName = (string)$simpleXmlBean->attributes()->id;
         $bClass = (string)$simpleXmlBean->attributes()->class;
         $bScope = (string)$simpleXmlBean->attributes()->scope;
@@ -248,10 +255,6 @@ class BeanFactoryXmlImpl extends BeanFactory
             );
         }
         $this->_beanDefs = array();
-        foreach ($this->_simpleXml->bean as $bean) {
-            $newBean = $this->_loadBean($bean);
-            $this->_beanDefs[$newBean->getName()] = $newBean;         
-        }
     }
 
     /**
