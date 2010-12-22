@@ -40,6 +40,10 @@ Currently, there are 2 available interceptors:
 * IExceptionInterceptor: Implement this one to be called when an aspected
  method throws an exception.
  
+--------------------------------------------------------------------------------
+Integration with other frameworks
+=================================
+See our doctrine2 integration: https://github.com/marcelog/Ding/tree/master/docs/examples/doctrine
 
  Collaborators:
  ============
