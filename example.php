@@ -163,6 +163,9 @@ class AspectD implements IExceptionInterceptor
         echo "After4\n";
     }
 
+    public function setAComponent(ClassX $a = null) {
+        
+    }
     public function __construct()
     {
     }

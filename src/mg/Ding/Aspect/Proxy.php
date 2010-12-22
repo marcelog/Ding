@@ -75,7 +75,7 @@ TEXT;
      * @var string
      */
     private static $_methodTemplate = <<<TEXT
-    VISIBILITY ADDITIONAL function METHOD_NAME()
+    VISIBILITY ADDITIONAL function METHOD_NAME(METHOD_ARGS)
     {
         \$invocation = new MethodInvocation(
             'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this
@@ -114,6 +114,39 @@ TEXT;
     }
     
     /**
+     * This will return a full proxy-method-parameter source.
+     * 
+     * @param \ReflectionParameter $parameter The method parameter.
+     * 
+     * @see Proxy::$_methodTemplate
+     * 
+     * @return string
+     */
+    private static function _createParameter(\ReflectionParameter $parameter)
+    {
+        $parameterSrc = '';
+        $paramClass = $parameter->getClass();
+        if ($parameter->isArray()) {
+            $parameterSrc .= 'array ';
+        } else if ($paramClass) {
+            $parameterSrc .= $paramClass->getName() . ' ';
+        }
+        if ($parameter->isPassedByReference()) {
+            $parameterSrc .= ' &';
+        }
+        $parameterSrc .= '$' . $parameter->getName();
+        if ($parameter->isOptional()) {
+            $parameterSrc .= '=';
+            if ($parameter->getDefaultValue() == null) {
+                $parameterSrc .= 'null';
+            } else {
+                $parameterSrc .= $parameter->getDefaultValue();
+            }
+        }
+        return $parameterSrc;
+    }
+    
+    /**
      * This will return a full proxy-method source.
      * 
      * @param \ReflectionMethod $method The method to be proxied.
@@ -145,10 +178,16 @@ TEXT;
         } else if ($method->isDestructor()) {
             $name = '__destruct';
         }
+        $args = array();
+        foreach ($method->getParameters() as $parameter) {
+            $args[] = self::_createParameter($parameter);            
+        }
+        
         $src = self::$_methodTemplate;
         $src = str_replace('VISIBILITY', $visibility, $src);
         $src = str_replace('ADDITIONAL', $additional, $src);
         $src = str_replace('METHOD_NAME', $name, $src);
+        $src = str_replace('METHOD_ARGS', implode(',', $args), $src);
         $src = str_replace(
         	'CLASS_NAME', $method->getDeclaringClass()->getName(), $src
         );
@@ -156,7 +195,7 @@ TEXT;
     }
 
     /**
-     * This will give you an instance of a proxy class for any given class.
+     * This will give you a string for a new proxy class.
      * 
      * @param string      $class                Class to be proxied.
      * @param IDispatcher $dispatcher           Dispatcher to invoke aspects.
@@ -165,7 +204,7 @@ TEXT;
      * @todo Currently, final classes can't be proxied because the proxy class
      * extends it (this may change in the near future).
      * 
-     * @return object 
+     * @return string 
      */
     public static function create($class, IDispatcher $dispatcher = null)
     {
