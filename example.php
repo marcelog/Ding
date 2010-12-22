@@ -75,6 +75,11 @@ class ClassB
     private $_aProperty;
     private $_bProperty;
     
+    public function init()
+    {
+        echo "Initializing class b\n";
+    }
+    
     public function setAProperty($value)
     {
         $this->_aProperty = $value;        

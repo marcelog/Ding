@@ -1,5 +1,5 @@
 <beans>
-	<bean id="ComponentB" class="ClassB" scope="singleton">
+	<bean id="ComponentB" class="ClassB" scope="singleton" init-method="init">
 		<constructor-arg>
 			<value>"001"</value>
 		</constructor-arg>

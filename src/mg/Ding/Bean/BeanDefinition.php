@@ -89,6 +89,12 @@ class BeanDefinition
     private $_factoryBean;
     
     /**
+     * Init method (if any).
+     * @var string
+     */
+    private $_initMethod;
+    
+    /**
      * Returns true if this bean has mapped aspects.
      * 
      * @return boolean
@@ -177,7 +183,17 @@ class BeanDefinition
     {
         return $this->_factoryBean;
     }
-        
+
+    /**
+     * Init method, false if none was set.
+     * 
+     * @return string
+     */
+    public function getInitMethod()
+    {
+        return $this->_initMethod;
+    }
+    
     /**
      * Constructor.
      * 
@@ -189,6 +205,7 @@ class BeanDefinition
      * false.
      * @param string                   $factoryBean   Factory bean name or
      * false.
+     * @param string                   $initMethod    Init method.
      * @param BeanPropertyDefinition[] $properties    Bean properties
      * definitions.
      * @param AspectDefinition[]       $aspects       Aspects definitions.
@@ -197,14 +214,15 @@ class BeanDefinition
      * @return void
      */
     public function __construct(
-        $name, $class, $scope, $factoryMethod, $factoryBean, array $properties,
-        array $aspects, array $arguments
+        $name, $class, $scope, $factoryMethod, $factoryBean, $initMethod,
+        array $properties, array $aspects, array $arguments
     ) {
         $this->_name = $name;
         $this->_class = $class;
         $this->_scope = $scope;
         $this->_factoryMethod = $factoryMethod;
         $this->_factoryBean = $factoryBean;
+        $this->_initMethod = $initMethod;
         $this->_properties = $properties;
         $this->_aspects = $aspects;
         $this->_constructorArgs = $arguments;

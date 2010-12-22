@@ -175,6 +175,10 @@ abstract class BeanFactory
         try
         {
             $this->_assemble($bean, $beanDefinition);
+            $initMethod = $beanDefinition->getInitMethod();
+            if ($initMethod) {
+                $bean->$initMethod();
+            }
         } catch(\ReflectionException $exception) {
             throw new BeanFactoryException('DI Error', 0, $exception);
         }
