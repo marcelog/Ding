@@ -1,0 +1,45 @@
+<beans>
+	<!-- This is to be implemented when sets can be defined in beans.xml
+	<bean id="repository-locator" class="\Doctrine\ORM\EntityManager"
+		factory-method="create">
+		<constructor-arg>
+			<ref bean="doctrine-connection-params"/>
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="doctrine-config"/>
+		</constructor-arg>
+	</bean>
+	-->
+	<bean id="doctrine-cache" class="\Doctrine\Common\Cache\ArrayCache" scope="singleton" />
+	<!-- This hack is needed to avoid repeating code in
+	 	\Doctrine\ORM\Configuration::newDefaultAnnotationDriver()
+	-->
+	<bean id="doctrine-config-dummy" class="\Doctrine\ORM\Configuration" scope="singleton" />
+	<bean id="doctrine-orm-driver"
+		factory-bean="doctrine-config-dummy" factory-method="newDefaultAnnotationDriver"
+		scope="singleton">
+		<constructor-arg>
+			<value>"./entities"</value>
+		</constructor-arg>
+	</bean>
+	<bean id="doctrine-config" class="\Doctrine\ORM\Configuration" scope="singleton">
+		<property name="metaDataCacheImpl">
+			<ref bean="doctrine-cache"/>
+		</property>
+		<property name="metadataDriverImpl">
+			<ref bean="doctrine-orm-driver"/>
+		</property>
+		<property name="queryCacheImpl">
+			<ref bean="doctrine-cache"/>
+		</property>
+		<property name="proxyDir">
+			<value>"./proxies"</value>
+		</property>
+		<property name="proxyNamespace">
+			<value>\Test\Proxies</value>
+		</property>
+		<property name="autoGenerateProxyClasses">
+			<value>true</value>
+		</property>
+	</bean>
+</beans>

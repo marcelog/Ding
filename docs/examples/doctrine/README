@@ -1,0 +1,10 @@
+--------------------------------------------------------------------------------
+NOTE: THIS EXAMPLE IS NOT FULLY DEVLOPED (WAITING FOR SOME FEATURES).
+      (However, it shows a nice integration with Doctrin2 framework)
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Please define DOCTRINE_LIB_PATH in example.php before running it.
+--------------------------------------------------------------------------------
+Requirements:
+
+* PHP requirements: pdo_sqlite3
