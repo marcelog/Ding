@@ -145,9 +145,9 @@ class AspectC implements IMethodInterceptor
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before3: " . $invocation->getOriginalInvocation() . "\n";
-        $invocation->proceed(array('b', 'c', 'd'));
-        echo "After3\n";
+        echo "Before9: " . $invocation->getOriginalInvocation() . "\n";
+        $invocation->proceed(func_get_args());
+        echo "After9\n";
     }
 
     public function __construct()
