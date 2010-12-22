@@ -185,6 +185,41 @@ class AspectE implements IMethodInterceptor
     {
     }
 }
+
+class ClassX
+{
+    public function __construct($a, $b)
+    {
+        echo "Creating ClassX with args:\n";
+        var_dump(func_get_args());
+   }
+}
+
+class ClassZ
+{
+    public static function getInstance($a, $b)
+    {
+        return new ClassX($a, $b);
+    }
+    public function __construct()
+    {
+        echo "Creating ClassZ\n";
+   }
+}
+
+class ClassY
+{
+    public static function getInstance($a, $b)
+    {
+        return new ClassY($a, $b);
+    }
+    
+    private function __construct($a, $b)
+    {
+        echo "Creating ClassY with args:\n";
+        var_dump(func_get_args());
+    }
+}
 ////////////////////////////////////////////////////////////////////////////////
 try
 {
@@ -193,6 +228,9 @@ try
     $bean->targetMethod('a', 1, array('1' => '2'));
     $bean = $a->getBean('ComponentB');
     $bean->targetMethod('a', 1, array('1' => '2'));
+    
+    $bean = $a->getBean('ComponentY');
+    $bean = $a->getBean('ComponentX');
 } catch(Exception $exception) {
     echo $exception . "\n";
 }

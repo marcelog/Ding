@@ -121,7 +121,7 @@ abstract class BeanFactory
         }
         if ($beanDefinition->hasAspects()) {
             $dispatcher = new DispatcherImpl();
-            $bean = Proxy::create($beanClass, $dispatcher, $args);
+            $beanClass = Proxy::create($beanClass, $dispatcher);
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 if (
@@ -136,13 +136,40 @@ abstract class BeanFactory
                     );
                 }
             }
-        } else {
-            /* @todo change this to a clone */
+        }
+        /* @todo change this to a clone */
+        if ($beanDefinition->getFactoryMethod() == false) {
             $constructor = new \ReflectionClass($beanClass);
-            if (!empty($args)) {
-                $bean = $constructor->newInstanceArgs($args);
-            } else {
+            if (count($args) < 1) {
                 $bean = $constructor->newInstanceArgs();
+            } else {
+                $bean = $constructor->newInstanceArgs($args);
+            }
+        } else {
+            if ($beanDefinition->getFactoryBean() == false) {
+                $beanFactoryMethod = $beanDefinition->getFactoryMethod();
+                if (empty($args)) {
+                    $bean = $beanClass::$beanFactoryMethod();
+                } else {
+                    /* @todo yikes! */
+                    $bean = forward_static_call_array(
+                        array($beanClass, $beanFactoryMethod),
+                        $args
+                    );
+                }
+            } else {
+                $beanFactory = $this->getBean(
+                    $beanDefinition->getFactoryBean()
+                );
+                $refObject = new \ReflectionObject($beanFactory);
+                $method = $refObject->getMethod(
+                    $beanDefinition->getFactoryMethod()
+                );
+                if (empty($args)) {
+                    $bean = $method->invoke($beanFactory);
+                } else {
+                    $bean = $method->invokeArgs($beanFactory, $args);
+                }
             }
         }
         try

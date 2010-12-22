@@ -167,9 +167,8 @@ TEXT;
      * 
      * @return object 
      */
-    public static function create(
-        $class, IDispatcher $dispatcher = null, array $constructorArguments
-    ) {
+    public static function create($class, IDispatcher $dispatcher = null)
+    {
         $subject = new \ReflectionClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName())
             . self::$_proxyCount;
@@ -179,8 +178,6 @@ TEXT;
             $proxyClassName::setDispatcher($dispatcher);
         }
         self::$_proxyCount++;
-        $constructor = new \ReflectionClass($proxyClassName);
-        $proxyInstance = $constructor->newInstanceArgs($constructorArguments);
-        return new $proxyInstance;
+        return $proxyClassName;
     }
 }

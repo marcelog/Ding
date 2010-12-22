@@ -75,6 +75,18 @@ class BeanDefinition
      * @var BeanConstructorArgumentDefinition[]
      */
     private $_constructorArgs;
+
+    /**
+     * Factory method name (if any). 
+     * @var string
+     */
+    private $_factoryMethod;
+
+    /**
+     * Factory bean name (if any). 
+     * @var string
+     */
+    private $_factoryBean;
     
     /**
      * Returns true if this bean has mapped aspects.
@@ -147,25 +159,52 @@ class BeanDefinition
     }
     
     /**
+     * Factory method, false if none was set.
+     * 
+     * @return string
+     */
+    public function getFactoryMethod()
+    {
+        return $this->_factoryMethod;
+    }
+
+    /**
+     * Factory bean, false if none was set.
+     * 
+     * @return string
+     */
+    public function getFactoryBean()
+    {
+        return $this->_factoryBean;
+    }
+        
+    /**
      * Constructor.
      * 
-     * @param string                   $name       Bean name.
-     * @param string                   $class      Bean class.
-     * @param integer                  $scope      Bean type (scope). See this
-     * class constants.
-     * @param BeanPropertyDefinition[] $properties Bean properties definitions.
-     * @param AspectDefinition[]       $aspects    Aspects definitions.
+     * @param string                   $name          Bean name.
+     * @param string                   $class         Bean class.
+     * @param integer                  $scope         Bean type (scope). See
+     * this class constants.
+     * @param string                   $factoryMethod Factory method name or
+     * false.
+     * @param string                   $factoryBean   Factory bean name or
+     * false.
+     * @param BeanPropertyDefinition[] $properties    Bean properties
+     * definitions.
+     * @param AspectDefinition[]       $aspects       Aspects definitions.
      * @param BeanConstructorArgumentDefinition[] $arguments Constructor args.
      * 
      * @return void
      */
     public function __construct(
-        $name, $class, $scope, array $properties,
+        $name, $class, $scope, $factoryMethod, $factoryBean, array $properties,
         array $aspects, array $arguments
     ) {
         $this->_name = $name;
         $this->_class = $class;
         $this->_scope = $scope;
+        $this->_factoryMethod = $factoryMethod;
+        $this->_factoryBean = $factoryBean;
         $this->_properties = $properties;
         $this->_aspects = $aspects;
         $this->_constructorArgs = $arguments;

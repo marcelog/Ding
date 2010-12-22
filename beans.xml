@@ -41,4 +41,22 @@
 	<bean id="AspectC" class="AspectC" scope="singleton"/>
 	<bean id="AspectD" class="AspectD" scope="singleton"/>
 	<bean id="AspectE" class="AspectE" scope="singleton"/>
+
+	<bean id="ComponentX" class="ClassX" scope="singleton" factory-bean="ComponentZ" factory-method="getInstance">
+		<constructor-arg>
+			<value>"001"</value>
+		</constructor-arg>
+        <constructor-arg>
+            <ref bean="ComponentC"/>
+        </constructor-arg>
+	</bean>
+	<bean id="ComponentY" class="ClassY" scope="singleton" factory-method="getInstance">
+		<constructor-arg>
+			<value>"001"</value>
+		</constructor-arg>
+        <constructor-arg>
+            <ref bean="ComponentC"/>
+        </constructor-arg>
+	</bean>
+	<bean id="ComponentZ" class="ClassZ" scope="singleton"/>
 </beans>

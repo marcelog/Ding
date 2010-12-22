@@ -195,6 +195,18 @@ class BeanFactoryXmlImpl extends BeanFactory
         $bName = (string)$simpleXmlBean->attributes()->id;
         $bClass = (string)$simpleXmlBean->attributes()->class;
         $bScope = (string)$simpleXmlBean->attributes()->scope;
+        if (isset($simpleXmlBean->attributes()->{'factory-method'})) {
+            $bFactoryMethod
+                = (string)$simpleXmlBean->attributes()->{'factory-method'};
+        } else {
+            $bFactoryMethod = false;
+        }
+        if (isset($simpleXmlBean->attributes()->{'factory-bean'})) {
+            $bFactoryBean
+                = (string)$simpleXmlBean->attributes()->{'factory-bean'};
+        } else {
+            $bFactoryBean = false;
+        }
         if ($bScope == 'prototype') {
             $bScope = BeanDefinition::BEAN_PROTOTYPE;
         } else if ($bScope == 'singleton') {
@@ -215,7 +227,8 @@ class BeanFactoryXmlImpl extends BeanFactory
             $constructorArgs[] = $this->_loadConstructorArg($arg);
         }
         return new BeanDefinition(
-            $bName, $bClass, $bScope, $bProps, $bAspects, $constructorArgs
+            $bName, $bClass, $bScope, $bFactoryMethod, $bFactoryBean,
+            $bProps, $bAspects, $constructorArgs
         );
     }
     
