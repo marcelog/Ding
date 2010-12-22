@@ -107,7 +107,9 @@ class MethodInvocation
         $target = new \ReflectionMethod(
             $this->getClass(), $this->getMethod()
         );
-        return $target->invokeArgs($this->getObject(), $this->getArguments());
+        $result = $target->invokeArgs($this->getObject(), $this->getArguments());
+        $this->setResult($result);
+        return $result;
     }
     
     /**
