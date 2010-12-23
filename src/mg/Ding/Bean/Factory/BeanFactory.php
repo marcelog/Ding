@@ -131,7 +131,6 @@ abstract class BeanFactory
      */
     private function _assemble($bean, BeanDefinition $def)
     {
-        $rClass = ReflectionFactory::getClass($def->getClass());
         foreach ($def->getProperties() as $property) {
             $propertyName = $property->getName();
             if (isset($this->_propertiesNameCache[$propertyName])) {
@@ -142,10 +141,9 @@ abstract class BeanFactory
             }
             try
             {
-                $method = $rClass->getMethod($methodName);
-                $method->invoke($bean, $this->_loadProperty($property));
+                $bean->$methodName( $this->_loadProperty($property));
             } catch (\ReflectionException $exception) {
-                throw new BeanFactoryException('Error calling: ' . $method);
+                throw new BeanFactoryException('Error calling: ' . $methodName);
             }
         }
     }
