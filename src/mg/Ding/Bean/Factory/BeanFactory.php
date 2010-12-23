@@ -118,10 +118,9 @@ abstract class BeanFactory
      */
     private function _assemble($bean, BeanDefinition $def)
     {
+        $rClass = new \ReflectionClass($def->getClass());
         foreach ($def->getProperties() as $property) {
-            $method = $this->_getSetterFor(
-                $def->getClass(), $property->getName()
-            );
+            $method = $rClass->getMethod('set' . ucfirst($property->getName()));
             try
             {
                 $method->invoke($bean, $this->_loadProperty($property));
@@ -130,22 +129,7 @@ abstract class BeanFactory
             }
         }
     }
-    
-    /**
-     * Returns the method (a reflection method) used for di'ing stuff.
-     * 
-     * @param string $class Class name.
-     * @param string $name  Property name. If name is 'name', then this will
-     * return a method named 'setName'.
-     * 
-     * @return \ReflectionMethod
-     */
-    private function _getSetterFor($class, $name)
-    {
-        $rClass = new \ReflectionClass($class);
-        return $rClass->getMethod('set' . ucfirst($name));
-    }
-    
+
     /**
      * This will return an argument value, from a definition.
      *
