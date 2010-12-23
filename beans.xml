@@ -37,6 +37,12 @@
 		  <array>
     		<entry key="100"><ref bean="ComponentC"/></entry>
        		<entry key="astring"><value>123</value></entry>
+       		<entry key="astring2">
+       			<array>
+       				<entry key="100"><ref bean="ComponentC"/></entry>
+       				<entry key="astring"><value>${user.name}</value></entry>
+       			</array>
+       		</entry>
           </array>
 		</property>
 		<property name="aComponent">
