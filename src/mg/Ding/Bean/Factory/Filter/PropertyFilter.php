@@ -120,6 +120,7 @@ class PropertyFilter implements IFilter
      */
     private function __construct(array $properties)
     {
+	$this->_properties = array();
         foreach (array_keys($properties) as $key) {
             /* Change keys. 'property' becomes ${property} */
             $propName = '${' . $key . '}';
