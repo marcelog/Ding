@@ -30,7 +30,8 @@ ini_set(
             DOCTRINE_LIB_PATH,
             __DIR__ .'/entities',
             ini_get('include_path'),
-            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
+            __DIR__ .DIRECTORY_SEPARATOR
+            .implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
         )
     )
 );
@@ -48,7 +49,14 @@ use Ding\Container\Impl\ContainerImpl;
 use Doctrine\ORM\EntityManager;
 try
 {
-    $a = ContainerImpl::getInstanceFromXml('beans.xml');
+    $properties = array(
+        'user.name' => 'nobody',
+        'log.dir' => '/tmp/alogdir',
+        'log.file' => 'alog.log',
+        'ding.cache.impl' => 'dummy' // You may use 'apc' here
+    );
+
+    $a = ContainerImpl::getInstanceFromXml('beans.xml', $properties);
     $config = $a->getBean('doctrine-config');
 
     $connectionOptions = array(
