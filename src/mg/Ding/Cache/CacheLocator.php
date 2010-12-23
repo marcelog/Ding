@@ -2,6 +2,7 @@
 namespace Ding\Cache;
 
 use Ding\Cache\Impl\APCCacheImpl;
+use Ding\Cache\Impl\FileCacheImpl;
 use Ding\Cache\Impl\DummyCacheImpl;
 
 class CacheLocator
