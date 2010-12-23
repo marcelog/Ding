@@ -36,12 +36,6 @@ use Ding\Aspect\AspectDefinition;
 class BeanFactoryXmlImpl extends BeanFactory
 {
     /**
-     * Bean definitions
-     * @var BeanDefinition[]
-     */
-    private $_beanDefs;
-    
-    /**
      * beans.xml file path.
      * @var string
      */
@@ -69,11 +63,7 @@ class BeanFactoryXmlImpl extends BeanFactory
      */
     public function getBeanDefinition($beanName)
     {
-        return
-            isset($this->_beanDefs[$beanName])
-            ? $this->_beanDefs[$beanName]
-            : $this->_loadBean($beanName);
-        ;
+        return $this->_loadBean($beanName);
     }
     
     /**
@@ -209,9 +199,12 @@ class BeanFactoryXmlImpl extends BeanFactory
      */
     private function _loadBean($beanName)
     {
+        if (!$this->_simpleXml) {
+            $this->_load();
+        }
         $simpleXmlBean = $this->_simpleXml->xpath("//bean[@id='$beanName']");
         if (false === $simpleXmlBean) {
-            return false;
+            throw new BeanFactoryException('Unknown bean: ' . $beanName);
         }
         // asume valid xml (only one bean with that id)
         $simpleXmlBean = $simpleXmlBean[0];
@@ -281,7 +274,6 @@ class BeanFactoryXmlImpl extends BeanFactory
                 . ': ' . $this->_getXmlErrors()
             );
         }
-        $this->_beanDefs = array();
     }
 
     /**
@@ -312,6 +304,6 @@ class BeanFactoryXmlImpl extends BeanFactory
         parent::__construct($properties);
         $this->_beanDefs = array();
         $this->_filename = $filename;
-        $this->_load();
+        $this->_simpleXml = false;
     }
 }

@@ -13,12 +13,12 @@
  */
 namespace Ding\Container\Impl;
 
+use Ding\Cache\Impl\APCCacheImpl;
+use Ding\Cache\Impl\DummyCacheImpl;
 use Ding\Container\IContainer;
 use Ding\Container\Exception\ContainerException;
-
 use Ding\Bean\Factory\BeanFactory;
 use Ding\Bean\Factory\Impl\BeanFactoryXmlImpl;
-
 use Ding\Aspect\Proxy;
 use Ding\Aspect\InterceptorDefinition;
 
@@ -87,13 +87,22 @@ class ContainerImpl implements IContainer
     public static function getInstanceFromXml(
         $filename, array $properties = array()
     ) {
-        return
-            self::$_containerInstance === false
-            ? new ContainerImpl(
-                BeanFactoryXmlImpl::getInstance($filename, $properties)
-            )
-            : self::$_containerInstance
-        ;
+        if (self::$_containerInstance === false) {
+            $factory = BeanFactoryXmlImpl::getInstance($filename, $properties);
+            $ret = new ContainerImpl($factory);
+            $factory->setContainer($ret);
+            $cache = DummyCacheImpl::getInstance();
+            if (isset($properties['ding.cache.impl'])) {
+                if ($properties['ding.cache.impl'] == 'apc') {
+                    $cache = APCCacheImpl::getInstance();
+                }
+            }         
+            $factory->setCache($cache);
+            self::$_containerInstance = $ret;
+        } else {
+            $ret = self::$_containerInstance;
+        }
+        return $ret;
     }
     
     /**
@@ -137,7 +146,6 @@ class ContainerImpl implements IContainer
         $this->_beans = array();
         $this->_factory = $factory;
         $this->_shutdowners = array();
-        $this->_factory->setContainer($this);
         self::$_containerInstance = $this;
     }
 }

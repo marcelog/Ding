@@ -16,6 +16,7 @@ namespace Ding\Aspect;
 
 use Ding\Aspect\Interceptor\IDispatcher;
 use Ding\Reflection\ReflectionFactory;
+use Ding\Cache\ICache;
 
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
@@ -199,7 +200,7 @@ TEXT;
      * This will give you a string for a new proxy class.
      * 
      * @param string      $class                Class to be proxied.
-     * @param string      $cacheDir             Cache directory for classes.
+     * @param ICache      $cache                Cache implementation to be used.
      * @param IDispatcher $dispatcher           Dispatcher to invoke aspects.
      * @param array       $constructorArguments Constructor arguments.
      * 
@@ -209,18 +210,17 @@ TEXT;
      * @return string 
      */
     public static function create(
-        $class, $cacheDir, IDispatcher $dispatcher = null
+        $class, ICache $cache, IDispatcher $dispatcher = null 
     ) {
         $subject = ReflectionFactory::getClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
-        $proxyFile = implode(
-            DIRECTORY_SEPARATOR, array($cacheDir, $proxyClassName . '.php')
-        );
-        if (!file_exists($proxyFile)) {
+        $result = false;
+        $src = $cache->fetch($proxyClassName . '.proxy', $result);
+        if (!$result) { 
             $src = self::_createClass($proxyClassName, $subject);
-            file_put_contents($proxyFile, '<?php '  . $src);
+            $cache->store($proxyClassName . '.proxy', $src);
         }
-        include_once $proxyFile;
+        eval($src);
         if ($dispatcher != null) {
             $proxyClassName::setDispatcher($dispatcher);
         }

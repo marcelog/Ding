@@ -14,6 +14,8 @@
  */
 namespace Ding\Bean\Factory;
 
+use Ding\Cache\ICache;
+
 use Ding\Reflection\ReflectionFactory;
 use Ding\Container\IContainer;
 use Ding\Bean\Factory\Filter\PropertyFilter;
@@ -59,10 +61,10 @@ abstract class BeanFactory
     private $_filters;
 
     /**
-     * Directory to be used as a proxy cache.
-     * @var string
+     * Cache implementation to use.
+     * @var ICache
      */
-    private $_proxyCacheDir;
+    private $_cache;
     
     /**
      * Our calling container. 
@@ -190,9 +192,7 @@ abstract class BeanFactory
         
         if ($beanDefinition->hasAspects()) {
             $dispatcher = new DispatcherImpl();
-            $beanClass = Proxy::create(
-                $beanClass, $this->_proxyCacheDir, $dispatcher
-            );
+            $beanClass = Proxy::create($beanClass, $this->_cache, $dispatcher);
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 if (
@@ -280,14 +280,15 @@ abstract class BeanFactory
     public function getBean($beanName)
     {
         $ret = false;
-        if (!isset($this->_beanDefs[$beanName])) {
+        $result = false;
+        $cache = $this->getCache();
+        $beanDefinition = $cache->fetch($beanName . 'beandef', $result);
+        if (!$result) {
             $beanDefinition = $this->getBeanDefinition($beanName);
             if (!$beanDefinition) {
                 throw new BeanFactoryException('Unknown bean: ' . $beanName);
             }
-            $this->_beanDefs[$beanName] = $beanDefinition;
-        } else {
-            $beanDefinition = $this->getBeanDefinition($beanName);
+            $cache->store($beanName . 'beandef', $beanDefinition);
         }
         switch ($beanDefinition->getScope())
         {
@@ -325,11 +326,21 @@ abstract class BeanFactory
     {
         return $this->_container;
     }
+
+    public function getCache()
+    {
+        return $this->_cache;
+    }
+    
+    public function setCache(ICache $cache)
+    {
+        $this->_cache = $cache;
+    }
     
     /**
      * Constructor.
      *
-     * @param array  $properties Container properties.
+     * @param array $properties Container properties.
      * 
      * @return void
      */
@@ -338,9 +349,8 @@ abstract class BeanFactory
         $this->_beans = array();
         $this->_beanDefs = array();
         $this->_filters = array();
-        $this->_proxyCacheDir = $properties['proxy.cache.dir'];
+        $this->_cache = false;
         $this->_propertiesNameCache = array();
-        @mkdir($this->_proxyCacheDir, 0750, true);
         $this->_filters[] = PropertyFilter::getInstance($properties);
     }
 }
