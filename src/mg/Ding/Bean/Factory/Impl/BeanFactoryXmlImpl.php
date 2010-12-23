@@ -147,17 +147,22 @@ class BeanFactoryXmlImpl extends BeanFactory
      */
     private function _loadProperty($simpleXmlProperty)
     {
-        $propName = $simpleXmlProperty->attributes()->name;
+        $propName = (string)$simpleXmlProperty->attributes()->name;
         if (isset($simpleXmlProperty->ref)) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
-            $propValue = $simpleXmlProperty->ref->attributes()->bean;  
+            $propValue = (string)$simpleXmlProperty->ref->attributes()->bean;  
+        } else if (isset($simpleXmlProperty->array)) {
+            $propType = BeanPropertyDefinition::PROPERTY_ARRAY;
+            $propValue = array();
+            foreach ($simpleXmlProperty->array->entry as $arrayEntry) {
+                $key = (string)$arrayEntry->attributes()->key;
+                $propValue[$key] = $this->_loadProperty($arrayEntry);
+            }
         } else {
             $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
-            $propValue = $simpleXmlProperty->value;  
+            $propValue = (string)$simpleXmlProperty->value;  
         }
-        return new BeanPropertyDefinition(
-            (string)$propName, $propType, (string)$propValue
-        );
+        return new BeanPropertyDefinition($propName, $propType, $propValue);
     }
 
     /**
@@ -172,14 +177,19 @@ class BeanFactoryXmlImpl extends BeanFactory
     {
         if (isset($simpleXmlArg->ref)) {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
-            $argValue = $simpleXmlArg->ref->attributes()->bean;  
+            $argValue = (string)$simpleXmlArg->ref->attributes()->bean;  
+        } else if (isset($simpleXmlArg->array)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY;
+            $argValue = array();
+            foreach ($simpleXmlArg->array->entry as $arrayEntry) {
+                $key = (string)$arrayEntry->attributes()->key;
+                $argValue[$key] = $this->_loadConstructorArg($arrayEntry);
+            }
         } else {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
-            $argValue = $simpleXmlArg->value;  
+            $argValue = (string)$simpleXmlArg->value;  
         }
-        return new BeanConstructorArgumentDefinition(
-            $argType, (string)$argValue
-        );
+        return new BeanConstructorArgumentDefinition($argType, $argValue);
     }
         
     /**

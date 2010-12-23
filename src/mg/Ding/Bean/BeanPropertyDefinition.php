@@ -40,6 +40,12 @@ class BeanPropertyDefinition
     const PROPERTY_BEAN = 1;
 
     /**
+     * This constant represents a property that is an array.
+     * @var integer
+     */
+    const PROPERTY_ARRAY = 2;
+    
+    /**
      * Property name
      * @var string
      */
@@ -56,6 +62,26 @@ class BeanPropertyDefinition
      * @var string
      */
     private $_type;
+
+    /**
+     * Returns true if this property is a reference to another bean.
+     * 
+     * @return boolean
+     */
+    public function isBean()
+    {
+        return $this->getType() == self::PROPERTY_BEAN;
+    }
+
+    /**
+     * Returns true if this property is an array.
+     * 
+     * @return boolean
+     */
+    public function isArray()
+    {
+        return $this->getType() == self::PROPERTY_ARRAY;
+    }
     
     /**
      * Returns property value (or bean name in the case of a bean property).

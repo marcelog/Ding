@@ -57,9 +57,19 @@ class ClassA extends ClassD
     {
         echo "Hello world $a $b $c \n";
     }
-
-    public function __construct()
+    
+    public function setAProperty(array $value)
     {
+        echo "setting a property: ";
+        var_dump($value);
+        $this->_aComponent = $value;        
+    }
+    
+    public function __construct(array $a)
+    {
+        echo "ClassA constructor: ";
+        var_dump(func_get_args());
+        var_dump($a[100]);
     }
 }
 

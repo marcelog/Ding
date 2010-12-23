@@ -21,6 +21,18 @@
 	</bean>
 
 	<bean id="ComponentA" class="ClassA" scope="singleton">
+        <constructor-arg>
+        	<array>
+        		<entry key="100"><ref bean="ComponentC"/></entry>
+        		<entry key="astring"><value>123</value></entry>
+        	</array>
+        </constructor-arg>
+		<property name="aProperty">
+		  <array>
+    		<entry key="100"><ref bean="ComponentC"/></entry>
+       		<entry key="astring"><value>123</value></entry>
+          </array>
+		</property>
 		<property name="aComponent">
 			<ref bean="ComponentB"/>
 		</property>

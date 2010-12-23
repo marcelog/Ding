@@ -37,7 +37,13 @@ class BeanConstructorArgumentDefinition
      * @var integer
      */
     const BEAN_CONSTRUCTOR_VALUE = 1;
-        
+
+    /**
+     * Means this argument is an array.
+     * @var integer
+     */
+    const BEAN_CONSTRUCTOR_ARRAY = 2;
+    
     /**
      * Argument type.
      * @var integer
@@ -46,7 +52,9 @@ class BeanConstructorArgumentDefinition
     
     /**
      * Returns value for this argument. This is a bean name (string) in the
-     * case of an argument of type bean.
+     * case of an argument of type bean. If this argument is an array, the
+     * value is a BeanConstructorArgument[] where the key of the array is the
+     * name of the key for the target array.
      * @var mixed
      */
     private $_value;
@@ -70,6 +78,16 @@ class BeanConstructorArgumentDefinition
     public function isBean()
     {
         return $this->getType() == self::BEAN_CONSTRUCTOR_BEAN;
+    }
+
+    /**
+     * Returns true if this argument is an array.
+     * 
+     * @return boolean
+     */
+    public function isArray()
+    {
+        return $this->getType() == self::BEAN_CONSTRUCTOR_ARRAY;
     }
     
     /**

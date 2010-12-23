@@ -14,6 +14,8 @@
  */
 namespace Ding\Bean\Factory;
 
+use Ding\Bean\BeanConstructorArgumentDefinition;
+
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
@@ -50,6 +52,29 @@ abstract class BeanFactory
     private $_beans;
     
     /**
+     * This will return the property value from a definition.
+     * 
+     * @param BeanPropertyDefinition $property Property definition.
+     * 
+     * @return mixed
+     */
+    private function _loadProperty(BeanPropertyDefinition $property)
+    {
+        $value = null;
+        if ($property->isBean()) {
+            $value = $this->getBean($property->getValue());
+        } else if ($property->isArray()) {
+            $value = array();
+            foreach ($property->getValue() as $k => $v) {
+                $value[$k] = $this->_loadProperty($v);
+            }
+        } else {
+            $value = $property->getValue();
+        }
+        return $value;
+    }
+    
+    /**
      * This will assembly a bean (inject dependencies, loading other needed
      * beans in the way).
      * 
@@ -66,20 +91,9 @@ abstract class BeanFactory
             $method = $this->_getSetterFor(
                 $def->getClass(), $property->getName()
             );
-            switch ($property->getType())
-            {
-            case BeanPropertyDefinition::PROPERTY_BEAN:
-                $value = $this->getBean($property->getValue());
-                break; 
-            case BeanPropertyDefinition::PROPERTY_SIMPLE:
-                $value = $property->getValue();
-                break; 
-            default:
-                throw new BeanFactoryException('Invalid property type');
-            }
             try
             {
-                $method->invoke($bean, $value);
+                $method->invoke($bean, $this->_loadProperty($property));
             } catch (\ReflectionException $exception) {
                 throw new BeanFactoryException('Error calling: ' . $value);
             }
@@ -102,6 +116,29 @@ abstract class BeanFactory
     }
     
     /**
+     * This will return an argument value, from a definition.
+     *
+     * @param BeanConstructorArgumentDefinition $arg Constructor definition.
+     * 
+     * @return mixed
+     */
+    private function _loadArgument(BeanConstructorArgumentDefinition $arg)
+    {
+        $value = null;
+        if ($arg->isBean()) {
+            $value = $this->getBean($arg->getValue());
+        } else if ($arg->isArray()) {
+            $value = array();
+            foreach ($arg->getValue() as $k => $v) {
+                $value[$k] = $this->_loadArgument($v);
+            }
+        } else {
+            $value = $arg->getValue();
+        }
+        return $value;
+    }
+    
+    /**
      * This will create a new bean, injecting all properties and applying all
      * aspects.
      * 
@@ -113,12 +150,9 @@ abstract class BeanFactory
         $beanClass = $beanDefinition->getClass();
         $args = array();
         foreach ($beanDefinition->getArguments() as $argument) {
-            if ($argument->isBean()) {
-                $args[] = $this->getBean($argument->getValue());
-            } else {
-                $args[] = $argument->getValue();
-            }
+            $args[] = $this->_loadArgument($argument);
         }
+        
         if ($beanDefinition->hasAspects()) {
             $dispatcher = new DispatcherImpl();
             $beanClass = Proxy::create($beanClass, $dispatcher);
