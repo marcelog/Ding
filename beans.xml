@@ -24,7 +24,7 @@
         <constructor-arg>
         	<array>
         		<entry key="100"><ref bean="ComponentC"/></entry>
-        		<entry key="astring"><value>123</value></entry>
+        		<entry key="astring"><value>${user.name}</value></entry>
         	</array>
         </constructor-arg>
 		<property name="aProperty">
