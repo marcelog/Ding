@@ -42,6 +42,12 @@ class ContainerImpl implements IContainer
     private $_factory = false;
     
     /**
+     * Registered shutdown methods for beans (destroy-methods).
+     * @var array
+     */
+    private $_shutdowners;
+    
+    /**
      * Container instance.
      * @var ContainerImpl
      */
@@ -89,11 +95,36 @@ class ContainerImpl implements IContainer
             : self::$_containerInstance
         ;
     }
-
-    public function shutdown()
+    
+    /**
+     * Register a shutdown (destroy-method) method for a bean.
+     * 
+     * @param object $bean   Bean to call.
+     * @param string $method Method to call.
+     * 
+     * @see Ding\Container.IContainer::registerShutdownMethod()
+     * 
+     * @return void
+     */
+    public function registerShutdownMethod($bean, $method)
     {
-        return;
+        $this->_shutdowners[] = array($bean, $method);
     }
+    
+    /**
+     * Destructor, will call all beans destroy-methods.
+     * 
+     * @return void
+     */
+    public function __destruct()
+    {
+        foreach ($this->_shutdowners as $shutdownCall) {
+            $bean = $shutdownCall[0];
+            $method = $shutdownCall[1];
+            $bean->$method();
+        }
+    }
+    
     /**
      * Constructor.
      * 
@@ -105,7 +136,7 @@ class ContainerImpl implements IContainer
     {
         $this->_beans = array();
         $this->_factory = $factory;
+        $this->_factory->setContainer($this);
         self::$_containerInstance = $this;
-        register_shutdown_function(array($this, 'shutdown'));
     }
 }

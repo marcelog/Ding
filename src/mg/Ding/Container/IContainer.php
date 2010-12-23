@@ -34,4 +34,16 @@ interface IContainer
      * @result object
      */
     public function getBean($bean);
+
+    /**
+     * Register a shutdown (destroy-method) method for a bean.
+     * 
+     * @param object $bean   Bean to call.
+     * @param string $method Method to call.
+     * 
+     * @see Ding\Container.IContainer::registerShutdownMethod()
+     * 
+     * @return void
+     */
+    public function registerShutdownMethod($bean, $method);
 }

@@ -14,14 +14,12 @@
  */
 namespace Ding\Bean\Factory;
 
+use Ding\Container\IContainer;
 use Ding\Bean\Factory\Filter\PropertyFilter;
-
+use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
-
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
-use Ding\Bean\Factory\Exception\BeanFactoryException;
-
 use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectDefinition;
 use Ding\Aspect\Interceptor\IDispatcher;
@@ -64,6 +62,12 @@ abstract class BeanFactory
      * @var string
      */
     private $_proxyCacheDir;
+    
+    /**
+     * Our calling container. 
+     * @var IContainer
+     */
+    private $_container;
     
     /**
      * This will return the property value from a definition.
@@ -234,7 +238,9 @@ abstract class BeanFactory
             }
             $destroyMethod = $beanDefinition->getDestroyMethod();
             if ($destroyMethod) {
-                register_shutdown_function(array($bean, $destroyMethod));
+                $this->_container->registerShutdownMethod(
+                    $bean, $destroyMethod
+                );
             }
         } catch(\ReflectionException $exception) {
             throw new BeanFactoryException('DI Error', 0, $exception);
@@ -291,14 +297,32 @@ abstract class BeanFactory
     }
     
     /**
+     * Sets current calling container.
+     * @return void
+     */
+    public function setContainer(IContainer $container)
+    {
+        $this->_container = $container;
+    }
+    
+    /**
+     * Returns current calling container.
+     * @return IContainer
+     */
+    public function getContainer()
+    {
+        return $this->_container;
+    }
+    
+    /**
      * Constructor.
      *
      * @param array  $properties Container properties.
      * 
      * @return void
      */
-    protected function __construct(array $properties = array()
-    ) {
+    protected function __construct(array $properties = array())
+    {
         $this->_beans = array();
         $this->_beanDefs = array();
         $this->_filters = array();
