@@ -107,6 +107,9 @@ class MethodInvocation
         $target = new \ReflectionMethod(
             $this->getClass(), $this->getMethod()
         );
+        if ($target->isPrivate() || $target->isProtected()) {
+            $target->setAccessible(true);
+        }
         $result = $target->invokeArgs($this->getObject(), $this->getArguments());
         $this->setResult($result);
         return $result;
