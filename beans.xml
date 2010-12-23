@@ -25,6 +25,12 @@
         	<array>
         		<entry key="100"><ref bean="ComponentC"/></entry>
         		<entry key="astring"><value>${user.name}</value></entry>
+        		<entry key="astring2">
+        			<array>
+        				<entry key="100"><ref bean="ComponentC"/></entry>
+        				<entry key="astring"><value>${user.name}</value></entry>
+        			</array>
+        		</entry>
         	</array>
         </constructor-arg>
 		<property name="aProperty">
