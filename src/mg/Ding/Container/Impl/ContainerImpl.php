@@ -90,6 +90,10 @@ class ContainerImpl implements IContainer
         ;
     }
 
+    public function shutdown()
+    {
+        return;
+    }
     /**
      * Constructor.
      * 
@@ -102,5 +106,6 @@ class ContainerImpl implements IContainer
         $this->_beans = array();
         $this->_factory = $factory;
         self::$_containerInstance = $this;
+        register_shutdown_function(array($this, 'shutdown'));
     }
 }

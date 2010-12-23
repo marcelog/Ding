@@ -235,6 +235,11 @@ class BeanFactoryXmlImpl extends BeanFactory
         } else {
             $bInitMethod = false;
         }
+        if (isset($simpleXmlBean->attributes()->{'destroy-method'})) {
+            $bDestroyMethod = (string)$simpleXmlBean->attributes()->{'destroy-method'};
+        } else {
+            $bDestroyMethod = false;
+        }
         if ($bScope == 'prototype') {
             $bScope = BeanDefinition::BEAN_PROTOTYPE;
         } else if ($bScope == 'singleton') {
@@ -256,7 +261,7 @@ class BeanFactoryXmlImpl extends BeanFactory
         }
         return new BeanDefinition(
             $bName, $bClass, $bScope, $bFactoryMethod, $bFactoryBean,
-            $bInitMethod, $bProps, $bAspects, $constructorArgs
+            $bInitMethod, $bDestroyMethod, $bProps, $bAspects, $constructorArgs
         );
     }
     

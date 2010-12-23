@@ -1,5 +1,5 @@
 <beans>
-	<bean id="ComponentB" class="ClassB" scope="singleton" init-method="init">
+	<bean id="ComponentB" class="ClassB" scope="singleton" init-method="init" destroy-method="shutdown">
 		<constructor-arg>
 			<value>Some string A, like: ${log.dir}/${log.file} as user ${user.name}</value>
 		</constructor-arg>

@@ -95,6 +95,12 @@ class BeanDefinition
     private $_initMethod;
     
     /**
+     * Destroy method (called when container is destroyed).
+     * @var string
+     */
+    private $_destroyMethod;
+    
+    /**
      * Returns true if this bean has mapped aspects.
      * 
      * @return boolean
@@ -193,6 +199,16 @@ class BeanDefinition
     {
         return $this->_initMethod;
     }
+
+    /**
+     * Destroy method, false if none was set.
+     * 
+     * @return string
+     */
+    public function getDestroyMethod()
+    {
+        return $this->_destroyMethod;
+    }
     
     /**
      * Constructor.
@@ -206,6 +222,7 @@ class BeanDefinition
      * @param string                   $factoryBean   Factory bean name or
      * false.
      * @param string                   $initMethod    Init method.
+     * @param string                   $destroyMethod Destroy method.
      * @param BeanPropertyDefinition[] $properties    Bean properties
      * definitions.
      * @param AspectDefinition[]       $aspects       Aspects definitions.
@@ -215,7 +232,7 @@ class BeanDefinition
      */
     public function __construct(
         $name, $class, $scope, $factoryMethod, $factoryBean, $initMethod,
-        array $properties, array $aspects, array $arguments
+        $destroyMethod, array $properties, array $aspects, array $arguments
     ) {
         $this->_name = $name;
         $this->_class = $class;
@@ -223,6 +240,7 @@ class BeanDefinition
         $this->_factoryMethod = $factoryMethod;
         $this->_factoryBean = $factoryBean;
         $this->_initMethod = $initMethod;
+        $this->_destroyMethod = $destroyMethod;
         $this->_properties = $properties;
         $this->_aspects = $aspects;
         $this->_constructorArgs = $arguments;

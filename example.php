@@ -89,6 +89,11 @@ class ClassB
     {
         echo "Initializing class b\n";
     }
+
+    public function shutdown()
+    {
+        echo "*** Shutting down class b ***\n";
+    }
     
     public function setAProperty($value)
     {

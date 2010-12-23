@@ -53,6 +53,10 @@ abstract class BeanFactory
      */
     private $_beans;
 
+    /**
+     * Registered filters to apply.
+     * @var IFilter[]
+     */
     private $_filters;
     
     /**
@@ -80,6 +84,13 @@ abstract class BeanFactory
         return $value;
     }
     
+    /**
+     * Applies all registered filters.
+     * 
+     * @param mixed $input Input to filter (typically a final value for a bean).
+     * 
+     * @return mixed
+     */
     private function _applyFilters($input)
     {
         foreach ($this->_filters as $filter) {
@@ -87,6 +98,7 @@ abstract class BeanFactory
         }
         return $input;
     }
+    
     /**
      * This will assembly a bean (inject dependencies, loading other needed
      * beans in the way).
@@ -227,6 +239,10 @@ abstract class BeanFactory
             $initMethod = $beanDefinition->getInitMethod();
             if ($initMethod) {
                 $bean->$initMethod();
+            }
+            $destroyMethod = $beanDefinition->getDestroyMethod();
+            if ($destroyMethod) {
+                register_shutdown_function(array($bean, $destroyMethod));
             }
         } catch(\ReflectionException $exception) {
             throw new BeanFactoryException('DI Error', 0, $exception);
