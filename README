@@ -22,8 +22,8 @@ for the class.
 DI
 ==
 Features available:
-* Setter injection (values and/or references to other beans).
-* Constructor injection (values and/or references to other beans).
+* Setter injection (arrays, values, and/or references to other beans).
+* Constructor injection (arrays, values, and/or references to other beans).
 * A bean can be: singleton or prototype (multiple instances).
 * Can create beans by specifying a static method of the bean class itself.
 * Can create beans by specifying another bean (and its method) as a factory.
