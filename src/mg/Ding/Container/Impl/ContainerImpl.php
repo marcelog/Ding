@@ -136,6 +136,7 @@ class ContainerImpl implements IContainer
     {
         $this->_beans = array();
         $this->_factory = $factory;
+        $this->_shutdowners = array();
         $this->_factory->setContainer($this);
         self::$_containerInstance = $this;
     }
