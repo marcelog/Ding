@@ -198,6 +198,7 @@ TEXT;
      * This will give you a string for a new proxy class.
      * 
      * @param string      $class                Class to be proxied.
+     * @param string      $cacheDir             Cache directory for classes.
      * @param IDispatcher $dispatcher           Dispatcher to invoke aspects.
      * @param array       $constructorArguments Constructor arguments.
      * 
@@ -206,13 +207,19 @@ TEXT;
      * 
      * @return string 
      */
-    public static function create($class, IDispatcher $dispatcher = null)
-    {
+    public static function create(
+        $class, $cacheDir, IDispatcher $dispatcher = null
+    ) {
         $subject = new \ReflectionClass($class);
-        $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName())
-            . self::$_proxyCount;
-        $src = self::_createClass($proxyClassName, $subject);
-        eval($src);
+        $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
+        $proxyFile = implode(
+            DIRECTORY_SEPARATOR, array($cacheDir, $proxyClassName . '.php')
+        );
+        if (!file_exists($proxyFile)) {
+            $src = self::_createClass($proxyClassName, $subject);
+            file_put_contents($proxyFile, '<?php '  . $src);
+        }
+        include_once $proxyFile;
         if ($dispatcher != null) {
             $proxyClassName::setDispatcher($dispatcher);
         }

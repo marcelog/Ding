@@ -249,7 +249,8 @@ try
     $properties = array(
         'user.name' => 'nobody',
         'log.dir' => '/tmp/alogdir',
-        'log.file' => 'alog.log'
+        'log.file' => 'alog.log',
+        'proxy.cache.dir' => '/tmp/Ding'
     );
     $a = ContainerImpl::getInstanceFromXml('beans.xml', $properties);
     $bean = $a->getBean('ComponentA');

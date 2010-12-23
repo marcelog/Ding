@@ -58,6 +58,12 @@ abstract class BeanFactory
      * @var IFilter[]
      */
     private $_filters;
+
+    /**
+     * Directory to be used as a proxy cache.
+     * @var string
+     */
+    private $_proxyCacheDir;
     
     /**
      * This will return the property value from a definition.
@@ -182,7 +188,9 @@ abstract class BeanFactory
         
         if ($beanDefinition->hasAspects()) {
             $dispatcher = new DispatcherImpl();
-            $beanClass = Proxy::create($beanClass, $dispatcher);
+            $beanClass = Proxy::create(
+                $beanClass, $this->_proxyCacheDir, $dispatcher
+            );
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 if (
@@ -300,16 +308,18 @@ abstract class BeanFactory
     
     /**
      * Constructor.
-     * 
-     * @param array  $properties container properties.
+     *
+     * @param array  $properties Container properties.
      * 
      * @return void
      */
-    protected function __construct(array $properties = array())
-    {
+    protected function __construct(array $properties = array()
+    ) {
         $this->_beans = array();
         $this->_beanDefs = array();
         $this->_filters = array();
+        $this->_proxyCacheDir = $properties['proxy.cache.dir'];
+        @mkdir($this->_proxyCacheDir, 0750, true);
         $this->_filters[] = PropertyFilter::getInstance($properties);
     }
 }
