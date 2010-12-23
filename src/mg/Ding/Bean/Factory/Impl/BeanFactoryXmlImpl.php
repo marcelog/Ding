@@ -158,6 +158,9 @@ class BeanFactoryXmlImpl extends BeanFactory
                 $key = (string)$arrayEntry->attributes()->key;
                 $propValue[$key] = $this->_loadProperty($arrayEntry);
             }
+        } else if (isset($simpleXmlProperty->eval)) {
+            $propType = BeanPropertyDefinition::PROPERTY_CODE;
+            $propValue = (string)$simpleXmlProperty->eval;  
         } else {
             $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
             $propValue = (string)$simpleXmlProperty->value;  
@@ -185,6 +188,9 @@ class BeanFactoryXmlImpl extends BeanFactory
                 $key = (string)$arrayEntry->attributes()->key;
                 $argValue[$key] = $this->_loadConstructorArg($arrayEntry);
             }
+        } else if (isset($simpleXmlArg->eval)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_CODE;
+            $argValue = (string)$simpleXmlArg->eval;  
         } else {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
             $argValue = (string)$simpleXmlArg->value;  

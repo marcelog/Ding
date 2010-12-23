@@ -44,6 +44,12 @@ class BeanPropertyDefinition
      * @var integer
      */
     const PROPERTY_ARRAY = 2;
+
+    /**
+     * This constant represents a property that is php code to be evaluated.
+     * @var integer
+     */
+    const PROPERTY_CODE = 3;
     
     /**
      * Property name
@@ -73,6 +79,16 @@ class BeanPropertyDefinition
         return $this->getType() == self::PROPERTY_BEAN;
     }
 
+    /**
+     * Returns true if this property is php code.
+     * 
+     * @return boolean
+     */
+    public function isCode()
+    {
+        return $this->getType() == self::PROPERTY_CODE;
+    }
+    
     /**
      * Returns true if this property is an array.
      * 

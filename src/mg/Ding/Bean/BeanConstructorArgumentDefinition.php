@@ -43,6 +43,12 @@ class BeanConstructorArgumentDefinition
      * @var integer
      */
     const BEAN_CONSTRUCTOR_ARRAY = 2;
+
+    /**
+     * Means this argument is php code to be evaluated.
+     * @var integer
+     */
+    const BEAN_CONSTRUCTOR_CODE = 3;
     
     /**
      * Argument type.
@@ -80,6 +86,16 @@ class BeanConstructorArgumentDefinition
         return $this->getType() == self::BEAN_CONSTRUCTOR_BEAN;
     }
 
+    /**
+     * Returns true if this argument is php code to be evaluated.
+     * 
+     * @return boolean
+     */
+    public function isCode()
+    {
+        return $this->getType() == self::BEAN_CONSTRUCTOR_CODE;
+    }
+    
     /**
      * Returns true if this argument is an array.
      * 

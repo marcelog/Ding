@@ -72,6 +72,8 @@ abstract class BeanFactory
             foreach ($property->getValue() as $k => $v) {
                 $value[$k] = $this->_loadProperty($v);
             }
+        } else if ($property->isCode()) {
+            $value = eval($property->getValue());
         } else {
             $value = $this->_applyFilters($property->getValue());
         }
@@ -143,6 +145,8 @@ abstract class BeanFactory
             foreach ($arg->getValue() as $k => $v) {
                 $value[$k] = $this->_loadArgument($v);
             }
+        } else if ($arg->isCode()) {
+            $value = eval($arg->getValue());
         } else {
             $value = $this->_applyFilters($arg->getValue());
         }

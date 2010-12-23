@@ -29,6 +29,8 @@
         			<array>
         				<entry key="100"><ref bean="ComponentC"/></entry>
         				<entry key="astring"><value>${user.name}</value></entry>
+        				<entry key="astring2"><eval><![CDATA[ return "Some evaluated code"; ]]></eval></entry>        				
+	       				<entry key="astring3"><eval><![CDATA[ return new ClassZ(); ]]></eval></entry>        				
         			</array>
         		</entry>
         	</array>
@@ -41,6 +43,7 @@
        			<array>
        				<entry key="100"><ref bean="ComponentC"/></entry>
        				<entry key="astring"><value>${user.name}</value></entry>
+       				<entry key="astring2"><eval><![CDATA[ return "Some evaluated code"; ]]></eval></entry>        				
        			</array>
        		</entry>
           </array>
