@@ -275,14 +275,15 @@ class BeanFactoryXmlImpl extends BeanFactory
     /**
      * Returns a instance for this factory.
      * 
-     * @param string $filename beans.xml path.
+     * @param string $filename   beans.xml path.
+     * @param array  $properties container properties.
      *
      * @return BeanFactoryXmlImpl
      */
-    public static function getInstance($filename)
+    public static function getInstance($filename, array $properties = array())
     {
         if (self::$_instance == false) {
-            self::$_instance = new BeanFactoryXmlImpl($filename);
+            self::$_instance = new BeanFactoryXmlImpl($filename, $properties);
         }
         return self::$_instance;
     }
@@ -294,9 +295,9 @@ class BeanFactoryXmlImpl extends BeanFactory
      * 
      * @return void
      */
-    protected function __construct($filename)
+    protected function __construct($filename, $properties)
     {
-        parent::__construct();
+        parent::__construct($properties);
         $this->_beanDefs = array();
         $this->_filename = $filename;
         $this->_load();

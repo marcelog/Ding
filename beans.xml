@@ -1,13 +1,13 @@
 <beans>
 	<bean id="ComponentB" class="ClassB" scope="singleton" init-method="init">
 		<constructor-arg>
-			<value>"001"</value>
+			<value>Some string A, like: ${log.dir}/${log.file} as user ${user.name}</value>
 		</constructor-arg>
         <constructor-arg>
             <ref bean="ComponentC"/>
         </constructor-arg>
 		<property name="aProperty">
-			<value>Some string A</value>
+			<value>Some string A, like: ${log.dir}/${log.file} as user ${user.name}</value>
 		</property>
 		<property name="bProperty">
 			<value>Some string B</value>

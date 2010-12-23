@@ -14,6 +14,8 @@
  */
 namespace Ding\Bean\Factory;
 
+use Ding\Bean\Factory\Filter\PropertyFilter;
+
 use Ding\Bean\BeanConstructorArgumentDefinition;
 
 use Ding\Bean\BeanDefinition;
@@ -50,6 +52,8 @@ abstract class BeanFactory
      * @var object[]
      */
     private $_beans;
+
+    private $_filters;
     
     /**
      * This will return the property value from a definition.
@@ -69,11 +73,18 @@ abstract class BeanFactory
                 $value[$k] = $this->_loadProperty($v);
             }
         } else {
-            $value = $property->getValue();
+            $value = $this->_applyFilters($property->getValue());
         }
         return $value;
     }
     
+    private function _applyFilters($input)
+    {
+        foreach ($this->_filters as $filter) {
+            $input = $filter->apply($input);
+        }
+        return $input;
+    }
     /**
      * This will assembly a bean (inject dependencies, loading other needed
      * beans in the way).
@@ -133,7 +144,7 @@ abstract class BeanFactory
                 $value[$k] = $this->_loadArgument($v);
             }
         } else {
-            $value = $arg->getValue();
+            $value = $this->_applyFilters($arg->getValue());
         }
         return $value;
     }
@@ -270,11 +281,15 @@ abstract class BeanFactory
     /**
      * Constructor.
      * 
+     * @param array  $properties container properties.
+     * 
      * @return void
      */
-    protected function __construct()
+    protected function __construct(array $properties = array())
     {
         $this->_beans = array();
         $this->_beanDefs = array();
+        $this->_filters = array();
+        $this->_filters[] = PropertyFilter::getInstance($properties);
     }
 }

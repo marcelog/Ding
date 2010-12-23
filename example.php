@@ -241,7 +241,12 @@ class ClassY
 ////////////////////////////////////////////////////////////////////////////////
 try
 {
-    $a = ContainerImpl::getInstanceFromXml('beans.xml');
+    $properties = array(
+        'user.name' => 'nobody',
+        'log.dir' => '/tmp/alogdir',
+        'log.file' => 'alog.log'
+    );
+    $a = ContainerImpl::getInstanceFromXml('beans.xml', $properties);
     $bean = $a->getBean('ComponentA');
     $bean->targetMethod('a', 1, array('1' => '2'));
     $bean = $a->getBean('ComponentB');

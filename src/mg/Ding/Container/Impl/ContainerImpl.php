@@ -73,15 +73,19 @@ class ContainerImpl implements IContainer
      * This will return a container using a BeanFactoryXmlImpl with the
      * given beans.xml file.
      * 
-     * @param string $filename Absolute path to beans.xml
+     * @param string $filename   Absolute path to beans.xml
+     * @param array  $properties Container properties.
      * 
      * @return ContainerImpl
      */
-    public static function getInstanceFromXml($filename)
-    {
+    public static function getInstanceFromXml(
+        $filename, array $properties = array()
+    ) {
         return
             self::$_containerInstance === false
-            ? new ContainerImpl(BeanFactoryXmlImpl::getInstance($filename))
+            ? new ContainerImpl(
+                BeanFactoryXmlImpl::getInstance($filename, $properties)
+            )
             : self::$_containerInstance
         ;
     }
