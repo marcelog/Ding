@@ -234,7 +234,7 @@ abstract class BeanFactory
         }
         /* @todo change this to a clone */
         if ($beanDefinition->getFactoryMethod() == false) {
-            $constructor = new \ReflectionClass($beanClass);
+            $constructor = $this->_getReflectionClass($beanClass);
             if (empty($args)) {
                 $bean = $constructor->newInstanceArgs();
             } else {
