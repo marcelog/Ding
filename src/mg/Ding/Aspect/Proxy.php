@@ -15,6 +15,7 @@
 namespace Ding\Aspect;
 
 use Ding\Aspect\Interceptor\IDispatcher;
+use Ding\Reflection\ReflectionFactory;
 
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
@@ -210,7 +211,7 @@ TEXT;
     public static function create(
         $class, $cacheDir, IDispatcher $dispatcher = null
     ) {
-        $subject = new \ReflectionClass($class);
+        $subject = ReflectionFactory::getClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
         $proxyFile = implode(
             DIRECTORY_SEPARATOR, array($cacheDir, $proxyClassName . '.php')

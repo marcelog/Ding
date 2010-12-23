@@ -14,6 +14,7 @@
  */
 namespace Ding\Bean\Factory;
 
+use Ding\Reflection\ReflectionFactory;
 use Ding\Container\IContainer;
 use Ding\Bean\Factory\Filter\PropertyFilter;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
@@ -76,12 +77,6 @@ abstract class BeanFactory
     private $_propertiesNameCache;
     
     /**
-     * Cache reflection classes instantiated so far.
-     * @var ReflectionClass[]
-     */
-    private $_reflectionClasses;
-    
-    /**
      * This will return the property value from a definition.
      * 
      * @param BeanPropertyDefinition $property Property definition.
@@ -120,26 +115,7 @@ abstract class BeanFactory
         }
         return $input;
     }
-    
-    /**
-     * Returns a (cached) reflection class.
-     *
-     * @param string $class Class name
-     * 
-     * @throws ReflectionException
-     * @return ReflectionClass
-     */
-    private function _getReflectionClass($class)
-    {
-        if (isset($this->_reflectionClasses[$class])) {
-            $rClass = $this->_reflectionClasses[$class];
-        } else {
-            $rClass = new \ReflectionClass($class);
-            $this->_reflectionClasses[$class] = $rClass;
-        }
-        return $rClass;
-    }
-    
+
     /**
      * This will assembly a bean (inject dependencies, loading other needed
      * beans in the way).
@@ -153,7 +129,7 @@ abstract class BeanFactory
      */
     private function _assemble($bean, BeanDefinition $def)
     {
-        $rClass = $this->_getReflectionClass($def->getClass());
+        $rClass = ReflectionFactory::getClass($def->getClass());
         foreach ($def->getProperties() as $property) {
             $propertyName = $property->getName();
             if (isset($this->_propertiesNameCache[$propertyName])) {
@@ -234,7 +210,7 @@ abstract class BeanFactory
         }
         /* @todo change this to a clone */
         if ($beanDefinition->getFactoryMethod() == false) {
-            $constructor = $this->_getReflectionClass($beanClass);
+            $constructor = ReflectionFactory::getClass($beanClass);
             if (empty($args)) {
                 $bean = $constructor->newInstanceArgs();
             } else {
@@ -364,7 +340,6 @@ abstract class BeanFactory
         $this->_filters = array();
         $this->_proxyCacheDir = $properties['proxy.cache.dir'];
         $this->_propertiesNameCache = array();
-        $this->_reflectionClasses = array();
         @mkdir($this->_proxyCacheDir, 0750, true);
         $this->_filters[] = PropertyFilter::getInstance($properties);
     }
