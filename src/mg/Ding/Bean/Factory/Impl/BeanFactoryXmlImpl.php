@@ -118,8 +118,9 @@ class BeanFactoryXmlImpl extends BeanFactory
     private function _loadAspect($simpleXmlAspect)
     {
         $aspects = array();
-        $aspectBean = (string)$simpleXmlAspect->attributes()->ref;
-        $type = (string)$simpleXmlAspect->attributes()->type;
+        $atts = $simpleXmlAspect->attributes();
+        $aspectBean = (string)$atts->ref;
+        $type = (string)$atts->type;
         if ($type == 'method') {
             $type = AspectDefinition::ASPECT_METHOD;
         } else if ($type == 'exception') {

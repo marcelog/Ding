@@ -70,6 +70,18 @@ abstract class BeanFactory
     private $_container;
     
     /**
+     * Cache property setters names.
+     * @var array[]
+     */
+    private $_propertiesNameCache;
+    
+    /**
+     * Cache reflection classes instantiated so far.
+     * @var ReflectionClass[]
+     */
+    private $_reflectionClasses;
+    
+    /**
      * This will return the property value from a definition.
      * 
      * @param BeanPropertyDefinition $property Property definition.
@@ -110,6 +122,25 @@ abstract class BeanFactory
     }
     
     /**
+     * Returns a (cached) reflection class.
+     *
+     * @param string $class Class name
+     * 
+     * @throws ReflectionException
+     * @return ReflectionClass
+     */
+    private function _getReflectionClass($class)
+    {
+        if (isset($this->_reflectionClasses[$class])) {
+            $rClass = $this->_reflectionClasses[$class];
+        } else {
+            $rClass = new \ReflectionClass($class);
+            $this->_reflectionClasses[$class] = $rClass;
+        }
+        return $rClass;
+    }
+    
+    /**
      * This will assembly a bean (inject dependencies, loading other needed
      * beans in the way).
      * 
@@ -122,14 +153,21 @@ abstract class BeanFactory
      */
     private function _assemble($bean, BeanDefinition $def)
     {
-        $rClass = new \ReflectionClass($def->getClass());
+        $rClass = $this->_getReflectionClass($def->getClass());
         foreach ($def->getProperties() as $property) {
-            $method = $rClass->getMethod('set' . ucfirst($property->getName()));
+            $propertyName = $property->getName();
+            if (isset($this->_propertiesNameCache[$propertyName])) {
+                $methodName = $this->_propertiesNameCache[$propertyName];
+            } else {
+                $methodName = 'set' . ucfirst($propertyName);
+                $this->_propertiesNameCache[$propertyName] = $methodName;
+            }
             try
             {
+                $method = $rClass->getMethod($methodName);
                 $method->invoke($bean, $this->_loadProperty($property));
             } catch (\ReflectionException $exception) {
-                throw new BeanFactoryException('Error calling: ' . $value);
+                throw new BeanFactoryException('Error calling: ' . $method);
             }
         }
     }
@@ -197,7 +235,7 @@ abstract class BeanFactory
         /* @todo change this to a clone */
         if ($beanDefinition->getFactoryMethod() == false) {
             $constructor = new \ReflectionClass($beanClass);
-            if (count($args) < 1) {
+            if (empty($args)) {
                 $bean = $constructor->newInstanceArgs();
             } else {
                 $bean = $constructor->newInstanceArgs($args);
@@ -238,9 +276,7 @@ abstract class BeanFactory
             }
             $destroyMethod = $beanDefinition->getDestroyMethod();
             if ($destroyMethod) {
-                $this->_container->registerShutdownMethod(
-                    $bean, $destroyMethod
-                );
+                $this->_container->registerShutdownMethod($bean, $destroyMethod);
             }
         } catch(\ReflectionException $exception) {
             throw new BeanFactoryException('DI Error', 0, $exception);
@@ -327,6 +363,8 @@ abstract class BeanFactory
         $this->_beanDefs = array();
         $this->_filters = array();
         $this->_proxyCacheDir = $properties['proxy.cache.dir'];
+        $this->_propertiesNameCache = array();
+        $this->_reflectionClasses = array();
         @mkdir($this->_proxyCacheDir, 0750, true);
         $this->_filters[] = PropertyFilter::getInstance($properties);
     }
