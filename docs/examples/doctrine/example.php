@@ -60,7 +60,7 @@ try
         'log.dir' => '/tmp/alogdir',
         'log.file' => 'alog.log',
         'ding.cache.proxy' => array('directory' => '/tmp/Ding/proxy'),
-    	'ding.cache.beandef' => array('directory' => '/tmp/Ding/bdef')
+    	'ding.cache.beandef' => array()
     );
 
     $a = ContainerImpl::getInstanceFromXml('beans.xml', $properties);

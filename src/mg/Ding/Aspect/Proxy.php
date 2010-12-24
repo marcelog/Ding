@@ -141,8 +141,12 @@ TEXT;
         $parameterSrc .= '$' . $parameter->getName();
         if ($parameter->isOptional()) {
             $parameterSrc .= '=';
-            if ($parameter->getDefaultValue() == null) {
+            if ($parameter->getDefaultValue() === null) {
                 $parameterSrc .= 'null';
+            } else if ($parameter->getDefaultValue() === false) {
+                $parameterSrc .= 'false';
+            } else if ($parameter->getDefaultValue() === true) {
+                $parameterSrc .= 'true';
             } else {
                 $parameterSrc .= $parameter->getDefaultValue();
             }
