@@ -13,8 +13,9 @@
  */
 namespace Ding\Container\Impl;
 
-use Ding\Cache\Impl\APCCacheImpl;
-use Ding\Cache\Impl\DummyCacheImpl;
+use Ding\Cache\CacheLocator;
+
+use Ding\Cache\CacheLocaCacheLocator;
 use Ding\Container\IContainer;
 use Ding\Container\Exception\ContainerException;
 use Ding\Bean\Factory\BeanFactory;
@@ -88,16 +89,20 @@ class ContainerImpl implements IContainer
         $filename, array $properties = array()
     ) {
         if (self::$_containerInstance === false) {
+            // Init cache subsystems.
+            if (isset($properties['ding.cache.bdef'])) {
+                CacheLocator::getDefinitionsCacheInstance($properties['ding.cache.bdef']);
+            } else {
+                CacheLocator::getDefinitionsCacheInstance();
+            }
+            if (isset($properties['ding.cache.proxy'])) {
+                CacheLocator::getProxyCacheInstance($properties['ding.cache.proxy']);
+            } else {
+                CacheLocator::getProxyCacheInstance();
+            }
             $factory = BeanFactoryXmlImpl::getInstance($filename, $properties);
             $ret = new ContainerImpl($factory);
             $factory->setContainer($ret);
-            $cache = DummyCacheImpl::getInstance();
-            if (isset($properties['ding.cache.impl'])) {
-                if ($properties['ding.cache.impl'] == 'apc') {
-                    $cache = APCCacheImpl::getInstance();
-                }
-            }         
-            $factory->setCache($cache);
             self::$_containerInstance = $ret;
         } else {
             $ret = self::$_containerInstance;

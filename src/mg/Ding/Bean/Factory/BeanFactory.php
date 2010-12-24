@@ -14,8 +14,7 @@
  */
 namespace Ding\Bean\Factory;
 
-use Ding\Cache\ICache;
-
+use Ding\Cache\CacheLocator;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Container\IContainer;
 use Ding\Bean\Factory\Filter\PropertyFilter;
@@ -61,12 +60,6 @@ abstract class BeanFactory
     private $_filters;
 
     /**
-     * Cache implementation to use.
-     * @var ICache
-     */
-    private $_cache;
-    
-    /**
      * Our calling container. 
      * @var IContainer
      */
@@ -77,7 +70,13 @@ abstract class BeanFactory
      * @var array[]
      */
     private $_propertiesNameCache;
-    
+
+    /**
+     * Cache to be used for bean definitions.
+     * @var ICache
+     */
+    private $_beanDefCache;
+
     /**
      * This will return the property value from a definition.
      * 
@@ -190,7 +189,7 @@ abstract class BeanFactory
         
         if ($beanDefinition->hasAspects()) {
             $dispatcher = new DispatcherImpl();
-            $beanClass = Proxy::create($beanClass, $this->_cache, $dispatcher);
+            $beanClass = Proxy::create($beanClass, $dispatcher);
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 if (
@@ -279,14 +278,13 @@ abstract class BeanFactory
     {
         $ret = false;
         $result = false;
-        $cache = $this->getCache();
-        $beanDefinition = $cache->fetch($beanName . 'beandef', $result);
+        $beanDefinition = $this->_beanDefCache->fetch($beanName . 'beandef', $result);
         if (!$result) {
             $beanDefinition = $this->getBeanDefinition($beanName);
             if (!$beanDefinition) {
                 throw new BeanFactoryException('Unknown bean: ' . $beanName);
             }
-            $cache->store($beanName . 'beandef', $beanDefinition);
+            $this->_beanDefCache->store($beanName . 'beandef', $beanDefinition);
         }
         switch ($beanDefinition->getScope())
         {
@@ -324,16 +322,6 @@ abstract class BeanFactory
     {
         return $this->_container;
     }
-
-    public function getCache()
-    {
-        return $this->_cache;
-    }
-    
-    public function setCache(ICache $cache)
-    {
-        $this->_cache = $cache;
-    }
     
     /**
      * Constructor.
@@ -347,7 +335,7 @@ abstract class BeanFactory
         $this->_beans = array();
         $this->_beanDefs = array();
         $this->_filters = array();
-        $this->_cache = false;
+        $this->_beanDefCache = CacheLocator::getDefinitionsCacheInstance();
         $this->_propertiesNameCache = array();
         $this->_filters[] = PropertyFilter::getInstance($properties);
     }

@@ -14,9 +14,11 @@
  */
 namespace Ding\Aspect;
 
+use Ding\Cache\CacheLocator;
+
 use Ding\Aspect\Interceptor\IDispatcher;
 use Ding\Reflection\ReflectionFactory;
-use Ding\Cache\ICache;
+use Ding\Cache\CacheLCacheLocator;
 
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
@@ -200,18 +202,16 @@ TEXT;
      * This will give you a string for a new proxy class.
      * 
      * @param string      $class                Class to be proxied.
-     * @param ICache      $cache                Cache implementation to be used.
      * @param IDispatcher $dispatcher           Dispatcher to invoke aspects.
-     * @param array       $constructorArguments Constructor arguments.
      * 
      * @todo Currently, final classes can't be proxied because the proxy class
      * extends it (this may change in the near future).
      * 
      * @return string 
      */
-    public static function create(
-        $class, ICache $cache, IDispatcher $dispatcher = null 
-    ) {
+    public static function create($class, IDispatcher $dispatcher = null)
+    {
+        $cache = CacheLocator::getProxyCacheInstance();
         $subject = ReflectionFactory::getClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
         $result = false;

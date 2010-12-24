@@ -51,6 +51,9 @@ class PropertyFilter implements IFilter
     {
         $output = $input;
         foreach ($this->_properties as $k => $v) {
+            if (is_array($v) || is_object($v)) {
+                continue;
+            }
             $output = str_replace($k, $v, $output);
         }
         return $output;

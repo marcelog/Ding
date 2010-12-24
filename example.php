@@ -250,7 +250,8 @@ try
         'user.name' => 'nobody',
         'log.dir' => '/tmp/alogdir',
         'log.file' => 'alog.log',
-        'ding.cache.impl' => 'dummy' // You may use 'apc' here
+        'ding.cache.proxy' => array('directory' => '/tmp/Ding/proxy'),
+    	'ding.cache.beandef' => array('directory' => '/tmp/Ding/bdef')
     );
     $a = ContainerImpl::getInstanceFromXml('beans.xml', $properties);
     $bean = $a->getBean('ComponentA');

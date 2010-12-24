@@ -25,8 +25,10 @@ Ding supports this cache implementations out of the box:
 * APC
 * DUMMY
 
-YOU MUST CONFIGURE THIS PROPERTY in the container: 'ding.cache.impl' => 'apc'
-(or 'dummy', etc, when instantiating the container).
+YOU MUST CONFIGURE THIS PROPERTY in the container, i.e:
+        'ding.cache.proxy' => array('directory' => '/tmp/Ding/proxy'),
+    	'ding.cache.beandef' => array('directory' => '/tmp/Ding/bdef')
+    	(when instantiating the container).
 --------------------------------------------------------------------------------
 DI
 ==
