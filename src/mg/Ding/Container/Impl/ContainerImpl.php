@@ -49,6 +49,12 @@ class ContainerImpl implements IContainer
     private $_shutdowners;
     
     /**
+     * Holds our beans cache.
+     * @var ICache
+     */
+    private $_beanCache;
+    
+    /**
      * Container instance.
      * @var ContainerImpl
      */
@@ -72,8 +78,13 @@ class ContainerImpl implements IContainer
      */
     public function getBean($bean)
     {
-        $factory = $this->_getFactory();
-        return $factory->getBean($bean);
+        $result = false;
+        $ret = $this->_beanCache->fetch($bean . '.bean', $result);
+        if ($result === false) {
+            $ret = $this->_factory->getBean($bean);
+            $this->_beanCache->store($bean . '.bean', $ret);
+        }
+        return $ret;
     }
     
     /**
@@ -144,6 +155,7 @@ class ContainerImpl implements IContainer
         $this->_beans = array();
         $this->_factory = $factory;
         $this->_shutdowners = array();
+        $this->_beanCache = CacheLocator::getBeansCacheInstance();
         self::$_containerInstance = $this;
     }
 }
