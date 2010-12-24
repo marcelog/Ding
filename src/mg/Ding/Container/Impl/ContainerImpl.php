@@ -90,15 +90,8 @@ class ContainerImpl implements IContainer
     ) {
         if (self::$_containerInstance === false) {
             // Init cache subsystems.
-            if (isset($properties['ding.cache.bdef'])) {
-                CacheLocator::getDefinitionsCacheInstance($properties['ding.cache.bdef']);
-            } else {
-                CacheLocator::getDefinitionsCacheInstance();
-            }
-            if (isset($properties['ding.cache.proxy'])) {
-                CacheLocator::getProxyCacheInstance($properties['ding.cache.proxy']);
-            } else {
-                CacheLocator::getProxyCacheInstance();
+            if (isset($properties['ding']['cache'])) {
+                CacheLocator::configure($properties['ding']['cache']);
             }
             $factory = BeanFactoryXmlImpl::getInstance($filename, $properties);
             $ret = new ContainerImpl($factory);

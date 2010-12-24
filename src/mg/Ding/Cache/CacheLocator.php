@@ -8,6 +8,12 @@ use Ding\Cache\Impl\DummyCacheImpl;
 
 class CacheLocator
 {
+    private static $_options = array(
+    	'proxy' => array('impl' => 'file', 'directory' => '.'),
+        'bdef' => array('impl' => 'apc'),
+        'beans' => array('impl' => 'dummy')
+    );
+    
     private static function _returnCacheFromImpl($options)
     {
         switch ($options['impl'])
@@ -23,27 +29,23 @@ class CacheLocator
         }
     }
 
-    public static function getProxyCacheInstance(array $options = array())
+    public static function configure(array $options)
     {
-        //if (isset($options['impl'])) {
-        //    return self::_returnCacheFromImpl($options);
-        //}
-        return FileCacheImpl::getInstance($options);
+        self::$_options = array_replace_recursive(self::$_options, $options);
     }
     
-    public static function getDefinitionsCacheInstance(array $options = array())
+    public static function getProxyCacheInstance()
     {
-        //if (isset($options['impl'])) {
-        //    return self::_returnCacheFromImpl($options);
-        //}
-        return APCCacheImpl::getInstance($options);
+        return self::_returnCacheFromImpl(self::$_options['proxy']);
     }
     
-    public static function getBeansCacheInstance(array $options = array())
+    public static function getDefinitionsCacheInstance()
     {
-        //if (isset($options['impl'])) {
-        //    return self::_returnCacheFromImpl($options);
-        //}
-        return DummyCacheImpl::getInstance($options);
+        return self::_returnCacheFromImpl(self::$_options['bdef']);
+    }
+    
+    public static function getBeansCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['beans']);
     }
 }
