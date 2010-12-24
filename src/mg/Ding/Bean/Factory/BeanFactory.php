@@ -189,21 +189,20 @@ abstract class BeanFactory
         
         if ($beanDefinition->hasAspects()) {
             $dispatcher = new DispatcherImpl();
-            $beanClass = Proxy::create($beanClass, $dispatcher);
+            $methods = array();
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
+                $method = $aspectDefinition->getPointcut();
+                $methods[$method] = '';
                 if (
                     $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
                 ) {
-                    $dispatcher->addMethodInterceptor(
-                        $aspectDefinition->getPointcut(), $aspect
-                    );
+                    $dispatcher->addMethodInterceptor($method, $aspect);
                 } else {
-                    $dispatcher->addExceptionInterceptor(
-                        $aspectDefinition->getPointcut(), $aspect
-                    );
+                    $dispatcher->addExceptionInterceptor($method, $aspect);
                 }
             }
+            $beanClass = Proxy::create($beanClass, $methods, $dispatcher);
         }
         /* @todo change this to a clone */
         if ($beanDefinition->getFactoryMethod() == false) {

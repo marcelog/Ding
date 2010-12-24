@@ -104,14 +104,17 @@ TEXT;
      * 
      * @return string
      */
-    private static function _createClass($newName, \ReflectionClass $class)
-    {
+    private static function _createClass(
+        $newName, array $proxyMethods, \ReflectionClass $class
+    ) {
         $src = self::$_proxyTemplate;
         $src = str_replace('NEW_NAME', $newName, $src);
         $src = str_replace('CLASS_NAME', $class->getName(), $src);
         $methods = array();
         foreach ($class->getMethods() as $method) {
-            $methods[] = self::_createMethod($method);
+            if (isset($proxyMethods[$method->getName()])) {
+                $methods[] = self::_createMethod($method);
+            }
         }
         $src = str_replace('METHODS', implode("\n", $methods), $src);
         return $src;
@@ -206,6 +209,7 @@ TEXT;
      * This will give you a string for a new proxy class.
      * 
      * @param string      $class                Class to be proxied.
+     * @param array       $proxyMethods         Methods to be proxied.
      * @param IDispatcher $dispatcher           Dispatcher to invoke aspects.
      * 
      * @todo Currently, final classes can't be proxied because the proxy class
@@ -213,15 +217,16 @@ TEXT;
      * 
      * @return string 
      */
-    public static function create($class, IDispatcher $dispatcher = null)
-    {
+    public static function create(
+        $class, array $proxyMethods = array(), IDispatcher $dispatcher = null
+    ) {
         $cache = CacheLocator::getProxyCacheInstance();
         $subject = ReflectionFactory::getClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
         $result = false;
         $src = $cache->fetch($proxyClassName . '.proxy', $result);
         if (!$result) { 
-            $src = self::_createClass($proxyClassName, $subject);
+            $src = self::_createClass($proxyClassName, $proxyMethods, $subject);
             $cache->store($proxyClassName . '.proxy', $src);
         }
         eval($src);
