@@ -50,6 +50,12 @@ use Doctrine\ORM\EntityManager;
 try
 {
     $properties = array(
+        'doctrine.proxy.dir' => './proxies',
+        'doctrine.proxy.autogenerate' => true,
+        'doctrine.proxy.namespace' => "\\Test\\Proxies",
+        'doctrine.entity.path' => "./entities",
+        'doctrine.db.driver' => "pdo_sqlite",
+        'doctrine.db.path' => "database.sqlite3",
         'user.name' => 'nobody',
         'log.dir' => '/tmp/alogdir',
         'log.file' => 'alog.log',
@@ -57,14 +63,7 @@ try
     );
 
     $a = ContainerImpl::getInstanceFromXml('beans.xml', $properties);
-    $config = $a->getBean('doctrine-config');
-
-    $connectionOptions = array(
-        'driver' => 'pdo_sqlite',
-        'path' => 'database.sqlite3'
-    );
-
-    $em = EntityManager::create($connectionOptions, $config);
+    $em = $a->getBean('repository-locator');
     require_once 'entities/Person.php';
     $person = new Person('foobar', 'Foo', 'Bar');
     echo "Persisting $person\n";

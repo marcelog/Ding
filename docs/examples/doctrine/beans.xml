@@ -1,15 +1,16 @@
 <beans>
-	<!-- This is to be implemented when sets can be defined in beans.xml
 	<bean id="repository-locator" class="\Doctrine\ORM\EntityManager"
-		factory-method="create">
+		factory-method="create" scope="singleton">
 		<constructor-arg>
-			<ref bean="doctrine-connection-params"/>
+			<array>
+        			<entry key="driver"><value>${doctrine.db.driver}</value></entry>
+        			<entry key="path"><value>${doctrine.db.path}</value></entry>
+			</array>
 		</constructor-arg>
 		<constructor-arg>
 			<ref bean="doctrine-config"/>
 		</constructor-arg>
 	</bean>
-	-->
 	<bean id="doctrine-cache" class="\Doctrine\Common\Cache\ArrayCache" scope="singleton" />
 	<!-- This hack is needed to avoid repeating code in
 	 	\Doctrine\ORM\Configuration::newDefaultAnnotationDriver()
@@ -19,7 +20,7 @@
 		factory-bean="doctrine-config-dummy" factory-method="newDefaultAnnotationDriver"
 		scope="singleton">
 		<constructor-arg>
-			<value>"./entities"</value>
+			<value>${doctrine.entity.path}</value>
 		</constructor-arg>
 	</bean>
 	<bean id="doctrine-config" class="\Doctrine\ORM\Configuration" scope="singleton">
@@ -33,13 +34,13 @@
 			<ref bean="doctrine-cache"/>
 		</property>
 		<property name="proxyDir">
-			<value>"./proxies"</value>
+			<value>${doctrine.proxy.dir}</value>
 		</property>
 		<property name="proxyNamespace">
-			<value>\Test\Proxies</value>
+			<value>${doctrine.proxy.namespace}</value>
 		</property>
 		<property name="autoGenerateProxyClasses">
-			<value>true</value>
+			<value>${doctrine.proxy.autogenerate}</value>
 		</property>
 	</bean>
 </beans>
