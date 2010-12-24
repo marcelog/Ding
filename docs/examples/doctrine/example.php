@@ -32,9 +32,11 @@ ini_set(
             ini_get('include_path'),
             __DIR__ .DIRECTORY_SEPARATOR
             .implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
-        )
-    )
-);
+                )
+            )
+        );
+
+require_once 'entities/Person.php';
 
 // register Doctrine class loader
 require 'Doctrine/Common/ClassLoader.php';
@@ -53,24 +55,25 @@ try
         'doctrine.proxy.dir' => './proxies',
         'doctrine.proxy.autogenerate' => true,
         'doctrine.proxy.namespace' => "\\Test\\Proxies",
-        'doctrine.entity.path' => "./entities",
+        'doctrine.entity.path' => __DIR__ ."/entities",
         'doctrine.db.driver' => "pdo_sqlite",
-        'doctrine.db.path' => "database.sqlite3",
+        'doctrine.db.path' => __DIR__ ."/db.sqlite3",
         'user.name' => 'nobody',
         'log.dir' => '/tmp/alogdir',
         'log.file' => 'alog.log',
         'ding' => array(
             'cache' => array(
-    			'proxy' => array('directory' => '/tmp/Ding/proxy'),
-        		'bdef' => array('impl' => 'apc'),
-          		'beans' => array('impl' => 'dummy')
+                'proxy' => array('directory' => '/tmp/Ding/proxy'),
+                'bdef' => array('impl' => 'apc'),
+                'beans' => array('impl' => 'dummy')
             )
         )
     );
 
-    $a = ContainerImpl::getInstanceFromXml('beans.xml', $properties);
+    $a = ContainerImpl::getInstanceFromXml(__DIR__ .'/beans.xml', $properties);
     $em = $a->getBean('repository-locator');
-    require_once 'entities/Person.php';
+    createSchema($properties);
+
     $person = new Person('foobar', 'Foo', 'Bar');
     echo "Persisting $person\n";
     $em->persist($person);
@@ -79,6 +82,19 @@ try
 
     echo "Retrieved from db:$person\n";
 
+    @unlink($properties['doctrine.db.path']);
 } catch(Exception $exception) {
     echo $exception . "\n";
+}
+
+function createSchema($props) {
+    $schema = file_get_contents(__DIR__ .'/schema.sql');
+    $config = new \Doctrine\DBAL\Configuration();
+    //..
+    $connectionParams = array(
+        'driver' => $props['doctrine.db.driver'],
+        'path' => $props['doctrine.db.path'],
+    );
+    $conn = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
+    $conn->executeQuery($schema);
 }
