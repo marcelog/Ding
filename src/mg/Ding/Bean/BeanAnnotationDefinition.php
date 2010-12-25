@@ -1,7 +1,7 @@
 <?php
 namespace Ding\Bean;
 
-abstract class BeanAnnotationDefinition
+class BeanAnnotationDefinition
 {
     private $_name;
     private $_args;

@@ -57,7 +57,10 @@ class ClassA extends ClassD
     {
         echo "Hello world $a $b $c \n";
     }
-    
+
+    /**
+     * @anAnnotationB
+     */
     public function setAProperty(array $value)
     {
         echo "setting a property: ";
@@ -232,6 +235,9 @@ class ClassZ
 
 class ClassY
 {
+    /**
+     * @anAnnotationA(A=b, C=a)
+     */
     public static function getInstance($a, $b)
     {
         return new ClassY($a, $b);

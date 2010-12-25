@@ -20,6 +20,7 @@ use Ding\Container\IContainer;
 
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
+use Ding\Bean\Factory\Driver\BeanAspectDriver;
 use Ding\Bean\Factory\Filter\PropertyFilter;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 
@@ -268,7 +269,17 @@ class BeanFactory
         }
         try
         {
+            foreach ($this->_lifecyclers as $lifecycleListener) {
+                $bean = $lifecycleListener->beforeAssemble(
+                    $bean, $beanDefinition
+                );
+            }
             $this->_assemble($bean, $beanDefinition);
+            foreach ($this->_lifecyclers as $lifecycleListener) {
+                $bean = $lifecycleListener->afterAssemble(
+                    $bean, $beanDefinition
+                );
+            }
             $initMethod = $beanDefinition->getInitMethod();
             if ($initMethod) {
                 $bean->$initMethod();
@@ -414,12 +425,12 @@ class BeanFactory
                 = BeanXmlDriver::getInstance(self::$_options['xml']);
             ;
         }
-        if (isset(self::$_options['annotation'])) {
-            $this->_lifecyclers[]
-                = BeanAnnotationDriver::getInstance(
-                    self::$_options['annotation']
-                );
-            ;
-        }
+        //if (isset(self::$_options['annotation'])) {
+        //    $this->_lifecyclers[]
+        //        = BeanAnnotationDriver::getInstance(
+        //            self::$_options['annotation']
+        //        );
+        //    ;
+        //}
     }
 }

@@ -32,7 +32,8 @@ interface ILifecycleListener
 {
     public function beforeDefinition($beanName, BeanDefinition $bean);
     public function afterDefinition($beanName, BeanDefinition $bean);
-    public function assemble(&$bean, BeanDefinition &$beanDefinition);
-    public function destruct(&$bean, BeanDefinition &$beanDefinition);
+    public function beforeAssemble($bean, BeanDefinition $beanDefinition);
+    public function afterAssemble($bean, BeanDefinition $beanDefinition);
+    public function destruct($bean, BeanDefinition $beanDefinition);
     public static function getInstance(array $options);
 }

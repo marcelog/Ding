@@ -13,6 +13,8 @@
  */
 namespace Ding\Bean;
 
+use Ding\Bean\BeanAnnotationDefinition;
+
 /**
  * Bean Definition.
  *
@@ -99,6 +101,65 @@ class BeanDefinition
      * @var string
      */
     private $_destroyMethod;
+
+    /**
+     * Annotations for this bean.
+     * @var BeanAnnotationDefinition[]
+     */
+    private $_annotations;
+    
+    /**
+     * This will annotated this bean with the given annotation.
+     *
+     * @param BeanAnnotationDefinition $annotation Annotation.
+     * 
+     * @return void
+     */
+    public function annotate(BeanAnnotationDefinition $annotation)
+    {
+        $name = $annotation->getName();
+        if (!isset($this->_annotations[$name])) {
+            $this->_annotations[$name] = array();
+        }
+        $this->_annotations[$name][] = $annotation;
+    }
+    
+    /**
+     * Returns all annotations under the given name.
+     *
+     * @param string $name Annotation name.
+     * 
+     * @return BeanAnnotationDefinition[]
+     */
+    public function getAnnotation($name)
+    {
+        if ($this->isAnnotated($name)) {
+            return $this->_annotations[$name];
+        }
+        return false;
+    }
+
+    /**
+     * Returns all annotations as an array indexed by annotation value.
+     *
+     * @return BeanAnnotationDefinition[string][]
+     */
+    public function getAnnotations()
+    {
+        return $this->_annotations;
+    }
+    
+    /**
+     * Returns true if this bean is annotated with the given annotation name.
+     *
+     * @param string $name Annotation name to check for.
+     * 
+     * @return boolean
+     */
+    public function isAnnotated($name)
+    {
+        return isset($this->_annotations[$name]);
+    }
     
     /**
      * Returns true if this bean has mapped aspects.
@@ -110,6 +171,13 @@ class BeanDefinition
         return count($this->getAspects()) > 0;
     }
     
+    /**
+     * Sets new aspects for this bean.
+     *
+     * @param BeanAspectDefinition[] $aspects New aspects.
+     * 
+     * @return void
+     */
     public function setAspects(array $aspects)
     {
         $this->_aspects = $aspects;
@@ -125,6 +193,13 @@ class BeanDefinition
         return $this->_aspects;
     }
     
+    /**
+     * Changes the scope for this bean.
+     *
+     * @param string $scope New scope.
+     * 
+     * @return void
+     */
     public function setScope($scope)
     {
         $this->_scope = $scope;
@@ -140,6 +215,13 @@ class BeanDefinition
         return $this->_scope;
     }
     
+    /**
+     * Sets a new name for this bean.
+     *
+     * @param string $name New name.
+     * 
+     * @return void
+     */
     public function setName($name)
     {
         $this->_name = $name;
@@ -155,6 +237,13 @@ class BeanDefinition
         return $this->_name;
     }
 
+    /**
+     * Sets a new class name for this bean.
+     *
+     * @param string $class New class name.
+     * 
+     * @return void
+     */
     public function setClass($class)
     {
         $this->_class = $class;
@@ -170,6 +259,13 @@ class BeanDefinition
         return $this->_class;
     }
 
+    /**
+     * Sets new properties for this bean.
+     *
+     * @param BeanPropertyDefinition[] $properties New properties.
+     * 
+     * @return void
+     */
     public function setProperties(array $properties)
     {
         $this->_properties = $properties;
@@ -185,6 +281,13 @@ class BeanDefinition
         return $this->_properties;
     }
 
+    /**
+     * Sets new arguments for this bean.
+     *
+     * @param BeanConstructorDefinition[] $arguments New arguments.
+     * 
+     * @return void
+     */
     public function setArguments(array $arguments)
     {
         $this->_constructorArguments = $arguments;
@@ -200,6 +303,13 @@ class BeanDefinition
         return $this->_constructorArgs;
     }
     
+    /**
+     * Sets a new factory method for this bean.
+     *
+     * @param string $factoryMethod New factory method.
+     * 
+     * @return void
+     */
     public function setFactoryMethod($factoryMethod)
     {
         $this->_factoryMethod = $factoryMethod;
@@ -214,6 +324,13 @@ class BeanDefinition
         return $this->_factoryMethod;
     }
 
+    /**
+     * Sets a new factory bean for this bean.
+     *
+     * @param string $factoryBean New factory bean.
+     * 
+     * @return void
+     */
     public function setFactoryBean($factoryBean)
     {
         $this->_factoryBean = $factoryBean;
@@ -229,6 +346,13 @@ class BeanDefinition
         return $this->_factoryBean;
     }
 
+    /**
+     * Sets a new init method for this bean.
+     *
+     * @param string $initMethod New init method.
+     * 
+     * @return void
+     */
     public function setInitMethod($initMethod)
     {
         $this->_initMethod = $initMethod;
@@ -244,6 +368,13 @@ class BeanDefinition
         return $this->_initMethod;
     }
 
+    /**
+     * Sets a new destroy method for this bean.
+     *
+     * @param string $destroyMethod New destroy method.
+     * 
+     * @return void
+     */
     public function setDestroyMethod($destroyMethod)
     {
         $this->_destroyMethod = $destroyMethod;

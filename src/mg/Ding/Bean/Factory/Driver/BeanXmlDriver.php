@@ -281,12 +281,17 @@ class BeanXmlDriver
         return $bean;
     }
     
-    public function assemble(&$bean, BeanDefinition &$beanDefinition)
+    public function beforeAssemble($bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
     
-    public function destruct(&$bean, BeanDefinition &$beanDefinition)
+    public function afterAssemble($bean, BeanDefinition $beanDefinition)
+    {
+        return $bean;
+    }
+    
+    public function destruct(&$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
