@@ -10,18 +10,18 @@ class BeanAnnotationDriver implements ILifecycleListener
 {
     private static $_instance = false;
 
-    public function beforeDefinition($beanName, BeanDefinition $bean)
+    public function afterDefinition($beanName, BeanDefinition $bean)
     {
         return $bean;
     }
     
-    public function afterDefinition($beanName, BeanDefinition $bean)
+    public function beforeDefinition($beanName, BeanDefinition $bean)
     {
         $class = $bean->getClass();
         if (empty($class)) {
             return $bean;
         }
-        $rClass = new \ReflectionClass($class);
+        $rClass = ReflectionFactory::getClass($class);
         foreach ($rClass->getMethods() as $method) {
             $doc = $method->getDocComment();
             if (preg_match_all('/@.+/', $doc, $matches) > 0) {
