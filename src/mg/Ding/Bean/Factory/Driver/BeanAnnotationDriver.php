@@ -45,7 +45,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
-    public function afterDefinition($beanName, BeanDefinition $bean)
+    public function afterDefinition($beanName, BeanDefinition &$bean)
     {
         return $bean;
     }
@@ -96,7 +96,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * 
      * @return BeanDefinition
      */
-    public function beforeDefinition($beanName, BeanDefinition $bean)
+    public function beforeDefinition($beanName, BeanDefinition &$bean)
     {
         $class = $bean->getClass();
         if (empty($class)) {
@@ -119,7 +119,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
      */
-    public function beforeAssemble($bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble(&$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -128,7 +128,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
      */
-    public function afterAssemble($bean, BeanDefinition $beanDefinition)
+    public function afterAssemble(&$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
