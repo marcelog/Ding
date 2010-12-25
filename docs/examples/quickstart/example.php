@@ -234,7 +234,7 @@ class ClassZ
 }
 
 /**
- * @aClassAnottation
+ * @aClassAnnotation
  *
  */
 class ClassY
