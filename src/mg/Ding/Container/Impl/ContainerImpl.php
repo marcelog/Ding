@@ -104,7 +104,11 @@ class ContainerImpl implements IContainer
             if (isset($properties['ding']['cache'])) {
                 CacheLocator::configure($properties['ding']['cache']);
             }
-            $factory = BeanFactoryXmlImpl::getInstance($filename, $properties);
+            // Init factory.
+            if (isset($properties['ding']['factory'])) {
+                BeanFactory::configure($properties['ding']['factory']);
+            }
+            $factory = BeanFactory::getInstance();
             $ret = new ContainerImpl($factory);
             $factory->setContainer($ret);
             self::$_containerInstance = $ret;

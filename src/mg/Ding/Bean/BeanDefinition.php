@@ -110,6 +110,11 @@ class BeanDefinition
         return count($this->getAspects()) > 0;
     }
     
+    public function setAspects(array $aspects)
+    {
+        $this->_aspects = $aspects;
+    }
+    
     /**
      * Returns aspects for this bean.
      * 
@@ -118,6 +123,11 @@ class BeanDefinition
     public function getAspects()
     {
         return $this->_aspects;
+    }
+    
+    public function setScope($scope)
+    {
+        $this->_scope = $scope;
     }
     
     /**
@@ -130,6 +140,11 @@ class BeanDefinition
         return $this->_scope;
     }
     
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+    
     /**
      * Returns bean name.
      * 
@@ -140,6 +155,11 @@ class BeanDefinition
         return $this->_name;
     }
 
+    public function setClass($class)
+    {
+        $this->_class = $class;
+    }
+    
     /**
      * Returns bean class.
      * 
@@ -150,6 +170,11 @@ class BeanDefinition
         return $this->_class;
     }
 
+    public function setProperties(array $properties)
+    {
+        $this->_properties = $properties;
+    }
+    
     /**
      * Returns properties for this bean.
      * 
@@ -160,6 +185,11 @@ class BeanDefinition
         return $this->_properties;
     }
 
+    public function setArguments(array $arguments)
+    {
+        $this->_constructorArguments = $arguments;
+    }
+    
     /**
      * Returns arguments for this bean.
      * 
@@ -170,6 +200,10 @@ class BeanDefinition
         return $this->_constructorArgs;
     }
     
+    public function setFactoryMethod($factoryMethod)
+    {
+        $this->_factoryMethod = $factoryMethod;
+    }
     /**
      * Factory method, false if none was set.
      * 
@@ -180,6 +214,11 @@ class BeanDefinition
         return $this->_factoryMethod;
     }
 
+    public function setFactoryBean($factoryBean)
+    {
+        $this->_factoryBean = $factoryBean;
+    }
+    
     /**
      * Factory bean, false if none was set.
      * 
@@ -190,6 +229,11 @@ class BeanDefinition
         return $this->_factoryBean;
     }
 
+    public function setInitMethod($initMethod)
+    {
+        $this->_initMethod = $initMethod;
+    }
+    
     /**
      * Init method, false if none was set.
      * 
@@ -200,6 +244,11 @@ class BeanDefinition
         return $this->_initMethod;
     }
 
+    public function setDestroyMethod($destroyMethod)
+    {
+        $this->_destroyMethod = $destroyMethod;
+    }
+    
     /**
      * Destroy method, false if none was set.
      * 

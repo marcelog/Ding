@@ -6,13 +6,13 @@
  *
  * @category   Ding
  * @package    Bean
- * @subpackage Factory.Impl
+ * @subpackage Driver
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @version    SVN: $Id$
  * @link       http://www.noneyet.ar/
  */
-namespace Ding\Bean\Factory\Impl;
+namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\Factory\BeanFactory;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
@@ -28,12 +28,12 @@ use Ding\Aspect\AspectDefinition;
  *
  * @category   Ding
  * @package    Bean
- * @subpackage Factory.Impl
+ * @subpackage Driver
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class BeanFactoryXmlImpl extends BeanFactory
+class BeanXmlDriver
 {
     /**
      * beans.xml file path.
@@ -52,19 +52,6 @@ class BeanFactoryXmlImpl extends BeanFactory
      * @var BeanFactoryXmlImpl
      */
     private static $_instance = false;
-    
-    /**
-     * Called from the parent class to get a bean definition.
-     * 
-	 * @param string $beanName Bean name to get definition for.
-	 * 
-	 * @throws BeanFactoryException
-	 * @return BeanDefinition
-     */
-    public function getBeanDefinition($beanName)
-    {
-        return $this->_loadBean($beanName);
-    }
     
     /**
      * Gets xml errors.
@@ -275,19 +262,46 @@ class BeanFactoryXmlImpl extends BeanFactory
             );
         }
     }
-
     /**
-     * Returns a instance for this factory.
+     * Called from the parent class to get a bean definition.
      * 
-     * @param string $filename   beans.xml path.
-     * @param array  $properties container properties.
-     *
-     * @return BeanFactoryXmlImpl
+	 * @param string         $beanName Bean name to get definition for.
+	 * @param BeanDefinition $bean     Where to store the data.
+	 * 
+	 * @throws BeanFactoryException
+	 * @return BeanDefinition
      */
-    public static function getInstance($filename, array $properties = array())
+    public function beforeDefinition($beanName, BeanDefinition $bean)
+    {
+        return $this->_loadBean($beanName);
+    }
+    
+    public function afterDefinition($beanName, BeanDefinition $bean)
+    {
+        return $bean;
+    }
+    
+    public function assemble(&$bean, BeanDefinition &$beanDefinition)
+    {
+        return $bean;
+    }
+    
+    public function destruct(&$bean, BeanDefinition &$beanDefinition)
+    {
+        return $bean;
+    }
+    
+    /**
+     * Returns a instance for this driver.
+     * 
+     * @param array $options Optional options ;)
+     *
+     * @return BeanXmlDriver
+     */
+    public static function getInstance(array $options)
     {
         if (self::$_instance == false) {
-            self::$_instance = new BeanFactoryXmlImpl($filename, $properties);
+            self::$_instance = new BeanXmlDriver($options['filename']);
         }
         return self::$_instance;
     }
@@ -299,9 +313,8 @@ class BeanFactoryXmlImpl extends BeanFactory
      * 
      * @return void
      */
-    protected function __construct($filename, $properties)
+    protected function __construct($filename)
     {
-        parent::__construct($properties);
         $this->_beanDefs = array();
         $this->_filename = $filename;
         $this->_simpleXml = false;

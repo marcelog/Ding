@@ -17,11 +17,16 @@ namespace Ding\Bean\Factory;
 use Ding\Cache\CacheLocator;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Container\IContainer;
+
+use Ding\Bean\Factory\Driver\BeanXmlDriver;
+use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
 use Ding\Bean\Factory\Filter\PropertyFilter;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
+
 use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
+
 use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectDefinition;
 use Ding\Aspect\Interceptor\IDispatcher;
@@ -39,8 +44,24 @@ use Ding\Aspect\Interceptor\DispatcherImpl;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-abstract class BeanFactory
+class BeanFactory
 {
+    /**
+     * Default options.
+     * @var array
+     */
+    private static $_options = array(
+        'xml' => array('filename' => 'beans.xml'),
+    	'annotation' => array(),
+        'properties' => array()
+    );
+    
+    /**
+     * Holds our instance.
+     * @var BeanFactory
+     */
+    private static $_instance = false;
+    
     /**
      * Bean definitions already known.
      * @var BeanDefinition[]
@@ -77,6 +98,12 @@ abstract class BeanFactory
      */
     private $_beanDefCache;
 
+    /**
+     * Lifecycle handlers for beans. 
+     * @var ILifecycleListener
+     */
+    private $_lifecyclers;
+    
     /**
      * This will return the property value from a definition.
      * 
@@ -257,13 +284,31 @@ abstract class BeanFactory
     }
     
     /**
-     * Override this one with your own implementation.
+     * Calls all lifecyclers for lifecycle BeforeDefinition and
+     * then AfterDefinition.
      *
      * @param string $beanName Bean to get definition for.
      * 
      * @return BeanDefinition
      */
-    public abstract function getBeanDefinition($beanName);
+    public function getBeanDefinition($beanName)
+    {
+        $beanDefinition = new BeanDefinition(
+            '', '', '', '', '', '', '', array(), array(), array()
+        );
+        foreach ($this->_lifecyclers as $lifecycleListener) {
+            $beanDefinition = $lifecycleListener->beforeDefinition(
+                $beanName, $beanDefinition
+            );
+        }
+        foreach ($this->_lifecyclers as $lifecycleListener) {
+            $beanDefinition
+                = $lifecycleListener->afterDefinition(
+                    $beanName, $beanDefinition
+                );
+        }
+        return $beanDefinition;
+    }
 
     /**
      * Returns a bean.
@@ -323,19 +368,58 @@ abstract class BeanFactory
     }
     
     /**
+     * The container will call this one, in order to setup options. If any
+     * option is missing, we use our default options as fallback.
+     * 
+     * @param array $options options.
+     * 
+     * @see BeanFactory::$_options
+     * @return void
+     */
+    public static function configure(array $options)
+    {
+        self::$_options = array_replace_recursive(self::$_options, $options);
+    }
+
+    public static function getInstance()
+    {
+        if (self::$_instance === false) {
+            $ret = new BeanFactory();
+        } else {
+            $ret = self::$_instance;
+        }
+        return $ret;
+    }
+            
+    /**
      * Constructor.
      *
      * @param array $properties Container properties.
      * 
      * @return void
      */
-    protected function __construct(array $properties = array())
+    protected function __construct()
     {
         $this->_beans = array();
         $this->_beanDefs = array();
         $this->_filters = array();
         $this->_beanDefCache = CacheLocator::getDefinitionsCacheInstance();
         $this->_propertiesNameCache = array();
-        $this->_filters[] = PropertyFilter::getInstance($properties);
+        $this->_filters[] = PropertyFilter::getInstance(
+            self::$_options['properties']
+        );
+        $this->_lifecyclers = array();
+        if (isset(self::$_options['xml'])) {
+            $this->_lifecyclers[]
+                = BeanXmlDriver::getInstance(self::$_options['xml']);
+            ;
+        }
+        if (isset(self::$_options['annotation'])) {
+            $this->_lifecyclers[]
+                = BeanAnnotationDriver::getInstance(
+                    self::$_options['annotation']
+                );
+            ;
+        }
     }
 }

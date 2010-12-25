@@ -247,18 +247,26 @@ class ClassY
 try
 {
     $properties = array(
-        'user.name' => 'nobody',
-        'log.dir' => '/tmp/alogdir',
-        'log.file' => 'alog.log',
         'ding' => array(
-            'cache' => array(
+            'factory' => array(
+                'bdef' => array(
+                	'xml' => array('filename' => 'beans.xml'),
+                	'annotation' => array()
+                ),
+                'properties' => array(
+                    'user.name' => 'nobody',
+                    'log.dir' => '/tmp/alogdir',
+                    'log.file' => 'alog.log',
+                )
+            ),
+    		'cache' => array(
     			'proxy' => array('directory' => '/tmp/Ding/proxy'),
         		'bdef' => array('impl' => 'apc'),
           		'beans' => array('impl' => 'dummy')
             )
         )
     );
-    $a = ContainerImpl::getInstanceFromXml('beans.xml', $properties);
+    $a = ContainerImpl::getInstanceFromXml($properties);
     $bean = $a->getBean('ComponentA');
     $bean->targetMethod('a', 1, array('1' => '2'));
     $bean = $a->getBean('ComponentB');
