@@ -237,6 +237,8 @@ class ClassY
 {
     /**
      * @anAnnotationA(A=b, C=a)
+     * @anotherAnnotation
+     * @YetAnotherOne(a=h)
      */
     public static function getInstance($a, $b)
     {

@@ -168,7 +168,7 @@ class BeanFactory
             }
             try
             {
-                $bean->$methodName( $this->_loadProperty($property));
+                $bean->$methodName($this->_loadProperty($property));
             } catch (\ReflectionException $exception) {
                 throw new BeanFactoryException('Error calling: ' . $methodName);
             }
@@ -313,10 +313,9 @@ class BeanFactory
             );
         }
         foreach ($this->_lifecyclers as $lifecycleListener) {
-            $beanDefinition
-                = $lifecycleListener->afterDefinition(
-                    $beanName, $beanDefinition
-                );
+            $beanDefinition = $lifecycleListener->afterDefinition(
+                $beanName, $beanDefinition
+            );
         }
         return $beanDefinition;
     }
@@ -425,12 +424,12 @@ class BeanFactory
                 = BeanXmlDriver::getInstance(self::$_options['xml']);
             ;
         }
-        //if (isset(self::$_options['annotation'])) {
-        //    $this->_lifecyclers[]
-        //        = BeanAnnotationDriver::getInstance(
-        //            self::$_options['annotation']
-        //        );
-        //    ;
-        //}
+        if (isset(self::$_options['annotation'])) {
+            $this->_lifecyclers[]
+                = BeanAnnotationDriver::getInstance(
+                    self::$_options['annotation']
+                );
+            ;
+        }
     }
 }
