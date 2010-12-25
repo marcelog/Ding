@@ -21,7 +21,7 @@ ini_set(
         PATH_SEPARATOR,
         array(
             ini_get('include_path'),
-            implode(DIRECTORY_SEPARATOR, array('src', 'mg'))
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg'))
         )
     )
 );
