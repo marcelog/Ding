@@ -51,7 +51,7 @@ use Ding\Container\Impl\ContainerImpl;
 use Doctrine\ORM\EntityManager;
 try
 {
-    $properties = array(
+    $myProperties = array(
         'doctrine.proxy.dir' => './proxies',
         'doctrine.proxy.autogenerate' => true,
         'doctrine.proxy.namespace' => "\\Test\\Proxies",
@@ -60,19 +60,27 @@ try
         'doctrine.db.path' => __DIR__ ."/db.sqlite3",
         'user.name' => 'nobody',
         'log.dir' => '/tmp/alogdir',
-        'log.file' => 'alog.log',
+        'log.file' => 'alog.log'
+	 );
+    $dingProperties = array(
         'ding' => array(
-            'cache' => array(
-                'proxy' => array('directory' => '/tmp/Ding/proxy'),
-                'bdef' => array('impl' => 'apc'),
-                'beans' => array('impl' => 'dummy')
-            )
+            'factory' => array(
+                'bdef' => array(
+                	'xml' => array('filename' => __DIR__ . '/beans.xml'),
+                	'annotation' => array()
+                ),
+                'properties' => $myProperties
+            ),
+    		  'cache' => array(
+    		    'proxy' => array('directory' => '/tmp/Ding/proxy'),
+          	 'bdef' => array('impl' => 'apc'),
+        	    'beans' => array('impl' => 'dummy')
+           )
         )
     );
-
-    $a = ContainerImpl::getInstanceFromXml(__DIR__ .'/beans.xml', $properties);
+    $a = ContainerImpl::getInstance($dingProperties);
     $em = $a->getBean('repository-locator');
-    createSchema($properties);
+    createSchema($myProperties);
 
     $person = new Person('foobar', 'Foo', 'Bar');
     echo "Persisting $person\n";

@@ -88,17 +88,14 @@ class ContainerImpl implements IContainer
     }
     
     /**
-     * This will return a container using a BeanFactoryXmlImpl with the
-     * given beans.xml file.
+     * This will return a container
      * 
-     * @param string $filename   Absolute path to beans.xml
-     * @param array  $properties Container properties.
+     * @param array $properties Container properties.
      * 
      * @return ContainerImpl
      */
-    public static function getInstanceFromXml(
-        $filename, array $properties = array()
-    ) {
+    public static function getInstance(array $properties = array())
+    {
         if (self::$_containerInstance === false) {
             // Init cache subsystems.
             if (isset($properties['ding']['cache'])) {

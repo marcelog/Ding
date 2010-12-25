@@ -266,7 +266,7 @@ try
             )
         )
     );
-    $a = ContainerImpl::getInstanceFromXml($properties);
+    $a = ContainerImpl::getInstance($properties);
     $bean = $a->getBean('ComponentA');
     $bean->targetMethod('a', 1, array('1' => '2'));
     $bean = $a->getBean('ComponentB');
