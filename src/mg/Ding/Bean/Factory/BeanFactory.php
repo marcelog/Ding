@@ -214,7 +214,6 @@ class BeanFactory
         foreach ($beanDefinition->getArguments() as $argument) {
             $args[] = $this->_loadArgument($argument);
         }
-        
         if ($beanDefinition->hasAspects()) {
             $dispatcher = new DispatcherImpl();
             $methods = array();

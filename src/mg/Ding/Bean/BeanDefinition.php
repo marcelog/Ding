@@ -109,32 +109,49 @@ class BeanDefinition
     private $_annotations;
     
     /**
+     * Annotations for this bean methods.
+     * @var BeanAnnotationDefinition[]
+     */
+    private $_methodAnnotations;
+    
+    /**
      * This will annotated this bean with the given annotation.
      *
      * @param BeanAnnotationDefinition $annotation Annotation.
+     * @param string                   $method     Optional method name.
      * 
      * @return void
      */
-    public function annotate(BeanAnnotationDefinition $annotation)
+    public function annotate(BeanAnnotationDefinition $annotation, $method = false)
     {
         $name = $annotation->getName();
-        if (!isset($this->_annotations[$name])) {
-            $this->_annotations[$name] = array();
+        if ($method === false) {
+            if (!isset($this->_annotations[$name])) {
+                $this->_annotations[$name] = array();
+            }
+            $this->_annotations[$name][] = $annotation;
+        } else {
+            if (!isset($this->_methodAnnotations[$method][$name])) {
+                $this->_methodAnnotations[$method][$name] = array();
+            }
+            $this->_methodAnnotations[$method][$name][] = $annotation;
         }
-        $this->_annotations[$name][] = $annotation;
     }
     
     /**
      * Returns all annotations under the given name.
      *
-     * @param string $name Annotation name.
+     * @param string $name   Annotation name.
+     * @param string $method Optional method name.
      * 
      * @return BeanAnnotationDefinition[]
      */
-    public function getAnnotation($name)
+    public function getAnnotation($name, $method = false)
     {
-        if ($this->isAnnotated($name)) {
+        if ($method === false && $this->isAnnotated($name)) {
             return $this->_annotations[$name];
+        } else if ($this->isAnnotated($name, $method)) {
+            return $this->_methodAnnotations[$method][$name];
         }
         return false;
     }
@@ -142,23 +159,34 @@ class BeanDefinition
     /**
      * Returns all annotations as an array indexed by annotation value.
      *
+     * @param string $method Optional method name.
+     * 
      * @return BeanAnnotationDefinition[string][]
      */
-    public function getAnnotations()
+    public function getAnnotations($method = false)
     {
-        return $this->_annotations;
+        if ($method === false) {
+            return $this->_annotations;
+        } else {
+            return isset($this->_methodAnnotations[$method]);
+        }
     }
     
     /**
      * Returns true if this bean is annotated with the given annotation name.
      *
-     * @param string $name Annotation name to check for.
+     * @param string $name   Annotation name to check for.
+     * @param string $method Optional method name.
      * 
      * @return boolean
      */
-    public function isAnnotated($name)
+    public function isAnnotated($name, $method = false)
     {
-        return isset($this->_annotations[$name]);
+        if ($method === false) {
+            return isset($this->_annotations[$name]);
+        } else {
+            return isset($this->_methodAnnotations[$method][$name]);
+        }
     }
     
     /**
