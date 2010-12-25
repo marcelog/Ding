@@ -4,9 +4,9 @@
  *
  * PHP Version 5
  *
- * @category   ding
- * @package    bean
- * @subpackage factory.exception
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Exception
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @version    SVN: $Id$
@@ -20,9 +20,9 @@ use Ding\Exception\DingException;
  *
  * PHP Version 5
  *
- * @category   ding
- * @package    bean
- * @subpackage factory.exception
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Exception
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
