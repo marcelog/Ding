@@ -268,17 +268,7 @@ class BeanFactory
         }
         try
         {
-            foreach ($this->_lifecyclers as $lifecycleListener) {
-                $bean = $lifecycleListener->beforeAssemble(
-                    $bean, $beanDefinition
-                );
-            }
             $this->_assemble($bean, $beanDefinition);
-            foreach ($this->_lifecyclers as $lifecycleListener) {
-                $bean = $lifecycleListener->afterAssemble(
-                    $bean, $beanDefinition
-                );
-            }
             $initMethod = $beanDefinition->getInitMethod();
             if ($initMethod) {
                 $bean->$initMethod();
