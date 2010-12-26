@@ -308,6 +308,9 @@ class BeanFactory
                 $beanName, $beanDefinition
             );
         }
+        /**
+         * @todo shouldn't this be on the container side?
+         */
         switch ($beanDefinition->getScope())
         {
         case BeanDefinition::BEAN_PROTOTYPE:
