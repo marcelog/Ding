@@ -202,6 +202,9 @@ class BeanFactory
      */
     private function _createBean(BeanDefinition $beanDefinition)
     {
+        foreach ($this->_lifecyclers[BeanLifecycle::BeforeCreate] as $lifecycleListener) {
+            $lifecycleListener->beforeCreate($beanDefinition);
+        }
         $beanClass = $beanDefinition->getClass();
         $args = array();
         foreach ($beanDefinition->getArguments() as $argument) {
@@ -258,6 +261,9 @@ class BeanFactory
                     $bean = $method->invokeArgs($beanFactory, $args);
                 }
             }
+        }
+        foreach ($this->_lifecyclers[BeanLifecycle::AfterCreate] as $lifecycleListener) {
+            $bean = $lifecycleListener->beforeCreate($bean, $beanDefinition);
         }
         try
         {
@@ -396,6 +402,8 @@ class BeanFactory
         $this->_lifecyclers = array();
         $this->_lifecyclers[BeanLifecycle::BeforeDefinition] = array();
         $this->_lifecyclers[BeanLifecycle::AfterDefinition] = array();
+        $this->_lifecyclers[BeanLifecycle::BeforeCreate] = array();
+        $this->_lifecyclers[BeanLifecycle::AfterCreate] = array();
         $this->_lifecyclers[BeanLifecycle::BeforeAssemble] = array();
         $this->_lifecyclers[BeanLifecycle::AfterAssemble] = array();
         
