@@ -67,11 +67,11 @@ class BeanCacheDefinitionDriver implements ILifecycleListener
             return $bean;
         }
         $result = false;
-        $beanDefinition = $this->_cache->fetch($beanName . 'beandef', $result);
+        $beanDef = $this->_cache->fetch($beanName . 'beandef', $result);
         if ($result === false) {
             return $bean;
         }
-        return $beanDefinition;
+       return $beanDef;
     }
 
     /**
@@ -80,9 +80,9 @@ class BeanCacheDefinitionDriver implements ILifecycleListener
      */
     public function beforeAssemble(&$bean, BeanDefinition $beanDefinition)
     {
-        $name = $beanDefinition->getName();
-        if (!$this->_cache->has($name . '.beandef')) {
-            $this->_cache->store($name . 'beandef', $beanDefinition);
+        $beanName = $beanDefinition->getName() . '.beandef';
+        if (!$this->_cache->has($beanName)) {
+            $this->_cache->store($beanName, $beanDefinition);
         }
         return $bean;
     }

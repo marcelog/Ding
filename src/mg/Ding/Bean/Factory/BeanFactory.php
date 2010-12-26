@@ -14,12 +14,14 @@
  */
 namespace Ding\Bean\Factory;
 
+
 use Ding\Cache\CacheLocator;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Container\IContainer;
 
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
+use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
 use Ding\Bean\Factory\Driver\BeanAspectDriver;
 use Ding\Bean\Factory\Filter\PropertyFilter;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
@@ -64,12 +66,6 @@ class BeanFactory
     private static $_instance = false;
     
     /**
-     * Bean definitions already known.
-     * @var BeanDefinition[]
-     */
-    private $_beanDefs;
-
-    /**
      * Beans already instantiated.
      * @var object[]
      */
@@ -92,12 +88,6 @@ class BeanFactory
      * @var array[]
      */
     private $_propertiesNameCache;
-
-    /**
-     * Cache to be used for bean definitions.
-     * @var ICache
-     */
-    private $_beanDefCache;
 
     /**
      * Lifecycle handlers for beans. 
@@ -268,7 +258,17 @@ class BeanFactory
         }
         try
         {
+            foreach ($this->_lifecyclers as $lifecycleListener) {
+                $bean = $lifecycleListener->beforeAssemble(
+                    $bean, $beanDefinition
+                );
+            }
             $this->_assemble($bean, $beanDefinition);
+            foreach ($this->_lifecyclers as $lifecycleListener) {
+                $bean = $lifecycleListener->afterAssemble(
+                    $bean, $beanDefinition
+                );
+            }
             $initMethod = $beanDefinition->getInitMethod();
             if ($initMethod) {
                 $bean->$initMethod();
@@ -320,14 +320,9 @@ class BeanFactory
     public function getBean($beanName)
     {
         $ret = false;
-        $result = false;
-        $beanDefinition = $this->_beanDefCache->fetch($beanName . 'beandef', $result);
-        if (!$result) {
-            $beanDefinition = $this->getBeanDefinition($beanName);
-            if (!$beanDefinition) {
-                throw new BeanFactoryException('Unknown bean: ' . $beanName);
-            }
-            $this->_beanDefCache->store($beanName . 'beandef', $beanDefinition);
+        $beanDefinition = $this->getBeanDefinition($beanName);
+        if (!$beanDefinition) {
+            throw new BeanFactoryException('Unknown bean: ' . $beanName);
         }
         switch ($beanDefinition->getScope())
         {
@@ -400,14 +395,13 @@ class BeanFactory
     protected function __construct()
     {
         $this->_beans = array();
-        $this->_beanDefs = array();
         $this->_filters = array();
-        $this->_beanDefCache = CacheLocator::getDefinitionsCacheInstance();
         $this->_propertiesNameCache = array();
         $this->_filters[] = PropertyFilter::getInstance(
             self::$_options['properties']
         );
         $this->_lifecyclers = array();
+        $this->_lifecyclers[] = BeanCacheDefinitionDriver::getInstance(array());
         if (isset(self::$_options['xml'])) {
             $this->_lifecyclers[]
                 = BeanXmlDriver::getInstance(self::$_options['xml']);
