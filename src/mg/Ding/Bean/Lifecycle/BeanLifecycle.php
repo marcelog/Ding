@@ -41,7 +41,7 @@ abstract class BeanLifecycle
      * @var integer
      */
     const AfterDefinition = 1;
-    const AfterCreation = 2;
+    const BeforeAssemble = 2;
     const AfterAssemble = 3;
     const BeforeDestruction = 4;
     public static function initiate($beanName, BeanFactory $factory, array $lifecyclers)

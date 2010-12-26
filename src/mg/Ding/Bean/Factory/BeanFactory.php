@@ -14,6 +14,7 @@
  */
 namespace Ding\Bean\Factory;
 
+use Ding\Bean\Lifecycle\BeanLifecycle;
 
 use Ding\Cache\CacheLocator;
 use Ding\Reflection\ReflectionFactory;
@@ -258,13 +259,13 @@ class BeanFactory
         }
         try
         {
-            foreach ($this->_lifecyclers as $lifecycleListener) {
+            foreach ($this->_lifecyclers[BeanLifecycle::BeforeAssemble] as $lifecycleListener) {
                 $bean = $lifecycleListener->beforeAssemble(
                     $bean, $beanDefinition
                 );
             }
             $this->_assemble($bean, $beanDefinition);
-            foreach ($this->_lifecyclers as $lifecycleListener) {
+            foreach ($this->_lifecyclers[BeanLifecycle::AfterAssemble] as $lifecycleListener) {
                 $bean = $lifecycleListener->afterAssemble(
                     $bean, $beanDefinition
                 );
@@ -295,7 +296,7 @@ class BeanFactory
     {
         $ret = false;
         $beanDefinition = null;
-        foreach ($this->_lifecyclers as $lifecycleListener) {
+        foreach ($this->_lifecyclers[BeanLifecycle::BeforeDefinition] as $lifecycleListener) {
             $beanDefinition = $lifecycleListener->beforeDefinition(
                 $beanName, $beanDefinition
             );
@@ -303,7 +304,7 @@ class BeanFactory
         if ($beanDefinition === null) {
             throw new BeanFactoryException('Unknown bean: ' . $beanName);
         }
-        foreach ($this->_lifecyclers as $lifecycleListener) {
+        foreach ($this->_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
             $beanDefinition = $lifecycleListener->afterDefinition(
                 $beanName, $beanDefinition
             );
@@ -362,6 +363,11 @@ class BeanFactory
         self::$_options = array_replace_recursive(self::$_options, $options);
     }
 
+    /**
+     * Returns an instance.
+     * 
+	 * @return BeanFactory
+     */
     public static function getInstance()
     {
         if (self::$_instance === false) {
@@ -388,14 +394,25 @@ class BeanFactory
             self::$_options['properties']
         );
         $this->_lifecyclers = array();
-        $this->_lifecyclers[] = BeanCacheDefinitionDriver::getInstance(array());
+        $this->_lifecyclers[BeanLifecycle::BeforeDefinition] = array();
+        $this->_lifecyclers[BeanLifecycle::AfterDefinition] = array();
+        $this->_lifecyclers[BeanLifecycle::BeforeAssemble] = array();
+        $this->_lifecyclers[BeanLifecycle::AfterAssemble] = array();
+        
+        $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
+            = BeanCacheDefinitionDriver::getInstance(array())
+        ;
+        $this->_lifecyclers[BeanLifecycle::BeforeAssemble][]
+            = BeanCacheDefinitionDriver::getInstance(array())
+        ;
+
         if (isset(self::$_options['xml'])) {
-            $this->_lifecyclers[]
+            $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
                 = BeanXmlDriver::getInstance(self::$_options['xml']);
             ;
         }
         if (isset(self::$_options['annotation'])) {
-            $this->_lifecyclers[]
+            $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
                 = BeanAnnotationDriver::getInstance(
                     self::$_options['annotation']
                 );
