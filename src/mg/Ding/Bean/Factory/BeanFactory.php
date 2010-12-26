@@ -14,6 +14,7 @@
  */
 namespace Ding\Bean\Factory;
 
+
 use Ding\Bean\Lifecycle\BeanLifecycle;
 
 use Ding\Cache\CacheLocator;
@@ -24,6 +25,7 @@ use Ding\Bean\Factory\Driver\BeanXmlDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
 use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
 use Ding\Bean\Factory\Driver\BeanAspectDriver;
+use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
 use Ding\Bean\Factory\Filter\PropertyFilter;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 
@@ -412,8 +414,13 @@ class BeanFactory
             ;
         }
         if (isset(self::$_options['annotation'])) {
-            $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
+            $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
                 = BeanAnnotationDriver::getInstance(
+                    self::$_options['annotation']
+                );
+            ;
+            $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
+                = AnnotationAspectDriver::getInstance(
                     self::$_options['annotation']
                 );
             ;

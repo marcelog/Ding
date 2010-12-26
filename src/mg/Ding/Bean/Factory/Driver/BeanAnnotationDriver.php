@@ -47,20 +47,6 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     public function afterDefinition($beanName, BeanDefinition &$bean)
     {
-        $class = $bean->getClass();
-        if (empty($class)) {
-            return $bean;
-        }
-        $rClass = ReflectionFactory::getClass($class);
-        foreach ($this->_getAnnotations($rClass->getDocComment()) as $annotation) {
-            $bean->annotate($annotation);
-        }
-        foreach ($rClass->getMethods() as $method) {
-            $methodName = $method->getName();
-            foreach ($this->_getAnnotations($method->getDocComment()) as $annotation) {
-                $bean->annotate($annotation, $methodName);
-            }
-        } 
         return $bean;
     }
     
@@ -112,6 +98,20 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     public function beforeDefinition($beanName, BeanDefinition &$bean = null)
     {
+        $class = $bean->getClass();
+        if (empty($class)) {
+            return $bean;
+        }
+        $rClass = ReflectionFactory::getClass($class);
+        foreach ($this->_getAnnotations($rClass->getDocComment()) as $annotation) {
+            $bean->annotate($annotation);
+        }
+        foreach ($rClass->getMethods() as $method) {
+            $methodName = $method->getName();
+            foreach ($this->_getAnnotations($method->getDocComment()) as $annotation) {
+                $bean->annotate($annotation, $methodName);
+            }
+        } 
         return $bean;
     }
     
