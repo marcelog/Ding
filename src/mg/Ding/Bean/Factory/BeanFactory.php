@@ -307,9 +307,7 @@ class BeanFactory
             throw new BeanFactoryException('Unknown bean: ' . $beanName);
         }
         foreach ($this->_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
-            $beanDefinition = $lifecycleListener->afterDefinition(
-                $beanName, $beanDefinition
-            );
+            $beanDefinition = $lifecycleListener->afterDefinition($beanDefinition);
         }
         /**
          * @todo shouldn't this be on the container side?

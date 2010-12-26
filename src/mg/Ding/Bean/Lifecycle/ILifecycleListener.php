@@ -31,9 +31,14 @@ use Ding\Bean\BeanDefinition;
 interface ILifecycleListener
 {
     public function beforeDefinition($beanName, BeanDefinition &$bean = null);
-    public function afterDefinition($beanName, BeanDefinition &$bean);
+    public function afterDefinition(BeanDefinition &$bean);
+
+    public function beforeCreate(BeanDefinition $beanDefinition);
+    public function afterCreate(&$bean, BeanDefinition $beanDefinition);
+
     public function beforeAssemble(&$bean, BeanDefinition $beanDefinition);
     public function afterAssemble(&$bean, BeanDefinition $beanDefinition);
+
     public function destruct($bean, BeanDefinition $beanDefinition);
     public static function getInstance(array $options);
 }

@@ -51,7 +51,7 @@ class BeanScopeDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
-    public function afterDefinition($beanName, BeanDefinition &$bean)
+    public function afterDefinition(BeanDefinition &$bean)
     {
         return $bean;
     }
@@ -61,6 +61,24 @@ class BeanScopeDriver implements ILifecycleListener
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
      */
     public function beforeDefinition($beanName, BeanDefinition &$bean = null)
+    {
+        return $bean;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
+     */
+    public function beforeCreate(BeanDefinition $beanDefinition)
+    {
+        return $bean;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
+     */
+    public function afterCreate(&$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }

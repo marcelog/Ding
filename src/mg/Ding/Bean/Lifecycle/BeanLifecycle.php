@@ -41,9 +41,36 @@ abstract class BeanLifecycle
      * @var integer
      */
     const AfterDefinition = 1;
-    const BeforeAssemble = 2;
-    const AfterAssemble = 3;
-    const BeforeDestruction = 4;
+
+    /**
+     * Before calling factory::createBean()
+     * @var integer
+     */
+    const BeforeCreate = 2;
+
+    /**
+     * After calling factory::createBean()
+     * @var integer
+     */
+    const AfterCreate = 3;
+
+    /**
+     * Before calling factory::assemble()
+     * @var integer
+     */
+    const BeforeAssemble = 4;
+
+    /**
+     * After calling factory::assemble()
+     * @var integer
+     */
+    const AfterAssemble = 5;
+
+    /**
+     * When the container is shutting down
+     * @var integer
+     */
+    const BeforeDestruction = 6;
     public static function initiate($beanName, BeanFactory $factory, array $lifecyclers)
     {
     }

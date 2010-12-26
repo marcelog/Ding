@@ -50,7 +50,7 @@ class AnnotationAspectDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
-    public function afterDefinition($beanName, BeanDefinition &$bean)
+    public function afterDefinition(BeanDefinition &$bean)
     {
         $class = $bean->getClass();
         if (empty($class)) {
@@ -65,7 +65,24 @@ class AnnotationAspectDriver implements ILifecycleListener
         }
         return $bean;
     }
-
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
+     */
+    public function beforeCreate(BeanDefinition $beanDefinition)
+    {
+        return $bean;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
+     */
+    public function afterCreate(&$bean, BeanDefinition $beanDefinition)
+    {
+        return $bean;
+    }
+    
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()

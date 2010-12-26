@@ -278,8 +278,26 @@ class BeanXmlDriver
         }
         return $bean;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
+     */
+    public function beforeCreate(BeanDefinition $beanDefinition)
+    {
+        return $bean;
+    }
     
-    public function afterDefinition($beanName, BeanDefinition &$bean)
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
+     */
+    public function afterCreate(&$bean, BeanDefinition $beanDefinition)
+    {
+        return $bean;
+    }
+        
+    public function afterDefinition(BeanDefinition &$bean)
     {
         return $bean;
     }
