@@ -271,9 +271,12 @@ class BeanXmlDriver
 	 * @throws BeanFactoryException
 	 * @return BeanDefinition
      */
-    public function beforeDefinition($beanName, BeanDefinition &$bean)
+    public function beforeDefinition($beanName, BeanDefinition &$bean = null)
     {
-        return $this->_loadBean($beanName);
+        if ($bean === null) {
+            return $this->_loadBean($beanName);
+        }
+        return $bean;
     }
     
     public function afterDefinition($beanName, BeanDefinition &$bean)

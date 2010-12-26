@@ -63,7 +63,7 @@ class BeanCacheDefinitionDriver implements ILifecycleListener
      */
     public function beforeDefinition($beanName, BeanDefinition &$bean = null)
     {
-        if ($bean === null) {
+        if ($bean != null) {
             return $bean;
         }
         $result = false;
@@ -71,7 +71,7 @@ class BeanCacheDefinitionDriver implements ILifecycleListener
         if ($result === false) {
             return $bean;
         }
-       return $beanDef;
+        return $beanDef;
     }
 
     /**

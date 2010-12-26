@@ -30,7 +30,7 @@ use Ding\Bean\BeanDefinition;
  */
 interface ILifecycleListener
 {
-    public function beforeDefinition($beanName, BeanDefinition &$bean);
+    public function beforeDefinition($beanName, BeanDefinition &$bean = null);
     public function afterDefinition($beanName, BeanDefinition &$bean);
     public function beforeAssemble(&$bean, BeanDefinition $beanDefinition);
     public function afterAssemble(&$bean, BeanDefinition $beanDefinition);

@@ -284,32 +284,6 @@ class BeanFactory
     }
     
     /**
-     * Calls all lifecyclers for lifecycle BeforeDefinition and
-     * then AfterDefinition.
-     *
-     * @param string $beanName Bean to get definition for.
-     * 
-     * @return BeanDefinition
-     */
-    public function getBeanDefinition($beanName)
-    {
-        $beanDefinition = new BeanDefinition(
-            '', '', '', '', '', '', '', array(), array(), array()
-        );
-        foreach ($this->_lifecyclers as $lifecycleListener) {
-            $beanDefinition = $lifecycleListener->beforeDefinition(
-                $beanName, $beanDefinition
-            );
-        }
-        foreach ($this->_lifecyclers as $lifecycleListener) {
-            $beanDefinition = $lifecycleListener->afterDefinition(
-                $beanName, $beanDefinition
-            );
-        }
-        return $beanDefinition;
-    }
-
-    /**
      * Returns a bean.
      * 
      * @param string $beanName Bean name.
@@ -320,9 +294,19 @@ class BeanFactory
     public function getBean($beanName)
     {
         $ret = false;
-        $beanDefinition = $this->getBeanDefinition($beanName);
-        if (!$beanDefinition) {
+        $beanDefinition = null;
+        foreach ($this->_lifecyclers as $lifecycleListener) {
+            $beanDefinition = $lifecycleListener->beforeDefinition(
+                $beanName, $beanDefinition
+            );
+        }
+        if ($beanDefinition === null) {
             throw new BeanFactoryException('Unknown bean: ' . $beanName);
+        }
+        foreach ($this->_lifecyclers as $lifecycleListener) {
+            $beanDefinition = $lifecycleListener->afterDefinition(
+                $beanName, $beanDefinition
+            );
         }
         switch ($beanDefinition->getScope())
         {
