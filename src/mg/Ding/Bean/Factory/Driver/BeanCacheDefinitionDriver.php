@@ -88,10 +88,11 @@ class BeanCacheDefinitionDriver implements ILifecycleListener
             return $bean;
         }
         $result = false;
-        $beanDef = $this->_cache->fetch($beanName . 'beandef', $result);
+        $beanDef = $this->_cache->fetch($beanName . '.beandef', $result);
         if ($result === false) {
             return $bean;
         }
+        echo " CACHE HIT \n";
         return $beanDef;
     }
 
