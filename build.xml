@@ -15,6 +15,7 @@
     <exec
       command="${phpdepend.exec} ${phpdepend.args}"
       dir="${project.basedir}"
+      passthru="true"
     />
     <xslt
       file="${phpdepend.output.xml.file}"
@@ -29,6 +30,7 @@
     <exec
       command="${phpcs.exec} ${phpcs.args}"
       dir="${project.basedir}"
+      passthru="true"
     />
     <xslt
       file="${phpcs.output.xml.file}"
@@ -43,6 +45,7 @@
     <exec
       command="${phpunit.exec} ${phpunit.args}"
       dir="${project.basedir}/test"
+      passthru="true"
     />
   </target>
 
@@ -52,6 +55,7 @@
     <exec
       command="${phpmd.exec} ${phpmd.args}"
       dir="${project.basedir}"
+      passthru="true"
     />
     <xslt
       file="${phpmd.output.xml.file}"
@@ -66,6 +70,7 @@
     <exec
       command="${phpcpd.exec} ${phpcpd.args}"
       dir="${project.basedir}"
+      passthru="true"
     />
     <xslt
       file="${phpcpd.output.xml.file}"
@@ -79,6 +84,7 @@
     <exec
       command="${phpdoc.exec} ${phpdoc.args}"
       dir="${project.basedir}/src/mg/Ding"
+      passthru="true"
     />
   </target>
 
@@ -87,6 +93,7 @@
     <exec
       command="${phploc.exec} ${phploc.args} > ${phploc.output.html.file}"
       dir="${project.basedir}"
+      passthru="true"
     />
   </target>
 
