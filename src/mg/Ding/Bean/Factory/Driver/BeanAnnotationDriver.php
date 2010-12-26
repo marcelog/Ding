@@ -19,6 +19,7 @@ use Ding\Bean\Lifecycle\ILifecycleListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Reflection\ReflectionFactory;
+use Ding\Bean\Factory\BeanFactory;
 
 /**
  * This driver will look up all annotations for the class and each method of
@@ -45,7 +46,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
-    public function afterDefinition(BeanDefinition &$bean)
+    public function afterDefinition(BeanFactory $factory, BeanDefinition &$bean)
     {
         return $bean;
     }
@@ -53,7 +54,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
      */
-    public function beforeCreate(BeanDefinition $beanDefinition)
+    public function beforeCreate(BeanFactory $factory, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -62,7 +63,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
      */
-    public function afterCreate(&$bean, BeanDefinition $beanDefinition)
+    public function afterCreate(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -113,7 +114,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * 
      * @return BeanDefinition
      */
-    public function beforeDefinition($beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(BeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
         $class = $bean->getClass();
         if (empty($class)) {
@@ -136,7 +137,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
      */
-    public function beforeAssemble(&$bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -145,7 +146,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
      */
-    public function afterAssemble(&$bean, BeanDefinition $beanDefinition)
+    public function afterAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }

@@ -15,6 +15,7 @@
 namespace Ding\Bean\Lifecycle;
 
 use Ding\Bean\BeanDefinition;
+use Ding\Bean\Factory\BeanFactory;
 
 /**
  * Lifecycle listener interface.
@@ -30,14 +31,14 @@ use Ding\Bean\BeanDefinition;
  */
 interface ILifecycleListener
 {
-    public function beforeDefinition($beanName, BeanDefinition &$bean = null);
-    public function afterDefinition(BeanDefinition &$bean);
+    public function beforeDefinition(BeanFactory $factory, $beanName, BeanDefinition &$bean = null);
+    public function afterDefinition(BeanFactory $factory, BeanDefinition &$bean);
 
-    public function beforeCreate(BeanDefinition $beanDefinition);
-    public function afterCreate(&$bean, BeanDefinition $beanDefinition);
+    public function beforeCreate(BeanFactory $factory, BeanDefinition $beanDefinition);
+    public function afterCreate(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition);
 
-    public function beforeAssemble(&$bean, BeanDefinition $beanDefinition);
-    public function afterAssemble(&$bean, BeanDefinition $beanDefinition);
+    public function beforeAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition);
+    public function afterAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition);
 
     public function destruct($bean, BeanDefinition $beanDefinition);
     public static function getInstance(array $options);

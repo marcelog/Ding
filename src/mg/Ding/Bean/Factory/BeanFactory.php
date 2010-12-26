@@ -203,16 +203,16 @@ class BeanFactory
     private function _createBean(BeanDefinition $beanDefinition)
     {
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeCreate] as $lifecycleListener) {
-            $lifecycleListener->beforeCreate($beanDefinition);
+            $lifecycleListener->beforeCreate($this, $beanDefinition);
         }
         $beanClass = $beanDefinition->getClass();
         $args = array();
         foreach ($beanDefinition->getArguments() as $argument) {
             $args[] = $this->_loadArgument($argument);
         }
+        $dispatcher = new DispatcherImpl();
+        $methods = array();
         if ($beanDefinition->hasAspects()) {
-            $dispatcher = new DispatcherImpl();
-            $methods = array();
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 $method = $aspectDefinition->getPointcut();
@@ -225,6 +225,8 @@ class BeanFactory
                     $dispatcher->addExceptionInterceptor($method, $aspect);
                 }
             }
+        }
+        if (!empty($beanClass)) {
             $beanClass = Proxy::create($beanClass, $methods, $dispatcher);
         }
         /* @todo change this to a clone */
@@ -263,19 +265,19 @@ class BeanFactory
             }
         }
         foreach ($this->_lifecyclers[BeanLifecycle::AfterCreate] as $lifecycleListener) {
-            $bean = $lifecycleListener->beforeCreate($bean, $beanDefinition);
+            $bean = $lifecycleListener->beforeCreate($this, $bean, $beanDefinition);
         }
         try
         {
             foreach ($this->_lifecyclers[BeanLifecycle::BeforeAssemble] as $lifecycleListener) {
                 $bean = $lifecycleListener->beforeAssemble(
-                    $bean, $beanDefinition
+                    $this, $bean, $beanDefinition
                 );
             }
             $this->_assemble($bean, $beanDefinition);
             foreach ($this->_lifecyclers[BeanLifecycle::AfterAssemble] as $lifecycleListener) {
                 $bean = $lifecycleListener->afterAssemble(
-                    $bean, $beanDefinition
+                    $this, $bean, $beanDefinition
                 );
             }
             $initMethod = $beanDefinition->getInitMethod();
@@ -306,14 +308,14 @@ class BeanFactory
         $beanDefinition = null;
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeDefinition] as $lifecycleListener) {
             $beanDefinition = $lifecycleListener->beforeDefinition(
-                $beanName, $beanDefinition
+                $this, $beanName, $beanDefinition
             );
         }
         if ($beanDefinition === null) {
             throw new BeanFactoryException('Unknown bean: ' . $beanName);
         }
         foreach ($this->_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
-            $beanDefinition = $lifecycleListener->afterDefinition($beanDefinition);
+            $beanDefinition = $lifecycleListener->afterDefinition($this, $beanDefinition);
         }
         /**
          * @todo shouldn't this be on the container side?

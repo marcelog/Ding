@@ -271,7 +271,7 @@ class BeanXmlDriver
 	 * @throws BeanFactoryException
 	 * @return BeanDefinition
      */
-    public function beforeDefinition($beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(BeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
         if ($bean === null) {
             return $this->_loadBean($beanName);
@@ -283,7 +283,7 @@ class BeanXmlDriver
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
      */
-    public function beforeCreate(BeanDefinition $beanDefinition)
+    public function beforeCreate(BeanFactory $factory, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -292,17 +292,17 @@ class BeanXmlDriver
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
      */
-    public function afterCreate(&$bean, BeanDefinition $beanDefinition)
+    public function afterCreate(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
         
-    public function afterDefinition(BeanDefinition &$bean)
+    public function afterDefinition(BeanFactory $factory, BeanDefinition &$bean)
     {
         return $bean;
     }
     
-    public function beforeAssemble(&$bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }

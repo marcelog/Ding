@@ -223,6 +223,9 @@ TEXT;
         $cache = CacheLocator::getProxyCacheInstance();
         $subject = ReflectionFactory::getClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
+        if (class_exists($proxyClassName)) {
+            return $proxyClassName;
+        }
         $result = false;
         $src = $cache->fetch($proxyClassName . '.proxy', $result);
         if (!$result) { 

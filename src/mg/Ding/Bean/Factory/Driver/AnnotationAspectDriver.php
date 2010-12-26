@@ -50,7 +50,7 @@ class AnnotationAspectDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
-    public function afterDefinition(BeanDefinition &$bean)
+    public function afterDefinition(BeanFactory $factory, BeanDefinition &$bean)
     {
         $class = $bean->getClass();
         if (empty($class)) {
@@ -69,7 +69,7 @@ class AnnotationAspectDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
      */
-    public function beforeCreate(BeanDefinition $beanDefinition)
+    public function beforeCreate(BeanFactory $factory, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -78,7 +78,7 @@ class AnnotationAspectDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
      */
-    public function afterCreate(&$bean, BeanDefinition $beanDefinition)
+    public function afterCreate(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -87,7 +87,7 @@ class AnnotationAspectDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
      */
-    public function beforeDefinition($beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(BeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
         return $bean;
     }
@@ -96,7 +96,7 @@ class AnnotationAspectDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
      */
-    public function beforeAssemble(&$bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -105,7 +105,7 @@ class AnnotationAspectDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
      */
-    public function afterAssemble(&$bean, BeanDefinition $beanDefinition)
+    public function afterAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
