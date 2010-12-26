@@ -410,7 +410,7 @@ class BeanFactory
         $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
             = BeanCacheDefinitionDriver::getInstance(array())
         ;
-        $this->_lifecyclers[BeanLifecycle::BeforeAssemble][]
+        $this->_lifecyclers[BeanLifecycle::BeforeCreate][]
             = BeanCacheDefinitionDriver::getInstance(array())
         ;
 

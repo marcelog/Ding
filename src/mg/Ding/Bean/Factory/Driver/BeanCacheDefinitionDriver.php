@@ -62,7 +62,11 @@ class BeanCacheDefinitionDriver implements ILifecycleListener
      */
     public function beforeCreate(BeanDefinition $beanDefinition)
     {
-        return $bean;
+        $beanName = $beanDefinition->getName() . '.beandef';
+        if (!$this->_cache->has($beanName)) {
+            $this->_cache->store($beanName, $beanDefinition);
+        }
+        return $beanDefinition;
     }
     
     /**
@@ -97,10 +101,6 @@ class BeanCacheDefinitionDriver implements ILifecycleListener
      */
     public function beforeAssemble(&$bean, BeanDefinition $beanDefinition)
     {
-        $beanName = $beanDefinition->getName() . '.beandef';
-        if (!$this->_cache->has($beanName)) {
-            $this->_cache->store($beanName, $beanDefinition);
-        }
         return $bean;
     }
 
