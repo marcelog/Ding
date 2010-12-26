@@ -92,7 +92,6 @@ class BeanCacheDefinitionDriver implements ILifecycleListener
         if ($result === false) {
             return $bean;
         }
-        echo " CACHE HIT \n";
         return $beanDef;
     }
 
