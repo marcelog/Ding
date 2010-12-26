@@ -90,7 +90,7 @@ try
 
     echo "Retrieved from db:$person\n";
 
-    @unlink($properties['doctrine.db.path']);
+    @unlink($myProperties['doctrine.db.path']);
 } catch(Exception $exception) {
     echo $exception . "\n";
 }
