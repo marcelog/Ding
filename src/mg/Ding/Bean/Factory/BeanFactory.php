@@ -57,8 +57,10 @@ class BeanFactory
      * @var array
      */
     private static $_options = array(
-        'xml' => array('filename' => 'beans.xml'),
-    	'annotation' => array(),
+        'bdef' => array(
+        	'xml' => array('filename' => 'beans.xml'),
+    		/*'annotation' => array()*/
+        ),
         'properties' => array()
     );
     
@@ -225,8 +227,6 @@ class BeanFactory
                     $dispatcher->addExceptionInterceptor($method, $aspect);
                 }
             }
-        }
-        if (!empty($beanClass)) {
             $beanClass = Proxy::create($beanClass, $methods, $dispatcher);
         }
         /* @todo change this to a clone */
@@ -416,20 +416,20 @@ class BeanFactory
             = BeanCacheDefinitionDriver::getInstance(array())
         ;
 
-        if (isset(self::$_options['xml'])) {
+        if (isset(self::$_options['bdef']['xml'])) {
             $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
-                = BeanXmlDriver::getInstance(self::$_options['xml']);
+                = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);
             ;
         }
-        if (isset(self::$_options['annotation'])) {
+        if (isset(self::$_options['bdef']['annotation'])) {
             $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
                 = BeanAnnotationDriver::getInstance(
-                    self::$_options['annotation']
+                    self::$_options['bdef']['annotation']
                 );
             ;
             $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
                 = AnnotationAspectDriver::getInstance(
-                    self::$_options['annotation']
+                    self::$_options['bdef']['annotation']
                 );
             ;
         }
