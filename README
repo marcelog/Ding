@@ -8,7 +8,8 @@ lack of spring-alike frameworks for php.
 Performance *is* a concern, but not now, because the framework is still in
 development. 
 --------------------------------------------------------------------------------
-Please see example.php for a very basic example of use.
+Please see docs/examples/quickstart/example.php for a very basic example of use.
+You can find a doctrine2 example in docs/examples/doctrine/example.php.
 --------------------------------------------------------------------------------
 Notes about the source:
 
@@ -22,8 +23,9 @@ for the class.
 CACHE
 =====
 Ding supports this cache implementations out of the box:
-* APC
-* DUMMY
+* APC (For beans definitions).
+* File (For proxy definitions).
+* DUMMY.
 
 YOU MUST CONFIGURE THIS PROPERTY in the container, i.e:
         'ding' => array(
