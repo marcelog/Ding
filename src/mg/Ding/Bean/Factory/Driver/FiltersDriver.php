@@ -1,6 +1,6 @@
 <?php
 /**
- * This driver will take care of all the depends-on beans. 
+ * This driver will apply all filters to property values. 
  *
  * PHP Version 5
  *
@@ -14,14 +14,17 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Bean\BeanPropertyDefinition;
+
 use Ding\Bean\Lifecycle\ILifecycleListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\BeanFactory;
 use Ding\Reflection\ReflectionFactory;
+use Ding\Bean\Factory\Filter\PropertyFilter;
 
 /**
- * This driver will take care of all the depends-on beans. 
+ * This driver will apply all filters to property values. 
  *
  * PHP Version 5
  *
@@ -32,13 +35,40 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class DependsOnDriver implements ILifecycleListener
+class FiltersDriver implements ILifecycleListener
 {
     /**
      * Holds current instance.
      * @var DependsOnDriver
      */
     private static $_instance = false;
+
+    /**
+     * Registered filters to apply.
+     * @var IFilter[]
+     */
+    private $_filters;
+
+    /**
+     * Recursively, apply filter to property or constructor arguments values.
+     *
+     * @param BeanPropertyDefinition|BeanConstructoruArgumentDefinition $def
+     * 
+     * @return void
+     */
+    private function _applyFilter(&$def)
+    {
+        $value = $def->getValue();
+        if (is_array($value)) {
+            foreach ($value as $otherDef) {
+                $this->_applyFilter($otherDef);
+            }
+        } else {
+            foreach ($this->_filters as $filter) {
+                $def->setValue($filter->apply($value));
+            }
+        }
+    }
     
     /**
      * (non-PHPdoc)
@@ -46,13 +76,11 @@ class DependsOnDriver implements ILifecycleListener
      */
     public function afterDefinition(BeanFactory $factory, BeanDefinition &$bean)
     {
-        /**
-         * @todo This should be done using a reference to the container (or 
-         * may be not, but it seems pretty clear we shouldn't be using the
-         * factory directly from here).
-         */
-        foreach ($bean->getDependsOn() as $depBean) {
-            $factory->getBean($depBean);
+        foreach ($bean->getProperties() as $property) {
+            $this->_applyFilter($property);
+        }
+        foreach ($bean->getArguments() as $argument) {
+            $this->_applyFilter($argument);
         }
         return $bean;
     }
@@ -116,12 +144,12 @@ class DependsOnDriver implements ILifecycleListener
      *
      * @param array $options Optional options.
      * 
-     * @return DependsOnDriver
+     * @return FiltersDriver
      */
     public static function getInstance(array $options)
     {
         if (self::$_instance === false) {
-            $ret = new DependsOnDriver($options);
+            $ret = new FiltersDriver($options);
             self::$_instance = $ret;
         } else {
             $ret = self::$_instance;
@@ -138,5 +166,6 @@ class DependsOnDriver implements ILifecycleListener
      */
     private function __construct(array $options)
     {
+        $this->_filters = array(PropertyFilter::getInstance($options));
     }
 }

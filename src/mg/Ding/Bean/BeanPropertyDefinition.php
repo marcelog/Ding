@@ -110,6 +110,18 @@ class BeanPropertyDefinition
     }
     
     /**
+     * Change the value for this property.
+     *
+     * @param mixed $value
+     * 
+     * @return void
+     */
+    public function setValue($value)
+    {
+        $this->_value = $value;
+    }
+    
+    /**
      * Returns property name
      *
      * @return string

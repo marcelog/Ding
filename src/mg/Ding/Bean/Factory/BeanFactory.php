@@ -26,8 +26,8 @@ use Ding\Bean\Factory\Driver\DependsOnDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
 use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
 use Ding\Bean\Factory\Driver\BeanAspectDriver;
+use Ding\Bean\Factory\Driver\FiltersDriver;
 use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
-use Ding\Bean\Factory\Filter\PropertyFilter;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 use Ding\Bean\BeanConstructorArgumentDefinition;
@@ -78,12 +78,6 @@ class BeanFactory
     private $_beans;
 
     /**
-     * Registered filters to apply.
-     * @var IFilter[]
-     */
-    private $_filters;
-
-    /**
      * Our calling container. 
      * @var IContainer
      */
@@ -121,24 +115,9 @@ class BeanFactory
         } else if ($property->isCode()) {
             $value = eval($property->getValue());
         } else {
-            $value = $this->_applyFilters($property->getValue());
+            $value = $property->getValue();
         }
         return $value;
-    }
-    
-    /**
-     * Applies all registered filters.
-     * 
-     * @param mixed $input Input to filter (typically a final value for a bean).
-     * 
-     * @return mixed
-     */
-    private function _applyFilters($input)
-    {
-        foreach ($this->_filters as $filter) {
-            $input = $filter->apply($input);
-        }
-        return $input;
     }
 
     /**
@@ -191,7 +170,7 @@ class BeanFactory
         } else if ($arg->isCode()) {
             $value = eval($arg->getValue());
         } else {
-            $value = $this->_applyFilters($arg->getValue());
+            $value = $arg->getValue();
         }
         return $value;
     }
@@ -398,11 +377,7 @@ class BeanFactory
     {
         $soullessArray = array();
         $this->_beans = $soullessArray;
-        $this->_filters = $soullessArray;
         $this->_propertiesNameCache = $soullessArray;
-        $this->_filters[] = PropertyFilter::getInstance(
-            self::$_options['properties']
-        );
         $this->_lifecyclers = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::BeforeDefinition] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::AfterDefinition] = $soullessArray;
@@ -416,6 +391,9 @@ class BeanFactory
         ;
         $this->_lifecyclers[BeanLifecycle::BeforeCreate][]
             = BeanCacheDefinitionDriver::getInstance($soullessArray)
+        ;
+        $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
+             = FiltersDriver::getInstance(self::$_options['properties']);
         ;
         $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
              = DependsOnDriver::getInstance($soullessArray);
