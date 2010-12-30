@@ -22,6 +22,7 @@ use Ding\Reflection\ReflectionFactory;
 use Ding\Container\IContainer;
 
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
+use Ding\Bean\Factory\Driver\DependsOnDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
 use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
 use Ding\Bean\Factory\Driver\BeanAspectDriver;
@@ -395,27 +396,31 @@ class BeanFactory
      */
     protected function __construct()
     {
-        $this->_beans = array();
-        $this->_filters = array();
-        $this->_propertiesNameCache = array();
+        $soullessArray = array();
+        $this->_beans = $soullessArray;
+        $this->_filters = $soullessArray;
+        $this->_propertiesNameCache = $soullessArray;
         $this->_filters[] = PropertyFilter::getInstance(
             self::$_options['properties']
         );
-        $this->_lifecyclers = array();
-        $this->_lifecyclers[BeanLifecycle::BeforeDefinition] = array();
-        $this->_lifecyclers[BeanLifecycle::AfterDefinition] = array();
-        $this->_lifecyclers[BeanLifecycle::BeforeCreate] = array();
-        $this->_lifecyclers[BeanLifecycle::AfterCreate] = array();
-        $this->_lifecyclers[BeanLifecycle::BeforeAssemble] = array();
-        $this->_lifecyclers[BeanLifecycle::AfterAssemble] = array();
+        $this->_lifecyclers = $soullessArray;
+        $this->_lifecyclers[BeanLifecycle::BeforeDefinition] = $soullessArray;
+        $this->_lifecyclers[BeanLifecycle::AfterDefinition] = $soullessArray;
+        $this->_lifecyclers[BeanLifecycle::BeforeCreate] = $soullessArray;
+        $this->_lifecyclers[BeanLifecycle::AfterCreate] = $soullessArray;
+        $this->_lifecyclers[BeanLifecycle::BeforeAssemble] = $soullessArray;
+        $this->_lifecyclers[BeanLifecycle::AfterAssemble] = $soullessArray;
         
         $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
-            = BeanCacheDefinitionDriver::getInstance(array())
+            = BeanCacheDefinitionDriver::getInstance($soullessArray)
         ;
         $this->_lifecyclers[BeanLifecycle::BeforeCreate][]
-            = BeanCacheDefinitionDriver::getInstance(array())
+            = BeanCacheDefinitionDriver::getInstance($soullessArray)
         ;
-
+        $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
+             = DependsOnDriver::getInstance($soullessArray);
+        ;
+        
         if (isset(self::$_options['bdef']['xml'])) {
             $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
                 = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);

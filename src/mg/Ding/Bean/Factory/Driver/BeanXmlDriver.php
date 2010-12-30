@@ -199,6 +199,14 @@ class BeanXmlDriver
         $bName = (string)$simpleXmlBean->attributes()->id;
         $bClass = (string)$simpleXmlBean->attributes()->class;
         $bScope = (string)$simpleXmlBean->attributes()->scope;
+        if (isset($simpleXmlBean->attributes()->{'depends-on'})) {
+            $bDependsOn = explode(
+                ',',
+                (string)$simpleXmlBean->attributes()->{'depends-on'}
+            );
+        } else {
+            $bDependsOn = array();
+        }
         if (isset($simpleXmlBean->attributes()->{'factory-method'})) {
             $bFactoryMethod
                 = (string)$simpleXmlBean->attributes()->{'factory-method'};
@@ -242,7 +250,8 @@ class BeanXmlDriver
         }
         return new BeanDefinition(
             $bName, $bClass, $bScope, $bFactoryMethod, $bFactoryBean,
-            $bInitMethod, $bDestroyMethod, $bProps, $bAspects, $constructorArgs
+            $bInitMethod, $bDestroyMethod, $bDependsOn, 
+            $bProps, $bAspects, $constructorArgs
         );
     }
     

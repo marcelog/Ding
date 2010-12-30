@@ -115,6 +115,12 @@ class BeanDefinition
     private $_methodAnnotations;
     
     /**
+     * Dependency beans literally specified in the configuration.
+     * @var string[]
+     */
+    private $_dependsOn;
+
+    /**
      * This will annotated this bean with the given annotation.
      *
      * @param BeanAnnotationDefinition $annotation Annotation.
@@ -417,6 +423,28 @@ class BeanDefinition
     {
         return $this->_destroyMethod;
     }
+
+    /**
+     * Returns all beans marked as dependencies for this bean.
+     *
+     * @return string[]
+     */
+    public function getDependsOn()
+    {
+        return $this->_dependsOn;
+    }
+    
+    /**
+     * Set bean dependencies.
+	 *
+     * @param string[] $dependsOn Dependencies (bean names).
+     * 
+     * @return void
+     */
+    public function setDependsOn(array $dependsOn)
+    {
+        $this->_dependsOn = $dependsOn;
+    }
     
     /**
      * Constructor.
@@ -431,6 +459,7 @@ class BeanDefinition
      * false.
      * @param string                   $initMethod    Init method.
      * @param string                   $destroyMethod Destroy method.
+     * @param string[]                 $dependsOn     Dependency beans.
      * @param BeanPropertyDefinition[] $properties    Bean properties
      * definitions.
      * @param AspectDefinition[]       $aspects       Aspects definitions.
@@ -440,7 +469,8 @@ class BeanDefinition
      */
     public function __construct(
         $name, $class, $scope, $factoryMethod, $factoryBean, $initMethod,
-        $destroyMethod, array $properties, array $aspects, array $arguments
+        $destroyMethod, array $dependsOn,
+        array $properties, array $aspects, array $arguments
     ) {
         $this->_name = $name;
         $this->_class = $class;
@@ -449,6 +479,7 @@ class BeanDefinition
         $this->_factoryBean = $factoryBean;
         $this->_initMethod = $initMethod;
         $this->_destroyMethod = $destroyMethod;
+        $this->_dependsOn = $dependsOn;
         $this->_properties = $properties;
         $this->_aspects = $aspects;
         $this->_constructorArgs = $arguments;
