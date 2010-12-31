@@ -1,0 +1,146 @@
+<?php
+/**
+ * Simple zend cache implementation (/bridge).
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Cache
+ * @subpackage Impl
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @version    SVN: $Id$
+ * @link       http://www.noneyet.ar/
+ */
+namespace Ding\Cache\Impl;
+use Ding\Cache\ICache;
+
+/**
+ * Simple zend cache implementation (/bridge).
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Cache
+ * @subpackage Impl
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @link       http://www.noneyet.ar/
+ */
+class ZendCacheImpl implements ICache
+{
+    /**
+     * Holds current instance.
+     * @var ZendCacheImpl
+     */
+    private static $_instance = false;
+    
+    /**
+     * A Zend_Cache component
+     * @Zend_Cache
+     */
+    private $_zfCache;
+
+    /**
+     * Returns true if this cache has the given key.
+     *
+     * @param string $name Key to check for.
+     * 
+     * @return boolean
+     */
+    public function has($name)
+    {
+        return $this->_zfCache->test($this->_transform($name));
+    }
+
+    private function _transform($name)
+    {
+        return str_replace('.', '_', $name);
+    }
+    
+    /**
+     * Returns a cached value.
+     * 
+     * @param string  $name    Key to look for.
+     * @param boolean &$result True on success, false otherwise.
+     * 
+     * @return mixed
+     */
+    public function fetch($name, &$result)
+    {
+        $result = false;
+        $value = $this->_zfCache->load($this->_transform($name));
+        if ($value != false) {
+            $result = true;
+            return $value;
+        }
+        return $result;
+    }
+
+    /**
+     * Stores a key/value.
+     * 
+     * @param string $name  Key to use.
+     * @param mixed  $value Value.
+     * 
+     * @return boolean
+     */
+    public function store($name, $value)
+    {
+        return $this->_zfCache->save($value, $this->_transform($name));
+    }
+
+    /**
+     * Empties the cache.
+     * 
+	 * @return boolean
+     */
+    public function flush()
+    {
+        return $this->_zfCache->clean();
+    }
+
+    /**
+     * Removes a key from the cache.
+     *
+     * @param string $name Key to remove.
+     * 
+     * @return boolean
+     */
+    public function remove($name)
+    {
+        return $this->_zfCache->remove($this->_transform($name));
+    }
+
+    /**
+     * Returns an instance of a cache.
+     *
+     * @param array $options Options for the cache backend.
+     * 
+     * @return ZendCacheImpl
+     */
+    public static function getInstance($options = array())
+    {
+        if (self::$_instance === false) {
+            $ret = new ZendCacheImpl($options);
+            self::$_instance = $ret;
+        } else {
+            $ret = self::$_instance;
+        }
+        return $ret;
+    }
+
+    /**
+     * Constructor.
+     * 
+	 * @return void
+     */
+    private function __construct(array $options)
+    {
+        $this->_zfCache = \Zend_Cache::factory(
+            $options['frontend'], $options['backend'],
+            $options['frontendoptions'],
+            $options['backendoptions']
+        );
+    }
+}

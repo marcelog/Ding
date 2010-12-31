@@ -25,6 +25,7 @@ CACHE
 Ding supports this cache implementations out of the box:
 * APC (For beans definitions).
 * File (For proxy definitions).
+* Zend Cache.
 * DUMMY.
 
 YOU MUST CONFIGURE THIS PROPERTY in the container, i.e:
