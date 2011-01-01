@@ -13,6 +13,7 @@
  */
 
 // Check for log4php.
+use Ding\Cache\Locator\CacheLocator;
 foreach (explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
     $truePath = implode(
         DIRECTORY_SEPARATOR,
@@ -70,7 +71,14 @@ class Autoloader
             )
         );
         if (!file_exists($file)) {
-            return false;
+            $proxyCache = CacheLocator::getProxyCacheInstance();
+            $result = false;
+            $classDef = $proxyCache->fetch($class . '.proxy', $result);
+            if ($result === false) {
+                return false;
+            }
+            eval($classDef);
+            return true;
         }
         include_once realpath($file);
         return true;

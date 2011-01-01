@@ -396,7 +396,7 @@ class ContainerImpl implements IContainer
         case BeanDefinition::BEAN_SINGLETON:
             if (!isset($this->_beans[$name])) {
                 $result = false;
-                $ret = $this->_beanCache->fetch($name, $result);
+                $ret = $this->_beanCache->fetch($beanName, $result);
                 if ($result === false) {
                     $ret = $this->_createBean($beanDefinition);
                 } else {
