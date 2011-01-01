@@ -130,6 +130,7 @@ class ContainerImpl implements IContainer
             $this->_beanDefs[$name] = $beanDefinition;
             return $beanDefinition;
         }
+        $beanDefinition = null;
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeDefinition] as $lifecycleListener) {
             $beanDefinition = $lifecycleListener->beforeDefinition(
                 $this, $name, $beanDefinition
@@ -141,7 +142,7 @@ class ContainerImpl implements IContainer
         foreach ($this->_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
             $beanDefinition = $lifecycleListener->afterDefinition($this, $beanDefinition);
         }
-        $this->_beanDefCache->store($beanName, $beanDefinition);
+        $this->setBeanDefinition($name, $beanDefinition);
         return $beanDefinition;
     }
 
@@ -170,7 +171,9 @@ class ContainerImpl implements IContainer
      */
     public function setBean($name, $bean)
     {
-        
+        $beanName = $name . '.bean';
+        $this->_beans[$name] = $bean;
+        $this->_beanCache->store($beanName, $bean);
     }
     
     /**
@@ -371,8 +374,12 @@ class ContainerImpl implements IContainer
             break;
         case BeanDefinition::BEAN_SINGLETON:
             if (!isset($this->_beans[$name])) {
-                $ret = $this->_createBean($beanDefinition);
-                $this->_beans[$name] = $ret;
+                $result = false;
+                $ret = $this->_beanCache->fetch($name, $result);
+                if ($result === false) {
+                    $ret = $this->_createBean($beanDefinition);
+                }
+                $this->setBean($name, $ret);
             } else {
                 $ret = $this->_beans[$name];
             }
