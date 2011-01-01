@@ -71,7 +71,4 @@ abstract class BeanLifecycle
      * @var integer
      */
     const BeforeDestruction = 6;
-    public static function initiate($beanName, BeanFactory $factory, array $lifecyclers)
-    {
-    }
 }
