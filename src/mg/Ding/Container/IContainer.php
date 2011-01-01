@@ -13,6 +13,8 @@
  */
 namespace Ding\Container;
 
+use Ding\Bean\Factory\IBeanFactory;
+
 /**
  * Interface for a container.
  *
@@ -24,17 +26,8 @@ namespace Ding\Container;
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
  */
-interface IContainer
+interface IContainer extends IBeanFactory
 {
-    /**
-     * Returns a bean, by name. The bean might be a proxy, if aspected.
-     * 
-     * @param string $bean Bean name.
-     * 
-     * @result object
-     */
-    public function getBean($bean);
-
     /**
      * Register a shutdown (destroy-method) method for a bean.
      * 

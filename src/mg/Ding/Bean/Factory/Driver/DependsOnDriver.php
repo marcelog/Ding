@@ -17,7 +17,7 @@ namespace Ding\Bean\Factory\Driver;
 use Ding\Bean\Lifecycle\ILifecycleListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
-use Ding\Bean\Factory\BeanFactory;
+use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
 
 /**
@@ -44,7 +44,7 @@ class DependsOnDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
-    public function afterDefinition(BeanFactory $factory, BeanDefinition &$bean)
+    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
         /**
          * @todo This should be done using a reference to the container (or 
@@ -61,7 +61,7 @@ class DependsOnDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
      */
-    public function beforeCreate(BeanFactory $factory, BeanDefinition $beanDefinition)
+    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -70,7 +70,7 @@ class DependsOnDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
      */
-    public function afterCreate(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -79,7 +79,7 @@ class DependsOnDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
      */
-    public function beforeDefinition(BeanFactory $factory, $beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
         return $bean;
     }
@@ -88,7 +88,7 @@ class DependsOnDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
      */
-    public function beforeAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -97,7 +97,7 @@ class DependsOnDriver implements ILifecycleListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
      */
-    public function afterAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    public function afterAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }

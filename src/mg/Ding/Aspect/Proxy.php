@@ -14,11 +14,10 @@
  */
 namespace Ding\Aspect;
 
-use Ding\Cache\CacheLocator;
+use Ding\Cache\Locator\CacheLocator;
 
 use Ding\Aspect\Interceptor\IDispatcher;
 use Ding\Reflection\ReflectionFactory;
-use Ding\Cache\CacheLCacheLocator;
 
 /**
  * So... php does not have such a thing.. and here's what it needs to be done

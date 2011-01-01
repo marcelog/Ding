@@ -14,7 +14,7 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
-use Ding\Bean\Factory\BeanFactory;
+use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
@@ -280,7 +280,7 @@ class BeanXmlDriver
 	 * @throws BeanFactoryException
 	 * @return BeanDefinition
      */
-    public function beforeDefinition(BeanFactory $factory, $beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
         if ($bean === null) {
             return $this->_loadBean($beanName);
@@ -292,7 +292,7 @@ class BeanXmlDriver
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
      */
-    public function beforeCreate(BeanFactory $factory, BeanDefinition $beanDefinition)
+    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
@@ -301,17 +301,17 @@ class BeanXmlDriver
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
      */
-    public function afterCreate(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
         
-    public function afterDefinition(BeanFactory $factory, BeanDefinition &$bean)
+    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
         return $bean;
     }
     
-    public function beforeAssemble(BeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
