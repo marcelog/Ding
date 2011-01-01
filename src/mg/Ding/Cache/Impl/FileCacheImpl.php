@@ -34,8 +34,12 @@ class FileCacheImpl implements ICache
      * Holds current instances.
      * @var FileCacheImpl[]
      */
-    private static $_instance = false;
+    private static $_instances = false;
     
+    /**
+     * Current assigned directory.
+     * @var string
+     */
     private $_directory;
     
     /**
@@ -67,6 +71,7 @@ class FileCacheImpl implements ICache
         $result = false;
         $filename = $this->_getFilenameFor($name);
         $data = @file_get_contents($filename);
+        $data = unserialize($data);
         $result = ($data != false);
         return $data;
     }
@@ -97,6 +102,7 @@ class FileCacheImpl implements ICache
     public function store($name, $value)
     {
         $filename = $this->_getFilenameFor($name);
+        $value = serialize($value);
         return @file_put_contents($filename, $value);
     }
 
@@ -133,12 +139,13 @@ class FileCacheImpl implements ICache
      */
     public static function getInstance($options = array())
     {
-        if (self::$_instance === false) {
+        $dir = $options['directory'];
+        if (!isset(self::$_instances[$dir])) {
             $ret = new FileCacheImpl($options);
-            self::$_instance = $ret;
+            self::$_instances[$dir] = $ret;
             $ret->_init();
         } else {
-            $ret = self::$_instance;
+            $ret = self::$_instances[$dir];
         }
         return $ret;
     }
@@ -169,7 +176,7 @@ class FileCacheImpl implements ICache
      * 
 	 * @return void
      */
-    private function __construct(array $options = array())
+    private function __construct(array $options)
     {
         $this->_directory = $options['directory'];
     }

@@ -286,9 +286,10 @@ try
                 )
             ),
     		'cache' => array(
-    			'proxy' => array('directory' => '/tmp/Ding/proxy'),
+    			'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
 //        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
-        		'bdef' => array('impl' => 'apc'),
+//              'bdef' => array('impl' => 'apc'),
+        		'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
                 'beans' => array('impl' => 'dummy')
             )
