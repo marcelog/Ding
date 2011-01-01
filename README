@@ -22,12 +22,15 @@ for the class.
 --------------------------------------------------------------------------------
 CACHE
 =====
-Ding supports this cache implementations out of the box:
-* APC (For beans definitions).
-* File (For proxy definitions).
+Ding supports this cache implementations out of the box.
+* APC.
+* File.
 * Zend Cache.
 * Memcache through memcached php extension (needs libmemcached).
 * DUMMY.
+
+Each one of the implementations can be used for bean caching, beandefinition
+caching, or proxy caching.
 
 YOU MUST CONFIGURE THIS PROPERTY in the container, i.e:
         'ding' => array(
