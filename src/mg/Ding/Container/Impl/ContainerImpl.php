@@ -49,6 +49,8 @@ use Ding\Bean\BeanPropertyDefinition;
  */
 class ContainerImpl implements IContainer
 {
+    private $_logger;
+    
     /**
      * Default options.
      * @var array
@@ -119,18 +121,27 @@ class ContainerImpl implements IContainer
      */
     public function getBeanDefinition($name)
     {
+        $beanName = $name . '.beandef';
         if (isset($this->_beanDefs[$name])) {
+            if ($this->_logger->isDebugEnabled()) {
+                $this->_logger->debug('Serving already known: ' . $beanName);
+            }
             return $this->_beanDefs[$name];
         }
 
-        $beanName = $name . '.beandef';
         $result = false;
         $beanDefinition = $this->_beanDefCache->fetch($beanName, $result); 
         if ($result !== false) {
             $this->_beanDefs[$name] = $beanDefinition;
+            if ($this->_logger->isDebugEnabled()) {
+                $this->_logger->debug('Serving cached: ' . $beanName);
+            }
             return $beanDefinition;
         }
         $beanDefinition = null;
+        if ($this->_logger->isDebugEnabled()) {
+            $this->_logger->debug('Running BeforeDefinition: ' . $beanName);
+        }
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeDefinition] as $lifecycleListener) {
             $beanDefinition = $lifecycleListener->beforeDefinition(
                 $this, $name, $beanDefinition
@@ -138,6 +149,9 @@ class ContainerImpl implements IContainer
         }
         if ($beanDefinition === null) {
             throw new BeanFactoryException('Unknown bean: ' . $beanName);
+        }
+        if ($this->_logger->isDebugEnabled()) {
+            $this->_logger->debug('Running AfterDefinition: ' . $beanName);
         }
         foreach ($this->_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
             $beanDefinition = $lifecycleListener->afterDefinition($this, $beanDefinition);
@@ -159,6 +173,9 @@ class ContainerImpl implements IContainer
         $beanName = $name . '.beandef';
         $this->_beanDefs[$name] = $definition;
         $this->_beanDefCache->store($beanName, $definition);
+        if ($this->_logger->isDebugEnabled()) {
+            $this->_logger->debug('New: ' . $beanName);
+        }
     }
 
     /**
@@ -174,6 +191,9 @@ class ContainerImpl implements IContainer
         $beanName = $name . '.bean';
         $this->_beans[$name] = $bean;
         $this->_beanCache->store($beanName, $bean);
+        if ($this->_logger->isDebugEnabled()) {
+            $this->_logger->debug('New: ' . $beanName);
+        }
     }
     
     /**
@@ -367,6 +387,7 @@ class ContainerImpl implements IContainer
     {
         $ret = false;
         $beanDefinition = $this->getBeanDefinition($name);
+        $beanName = $name . '.bean';
         switch ($beanDefinition->getScope())
         {
         case BeanDefinition::BEAN_PROTOTYPE:
@@ -378,9 +399,16 @@ class ContainerImpl implements IContainer
                 $ret = $this->_beanCache->fetch($name, $result);
                 if ($result === false) {
                     $ret = $this->_createBean($beanDefinition);
+                } else {
+                    if ($this->_logger->isDebugEnabled()) {
+                        $this->_logger->debug('Serving cached: ' . $beanName);
+                    }
                 }
                 $this->setBean($name, $ret);
             } else {
+                if ($this->_logger->isDebugEnabled()) {
+                    $this->_logger->debug('Serving already known: ' . $beanName);
+                }
                 $ret = $this->_beans[$name];
             }
             break;
@@ -403,6 +431,9 @@ class ContainerImpl implements IContainer
             // Init cache subsystems.
             if (isset($properties['ding']['cache'])) {
                 CacheLocator::configure($properties['ding']['cache']);
+            }
+            if (isset($properties['ding']['log4php.properties'])) {
+                \Logger::configure($properties['ding']['log4php.properties']);
             }
             $ret = new ContainerImpl($properties['ding']['factory']);
             self::$_containerInstance = $ret;
@@ -450,6 +481,7 @@ class ContainerImpl implements IContainer
      */
     protected function __construct(array $options)
     {
+        $this->_logger = \Logger::getLogger('Ding.Container');
         $soullessArray = array();
         self::$_options = array_replace_recursive(self::$_options, $options);
 

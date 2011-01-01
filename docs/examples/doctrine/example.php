@@ -64,7 +64,8 @@ try
 	 );
     $dingProperties = array(
         'ding' => array(
-            'factory' => array(
+            'log4php.properties' => './log4php.properties',
+    		'factory' => array(
                 'bdef' => array(
                 	'xml' => array('filename' => __DIR__ . '/beans.xml'),
                 	'annotation' => array()
@@ -72,9 +73,16 @@ try
                 'properties' => $myProperties
             ),
     		  'cache' => array(
-    		    'proxy' => array('directory' => '/tmp/Ding/proxy'),
-          	 'bdef' => array('impl' => 'apc'),
-        	    'beans' => array('impl' => 'dummy')
+    			'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
+//        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
+//              'bdef' => array('impl' => 'apc'),
+        		'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
+        		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
+//        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
+//        		'beans' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
+//              'beans' => array('impl' => 'dummy')
+//              'beans' => array('impl' => 'apc')
+//        		'beans' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
            )
         )
     );

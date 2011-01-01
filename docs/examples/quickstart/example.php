@@ -269,11 +269,12 @@ try
         'frontend' => 'Core',
         'backend' => 'File',
         'backendoptions' => array('cache_dir' => '/tmp/Ding/zend/cache'),
-        'frontendoptions' => array('lifetime' => 1, 'automatic_serialization' => true)
+        'frontendoptions' => array('lifetime' => 10000, 'automatic_serialization' => true)
     );
     $memcachedOptions = array('host' => '127.0.0.1', 'port' => 11211);
     $properties = array(
         'ding' => array(
+            'log4php.properties' => './log4php.properties',
             'factory' => array(
                 'bdef' => array(
                 	'xml' => array('filename' => 'beans.xml'),
@@ -292,8 +293,10 @@ try
         		'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
         		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
-//                'beans' => array('impl' => 'dummy')
-//                'beans' => array('impl' => 'apc')
+//        		'beans' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
+//              'beans' => array('impl' => 'dummy')
+//              'beans' => array('impl' => 'apc')
+//        		'beans' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
             )
         )
     );
