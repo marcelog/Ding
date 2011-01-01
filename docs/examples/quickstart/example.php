@@ -290,7 +290,7 @@ try
 //        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
         		'bdef' => array('impl' => 'apc'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
-            'beans' => array('impl' => 'dummy')
+                'beans' => array('impl' => 'dummy')
             )
         )
     );
