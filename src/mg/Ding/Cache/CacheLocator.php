@@ -18,6 +18,7 @@ use Ding\Cache\Exception\CacheException;
 use Ding\Cache\Impl\APCCacheImpl;
 use Ding\Cache\Impl\ZendCacheImpl;
 use Ding\Cache\Impl\FileCacheImpl;
+use Ding\Cache\Impl\MemcachedCacheImpl;
 use Ding\Cache\Impl\DummyCacheImpl;
 
 /**
@@ -64,6 +65,8 @@ class CacheLocator
             return DummyCacheImpl::getInstance($options);
         case 'zend':
             return ZendCacheImpl::getInstance($options['zend']);
+        case 'memcached':
+            return MemcachedCacheImpl::getInstance($options['memcached']);
         default:
             throw new CacheException('Invalid cache impl requested');
         }

@@ -271,6 +271,7 @@ try
         'backendoptions' => array('cache_dir' => '/tmp/Ding/zend/cache'),
         'frontendoptions' => array('lifetime' => 1, 'automatic_serialization' => true)
     );
+    $memcachedOptions = array('host' => '127.0.0.1', 'port' => 11211);
     $properties = array(
         'ding' => array(
             'factory' => array(
@@ -288,6 +289,7 @@ try
     			'proxy' => array('directory' => '/tmp/Ding/proxy'),
 //        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
         		'bdef' => array('impl' => 'apc'),
+//        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
             'beans' => array('impl' => 'dummy')
             )
         )
