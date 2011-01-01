@@ -158,7 +158,7 @@ class ContainerImpl implements IContainer
     {
         $beanName = $name . '.beandef';
         $this->_beanDefs[$name] = $definition;
-        $this->_beanDefCache->store($beanName, $beanDefinition);
+        $this->_beanDefCache->store($beanName, $definition);
     }
 
     /**
