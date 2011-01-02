@@ -71,14 +71,7 @@ class Autoloader
             )
         );
         if (!file_exists($file)) {
-            $proxyCache = CacheLocator::getProxyCacheInstance();
-            $result = false;
-            $classDef = $proxyCache->fetch($class . '.proxy', $result);
-            if ($result === false) {
-                return false;
-            }
-            eval($classDef);
-            return true;
+            return false;
         }
         include_once realpath($file);
         return true;

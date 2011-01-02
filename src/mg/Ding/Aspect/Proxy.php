@@ -58,6 +58,15 @@ final class NEW_NAME extends CLASS_NAME {
     private static \$_dispatcher = false;
 
     /**
+     * This is not suppose to exist. We need to refactor the proxy so it
+     * can be correctly serialized. This check is used internally by the
+     * container to know that this bean cant be cached (although it can cache
+     * its definition).
+     * @var boolean
+     */
+    public static \$iAmADingProxy = true;
+    
+    /**
      * This is used from the container to set the dispatcher for the aspects.
      *
      * @param IDispatcher \$dispatcher Advice dispatcher.

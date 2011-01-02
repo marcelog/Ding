@@ -35,8 +35,8 @@ use Ding\Aspect\Interceptor\IExceptionInterceptor;
 // Uncomment these two lines if you want to try zend_cache instead of
 // the default available cache backends. Also, modify one of the 'impl' options
 // below to use it (see example below).
-//require_once 'Zend/Loader/Autoloader.php';
-//Zend_Loader_Autoloader::getInstance();
+require_once 'Zend/Loader/Autoloader.php';
+Zend_Loader_Autoloader::getInstance();
 
 ////////////////////////////////////////////////////////////////////////////////
 // Normal operation follows... 
@@ -291,10 +291,10 @@ try
 //        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
 //              'bdef' => array('impl' => 'apc'),
         		'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
-//        		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
+        		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
 //        		'beans' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
-                'beans' => array('impl' => 'dummy')
+//                'beans' => array('impl' => 'dummy')
 //              'beans' => array('impl' => 'apc')
 //        		'beans' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
             )
