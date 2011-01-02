@@ -36,6 +36,12 @@ use Ding\Aspect\AspectDefinition;
 class BeanXmlDriver
 {
     /**
+     * log4php logger or our own. 
+     * @var Logger
+     */
+    private $_logger;
+    
+    /**
      * beans.xml file path.
      * @var string
      */
@@ -77,6 +83,9 @@ class BeanXmlDriver
      */
     private function _loadXml($filename)
     {
+        if ($this->_logger->isDebugEnabled()) {
+            $this->_logger->debug('Loading ' . $filename);
+        }
         $xmls = array();
         libxml_use_internal_errors(true);
         if (!file_exists($filename)) {
@@ -86,11 +95,11 @@ class BeanXmlDriver
         if ($ret === false) {
             return $ret;
         }
-        $xmls[] = $ret;
+        $xmls[$filename] = $ret;
         foreach ($ret->xpath("//import") as $imported) {
             $filename = (string)$imported->attributes()->resource;
-            foreach ($this->_loadXml($filename) as $xml) {
-                $xmls[] = $xml;
+            foreach ($this->_loadXml($filename) as $name => $xml) {
+                $xmls[$name] = $xml;
             }
         }
         return $xmls;
@@ -201,9 +210,10 @@ class BeanXmlDriver
         if (!$this->_simpleXml) {
             $this->_load();
         }
-        foreach ($this->_simpleXml as $xml) {
+        foreach($this->_simpleXml as $name => $xml) {
             $simpleXmlBean = $xml->xpath("//bean[@id='$beanName']");
-            if ($simpleXmlBean != false) {
+            if (!empty($simpleXmlBean)) {
+                $this->_logger->debug('Found ' . $beanName . ' in ' . $name);
                 break;
             }
         }
@@ -367,6 +377,7 @@ class BeanXmlDriver
      */
     protected function __construct($filename)
     {
+        $this->_logger = \Logger::getLogger('Ding.Factory.Driver.BeanXmlDriver');
         $this->_beanDefs = array();
         $this->_filename = $filename;
         $this->_simpleXml = false;

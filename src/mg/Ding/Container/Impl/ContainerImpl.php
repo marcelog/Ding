@@ -49,6 +49,10 @@ use Ding\Bean\BeanPropertyDefinition;
  */
 class ContainerImpl implements IContainer
 {
+    /**
+     * log4php logger or our own. 
+     * @var Logger
+     */
     private $_logger;
     
     /**
