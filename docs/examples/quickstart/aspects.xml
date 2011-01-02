@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<import resource="factories.xml"/>
+	<bean id="AspectA" class="AspectA" scope="singleton"/>
+	<bean id="AspectB" class="AspectB" scope="singleton"/>
+	<bean id="AspectC" class="AspectC" scope="singleton"/>
+	<bean id="AspectD" class="AspectD" scope="singleton">
+		<property name="aComponent">
+			<ref bean="ComponentX"/>
+		</property>
+		<aspect ref="AspectC" type="method">
+			<pointcut expression="setAComponent"/>
+		</aspect>
+	</bean>
+	<bean id="AspectE" class="AspectE" scope="singleton"/>
+</beans>

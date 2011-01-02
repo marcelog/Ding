@@ -62,7 +62,8 @@ YOU MUST CONFIGURE THIS PROPERTY in the container, i.e:
 --------------------------------------------------------------------------------
 DI
 ==
-Features available:
+* Import other beans.xml files anywhere inside your already existant files. This
+let you split your beans among several configuration files.
 * Setter injection (php evaluated code, arrays, values, and/or references to
  other beans).
 * Constructor injection (php evaluated code, arrays, values, and/or references

@@ -43,7 +43,7 @@ class BeanXmlDriver
     
     /**
      * SimpleXML object.
-     * @var SimpleXML
+     * @var SimpleXML[]
      */
     private $_simpleXml;
     
@@ -77,11 +77,23 @@ class BeanXmlDriver
      */
     private function _loadXml($filename)
     {
+        $xmls = array();
         libxml_use_internal_errors(true);
         if (!file_exists($filename)) {
             throw new BeanFactoryException($filename . ' not found.');
         }
-        return simplexml_load_string(file_get_contents($filename));
+        $ret = simplexml_load_string(file_get_contents($filename));
+        if ($ret === false) {
+            return $ret;
+        }
+        $xmls[] = $ret;
+        foreach ($ret->xpath("//import") as $imported) {
+            $filename = (string)$imported->attributes()->resource;
+            foreach ($this->_loadXml($filename) as $xml) {
+                $xmls[] = $xml;
+            }
+        }
+        return $xmls;
     }
     
     /**
@@ -189,7 +201,12 @@ class BeanXmlDriver
         if (!$this->_simpleXml) {
             $this->_load();
         }
-        $simpleXmlBean = $this->_simpleXml->xpath("//bean[@id='$beanName']");
+        foreach ($this->_simpleXml as $xml) {
+            $simpleXmlBean = $xml->xpath("//bean[@id='$beanName']");
+            if ($simpleXmlBean != false) {
+                break;
+            }
+        }
         if (false === $simpleXmlBean) {
             throw new BeanFactoryException('Unknown bean: ' . $beanName);
         }
@@ -264,7 +281,7 @@ class BeanXmlDriver
     private function _load()
     {
         $this->_simpleXml = $this->_loadXml($this->_filename);
-        if (!$this->_simpleXml) {
+        if (empty($this->_simpleXml)) {
             throw new BeanFactoryException(
                 'Could not parse: ' . $this->_filename
                 . ': ' . $this->_getXmlErrors()

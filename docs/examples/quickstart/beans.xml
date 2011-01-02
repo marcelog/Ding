@@ -1,4 +1,5 @@
 <beans>
+	<import resource="aspects.xml"/>
 	<bean id="ComponentB" class="ClassB" scope="singleton" init-method="init" destroy-method="shutdown" depends-on="ComponentZ,ComponentY,ComponentX">
 		<constructor-arg>
 			<value>Some string A, like: ${log.dir}/${log.file} as user ${user.name}</value>
@@ -61,36 +62,4 @@
 			<pointcut expression="targetMethod"/>
 		</aspect>
 	</bean>
-	
-	<bean id="ComponentC" class="ClassC" scope="singleton"/>
-	<bean id="AspectA" class="AspectA" scope="singleton"/>
-	<bean id="AspectB" class="AspectB" scope="singleton"/>
-	<bean id="AspectC" class="AspectC" scope="singleton"/>
-	<bean id="AspectD" class="AspectD" scope="singleton">
-		<property name="aComponent">
-			<ref bean="ComponentX"/>
-		</property>
-		<aspect ref="AspectC" type="method">
-			<pointcut expression="setAComponent"/>
-		</aspect>
-	</bean>
-	<bean id="AspectE" class="AspectE" scope="singleton"/>
-
-	<bean id="ComponentX" class="ClassX" scope="singleton" factory-bean="ComponentZ" factory-method="getInstance">
-		<constructor-arg>
-			<value>"001"</value>
-		</constructor-arg>
-        <constructor-arg>
-            <ref bean="ComponentC"/>
-        </constructor-arg>
-	</bean>
-	<bean id="ComponentY" class="ClassY" scope="singleton" factory-method="getInstance">
-		<constructor-arg>
-			<value>"001"</value>
-		</constructor-arg>
-        <constructor-arg>
-            <ref bean="ComponentC"/>
-        </constructor-arg>
-	</bean>
-	<bean id="ComponentZ" class="ClassZ" scope="singleton"/>
 </beans>

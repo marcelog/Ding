@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="ComponentC" class="ClassC" scope="singleton"/>
+	<bean id="ComponentX" class="ClassX" scope="singleton" factory-bean="ComponentZ" factory-method="getInstance">
+		<constructor-arg>
+			<value>"001"</value>
+		</constructor-arg>
+        <constructor-arg>
+            <ref bean="ComponentC"/>
+        </constructor-arg>
+	</bean>
+	<bean id="ComponentY" class="ClassY" scope="singleton" factory-method="getInstance">
+		<constructor-arg>
+			<value>"001"</value>
+		</constructor-arg>
+        <constructor-arg>
+            <ref bean="ComponentC"/>
+        </constructor-arg>
+	</bean>
+	<bean id="ComponentZ" class="ClassZ" scope="singleton"/>
+</beans>
