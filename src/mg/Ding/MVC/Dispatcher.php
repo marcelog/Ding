@@ -16,27 +16,33 @@ abstract class Dispatcher
      */
     private $_viewResolver;
     
+    /**
+     * @var IMapper
+     */
+    private $_mapper;
+    
     public function getControllers()
     {
         return $this->_controllers;
     }
     
-    protected function findSuitable(IAction $action)
+    public function dispatch(IAction $action)
     {
-        $actionId = $action->getId();
-        foreach ($controllers as $controller) {
-            $mappings = $controller->getMappings();
-            foreach ($mappings as $name => $value) {
-                if ($name === $actionId) {
-                    return array($controller, $value);
-                }
-            }
+        $mapper = $this->_mapper;
+        $viewResolver = $this->_viewResolver;
+        $dispatchInfo = $mapper->map($action);
+        
+        if ($controller === false) {
+            throw new MVCException(
+            	'No suitable controller for: ' . $action->getId()
+            );
         }
-        return false;
+        
+        $controller = $dispatchInfo[0];
+        $actionHandler = $dispatchInfo[1];
+        $controller->$actionHandler($action->getArguments());
     }
     
-    public abstract function dispatch(IAction $action);
-
     public function setControllers($controllers)
     {
         $this->_controllers = $controllers;
@@ -45,6 +51,16 @@ abstract class Dispatcher
     public function setViewResolver(IViewResolver $viewResolver)
     {
         $this->_viewResolver = $viewResolver;
+    }
+
+    public function setMapper(IMapper $mapper)
+    {
+        $this->_mapper = $mapper;
+    }
+    
+    public function getMapper()
+    {
+        return $this->_mapper;
     }
     
     public function getViewResolver()

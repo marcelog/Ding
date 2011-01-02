@@ -19,19 +19,6 @@ class HttpDispatcher extends Dispatcher
         $this->_server = $_SERVER;
         $this->_cookies = $_COOKIE;
     }
-
-    public function dispatch(IAction $action)
-    {
-        $dispatchInfo = $this->_findSuitable($action, $controllers);
-        if ($controller === false) {
-            throw new MVCException(
-            	'No suitable controller for: ' . $action->getId()
-            );
-        }
-        $controller = $dispatchInfo[0];
-        $actionHandler = $dispatchInfo[1];
-        $controller->$actionHandler($action->getArguments());
-    }
     
     public function __construct()
     {
