@@ -23,7 +23,7 @@
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
  */
-class Logger
+final class Logger
 {
     /**
      * Holds our instance.
@@ -38,7 +38,7 @@ class Logger
      * 
      * @return Logger
      */
-    public static function getLogger($options)
+    public final static function getLogger($options)
     {
         if (self::$_instance === false) {
             $ret = new Logger();
@@ -56,7 +56,7 @@ class Logger
      * 
      * @return void
      */
-    public static function configure($options)
+    public final static function configure($options)
     {
     }
     
@@ -65,7 +65,7 @@ class Logger
      *
      * @return false
      */
-    public function isDebugEnabled()
+    public final function isDebugEnabled()
     {
         return false;
     }
@@ -75,7 +75,7 @@ class Logger
      *
      * @return void
      */
-    protected function __construct()
+    protected final function __construct()
     {
         
     }
