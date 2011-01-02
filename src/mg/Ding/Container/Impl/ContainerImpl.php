@@ -506,6 +506,8 @@ class ContainerImpl implements IContainer
         $this->_propertiesNameCache = $soullessArray;
 
         $this->_lifecyclers = $soullessArray;
+        $this->_lifecyclers[BeanLifecycle::BeforeConfig] = $soullessArray;
+        $this->_lifecyclers[BeanLifecycle::AfterConfig] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::BeforeDefinition] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::AfterDefinition] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::BeforeCreate] = $soullessArray;
@@ -536,6 +538,12 @@ class ContainerImpl implements IContainer
                     self::$_options['bdef']['annotation']
                 );
             ;
+        }
+        foreach ($this->_lifecyclers[BeanLifecycle::BeforeConfig] as $lifecycleListener) {
+            $lifecycleListener->beforeConfig($this);
+        }
+        foreach ($this->_lifecyclers[BeanLifecycle::AfterConfig] as $lifecycleListener) {
+            $lifecycleListener->afterConfig($this);
         }
     }
 }

@@ -294,7 +294,7 @@ try
         		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
 //        		'beans' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
-//                'beans' => array('impl' => 'dummy')
+//              'beans' => array('impl' => 'dummy')
 //              'beans' => array('impl' => 'apc')
 //        		'beans' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
             )

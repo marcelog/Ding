@@ -56,6 +56,24 @@ class DependsOnDriver implements ILifecycleListener
         }
         return $bean;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
+     */
+    public function beforeConfig(IBeanFactory $factory)
+    {
+        
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
+     */
+    public function afterConfig(IBeanFactory $factory)
+    {
+        
+    }
     
     /**
      * (non-PHPdoc)

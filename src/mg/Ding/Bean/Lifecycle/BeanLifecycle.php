@@ -28,6 +28,9 @@ namespace Ding\Bean\Lifecycle;
  */
 abstract class BeanLifecycle
 {
+    const BeforeConfig = 7;
+    const AfterConfig = 8;
+
     /**
      * The bean is in the process of being defined. Typically by a final
      * backend, like xml or mysql, etc.

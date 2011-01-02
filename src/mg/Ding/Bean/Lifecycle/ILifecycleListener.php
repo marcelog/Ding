@@ -31,6 +31,9 @@ use Ding\Bean\Factory\IBeanFactory;
  */
 interface ILifecycleListener
 {
+    public function beforeConfig(IBeanFactory $factory);
+    public function afterConfig(IBeanFactory $factory);
+    
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null);
     public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean);
 
