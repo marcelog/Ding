@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	
+	<bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton" init-method="init">
+		<property name="viewResolver"><ref bean="HttpViewResolver"/></property>
+	</bean>
+	
+	<bean id="HttpViewResolver" class="Ding\MVC\Http\HttpViewResolver" scope="singleton">
+		<property name="viewPrefix"><value>${viewPrefix}</value></property>
+		<property name="viewSuffix"><value>${viewSuffix}</value></property>
+		<property name="viewPath"><value>${viewPath}</value></property>
+	</bean>
+</beans>
