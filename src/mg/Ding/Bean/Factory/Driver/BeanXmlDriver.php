@@ -213,7 +213,9 @@ class BeanXmlDriver
         foreach($this->_simpleXml as $name => $xml) {
             $simpleXmlBean = $xml->xpath("//bean[@id='$beanName']");
             if (!empty($simpleXmlBean)) {
-                $this->_logger->debug('Found ' . $beanName . ' in ' . $name);
+                if ($this->_logger->isDebugEnabled()) {
+                    $this->_logger->debug('Found ' . $beanName . ' in ' . $name);
+                }
                 break;
             }
         }
