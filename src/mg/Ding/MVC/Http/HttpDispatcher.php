@@ -19,7 +19,7 @@ class HttpDispatcher extends Dispatcher
         $this->_server = $_SERVER;
         $this->_cookies = $_COOKIE;
     }
-    
+
     public function __construct()
     {
     }

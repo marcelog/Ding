@@ -1,9 +1,9 @@
 <?php
 namespace Ding\MVC\Http;
 
-use Ding\MVC\IAction;
+use Ding\MVC\Action;
 
-class HttpAction implements IAction
+class HttpAction extends Action
 {
     private $_method;
     private $_url;
@@ -18,18 +18,9 @@ class HttpAction implements IAction
         return $this->_method;
     }
     
-    public function setUrl($url)
+    public function __construct($id, array $arguments = array())
     {
-        $this->_url = $url;
-    }
-    
-    public function getUrl()
-    {
-        return $this->_url;
-    }
-
-    public function __construct()
-    {
+        parent::__construct($id, $arguments);
         $this->_method = 'GET';
         $this->_url = '/';
     }

@@ -15,6 +15,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Mandatory stuff to bootstrap ding. (START)
 ////////////////////////////////////////////////////////////////////////////////
+use Ding\MVC\Http\HttpFrontController;
 ini_set(
     'include_path',
     implode(
@@ -27,7 +28,7 @@ ini_set(
 );
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
-use Ding\Container\Impl\ContainerImpl;
+use Ding\MVC\Http\HttpFronHttpFrontController;
 ////////////////////////////////////////////////////////////////////////////////
 // Normal operation follows... 
 ////////////////////////////////////////////////////////////////////////////////
@@ -43,32 +44,27 @@ class MyController
     }
 }
 
-try
-{
-    $properties = array(
-        'ding' => array(
-            'log4php.properties' => './log4php.properties',
-            'factory' => array(
-                'bdef' => array(
-                	'xml' => array('filename' => 'beans.xml'),
-                	'annotation' => array()
-                ),
-                'properties' => array(
-                    'viewPath' => './',
-                    'viewSuffix' => '.html',
-                    'viewPrefix' => 'view.',
-                )
+$properties = array(
+    'ding' => array(
+    	'log4php.properties' => realpath('./log4php.properties'),
+        'factory' => array(
+        	'bdef' => array(
+             	'xml' => array('filename' => realpath('./beans.xml')),
             ),
-    		'cache' => array(
-    			'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
-        		'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
-        		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
+        	'properties' => array(
+    	    	'viewPath' => './',
+    			'viewSuffix' => '.html',
+    			'viewPrefix' => 'view.'
             )
+        ),
+        'cache' => array(
+            'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
+            'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
+            'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
         )
-    );
-    $a = ContainerImpl::getInstance($properties);
-    $bean = $a->getBean('HttpDispatcher');
-} catch(Exception $exception) {
-    echo $exception . "\n";
-}
+    )
+);
+HttpFrontController::configure($properties);
+$frontController = new HttpFrontController();
+$frontController->handle();
 ////////////////////////////////////////////////////////////////////////////////
