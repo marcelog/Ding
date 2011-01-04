@@ -43,7 +43,12 @@ abstract class Dispatcher
         if (!method_exists($controller, $actionHandler)) {
             throw new MVCException('No valid action handler found');
         }
-        $controller->$actionHandler($action->getArguments());
+        $modelAndView = $controller->$actionHandler($action->getArguments());
+        if (!($modelAndView instanceof ModelAndView)) {
+            $modelAndView = new ModelAndView('Main');
+        }
+        $view = $viewResolver->resolve($modelAndView);
+        $view->render(); 
     }
     
     public function setControllers($controllers)

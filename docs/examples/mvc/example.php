@@ -42,7 +42,6 @@ class MyController
     {
         $modelAndView = new ModelAndView('some');
         $modelAndView->add(array('somestring' => 'Hello World'));
-        var_dump($modelAndView);
         return $modelAndView;
     }
 }

@@ -1,22 +1,22 @@
 <?php
 namespace Ding\MVC\Http;
 
-use Ding\MVC\IView;
+use Ding\MVC\View;
 use Ding\MVC\ModelAndView;
 
-class HttpView implements IView
+class HttpView extends View
 {
     private $_path;
     
-    public function render(ModelAndView $modelAndView)
+    public function render()
     {
         readfile($this->_path);
         return true;
     }
     
-    public function __construct($name, $path)
+    public function __construct(ModelAndView $modelAndView, $path)
     {
-        parent::__construct($name);
+        parent::__construct($modelAndView);
         $this->_path = $path;
     }
 }

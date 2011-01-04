@@ -94,6 +94,8 @@ The mvc is work in progress, but you can sneak peek it in docs/examples/mvc.
 You will need a rewrite rule, like: 
 
 url.rewrite-once = ( "^/(.*)" => "/example.php" ) // for lighttpd
+
+The example is mapped to /Some/Mapped/Path/MyController/some
 --------------------------------------------------------------------------------
 Integration with other frameworks
 =================================

@@ -19,12 +19,12 @@ class HttpViewResolver implements IViewResolver
             DIRECTORY_SEPARATOR .
             $this->_prefix . $name . $this->_suffix
         ;
-        return new HttpView($name, $path);
+        return new HttpView($modelAndView, $path);
     }
 
     public function setViewPath($path)
     {
-        return $this->_path;
+        $this->_path = $path;
     }
     
     public function setViewPrefix($prefix)

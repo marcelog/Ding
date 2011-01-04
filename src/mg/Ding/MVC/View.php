@@ -28,38 +28,36 @@ abstract class View
 {
     /**
      * View name.
-     * @var string
+     * @var ModelAndView
      */
-    private $_name;
+    private $_modelAndView;
 
     /**
      * Implement this one to render your view.
      *
-     * @param ModelAndView $modelAndView What to render.
-     * 
      * @return void
      */
-    public abstract function render(ModelAndView $modelAndView);
+    public abstract function render();
 
     /**
      * Returns this view name.
      *
      * @return string
      */
-    public function getName()
+    public function getModelAndView()
     {
-        return $this->_name;
+        return $this->_modelAndView;
     }
 
     /**
      * Constructor.
      *
-     * @param string $name View name.
+     * @param ModelAndView $modelAndView Model to render.
      * 
      * @return void
      */
-    protected function __construct($name)
+    protected function __construct(ModelAndView $modelAndView)
     {
-        $this->_name = $name;
+        $this->_modelAndView = $modelAndView;
     }
 }

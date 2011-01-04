@@ -30,10 +30,7 @@ class HttpFrontController
             }
             $action = new HttpAction($url, $arguments);
             $action->setMethod($method);
-            $modelAndView = $dispatcher->dispatch($action);
-            if (!($modelAndView instanceof ModelAndView)) {
-                $modelAndView = new ModelAndView('Main');
-            }
+            $dispatcher->dispatch($action);
         } catch(Exception $exception) {
             header('HTTP/1.1 500 Not Found');
         }
