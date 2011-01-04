@@ -54,7 +54,7 @@ class ContainerImpl implements IContainer
      * @var Logger
      */
     private $_logger;
-    
+
     /**
      * Default options.
      * @var array
