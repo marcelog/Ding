@@ -10,7 +10,9 @@ class HttpView extends View
     
     public function render()
     {
-        readfile($this->_path);
+        global $modelAndView;
+        $modelAndView = $this->getModelAndView();
+        include_once $this->_path;
         return true;
     }
     
