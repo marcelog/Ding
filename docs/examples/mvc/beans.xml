@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-	<bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton" init-method="init">
+	<bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton">
 		<property name="viewResolver"><ref bean="HttpViewResolver"/></property>
 		<property name="mapper"><ref bean="HttpUrlMapper"/></property>
 	</bean>
 	
 	<bean id="HttpUrlMapper" class="Ding\MVC\Http\HttpUrlMapper" scope="singleton">
-		<property name="baseUrl"><value>/</value></property>
+		<property name="baseUrl"><value>${baseUrl}</value></property>
 		<property name="map">
         	<array>
-        		<entry key="0"><ref bean="MyAction"/></entry>
+        		<entry key="0"><value>/MyController</value></entry>
         		<entry key="1"><ref bean="MyController"/></entry>
         	</array>
 		</property>
@@ -20,5 +20,6 @@
 		<property name="viewSuffix"><value>${viewSuffix}</value></property>
 		<property name="viewPath"><value>${viewPath}</value></property>
 	</bean>
+
 	<import resource="controllers.xml"/>
 </beans>

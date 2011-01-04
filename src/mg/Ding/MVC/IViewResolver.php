@@ -34,7 +34,7 @@ interface IViewResolver
      * @param ModelAndView $modelAndView
      * 
      * @throws MVCException
-     * @return IView
+     * @return View
      */
     public function resolve(ModelAndView $modelAndView);
 }

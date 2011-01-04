@@ -26,13 +26,13 @@ abstract class Dispatcher
         return $this->_controllers;
     }
     
-    public function dispatch(IAction $action)
+    public function dispatch(Action $action)
     {
         $mapper = $this->_mapper;
         $viewResolver = $this->_viewResolver;
         $dispatchInfo = $mapper->map($action);
         
-        if ($controller === false) {
+        if ($dispatchInfo === false) {
             throw new MVCException(
             	'No suitable controller for: ' . $action->getId()
             );
@@ -40,6 +40,9 @@ abstract class Dispatcher
         
         $controller = $dispatchInfo[0];
         $actionHandler = $dispatchInfo[1];
+        if (!method_exists($controller, $actionHandler)) {
+            throw new MVCException('No valid action handler found');
+        }
         $controller->$actionHandler($action->getArguments());
     }
     

@@ -15,7 +15,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Mandatory stuff to bootstrap ding. (START)
 ////////////////////////////////////////////////////////////////////////////////
-use Ding\MVC\Http\HttpFrontController;
 ini_set(
     'include_path',
     implode(
@@ -28,7 +27,8 @@ ini_set(
 );
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
-use Ding\MVC\Http\HttpFronHttpFrontController;
+use Ding\MVC\ModelAndView;
+use Ding\MVC\Http\HttpFrontController;
 ////////////////////////////////////////////////////////////////////////////////
 // Normal operation follows... 
 ////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +40,10 @@ class MyController
 {
     public function someAction(array $arguments)
     {
-        
+        $modelAndView = new ModelAndView('some');
+        $modelAndView->add(array('somestring' => 'Hello World'));
+        var_dump($modelAndView);
+        return $modelAndView;
     }
 }
 
@@ -52,15 +55,16 @@ $properties = array(
              	'xml' => array('filename' => realpath('./beans.xml')),
             ),
         	'properties' => array(
+                'baseUrl' => '/Some/Mapped/Path',
     	    	'viewPath' => './',
     			'viewSuffix' => '.html',
     			'viewPrefix' => 'view.'
             )
         ),
         'cache' => array(
-            'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
-            'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
-            'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
+            'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
+            'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
+            'beans' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans'),
         )
     )
 );
