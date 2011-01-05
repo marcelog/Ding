@@ -7,7 +7,9 @@
 <body>
 Something bad happened :(
 <?php
-var_dump($modelAndView);
+$exception = $modelAndView->getModel();
+$exception = $exception['exception'];
+var_dump($exception);
 ?>
 </body>
 </html>
