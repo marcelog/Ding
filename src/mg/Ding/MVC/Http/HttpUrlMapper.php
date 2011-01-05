@@ -63,7 +63,7 @@ class HttpUrlMapper implements IMapper
      */
     public function setMap(array $map)
     {
-        $this->_map[] = $map;
+        $this->_map = $map;
     }
 
     /**
