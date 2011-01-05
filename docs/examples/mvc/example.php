@@ -69,8 +69,8 @@ $properties = array(
             )
         ),
         'cache' => array(
-            'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
-            'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
+            'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
+            'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
             'beans' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans'),
         )
     )

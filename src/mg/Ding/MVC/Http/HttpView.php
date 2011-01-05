@@ -46,6 +46,9 @@ class HttpView extends View
      */
     public function render()
     {
+        /**
+         * @todo is there a better way to do this?
+         */
         global $modelAndView;
         $modelAndView = $this->getModelAndView();
         /**
