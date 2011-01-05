@@ -14,8 +14,9 @@
  */
 namespace Ding\MVC\Http;
 
+use Ding\MVC\IMapper;
 use Ding\MVC\Dispatcher;
-use Ding\MVC\IAction;
+use Ding\MVC\Action;
 
 /**
  * Http dispatcher. Nothing special.

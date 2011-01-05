@@ -36,9 +36,21 @@ date_default_timezone_set('UTC');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ////////////////////////////////////////////////////////////////////////////////
+class AnException extends \Exception
+{
+}
+
 class MyController
 {
-    public function someAction(array $arguments)
+
+    public function ExceptionException(array $arguments = array())
+    {
+        $modelAndView = new ModelAndView('exception');
+        $modelAndView->add(array('exception' => $arguments['exception']));
+        return $modelAndView;
+    }
+
+    public function someAction(array $arguments = array())
     {
         $modelAndView = new ModelAndView('some');
         $modelAndView->add(array('somestring' => 'Hello World'));
@@ -51,6 +63,11 @@ class MyController
             )
         );
         return $modelAndView;
+    }
+
+    public function someExceptionAction(array $arguments = array())
+    {
+        throw new AnException('pepe');
     }
 }
 
@@ -69,8 +86,8 @@ $properties = array(
             )
         ),
         'cache' => array(
-            'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
-            'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
+            'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
+            'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
             'beans' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans'),
         )
     )

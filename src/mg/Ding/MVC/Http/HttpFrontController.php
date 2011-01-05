@@ -48,10 +48,12 @@ class HttpFrontController
     public function handle()
     {
         ob_start();
+        $exceptionMapper = false;
         try
         {
             $container = ContainerImpl::getInstance(self::$_properties);
             $dispatcher = $container->getBean('HttpDispatcher');
+            $exceptionMapper = $container->getBean('HttpExceptionMapper');
             $method = strtolower($_SERVER['REQUEST_METHOD']);
             $url = $_SERVER['REQUEST_URI'];
             $arguments = array();
@@ -68,10 +70,17 @@ class HttpFrontController
             $action = new HttpAction($url, $arguments);
             $action->setMethod($method);
             $dispatcher->dispatch($action);
-        } catch(Exception $exception) {
+        } catch(\Exception $exception) {
             ob_end_clean();
             ob_start();
-            header('HTTP/1.1 500 Error.');
+            if ($exceptionMapper === false) {
+                header('HTTP/1.1 500 Error.');
+            } else {
+                $action = new HttpAction(
+                    get_class($exception), array('exception' => $exception)
+                );
+                $dispatcher->dispatch($action, $exceptionMapper);
+            }
         }
         ob_end_flush();
     }

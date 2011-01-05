@@ -21,5 +21,13 @@
 		<property name="viewPath"><value>${viewPath}</value></property>
 	</bean>
 
+	<bean id="HttpExceptionMapper" class="Ding\MVC\Http\HttpExceptionMapper" scope="singleton">
+		<property name="map">
+        	<array>
+        		<entry key="0"><value>Exception</value></entry>
+        		<entry key="1"><ref bean="MyController"/></entry>
+        	</array>
+		</property>
+	</bean>
 	<import resource="controllers.xml"/>
 </beans>

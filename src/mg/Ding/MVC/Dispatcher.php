@@ -52,6 +52,11 @@ abstract class Dispatcher
     private $_mapper;
 
     /**
+     * @var IMapper
+     */
+    private $_exceptionMapper;
+
+    /**
      * Sets controller.
      *
      * @param Controller[] $controllers Controllers.
@@ -78,14 +83,17 @@ abstract class Dispatcher
      * handle the given Action, and then the viewresolver to get a View that
      * can render the returned ModelAndView from the controller.
      *
-     * @param Action $action Action to dispatch.
+     * @param Action  $action Action to dispatch.
+     * @param IMapper $mapper Optional mapper. Uses default if none specified.
      *
      * @throws MVCException
      * @return void
      */
-    public function dispatch(Action $action)
+    public function dispatch(Action $action, $mapper = false)
     {
-        $mapper = $this->_mapper;
+        if ($mapper === false) {
+            $mapper = $this->_mapper;
+        }
         $viewResolver = $this->_viewResolver;
         $dispatchInfo = $mapper->map($action);
         if ($dispatchInfo === false) {
@@ -105,7 +113,7 @@ abstract class Dispatcher
             );
         }
         if (!method_exists($controller, $actionHandler)) {
-            throw new MVCException('No valid action handler found');
+            throw new MVCException('No valid action handler found: ' . $actionHandler);
         }
         $modelAndView = $controller->$actionHandler($action->getArguments());
         if (!($modelAndView instanceof ModelAndView)) {
