@@ -1,13 +1,49 @@
 <?php
+/**
+ * An http view.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Mvc
+ * @subpackage Http
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @version    SVN: $Id$
+ * @link       http://www.noneyet.ar/
+ */
 namespace Ding\MVC\Http;
 
 use Ding\MVC\View;
 use Ding\MVC\ModelAndView;
 
+/**
+ * An http view.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Mvc
+ * @subpackage Http
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @link       http://www.noneyet.ar/
+ */
 class HttpView extends View
 {
+    /**
+     * Full absolute path for this view.
+     * @var string
+     */
     private $_path;
-    
+
+    /**
+     * Renders this view.
+     *
+     * @see Ding\MVC.View::render()
+     *
+     * @return void
+     */
     public function render()
     {
         global $modelAndView;
@@ -15,7 +51,15 @@ class HttpView extends View
         include_once $this->_path;
         return true;
     }
-    
+
+    /**
+     * Constructor.
+     *
+     * @param ModelAndView $modelAndView Use this model representation for this view.
+     * @param string       $path         Full absolute path to the file containing this view.
+     *
+     *  @return void
+     */
     public function __construct(ModelAndView $modelAndView, $path)
     {
         parent::__construct($modelAndView);
