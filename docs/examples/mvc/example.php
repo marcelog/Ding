@@ -1,7 +1,7 @@
 <?php
 /**
  * Example using ding mvc.
- * 
+ *
  * PHP Version 5
  *
  * @category Ding
@@ -30,7 +30,7 @@ Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\MVC\ModelAndView;
 use Ding\MVC\Http\HttpFrontController;
 ////////////////////////////////////////////////////////////////////////////////
-// Normal operation follows... 
+// Normal operation follows...
 ////////////////////////////////////////////////////////////////////////////////
 date_default_timezone_set('UTC');
 error_reporting(E_ALL);
@@ -42,6 +42,14 @@ class MyController
     {
         $modelAndView = new ModelAndView('some');
         $modelAndView->add(array('somestring' => 'Hello World'));
+        $modelAndView->add(
+            array(
+            	'headers' => array(
+            		'Cache-Control: no-cache',
+                    'Pragma: no-cache'
+                )
+            )
+        );
         return $modelAndView;
     }
 }

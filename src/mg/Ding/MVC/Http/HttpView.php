@@ -48,8 +48,17 @@ class HttpView extends View
     {
         global $modelAndView;
         $modelAndView = $this->getModelAndView();
+        /**
+         * @todo render headers: does this belong here?
+         */
+        $objects = $modelAndView->getModel();
+        if (isset($objects['headers'])) {
+            foreach ($objects['headers'] as $header) {
+                header($header);
+            }
+        }
+        // Now render everything else.
         include_once $this->_path;
-        return true;
     }
 
     /**

@@ -47,6 +47,7 @@ class HttpFrontController
      */
     public function handle()
     {
+        ob_start();
         try
         {
             $container = ContainerImpl::getInstance(self::$_properties);
@@ -68,8 +69,11 @@ class HttpFrontController
             $action->setMethod($method);
             $dispatcher->dispatch($action);
         } catch(Exception $exception) {
-            header('HTTP/1.1 500 Not Found');
+            ob_end_clean();
+            ob_start();
+            header('HTTP/1.1 500 Error.');
         }
+        ob_end_flush();
     }
 
     /**
