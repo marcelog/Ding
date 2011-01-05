@@ -56,18 +56,19 @@ class HttpFrontController
             $exceptionMapper = $container->getBean('HttpExceptionMapper');
             $method = strtolower($_SERVER['REQUEST_METHOD']);
             $url = $_SERVER['REQUEST_URI'];
-            $arguments = array();
-            $arguments[$method] = $arguments; // just reusing an empty array
-            $vars = $arguments; // idem
-            if ($method === 'GET') {
-                $vars = $_GET;
-            } else if ($method === 'POST') {
-                $vars = $_POST;
+            $argsStart = strpos($url, '?');
+            if ($argsStart != false) {
+                $urlArgs = substr($url, $argsStart + 1);
+                $arguments = explode('&', $urlArgs);
+                $variables = array();
+                foreach ($arguments as $argument) {
+                    $data = explode('=', $argument);
+                    $variables[$data[0]] = isset($data[1]) ? $data[1] : '';
+                }
+            } else {
+                $variables = array();
             }
-            foreach ($_GET as $k => $v) {
-                $arguments[$method][$k] = $v;
-            }
-            $action = new HttpAction($url, $arguments);
+            $action = new HttpAction($url, $variables);
             $action->setMethod($method);
             $dispatcher->dispatch($action);
         } catch(\Exception $exception) {

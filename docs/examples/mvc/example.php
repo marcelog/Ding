@@ -53,7 +53,10 @@ class MyController
     public function someAction(array $arguments = array())
     {
         $modelAndView = new ModelAndView('some');
-        $modelAndView->add(array('somestring' => 'Hello World'));
+        $modelAndView->add(array(
+        	'somestring' => 'Hello World',
+            'arguments' => $arguments
+        ));
         $modelAndView->add(
             array(
             	'headers' => array(
