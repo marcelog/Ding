@@ -88,7 +88,6 @@ abstract class Dispatcher
         $mapper = $this->_mapper;
         $viewResolver = $this->_viewResolver;
         $dispatchInfo = $mapper->map($action);
-
         if ($dispatchInfo === false) {
             throw new MVCException(
             	'No suitable controller for: ' . $action->getId()

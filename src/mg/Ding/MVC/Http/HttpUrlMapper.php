@@ -34,6 +34,12 @@ use Ding\MVC\Action;
 class HttpUrlMapper implements IMapper
 {
     /**
+     * log4php logger or our own.
+     * @var Logger
+     */
+    private $_logger;
+
+    /**
      * @var Controller[]
      */
     private $_map;
@@ -96,6 +102,9 @@ class HttpUrlMapper implements IMapper
     {
         $url = $action->getId();
         $urlStart = strpos($url, $this->_baseUrl);
+        if ($this->_logger->isDebugEnabled()) {
+            $this->_logger->debug('Trying to match: ' . $url);
+        }
         if ($urlStart === false || $urlStart > 0) {
             throw new MVCException('Not a base url.');
         }
@@ -114,6 +123,9 @@ class HttpUrlMapper implements IMapper
             $url .= '/';
         }
 
+        if ($this->_logger->isDebugEnabled()) {
+            $this->_logger->debug('Trying to match: ' . $url);
+        }
         // Lookup a controller that can handle this url.
         foreach ($this->_map as $map) {
             $controllerUrl = $map[0];
@@ -148,6 +160,7 @@ class HttpUrlMapper implements IMapper
      */
     public function __construct()
     {
+        $this->_logger = \Logger::getLogger('Ding.MVC');
         $this->_map = array();
         $this->_baseUrl = '/';
     }
