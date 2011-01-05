@@ -67,7 +67,7 @@ class MyController
 
     public function someExceptionAction(array $arguments = array())
     {
-        throw new AnException('pepe');
+        throw new AnException('Woooooow!');
     }
 }
 

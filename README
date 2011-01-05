@@ -95,7 +95,9 @@ You will need a rewrite rule, like:
 
 url.rewrite-once = ( "^/(.*)" => "/example.php" ) // for lighttpd
 
-The example is mapped to /Some/Mapped/Path/MyController/some
+The example is mapped to /Some/Mapped/Path/MyController/some. Also, if you want
+to trigger an exception to see the exception handler in action, point your
+browser to: /Some/Mapped/Path/MyController/someException
 --------------------------------------------------------------------------------
 Integration with other frameworks
 =================================
