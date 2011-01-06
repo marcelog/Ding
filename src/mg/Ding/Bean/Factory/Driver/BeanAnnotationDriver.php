@@ -57,7 +57,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     public function beforeConfig(IBeanFactory $factory)
     {
-        
+
     }
 
     /**
@@ -66,7 +66,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     public function afterConfig(IBeanFactory $factory)
     {
-        
+
     }
     /**
      * (non-PHPdoc)
@@ -76,7 +76,7 @@ class BeanAnnotationDriver implements ILifecycleListener
     {
         return $bean;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
@@ -85,12 +85,12 @@ class BeanAnnotationDriver implements ILifecycleListener
     {
         return $bean;
     }
-    
+
     /**
      * Parses all annotations in the given text.
      *
      * @param string $text
-     * 
+     *
      * @return BeanAnnotationDefinition[]
      */
     private function _getAnnotations($text)
@@ -106,7 +106,7 @@ class BeanAnnotationDriver implements ILifecycleListener
                     // http://stackoverflow.com/questions/168171/regular-expression-for-parsing-name-value-pairs
                     $argsN = preg_match_all(
                     	'/([^=,]*)=("[^"]*"|[^,"]*)/', $args, $matches
-                    ); 
+                    );
                     if ($argsN > 0)
                     {
                         for ($i = 0; $i < $argsN; $i++) {
@@ -127,13 +127,16 @@ class BeanAnnotationDriver implements ILifecycleListener
     /**
      * Annotates the given bean with the annotations found in the class and
      * every method.
-     * 
+     *
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
-     * 
+     *
      * @return BeanDefinition
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
+        if ($bean === null) {
+            return $bean;
+        }
         $class = $bean->getClass();
         if (empty($class)) {
             return $bean;
@@ -147,10 +150,10 @@ class BeanAnnotationDriver implements ILifecycleListener
             foreach ($this->_getAnnotations($method->getDocComment()) as $annotation) {
                 $bean->annotate($annotation, $methodName);
             }
-        } 
+        }
         return $bean;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
@@ -168,7 +171,7 @@ class BeanAnnotationDriver implements ILifecycleListener
     {
         return $bean;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::destruct()
@@ -182,7 +185,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      * Returns an instance.
      *
      * @param array $options Optional options.
-     * 
+     *
      * @return BeanAnnotationDriver
      */
     public static function getInstance(array $options)
@@ -195,16 +198,16 @@ class BeanAnnotationDriver implements ILifecycleListener
         }
         return $ret;
     }
-    
+
     /**
      * Constructor.
      *
      * @param array $options Optional options.
-     * 
+     *
      * @return void
      */
     private function __construct(array $options)
     {
-        
+
     }
 }

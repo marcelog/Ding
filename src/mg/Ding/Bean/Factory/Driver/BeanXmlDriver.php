@@ -36,32 +36,32 @@ use Ding\Aspect\AspectDefinition;
 class BeanXmlDriver
 {
     /**
-     * log4php logger or our own. 
+     * log4php logger or our own.
      * @var Logger
      */
     private $_logger;
-    
+
     /**
      * beans.xml file path.
      * @var string
      */
     private $_filename;
-    
+
     /**
      * SimpleXML object.
      * @var SimpleXML[]
      */
     private $_simpleXml;
-    
+
     /**
      * Current instance.
      * @var BeanFactoryXmlImpl
      */
     private static $_instance = false;
-    
+
     /**
      * Gets xml errors.
-     * 
+     *
      * @return string
      */
     private function _getXmlErrors()
@@ -75,9 +75,9 @@ class BeanXmlDriver
 
     /**
      * Initializes SimpleXML Object
-     * 
+     *
      * @param string $filename
-     * 
+     *
      * @throws BeanFactoryException
      * @return SimpleXML
      */
@@ -104,12 +104,12 @@ class BeanXmlDriver
         }
         return $xmls;
     }
-    
+
     /**
      * Returns an aspect definition.
-     * 
+     *
      * @param SimpleXML $simpleXmlAspect Aspect node.
-     * 
+     *
      * @throws BeanFactoryException
      * @return AspectDefinition
      */
@@ -129,18 +129,18 @@ class BeanXmlDriver
         foreach ($simpleXmlAspect->pointcut as $pointcut) {
             $aspect = new AspectDefinition(
                 (string)$pointcut->attributes()->expression,
-                intval($type), 
-                $aspectBean 
+                intval($type),
+                $aspectBean
             );
         }
         return $aspect;
     }
-    
+
     /**
      * Returns a property definition.
-     * 
+     *
      * @param SimpleXML $simpleXmlProperty Property node.
-     * 
+     *
      * @throws BeanFactoryException
      * @return BeanPropertyDefinition
      */
@@ -149,7 +149,7 @@ class BeanXmlDriver
         $propName = (string)$simpleXmlProperty->attributes()->name;
         if (isset($simpleXmlProperty->ref)) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
-            $propValue = (string)$simpleXmlProperty->ref->attributes()->bean;  
+            $propValue = (string)$simpleXmlProperty->ref->attributes()->bean;
         } else if (isset($simpleXmlProperty->array)) {
             $propType = BeanPropertyDefinition::PROPERTY_ARRAY;
             $propValue = array();
@@ -159,19 +159,19 @@ class BeanXmlDriver
             }
         } else if (isset($simpleXmlProperty->eval)) {
             $propType = BeanPropertyDefinition::PROPERTY_CODE;
-            $propValue = (string)$simpleXmlProperty->eval;  
+            $propValue = (string)$simpleXmlProperty->eval;
         } else {
             $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
-            $propValue = (string)$simpleXmlProperty->value;  
+            $propValue = (string)$simpleXmlProperty->value;
         }
         return new BeanPropertyDefinition($propName, $propType, $propValue);
     }
 
     /**
      * Returns a constructor argument definition.
-     * 
+     *
      * @param SimpleXML $simpleXmlArg Argument node.
-     * 
+     *
      * @throws BeanFactoryException
      * @return BeanConstructorArgumentDefinition
      */
@@ -179,7 +179,7 @@ class BeanXmlDriver
     {
         if (isset($simpleXmlArg->ref)) {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
-            $argValue = (string)$simpleXmlArg->ref->attributes()->bean;  
+            $argValue = (string)$simpleXmlArg->ref->attributes()->bean;
         } else if (isset($simpleXmlArg->array)) {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY;
             $argValue = array();
@@ -189,19 +189,19 @@ class BeanXmlDriver
             }
         } else if (isset($simpleXmlArg->eval)) {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_CODE;
-            $argValue = (string)$simpleXmlArg->eval;  
+            $argValue = (string)$simpleXmlArg->eval;
         } else {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
-            $argValue = (string)$simpleXmlArg->value;  
+            $argValue = (string)$simpleXmlArg->value;
         }
         return new BeanConstructorArgumentDefinition($argType, $argValue);
     }
-        
+
     /**
      * Returns a bean definition.
-     *  
+     *
      * @param string $beanName
-     * 
+     *
      * @throws BeanFactoryException
      * @return BeanDefinition
      */
@@ -219,8 +219,8 @@ class BeanXmlDriver
                 break;
             }
         }
-        if (false === $simpleXmlBean) {
-            throw new BeanFactoryException('Unknown bean: ' . $beanName);
+        if (false == $simpleXmlBean) {
+            return null;
         }
         // asume valid xml (only one bean with that id)
         $simpleXmlBean = $simpleXmlBean[0];
@@ -279,14 +279,14 @@ class BeanXmlDriver
         }
         return new BeanDefinition(
             $bName, $bClass, $bScope, $bFactoryMethod, $bFactoryBean,
-            $bInitMethod, $bDestroyMethod, $bDependsOn, 
+            $bInitMethod, $bDestroyMethod, $bDependsOn,
             $bProps, $bAspects, $constructorArgs
         );
     }
-    
+
     /**
      * Initialize SimpleXML.
-     * 
+     *
      * @throws BeanFactoryException
      * @return void
      */
@@ -302,10 +302,10 @@ class BeanXmlDriver
     }
     /**
      * Called from the parent class to get a bean definition.
-     * 
+     *
 	 * @param string         $beanName Bean name to get definition for.
 	 * @param BeanDefinition $bean     Where to store the data.
-	 * 
+	 *
 	 * @throws BeanFactoryException
 	 * @return BeanDefinition
      */
@@ -323,7 +323,7 @@ class BeanXmlDriver
      */
     public function beforeConfig(IBeanFactory $factory)
     {
-        
+
     }
 
     /**
@@ -332,9 +332,9 @@ class BeanXmlDriver
      */
     public function afterConfig(IBeanFactory $factory)
     {
-        
+
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
@@ -343,7 +343,7 @@ class BeanXmlDriver
     {
         return $bean;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
@@ -352,30 +352,30 @@ class BeanXmlDriver
     {
         return $bean;
     }
-        
+
     public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
         return $bean;
     }
-    
+
     public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
-    
+
     public function afterAssemble(&$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
-    
+
     public function destruct(&$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
-    
+
     /**
      * Returns a instance for this driver.
-     * 
+     *
      * @param array $options Optional options ;)
      *
      * @return BeanXmlDriver
@@ -387,12 +387,12 @@ class BeanXmlDriver
         }
         return self::$_instance;
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param
-     * 
+     *
      * @return void
      */
     protected function __construct($filename)

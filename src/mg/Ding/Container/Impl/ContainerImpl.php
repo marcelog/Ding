@@ -30,6 +30,7 @@ use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
 use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
 use Ding\Bean\Factory\Driver\BeanAspectDriver;
 use Ding\Bean\Factory\Driver\FiltersDriver;
+use Ding\Bean\Factory\Driver\ErrorHandlerDriver;
 use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
@@ -50,7 +51,7 @@ use Ding\Bean\BeanPropertyDefinition;
 class ContainerImpl implements IContainer
 {
     /**
-     * log4php logger or our own. 
+     * log4php logger or our own.
      * @var Logger
      */
     private $_logger;
@@ -66,19 +67,19 @@ class ContainerImpl implements IContainer
         ),
         'properties' => array()
     );
-        
+
     /**
      * Registered shutdown methods for beans (destroy-methods).
      * @var array
      */
     private $_shutdowners;
-    
+
     /**
      * Beans already instantiated.
      * @var object[]
      */
     private $_beans;
-    
+
     /**
      * Holds our beans cache.
      * @var ICache
@@ -96,7 +97,7 @@ class ContainerImpl implements IContainer
      * @var ICache
      */
     private $_beanDefCache;
-    
+
     /**
      * Cache property setters names.
      * @var array[]
@@ -104,7 +105,7 @@ class ContainerImpl implements IContainer
     private $_propertiesNameCache;
 
     /**
-     * Lifecycle handlers for beans. 
+     * Lifecycle handlers for beans.
      * @var ILifecycleListener
      */
     private $_lifecyclers;
@@ -119,7 +120,7 @@ class ContainerImpl implements IContainer
      * Returns a bean definition.
      *
      * @param string $name Bean name.
-     * 
+     *
      * @return BeanDefinition
      * @throws BeanFactoryException
      */
@@ -134,7 +135,7 @@ class ContainerImpl implements IContainer
         }
 
         $result = false;
-        $beanDefinition = $this->_beanDefCache->fetch($beanName, $result); 
+        $beanDefinition = $this->_beanDefCache->fetch($beanName, $result);
         if ($result !== false) {
             $this->_beanDefs[$name] = $beanDefinition;
             if ($this->_logger->isDebugEnabled()) {
@@ -152,7 +153,7 @@ class ContainerImpl implements IContainer
             );
         }
         if ($beanDefinition === null) {
-            throw new BeanFactoryException('Unknown bean: ' . $beanName);
+            throw new BeanFactoryException('Unknown bean: ' . $name);
         }
         if ($this->_logger->isDebugEnabled()) {
             $this->_logger->debug('Running AfterDefinition: ' . $beanName);
@@ -169,7 +170,7 @@ class ContainerImpl implements IContainer
      *
      * @param string         $name       Bean name.
      * @param BeanDefinition $definition New bean definition.
-     * 
+     *
      * @return void
      */
     public function setBeanDefinition($name, BeanDefinition $definition)
@@ -187,7 +188,7 @@ class ContainerImpl implements IContainer
      *
      * @param string $name Bean name.
      * @param object $bean New object.
-     * 
+     *
      * @return void
      */
     public function setBean($name, $bean)
@@ -208,12 +209,12 @@ class ContainerImpl implements IContainer
             $this->_logger->debug('New: ' . $beanName);
         }
     }
-    
+
     /**
      * This will return the property value from a definition.
-     * 
+     *
      * @param BeanPropertyDefinition $property Property definition.
-     * 
+     *
      * @return mixed
      */
     private function _loadProperty(BeanPropertyDefinition $property)
@@ -237,11 +238,11 @@ class ContainerImpl implements IContainer
     /**
      * This will assembly a bean (inject dependencies, loading other needed
      * beans in the way).
-     * 
+     *
      * @param object         $bean Where to call 'setXXX' methods.
-     * @param BeanDefinition $def  Bean definition, used to get needed 
+     * @param BeanDefinition $def  Bean definition, used to get needed
      * properties.
-     * 
+     *
      * @throws BeanFactoryException
      * @return void
      */
@@ -268,7 +269,7 @@ class ContainerImpl implements IContainer
      * This will return an argument value, from a definition.
      *
      * @param BeanConstructorArgumentDefinition $arg Constructor definition.
-     * 
+     *
      * @return mixed
      */
     private function _loadArgument(BeanConstructorArgumentDefinition $arg)
@@ -288,11 +289,11 @@ class ContainerImpl implements IContainer
         }
         return $value;
     }
-    
+
     /**
      * This will create a new bean, injecting all properties and applying all
      * aspects.
-     * 
+     *
      * @throws BeanFactoryException
      * @return object
      */
@@ -387,12 +388,12 @@ class ContainerImpl implements IContainer
         }
         return $bean;
     }
-    
+
     /**
      * Returns a bean.
-     * 
+     *
      * @param string $name Bean name.
-     * 
+     *
      * @throws BeanFactoryException
      * @return object
      */
@@ -430,12 +431,12 @@ class ContainerImpl implements IContainer
         }
         return $ret;
     }
-    
+
     /**
      * This will return a container
-     * 
+     *
      * @param array $properties Container properties.
-     * 
+     *
      * @return ContainerImpl
      */
     public static function getInstance(array $properties = array())
@@ -455,25 +456,25 @@ class ContainerImpl implements IContainer
         }
         return $ret;
     }
-    
+
     /**
      * Register a shutdown (destroy-method) method for a bean.
-     * 
+     *
      * @param object $bean   Bean to call.
      * @param string $method Method to call.
-     * 
+     *
      * @see Ding\Container.IContainer::registerShutdownMethod()
-     * 
+     *
      * @return void
      */
     public function registerShutdownMethod($bean, $method)
     {
         $this->_shutdowners[] = array($bean, $method);
     }
-    
+
     /**
      * Destructor, will call all beans destroy-methods.
-     * 
+     *
      * @return void
      */
     public function __destruct()
@@ -484,12 +485,12 @@ class ContainerImpl implements IContainer
             $bean->$method();
         }
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param array $options options.
-     * 
+     *
      * @return void
      */
     protected function __construct(array $options)
@@ -514,14 +515,18 @@ class ContainerImpl implements IContainer
         $this->_lifecyclers[BeanLifecycle::AfterCreate] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::BeforeAssemble] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::AfterAssemble] = $soullessArray;
-        
+
+        $this->_lifecyclers[BeanLifecycle::AfterConfig][]
+            = ErrorHandlerDriver::getInstance($soullessArray)
+        ;
+
         $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
              = FiltersDriver::getInstance(self::$_options['properties']);
         ;
         $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
              = DependsOnDriver::getInstance($soullessArray);
         ;
-        
+
         if (isset(self::$_options['bdef']['xml'])) {
             $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
                 = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);
