@@ -95,6 +95,10 @@ You will need a rewrite rule, like:
 
 url.rewrite-once = ( "^/(.*)" => "/example.php" ) // for lighttpd
 
+Apache's mod_rewrite should be pretty much the same thing. The objective is
+to send everything (literally) to 1 file, that is also the '/' of your
+virtualhost.
+
 The example is mapped to /Some/Mapped/Path/MyController/some (hint: try it with
 ?a=b). If you press the button, the form will be submitted and handled by another
 action that will print the same data, but now for the post instead of the
