@@ -50,6 +50,11 @@ class MyController
         return $modelAndView;
     }
 
+    public function formAction(array $arguments = array())
+    {
+        return $this->someAction($arguments);
+    }
+
     public function someAction(array $arguments = array())
     {
         $modelAndView = new ModelAndView('some');

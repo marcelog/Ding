@@ -68,6 +68,8 @@ class HttpFrontController
                         $variables[$data[0]] = isset($data[1]) ? $data[1] : '';
                     }
                 }
+            } else if ($method == 'post') {
+                $variables = $_POST;
             }
             $action = new HttpAction($url, $variables);
             $action->setMethod($method);
