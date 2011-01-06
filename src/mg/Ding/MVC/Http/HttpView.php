@@ -61,7 +61,9 @@ class HttpView extends View
             }
         }
         // Now render everything else.
-        include_once $this->_path;
+        if (file_exists($this->_path)) {
+            include_once $this->_path;
+        }
     }
 
     /**

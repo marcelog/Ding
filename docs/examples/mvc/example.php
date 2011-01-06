@@ -55,6 +55,20 @@ class MyController
         return $this->someAction($arguments);
     }
 
+    public function redirectAction(array $arguments = array())
+    {
+        $modelAndView = new ModelAndView('some');
+        $modelAndView->add(
+            array(
+            	'headers' => array(
+                    'HTTP/1.1 301 Moved Permanently',
+                    'Location: http://github.com/marcelog/Ding'
+                )
+            )
+        );
+        return $modelAndView;
+    }
+
     public function someAction(array $arguments = array())
     {
         $modelAndView = new ModelAndView('some');

@@ -106,6 +106,10 @@ initial get.
 
 Also, if you want to trigger an exception to see the exception handler in
 action, point your browser to: /Some/Mapped/Path/MyController/someException
+
+To try a redirect (no view render, just headers sent), point your browser to 
+/Some/Mapped/Path/MyController/redirect
+
 --------------------------------------------------------------------------------
 Integration with other frameworks
 =================================
