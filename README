@@ -95,9 +95,13 @@ You will need a rewrite rule, like:
 
 url.rewrite-once = ( "^/(.*)" => "/example.php" ) // for lighttpd
 
-The example is mapped to /Some/Mapped/Path/MyController/some. Also, if you want
-to trigger an exception to see the exception handler in action, point your
-browser to: /Some/Mapped/Path/MyController/someException
+The example is mapped to /Some/Mapped/Path/MyController/some (hint: try it with
+?a=b). If you press the button, the form will be submitted and handled by another
+action that will print the same data, but now for the post instead of the
+initial get.
+
+Also, if you want to trigger an exception to see the exception handler in
+action, point your browser to: /Some/Mapped/Path/MyController/someException
 --------------------------------------------------------------------------------
 Integration with other frameworks
 =================================
