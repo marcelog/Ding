@@ -61,7 +61,7 @@ class MyController
         $modelAndView->add(
             array(
             	'headers' => array(
-                    'HTTP/1.1 301 Moved Permanently',
+                    'HTTP/1.1 302 Moved',
                     'Location: http://github.com/marcelog/Ding'
                 )
             )
