@@ -1,16 +1,16 @@
---------------------------------------------------------------------------------
-NOTE: THIS FRAMEWORK IS NOT YET SUITABLE FOR PRODUCTION ENVIRONMENTS.
-(However, you can still give it a try, it may suit your needs and it seems to be pretty stable ;)).
---------------------------------------------------------------------------------
+Introduction
+============
 This framework is a very young project, started on 12/16/2010 because of the
 lack of spring-alike frameworks for php.
 
 Performance *is* a concern, but not now, because the framework is still in
 development. 
+
 --------------------------------------------------------------------------------
 Please see docs/examples/quickstart/example.php for a very basic example of use.
 You can find a doctrine2 example in docs/examples/doctrine/example.php.
 --------------------------------------------------------------------------------
+
 Notes about the source:
 
 * There is no official release yet! So expect changes and be patience, the
