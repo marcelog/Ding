@@ -97,7 +97,7 @@ class MyController
 
 class MyErrorHandler implements IErrorHandler
 {
-    public function handle(ErrorInfo $error)
+    public function handleError(ErrorInfo $error)
     {
         echo "This is your custom error handler: " . print_r($error, true);
     }

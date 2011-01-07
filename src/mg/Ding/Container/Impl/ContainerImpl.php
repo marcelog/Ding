@@ -31,6 +31,7 @@ use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
 use Ding\Bean\Factory\Driver\BeanAspectDriver;
 use Ding\Bean\Factory\Driver\FiltersDriver;
 use Ding\Bean\Factory\Driver\ErrorHandlerDriver;
+use Ding\Bean\Factory\Driver\SignalHandlerDriver;
 use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
@@ -518,6 +519,9 @@ class ContainerImpl implements IContainer
 
         $this->_lifecyclers[BeanLifecycle::AfterConfig][]
             = ErrorHandlerDriver::getInstance($soullessArray)
+        ;
+        $this->_lifecyclers[BeanLifecycle::AfterConfig][]
+            = SignalHandlerDriver::getInstance($soullessArray)
         ;
 
         $this->_lifecyclers[BeanLifecycle::AfterDefinition][]

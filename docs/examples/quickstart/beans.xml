@@ -69,5 +69,13 @@
 		</property>
 	</bean>
 	
+	<!--  This is an optional bean, you can comment it out if you want -->
+	<bean id="SignalHandler" class="Ding\Helpers\SignalHandler\SignalHandlerHelper" scope="singleton">
+		<property name="signalHandler">
+			<ref bean="MySignalHandler"/>
+		</property>
+	</bean>
+
 	<bean id="MyErrorHandler" class="MyErrorHandler" scope="singleton"/>
+	<bean id="MySignalHandler" class="MyErrorHandler" scope="singleton"/>
 </beans>

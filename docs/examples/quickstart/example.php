@@ -15,6 +15,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Mandatory stuff to bootstrap ding. (START)
 ////////////////////////////////////////////////////////////////////////////////
+declare(ticks=1);
 ini_set(
     'include_path',
     implode(
@@ -29,6 +30,7 @@ require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Helpers\ErrorHandler\IErrorHandler;
+use Ding\Helpers\SignalHandler\ISignalHandler;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Aspect\MethodInvocation;
 use Ding\Aspect\Interceptor\IMethodInterceptor;
@@ -37,8 +39,8 @@ use Ding\Aspect\Interceptor\IExceptionInterceptor;
 // Uncomment these two lines if you want to try zend_cache instead of
 // the default available cache backends. Also, modify one of the 'impl' options
 // below to use it (see example below).
-require_once 'Zend/Loader/Autoloader.php';
-Zend_Loader_Autoloader::getInstance();
+//require_once 'Zend/Loader/Autoloader.php';
+//Zend_Loader_Autoloader::getInstance();
 
 ////////////////////////////////////////////////////////////////////////////////
 // Normal operation follows...
@@ -264,11 +266,16 @@ class ClassY
         var_dump(func_get_args());
     }
 }
-class MyErrorHandler implements IErrorHandler
+class MyErrorHandler implements IErrorHandler, ISignalHandler
 {
-    public function handle(ErrorInfo $error)
+    public function handleError(ErrorInfo $error)
     {
         echo "This is your custom error handler: " . print_r($error, true);
+    }
+
+    public function handleSignal($signal)
+    {
+        echo "This is your custom signal handler: " . $signal . "\n";
     }
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -319,6 +326,8 @@ try
     $bean = $a->getBean('ComponentY');
     $bean = $a->getBean('ComponentX');
     $triggererror = $asd;
+    posix_kill(posix_getpid(), SIGUSR1);
+    sleep(5);
 } catch(Exception $exception) {
     echo $exception . "\n";
 }
