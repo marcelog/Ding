@@ -46,19 +46,19 @@ if (!class_exists('Logger')) {
 class Autoloader
 {
     private static $_logger;
-    
+
     /**
      * Holds current realpath.
      * @var string
      */
     private static $_myPath;
-    
+
     /**
      * Called by php to load a given class. Returns true if the class was
      * successfully loaded.
-     * 
+     *
      * @todo Performance: Try to get rid of implode() and str_replace() here.
-     * 
+     *
      * @return boolean
      */
     public static function load($class)
@@ -76,18 +76,18 @@ class Autoloader
         include_once realpath($file);
         return true;
     }
-    
+
     /**
      * You need to use this function to autoregister this loader.
-     * 
+     *
      * @see spl_autoload_register()
-     * 
+     *
      * @return boolean
      */
     public static function register()
     {
         self::$_myPath = implode(
-            DIRECTORY_SEPARATOR, 
+            DIRECTORY_SEPARATOR,
             array(realpath(dirname(__FILE__)), '..', '..')
         );
         return spl_autoload_register('Autoloader::load');
