@@ -62,4 +62,12 @@
 			<pointcut expression="targetMethod"/>
 		</aspect>
 	</bean>
+	<!--  This is an optional bean, you can comment it out if you want -->
+	<bean id="ErrorHandler" class="Ding\Helpers\ErrorHandler\ErrorHandlerHelper" scope="singleton">
+		<property name="errorHandler">
+			<ref bean="MyErrorHandler"/>
+		</property>
+	</bean>
+	
+	<bean id="MyErrorHandler" class="MyErrorHandler" scope="singleton"/>
 </beans>

@@ -1,10 +1,37 @@
 <?php
+/**
+ * This driver will look up an optional bean called ErrorHandler and if it
+ * finds it, will set it up to be the error handler.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @version    SVN: $Id$
+ * @link       http://www.noneyet.ar/
+ */
 namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\Lifecycle\ILifecycleListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\Factory\IBeanFactory;
 
+/**
+ * This driver will look up an optional bean called ErrorHandler and if it
+ * finds it, will set it up to be the error handler.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @link       http://www.noneyet.ar/
+ */
 class ErrorHandlerDriver
 {
     /**

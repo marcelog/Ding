@@ -27,6 +27,8 @@ ini_set(
 );
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
+use Ding\Helpers\ErrorHandler\ErrorInfo;
+use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\MVC\ModelAndView;
 use Ding\MVC\Http\HttpFrontController;
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,6 +92,14 @@ class MyController
     public function someExceptionAction(array $arguments = array())
     {
         throw new AnException('Woooooow!');
+    }
+}
+
+class MyErrorHandler implements IErrorHandler
+{
+    public function handle(ErrorInfo $error)
+    {
+        echo "This is your custom error handler: " . print_r($error, true);
     }
 }
 

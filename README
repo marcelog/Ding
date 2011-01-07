@@ -111,6 +111,13 @@ To try a redirect (no view render, just headers sent), point your browser to
 /Some/Mapped/Path/MyController/redirect
 
 --------------------------------------------------------------------------------
+ErrorHandling
+=============
+You can configure the optional bean ErrorHandler using the class
+Ding\Helpers\ErrorHandler\ErrorHandlerHelper to quickly implement an error
+handler for your app, see the examples.
+
+--------------------------------------------------------------------------------
 Integration with other frameworks
 =================================
 See our doctrine2 integration:

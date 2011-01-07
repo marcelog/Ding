@@ -1,37 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-	<bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton">
-		<property name="viewResolver"><ref bean="HttpViewResolver"/></property>
-		<property name="mapper"><ref bean="HttpUrlMapper"/></property>
+	<import resource="mvc.xml"/>
+	<import resource="controllers.xml"/>
+	
+	<bean id="ErrorHandler" class="Ding\Helpers\ErrorHandler\ErrorHandlerHelper" scope="singleton">
+		<property name="errorHandler">
+			<ref bean="MyErrorHandler"/>
+		</property>
 	</bean>
 	
-	<bean id="HttpUrlMapper" class="Ding\MVC\Http\HttpUrlMapper" scope="singleton">
-		<property name="baseUrl"><value>${baseUrl}</value></property>
-		<property name="map">
-        	<array>
-        		<entry key="0">
-	        		<array>
-	        			<entry key="0"><value>/MyController</value></entry>
-	        			<entry key="1"><ref bean="MyController"/></entry>
-	        		</array>
-        		</entry>
-        	</array>
-		</property>
-	</bean>
-
-	<bean id="HttpViewResolver" class="Ding\MVC\Http\HttpViewResolver" scope="singleton">
-		<property name="viewPrefix"><value>${viewPrefix}</value></property>
-		<property name="viewSuffix"><value>${viewSuffix}</value></property>
-		<property name="viewPath"><value>${viewPath}</value></property>
-	</bean>
-
-	<bean id="HttpExceptionMapper" class="Ding\MVC\Http\HttpExceptionMapper" scope="singleton">
-		<property name="map">
-        	<array>
-        		<entry key="0"><value>Exception</value></entry>
-        		<entry key="1"><ref bean="MyController"/></entry>
-        	</array>
-		</property>
-	</bean>
-	<import resource="controllers.xml"/>
+	<bean id="MyErrorHandler" class="MyErrorHandler" scope="singleton"/>
+	
 </beans>

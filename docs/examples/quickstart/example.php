@@ -1,7 +1,7 @@
 <?php
 /**
  * Example using ding. See also beans.xml.
- * 
+ *
  * PHP Version 5
  *
  * @category Ding
@@ -27,6 +27,8 @@ ini_set(
 );
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
+use Ding\Helpers\ErrorHandler\ErrorInfo;
+use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Aspect\MethodInvocation;
 use Ding\Aspect\Interceptor\IMethodInterceptor;
@@ -39,7 +41,7 @@ require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();
 
 ////////////////////////////////////////////////////////////////////////////////
-// Normal operation follows... 
+// Normal operation follows...
 ////////////////////////////////////////////////////////////////////////////////
 date_default_timezone_set('UTC');
 error_reporting(E_ALL);
@@ -48,12 +50,12 @@ ini_set('display_errors', 1);
 class ClassA extends ClassD
 {
     private $_aComponent;
-    
+
     public function setAComponent($value)
     {
-        $this->_aComponent = $value;        
+        $this->_aComponent = $value;
     }
-    
+
     public function getAComponent()
     {
         return $this->_aComponent;
@@ -71,9 +73,9 @@ class ClassA extends ClassD
     {
         echo "setting a property: ";
         var_dump($value);
-        $this->_aComponent = $value;        
+        $this->_aComponent = $value;
     }
-    
+
     public function __construct(array $a)
     {
         echo "ClassA constructor: ";
@@ -93,7 +95,7 @@ class ClassB
 {
     private $_aProperty;
     private $_bProperty;
-    
+
     public function init()
     {
         echo "Initializing class b\n";
@@ -103,12 +105,12 @@ class ClassB
     {
         echo "*** Shutting down class b ***\n";
     }
-    
+
     public function setAProperty($value)
     {
-        $this->_aProperty = $value;        
+        $this->_aProperty = $value;
     }
-    
+
     public function getAProperty()
     {
         return $this->_aProperty;
@@ -116,14 +118,14 @@ class ClassB
 
     public function setBProperty($value)
     {
-        $this->_bProperty = $value;        
+        $this->_bProperty = $value;
     }
-    
+
     public function getBProperty()
     {
         return $this->_bProperty;
     }
-    
+
     public function targetMethod()
     {
         throw new Exception('Pepe');
@@ -193,7 +195,7 @@ class AspectD implements IExceptionInterceptor
     }
 
     public function setAComponent(ClassX $a = null) {
-        
+
     }
     public function __construct()
     {
@@ -255,11 +257,18 @@ class ClassY
     {
         return new ClassY($a, $b);
     }
-    
+
     private function __construct($a, $b)
     {
         echo "Creating ClassY with args:\n";
         var_dump(func_get_args());
+    }
+}
+class MyErrorHandler implements IErrorHandler
+{
+    public function handle(ErrorInfo $error)
+    {
+        echo "This is your custom error handler: " . print_r($error, true);
     }
 }
 ////////////////////////////////////////////////////////////////////////////////
@@ -290,11 +299,12 @@ try
     			'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
 //        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
 //              'bdef' => array('impl' => 'apc'),
-        		'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
-        		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
+//              'bdef' => array('impl' => 'dummy'),
+            	'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
+        		//'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
 //        		'beans' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
-//              'beans' => array('impl' => 'dummy')
+              	'beans' => array('impl' => 'dummy')
 //              'beans' => array('impl' => 'apc')
 //        		'beans' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
             )
@@ -305,9 +315,10 @@ try
     $bean->targetMethod('a', 1, array('1' => '2'));
     $bean = $a->getBean('ComponentB');
     $bean->targetMethod('a', 1, array('1' => '2'));
-    
+
     $bean = $a->getBean('ComponentY');
     $bean = $a->getBean('ComponentX');
+    $triggererror = $asd;
 } catch(Exception $exception) {
     echo $exception . "\n";
 }
