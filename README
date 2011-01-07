@@ -118,6 +118,14 @@ Ding\Helpers\ErrorHandler\ErrorHandlerHelper to quickly implement an error
 handler for your app, see the examples.
 
 --------------------------------------------------------------------------------
+SignalHandling
+==============
+You can configure the optional bean SignalHandler using the class
+Ding\Helpers\SignalHandler\signalHandlerHelper to quickly implement a signal
+handler for your app, see the examples. You will need declare(ticks=1) as the
+first line of your script.
+
+--------------------------------------------------------------------------------
 Integration with other frameworks
 =================================
 See our doctrine2 integration:
