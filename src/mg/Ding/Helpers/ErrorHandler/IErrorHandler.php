@@ -35,5 +35,5 @@ interface IErrorHandler
      *
      * @return void
      */
-    public function handle(ErrorInfo $error);
+    public function handleError(ErrorInfo $error);
 }

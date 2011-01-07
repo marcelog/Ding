@@ -55,12 +55,14 @@ class ErrorHandlerHelper
     }
 
     /**
-     * This was set by set_error_handler.
+     * This was set by set_error_handler. Returns true.
      *
      * @param integer $errno   PHP Error type.
      * @param string  $errstr  Error message.
      * @param string  $errfile File that triggered the error.
      * @param integer $errline Line that triggered the error.
+     *
+     * @return boolean
      */
     public function handle($errno, $errstr, $errfile, $errline)
     {
@@ -70,7 +72,7 @@ class ErrorHandlerHelper
                 implode(' | ', array($errno, $errstr, $errfile, $errline))
             );
         }
-        $this->_handler->handle($info);
+        $this->_handler->handleError($info);
         return true;
     }
 
