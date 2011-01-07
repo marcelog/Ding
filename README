@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 NOTE: THIS FRAMEWORK IS NOT YET SUITABLE FOR PRODUCTION ENVIRONMENTS.
-      (However, you can still give it a try, it may suit your needs).
+(However, you can still give it a try, it may suit your needs and it seems to be pretty stable ;)).
 --------------------------------------------------------------------------------
 This framework is a very young project, started on 12/16/2010 because of the
 lack of spring-alike frameworks for php.
