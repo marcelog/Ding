@@ -35,18 +35,18 @@ class FileCacheImpl implements ICache
      * @var FileCacheImpl[]
      */
     private static $_instances = false;
-    
+
     /**
      * Current assigned directory.
      * @var string
      */
     private $_directory;
-    
+
     /**
      * Returns true if this cache has the given key.
      *
      * @param string $name Key to check for.
-     * 
+     *
      * @return boolean
      */
     public function has($name)
@@ -60,16 +60,19 @@ class FileCacheImpl implements ICache
 
     /**
      * Returns a cached value.
-     * 
+     *
      * @param string  $name    Key to look for.
      * @param boolean &$result True on success, false otherwise.
-     * 
+     *
      * @return mixed
      */
     public function fetch($name, &$result)
     {
         $result = false;
         $filename = $this->_getFilenameFor($name);
+        if (!@file_exists($filename)) {
+            return false;
+        }
         $data = @file_get_contents($filename);
         $data = unserialize($data);
         $result = ($data != false);
@@ -80,7 +83,7 @@ class FileCacheImpl implements ICache
      * Generates a filename from a given cache key.
      *
      * @param string $name Cache key name
-     * 
+     *
      * @return string
      */
     private function _getFilenameFor($name)
@@ -90,13 +93,13 @@ class FileCacheImpl implements ICache
             array($this->_directory, $name)
         );
     }
-    
+
     /**
      * Stores a key/value.
-     * 
+     *
      * @param string $name  Key to use.
      * @param mixed  $value Value.
-     * 
+     *
      * @return boolean
      */
     public function store($name, $value)
@@ -108,7 +111,7 @@ class FileCacheImpl implements ICache
 
     /**
      * Empties the cache.
-     * 
+     *
      * @todo implement this
 	 * @return boolean
      */
@@ -121,7 +124,7 @@ class FileCacheImpl implements ICache
      * Removes a key from the cache.
      *
      * @param string $name Key to remove.
-     * 
+     *
      * @return boolean
      */
     public function remove($name)
@@ -134,7 +137,7 @@ class FileCacheImpl implements ICache
      * Returns an instance of a cache.
      *
      * @param array $options Options for the cache backend.
-     * 
+     *
      * @return DummyCacheImpl
      */
     public static function getInstance($options = array())
@@ -170,10 +173,10 @@ class FileCacheImpl implements ICache
             );
         }
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
 	 * @return void
      */
     private function __construct(array $options)
