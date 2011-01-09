@@ -47,6 +47,7 @@ class HttpFrontController
      */
     public function handle()
     {
+        session_start();
         ob_start();
         $exceptionMapper = false;
         try

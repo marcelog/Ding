@@ -27,6 +27,7 @@ ini_set(
 );
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 Autoloader::register(); // Call autoloader register for ding autoloader.
+use Ding\HttpSession\HttpSession;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\MVC\ModelAndView;
@@ -54,6 +55,8 @@ class MyController
 
     public function formAction(array $arguments = array())
     {
+        $session = HttpSession::getSession();
+        $arguments['sessionStuff'] = $session->getAttribute('aSessionVariable');
         return $this->someAction($arguments);
     }
 
@@ -73,6 +76,8 @@ class MyController
 
     public function someAction(array $arguments = array())
     {
+        $session = HttpSession::getSession();
+        $session->setAttribute('aSessionVariable', array('user' => 'aUser'));
         $modelAndView = new ModelAndView('some');
         $modelAndView->add(array(
         	'somestring' => 'Hello World',
