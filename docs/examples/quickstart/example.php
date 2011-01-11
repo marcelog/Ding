@@ -31,6 +31,7 @@ Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\Helpers\SignalHandler\ISignalHandler;
+use Ding\Helpers\ShutdownHandler\IShutdownHandler;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Aspect\MethodInvocation;
 use Ding\Aspect\Interceptor\IMethodInterceptor;
@@ -266,11 +267,16 @@ class ClassY
         var_dump(func_get_args());
     }
 }
-class MyErrorHandler implements IErrorHandler, ISignalHandler
+class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
 {
     public function handleError(ErrorInfo $error)
     {
         echo "This is your custom error handler: " . print_r($error, true);
+    }
+
+    public function handleShutdown()
+    {
+        echo "This is your custom shutdown handler.\n";
     }
 
     public function handleSignal($signal)

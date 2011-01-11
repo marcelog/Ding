@@ -27,6 +27,7 @@ use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
 use Ding\Bean\Factory\Driver\DependsOnDriver;
 use Ding\Bean\Factory\Driver\TimezoneDriver;
+use Ding\Bean\Factory\Driver\ShutdownDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
 use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
 use Ding\Bean\Factory\Driver\BeanAspectDriver;
@@ -526,6 +527,9 @@ class ContainerImpl implements IContainer
         ;
         $this->_lifecyclers[BeanLifecycle::AfterConfig][]
             = TimezoneDriver::getInstance($soullessArray)
+        ;
+        $this->_lifecyclers[BeanLifecycle::AfterConfig][]
+            = ShutdownDriver::getInstance($soullessArray)
         ;
 
         $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
