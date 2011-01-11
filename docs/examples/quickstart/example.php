@@ -300,6 +300,7 @@ try
                     'user.name' => 'nobody',
                     'log.dir' => '/tmp/alogdir',
                     'log.file' => 'alog.log',
+                    'timezone' => 'America/Buenos_Aires'
                 )
             ),
     		'cache' => array(

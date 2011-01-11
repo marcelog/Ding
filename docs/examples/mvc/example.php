@@ -119,7 +119,8 @@ $properties = array(
                 'baseUrl' => '/Some/Mapped/Path',
     	    	'viewPath' => './',
     			'viewSuffix' => '.html',
-    			'viewPrefix' => 'view.'
+    			'viewPrefix' => 'view.',
+                'timezone' => 'America/Buenos_Aires'
             )
         ),
         'cache' => array(

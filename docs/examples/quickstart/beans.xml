@@ -78,4 +78,8 @@
 
 	<bean id="MyErrorHandler" class="MyErrorHandler" scope="singleton"/>
 	<bean id="MySignalHandler" class="MyErrorHandler" scope="singleton"/>
+	
+	<bean id="Timezone" class="Ding\Helpers\Timezone\TimezoneHelper" scope="singleton">
+		<property name="timezone"><value>${timezone}</value></property>
+	</bean>
 </beans>
