@@ -43,7 +43,7 @@ if (!class_exists('Logger')) {
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
  */
-class Autoloader
+class Ding_Autoloader
 {
     private static $_logger;
 
@@ -90,6 +90,6 @@ class Autoloader
             DIRECTORY_SEPARATOR,
             array(realpath(dirname(__FILE__)), '..', '..')
         );
-        return spl_autoload_register('Autoloader::load');
+        return spl_autoload_register('Ding_Autoloader::load');
     }
 }

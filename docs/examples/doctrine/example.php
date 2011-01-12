@@ -1,11 +1,11 @@
 <?php
 /**
  * Example using Ding with Doctrine.
- * 
+ *
  * PHP Version 5
  *
  * @category Ding
- * @package  
+ * @package
  * @author   Agustín Gutiérrez <agu.gutierrez@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
@@ -44,8 +44,8 @@ $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', DOCTRINE_LIB_PATH);
 $classLoader->register();
 
 // register Ding autoloader
-require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
-Autoloader::register(); // Call autoloader register for ding autoloader.
+require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
+Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 
 // Uncomment these two lines if you want to try zend_cache instead of
 // the default available cache backends. Also, modify one of the 'impl' options

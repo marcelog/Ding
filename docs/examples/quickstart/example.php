@@ -26,8 +26,8 @@ ini_set(
         )
     )
 );
-require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
-Autoloader::register(); // Call autoloader register for ding autoloader.
+require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
+Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\Helpers\SignalHandler\ISignalHandler;

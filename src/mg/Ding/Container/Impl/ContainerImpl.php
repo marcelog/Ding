@@ -4,12 +4,13 @@
  *
  * PHP Version 5
  *
- * @category Ding
- * @package  Container
- * @author   Marcelo Gornstein <marcelog@gmail.com>
- * @license  http://www.noneyet.ar/ Apache License 2.0
- * @version  SVN: $Id$
- * @link     http://www.noneyet.ar/
+ * @category   Ding
+ * @package    Container
+ * @subpackage Impl
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @version    SVN: $Id$
+ * @link       http://www.noneyet.ar/
  */
 namespace Ding\Container\Impl;
 
@@ -45,11 +46,12 @@ use Ding\Bean\BeanPropertyDefinition;
  *
  * PHP Version 5
  *
- * @category Ding
- * @package  Container
- * @author   Marcelo Gornstein <marcelog@gmail.com>
- * @license  http://www.noneyet.ar/ Apache License 2.0
- * @link     http://www.noneyet.ar/
+ * @category   Ding
+ * @package    Container
+ * @subpackage Impl
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @link       http://www.noneyet.ar/
  */
 class ContainerImpl implements IContainer
 {
