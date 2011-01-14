@@ -17,6 +17,7 @@ quickstart: docs/examples/quickstart/example.php
 doctrine2: docs/examples/doctrine/example.php
 mvc: docs/examples/mvc
 tcp: docs/examples/tcp
+syslog: docs/examples/syslog
 --------------------------------------------------------------------------------
 
 Notes about the source:
@@ -182,6 +183,11 @@ HttpSession
 ===========
 A helper so you can access the session from the mvc. You can setAttribute()'s
 and getAttribute()'s, destroy() it, etc. See the mvc example.
+--------------------------------------------------------------------------------
+Syslog
+======
+Try the SyslogHelper to easily add syslogging to your own application.
+See docs/examples/syslog.
 --------------------------------------------------------------------------------
 Integration with other frameworks
 =================================

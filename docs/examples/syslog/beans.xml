@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="Syslog" class="Ding\Helpers\Syslog\SyslogHelper" scope="singleton" init-method="open" destroy-method="close">
+		<property name="ident"><value>${ident}</value></property>
+		<property name="options"><value>${options}</value></property>
+		<property name="facility"><value>${facility}</value></property>
+	</bean>
+</beans>
