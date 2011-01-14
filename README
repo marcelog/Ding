@@ -111,6 +111,28 @@ To try a redirect (no view render, just headers sent), point your browser to
 /Some/Mapped/Path/MyController/redirect
 
 --------------------------------------------------------------------------------
+TCPClient
+=========
+You can use the helper TCPClientHelper as just another bean. Via callbacks and
+combining the helpers for error and signal handling, you can easily create a
+very complete tcp client, using non blocking sockets. Available callbacks:
+* Before the connection.
+* As soon as the connection establishes
+* If the connection failed because of a timeout.
+* When data is available to be read.
+* When the connection is closed by either one of the peers.
+
+You can specify the connection timeout, the read timeout (both in milliseconds)
+and the minimum needed bytes in the socket before considering it as available
+data to be read.
+
+see docs/examples/tcp for an example of use.
+
+When using non blocking connects, be aware that php will call your error
+handler with an "operation in progress" message that is completely normal but
+it seems there is no way to disable it without interferring with other 
+messages :(
+--------------------------------------------------------------------------------
 ErrorHandling
 =============
 You can configure the optional bean ErrorHandler using the class
