@@ -6,6 +6,11 @@ lack of spring-alike frameworks for php.
 Performance *is* a concern, but not now, because the framework is still in
 development. 
 
+Currently there is no manual or comprehensive documentation, so please refer
+to the examples, it's really all there (I will write the documentation as
+soon as possible). Please contact me if you have any comments, doubts, or
+any kind of feedback. Send an email to: marcelog@gmail.com
+
 --------------------------------------------------------------------------------
 Please see docs/examples/quickstart/example.php for a very basic example of use.
 You can find a doctrine2 example in docs/examples/doctrine/example.php.
