@@ -1,4 +1,17 @@
 <?php
+/**
+ * TCP Client example.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    examples
+ * @subpackage quickstart
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @version    SVN: $Id$
+ * @link       http://www.noneyet.ar/
+ */
 declare(ticks=1);
 require_once 'Ding/Autoloader/Ding_Autoloader.php';
 Ding_Autoloader::register();
