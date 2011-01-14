@@ -52,4 +52,25 @@
 		</property>
 	</bean>
 	<bean id="MyClientHandler" class="MyClientHandler" scope="prototype"/>
+	<bean id="Server" class="Ding\Helpers\TCP\TCPServerHelper" scope="singleton">
+		<property name="backlog">
+			<value>${tcp.backlog}</value>
+		</property>
+		<property name="readTimeout">
+			<value>${tcp.rto}</value>
+		</property>
+		<property name="readMinLength">
+			<value>${tcp.rlen}</value>
+		</property>
+		<property name="address">
+			<value>${tcp.address}</value>
+		</property>
+		<property name="port">
+			<value>${tcp.port}</value>
+		</property>
+		<property name="handler">
+			<ref bean="MyServerHandler"/>
+		</property>
+	</bean>
+	<bean id="MyServerHandler" class="MyServerHandler" scope="singleton"/>
 </beans>

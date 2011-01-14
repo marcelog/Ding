@@ -80,6 +80,10 @@ class TCPClientHelper
      */
     private $_connected;
 
+    /**
+     * Time for last data received. Used to control read timeout.
+     * @var float
+     */
     private $_lastDataReadTime;
 
     /**
@@ -176,7 +180,7 @@ class TCPClientHelper
             return;
         }
         socket_set_nonblock($this->_socket);
-        $this->_lastDataReadTime = $this->microtime_float();
+        $this->_lastDataReadTime = $this->getMicrotime();
         $this->_connected = true;
         $this->_handler->connect();
     }
@@ -186,7 +190,7 @@ class TCPClientHelper
      *
      * @return float
      */
-    protected function microtime_float()
+    protected function getMicrotime()
     {
         list($usec, $sec) = explode(" ", microtime());
         return ((float)$usec + (float)$sec);
@@ -222,7 +226,7 @@ class TCPClientHelper
                 $len = $this->read($buffer, $len, true);
                 if ($len > 0) {
                     if ($len >= $this->_readLen) {
-                        $this->_lastDataReadTime = $this->microtime_float();
+                        $this->_lastDataReadTime = $this->getMicrotime();
                         $this->_handler->data();
                         return;
                     }
@@ -232,7 +236,7 @@ class TCPClientHelper
                 }
             }
         }
-        $now = $this->microtime_float();
+        $now = $this->getMicrotime();
         if (($now - $this->_lastDataReadTime) > $this->_rTo) {
             if ($this->_rTo > 0) {
                 $this->_handler->readTimeout();
@@ -258,6 +262,8 @@ class TCPClientHelper
      * Sets the read timeout in milliseconds. 0 to disable.
      *
      * @param integer $rTo Read timeout.
+     *
+     * @return void
      */
     public function setReadTimeout($rTo)
     {

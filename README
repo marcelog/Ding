@@ -133,6 +133,24 @@ handler with an "operation in progress" message that is completely normal but
 it seems there is no way to disable it without interferring with other 
 messages :(
 --------------------------------------------------------------------------------
+TCPServer
+=========
+You can use the helper TCPServerHelper as just another bean. Via callbacks and
+combining the helpers for error and signal handling, you can easily create a
+very complete tcp server, using non blocking sockets. Available callbacks:
+* Before opening the socket.
+* Before binding and listening the socket.
+* As soon as a connection establishes or closes.
+* When data is available to be read.
+* When the connection is closed by either one of the peers.
+* When there is a read timeout on any of the clients.
+
+You can specify the connection timeout, the read timeout (both in milliseconds)
+and the minimum needed bytes in the socket before considering it as available
+data to be read.
+
+see docs/examples/tcp for an example of use.
+--------------------------------------------------------------------------------
 ErrorHandling
 =============
 You can configure the optional bean ErrorHandler using the class
