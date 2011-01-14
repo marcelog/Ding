@@ -12,14 +12,17 @@ soon as possible). Please contact me if you have any comments, doubts, or
 any kind of feedback. Send an email to: marcelog@gmail.com
 
 --------------------------------------------------------------------------------
-Please see docs/examples/quickstart/example.php for a very basic example of use.
-You can find a doctrine2 example in docs/examples/doctrine/example.php.
+Please see:
+quickstart: docs/examples/quickstart/example.php
+doctrine2: docs/examples/doctrine/example.php
+mvc: docs/examples/mvc
+tcp: docs/examples/tcp
 --------------------------------------------------------------------------------
 
 Notes about the source:
 
-* There is no official release yet! So expect changes and be patience, the
-work will get done. Also, performance will eventually be taken care of.
+* Expect changes and be patience, the work will get done. Also, performance
+will eventually be taken care of.
 
 * If you're wondering why the first comment of each source file is repeated,
 it's because they're actually 2 different comments: one for the file, and one
