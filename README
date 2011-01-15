@@ -18,6 +18,7 @@ doctrine2: docs/examples/doctrine/example.php
 mvc: docs/examples/mvc
 tcp: docs/examples/tcp
 syslog: docs/examples/syslog
+timers: docs/examples/timer
 --------------------------------------------------------------------------------
 
 Notes about the source:
@@ -188,6 +189,12 @@ Syslog
 ======
 Try the SyslogHelper to easily add syslogging to your own application.
 See docs/examples/syslog.
+--------------------------------------------------------------------------------
+Timers
+======
+You can setup TimerHelper's and configure any timers you'd like to have in
+your application, giving the inveral in milliseconds and using your own
+handlers.
 --------------------------------------------------------------------------------
 Integration with other frameworks
 =================================

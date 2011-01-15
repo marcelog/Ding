@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="Timer1" class="Ding\Helpers\Timer\TimerHelper" scope="prototype">
+		<property name="handler"><ref bean="TimerHandler1"/></property>
+		<property name="milliseconds"><value>${interval1}</value></property>
+	</bean>
+	<bean id="Timer2" class="Ding\Helpers\Timer\TimerHelper" scope="prototype">
+		<property name="handler"><ref bean="TimerHandler2"/></property>
+		<property name="milliseconds"><value>${interval2}</value></property>
+	</bean>
+	<bean id="TimerHandler1" class="MyTimerHandler1" scope="prototype"/>
+	<bean id="TimerHandler2" class="MyTimerHandler2" scope="prototype"/>
+</beans>

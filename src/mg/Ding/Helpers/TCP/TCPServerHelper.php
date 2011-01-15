@@ -207,6 +207,7 @@ class TCPServerHelper
     /**
      * From php examples. Returns time including millseconds.
      *
+     * @todo duplicated code, where can this go?
      * @return float
      */
     protected function getMicrotime()
