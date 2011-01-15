@@ -41,19 +41,11 @@ Ding supports this cache implementations out of the box.
 * DUMMY.
 
 Each one of the implementations can be used for bean caching, beandefinition
-caching, or proxy caching.
-
-YOU MUST CONFIGURE THIS PROPERTY in the container, i.e:
-        'ding' => array(
-            'cache' => array(
-    			'proxy' => array('directory' => '/tmp/Ding/proxy'),
-//        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
-        		'bdef' => array('impl' => 'apc'),
-//        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
-                'beans' => array('impl' => 'dummy')
-            )
-        )
-    	(when instantiating the container).
+caching, or proxy caching. Actually, caching beans is a little trickier in
+the php world. In the java world, the application server is always "up & running",
+whilst in php everything is created from scratch for every request. So it may
+be better to not cache the bean itself, but everything else, like definintions
+and proxies definitions.
 --------------------------------------------------------------------------------
 DI
 ==
