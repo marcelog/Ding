@@ -17,6 +17,7 @@ namespace Ding\Helpers\PAMI;
 use PAMI\Client\Impl\ClientImpl;
 use PAMI\Listener\IEventListener;
 use PAMI\Message\Event\EventMessage;
+use PAMI\Message\Action\ActionMessage;
 
 /**
  * PAMI Helper. Will call your own handler and manage ami connection.
@@ -171,6 +172,18 @@ class PamiHelper implements IEventListener
         }
 	    $this->_ami->registerEventListener($this);
 	    $this->_ami->open();
+    }
+
+    /**
+     * Sends a message to ami.
+     *
+     * @param ActionMessage $message AMI Command.
+     *
+     * @return Response
+     */
+    public function send(ActionMessage $message)
+    {
+        return $this->_ami->send($message);
     }
 
     /**

@@ -22,6 +22,7 @@ PAMI_Autoloader::register();
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Helpers\PAMI\IPamiEventHandler;
 use PAMI\Message\Event\EventMessage;
+use PAMI\Message\Action\ListCommandsAction;
 
 if ($argc != 5) {
     echo "Use: $argv[0] <host> <port> <user> <pass>\n";
@@ -57,6 +58,7 @@ $properties = array(
 );
 $a = ContainerImpl::getInstance($properties);
 $ami = $a->getBean('Pami');
+var_dump($ami->send(new ListCommandsAction()));
 while(true){
     usleep(1);
 }
