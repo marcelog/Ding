@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="PagiExtensionMapper" class="Ding\Helpers\PAGI\PagiExtensionMapper" scope="singleton">
+		<property name="map">
+        	<array>
+        		<entry key="0">
+	        		<array>
+	        			<entry key="extension"><value>${app1.num}</value></entry>
+	        			<entry key="application"><ref bean="MyPagiApplication1"/></entry>
+	        		</array>
+        		</entry>
+        		<entry key="1">
+	        		<array>
+	        			<entry key="extension"><value>${app2.num}</value></entry>
+	        			<entry key="application"><ref bean="MyPagiApplication2"/></entry>
+	        		</array>
+        		</entry>
+        	</array>
+		</property>
+		<bean id="MyPagiApplication1" class="MyPagiApplication1" scope="singleton">
+			<constructor-arg>
+				<array>
+					<entry key="log4php.properties">
+						<value>${log4php.properties}</value>
+					</entry>
+				</array>
+			</constructor-arg>
+		</bean>
+		<bean id="MyPagiApplication2" class="MyPagiApplication2" scope="singleton">
+			<constructor-arg>
+				<array>
+					<entry key="log4php.properties">
+						<value>${log4php.properties}</value>
+					</entry>
+				</array>
+			</constructor-arg>
+		</bean>
+	</bean>
+</beans>

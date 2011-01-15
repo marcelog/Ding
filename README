@@ -19,9 +19,14 @@ mvc: docs/examples/mvc
 tcp: docs/examples/tcp
 syslog: docs/examples/syslog
 timers: docs/examples/timer
+
 PAMI: docs/examples/pami (PHP Asterisk Manager Interface, at
 https://github.com/marcelog/PAMI, is an oop implementation for asterisk manager
 interface, designed to interact and manage asterisk in an event-driven fashion).
+
+PAGI: docs/examples/pagi (PHP Asterisk Gateway Interface, at
+https://github.com/marcelog/PAGI, is an oop implementation for asterisk gateway
+interface, designed to make agi -telephony- applications very easy).
 --------------------------------------------------------------------------------
 
 Notes about the source:
@@ -173,6 +178,25 @@ installations via the asterisk manager interface (ami).
 
 See: docs/examples/pami
 --------------------------------------------------------------------------------
+PAGIHelper
+==========
+This helper integrates PAGI (https://github.com/marcelog/PAGI) with Ding, 
+offering a quick, easy, and effective way to make agi (Asterisk Gateway
+Interface) applications (PrePaid systems, voicemail's, etc). 
+
+See: docs/examples/pagi
+
+In order to run the example, you need something like this in your dialplan:
+
+[default]
+exten => 1,1,AGI(/tmp/Ding/docs/examples/pagi/run.sh,a,b,c,d)
+exten => 1,n,Hangup
+exten => 2,1,AGI(/tmp/Ding/docs/examples/pagi/run.sh,a,b,c,d)
+exten => 2,n,Hangup
+
+Call to extension 1 and extension 2 (modify the example if you want another
+extensions).
+--------------------------------------------------------------------------------
 Syslog
 ======
 Try the SyslogHelper to easily add syslogging to your own application.
@@ -190,6 +214,8 @@ See our doctrine2 integration:
 https://github.com/marcelog/Ding/tree/master/docs/examples/doctrine
 
 See the pami example: https://github.com/marcelog/Ding/tree/master/docs/examples/pami
+
+See the pagi example: https://github.com/marcelog/Ding/tree/master/docs/examples/pagi
 --------------------------------------------------------------------------------
 Developers
 ==========
