@@ -60,7 +60,7 @@ class PagiExtensionMapper
                 return $map['application'];
             }
         }
-        return false;
+        return $this->_map['default']['application'];
     }
 
     /**

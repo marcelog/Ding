@@ -189,13 +189,11 @@ See: docs/examples/pagi
 In order to run the example, you need something like this in your dialplan:
 
 [default]
-exten => 1,1,AGI(/tmp/Ding/docs/examples/pagi/run.sh,a,b,c,d)
-exten => 1,n,Hangup
-exten => 2,1,AGI(/tmp/Ding/docs/examples/pagi/run.sh,a,b,c,d)
-exten => 2,n,Hangup
+exten => _X,1,AGI(/tmp/Ding/docs/examples/pagi/run.sh,a,b,c,d)
+exten => _X,n,Hangup
 
 Call to extension 1 and extension 2 (modify the example if you want another
-extensions).
+extensions). Use other digit to invoke the default extension.
 --------------------------------------------------------------------------------
 Syslog
 ======

@@ -15,6 +15,11 @@
 	        			<entry key="application"><ref bean="MyPagiApplication2"/></entry>
 	        		</array>
         		</entry>
+        		<entry key="default">
+	        		<array>
+	        			<entry key="application"><ref bean="MyPagiApplication3"/></entry>
+	        		</array>
+        		</entry>
         	</array>
 		</property>
 		<bean id="MyPagiApplication1" class="MyPagiApplication1" scope="singleton">
@@ -27,6 +32,15 @@
 			</constructor-arg>
 		</bean>
 		<bean id="MyPagiApplication2" class="MyPagiApplication2" scope="singleton">
+			<constructor-arg>
+				<array>
+					<entry key="log4php.properties">
+						<value>${log4php.properties}</value>
+					</entry>
+				</array>
+			</constructor-arg>
+		</bean>
+		<bean id="MyPagiApplication3" class="MyPagiApplication3" scope="singleton">
 			<constructor-arg>
 				<array>
 					<entry key="log4php.properties">

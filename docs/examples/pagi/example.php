@@ -59,8 +59,6 @@ class MyPagiApplication2 extends PAGIApplication
 
     public function init()
     {
-        $agi = $this->getAgi();
-        $agi->sayDigits('2', '');
     }
 
     public function shutdown()
@@ -70,6 +68,35 @@ class MyPagiApplication2 extends PAGIApplication
 
     public function run()
     {
+        $agi = $this->getAgi();
+        $agi->sayDigits('2', '');
+    }
+}
+class MyPagiApplication3 extends PAGIApplication
+{
+    public function errorHandler($type, $message, $file, $line)
+    {
+
+    }
+
+    public function signalHandler($signal)
+    {
+
+    }
+
+    public function init()
+    {
+    }
+
+    public function shutdown()
+    {
+
+    }
+
+    public function run()
+    {
+        $agi = $this->getAgi();
+        $agi->sayDigits('3', '');
     }
 }
 
