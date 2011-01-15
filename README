@@ -19,7 +19,9 @@ mvc: docs/examples/mvc
 tcp: docs/examples/tcp
 syslog: docs/examples/syslog
 timers: docs/examples/timer
-PAMI: docs/examples/pami
+PAMI: docs/examples/pami (PHP Asterisk Manager Interface, at
+https://github.com/marcelog/PAMI, is an oop implementation for asterisk manager
+interface, designed to interact and manage asterisk in an event-driven fashion).
 --------------------------------------------------------------------------------
 
 Notes about the source:
