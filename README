@@ -19,6 +19,7 @@ mvc: docs/examples/mvc
 tcp: docs/examples/tcp
 syslog: docs/examples/syslog
 timers: docs/examples/timer
+PAMI: docs/examples/pami
 --------------------------------------------------------------------------------
 
 Notes about the source:
@@ -185,6 +186,14 @@ HttpSession
 A helper so you can access the session from the mvc. You can setAttribute()'s
 and getAttribute()'s, destroy() it, etc. See the mvc example.
 --------------------------------------------------------------------------------
+PAMIHelper
+==========
+This helper integrates PAMI (https://github.com/marcelog/PAMI) with Ding, 
+offering a quick, easy, and effective way to access and manager asterisk
+installations via the asterisk manager interface (ami). 
+
+See: docs/examples/pami
+--------------------------------------------------------------------------------
 Syslog
 ======
 Try the SyslogHelper to easily add syslogging to your own application.
@@ -200,6 +209,8 @@ Integration with other frameworks
 =================================
 See our doctrine2 integration:
 https://github.com/marcelog/Ding/tree/master/docs/examples/doctrine
+
+See the pami example: https://github.com/marcelog/Ding/tree/master/docs/examples/pami
 --------------------------------------------------------------------------------
 Developers
 ==========
