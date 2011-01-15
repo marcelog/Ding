@@ -187,7 +187,7 @@ See docs/examples/syslog.
 Timers
 ======
 You can setup TimerHelper's and configure any timers you'd like to have in
-your application, giving the inveral in milliseconds and using your own
+your application, giving the intveral in milliseconds and using your own
 handlers.
 --------------------------------------------------------------------------------
 Integration with other frameworks
