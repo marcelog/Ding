@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Todo List</title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+											</head>
+		<body>
+						<div align="center"><h1>Todo List</h1></div>
+<h2>Autoloader</h2>
+<h3><a href="Autoloader/Ding_Autoloader.html#methodload">Ding_Autoloader::load()</a></h3>
+<ul>
+    <li>Performance: Try to get rid of implode() and str_replace() here.</li>
+</ul>
+<h2>Cache</h2>
+<h3><a href="Cache/Impl/FileCacheImpl.html#methodflush">FileCacheImpl::flush()</a></h3>
+<ul>
+    <li>implement this</li>
+</ul>
+<h2>Aspect</h2>
+<h3><a href="Aspect/Proxy.html#methodcreate">Proxy::create()</a></h3>
+<ul>
+    <li>Currently, final classes can't be proxied because the proxy class  extends it (this may change in the near future).</li>
+</ul>
+<h3><a href="Aspect/MethodInvocation.html#methodproceed">MethodInvocation::proceed()</a></h3>
+<ul>
+    <li>Performance: Remove new ReflectionMethod here</li>
+</ul>
+<h3><a href="Aspect/Proxy.html">Proxy</a></h3>
+<ul>
+    <li>Performance: Remove new MethodInvocation in proxied invocation.</li>
+</ul>
+<h2>Helpers</h2>
+<h3><a href="Helpers/Timer/TimerHelper.html#methodgetMicrotime">TimerHelper::getMicrotime()</a></h3>
+<ul>
+    <li>duplicated code, where can this go?</li>
+</ul>
+<h3><a href="Helpers/Tcp/TCPServerHelper.html#methodgetMicrotime">TCPServerHelper::getMicrotime()</a></h3>
+<ul>
+    <li>duplicated code, where can this go?</li>
+</ul>
+<h3><a href="Helpers/Tcp/TCPClientHelper.html#methodgetMicrotime">TCPClientHelper::getMicrotime()</a></h3>
+<ul>
+    <li>duplicated code, where can this go?</li>
+</ul>
+	<p class="notes" id="credit">
+		Documentation generated on Sat, 15 Jan 2011 21:11:35 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</body>
+</html>
