@@ -6,7 +6,7 @@
  *
  * @category   Ding
  * @package    Helpers
- * @subpackage PAMI
+ * @subpackage Pami
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @version    SVN: $Id$
@@ -26,7 +26,7 @@ use PAMI\Message\Action\ActionMessage;
  *
  * @category   Ding
  * @package    Helpers
- * @subpackage PAMI
+ * @subpackage Pami
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
