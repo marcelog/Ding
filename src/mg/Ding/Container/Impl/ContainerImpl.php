@@ -26,6 +26,7 @@ use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Lifecycle\BeanLifecycle;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
+use Ding\Bean\Factory\Driver\MVCAnnotationDriver;
 use Ding\Bean\Factory\Driver\DependsOnDriver;
 use Ding\Bean\Factory\Driver\TimezoneDriver;
 use Ding\Bean\Factory\Driver\ShutdownDriver;
@@ -560,6 +561,9 @@ class ContainerImpl implements IContainer
                 );
             ;
         }
+        $this->_lifecyclers[BeanLifecycle::AfterConfig][]
+            = MVCAnnotationDriver::getInstance($soullessArray)
+        ;
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeConfig] as $lifecycleListener) {
             $lifecycleListener->beforeConfig($this);
         }

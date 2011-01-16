@@ -106,6 +106,14 @@ action, point your browser to: /Some/Mapped/Path/MyController/someException
 To try a redirect (no view render, just headers sent), point your browser to 
 /Some/Mapped/Path/MyController/redirect
 
+To try annotated controllers (see below), point your browser to 
+/Some/Mapped/Path/MyAnnotatedController/an.
+
+MVC Annotations
+---------------
+
+You can use @Controller and @RequestMapping in your classes and not declare
+them in beans.xml file. see docs/examples/mvc/annotatedControllers.
 --------------------------------------------------------------------------------
 TCPClient
 =========

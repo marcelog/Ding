@@ -13,6 +13,8 @@
  */
 namespace Ding\Reflection;
 
+use Ding\Bean\BeanAnnotationDefinition;
+
 /**
  * Internal reflection manager.
  *
@@ -31,12 +33,89 @@ class ReflectionFactory
      * @var ReflectionClass[]
      */
     private static $_reflectionClasses = array();
-    
+    private static $_annotatedClasses = array();
+    private static $_classesAnnotated = array();
+
+    /**
+     * Parses all annotations in the given text.
+     *
+     * @param string $text
+     *
+     * @return BeanAnnotationDefinition[]
+     */
+    private static function _getAnnotations($text)
+    {
+        $ret = array();
+        if (preg_match_all('/@.+/', $text, $matches) > 0) {
+            foreach ($matches[0] as $annotation) {
+                $argsStart = strpos($annotation, '(');
+                $arguments = array();
+                if ($argsStart !== false) {
+                    $name = substr($annotation, 1, $argsStart - 1);
+                    $args = substr($annotation, $argsStart + 1, -1);
+                    // http://stackoverflow.com/questions/168171/regular-expression-for-parsing-name-value-pairs
+                    $argsN = preg_match_all(
+                    	'/([^=,]*)=("[^"]*"|[^,"]*)/', $args, $matches
+                    );
+                    if ($argsN > 0)
+                    {
+                        for ($i = 0; $i < $argsN; $i++) {
+                            $key = trim($matches[1][$i]);
+                            $value = trim($matches[2][$i]);
+                            $arguments[$key] = $value;
+                        }
+                    }
+                } else {
+                    $name = substr($annotation, 1);
+                }
+                $ret[] = new BeanAnnotationDefinition($name, $arguments);
+            }
+        }
+        return $ret;
+    }
+
+    public static function getClassesByAnnotation($annotation)
+    {
+        if (isset(self::$_classesAnnotated[$annotation])) {
+            return self::$_classesAnnotated[$annotation];
+        }
+        return array();
+    }
+
+    public static function getClassAnnotations($class)
+    {
+        if (isset(self::$_annotatedClasses[$class])) {
+            return self::$_annotatedClasses[$class];
+        }
+        self::$_annotatedClasses[$class] = array();
+        $rClass = ReflectionFactory::getClass($class);
+        $ret = array();
+        $ret['class'] = array();
+        foreach (self::_getAnnotations($rClass->getDocComment()) as $annotation) {
+            $name = $annotation->getName();
+            $ret['class'][$name] = $annotation;
+            if (!isset(self::$_classesAnnotated[$name])) {
+                self::$_classesAnnotated[$name] = array();
+            }
+            self::$_classesAnnotated[$name][] = $class;
+        }
+        foreach ($rClass->getMethods() as $method) {
+            $methodName = $method->getName();
+            $ret[$methodName] = array();
+            foreach (self::_getAnnotations($method->getDocComment()) as $annotation) {
+                $name = $annotation->getName();
+                $ret[$methodName][$name] = $annotation;
+            }
+        }
+        self::$_annotatedClasses[$class] = $ret;
+        return $ret;
+    }
+
     /**
      * Returns a (cached) reflection class.
      *
      * @param string $class Class name
-     * 
+     *
      * @throws ReflectionException
      * @return ReflectionClass
      */

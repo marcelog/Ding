@@ -45,7 +45,6 @@ class AnException extends \Exception
 
 class MyController
 {
-
     public function ExceptionException(array $arguments = array())
     {
         $modelAndView = new ModelAndView('exception');
@@ -114,6 +113,7 @@ $properties = array(
         'factory' => array(
         	'bdef' => array(
              	'xml' => array('filename' => realpath('./beans.xml')),
+                'annotation' => array('scanDir' => array(realpath(__DIR__)))
             ),
         	'properties' => array(
                 'baseUrl' => '/Some/Mapped/Path',

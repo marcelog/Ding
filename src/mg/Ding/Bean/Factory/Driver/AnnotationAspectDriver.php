@@ -1,6 +1,6 @@
 <?php
 /**
- * This driver will lookup all aspect-annotated beans. 
+ * This driver will lookup all aspect-annotated beans.
  *
  * PHP Version 5
  *
@@ -21,7 +21,7 @@ use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
 
 /**
- * This driver will lookup all aspect-annotated beans. 
+ * This driver will lookup all aspect-annotated beans.
  *
  * PHP Version 5
  *
@@ -45,34 +45,23 @@ class AnnotationAspectDriver implements ILifecycleListener
      * @var ICache
      */
     private $_cache;
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
     public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
-        $class = $bean->getClass();
-        if (empty($class)) {
-            return $bean;
-        }
-        $rClass = ReflectionFactory::getClass($class);
-        foreach ($rClass->getMethods() as $method) {
-            $methodName = $method->getName();
-            if ($bean->isAnnotated('Aspect', $methodName)) {
-                
-            }
-        }
         return $bean;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
      */
     public function beforeConfig(IBeanFactory $factory)
     {
-        
+
     }
 
     /**
@@ -81,9 +70,9 @@ class AnnotationAspectDriver implements ILifecycleListener
      */
     public function afterConfig(IBeanFactory $factory)
     {
-        
+
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
@@ -92,7 +81,7 @@ class AnnotationAspectDriver implements ILifecycleListener
     {
         return $bean;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
@@ -101,7 +90,7 @@ class AnnotationAspectDriver implements ILifecycleListener
     {
         return $bean;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
@@ -128,7 +117,7 @@ class AnnotationAspectDriver implements ILifecycleListener
     {
         return $bean;
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::destruct()
@@ -142,7 +131,7 @@ class AnnotationAspectDriver implements ILifecycleListener
      * Returns an instance.
      *
      * @param array $options Optional options.
-     * 
+     *
      * @return BeanAPCDefinitionDriver
      */
     public static function getInstance(array $options)
@@ -155,12 +144,12 @@ class AnnotationAspectDriver implements ILifecycleListener
         }
         return $ret;
     }
-    
+
     /**
      * Constructor.
      *
      * @param array $options Optional options.
-     * 
+     *
      * @return void
      */
     private function __construct(array $options)

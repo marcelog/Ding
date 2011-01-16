@@ -1,7 +1,5 @@
 <?php
 /**
- * This driver will look up all annotations for the class and each method of
- * the class (of the bean, of course).
  *
  * PHP Version 5
  *
@@ -15,6 +13,8 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\MVC\Http\HttpUrlMapper;
+
 use Ding\Bean\Lifecycle\ILifecycleListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
@@ -22,8 +22,6 @@ use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Factory\IBeanFactory;
 
 /**
- * This driver will look up all annotations for the class and each method of
- * the class (of the bean, of course).
  *
  * PHP Version 5
  *
@@ -34,15 +32,13 @@ use Ding\Bean\Factory\IBeanFactory;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class BeanAnnotationDriver implements ILifecycleListener
+class MVCAnnotationDriver implements ILifecycleListener
 {
     /**
      * Holds current instance.
-     * @var BeanAnnotationDriver
+     * @var MVCAnnotationDriver
      */
     private static $_instance = false;
-    private $_scanDirs;
-    private static $_knownClasses = false;
 
     /**
      * (non-PHPdoc)
@@ -62,49 +58,36 @@ class BeanAnnotationDriver implements ILifecycleListener
 
     }
 
-
-    private function _scan($dir)
-    {
-        self::$_knownClasses = get_declared_classes();
-        foreach (scandir($dir) as $dirEntry) {
-            if ($dirEntry == '.' || $dirEntry == '..') {
-                continue;
-            }
-            $dirEntry = $dir . DIRECTORY_SEPARATOR . $dirEntry;
-            if (is_dir($dirEntry)) {
-                $this->_scan($dirEntry);
-            } else if(is_file($dirEntry)) {
-                $extensionPos = strrpos($dirEntry, '.');
-                if ($extensionPos === false) {
-                    continue;
-                }
-                if (substr($dirEntry, $extensionPos, 4) != '.php') {
-                    continue;
-                }
-                include_once $dirEntry;
-                $newClasses = get_declared_classes();
-                foreach (array_diff($newClasses, self::$_knownClasses) as $aNewClass) {
-                    self::$_knownClasses[$aNewClass] = ReflectionFactory::getClassAnnotations($aNewClass);
-                }
-            }
-        }
-    }
-
-    public static function getKnownClasses()
-    {
-        return self::$_knownClasses;
-    }
-
     /**
+     * Will call HttpUrlMapper::addAnnotatedController to add new mappings
+     * from the @Controller annotated classes. Also, creates a new bean
+     * definition for every one of them.
+     *
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
     public function afterConfig(IBeanFactory $factory)
     {
-        foreach ($this->_scanDirs as $dir) {
-            $this->_scan($dir);
+        foreach (ReflectionFactory::getClassesByAnnotation('Controller') as $controller) {
+            $name = 'Controller' . microtime(true);
+            $beanDef = new BeanDefinition(
+                $name, $controller, BeanDefinition::BEAN_SINGLETON,
+                '', '', '', '', array(), array(), array(), array()
+            );
+            $url = ReflectionFactory::getClassAnnotations($controller);
+            if (!isset($url['class']['RequestMapping'])) {
+                continue;
+            }
+            $url = $url['class']['RequestMapping']->getArguments();
+            if (!isset($url['url'])) {
+                continue;
+            }
+            $url = $url['url'];
+            $factory->setBeanDefinition($name, $beanDef);
+            HttpUrlMapper::addAnnotatedController($url, $name);
         }
     }
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
@@ -168,12 +151,12 @@ class BeanAnnotationDriver implements ILifecycleListener
      *
      * @param array $options Optional options.
      *
-     * @return BeanAnnotationDriver
+     * @return MVCAnnotationDriver
      */
     public static function getInstance(array $options)
     {
         if (self::$_instance === false) {
-            $ret = new BeanAnnotationDriver($options);
+            $ret = new MVCAnnotationDriver($options);
             self::$_instance = $ret;
         } else {
             $ret = self::$_instance;
@@ -190,6 +173,6 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     private function __construct(array $options)
     {
-        $this->_scanDirs = $options['scanDir'];
+
     }
 }
