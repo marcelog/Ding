@@ -33,49 +33,48 @@ class PropertyFilter implements IFilter
      * @var PropertyFilter
      */
     private static $_instance;
-    
+
     /**
      * Properties.
      * @var array
      */
     private $_properties;
-    
+
     /**
      * Search and replaces for ${property}
-     * 
+     *
      * @see Ding\Bean\Factory\Filter.IFilter::apply()
-     * 
+     *
      * @return string
      */
     public function apply($input)
     {
         $output = $input;
         foreach ($this->_properties as $k => $v) {
-            if (is_array($v) || is_object($v)) {
-                continue;
+            if (!is_array($v) && !is_object($v)) {
+                $output = str_replace($k, $v, $output);
             }
-            $output = str_replace($k, $v, $output);
         }
         return $output;
     }
-    
+
     /**
      * Returns true if we know the prop named key.
 	 *
      * @param string $key String to look for.
-     * 
+     *
      * @return boolean
      */
     public function has($key)
     {
         return isset($this->_properties['${' . $key . '}']);
     }
-    
+
     /**
      * Returns a value for the given key. False if none found.
-     * 
+     *
      * @param string $key
-     * 
+     *
      * @return mixed
      */
     public function get($key)
@@ -85,25 +84,25 @@ class PropertyFilter implements IFilter
         }
         return false;
     }
-    
+
     /**
      * Sets the given key=value
 	 *
      * @param string $key
      * @param mixed  $value
-     * 
+     *
      * @return void
      */
     public function set($key, $value)
     {
         $this->_properties[$key] = $value;
     }
-    
+
     /**
      * Returns an instance.
-     * 
+     *
      * @param array $properties Properties to use.
-     * 
+     *
      * @return PropertyFilter
      */
     public static function getInstance(array $properties)
@@ -116,7 +115,7 @@ class PropertyFilter implements IFilter
 
     /**
      * Constructor.
-     * 
+     *
      * @param array $properties Properties to use.
 	 *
 	 * @return void
