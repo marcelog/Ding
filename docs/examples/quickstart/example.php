@@ -300,7 +300,7 @@ try
             'factory' => array(
                 'bdef' => array(
                 	'xml' => array('filename' => 'beans.xml'),
-                	'annotation' => array()
+                    //'annotation' => array('scanDir' => array(realpath(__DIR__)))
                 ),
                 'properties' => array(
                     'user.name' => 'nobody',

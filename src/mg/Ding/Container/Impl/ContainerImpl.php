@@ -66,10 +66,7 @@ class ContainerImpl implements IContainer
      * @var array
      */
     private static $_options = array(
-        'bdef' => array(
-        	'xml' => array('filename' => 'beans.xml'),
-    		/*'annotation' => array()*/
-        ),
+        'bdef' => array(),
         'properties' => array()
     );
 
@@ -547,6 +544,11 @@ class ContainerImpl implements IContainer
             ;
         }
         if (isset(self::$_options['bdef']['annotation'])) {
+            $this->_lifecyclers[BeanLifecycle::AfterConfig][]
+                = BeanAnnotationDriver::getInstance(
+                    self::$_options['bdef']['annotation']
+                );
+            ;
             $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
                 = BeanAnnotationDriver::getInstance(
                     self::$_options['bdef']['annotation']

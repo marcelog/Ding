@@ -41,6 +41,8 @@ class BeanAnnotationDriver implements ILifecycleListener
      * @var BeanAnnotationDriver
      */
     private static $_instance = false;
+    private $_scanDirs;
+    private static $_knownClasses = false;
 
     /**
      * (non-PHPdoc)
@@ -60,13 +62,47 @@ class BeanAnnotationDriver implements ILifecycleListener
 
     }
 
+    private function _scan($dir)
+    {
+        self::$_knownClasses = get_declared_classes();
+        foreach (scandir($dir) as $dirEntry) {
+            if ($dirEntry == '.' || $dirEntry == '..') {
+                continue;
+            }
+            $dirEntry = $dir . DIRECTORY_SEPARATOR . $dirEntry;
+            if (is_dir($dirEntry)) {
+                $this->_scan($dirEntry);
+            } else if(is_file($dirEntry)) {
+                $extensionPos = strrpos($dirEntry, '.');
+                if ($extensionPos === false) {
+                    continue;
+                }
+                if (substr($dirEntry, $extensionPos, 4) != '.php') {
+                    continue;
+                }
+                include_once $dirEntry;
+                $newClasses = get_declared_classes();
+                foreach (array_diff($newClasses, self::$_knownClasses) as $aNewClass) {
+                }
+                self::$_knownClasses = $newClasses;
+            }
+        }
+    }
+
+    public static function getKnownClasses()
+    {
+        return self::$_knownClasses;
+    }
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
     public function afterConfig(IBeanFactory $factory)
     {
-
+        foreach ($this->_scanDirs as $dir) {
+            $this->_scan($dir);
+        }
     }
     /**
      * (non-PHPdoc)
@@ -134,6 +170,7 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
+        return $bean;
         if ($bean === null) {
             return $bean;
         }
@@ -208,6 +245,6 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     private function __construct(array $options)
     {
-
+        $this->_scanDirs = $options['scanDir'];
     }
 }

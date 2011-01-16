@@ -74,7 +74,6 @@ try
     		'factory' => array(
                 'bdef' => array(
                 	'xml' => array('filename' => __DIR__ . '/beans.xml'),
-                	'annotation' => array()
                 ),
                 'properties' => $myProperties
             ),
