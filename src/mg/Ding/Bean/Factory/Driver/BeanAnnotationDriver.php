@@ -62,6 +62,24 @@ class BeanAnnotationDriver implements ILifecycleListener
 
     }
 
+    private function _scanClass($class)
+    {
+        $rClass = ReflectionFactory::getClass($class);
+        $ret = array();
+        $ret['class'] = array();
+        foreach ($this->_getAnnotations($rClass->getDocComment()) as $annotation) {
+            $ret['class'][] = $annotation;
+        }
+        foreach ($rClass->getMethods() as $method) {
+            $methodName = $method->getName();
+            $ret[$methodName] = array();
+            foreach ($this->_getAnnotations($method->getDocComment()) as $annotation) {
+                $ret[$methodName][] = $annotation;
+            }
+        }
+        return $ret;
+    }
+
     private function _scan($dir)
     {
         self::$_knownClasses = get_declared_classes();
@@ -83,8 +101,8 @@ class BeanAnnotationDriver implements ILifecycleListener
                 include_once $dirEntry;
                 $newClasses = get_declared_classes();
                 foreach (array_diff($newClasses, self::$_knownClasses) as $aNewClass) {
+                    self::$_knownClasses[$aNewClass] = $this->_scanClass($aNewClass);
                 }
-                self::$_knownClasses = $newClasses;
             }
         }
     }
@@ -177,16 +195,6 @@ class BeanAnnotationDriver implements ILifecycleListener
         $class = $bean->getClass();
         if (empty($class)) {
             return $bean;
-        }
-        $rClass = ReflectionFactory::getClass($class);
-        foreach ($this->_getAnnotations($rClass->getDocComment()) as $annotation) {
-            $bean->annotate($annotation);
-        }
-        foreach ($rClass->getMethods() as $method) {
-            $methodName = $method->getName();
-            foreach ($this->_getAnnotations($method->getDocComment()) as $annotation) {
-                $bean->annotate($annotation, $methodName);
-            }
         }
         return $bean;
     }
