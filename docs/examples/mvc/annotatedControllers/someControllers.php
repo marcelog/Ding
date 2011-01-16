@@ -7,9 +7,6 @@ use Ding\MVC\ModelAndView;
  */
 class AnnotatedController
 {
-    /**
-     * @pepe
-     */
     public function anAction()
     {
         $modelAndView = new ModelAndView('annotated');
