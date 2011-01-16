@@ -37,6 +37,8 @@ class HttpFrontController
      */
     private static $_properties;
 
+    private $_logger;
+
     /**
      * Handles the request. This will instantiate the container with the given
      * properties (via static method configure(), see below). Then it will
@@ -53,6 +55,7 @@ class HttpFrontController
         try
         {
             $container = ContainerImpl::getInstance(self::$_properties);
+            $this->_logger = \Logger::getLogger('Ding.HttpFrontController');
             $dispatcher = $container->getBean('HttpDispatcher');
             $exceptionMapper = $container->getBean('HttpExceptionMapper');
             $method = strtolower($_SERVER['REQUEST_METHOD']);
@@ -76,6 +79,9 @@ class HttpFrontController
             $action->setMethod($method);
             $dispatcher->dispatch($action);
         } catch(\Exception $exception) {
+            if ($this->_logger->isDebugEnabled()) {
+                $this->_logger->debug('Got Exception: ' . $exception);
+            }
             ob_end_clean();
             ob_start();
             if ($exceptionMapper === false) {

@@ -171,6 +171,11 @@ class HttpUrlMapper implements IMapper
             $action = explode('/', $action);
             $action = $action[0];
             if (!is_object($controller)) {
+                if ($this->_logger->isDebugEnabled()) {
+                    $this->_logger->debug(
+                    	'Found as annotated controller: ' . $controller
+                    );
+                }
                 $container = ContainerImpl::getInstance();
                 $controller = $container->getBean($controller);
             }
