@@ -63,6 +63,31 @@
 		</aspect>
 	</bean>
 	<!--  This is an optional bean, you can comment it out if you want -->
+	<bean id="ErrorHandler" class="Ding\Helpers\ErrorHandler\ErrorHandlerHelper" scope="singleton">
+		<property name="errorHandler">
+			<ref bean="MyErrorHandler"/>
+		</property>
+	</bean>
+	
+	<!--  This is an optional bean, you can comment it out if you want -->
+	<bean id="ShutdownHandler" class="Ding\Helpers\ShutdownHandler\ShutdownHandlerHelper" scope="singleton">
+		<property name="shutdownHandler">
+			<ref bean="MyShutdownHandler"/>
+		</property>
+	</bean>
+
+	<!--  This is an optional bean, you can comment it out if you want -->
+	<bean id="SignalHandler" class="Ding\Helpers\SignalHandler\SignalHandlerHelper" scope="singleton">
+		<property name="signalHandler">
+			<ref bean="MySignalHandler"/>
+		</property>
+	</bean>
+ 
+	<bean id="MyErrorHandler" class="MyErrorHandler" scope="singleton"/>
+	<bean id="MySignalHandler" class="MyErrorHandler" scope="singleton"/>
+	<bean id="MyShutdownHandler" class="MyErrorHandler" scope="singleton"/>
+	
+	<!--  This is an optional bean, you can comment it out if you want -->
 	<bean id="Timezone" class="Ding\Helpers\Timezone\TimezoneHelper" scope="singleton">
 		<property name="timezone"><value>${timezone}</value></property>
 	</bean>

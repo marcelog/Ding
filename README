@@ -41,6 +41,9 @@ for the class.
 --------------------------------------------------------------------------------
 Supported annotations
 =====================
+Remember that using annotations is completely optional. Not using them will
+benefit performance.
+
 * @Controller (When using the MVC through http).
 * @RequestMapping (When using the MVC through http).
 * @SignalHandler
