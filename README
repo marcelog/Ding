@@ -39,6 +39,14 @@ will eventually be taken care of.
 it's because they're actually 2 different comments: one for the file, and one
 for the class.
 --------------------------------------------------------------------------------
+Supported annotations
+=====================
+* @Controller (When using the MVC through http).
+* @RequestMapping (When using the MVC through http).
+* @SignalHandler
+* @ErrorHandler
+* @ShutdownHandler
+--------------------------------------------------------------------------------
 CACHE
 =====
 Ding supports this cache implementations out of the box.
