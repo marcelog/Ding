@@ -160,6 +160,12 @@ ErrorHandling
 You can configure the optional bean ErrorHandler using the class
 Ding\Helpers\ErrorHandler\ErrorHandlerHelper to quickly implement an error
 handler for your app, see the examples.
+
+@ErrorHandler
+=============
+Annotate a class with this annotation will have the same result has declaring
+a bean in beans.xml.
+
 --------------------------------------------------------------------------------
 SignalHandling
 ==============
@@ -167,12 +173,22 @@ You can configure the optional bean SignalHandler using the class
 Ding\Helpers\SignalHandler\SignalHandlerHelper to quickly implement a signal
 handler for your app, see the examples. You will need declare(ticks=1) as the
 first line of your script.
+
+@SignalHandler
+=============
+Annotate a class with this annotation will have the same result has declaring
+a bean in beans.xml.
 --------------------------------------------------------------------------------
 ShutdownHandling
 ================
 You can configure the optional bean ShutdownHandler using the class
 Ding\Helpers\ShutdownHandler\ShutdownHandlerHelper to quickly implement a 
 shutdown handler for your script via register_shutdown_function().
+
+@ShutdownHandler
+================
+Annotate a class with this annotation will have the same result has declaring
+a bean in beans.xml.
 --------------------------------------------------------------------------------
 HttpSession
 ===========

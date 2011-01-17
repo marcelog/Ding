@@ -519,6 +519,23 @@ class ContainerImpl implements IContainer
         $this->_lifecyclers[BeanLifecycle::BeforeAssemble] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::AfterAssemble] = $soullessArray;
 
+        if (isset(self::$_options['bdef']['annotation'])) {
+            $this->_lifecyclers[BeanLifecycle::AfterConfig][]
+                = BeanAnnotationDriver::getInstance(
+                    self::$_options['bdef']['annotation']
+                );
+            ;
+            $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
+                = BeanAnnotationDriver::getInstance(
+                    self::$_options['bdef']['annotation']
+                );
+            ;
+            $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
+                = AnnotationAspectDriver::getInstance(
+                    self::$_options['bdef']['annotation']
+                );
+            ;
+        }
         $this->_lifecyclers[BeanLifecycle::AfterConfig][]
             = ErrorHandlerDriver::getInstance($soullessArray)
         ;
@@ -542,23 +559,6 @@ class ContainerImpl implements IContainer
         if (isset(self::$_options['bdef']['xml'])) {
             $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
                 = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);
-            ;
-        }
-        if (isset(self::$_options['bdef']['annotation'])) {
-            $this->_lifecyclers[BeanLifecycle::AfterConfig][]
-                = BeanAnnotationDriver::getInstance(
-                    self::$_options['bdef']['annotation']
-                );
-            ;
-            $this->_lifecyclers[BeanLifecycle::BeforeDefinition][]
-                = BeanAnnotationDriver::getInstance(
-                    self::$_options['bdef']['annotation']
-                );
-            ;
-            $this->_lifecyclers[BeanLifecycle::AfterDefinition][]
-                = AnnotationAspectDriver::getInstance(
-                    self::$_options['bdef']['annotation']
-                );
             ;
         }
         $this->_lifecyclers[BeanLifecycle::AfterConfig][]

@@ -16,8 +16,10 @@
 namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\Factory\IBeanFactory;
+use Ding\Reflection\ReflectionFactory;
 
 /**
  * This driver will look up an optional bean called ShutdownHandler and if it
@@ -67,9 +69,28 @@ class ShutdownDriver
         try
         {
             $bean = $factory->getBean('ShutdownHandler');
-            register_shutdown_function(array($bean, 'handle'));
         } catch(\Exception $e) {
+            $handler = ReflectionFactory::getClassesByAnnotation('ShutdownHandler');
+            if (empty($handler)) {
+                return;
+            }
+            $handler = $handler[0];
+            $name = 'ShutdownHandler' . microtime(true);
+            $beanDef = new BeanDefinition(
+                $name, $handler, BeanDefinition::BEAN_SINGLETON,
+            	'', '', '', '', array(), array(), array(), array()
+            );
+            $factory->setBeanDefinition($name, $beanDef);
+            $property = new BeanPropertyDefinition('shutdownHandler', BeanPropertyDefinition::PROPERTY_BEAN, $name);
+            $beanDef = new BeanDefinition(
+                'ShutdownHandler', 'Ding\\Helpers\\ShutdownHandler\\ShutdownHandlerHelper',
+                BeanDefinition::BEAN_SINGLETON,
+            	'', '', '', '', array(), array($property), array(), array()
+            );
+            $factory->setBeanDefinition('ShutdownHandler', $beanDef);
+            $bean = $factory->getBean('ShutdownHandler');
         }
+        register_shutdown_function(array($bean, 'handle'));
     }
 
     /**

@@ -267,23 +267,6 @@ class ClassY
         var_dump(func_get_args());
     }
 }
-class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
-{
-    public function handleError(ErrorInfo $error)
-    {
-        echo "This is your custom error handler: " . print_r($error, true);
-    }
-
-    public function handleShutdown()
-    {
-        echo "This is your custom shutdown handler.\n";
-    }
-
-    public function handleSignal($signal)
-    {
-        echo "This is your custom signal handler: " . $signal . "\n";
-    }
-}
 ////////////////////////////////////////////////////////////////////////////////
 try
 {
@@ -300,7 +283,7 @@ try
             'factory' => array(
                 'bdef' => array(
                 	'xml' => array('filename' => 'beans.xml'),
-                    //'annotation' => array('scanDir' => array(realpath(__DIR__)))
+                    'annotation' => array('scanDir' => array(realpath(__DIR__)))
                 ),
                 'properties' => array(
                     'user.name' => 'nobody',

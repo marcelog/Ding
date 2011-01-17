@@ -15,9 +15,11 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\ILifecycleListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\Factory\IBeanFactory;
+use Ding\Reflection\ReflectionFactory;
 
 /**
  * This driver will look up an optional bean called SignalHandler and if it
@@ -73,13 +75,32 @@ class SignalHandlerDriver
         try
         {
             $bean = $factory->getBean('SignalHandler');
-            $handler = array($bean, 'handle');
-            foreach (self::$_signals as $signal) {
-                pcntl_signal($signal, $handler);
-            }
-            pcntl_sigprocmask(SIG_UNBLOCK, self::$_signals);
         } catch(\Exception $e) {
+            $handler = ReflectionFactory::getClassesByAnnotation('SignalHandler');
+            if (empty($handler)) {
+                return;
+            }
+            $handler = $handler[0];
+            $name = 'SignalHandler' . microtime(true);
+            $beanDef = new BeanDefinition(
+                $name, $handler, BeanDefinition::BEAN_SINGLETON,
+            	'', '', '', '', array(), array(), array(), array()
+            );
+            $factory->setBeanDefinition($name, $beanDef);
+            $property = new BeanPropertyDefinition('signalHandler', BeanPropertyDefinition::PROPERTY_BEAN, $name);
+            $beanDef = new BeanDefinition(
+                'SignalHandler', 'Ding\\Helpers\\SignalHandler\\SignalHandlerHelper',
+                BeanDefinition::BEAN_SINGLETON,
+            	'', '', '', '', array(), array($property), array(), array()
+            );
+            $factory->setBeanDefinition('SignalHandler', $beanDef);
+            $bean = $factory->getBean('SignalHandler');
         }
+        $handler = array($bean, 'handle');
+        foreach (self::$_signals as $signal) {
+            pcntl_signal($signal, $handler);
+        }
+        pcntl_sigprocmask(SIG_UNBLOCK, self::$_signals);
     }
 
     /**

@@ -15,9 +15,10 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
-use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\Factory\IBeanFactory;
+use Ding\Reflection\ReflectionFactory;
 
 /**
  * This driver will look up an optional bean called ErrorHandler and if it
@@ -67,9 +68,28 @@ class ErrorHandlerDriver
         try
         {
             $bean = $factory->getBean('ErrorHandler');
-            set_error_handler(array($bean, 'handle'));
         } catch(\Exception $e) {
+            $handler = ReflectionFactory::getClassesByAnnotation('ErrorHandler');
+            if (empty($handler)) {
+                return;
+            }
+            $handler = $handler[0];
+            $name = 'ErrorHandler' . microtime(true);
+            $beanDef = new BeanDefinition(
+                $name, $handler, BeanDefinition::BEAN_SINGLETON,
+            	'', '', '', '', array(), array(), array(), array()
+            );
+            $factory->setBeanDefinition($name, $beanDef);
+            $property = new BeanPropertyDefinition('errorHandler', BeanPropertyDefinition::PROPERTY_BEAN, $name);
+            $beanDef = new BeanDefinition(
+                'ErrorHandler', 'Ding\\Helpers\\ErrorHandler\\ErrorHandlerHelper',
+                BeanDefinition::BEAN_SINGLETON,
+            	'', '', '', '', array(), array($property), array(), array()
+            );
+            $factory->setBeanDefinition('ErrorHandler', $beanDef);
+            $bean = $factory->getBean('ErrorHandler');
         }
+        set_error_handler(array($bean, 'handle'));
     }
 
     /**
