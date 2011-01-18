@@ -70,10 +70,10 @@ class ErrorHandlerDriver
             $bean = $factory->getBean('ErrorHandler');
         } catch(\Exception $e) {
             $handler = ReflectionFactory::getClassesByAnnotation('ErrorHandler');
-            if (empty($handler)) {
+            if (count($handler) == 0) {
                 return;
             }
-            $handler = $handler[0];
+            $handler = array_pop($handler);
             $name = 'ErrorHandler' . microtime(true);
             $beanDef = new BeanDefinition($name);
             $beanDef->setClass($handler);

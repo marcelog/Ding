@@ -71,10 +71,10 @@ class ShutdownDriver
             $bean = $factory->getBean('ShutdownHandler');
         } catch(\Exception $e) {
             $handler = ReflectionFactory::getClassesByAnnotation('ShutdownHandler');
-            if (empty($handler)) {
+            if (count($handler) == 0) {
                 return;
             }
-            $handler = $handler[0];
+            $handler = array_pop($handler);
             $name = 'ShutdownHandler' . microtime(true);
             $beanDef = new BeanDefinition($name);
             $beanDef->setClass($handler);
