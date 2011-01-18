@@ -49,6 +49,8 @@ benefit performance.
 * @SignalHandler
 * @ErrorHandler
 * @ShutdownHandler
+* @InitMethod(method=xxx)
+* @DestroyMethod(method=xxx)
 --------------------------------------------------------------------------------
 CACHE
 =====
@@ -78,8 +80,10 @@ let you split your beans among several configuration files.
 * Can create beans by specifying a static method of the bean class itself.
 * Can create beans by specifying another bean (and its method) as a factory.
 * Properties for your beans.xml, like: ${log.dir}/alog.log
-* Optional init-method will be called right after assembling a bean.
+* Optional init-method will be called right after assembling a bean. (Can also
+be specified via the @InitMethod(method=xxx) annotation).
 * Optional destroy-method will be called when the container is shutting down.
+(Can also be specified via the @DestroyMethod(method=xxx) annotation).
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 AOP
