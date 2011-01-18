@@ -82,17 +82,15 @@ class SignalHandlerDriver
             }
             $handler = $handler[0];
             $name = 'SignalHandler' . microtime(true);
-            $beanDef = new BeanDefinition(
-                $name, $handler, BeanDefinition::BEAN_SINGLETON,
-            	'', '', '', '', array(), array(), array(), array()
-            );
+            $beanDef = new BeanDefinition($name);
+            $beanDef->setClass($handler);
+            $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
             $factory->setBeanDefinition($name, $beanDef);
             $property = new BeanPropertyDefinition('signalHandler', BeanPropertyDefinition::PROPERTY_BEAN, $name);
-            $beanDef = new BeanDefinition(
-                'SignalHandler', 'Ding\\Helpers\\SignalHandler\\SignalHandlerHelper',
-                BeanDefinition::BEAN_SINGLETON,
-            	'', '', '', '', array(), array($property), array(), array()
-            );
+            $beanDef = new BeanDefinition('SignalHandler');
+            $beanDef->setClass('Ding\\Helpers\\SignalHandler\\SignalHandlerHelper');
+            $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
+            $beanDef->setProperties(array($property));
             $factory->setBeanDefinition('SignalHandler', $beanDef);
             $bean = $factory->getBean('SignalHandler');
         }

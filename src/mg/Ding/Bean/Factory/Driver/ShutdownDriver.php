@@ -76,17 +76,15 @@ class ShutdownDriver
             }
             $handler = $handler[0];
             $name = 'ShutdownHandler' . microtime(true);
-            $beanDef = new BeanDefinition(
-                $name, $handler, BeanDefinition::BEAN_SINGLETON,
-            	'', '', '', '', array(), array(), array(), array()
-            );
+            $beanDef = new BeanDefinition($name);
+            $beanDef->setClass($handler);
+            $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
             $factory->setBeanDefinition($name, $beanDef);
             $property = new BeanPropertyDefinition('shutdownHandler', BeanPropertyDefinition::PROPERTY_BEAN, $name);
-            $beanDef = new BeanDefinition(
-                'ShutdownHandler', 'Ding\\Helpers\\ShutdownHandler\\ShutdownHandlerHelper',
-                BeanDefinition::BEAN_SINGLETON,
-            	'', '', '', '', array(), array($property), array(), array()
-            );
+            $beanDef = new BeanDefinition('ShutdownHandler');
+            $beanDef->setClass('Ding\\Helpers\\ShutdownHandler\\ShutdownHandlerHelper');
+            $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
+            $beanDef->setProperties(array($property));
             $factory->setBeanDefinition('ShutdownHandler', $beanDef);
             $bean = $factory->getBean('ShutdownHandler');
         }

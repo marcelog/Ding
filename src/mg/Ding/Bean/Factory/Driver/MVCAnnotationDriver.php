@@ -70,10 +70,9 @@ class MVCAnnotationDriver implements ILifecycleListener
     {
         foreach (ReflectionFactory::getClassesByAnnotation('Controller') as $controller) {
             $name = 'Controller' . microtime(true);
-            $beanDef = new BeanDefinition(
-                $name, $controller, BeanDefinition::BEAN_SINGLETON,
-                '', '', '', '', array(), array(), array(), array()
-            );
+            $beanDef = new BeanDefinition($name);
+            $beanDef->setClass($controller);
+            $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
             $url = ReflectionFactory::getClassAnnotations($controller);
             if (!isset($url['class']['RequestMapping'])) {
                 continue;

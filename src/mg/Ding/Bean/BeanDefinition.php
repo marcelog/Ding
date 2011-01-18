@@ -34,14 +34,14 @@ class BeanDefinition
      * @var integer
      */
     const BEAN_PROTOTYPE = 0;
-    
+
     /**
      * Specifies scope singleton for beans, meaning that the same instance will
      * be returned every time.
      * @var integer
      */
     const BEAN_SINGLETON = 1;
-    
+
     /**
      * Bean name
      * @var string
@@ -71,7 +71,7 @@ class BeanDefinition
      * @var AspectDefinition[]
      */
     private $_aspects;
-    
+
     /**
      * Constructor arguments.
      * @var BeanConstructorArgumentDefinition[]
@@ -79,23 +79,23 @@ class BeanDefinition
     private $_constructorArgs;
 
     /**
-     * Factory method name (if any). 
+     * Factory method name (if any).
      * @var string
      */
     private $_factoryMethod;
 
     /**
-     * Factory bean name (if any). 
+     * Factory bean name (if any).
      * @var string
      */
     private $_factoryBean;
-    
+
     /**
      * Init method (if any).
      * @var string
      */
     private $_initMethod;
-    
+
     /**
      * Destroy method (called when container is destroyed).
      * @var string
@@ -107,13 +107,13 @@ class BeanDefinition
      * @var BeanAnnotationDefinition[]
      */
     private $_annotations;
-    
+
     /**
      * Annotations for this bean methods.
      * @var BeanAnnotationDefinition[]
      */
     private $_methodAnnotations;
-    
+
     /**
      * Dependency beans literally specified in the configuration.
      * @var string[]
@@ -125,7 +125,7 @@ class BeanDefinition
      *
      * @param BeanAnnotationDefinition $annotation Annotation.
      * @param string                   $method     Optional method name.
-     * 
+     *
      * @return void
      */
     public function annotate(BeanAnnotationDefinition $annotation, $method = false)
@@ -143,13 +143,13 @@ class BeanDefinition
             $this->_methodAnnotations[$method][$name][] = $annotation;
         }
     }
-    
+
     /**
      * Returns all annotations under the given name.
      *
      * @param string $name   Annotation name.
      * @param string $method Optional method name.
-     * 
+     *
      * @return BeanAnnotationDefinition[]
      */
     public function getAnnotation($name, $method = false)
@@ -166,7 +166,7 @@ class BeanDefinition
      * Returns all annotations as an array indexed by annotation value.
      *
      * @param string $method Optional method name.
-     * 
+     *
      * @return BeanAnnotationDefinition[string][]
      */
     public function getAnnotations($method = false)
@@ -177,13 +177,13 @@ class BeanDefinition
             return isset($this->_methodAnnotations[$method]);
         }
     }
-    
+
     /**
      * Returns true if this bean is annotated with the given annotation name.
      *
      * @param string $name   Annotation name to check for.
      * @param string $method Optional method name.
-     * 
+     *
      * @return boolean
      */
     public function isAnnotated($name, $method = false)
@@ -194,76 +194,76 @@ class BeanDefinition
             return isset($this->_methodAnnotations[$method][$name]);
         }
     }
-    
+
     /**
      * Returns true if this bean has mapped aspects.
-     * 
+     *
      * @return boolean
      */
     public function hasAspects()
     {
         return count($this->getAspects()) > 0;
     }
-    
+
     /**
      * Sets new aspects for this bean.
      *
      * @param BeanAspectDefinition[] $aspects New aspects.
-     * 
+     *
      * @return void
      */
     public function setAspects(array $aspects)
     {
         $this->_aspects = $aspects;
     }
-    
+
     /**
      * Returns aspects for this bean.
-     * 
+     *
      * @return AspectDefinition[]
      */
     public function getAspects()
     {
         return $this->_aspects;
     }
-    
+
     /**
      * Changes the scope for this bean.
      *
      * @param string $scope New scope.
-     * 
+     *
      * @return void
      */
     public function setScope($scope)
     {
         $this->_scope = $scope;
     }
-    
+
     /**
      * Returns bean type (scope). See this class constants.
-     * 
+     *
      * @return integer
      */
     public function getScope()
     {
         return $this->_scope;
     }
-    
+
     /**
      * Sets a new name for this bean.
      *
      * @param string $name New name.
-     * 
+     *
      * @return void
      */
     public function setName($name)
     {
         $this->_name = $name;
     }
-    
+
     /**
      * Returns bean name.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -275,17 +275,17 @@ class BeanDefinition
      * Sets a new class name for this bean.
      *
      * @param string $class New class name.
-     * 
+     *
      * @return void
      */
     public function setClass($class)
     {
         $this->_class = $class;
     }
-    
+
     /**
      * Returns bean class.
-     * 
+     *
      * @return string
      */
     public function getClass()
@@ -297,17 +297,17 @@ class BeanDefinition
      * Sets new properties for this bean.
      *
      * @param BeanPropertyDefinition[] $properties New properties.
-     * 
+     *
      * @return void
      */
     public function setProperties(array $properties)
     {
         $this->_properties = $properties;
     }
-    
+
     /**
      * Returns properties for this bean.
-     * 
+     *
      * @return BeanPropertyDefinition[]
      */
     public function getProperties()
@@ -319,29 +319,29 @@ class BeanDefinition
      * Sets new arguments for this bean.
      *
      * @param BeanConstructorDefinition[] $arguments New arguments.
-     * 
+     *
      * @return void
      */
     public function setArguments(array $arguments)
     {
-        $this->_constructorArguments = $arguments;
+        $this->_constructorArgs = $arguments;
     }
-    
+
     /**
      * Returns arguments for this bean.
-     * 
+     *
      * @return BeanConstructorArgumentDefinition[]
      */
     public function getArguments()
     {
         return $this->_constructorArgs;
     }
-    
+
     /**
      * Sets a new factory method for this bean.
      *
      * @param string $factoryMethod New factory method.
-     * 
+     *
      * @return void
      */
     public function setFactoryMethod($factoryMethod)
@@ -350,7 +350,7 @@ class BeanDefinition
     }
     /**
      * Factory method, false if none was set.
-     * 
+     *
      * @return string
      */
     public function getFactoryMethod()
@@ -362,17 +362,17 @@ class BeanDefinition
      * Sets a new factory bean for this bean.
      *
      * @param string $factoryBean New factory bean.
-     * 
+     *
      * @return void
      */
     public function setFactoryBean($factoryBean)
     {
         $this->_factoryBean = $factoryBean;
     }
-    
+
     /**
      * Factory bean, false if none was set.
-     * 
+     *
      * @return string
      */
     public function getFactoryBean()
@@ -384,17 +384,17 @@ class BeanDefinition
      * Sets a new init method for this bean.
      *
      * @param string $initMethod New init method.
-     * 
+     *
      * @return void
      */
     public function setInitMethod($initMethod)
     {
         $this->_initMethod = $initMethod;
     }
-    
+
     /**
      * Init method, false if none was set.
-     * 
+     *
      * @return string
      */
     public function getInitMethod()
@@ -406,17 +406,17 @@ class BeanDefinition
      * Sets a new destroy method for this bean.
      *
      * @param string $destroyMethod New destroy method.
-     * 
+     *
      * @return void
      */
     public function setDestroyMethod($destroyMethod)
     {
         $this->_destroyMethod = $destroyMethod;
     }
-    
+
     /**
      * Destroy method, false if none was set.
-     * 
+     *
      * @return string
      */
     public function getDestroyMethod()
@@ -433,55 +433,40 @@ class BeanDefinition
     {
         return $this->_dependsOn;
     }
-    
+
     /**
      * Set bean dependencies.
 	 *
      * @param string[] $dependsOn Dependencies (bean names).
-     * 
+     *
      * @return void
      */
     public function setDependsOn(array $dependsOn)
     {
         $this->_dependsOn = $dependsOn;
     }
-    
+
     /**
      * Constructor.
-     * 
-     * @param string                   $name          Bean name.
-     * @param string                   $class         Bean class.
-     * @param integer                  $scope         Bean type (scope). See
-     * this class constants.
-     * @param string                   $factoryMethod Factory method name or
-     * false.
-     * @param string                   $factoryBean   Factory bean name or
-     * false.
-     * @param string                   $initMethod    Init method.
-     * @param string                   $destroyMethod Destroy method.
-     * @param string[]                 $dependsOn     Dependency beans.
-     * @param BeanPropertyDefinition[] $properties    Bean properties
-     * definitions.
-     * @param AspectDefinition[]       $aspects       Aspects definitions.
-     * @param BeanConstructorArgumentDefinition[] $arguments Constructor args.
-     * 
+     *
+     * @param string $name Bean name.
+     *
      * @return void
      */
-    public function __construct(
-        $name, $class, $scope, $factoryMethod, $factoryBean, $initMethod,
-        $destroyMethod, array $dependsOn,
-        array $properties, array $aspects, array $arguments
-    ) {
+    public function __construct($name)
+    {
         $this->_name = $name;
-        $this->_class = $class;
-        $this->_scope = $scope;
-        $this->_factoryMethod = $factoryMethod;
-        $this->_factoryBean = $factoryBean;
-        $this->_initMethod = $initMethod;
-        $this->_destroyMethod = $destroyMethod;
-        $this->_dependsOn = $dependsOn;
-        $this->_properties = $properties;
-        $this->_aspects = $aspects;
-        $this->_constructorArgs = $arguments;
+        $soullessString = '';
+        $soullessArray = array();
+        $this->_class = $soullessString;
+        $this->_scope = 0;
+        $this->_factoryMethod = $soullessString;
+        $this->_factoryBean = $soullessString;
+        $this->_initMethod = $soullessString;
+        $this->_destroyMethod = $soullessString;
+        $this->_dependsOn = $soullessArray;
+        $this->_properties = $soullessArray;
+        $this->_aspects = $soullessArray;
+        $this->_constructorArgs = $soullessArray;
     }
 }

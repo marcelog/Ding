@@ -205,7 +205,7 @@ class BeanXmlDriver
      * @throws BeanFactoryException
      * @return BeanDefinition
      */
-    private function _loadBean($beanName)
+    private function _loadBean($beanName, BeanDefinition &$bean = null)
     {
         if (!$this->_simpleXml) {
             $this->_load();
@@ -224,46 +224,45 @@ class BeanXmlDriver
         }
         // asume valid xml (only one bean with that id)
         $simpleXmlBean = $simpleXmlBean[0];
-
-        $bName = (string)$simpleXmlBean->attributes()->id;
-        $bClass = (string)$simpleXmlBean->attributes()->class;
+        if ($bean === null) {
+            $bean = new BeanDefinition($beanName);
+        }
+        $bean->setClass((string)$simpleXmlBean->attributes()->class);
         $bScope = (string)$simpleXmlBean->attributes()->scope;
-        if (isset($simpleXmlBean->attributes()->{'depends-on'})) {
-            $bDependsOn = explode(
-                ',',
-                (string)$simpleXmlBean->attributes()->{'depends-on'}
-            );
-        } else {
-            $bDependsOn = array();
-        }
-        if (isset($simpleXmlBean->attributes()->{'factory-method'})) {
-            $bFactoryMethod
-                = (string)$simpleXmlBean->attributes()->{'factory-method'};
-        } else {
-            $bFactoryMethod = false;
-        }
-        if (isset($simpleXmlBean->attributes()->{'factory-bean'})) {
-            $bFactoryBean
-                = (string)$simpleXmlBean->attributes()->{'factory-bean'};
-        } else {
-            $bFactoryBean = false;
-        }
-        if (isset($simpleXmlBean->attributes()->{'init-method'})) {
-            $bInitMethod = (string)$simpleXmlBean->attributes()->{'init-method'};
-        } else {
-            $bInitMethod = false;
-        }
-        if (isset($simpleXmlBean->attributes()->{'destroy-method'})) {
-            $bDestroyMethod = (string)$simpleXmlBean->attributes()->{'destroy-method'};
-        } else {
-            $bDestroyMethod = false;
-        }
         if ($bScope == 'prototype') {
-            $bScope = BeanDefinition::BEAN_PROTOTYPE;
+            $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
         } else if ($bScope == 'singleton') {
-            $bScope = BeanDefinition::BEAN_SINGLETON;
+            $bean->setScope(BeanDefinition::BEAN_SINGLETON);
         } else {
             throw new BeanFactoryException('Invalid bean scope: ' . $bScope);
+        }
+
+        if (isset($simpleXmlBean->attributes()->{'factory-method'})) {
+            $bean->setFactoryMethod(
+                (string)$simpleXmlBean->attributes()->{'factory-method'}
+            );
+        }
+
+        if (isset($simpleXmlBean->attributes()->{'depends-on'})) {
+            $bean->setDependsOn(explode(
+            	',',
+                (string)$simpleXmlBean->attributes()->{'depends-on'}
+            ));
+        }
+        if (isset($simpleXmlBean->attributes()->{'factory-bean'})) {
+            $bean->setFactoryBean(
+                (string)$simpleXmlBean->attributes()->{'factory-bean'}
+            );
+        }
+        if (isset($simpleXmlBean->attributes()->{'init-method'})) {
+            $bean->setInitMethod(
+                (string)$simpleXmlBean->attributes()->{'init-method'}
+            );
+        }
+        if (isset($simpleXmlBean->attributes()->{'destroy-method'})) {
+            $bean->setDestroyMethod(
+                (string)$simpleXmlBean->attributes()->{'destroy-method'}
+            );
         }
         $bProps = array();
         $bAspects = array();
@@ -277,11 +276,16 @@ class BeanXmlDriver
         foreach ($simpleXmlBean->{'constructor-arg'} as $arg) {
             $constructorArgs[] = $this->_loadConstructorArg($arg);
         }
-        return new BeanDefinition(
-            $bName, $bClass, $bScope, $bFactoryMethod, $bFactoryBean,
-            $bInitMethod, $bDestroyMethod, $bDependsOn,
-            $bProps, $bAspects, $constructorArgs
-        );
+        if (!empty($bProps)) {
+            $bean->setProperties($bProps);
+        }
+        if (!empty($bAspects)) {
+            $bean->setAspects($bAspects);
+        }
+        if (!empty($constructorArgs)) {
+            $bean->setArguments($constructorArgs);
+        }
+        return $bean;
     }
 
     /**
@@ -311,10 +315,7 @@ class BeanXmlDriver
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
-        if ($bean === null) {
-            return $this->_loadBean($beanName);
-        }
-        return $bean;
+        return $this->_loadBean($beanName, $bean);
     }
 
     /**

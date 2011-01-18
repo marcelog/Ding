@@ -75,17 +75,15 @@ class ErrorHandlerDriver
             }
             $handler = $handler[0];
             $name = 'ErrorHandler' . microtime(true);
-            $beanDef = new BeanDefinition(
-                $name, $handler, BeanDefinition::BEAN_SINGLETON,
-            	'', '', '', '', array(), array(), array(), array()
-            );
+            $beanDef = new BeanDefinition($name);
+            $beanDef->setClass($handler);
+            $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
             $factory->setBeanDefinition($name, $beanDef);
             $property = new BeanPropertyDefinition('errorHandler', BeanPropertyDefinition::PROPERTY_BEAN, $name);
-            $beanDef = new BeanDefinition(
-                'ErrorHandler', 'Ding\\Helpers\\ErrorHandler\\ErrorHandlerHelper',
-                BeanDefinition::BEAN_SINGLETON,
-            	'', '', '', '', array(), array($property), array(), array()
-            );
+            $beanDef = new BeanDefinition('ErrorHandler');
+            $beanDef->setClass('Ding\\Helpers\\ErrorHandler\\ErrorHandlerHelper');
+            $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
+            $beanDef->setProperties(array($property));
             $factory->setBeanDefinition('ErrorHandler', $beanDef);
             $bean = $factory->getBean('ErrorHandler');
         }
