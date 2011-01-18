@@ -8,9 +8,21 @@ use Ding\Helpers\ShutdownHandler\IShutdownHandler;
  * @ErrorHandler
  * @SignalHandler
  * @ShutdownHandler
+ * @InitMethod(method=anInitMethod)
+ * @DestroyMethod(method=aDestroyMethod)
  */
 class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
 {
+    public function anInitMethod()
+    {
+        echo "Hello, this is the init method of your errorhandler\n";
+    }
+
+    public function aDestroyMethod()
+    {
+        echo "Hello, this is the *destroy* method of your errorhandler\n";
+    }
+
     public function handleError(ErrorInfo $error)
     {
         echo "This is your custom error handler: " . print_r($error, true);

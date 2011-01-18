@@ -220,7 +220,7 @@ class BeanXmlDriver
             }
         }
         if (false == $simpleXmlBean) {
-            return null;
+            return $bean;
         }
         // asume valid xml (only one bean with that id)
         $simpleXmlBean = $simpleXmlBean[0];

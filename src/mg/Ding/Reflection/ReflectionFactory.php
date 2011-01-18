@@ -97,7 +97,7 @@ class ReflectionFactory
             if (!isset(self::$_classesAnnotated[$name])) {
                 self::$_classesAnnotated[$name] = array();
             }
-            self::$_classesAnnotated[$name][] = $class;
+            self::$_classesAnnotated[$name][$class] = $class;
         }
         foreach ($rClass->getMethods() as $method) {
             $methodName = $method->getName();
