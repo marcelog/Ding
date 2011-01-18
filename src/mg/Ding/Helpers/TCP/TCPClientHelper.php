@@ -163,7 +163,7 @@ class TCPClientHelper
             $error = socket_last_error();
             if ($error != SOCKET_EINPROGRESS && $error != SOCKET_EALREADY) {
                 socket_close($this->_socket);
-                $error = socket_strerror(socket_last_error($this->_socket));
+                $error = socket_strerror($error);
                 $this->_socket = false;
                 throw new TCPException('Could not connect: ' . $error);
             }
