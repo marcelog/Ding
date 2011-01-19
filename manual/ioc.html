@@ -1,0 +1,218 @@
+<H1><u>Container, Inversion of Control, and Dependency Injection</u></H1>
+<H2><u>Beans</u></H2>
+
+In the java world, a bean is a POJO (Plan Old Java Object), meaning that
+virtually any concrete class definition is a bean. Since the latter also
+applies in the php world, we should say that a bean is a "POPO"
+(Plain Old PHP Object).
+
+<H3><u>Scopes</u></H3>
+The scope of the bean defines its lifecycle (when it is created and when should
+be destroyed). The container provides the following options as scopes:
+<ul>
+  <li><u>Singleton:</u>The container will have a single instance for the bean
+  (lazy created), and will returns this instance every time this bean is
+  asked for.
+  </li>
+  <li><u>Prototype:</u>The container will return a new instance every time
+  this bean is asked for.
+  </li>
+</ul>
+
+<H3><u>Bean metadata</u></H3>
+
+For each managed bean by the container, exists a bean definition. This is
+actually all the metadata needed by the container and its extensions to
+actually create and modify the bean's behavior. This metadata includes:
+
+<ul>
+  <li><u>Properties:</u>Optional. Properties have also its own metadata (see below).</li>
+  <li><u>Constructor arguments:</u>Optional. They almost identical to properties, and have
+  their own metadata (see below).</li>
+  <li><u>Aspects:</u>Optional. All aspects applied to this bean. Aspects have their own
+  metadata (see below).</li>
+  <li><u>Name:</u>Mandatory. The bean's name.</li>
+  <li><u>Class:</u>Mandatory. The bean's full class name (including namespace, like A\B\Foo.</li>
+  <li><u>Scope:</u>Mandatory. The bean's scope. This informs the container how to handle
+  the lifecycle of this bean.</li>
+  <li><u>Annotations:</u>Optional. All class-level annotations. Annotations have their
+  own metadata. (see below).</li>
+  <li><u>Init method:</u>Optional. You may declare an optional method to call right after the bean
+  is constructed and its properties injected so you can initialize internal stuff.</li>
+  <li><u>Shutdown method</u>Optional. You may declare an optional method to call when the container
+  is destroyed, so you can cleanup internal stuff.</li>
+  <li><u>Method annotations:</u>Optional. All method-level annotations.</li>
+  <li><u>Bean dependencies:</u>Optional. Which beans need to be created before creating
+  this bean. This has nothing to do with properties that reference other beans
+  (those are resolved when creating each property), but with indirect
+  dependencies (for instance, bean A depends on bean B which in turns depends
+  on bean C, so in order to create bean A, we need to create C and B).</li>
+  <li><u>Factory Method:</u>Optional. If specified, will call a static method of Factory
+  Class, a method of Factory Method, or a static method of the bean class in
+  order to create the bean (instead of using the constructor).</li>
+  <li><u>Factory Class:</u>Optional. If specified, informs the container to call
+  a static method (see Factory Method) of the given class to create the bean
+  instead of using the constructor.</li>
+  <li><u>Factory Bean:</u>Optional. Same as factory class, but will use a method for 
+  the given bean.</li> 
+</ul>
+
+<H4><u>Examples:</u></H4>
+<u>Generic bean definition</u>
+<p>
+For a prototype bean (multiple instances allowed):<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"/&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+For a singleton bean (only one instance allowed):<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="singleton"/&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+All options in the above examples are *MANDATORY*. What follows are examples with
+optional arguments:
+<hr/>
+<p>
+This one will first create aBean, bBean, cBean before creating "beanName":<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype" depends-on="aBean, bBean, cBean"/&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+This one will call A\B\C::getInstance() (static method) in order to get a bean:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype" factory-method="getInstance"/&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+This one will call AnotherClass::getInstance() (static method) in order to get a bean:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype" factory-class="AnotherClass" factory-method="getInstance"/&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+This one will first create "anotherBean" and then call anotherBean->getInstance() (instance method) in order to get the other bean:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype" factory-bean="anotherBean" factory-method="getInstance"/&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+This one will call init() as soon as the bean is created and all its properties are injected but before returning the instance to the caller:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype" init-method="init"/&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+This one will call destroy() when the container is destroyed:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype" destroy-method="destroy"/&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<H3><u>Constructor arguments types and metadata</u></H3>
+The constructor arguments for a bean behave exactly like properties. See the
+sections below.
+ 
+<H3><u>Properties types</u></H3>
+<ul>
+  <li><u>Array:</u>An array has a key (mandatory) and 1 value per key (which in
+  turn can be of any type, so you can have arrays inside arrays, etc).</li>
+  <li><u>Scalar value:</u>A final value, like a string, an integer, etc.</li>
+  <li><u>Bean reference:</u>A string containing the name of another bean defined
+  in the container.</li>
+  <li><u>Code:</u>PHP code to be eval()'uated by the container.</li>
+</ul>
+
+<H3><u>Properties metadata</u></H3>
+<ul>
+  <li><u>Name:</u>The name of the property. The name is important for setter
+injection, i.e: a property called 'name' will be injected calling setName()</li>
+  <li><u>Type:</u>See above for properties types</li>
+  <li><u>Value:</u>The actual value, whatever the type.</li>
+</ul>
+
+<H3><u>Annotations metadata</u></H3>
+<ul>
+  <li><u>Name:</u>The name of the annotation (i.e: @InitMethod).
+  <li><u>Arguments:</u>The annotations arguments. For example @InitMethod(method=xxx)
+  will result in an annotation named InitMethod with an argument 'method' having the
+  value 'xxx'.</li>
+</ul>
+
+<H4><u>Examples:</u></H4>
+<p>
+Define a scalar property:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;aValue&lt;/value&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+Define a reference to another bean as a property:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ref bean="otherBean"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+Define a property as code to be evaluated:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;eval&gt;&lt;![CDATA[ return "Some evaluated code"; ]]>&lt;/eval&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+Define an array as a property:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;array&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="0"&gt;&lt;ref bean="otherBean"/&gt;&lt;/entry&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="1"&gt;&lt;value&gt;aValue&lt;/value&gt;&lt;/entry&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="2"&gt;&lt;eval&gt;&lt;![CDATA[ return "Some evaluated code"; ]]>&lt;/eval&gt;&lt;/entry&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="3"&gt;&lt;array&gt;&lt;entry key="something"&gt;&lt;ref bean="otherBean"/&gt;&lt;/entry&gt;&lt;/array&gt;&lt;/entry&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/array&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+
+<H2><u>Container</u></H2>
+
+The container is a factory of beans. It constructs an instance of a bean using the
+metadata associated with it (and its subparts, like properties, annotations, etc).
+
+A bean may have properties and/or constructor arguments that need to be "injected"
+at some point during the bean's lifecycle. The container supports the following methods
+for injecting data into the beans:
+<ul>
+  <li><u>Setter injection:</u>
+  <li><u>Constructor injection:</u>
+</ul>
+
+<H3><u>Container managed annotations</u></H3>
+<ul>
+  <li><u>@InitMethod</u></li>
+  <li><u>@DestroyMethod</u></li>
+</ul>
