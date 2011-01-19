@@ -136,15 +136,10 @@ sections below.
   <li><u>Name:</u>The name of the property. The name is important for setter
 injection, i.e: a property called 'name' will be injected calling setName()</li>
   <li><u>Type:</u>See above for properties types</li>
-  <li><u>Value:</u>The actual value, whatever the type.</li>
-</ul>
-
-<H3><u>Annotations metadata</u></H3>
-<ul>
-  <li><u>Name:</u>The name of the annotation (i.e: @InitMethod).
-  <li><u>Arguments:</u>The annotations arguments. For example @InitMethod(method=xxx)
-  will result in an annotation named InitMethod with an argument 'method' having the
-  value 'xxx'.</li>
+  <li><u>Value:</u>The actual value, whatever the type. The value can also be
+  a string like ${some.value}, which resembles java properties. The container will
+  notice this and will put the correct value (assuming you passed the right value
+  when instantiating the container).</li>
 </ul>
 
 <H4><u>Examples:</u></H4>
@@ -154,6 +149,43 @@ Define a scalar property:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;aValue&lt;/value&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+Define a scalar constructor argument:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;constructor-arg&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;aValue&lt;/value&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/constructor-arg&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+Mixing both:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;constructor-arg&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;aValue&lt;/value&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/constructor-arg&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;aValue&lt;/value&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<H4>The following examples also apply to constructor arguments</H4>
+<p>
+Define a scalar property with a container property:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;${some.value}&lt;/value&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
 &lt;/beans&gt;<br/>
@@ -190,13 +222,21 @@ Define an array as a property:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="0"&gt;&lt;ref bean="otherBean"/&gt;&lt;/entry&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="1"&gt;&lt;value&gt;aValue&lt;/value&gt;&lt;/entry&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="2"&gt;&lt;eval&gt;&lt;![CDATA[ return "Some evaluated code"; ]]>&lt;/eval&gt;&lt;/entry&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="3"&gt;&lt;array&gt;&lt;entry key="something"&gt;&lt;ref bean="otherBean"/&gt;&lt;/entry&gt;&lt;/array&gt;&lt;/entry&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;entry key="3"&gt;&lt;array&gt;&lt;entry key="other"&gt;&lt;value&gt;${aValue}&lt;/value&gt;&lt;/entry&gt;&lt;/array&gt;&lt;/entry&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/array&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
 &lt;/beans&gt;<br/>
 </p>
 <hr/>
+<H3><u>Annotations metadata</u></H3>
+<ul>
+  <li><u>Name:</u>The name of the annotation (i.e: @InitMethod).
+  <li><u>Arguments:</u>The annotations arguments. For example @InitMethod(method=xxx)
+  will result in an annotation named InitMethod with an argument 'method' having the
+  value 'xxx'.</li>
+</ul>
+
 
 <H2><u>Container</u></H2>
 
