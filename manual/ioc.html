@@ -1,6 +1,45 @@
-<H1><u>Container, Inversion of Control, and Dependency Injection</u></H1>
-<H2><u>Beans</u></H2>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Ding: Beans, IoC, DI, AOP</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #f49648;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #0b69b7; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #0b69b7; }
+    h3 { color: #0b69b7; }
+    a { color: #0b69b7; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+	
+</head>
+
+<body>
+
+<H1><u>Container, Inversion of Control, and Dependency Injection</u></H1><br/>
+<H2><u>Beans</u></H2>
+A Bean is just an object. We call it bean because this particular object obeys some
+rules and this rules and the bean's lifecycle are managed entirely by what is called
+a container.<br/> 
 In the java world, a bean is a POJO (Plan Old Java Object), meaning that
 virtually any concrete class definition is a bean. Since the latter also
 applies in the php world, we should say that a bean is a "POPO"
@@ -20,10 +59,29 @@ be destroyed). The container provides the following options as scopes:
 </ul>
 
 <H3><u>Bean metadata</u></H3>
-
-For each managed bean by the container, exists a bean definition. This is
-actually all the metadata needed by the container and its extensions to
-actually create and modify the bean's behavior. This metadata includes:
+<p>
+For each managed bean by the container, exists a bean definition, which 
+composes all the metadata needed by the container and its extensions to
+actually create and modify the bean's behavior.
+</p>
+<p>
+This data is generated, and
+modified by "Drivers". Drivers are listeners of one or more events in the lifecycle
+of the container and the lifecycle of each bean. Currently, Ding supports 2 
+different drivers: "xml" and "annotations".
+</p>
+<p>
+The first one reads and parses a xml
+file (normally called beans.xml) and the latter generates metadata from the annotations
+found in each of the classes of the project and their methods.
+</p>
+<p>
+ Any number of drivers can be used at any
+given time, they are supposed to complement each one's metadata. So for example you may
+use an annotation in your class at the same time that is declared (with the same or
+different features or properties) in the beans.xml file.
+</p>
+This metadata includes:
 
 <ul>
   <li><u>Properties:</u>Optional. Properties have also its own metadata (see below).</li>
@@ -256,3 +314,5 @@ for injecting data into the beans:
   <li><u>@InitMethod</u></li>
   <li><u>@DestroyMethod</u></li>
 </ul>
+</body>
+</html>

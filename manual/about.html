@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Ding: About</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #f49648;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #0b69b7; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #0b69b7; }
+    h3 { color: #0b69b7; }
+    a { color: #0b69b7; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+	
+</head>
+
+<body>
+
+<H1><u>About Ding and this manual</u></H1>
+<H2><u>About this manual</u></H2>
+This manual, its samples, and Ding itself are not inteded to be an introduction or
+tutorial about dependency injection, inversion of control, aspect oriented programming,
+php, or anything that is not Ding itself. If you are not familiar with these concepts,
+you may still use Ding (since its really easy to do so). However, you are encouraged to
+read about these subjects, just search the web and you will find a lot of good articles,
+books, and tutorials. Also, having some knowledge or experience using the Spring framework,
+Seasar, or Sean is not required, but useful when using Ding.
+
+<H2><u>About Ding</u></H2><br/>
+The name "Ding" comes from the action of using/doing dependency injection (DI),
+the result is something like "di'ing".<br/>
+Also, Ding is based on (and tries to be designed as) the Spring framework from SpringSource, 
+which offers a lot of great features not available to the php world. You now know where those
+great ideas came from ;)<br/>
+
+Ding is intended to be used not only for web applications, but for desktop and embedded applications
+too. As a matter of fact, it has more features for desktop, server, and embedded applications than 
+for web applications.<br/>
+
+<H2><u>Features</u></H2><br/>
+Ding offers the following features:<br/>
+<ul>
+  <li>Scalable architecture, allowing to easily adopt new features.</li>
+  <li>Setter Injection (For arrays, scalar values, php code, and references to other beans).</li>
+  <li>Constructor Injection (For the same data types as above).</li>
+  <li>Can define factory beans, factory classes, and factory methods to create beans.</li>
+  <li>Managed bean lifecycle (for singletons and prototypes).</li>
+  <li>Initialization and destruction methods called by the container.</li>
+  <li>Aspects (as in aspect oriented programming).</li>
+  <li>Lightweight implementation of the MVC (Model View Controller) pattern.</li>
+  <li>Annotations used by helpers and the container (i.e: @InitMethod, @DestroyMethod, @Controller, @ErrorHandler, etc).</li>
+  <li>Can cache proxies and bean definitions with Zend_Cache, Memcached, Filesystem, and APC.</li>
+  <li>Integration with PAMI and PAGI. So you can make asterisk (telephony) applications via agi and ami.</li>
+  <li>Helpers: SignalHandler, ErrorHandler, ShutdownHandler, Timer, Syslog, TCPServer, TCPClient, etc.</li>
+</ul>
+</body>
+</html>
