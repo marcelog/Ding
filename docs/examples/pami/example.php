@@ -1,13 +1,13 @@
 <?php
 declare(ticks=1);
 /**
- * Syslog example
+ * PAMI example.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Examples
- * @subpackage Timer
+ * @subpackage Pami
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @version    SVN: $Id$

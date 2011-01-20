@@ -117,7 +117,7 @@ $properties = array(
             ),
         	'properties' => array(
                 'baseUrl' => '/Some/Mapped/Path',
-    	    	'viewPath' => './',
+    	    	'viewPath' => './views',
     			'viewSuffix' => '.html',
     			'viewPrefix' => 'view.',
                 'timezone' => 'America/Buenos_Aires'
