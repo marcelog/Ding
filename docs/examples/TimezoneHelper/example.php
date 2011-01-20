@@ -1,12 +1,12 @@
 <?php
 /**
- * Example using TimezoneHandler.
+ * Example using TimezoneHelper.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Examples
- * @subpackage TimezoneHandler
+ * @subpackage TimezoneHelper
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
