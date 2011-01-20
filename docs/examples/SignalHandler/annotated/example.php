@@ -15,7 +15,6 @@ declare(ticks=1);
 require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
 Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Bean\Factory\Driver\SignalHandlerDriver;
 use Ding\Helpers\SignalHandler\ISignalHandler;
 
 error_reporting(E_ALL);
