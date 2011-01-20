@@ -2,7 +2,7 @@
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
  * to have a proxy class and any kind of "dynamic class".
- * 
+ *
  * PHP Version 5
  *
  * @category Ding
@@ -30,7 +30,7 @@ use Ding\Reflection\ReflectionFactory;
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
- * 
+ *
  * @todo Performance: Remove new MethodInvocation in proxied invocation.
  */
 class Proxy
@@ -40,7 +40,7 @@ class Proxy
      * @var integer
      */
     private static $_proxyCount = 1;
-    
+
     /**
      * Proxy class template (i.e: the dynamic class)
      * @var string
@@ -65,7 +65,7 @@ final class NEW_NAME extends CLASS_NAME {
      * @var boolean
      */
     public static \$iAmADingProxy = true;
-    
+
     /**
      * This is used from the container to set the dispatcher for the aspects.
      *
@@ -77,7 +77,7 @@ final class NEW_NAME extends CLASS_NAME {
     {
         self::\$_dispatcher = \$dispatcher;
     }
-    
+
     METHODS
 }
 TEXT;
@@ -104,12 +104,12 @@ TEXT;
 
     /**
      * This will return a proxy class source.
-     * 
+     *
      * @param string          $newName     Name for the proxy class.
      * @param ReflectionClass $targetClass Class to be proxied.
-     * 
+     *
      * @see Proxy::$_proxyTemplate
-     * 
+     *
      * @return string
      */
     private static function _createClass(
@@ -127,14 +127,14 @@ TEXT;
         $src = str_replace('METHODS', implode("\n", $methods), $src);
         return $src;
     }
-    
+
     /**
      * This will return a full proxy-method-parameter source.
-     * 
+     *
      * @param \ReflectionParameter $parameter The method parameter.
-     * 
+     *
      * @see Proxy::$_methodTemplate
-     * 
+     *
      * @return string
      */
     private static function _createParameter(\ReflectionParameter $parameter)
@@ -164,14 +164,14 @@ TEXT;
         }
         return $parameterSrc;
     }
-    
+
     /**
      * This will return a full proxy-method source.
-     * 
+     *
      * @param \ReflectionMethod $method The method to be proxied.
-     * 
+     *
      * @see Proxy::$_methodTemplate
-     * 
+     *
      * @return string
      */
     private static function _createMethod(\ReflectionMethod $method)
@@ -199,9 +199,9 @@ TEXT;
         }
         $args = array();
         foreach ($method->getParameters() as $parameter) {
-            $args[] = self::_createParameter($parameter);            
+            $args[] = self::_createParameter($parameter);
         }
-        
+
         $src = self::$_methodTemplate;
         $src = str_replace('VISIBILITY', $visibility, $src);
         $src = str_replace('ADDITIONAL', $additional, $src);
@@ -215,15 +215,15 @@ TEXT;
 
     /**
      * This will give you a string for a new proxy class.
-     * 
+     *
      * @param string      $class                Class to be proxied.
      * @param array       $proxyMethods         Methods to be proxied.
      * @param IDispatcher $dispatcher           Dispatcher to invoke aspects.
-     * 
+     *
      * @todo Currently, final classes can't be proxied because the proxy class
      * extends it (this may change in the near future).
-     * 
-     * @return string 
+     *
+     * @return string
      */
     public static function create(
         $class, array $proxyMethods = array(), IDispatcher $dispatcher = null
@@ -233,7 +233,7 @@ TEXT;
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
         $result = false;
         $src = $cache->fetch($proxyClassName . '.proxy', $result);
-        if (!$result) { 
+        if (!$result) {
             $src = self::_createClass($proxyClassName, $proxyMethods, $subject);
             $cache->store($proxyClassName . '.proxy', $src);
         }
