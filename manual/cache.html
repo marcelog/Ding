@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Ding: Configuring the container caches</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #f49648;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #0b69b7; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #0b69b7; }
+    h3 { color: #0b69b7; }
+    a { color: #0b69b7; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+	
+</head>
+
+<body>
+
+<H1><u>Configuring the container caches</u></H1>
+The container::getInstance() accepts an array that is used configure the
+framework. The cache subsystems use $properties['ding']['cache']. The subsystems
+are:
+
+<ul>
+  <li><u>proxy</u>: To cache proxy definitions: its expensive to create proxies
+  because php lacks this hability, so we have to actually generate code. This code
+  can be cached.</li>
+  <li><u>bdef</u>: To cache BeanDefinitions so no xml's or annotations have to be
+  reparsed per every request.</li>
+  <li><u>beans</u>: To cache the beans themselves. This is actually not so easy as it
+  sounds, so dont expect it to work as intended. Note: this is not a flaw of Ding itself but
+  inherent to the architecture used generally in php, the lack of the concept of an
+  application server, etc. It is recomended to use the dummy implementation for this cache.</li>
+</ul>
+<p>
+The resulting properties needed to configure each one of the cache subsystems:
+</p>
+
+<p>
+<ul>
+  <li>$properties['ding']['cache']['proxy']</li>
+  <li>$properties['ding']['cache']['bdef']</li>
+  <li>$properties['ding']['cache']['beans']</li>
+</ul>
+</p>
+<p>
+In turn, each one of these entries, require the 'impl' key to point to one
+of the possible cache implementations:
+<ul>
+  <li><u>dummy</u>: Does not cache at all.</li>
+  <li><u>file</u>: Uses the filesystem. Requires the additional option 'directory'.</li>
+  <li><u>apc</u>: Uses apc.</li>
+  <li><u>memcached</u>: Uses memcached php extension. Requires additional option 'memcached', an array with: 'host' and 'port'.</li>
+  <li><u>zend</u>: Uses Zend_Cache. Requires additional option: 'zend' with an array of options of your choice according to Zend_Cache documentation.</li>
+</ul>
+</p>
+<p>
+Then, you can configure any of the cache subsystems with any of the cache implementations:<
+</p>
+<hr/>
+
+<p>
+$properties['ding']['cache']['proxy'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'file', 'directory' => '/tmp/Ding/cache'<br/>
+)<br/>
+</p>
+<hr/>
+
+<p>
+$properties['ding']['cache']['bdef'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'memcached', 'memcached' => array('host' => '127.0.0.1', 'port' => 11211)<br/>
+)<br/>
+</p>
+
+<p>
+$properties['ding']['cache']['proxy'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
+)<br/>
+</p>
+<hr/>
+
+<p>
+$properties['ding']['cache']['bdef'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'dummy'<br/>
+)<br/>
+</p>
+<hr/>
+
+<p>
+$zendCacheOptions = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'frontend' => 'Core',<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'backend' => 'File',<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'backendoptions' => array('cache_dir' => '/tmp/Ding/zend/cache'),<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'frontendoptions' => array('lifetime' => 10000, 'automatic_serialization' => true)<br/>
+);<br/>
+<br/>
+$properties['ding']['cache']['bdef'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'zend', 'zend' => $zendCacheOptions<br/>
+)<br/>
+</p>
+<hr/>
+
+</body>
+</html>
