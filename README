@@ -16,13 +16,8 @@ Checkout the api (phpdoc) at: http://marcelog.github.com/Ding/php-doc/html/index
 In the homepage, you can find the user manual: http://marcelog.github.com/Ding
 
 --------------------------------------------------------------------------------
-Please see:
-quickstart: docs/examples/quickstart/example.php
-doctrine2: docs/examples/doctrine/example.php
-mvc: docs/examples/mvc
-tcp: docs/examples/tcp
-syslog: docs/examples/syslog
-timers: docs/examples/timer
+Please see inside docs/examples for code samples. A good place to start are
+the "basic", "aop", "quickstart", "doctrine", and "mvc" examples.
 
 PAMI: docs/examples/pami (PHP Asterisk Manager Interface, at
 https://github.com/marcelog/PAMI, is an oop implementation for asterisk manager
