@@ -328,7 +328,8 @@ class ContainerImpl implements IContainer
             $beanClass = Proxy::create($beanClass, $methods, $dispatcher);
         }
         /* @todo change this to a clone */
-        if ($beanDefinition->getFactoryMethod() == false) {
+        $factoryMethod = $beanDefinition->getFactoryMethod();
+        if ($factoryMethod == false || empty($factoryMethod)) {
             $constructor = ReflectionFactory::getClass($beanClass);
             if (empty($args)) {
                 $bean = $constructor->newInstanceArgs();
@@ -378,17 +379,19 @@ class ContainerImpl implements IContainer
                     $this, $bean, $beanDefinition
                 );
             }
-            $annotations = ReflectionFactory::getClassAnnotations($beanDefinition->getClass());
-            if (isset($annotations['class']['InitMethod'])) {
-                $arguments = $annotations['class']['InitMethod']->getArguments();
-                if (isset($arguments['method'])) {
-                    $beanDefinition->setInitMethod($arguments['method']);
+            if (!empty($beanClass)) {
+                $annotations = ReflectionFactory::getClassAnnotations($beanDefinition->getClass());
+                if (isset($annotations['class']['InitMethod'])) {
+                    $arguments = $annotations['class']['InitMethod']->getArguments();
+                    if (isset($arguments['method'])) {
+                        $beanDefinition->setInitMethod($arguments['method']);
+                    }
                 }
-            }
-            if (isset($annotations['class']['DestroyMethod'])) {
-                $arguments = $annotations['class']['DestroyMethod']->getArguments();
-                if (isset($arguments['method'])) {
-                    $beanDefinition->setDestroyMethod($arguments['method']);
+                if (isset($annotations['class']['DestroyMethod'])) {
+                    $arguments = $annotations['class']['DestroyMethod']->getArguments();
+                    if (isset($arguments['method'])) {
+                        $beanDefinition->setDestroyMethod($arguments['method']);
+                    }
                 }
             }
             $initMethod = $beanDefinition->getInitMethod();

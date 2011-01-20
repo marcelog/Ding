@@ -5,7 +5,7 @@
 class SomeBeanProviderClass
 {
     /**
-     * @Bean(class=MyBean,scope=singleton)
+     * @Bean
      */
     public function someBean()
     {

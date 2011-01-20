@@ -162,14 +162,9 @@ class BeanAnnotationDriver implements ILifecycleListener
                     $bean = new BeanDefinition($beanName);
                 }
                 $args = $this->_configBeans[$class][$beanName]->getArguments();
-                $bean->setClass($args['class']);
                 $bean->setFactoryBean($class);
                 $bean->setFactoryMethod($beanName);
-                if ($args['scope'] == 'singleton') {
-                    $bean->setScope(BeanDefinition::BEAN_SINGLETON);
-                } else {
-                    $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
-                }
+                $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
                 return $bean;
             }
         }
