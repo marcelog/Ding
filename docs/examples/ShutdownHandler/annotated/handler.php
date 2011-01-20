@@ -1,6 +1,6 @@
 <?php
 /**
- * Example using annotated SignalHandler.
+ * Example using annotated ShutdownHandler.
  *
  * PHP Version 5
  *

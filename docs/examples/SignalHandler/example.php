@@ -2,7 +2,7 @@
 declare(ticks=1);
 
 /**
- * Example using annotated SignalHandler.
+ * Example using SignalHandler.
  *
  * PHP Version 5
  *
