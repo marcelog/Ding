@@ -199,7 +199,10 @@ injection, i.e: a property called 'name' will be injected calling setName()</li>
   notice this and will put the correct value (assuming you passed the right value
   when instantiating the container).</li>
 </ul>
-
+<p>
+The value for the properties is run through a chain of filters. One of these filters
+is PropertyFilter, responsible for replacing the ${property} kind of values.
+</p>
 <H4><u>Examples:</u></H4>
 <p>
 Define a scalar property:<br/>
@@ -305,8 +308,8 @@ A bean may have properties and/or constructor arguments that need to be "injecte
 at some point during the bean's lifecycle. The container supports the following methods
 for injecting data into the beans:
 <ul>
-  <li><u>Setter injection:</u>
-  <li><u>Constructor injection:</u>
+  <li>Setter injection</li>
+  <li>Constructor injection</li>
 </ul>
 
 <H3><u>Container managed annotations</u></H3>
