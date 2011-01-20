@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>Ding: Configuring the container caches</title>
+	<title>Ding: Configuring the container</title>
 	
 	<style type="text/css">
 		body {
@@ -35,12 +35,60 @@
 
 <body>
 
-<H1><u>Configuring the container caches</u></H1>
+<H1><u>Configuring the container</u></H1>
 The container::getInstance() method accepts an array that is used configure the
 framework. <br/>
 <p>
 $a = ContainerImpl::getInstance($properties);
 </p>
+<H2>Logging</H2>
+Use the optional property: $properties['ding']['log4php.properties'] => './log4php.properties'
+
+<H2>Bean Factory Drivers</H2>
+You may configure any of the bean definition drivers available:
+<ul>
+  <li>xml: Parses the given xml file, usually beans.xml and get bean definitions from there. Requires the optional property 'filename'.</li>
+  <li>annotation: Extracts bean definitions and other information right from the annotated code. Requires the property 'scanDir'.</li>
+</ul>
+These drivers are configured with their own properties:
+<p>
+<ul>
+  <li>$properties['ding']['factory']['bdef']['xml']</li>
+  <li>$properties['ding']['factory']['bdef']['annotation']</li>
+</ul>
+</p>
+Example:
+<p>
+$properties['ding']['factory']['bdef']['xml'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'filename' => 'beans.xml'<br/>
+)<br/>
+</p>
+<hr/>
+<p>
+$properties['ding']['factory']['bdef']['annotation'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'scanDir' => array(realpath(__DIR__))<br/>
+)<br/>
+</p>
+<hr/>
+<H2>User properties</H2>
+Use the optional property: $properties['ding']['factory']['properties'] to
+specify any key/value pair that you may want search and replace via the PropertyFilter. Example:
+<p>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;${some.value}&lt;/value&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<p>
+$properties['ding']['factory']['properties'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'some.value' => 'This is the final property value'<br/>
+)<br/>
+</p>
+
+<H2>Cache Subsystems</H2>
 The cache subsystems use $properties['ding']['cache']. The subsystems are:
 
 <ul>
