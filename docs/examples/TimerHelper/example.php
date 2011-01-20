@@ -13,6 +13,17 @@ declare(ticks=1);
  * @version    SVN: $Id$
  * @link       http://www.noneyet.ar/
  */
+ini_set(
+    'include_path',
+    implode(
+        PATH_SEPARATOR,
+        array(
+            ini_get('include_path'),
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg'))
+        )
+    )
+);
+
 require_once 'Ding/Autoloader/Ding_Autoloader.php';
 Ding_Autoloader::register();
 

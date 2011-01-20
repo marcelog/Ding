@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="ComponentA" class="ComponentA" scope="singleton">
+		<aspect ref="AspectA" type="method">
+			<pointcut expression="targetMethod"/>
+		</aspect>
+	</bean>
+	<bean id="AspectA" class="AspectA" scope="singleton"/>
+</beans>

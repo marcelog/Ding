@@ -11,6 +11,16 @@
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
+ini_set(
+    'include_path',
+    implode(
+        PATH_SEPARATOR,
+        array(
+            ini_get('include_path'),
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg'))
+        )
+    )
+);
 
 /**
  * This is our bean.
