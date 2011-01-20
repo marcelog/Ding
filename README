@@ -42,6 +42,8 @@ Supported annotations
 Remember that using annotations is completely optional. Not using them will
 benefit performance.
 
+* @Configuration and @Bean just like Java Configuration. So you dont even need
+a beans.xml
 * @Controller (When using the MVC through http).
 * @RequestMapping (When using the MVC through http).
 * @SignalHandler
