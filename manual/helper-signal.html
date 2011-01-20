@@ -36,8 +36,7 @@
 <body>
 
 <H1><u>The SignalHandlerHelper</u></H1>
-The SignalHandlerHelper complete name is Ding\Helpers\SignalHandlerHelper. This class
-is used as a signal handler for the signals: 
+This helper is used as a signal handler for the signals: 
 <ul>
   <li>SIGQUIT</li>
   <li>SIGHUP</li>
@@ -47,21 +46,34 @@ is used as a signal handler for the signals:
   <li>SIGUSR1</li>
   <li>SIGUSR2</li>
 </ul>
+
+<H3>Class</H3>
+Ding\Helpers\SignalHandler\SignalHandlerHelper
+
+<H3>Driver</H3>
+Ding\Bean\Factory\Driver\SignalHandlerDriver
+
+<H3>Annotations</H3>
+Class level annotation @SignalHandler
+
+<H3>Description</H3>
 <p>
 For every signal received, it will invoke a (literally, a) signal handler
 of your choice. You cannot choose which signals to receive, so you must be ready
 to catch any of those. The property "signalHandler" of this bean, is a reference to your
-own bean (whose class definition must implement Ding\Helpers\ISignalHandlerDriver).
+own bean (whose class definition must implement Ding\Helpers\SignalHandler\ISignalHandlerDriver).
 </p>
 <p>
 For this handler to work, you need to "declare(ticks=1)" in your php entry point.
 </p>
 <p>
-The Ding\Bean\Factory\Driver\SignalHandlerDriver is the one responsible for getting an
+The  is the one responsible for getting an
 optional bean from the container, named "SignalHandler", that should be of class
 "Ding\Helpers\SignalHandlerHelper". If this bean exists, it will be set as the
 signal handler. The helper will in turn, call the handler set via the "signalHandler"
 property. This driver registers at AfterConfig in the Container lifecycle.
+
+
 <H3>Example</H3>
 <ul>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SignalHandler">docs/examples/SignalHandler</a>: Using the xml driver.</li>
