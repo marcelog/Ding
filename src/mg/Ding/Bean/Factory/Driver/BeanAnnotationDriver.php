@@ -43,6 +43,8 @@ class BeanAnnotationDriver implements ILifecycleListener
     private static $_instance = false;
     private $_scanDirs;
     private static $_knownClasses = false;
+    private $_configClasses = false;
+    private $_configBeans = false;
 
     /**
      * (non-PHPdoc)
@@ -104,6 +106,26 @@ class BeanAnnotationDriver implements ILifecycleListener
         foreach ($this->_scanDirs as $dir) {
             $this->_scan($dir);
         }
+        $configClasses = ReflectionFactory::getClassesByAnnotation('Configuration');
+        foreach ($configClasses as $configClass) {
+            $this->_configClasses[] = $configClass;
+            $beanName = $configClass . 'DingConfigClass';
+            $def = new BeanDefinition($beanName);
+            $def->setClass($configClass);
+            $def->setScope(BeanDefinition::BEAN_SINGLETON);
+            $factory->setBeanDefinition($beanName, $def);
+            $this->_configBeans[$beanName] = array();
+            foreach (ReflectionFactory::getClassAnnotations($configClass) as $method => $annotations) {
+                if ($method == 'class') {
+                    continue;
+                }
+                foreach ($annotations as $name => $annotation) {
+                    if ($name == 'Bean') {
+                        $this->_configBeans[$beanName][$method] = $annotation;
+                    }
+                }
+            }
+        }
     }
     /**
      * (non-PHPdoc)
@@ -133,6 +155,24 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
+        $configClasses = ReflectionFactory::getClassesByAnnotation('Configuration');
+        foreach ($this->_configBeans as $class => $beans) {
+            if (isset($this->_configBeans[$class][$beanName])) {
+                if ($bean === null) {
+                    $bean = new BeanDefinition($beanName);
+                }
+                $args = $this->_configBeans[$class][$beanName]->getArguments();
+                $bean->setClass($args['class']);
+                $bean->setFactoryBean($class);
+                $bean->setFactoryMethod($beanName);
+                if ($args['scope'] == 'singleton') {
+                    $bean->setScope(BeanDefinition::BEAN_SINGLETON);
+                } else {
+                    $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
+                }
+                return $bean;
+            }
+        }
         return $bean;
     }
 
@@ -191,5 +231,7 @@ class BeanAnnotationDriver implements ILifecycleListener
     private function __construct(array $options)
     {
         $this->_scanDirs = $options['scanDir'];
+        $this->_configClasses = array();
+        $this->_configBeans = array();
     }
 }

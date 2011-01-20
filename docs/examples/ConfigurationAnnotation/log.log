@@ -1,0 +1,171 @@
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Loading beans.xml
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Loading beans.xml
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Loading beans.xml
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Loading beans.xml
+DEBUG - Running BeforeDefinition: myBeanName.beandef
+DEBUG - Loading beans.xml
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: myBeanName.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: myBeanName.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: myBeanName.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: myBeanName.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: myBeanName.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: myBeanName.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: myBeanName.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - Running AfterDefinition: someBean.beandef
+DEBUG - New: someBean.beandef
+DEBUG - Serving already known: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - Running AfterDefinition: someBean.beandef
+DEBUG - New: someBean.beandef
+DEBUG - Serving already known: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.bean
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - Running AfterDefinition: someBean.beandef
+DEBUG - New: someBean.beandef
+DEBUG - Serving already known: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.bean
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - Running AfterDefinition: someBean.beandef
+DEBUG - New: someBean.beandef
+DEBUG - Serving already known: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.bean
+DEBUG - New: someBean.bean
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - Running AfterDefinition: someBean.beandef
+DEBUG - New: someBean.beandef
+DEBUG - Serving already known: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.bean
+DEBUG - New: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - Running BeforeDefinition: ErrorHandler.beandef
+DEBUG - Running BeforeDefinition: SignalHandler.beandef
+DEBUG - Running BeforeDefinition: Timezone.beandef
+DEBUG - Running BeforeDefinition: ShutdownHandler.beandef
+DEBUG - Running BeforeDefinition: someBean.beandef
+DEBUG - Running AfterDefinition: someBean.beandef
+DEBUG - New: someBean.beandef
+DEBUG - Serving already known: SomeBeanProviderClassDingConfigClass.beandef
+DEBUG - New: SomeBeanProviderClassDingConfigClass.bean
+DEBUG - New: someBean.bean
