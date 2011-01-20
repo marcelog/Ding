@@ -4,6 +4,10 @@
 		<aspect ref="AspectA" type="method">
 			<pointcut expression="targetMethod"/>
 		</aspect>
+		<aspect ref="AspectB" type="exception">
+			<pointcut expression="targetException"/>
+		</aspect>
 	</bean>
 	<bean id="AspectA" class="AspectA" scope="singleton"/>
+	<bean id="AspectB" class="AspectB" scope="singleton"/>
 </beans>
