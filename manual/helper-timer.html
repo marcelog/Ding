@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>Ding: Timezone Helper</title>
+	<title>Ding: Timer Helper</title>
 	
 	<style type="text/css">
 		body {
@@ -35,26 +35,20 @@
 
 <body>
 
-<H1><u>The TimezoneHelper</u></H1>
-This helper is used to setup the default timezone for the script, using
-date_default_timezone_set(). 
-
+<H1><u>The TimerHelper</u></H1>
+This helper is designed to be a bean of scope prototype, and act as a timer,
+calling your callback every some milliseconds.
+ 
 <H3>Class</H3>
-Ding\Helpers\Timezone\TimezoneHelper
-
-<H3>Driver</H3>
-Ding\Bean\Factory\Driver\TimezoneDriver
+Ding\Helpers\Timer\TimerHelper
 
 <H3>Description</H3>
 <p>
-The driver is the one responsible for getting an
-optional bean from the container, named "Timezone", that should be of class
-"Ding\Helpers\TimezoneHelper". If this bean exists, it will get the its property
-"timezone" and call date_default_time_set() with that value.
-This driver registers at AfterConfig in the Container lifecycle.
-
+This bean has the properties "handler", and "milliseconds". Handler is a reference
+to another bean that must implement Ding\Helpers\Timers\ITimerHandler. The timer
+can be start()'ed and stop()'ed as needed (see the php-doc api for more details).
 
 <H3>Example</H3>
 <ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TimezoneHelper">docs/examples/TimezoneHelper</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TimerHelper">docs/examples/TimerHelper</a>: Using the xml driver.</li>
 </ul>
