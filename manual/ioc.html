@@ -116,7 +116,19 @@ This metadata includes:
 </ul>
 
 <H4><u>Examples:</u></H4>
-<u>Generic bean definition</u>
+<u>Generic bean definition (annotations driver)</u>
+<p>
+This is pretty much the same as Java Configuration. You can define a class and
+annotate it with @Configuration. All methods of this class (or classes) annotated
+themselves with @Bean(scope=xxx,class=xxx) will became a source for bean definitions.
+</p>
+<p>
+@Configuration classes become factory beans. So, a class annotated with
+@Configuration, having a method called "someBean" which is in turn annotated
+with @Bean, will become the factory bean and factory method for the bean named
+"someBean". 
+</p>
+<u>Generic bean definition (xml driver)</u>
 <p>
 For a prototype bean (multiple instances allowed):<br/>
 &lt;beans&gt;<br/>
