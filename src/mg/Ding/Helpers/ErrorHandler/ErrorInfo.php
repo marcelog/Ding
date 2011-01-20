@@ -96,6 +96,58 @@ class ErrorInfo
     }
 
     /**
+     * Returns a human readable string description of the given error type.
+     *
+     * @param integer $type Error type to convert to string, from getType()
+     *
+     * @return string
+     */
+    public static function typeToString($type)
+    {
+        switch($type)
+        {
+        case E_USER_ERROR:
+            return 'User Error';
+        case E_USER_WARNING:
+            return 'User Warning';
+        case E_USER_NOTICE:
+            return 'User Notice';
+        case E_USER_DEPRECATED:
+            return 'User deprecated';
+        case E_DEPRECATED:
+            return 'Deprecated';
+        case E_RECOVERABLE_ERROR:
+            return 'Recoverable error';
+        case E_STRICT:
+            return 'Strict';
+        case E_WARNING:
+            return 'Warning';
+        case E_NOTICE:
+            return 'Notice';
+        case E_ERROR:
+            return 'Error';
+        default:
+            return 'Unknown';
+        }
+    }
+
+    /**
+     * Standard.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return
+            '[ ErrorInfo: '
+            . ' type: ' . self::typeToString($this->getType())
+            . ', Message: ' . $this->getMessage()
+            . ', File: ' . $this->getFile()
+            . ', Line: ' . $this->getLine()
+            . ']'
+        ;
+    }
+    /**
      * Constructor.
      *
      * @param integer $type    PHP Error type (E_NOTICE, E_USER_*, etc).
