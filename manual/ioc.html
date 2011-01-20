@@ -304,18 +304,63 @@ Define an array as a property:<br/>
 The container is a factory of beans. It constructs an instance of a bean using the
 metadata associated with it (and its subparts, like properties, annotations, etc).
 
-A bean may have properties and/or constructor arguments that need to be "injected"
-at some point during the bean's lifecycle. The container supports the following methods
-for injecting data into the beans:
-<ul>
-  <li>Setter injection</li>
-  <li>Constructor injection</li>
-</ul>
-
 <H3><u>Container managed annotations</u></H3>
 <ul>
-  <li><u>@InitMethod</u></li>
-  <li><u>@DestroyMethod</u></li>
+  <li><u>@InitMethod</u>: Has the same effect as declaring a bean with init-method in the beans.xml file.</li>
+  <li><u>@DestroyMethod</u>: Has the same effect as declaring a bean with destroy-method in the beans.xml file.</li>
 </ul>
+
+
+<H3><u>Extension points</u></H3>
+
+If you're wondering about how to extend Ding with different or new features,
+there are some predefined "kind" of extension points:
+
+<ul>
+  <li>Drivers</li>
+  <li>Filters</li>
+  <li>Helpers</li>
+</ul>
+
+<H3><u>Drivers</u></H3>
+Drivers are normal "lifecyclers". These can be any object that implements
+ILifecycleListener and listens on one or more of the container lifecycle events:
+
+<ul>
+  <li>BeforeConfig</li>
+  <li>AfterConfig</li> 
+  <li>BeforeDefinition</li>
+  <li>AfterDefinition</li>
+  <li>BeforeCreate</li>
+  <li>AfterCreate</li>
+  <li>BeforeAssembly</li>
+  <li>AfterAssembly</li>
+</ul>
+These classes usually reside in the namespace Ding\Bean\Factory\Driver.
+
+Each lifecycle event triggers a chain of the lifecyclers for that particular
+event, so the order might be important. The chain cant be interrupted.
+
+
+<H3><u>Filters</u></H3>
+
+Filters are used to transform a value of a property or constructor argument.
+For example, PropertyFilter searches for the ${xxx} syntax 
+
+in a property value and tries to replace it with a property named xxx.
+
+Filters are chained and the chain cant be interrumpted.
+
+<H3><u>Helpers</u></H3>
+Helpers reside in the namespace Ding\Helpers. The helpers are usually normal
+beans, lets call them "user space" code (meaning that they 
+
+are not part of Ding's architecture per se, unlike Drivers and Filters that are
+active players in the bean creation process).
+
+<H3><u>ReflectionFactory</u></H3>
+The namespace Ding\Reflection contains ReflectionFactory. This factory is
+used throughout the container and its extension points 
+
 </body>
 </html>
