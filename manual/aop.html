@@ -1,10 +1,78 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Ding: Aspect Oriented Programming</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #f49648;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #0b69b7; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #0b69b7; }
+    h3 { color: #0b69b7; }
+    a { color: #0b69b7; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+	
 </head>
+
 <body>
+
+<H1><u>Aspect Oriented Programming</u></H1>
+Ding has an implementation of the interceptor pattern, which is used to bring
+aop in the framework. Currently, there are 2 available kind of interceptors, both
+of them will call all aspects in a chained fashion. Either of those chained aspects
+can break or continue the chain by choosing to (or not to) call the proceed() method.
+<ul>
+  <li><u>Method</u>: Called when the method is called.</li>
+  <li><u>Exception</u>: Called when the called method has thrown an exception not catched.</li>
+</ul>
+The aspects are declared in the xml driver like this:<br/>
+<hr/>
+&lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut expression="targetMethod"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/aspect&gt;<br/>
+&lt;/bean&gt;<br/>
+<hr/>
+<p>
+The above example defines a bean named "some". When the container is requested to return an
+instance of this bean, it will notice that is has an aspect attached, so the bean's class is
+automatically proxied and the instance of that proxy is what is really returned.<br/><br/>
+In this case, the aspect references another bean that should also be known to the container. That
+bean must implement Ding\Aspect\Interceptor\IMethodInterceptor.
+</p>
+<p>
+Notice the "type" attribute in the aspect tag. The other possible value for this attribute is "exception", this will attach an
+ExceptionInterceptor instead of a MethodInterceptor, and your aspect bean must implement IExceptionInterceptor
+instead of IMethodInterceptor.
+</p>
+<p>
+Whenever a call is made to the method defined in the pointcut tag (in this case the method is called
+targetMethod), the invoke() method on your bean will be called. The same applies to exception interceptors.
+</p>
+
+<H3>Example</H3>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop">docs/examples/aop</a>: Using the xml driver.</li>
+</ul>
 
 </body>
 </html>
