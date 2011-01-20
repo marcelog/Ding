@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="Client" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+		<property name="connectTimeout">
+			<value>${tcp.cto}</value>
+		</property>
+		<property name="readTimeout">
+			<value>${tcp.rto}</value>
+		</property>
+		<property name="readMinLength">
+			<value>${tcp.rlen}</value>
+		</property>
+		<property name="address">
+			<value>${tcp.address}</value>
+		</property>
+		<property name="port">
+			<value>${tcp.port}</value>
+		</property>
+		<property name="handler">
+			<ref bean="MyClientHandler"/>
+		</property>
+	</bean>
+	<bean id="MyClientHandler" class="MyClientHandler" scope="prototype"/>
+</beans>
