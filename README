@@ -12,6 +12,9 @@ soon as possible). Please contact me if you have any comments, doubts, or
 any kind of feedback. Send an email to: marcelog@gmail.com
 
 Checkout the api (phpdoc) at: http://marcelog.github.com/Ding/php-doc/html/index.html
+
+In the homepage, you can find the user manual: http://marcelog.github.com/Ding
+
 --------------------------------------------------------------------------------
 Please see:
 quickstart: docs/examples/quickstart/example.php
@@ -243,7 +246,7 @@ See docs/examples/syslog.
 Timers
 ======
 You can setup TimerHelper's and configure any timers you'd like to have in
-your application, giving the intveral in milliseconds and using your own
+your application, giving the interval in milliseconds and using your own
 handlers.
 --------------------------------------------------------------------------------
 Integration with other frameworks
