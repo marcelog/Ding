@@ -36,9 +36,12 @@
 <body>
 
 <H1><u>Configuring the container caches</u></H1>
-The container::getInstance() accepts an array that is used configure the
-framework. The cache subsystems use $properties['ding']['cache']. The subsystems
-are:
+The container::getInstance() method accepts an array that is used configure the
+framework. <br/>
+<p>
+$a = ContainerImpl::getInstance($properties);
+</p>
+The cache subsystems use $properties['ding']['cache']. The subsystems are:
 
 <ul>
   <li><u>proxy</u>: To cache proxy definitions: its expensive to create proxies
