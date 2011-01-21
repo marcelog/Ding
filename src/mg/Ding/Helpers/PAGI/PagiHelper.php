@@ -30,20 +30,22 @@ use PAGI\Client\Impl\ClientImpl;
 $appName = getenv('PAGIApplication');
 $bootstrap = getenv('PAGIBootstrap');
 $log4php = realpath(getenv('log4php_properties'));
+$agiLogger = false;
 try
 {
     include_once $bootstrap;
     $container = ContainerImpl::getInstance($properties);
     $agi = ClientImpl::getInstance(array('log4php.properties' => $log4php));
+    $agiLogger = $agi->getAsteriskLogger();
     $extension = $agi->getChannelVariables()->getDNIS();
     $mapper = $container->getBean('PagiExtensionMapper');
     $myApp = $mapper->resolve($extension);
-    $agi->log('Launching ' . get_class($myApp));
+    $agi->consoleLog('Launching ' . get_class($myApp));
     if ($myApp === false) {
         throw new \Exception('No applications found.');
     }
     $myApp->init();
     $myApp->run();
 } catch (\Exception $e) {
-    $agi->log($e);
+    $agiLogger->error($e);
 }
