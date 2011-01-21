@@ -41,9 +41,29 @@ class BeanAnnotationDriver implements ILifecycleListener
      * @var BeanAnnotationDriver
      */
     private static $_instance = false;
+
+    /**
+     * Target directories to scan for annotated classes.
+     * @var string[]
+     */
     private $_scanDirs;
+
+    /**
+     * Known classes.
+     * @var string[]
+     */
     private static $_knownClasses = false;
+
+    /**
+     * @Configuration annotated classes.
+     * @var string[]
+     */
     private $_configClasses = false;
+
+    /**
+     * @Configuration beans (coming from @Configuration annotated classes).
+     * @var object[]
+     */
     private $_configBeans = false;
 
     /**
@@ -65,6 +85,13 @@ class BeanAnnotationDriver implements ILifecycleListener
     }
 
 
+    /**
+     * Recursively scans a directory looking for annotated classes.
+     *
+     * @param string $dir Directory to scan.
+     *
+     * @return void
+     */
     private function _scan($dir)
     {
         self::$_knownClasses = get_declared_classes();
@@ -92,6 +119,11 @@ class BeanAnnotationDriver implements ILifecycleListener
         }
     }
 
+    /**
+     * Returns known classes.
+     *
+	 * @return string[]
+     */
     public static function getKnownClasses()
     {
         return self::$_knownClasses;
