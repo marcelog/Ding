@@ -129,6 +129,9 @@ with @Bean, will become the factory bean and factory method for the bean named
 "someBean". See docs/examples/ConfigurationAnnotation.
 </p>
 <p>
+For every of the @Bean annotated methods, you should also specify:
+</p>
+<p>
 @Scope(value=xxx) Where xxx is one of prototype or singleton.
 </p>
 <p>
@@ -137,6 +140,26 @@ with @Bean, will become the factory bean and factory method for the bean named
 <p>
 @DestroyMethod(method=xxx) Where xxx is the method to call to destroy the bean on
 container shutdown.
+</p>
+<p>
+/**<br/>
+ * @Configuration<br/>
+ */<br/>
+class SomeBeanProviderClass<br/>
+{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;/**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @Bean<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @Scope(value='singleton')<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @InitMethod(method=aMethod)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* @DestroyMethod(method=bMethod)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;public function someBean()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ret = new MyBean();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$ret->setSomeProperty('hello world');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return $ret;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
 </p>
 <u>Generic bean definition (xml driver)</u>
 <p>
