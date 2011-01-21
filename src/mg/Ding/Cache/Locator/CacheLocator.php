@@ -44,14 +44,15 @@ class CacheLocator
     private static $_options = array(
     	'proxy' => array('impl' => 'file', 'directory' => '.'),
         'bdef' => array('impl' => 'apc'),
-        'beans' => array('impl' => 'dummy')
+        'beans' => array('impl' => 'dummy'),
+        'annotations' => array('impl' => 'dummy')
     );
-    
+
     /**
      * Factory for cache implementations.
-     * 
+     *
      * @param array $options Cache options.
-     * 
+     *
      * @throws CacheException
      * @return ICache
      */
@@ -77,9 +78,9 @@ class CacheLocator
     /**
      * The container will call this one, in order to setup options. If any
      * option is missing, we use our default options as fallback.
-     * 
+     *
      * @param array $options Cache options.
-     * 
+     *
      * @see CacheLocator::$_options
      * @return void
      */
@@ -87,9 +88,9 @@ class CacheLocator
     {
         self::$_options = array_replace_recursive(self::$_options, $options);
     }
-    
+
     /**
-     * Returns a cache for auto generated proxy classes. 
+     * Returns a cache for auto generated proxy classes.
 	 *
      * @return ICache
      */
@@ -97,9 +98,9 @@ class CacheLocator
     {
         return self::_returnCacheFromImpl(self::$_options['proxy']);
     }
-    
+
     /**
-     * Returns a cache for bean definitions. 
+     * Returns a cache for bean definitions.
 	 *
      * @return ICache
      */
@@ -107,14 +108,24 @@ class CacheLocator
     {
         return self::_returnCacheFromImpl(self::$_options['bdef']);
     }
-    
+
     /**
-     * Returns a cache for beans. 
+     * Returns a cache for beans.
 	 *
      * @return ICache
      */
     public static function getBeansCacheInstance()
     {
         return self::_returnCacheFromImpl(self::$_options['beans']);
+    }
+
+    /**
+     * Returns a cache for annotations.
+	 *
+     * @return ICache
+     */
+    public static function getAnnotationsCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['annotations']);
     }
 }
