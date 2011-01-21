@@ -128,6 +128,16 @@ themselves with @Bean will became a source for bean definitions.
 with @Bean, will become the factory bean and factory method for the bean named
 "someBean". See docs/examples/ConfigurationAnnotation.
 </p>
+<p>
+@Scope(value=xxx) Where xxx is one of prototype or singleton.
+</p>
+<p>
+@InitMethod(method=xxx) Where xxx is the method to call to initialize the bean.
+</p>
+<p>
+@DestroyMethod(method=xxx) Where xxx is the method to call to destroy the bean on
+container shutdown.
+</p>
 <u>Generic bean definition (xml driver)</u>
 <p>
 For a prototype bean (multiple instances allowed):<br/>
