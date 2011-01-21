@@ -29,6 +29,16 @@ class MyBean
 {
     private $_someProperty;
 
+    public function aMethod()
+    {
+        echo "Init\n";
+    }
+
+    public function bMethod()
+    {
+        echo "Destroy\n";
+    }
+
     public function setSomeProperty($value)
     {
         $this->_someProperty = $value;

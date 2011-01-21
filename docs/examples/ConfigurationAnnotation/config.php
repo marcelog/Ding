@@ -6,6 +6,9 @@ class SomeBeanProviderClass
 {
     /**
      * @Bean
+     * @Scope(value='prototype')
+     * @InitMethod(method=aMethod)
+     * @DestroyMethod(method=bMethod)
      */
     public function someBean()
     {

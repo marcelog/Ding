@@ -109,24 +109,51 @@ class BeanAnnotationDriver implements ILifecycleListener
         $configClasses = ReflectionFactory::getClassesByAnnotation('Configuration');
         foreach ($configClasses as $configClass) {
             $this->_configClasses[] = $configClass;
-            $beanName = $configClass . 'DingConfigClass';
-            $def = new BeanDefinition($beanName);
+            $configBeanName = $configClass . 'DingConfigClass';
+            $def = new BeanDefinition($configBeanName);
             $def->setClass($configClass);
             $def->setScope(BeanDefinition::BEAN_SINGLETON);
-            $factory->setBeanDefinition($beanName, $def);
-            $this->_configBeans[$beanName] = array();
+            $factory->setBeanDefinition($configBeanName, $def);
+            $this->_configBeans[$configBeanName] = array();
             foreach (ReflectionFactory::getClassAnnotations($configClass) as $method => $annotations) {
                 if ($method == 'class') {
                     continue;
                 }
                 foreach ($annotations as $name => $annotation) {
                     if ($name == 'Bean') {
-                        $this->_configBeans[$beanName][$method] = $annotation;
+                        $this->_configBeans[$configBeanName][$method] = $annotation;
+                        $def = new BeanDefinition($method);
+                        $def->setFactoryBean($configBeanName);
+                        $def->setFactoryMethod($method);
+                        if (isset($annotations['Scope'])) {
+                            $args = $annotations['Scope']->getArguments();
+                            if (isset($args['value'])) {
+                                if ($args['value'] == 'singleton') {
+                                    $def->setScope(BeanDefinition::BEAN_SINGLETON);
+                                } else if ($args['value'] == 'prototype') {
+                                    $def->setScope(BeanDefinition::BEAN_PROTOTYPE);
+                                }
+                            }
+                        }
+                        if (isset($annotations['InitMethod'])) {
+                            $args = $annotations['InitMethod']->getArguments();
+                            if (isset($args['method'])) {
+                                $def->setInitMethod($args['method']);
+                            }
+                        }
+                        if (isset($annotations['DestroyMethod'])) {
+                            $args = $annotations['DestroyMethod']->getArguments();
+                            if (isset($args['method'])) {
+                                $def->setDestroyMethod($args['method']);
+                            }
+                        }
+                        $factory->setBeanDefinition($method, $def);
                     }
                 }
             }
         }
     }
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
@@ -155,19 +182,6 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
-        $configClasses = ReflectionFactory::getClassesByAnnotation('Configuration');
-        foreach ($this->_configBeans as $class => $beans) {
-            if (isset($this->_configBeans[$class][$beanName])) {
-                if ($bean === null) {
-                    $bean = new BeanDefinition($beanName);
-                }
-                $args = $this->_configBeans[$class][$beanName]->getArguments();
-                $bean->setFactoryBean($class);
-                $bean->setFactoryMethod($beanName);
-                $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
-                return $bean;
-            }
-        }
         return $bean;
     }
 

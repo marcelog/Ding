@@ -43,7 +43,8 @@ Remember that using annotations is completely optional. Not using them will
 benefit performance.
 
 * @Configuration and @Bean just like Java Configuration. So you dont even need
-a beans.xml
+a beans.xml (@Scope, @InitMethod, @DestroyMethod) for this annotated bean
+definitions.
 * @Controller (When using the MVC through http).
 * @RequestMapping (When using the MVC through http).
 * @SignalHandler
