@@ -69,9 +69,10 @@ $properties = array(
         // You can configure the cache for the bean definition, the beans, and the proxy definitions.
         // Other available implementations: zend, file, dummy, and memcached.
     	'cache' => array(
-            'proxy' => array('impl' => 'dummy'),
-            'bdef' => array('impl' => 'dummy'),
-            'beans' => array('impl' => 'dummy')
+            'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/proxy'),
+            'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/bdef'),
+            'annotations' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/annotations'),
+        	'beans' => array('impl' => 'dummy')
         )
     )
 );

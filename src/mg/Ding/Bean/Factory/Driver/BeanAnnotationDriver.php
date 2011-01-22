@@ -15,6 +15,8 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Cache\Locator\CacheLocator;
+
 use Ding\Bean\Lifecycle\ILifecycleListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
@@ -68,6 +70,12 @@ class BeanAnnotationDriver implements ILifecycleListener
     private $_configBeans = false;
 
     /**
+     * Our cache.
+     * @var ICache
+     */
+    private $_cache = false;
+
+    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
@@ -107,6 +115,13 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     private function _scan($dir)
     {
+        $result = false;
+        $cacheKey = str_replace('\\', '_', str_replace('/', '_', $dir)) . '.knownclasses';
+//        $knownClasses = $this->_cache->fetch($cacheKey, $result);
+        if ($result === true) {
+            self::$_knownClasses = array_merge_recursive(self::$_knownClasses, $knownClasses);
+            return;
+        }
         foreach (scandir($dir) as $dirEntry) {
             if ($dirEntry == '.' || $dirEntry == '..') {
                 continue;
@@ -116,10 +131,15 @@ class BeanAnnotationDriver implements ILifecycleListener
                 $this->_scan($dirEntry);
             } else if(is_file($dirEntry) && $this->_isScannable($dirEntry)) {
                 include_once $dirEntry;
-                $newClasses = get_declared_classes();
-                foreach (array_diff($newClasses, self::$_knownClasses) as $aNewClass) {
+                $classes = get_declared_classes();
+                $newClasses = array_combine($classes, $classes);
+                $diff = array_diff($newClasses, self::$_knownClasses);
+                $diff = array_combine($diff, $diff);
+                foreach ($diff as $aNewClass) {
                     self::$_knownClasses[$aNewClass] = ReflectionFactory::getClassAnnotations($aNewClass);
+                    $diff[$aNewClass] = self::$_knownClasses[$aNewClass];
                 }
+                $this->_cache->store($cacheKey, $diff);
             }
         }
     }
@@ -302,6 +322,8 @@ class BeanAnnotationDriver implements ILifecycleListener
         $this->_scanDirs = $options['scanDir'];
         $this->_configClasses = array();
         $this->_configBeans = array();
-        self::$_knownClasses = get_declared_classes();
+        $classes = get_declared_classes();
+        self::$_knownClasses = array_combine($classes, $classes);
+        $this->_cache = CacheLocator::getAnnotationsCacheInstance();
     }
 }
