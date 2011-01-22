@@ -40,7 +40,8 @@ for the class.
 Supported annotations
 =====================
 Remember that using annotations is completely optional. Not using them will
-benefit performance.
+benefit performance. Annotations CAN be cached. Use the 'annotations' cache with
+any of the implementations below ;)
 
 * @Configuration and @Bean just like Java Configuration. So you dont even need
 a beans.xml (@Scope, @InitMethod, @DestroyMethod) for this annotated bean
