@@ -36,6 +36,18 @@
 <body>
 
 <H1><u>The MVC Implementation</u></H1>
+
+<H3>Classes</H3>
+Ding\MVC\Action<br/>
+Ding\MVC\Dispatcher<br/>
+Ding\MVC\ModelAndView<br/>
+Ding\MVC\View<br/>
+
+<H3>Interfaces</H3>
+Ding\MVC\IMapper<br/>
+Ding\MVC\IViewResolver<br/>
+
+<H2>Description</H2>
 The MVC implementation of Ding is in the namespace Ding\MVC. The components are:
 
 <ul>
@@ -50,6 +62,24 @@ The MVC implementation of Ding is in the namespace Ding\MVC. The components are:
   <li><u>View</u>: Views are in charge of rendering the ModelAndView in a proper way for the actor that triggered the request.</li>
 </ul>
 <H2>HTTP implementation</H2>
+<H2>Classes</H3>
+Ding\MVC\Http\HttpAction<br/>
+Ding\MVC\Http\HttpDispatcher<br/>
+Ding\MVC\Http\HttpExceptionMapper<br/>
+Ding\MVC\Http\HttpView<br/>
+Ding\MVC\Http\HttpViewResolver<br/>
+Ding\MVC\Http\HttpUrlMapper<br/>
+Ding\MVC\Http\HttpFrontController<br/>
+
+<H2>Annotations</H3>
+@Controller<br/>
+@RequestMapping(url=xxx)<br/>
+<br/>
+Both of these annotations need to be present in a controller defined by annotations.<br/>
+@Controller will tell the mvc driver to map the class with the content of the url param in the
+@RequestMapping annotation. This is equivalent to configure the class as a bean in beans.xml and
+mapping there the url to that bean.
+<p>
 In the case of http, the following components exist:
 <ul>
   <li><u>HttpAction</u>: The HttpAction encapsulated the uri, the method used, and the arguments.</li>
@@ -64,6 +94,7 @@ In the case of http, the following components exist:
   <li><u>HttpFrontController</u>: This is intended to be instantiated and called from your own entry point, will load the
   container and also, invoke the dispatcher and completely handle the request.</li>
 </ul>
+</p>
 <p>
 A special setup is required in the web server. You need to forward ALL uri's (at least the ones you're interested
 in manage with Ding) to your entry point, let's say index.php. In lighttpd you would do:<br/><br/>
