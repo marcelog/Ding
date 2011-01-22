@@ -13,6 +13,12 @@
  * @link       http://www.noneyet.ar/
  */
 declare(ticks=1);
+use Ding\Helpers\ErrorHandler\ErrorInfo;
+use Ding\Helpers\ErrorHandler\IErrorHandler;
+use Ding\Helpers\SignalHandler\ISignalHandler;
+use Ding\Helpers\ShutdownHandler\IShutdownHandler;
+use Ding\Helpers\TCP\ITCPServerHandler;
+
 ini_set(
     'include_path',
     implode(
@@ -28,6 +34,76 @@ require_once 'Ding/Autoloader/Ding_Autoloader.php';
 Ding_Autoloader::register();
 use Ding\Container\Impl\ContainerImpl;
 
+/**
+ * @ErrorHandler
+ * @SignalHandler
+ * @ShutdownHandler
+ */
+class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
+{
+    public function handleError(ErrorInfo $error)
+    {
+        echo "This is your custom error handler: " . print_r($error, true);
+    }
+
+    public function handleShutdown()
+    {
+        echo "This is your custom shutdown handler.\n";
+    }
+
+    public function handleSignal($signal)
+    {
+        global $run;
+        echo "This is your custom signal handler: " . $signal . "\n";
+        $run = false;
+    }
+}
+class MyServerHandler implements ITCPServerHandler
+{
+    public function beforeOpen()
+    {
+        echo "before open\n";
+    }
+
+    public function beforeListen()
+    {
+        echo "before listen\n";
+    }
+
+    public function close()
+    {
+        echo "close\n";
+    }
+
+    public function handleConnection($remoteAddress, $remotePort)
+    {
+        global $server;
+        echo "new connection from: $remoteAddress:$remotePort\n";
+    }
+
+    public function readTimeout($remoteAddress, $remotePort)
+    {
+        global $server;
+        echo "read timeout for $remoteAddress:$remotePort\n";
+        $server->disconnect($remoteAddress, $remotePort);
+    }
+
+    public function handleData($remoteAddress, $remotePort)
+    {
+        global $server;
+        $buffer = '';
+        $len = 4096;
+        echo "data from: $remoteAddress:$remotePort\n";
+        $server->read($remoteAddress, $remotePort, $buffer, $len);
+        echo $buffer . "\n";
+        $server->write($remoteAddress, $remotePort, 'You said: ' . $buffer);
+    }
+
+    public function disconnect($remoteAddress, $remotePort)
+    {
+        echo "disconnect: $remoteAddress:$remotePort\n";
+    }
+}
 $run = true;
 $properties = array(
     'ding' => array(

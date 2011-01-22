@@ -145,11 +145,11 @@ class BeanAnnotationDriver implements ILifecycleListener
                     if (empty(self::$_knownClasses[$aNewClass])) {
                         continue;
                     }
-                    $diff[$aNewClass] = self::$_knownClasses[$aNewClass];
+                    $classes = array_combine($classes, $classes);
                     $include_files[$aNewClass] = $dirEntry;
                     $this->_cache->store(str_replace('\\', '_', $aNewClass) . '.include_file', $dirEntry);
                 }
-                $this->_cache->store($cacheKey, $diff);
+                $this->_cache->store($cacheKey, $classes);
             }
         }
     }

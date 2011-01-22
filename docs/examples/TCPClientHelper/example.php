@@ -29,6 +29,85 @@ ini_set(
 require_once 'Ding/Autoloader/Ding_Autoloader.php';
 Ding_Autoloader::register();
 use Ding\Container\Impl\ContainerImpl;
+use Ding\Helpers\TCP\ITCPClientHandler;
+use Ding\Helpers\ErrorHandler\ErrorInfo;
+use Ding\Helpers\ErrorHandler\IErrorHandler;
+use Ding\Helpers\SignalHandler\ISignalHandler;
+use Ding\Helpers\ShutdownHandler\IShutdownHandler;
+
+/**
+ * @ErrorHandler
+ * @SignalHandler
+ * @ShutdownHandler
+ */
+class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
+{
+    public function handleError(ErrorInfo $error)
+    {
+        echo "This is your custom error handler: " . print_r($error, true);
+    }
+
+    public function handleShutdown()
+    {
+        echo "This is your custom shutdown handler.\n";
+    }
+
+    public function handleSignal($signal)
+    {
+        global $run;
+        echo "This is your custom signal handler: " . $signal . "\n";
+        $run = false;
+    }
+}
+
+class MyClientHandler implements ITCPClientHandler
+{
+
+    public function connectTimeout()
+    {
+        echo "connection timeout\n";
+    }
+
+    public function readTimeout()
+    {
+        global $client;
+        echo "read timeout\n";
+        $client->close();
+    }
+    public function beforeConnect()
+    {
+        echo "before connect\n";
+    }
+
+    public function connect()
+    {
+        global $connected;
+        global $client;
+        $connected = true;
+        echo "connected\n";
+        $client->write("GET / HTTP/1.0\n\n");
+    }
+
+    public function disconnect()
+    {
+        global $connected;
+        global $run;
+        $connected = false;
+        echo "disconnected\n";
+        $run = false;
+    }
+
+    public function data()
+    {
+        global $client;
+        $buffer = '';
+        $len = 4096;
+        $len = $client->read($buffer, $len);
+        echo "got data (" . $len . "): \n";
+        echo $buffer . "\n";
+        $client->close();
+    }
+}
 
 $connected = false;
 $run = true;

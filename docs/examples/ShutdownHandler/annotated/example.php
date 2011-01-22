@@ -14,6 +14,22 @@
 require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
 Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
+use Ding\Helpers\ShutdownHandler\IShutdownHandler;
+
+/**
+ * @ShutdownHandler
+ */
+class MyShutdownHandler implements IShutdownHandler
+{
+    public function handleShutdown()
+    {
+        echo "This is your custom shutdown handler\n";
+    }
+
+    public function __construct()
+    {
+    }
+}
 
 error_reporting(E_ALL);
 ini_set('display_errorrs', 1);

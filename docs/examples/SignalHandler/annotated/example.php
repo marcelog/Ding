@@ -15,6 +15,22 @@ declare(ticks=1);
 require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
 Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
+use Ding\Helpers\SignalHandler\ISignalHandler;
+
+/**
+ * @SignalHandler
+ */
+class MySignalHandler implements ISignalHandler
+{
+    public function handleSignal($signal)
+    {
+        echo "This is your custom signal handler: " . $signal . "\n";
+    }
+
+    public function __construct()
+    {
+    }
+}
 
 error_reporting(E_ALL);
 ini_set('display_errorrs', 1);
