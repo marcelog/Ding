@@ -129,6 +129,14 @@ with @Bean, will become the factory bean and factory method for the bean named
 "someBean". See docs/examples/ConfigurationAnnotation.
 </p>
 <p>
+This behavior can be overriden if you use the argument name= in the @Bean
+annotation, like:<br/>
+<br/>
+@Bean(name=someOtherName)<br/><br/>
+The string "someOtherName" is now the final name of the bean (although the method
+is still used as the factory method).
+</p>
+<p>
 For every of the @Bean annotated methods, you should also specify:
 </p>
 <p>
