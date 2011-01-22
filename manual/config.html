@@ -95,6 +95,9 @@ The cache subsystems use $properties['ding']['cache']. The subsystems are:
   <li><u>proxy</u>: To cache proxy definitions: its expensive to create proxies
   because php lacks this hability, so we have to actually generate code. This code
   can be cached.</li>
+  <li><u>annotations</u>: To cache annotations, its *really* expensive if you have
+  a large source tree or use them a lot. So we cache the annotations for each class and
+  the files and directories scanned (along with all autodiscovered classes there).</li>
   <li><u>bdef</u>: To cache BeanDefinitions so no xml's or annotations have to be
   reparsed per every request.</li>
   <li><u>beans</u>: To cache the beans themselves. This is actually not so easy as it
@@ -111,6 +114,7 @@ The resulting properties needed to configure each one of the cache subsystems:
   <li>$properties['ding']['cache']['proxy']</li>
   <li>$properties['ding']['cache']['bdef']</li>
   <li>$properties['ding']['cache']['beans']</li>
+  <li>$properties['ding']['cache']['annotations']</li>
 </ul>
 </p>
 <p>
@@ -144,6 +148,13 @@ $properties['ding']['cache']['bdef'] = array(<br/>
 
 <p>
 $properties['ding']['cache']['proxy'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
+)<br/>
+</p>
+<hr/>
+
+<p>
+$properties['ding']['cache']['annotations'] = array(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
 )<br/>
 </p>
