@@ -34,7 +34,7 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class SignalHandlerDriver
+class SignalHandlerDriver implements ILifecycleListener
 {
     /**
      * Holds current instance.

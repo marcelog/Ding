@@ -14,6 +14,7 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Bean\Lifecycle\ILifecycleListener;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
@@ -33,7 +34,7 @@ use Ding\Aspect\AspectDefinition;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class BeanXmlDriver
+class BeanXmlDriver implements ILifecycleListener
 {
     /**
      * log4php logger or our own.
@@ -364,12 +365,20 @@ class BeanXmlDriver
         return $bean;
     }
 
-    public function afterAssemble(&$bean, BeanDefinition $beanDefinition)
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
+     */
+    public function afterAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }
 
-    public function destruct(&$bean, BeanDefinition $beanDefinition)
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::destruct()
+     */
+    public function destruct($bean, BeanDefinition $beanDefinition)
     {
         return $bean;
     }

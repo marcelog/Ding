@@ -28,9 +28,6 @@ namespace Ding\Bean\Lifecycle;
  */
 abstract class BeanLifecycle
 {
-    const BeforeConfig = 7;
-    const AfterConfig = 8;
-
     /**
      * The bean is in the process of being defined. Typically by a final
      * backend, like xml or mysql, etc.
@@ -74,4 +71,16 @@ abstract class BeanLifecycle
      * @var integer
      */
     const BeforeDestruction = 6;
+
+    /**
+     * When the container is about to configure itself and its subsytems.
+     * @var integer
+     */
+    const BeforeConfig = 7;
+
+    /**
+     * Right after configuring everything, ready to be used by the user.
+     * @var integer
+     */
+    const AfterConfig = 8;
 }

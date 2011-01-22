@@ -19,6 +19,7 @@ use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
+use Ding\Bean\Lifecycle\ILifecycleListener;
 
 /**
  * This driver will look up an optional bean called ErrorHandler and if it
@@ -33,7 +34,7 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class ErrorHandlerDriver
+class ErrorHandlerDriver implements ILifecycleListener
 {
     /**
      * Holds current instance.

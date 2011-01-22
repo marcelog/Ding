@@ -32,7 +32,7 @@ use Ding\Bean\Factory\IBeanFactory;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class TimezoneDriver
+class TimezoneDriver implements ILifecycleListener
 {
     /**
      * Holds current instance.
