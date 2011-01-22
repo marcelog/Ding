@@ -89,6 +89,11 @@ class BeanAnnotationDriver
         }
     }
 
+    /**
+     * Returns true if the given filesystem entry is interesting to scan.
+     *
+     * @param string $dirEntry Filesystem entry.
+     */
     private function _isScannable($dirEntry)
     {
         $extensionPos = strrpos($dirEntry, '.');
@@ -158,11 +163,28 @@ class BeanAnnotationDriver
         return self::$_knownClasses;
     }
 
-    private function _loadBean($name, $factoryBean, $annotations)
+    /**
+     * Loads a bean definition from the given annotations.
+     *
+     * @param string                     $name          Candidate name.
+     * @param string                     $factoryBean   Factory bean name.
+     * @param string                     $factoryMethod Factory bean method.
+     * @param BeanAnnotationDefinition[] $annotations   Annotations with data.
+     *
+     * @return BeanDefinition
+     */
+    private function _loadBean($name, $factoryBean, $factoryMethod, $annotations)
     {
         $def = new BeanDefinition($name);
         $def->setFactoryBean($factoryBean);
-        $def->setFactoryMethod($name);
+        $beanAnnotation = $annotations['Bean'];
+        $overrideName = $beanAnnotation->getArguments();
+        if (!empty($overrideName)) {
+            if (isset($overrideName['name'])) {
+                $name = $overrideName['name'];
+            }
+        }
+        $def->setFactoryMethod($factoryMethod);
         if (isset($annotations['Scope'])) {
             $args = $annotations['Scope']->getArguments();
             if (isset($args['value'])) {
@@ -238,11 +260,20 @@ class BeanAnnotationDriver
                     if ($method == 'class') {
                         continue;
                     }
-                    if ($method == $beanName) {
-                        if (isset($annotations['Bean'])) {
-                            $bean = $this->_loadBean($method, $configBeanName, $annotations);
-                            $this->_configBeans[$configBeanName][$method] = $annotation;
-                            return $bean;
+                    if (isset($annotations['Bean'])) {
+                        $beanAnnotation = $annotations['Bean'];
+                        $args = $beanAnnotation->getArguments();
+                        if (isset($args['name'])) {
+                            $name = $args['name'];
+                        } else {
+                            $name = $method;
+                        }
+                        if ($name == $beanName) {
+                            if (isset($annotations['Bean'])) {
+                                $bean = $this->_loadBean($name, $configBeanName, $method, $annotations);
+                                $this->_configBeans[$configBeanName][$name] = $annotation;
+                                return $bean;
+                            }
                         }
                     }
                 }

@@ -28,8 +28,12 @@ ini_set(
 class SomeBeanProviderClass
 {
     /**
-     * @Bean
-     * @Scope(value='prototype')
+     * Notice how the name= here replaces the bean name that comes from the method.
+     * This bean should be called someBean (if no name= arguments where passed to the
+     * bean annotation.)
+     *
+     * @Bean(name=someBeanRenamed)
+     * @Scope(value=prototype)
      * @InitMethod(method=aMethod)
      * @DestroyMethod(method=bMethod)
      */
@@ -98,6 +102,6 @@ $properties = array(
     )
 );
 $container = ContainerImpl::getInstance($properties);
-$bean = $container->getBean('someBean');
+$bean = $container->getBean('someBeanRenamed');
 var_dump($bean->getSomeProperty());
 var_dump(ReflectionFactory::getClassesByAnnotation('author'));
