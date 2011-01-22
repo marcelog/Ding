@@ -45,6 +45,7 @@ use Ding\Bean\Factory\Driver\BeanAspectDriver;
 use Ding\Bean\Factory\Driver\FiltersDriver;
 use Ding\Bean\Factory\Driver\ErrorHandlerDriver;
 use Ding\Bean\Factory\Driver\SignalHandlerDriver;
+use Ding\Bean\Factory\Driver\SetterInjectionDriver;
 use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
@@ -109,12 +110,6 @@ class ContainerImpl implements IContainer
      * @var ICache
      */
     private $_beanDefCache;
-
-    /**
-     * Cache property setters names.
-     * @var array[]
-     */
-    private $_propertiesNameCache;
 
     /**
      * Lifecycle handlers for beans.
@@ -223,31 +218,6 @@ class ContainerImpl implements IContainer
     }
 
     /**
-     * This will return the property value from a definition.
-     *
-     * @param BeanPropertyDefinition $property Property definition.
-     *
-     * @return mixed
-     */
-    private function _loadProperty(BeanPropertyDefinition $property)
-    {
-        $value = null;
-        if ($property->isBean()) {
-            $value = $this->getBean($property->getValue());
-        } else if ($property->isArray()) {
-            $value = array();
-            foreach ($property->getValue() as $k => $v) {
-                $value[$k] = $this->_loadProperty($v);
-            }
-        } else if ($property->isCode()) {
-            $value = eval($property->getValue());
-        } else {
-            $value = $property->getValue();
-        }
-        return $value;
-    }
-
-    /**
      * This will assembly a bean (inject dependencies, loading other needed
      * beans in the way).
      *
@@ -260,20 +230,11 @@ class ContainerImpl implements IContainer
      */
     private function _assemble($bean, BeanDefinition $def)
     {
-        foreach ($def->getProperties() as $property) {
-            $propertyName = $property->getName();
-            if (isset($this->_propertiesNameCache[$propertyName])) {
-                $methodName = $this->_propertiesNameCache[$propertyName];
-            } else {
-                $methodName = 'set' . ucfirst($propertyName);
-                $this->_propertiesNameCache[$propertyName] = $methodName;
-            }
-            try
-            {
-                $bean->$methodName($this->_loadProperty($property));
-            } catch (\ReflectionException $exception) {
-                throw new BeanFactoryException('Error calling: ' . $methodName);
-            }
+        foreach ($this->_lifecyclers[BeanLifecycle::BeforeAssemble] as $lifecycleListener) {
+            $bean = $lifecycleListener->beforeAssemble($this, $bean, $def);
+        }
+        foreach ($this->_lifecyclers[BeanLifecycle::AfterAssemble] as $lifecycleListener) {
+            $bean = $lifecycleListener->afterAssemble($this, $bean, $def);
         }
     }
 
@@ -377,17 +338,7 @@ class ContainerImpl implements IContainer
         }
         try
         {
-            foreach ($this->_lifecyclers[BeanLifecycle::BeforeAssemble] as $lifecycleListener) {
-                $bean = $lifecycleListener->beforeAssemble(
-                    $this, $bean, $beanDefinition
-                );
-            }
             $this->_assemble($bean, $beanDefinition);
-            foreach ($this->_lifecyclers[BeanLifecycle::AfterAssemble] as $lifecycleListener) {
-                $bean = $lifecycleListener->afterAssemble(
-                    $this, $bean, $beanDefinition
-                );
-            }
             if (!empty($beanClass)) {
                 $annotations = ReflectionFactory::getClassAnnotations($beanDefinition->getClass());
                 if (isset($annotations['class']['InitMethod'])) {
@@ -613,7 +564,6 @@ class ContainerImpl implements IContainer
         $this->_beans = $soullessArray;
         $this->_beanCache = CacheLocator::getBeansCacheInstance();
         $this->_shutdowners = $soullessArray;
-        $this->_propertiesNameCache = $soullessArray;
 
         $this->_lifecyclers = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::BeforeConfig] = $soullessArray;
@@ -647,6 +597,7 @@ class ContainerImpl implements IContainer
             $this->addBeforeDefinitionListener(BeanXmlDriver::getInstance(self::$_options['bdef']['xml']));
         }
         $this->addAfterConfigListener(MVCAnnotationDriver::getInstance($soullessArray));
+        $this->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
 
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeConfig] as $lifecycleListener) {
             $lifecycleListener->beforeConfig($this);
