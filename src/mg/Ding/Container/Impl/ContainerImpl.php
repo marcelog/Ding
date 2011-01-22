@@ -536,6 +536,11 @@ class ContainerImpl implements IContainer
         $this->_lifecyclers[BeanLifecycle::AfterAssemble] = $soullessArray;
 
         if (isset(self::$_options['bdef']['annotation'])) {
+            $this->_lifecyclers[BeanLifecycle::BeforeConfig][]
+                = BeanAnnotationDriver::getInstance(
+                    self::$_options['bdef']['annotation']
+                );
+            ;
             $this->_lifecyclers[BeanLifecycle::AfterConfig][]
                 = BeanAnnotationDriver::getInstance(
                     self::$_options['bdef']['annotation']
