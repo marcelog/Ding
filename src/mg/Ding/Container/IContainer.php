@@ -14,7 +14,15 @@
 namespace Ding\Container;
 
 use Ding\Bean\Factory\IBeanFactory;
-use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\Lifecycle\IBeforeConfigListener;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
+use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+use Ding\Bean\Lifecycle\IBeforeCreateListener;
+use Ding\Bean\Lifecycle\IAfterCreateListener;
+use Ding\Bean\Lifecycle\IBeforeAssembleListener;
+use Ding\Bean\Lifecycle\IAfterAssembleListener;
+use Ding\Bean\Lifecycle\IBeforeDestructListener;
 use Ding\Bean\Lifecycle\BeanLifecycle;
 
 /**
@@ -45,81 +53,81 @@ interface IContainer extends IBeanFactory
     /**
      * Register a listener for BeforeConfig.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IBeforeConfigListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addBeforeConfigListener(ILifecycleListener $listener);
+    public function addBeforeConfigListener(IBeforeConfigListener $listener);
 
     /**
-     * Register a listener for BeforeConfig.
+     * Register a listener for AfterConfig.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IAfterConfigListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addAfterConfigListener(ILifecycleListener $listener);
+    public function addAfterConfigListener(IAfterConfigListener $listener);
 
     /**
-     * Register a listener for BeforeConfig.
+     * Register a listener for BeforeDefinition.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IBeforeDefinitionListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addBeforeDefinitionListener(ILifecycleListener $listener);
+    public function addBeforeDefinitionListener(IBeforeDefinitionListener $listener);
 
     /**
-     * Register a listener for BeforeConfig.
+     * Register a listener for AfterDefinition.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IAfterDefinitionListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addAfterDefinitionListener(ILifecycleListener $listener);
+    public function addAfterDefinitionListener(IAfterDefinitionListener $listener);
 
     /**
-     * Register a listener for BeforeConfig.
+     * Register a listener for BeforeCreate.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IBeforeCreateListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addBeforeCreateListener(ILifecycleListener $listener);
+    public function addBeforeCreateListener(IBeforeCreateListener $listener);
 
     /**
-     * Register a listener for BeforeConfig.
+     * Register a listener for AfterCreate.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IAfterCreateListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addAfterCreateListener(ILifecycleListener $listener);
+    public function addAfterCreateListener(IAfterCreateListener $listener);
 
     /**
-     * Register a listener for BeforeConfig.
+     * Register a listener for BeforeAssemble.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IBeforeAssembleListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addBeforeAssembleListener(ILifecycleListener $listener);
+    public function addBeforeAssembleListener(IBeforeAssembleListener $listener);
 
     /**
-     * Register a listener for BeforeConfig.
+     * Register a listener for AfterAssemble.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IAfterAssembleListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addAfterAssembleListener(ILifecycleListener $listener);
+    public function addAfterAssembleListener(IAfterAssembleListener $listener);
 
     /**
-     * Register a listener for BeforeConfig.
+     * Register a listener for BeforeDestruct.
      *
-     * @param ILifecycleListener $listener Listener to be called.
+     * @param IBeforeDestructListener $listener Listener to be called.
      *
      * @return void
      */
-    public function addBeforeDestructionListener(ILifecycleListener $listener);
+    public function addBeforeDestructListener(IBeforeDestructListener $listener);
 }

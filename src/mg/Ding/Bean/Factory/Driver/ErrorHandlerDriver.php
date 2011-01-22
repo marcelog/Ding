@@ -17,9 +17,9 @@ namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
-use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+use Ding\Bean\Factory\IBeanFactory;
 
 /**
  * This driver will look up an optional bean called ErrorHandler and if it
@@ -34,32 +34,13 @@ use Ding\Bean\Lifecycle\ILifecycleListener;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class ErrorHandlerDriver implements ILifecycleListener
+class ErrorHandlerDriver implements IAfterConfigListener
 {
     /**
      * Holds current instance.
      * @var ErrorHandlerDriver
      */
     private static $_instance = false;
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
-     */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
-     */
-    public function beforeConfig(IBeanFactory $factory)
-    {
-
-    }
-
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
@@ -90,61 +71,6 @@ class ErrorHandlerDriver implements ILifecycleListener
         }
         set_error_handler(array($bean, 'handle'));
     }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
-     */
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
-     */
-    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
-     */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
-     */
-    public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
-     */
-    public function afterAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::destruct()
-     */
-    public function destruct($bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
     /**
      * Returns an instance.
      *

@@ -24,7 +24,15 @@ use Ding\Aspect\Interceptor\IDispatcher;
 use Ding\Aspect\Interceptor\DispatcherImpl;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Lifecycle\BeanLifecycle;
-use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\Lifecycle\IBeforeConfigListener;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
+use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+use Ding\Bean\Lifecycle\IBeforeCreateListener;
+use Ding\Bean\Lifecycle\IAfterCreateListener;
+use Ding\Bean\Lifecycle\IBeforeAssembleListener;
+use Ding\Bean\Lifecycle\IAfterAssembleListener;
+use Ding\Bean\Lifecycle\IBeforeDestructListener;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
 use Ding\Bean\Factory\Driver\MVCAnnotationDriver;
@@ -510,7 +518,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Container.IContainer::addBeforeConfigListener()
      */
-    public function addBeforeConfigListener(ILifecycleListener $listener)
+    public function addBeforeConfigListener(IBeforeConfigListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::BeforeConfig][] = $listener;
     }
@@ -519,7 +527,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Container.IContainer::addAfterConfigListener()
      */
-    public function addAfterConfigListener(ILifecycleListener $listener)
+    public function addAfterConfigListener(IAfterConfigListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::AfterConfig][] = $listener;
     }
@@ -528,7 +536,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Container.IContainer::addBeforeDefinitionListener()
      */
-    public function addBeforeDefinitionListener(ILifecycleListener $listener)
+    public function addBeforeDefinitionListener(IBeforeDefinitionListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::BeforeDefinition][] = $listener;
     }
@@ -537,7 +545,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Container.IContainer::addAfterDefinitionListener()
      */
-    public function addAfterDefinitionListener(ILifecycleListener $listener)
+    public function addAfterDefinitionListener(IAfterDefinitionListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::AfterDefinition][] = $listener;
     }
@@ -546,7 +554,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Container.IContainer::addBeforeCreateListener()
      */
-    public function addBeforeCreateListener(ILifecycleListener $listener)
+    public function addBeforeCreateListener(IBeforeCreateListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::BeforeCreate][] = $listener;
     }
@@ -555,7 +563,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Container.IContainer::addAfterCreateListener()
      */
-    public function addAfterCreateListener(ILifecycleListener $listener)
+    public function addAfterCreateListener(IAfterCreateListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::AfterCreate][] = $listener;
     }
@@ -564,7 +572,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Container.IContainer::addBeforeAssembleListener()
      */
-    public function addBeforeAssembleListener(ILifecycleListener $listener)
+    public function addBeforeAssembleListener(IBeforeAssembleListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::BeforeAssemble][] = $listener;
     }
@@ -573,16 +581,16 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Container.IContainer::addAfterAssembleListener()
      */
-    public function addAfterAssembleListener(ILifecycleListener $listener)
+    public function addAfterAssembleListener(IAfterAssembleListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::AfterAssemble][] = $listener;
     }
 
     /**
      * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addBeforeDestructionListener()
+     * @see Ding\Container.IContainer::addBeforeDestructListener()
      */
-    public function addBeforeDestructionListener(ILifecycleListener $listener)
+    public function addBeforeDestructListener(IBeforeDestructListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::BeforeDestruction][] = $listener;
     }

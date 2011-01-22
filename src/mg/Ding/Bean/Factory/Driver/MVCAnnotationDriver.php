@@ -15,7 +15,7 @@ namespace Ding\Bean\Factory\Driver;
 
 use Ding\MVC\Http\HttpUrlMapper;
 
-use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Reflection\ReflectionFactory;
@@ -32,31 +32,13 @@ use Ding\Bean\Factory\IBeanFactory;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class MVCAnnotationDriver implements ILifecycleListener
+class MVCAnnotationDriver implements IAfterConfigListener
 {
     /**
      * Holds current instance.
      * @var MVCAnnotationDriver
      */
     private static $_instance = false;
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
-     */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
-     */
-    public function beforeConfig(IBeanFactory $factory)
-    {
-
-    }
 
     /**
      * Will call HttpUrlMapper::addAnnotatedController to add new mappings
@@ -85,64 +67,6 @@ class MVCAnnotationDriver implements ILifecycleListener
             $factory->setBeanDefinition($name, $beanDef);
             HttpUrlMapper::addAnnotatedController($url, $name);
         }
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
-     */
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
-     */
-    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * Annotates the given bean with the annotations found in the class and
-     * every method.
-     *
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
-     *
-     * @return BeanDefinition
-     */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
-     */
-    public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
-     */
-    public function afterAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::destruct()
-     */
-    public function destruct($bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
     }
 
     /**

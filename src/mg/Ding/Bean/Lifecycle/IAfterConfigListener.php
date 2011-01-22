@@ -1,6 +1,6 @@
 <?php
 /**
- * Lifecycle listener interface.
+ * Interface for a AfterConfig lifecycle event.
  *
  * PHP Version 5
  *
@@ -14,8 +14,10 @@
  */
 namespace Ding\Bean\Lifecycle;
 
+use Ding\Bean\Factory\IBeanFactory;
+
 /**
- * Lifecycle listener interface.
+ * Interface for a AfterConfig lifecycle event.
  *
  * PHP Version 5
  *
@@ -26,8 +28,7 @@ namespace Ding\Bean\Lifecycle;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-interface ILifecycleListener
+interface IAfterConfigListener extends ILifecycleListener
 {
-
-
+    public function afterConfig(IBeanFactory $factory);
 }

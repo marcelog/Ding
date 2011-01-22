@@ -15,7 +15,7 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
-use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\Factory\IBeanFactory;
@@ -34,31 +34,13 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class ShutdownDriver implements ILifecycleListener
+class ShutdownDriver implements IAfterConfigListener
 {
     /**
      * Holds current instance.
      * @var ShutdownDriver
      */
     private static $_instance = false;
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
-     */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
-     */
-    public function beforeConfig(IBeanFactory $factory)
-    {
-
-    }
 
     /**
      * (non-PHPdoc)
@@ -89,60 +71,6 @@ class ShutdownDriver implements ILifecycleListener
             $bean = $factory->getBean('ShutdownHandler');
         }
         register_shutdown_function(array($bean, 'handle'));
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
-     */
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
-     */
-    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
-     */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
-     */
-    public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
-     */
-    public function afterAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::destruct()
-     */
-    public function destruct($bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
     }
 
     /**

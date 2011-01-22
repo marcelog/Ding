@@ -1,6 +1,6 @@
 <?php
 /**
- * This driver will apply all filters to property values. 
+ * This driver will apply all filters to property values.
  *
  * PHP Version 5
  *
@@ -16,7 +16,7 @@ namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\BeanPropertyDefinition;
 
-use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
@@ -24,7 +24,7 @@ use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Factory\Filter\PropertyFilter;
 
 /**
- * This driver will apply all filters to property values. 
+ * This driver will apply all filters to property values.
  *
  * PHP Version 5
  *
@@ -35,7 +35,7 @@ use Ding\Bean\Factory\Filter\PropertyFilter;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class FiltersDriver implements ILifecycleListener
+class FiltersDriver implements IAfterDefinitionListener
 {
     /**
      * Holds current instance.
@@ -53,7 +53,7 @@ class FiltersDriver implements ILifecycleListener
      * Recursively, apply filter to property or constructor arguments values.
      *
      * @param BeanPropertyDefinition|BeanConstructoruArgumentDefinition $def
-     * 
+     *
      * @return void
      */
     private function _applyFilter(&$def)
@@ -69,7 +69,7 @@ class FiltersDriver implements ILifecycleListener
             }
         }
     }
-    
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
@@ -84,84 +84,12 @@ class FiltersDriver implements ILifecycleListener
         }
         return $bean;
     }
-    
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
-     */
-    public function beforeConfig(IBeanFactory $factory)
-    {
-        
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
-     */
-    public function afterConfig(IBeanFactory $factory)
-    {
-        
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
-     */
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
-     */
-    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
-     */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
-     */
-    public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
-     */
-    public function afterAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::destruct()
-     */
-    public function destruct($bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
 
     /**
      * Returns an instance.
      *
      * @param array $options Optional options.
-     * 
+     *
      * @return FiltersDriver
      */
     public static function getInstance(array $options)
@@ -174,12 +102,12 @@ class FiltersDriver implements ILifecycleListener
         }
         return $ret;
     }
-    
+
     /**
      * Constructor.
      *
      * @param array $options Optional options.
-     * 
+     *
      * @return void
      */
     private function __construct(array $options)
