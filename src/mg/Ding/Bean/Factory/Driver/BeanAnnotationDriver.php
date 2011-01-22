@@ -172,8 +172,8 @@ class BeanAnnotationDriver implements ILifecycleListener
     {
         $configClasses = ReflectionFactory::getClassesByAnnotation('Configuration');
         foreach ($configClasses as $configClass) {
-            $this->_configClasses[] = $configClass;
             $configBeanName = $configClass . 'DingConfigClass';
+            $this->_configClasses[$configClass] = $configBeanName;
             $def = false;
             try
             {
@@ -183,26 +183,6 @@ class BeanAnnotationDriver implements ILifecycleListener
                 $def->setClass($configClass);
                 $def->setScope(BeanDefinition::BEAN_SINGLETON);
                 $factory->setBeanDefinition($configBeanName, $def);
-            }
-            $this->_configBeans[$configBeanName] = array();
-            foreach (
-                ReflectionFactory::getClassAnnotations($configClass)
-                as $method => $annotations
-            ) {
-                if ($method == 'class') {
-                    continue;
-                }
-                if (isset($annotations['Bean'])) {
-                    $def = false;
-                    try
-                    {
-                        $def = $factory->getBeanDefinition($method);
-                    } catch(BeanFactoryException $exception) {
-                        $def = $this->_loadBean($method, $configBeanName, $annotations);
-                        $factory->setBeanDefinition($method, $def);
-                    }
-                    $this->_configBeans[$configBeanName][$method] = $annotation;
-                }
             }
         }
     }
@@ -235,6 +215,33 @@ class BeanAnnotationDriver implements ILifecycleListener
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
     {
+        if ($bean != null) {
+            return $bean;
+        }
+        foreach ($this->_configClasses as $configClass => $configBeanName) {
+            if (isset($this->_configBeans[$configBeanName][$beanName])) {
+                $bean = $this->_configBeans[$configBeanName][$beanName];
+                return $bean;
+            }
+            if (empty($this->_configBeans[$configBeanName])) {
+                $this->_configBeans[$configBeanName] = array();
+                foreach (
+                    ReflectionFactory::getClassAnnotations($configClass)
+                    as $method => $annotations
+                ) {
+                    if ($method == 'class') {
+                        continue;
+                    }
+                    if ($method == $beanName) {
+                        if (isset($annotations['Bean'])) {
+                            $bean = $this->_loadBean($method, $configBeanName, $annotations);
+                            $this->_configBeans[$configBeanName][$method] = $annotation;
+                            return $bean;
+                        }
+                    }
+                }
+            }
+        }
         return $bean;
     }
 
