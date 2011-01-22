@@ -168,6 +168,9 @@ class BeanAnnotationDriver implements ILifecycleListener
                 include_once $dirEntry;
                 foreach ($classes as $aNewClass) {
                     self::$_knownClasses[$aNewClass] = ReflectionFactory::getClassAnnotations($aNewClass);
+                    if (empty(self::$_knownClasses[$aNewClass])) {
+                        continue;
+                    }
                     $diff[$aNewClass] = self::$_knownClasses[$aNewClass];
                     $include_files[$aNewClass] = $dirEntry;
                     $this->_cache->store(str_replace('\\', '_', $aNewClass) . '.include_file', $dirEntry);

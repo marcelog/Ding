@@ -48,7 +48,7 @@ class ReflectionFactory
     private static function _getAnnotations($text)
     {
         $ret = array();
-        if (preg_match_all('/@.+/', $text, $matches) > 0) {
+        if (preg_match_all('/@[a-zA-Z0-9\(\)]+/', $text, $matches) > 0) {
             foreach ($matches[0] as $annotation) {
                 $argsStart = strpos($annotation, '(');
                 $arguments = array();
@@ -82,7 +82,7 @@ class ReflectionFactory
             return self::$_classesAnnotated[$annotation];
         }
         $cache = CacheLocator::getAnnotationsCacheInstance();
-        $cacheKey = str_replace('\\', '_', $annotation) . 'classbyannotations';
+        $cacheKey = $annotation . '.classbyannotations';
         $result = false;
         $classes = $cache->fetch($cacheKey, $result);
         if ($result === true) {
@@ -98,7 +98,8 @@ class ReflectionFactory
             return self::$_annotatedClasses[$class];
         }
         $cache = CacheLocator::getAnnotationsCacheInstance();
-        $cacheKey = str_replace('\\', '_', $class) . '.classannotations';
+        $cacheKeyPfx = str_replace('\\', '_', $class);
+        $cacheKey = $cacheKeyPfx . '.classannotations';
         $result = false;
         $annotations = $cache->fetch($cacheKey, $result);
         if ($result === true) {
@@ -116,6 +117,8 @@ class ReflectionFactory
                 self::$_classesAnnotated[$name] = array();
             }
             self::$_classesAnnotated[$name][$class] = $class;
+            $cacheKeyA = $name . '.classbyannotations';
+            $cache->store($cacheKeyA, self::$_classesAnnotated[$name]);
         }
         foreach ($rClass->getMethods() as $method) {
             $methodName = $method->getName();
