@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd-cpd version="phpcpd 1.3.1">
+  <duplication lines="26" tokens="16">
+    <file path="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/DependsOnDriver.php" line="57"/>
+    <file path="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationAspectDriver.php" line="55"/>
+    <codefragment>        return $bean;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
+     */
+    public function beforeConfig(IBeanFactory $factory)
+    {
+        
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
+     */
+    public function afterConfig(IBeanFactory $factory)
+    {
+        
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
+     */
+    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
+</codefragment>
+  </duplication>
+  <duplication lines="8" tokens="7">
+    <file path="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ErrorHandlerDriver.php" line="90"/>
+    <file path="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ShutdownDriver.php" line="91"/>
+    <codefragment>        set_error_handler(array($bean, 'handle'));
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
+     */
+    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
+</codefragment>
+  </duplication>
+  <duplication lines="26" tokens="16">
+    <file path="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/DependsOnDriver.php" line="57"/>
+    <file path="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/FiltersDriver.php" line="85"/>
+    <codefragment>        return $bean;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
+     */
+    public function beforeConfig(IBeanFactory $factory)
+    {
+        
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
+     */
+    public function afterConfig(IBeanFactory $factory)
+    {
+        
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
+     */
+    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
+</codefragment>
+  </duplication>
+</pmd-cpd>

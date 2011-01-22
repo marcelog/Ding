@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PDepend>
+  <Packages>
+    <Package name="Ding\Aspect">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>2</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>0.5</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/AspectDefinition.php">AspectDefinition</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/MethodInvocation.php">MethodInvocation</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\Aspect\Interceptor</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Aspect\Interceptor">
+      <Stats>
+        <TotalClasses>6</TotalClasses>
+        <ConcreteClasses>2</ConcreteClasses>
+        <AbstractClasses>4</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0.666666666667</A>
+        <I>1</I>
+        <D>0.666666666667</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/DispatcherImpl.php">DispatcherImpl</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/IDispatcher.php">IDispatcher</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/IExceptionInterceptor.php">IExceptionInterceptor</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/IInterceptor.php">IInterceptor</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/IMethodInterceptor.php">IMethodInterceptor</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package>Ding\Aspect</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Autoloader">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>0</Ce>
+        <A>0</A>
+        <I>0</I>
+        <D>1</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Autoloader/Ding_Autoloader.php">Ding_Autoloader</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Bean">
+      <Stats>
+        <TotalClasses>4</TotalClasses>
+        <ConcreteClasses>4</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>3</Ca>
+        <Ce>0</Ce>
+        <A>0</A>
+        <I>0</I>
+        <D>1</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/BeanAnnotationDefinition.php">BeanAnnotationDefinition</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/BeanConstructorArgumentDefinition.php">BeanConstructorArgumentDefinition</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/BeanDefinition.php">BeanDefinition</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/BeanPropertyDefinition.php">BeanPropertyDefinition</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon/>
+      <UsedBy>
+        <Package>Ding\Bean\Factory</Package>
+        <Package>Ding\Bean\Factory\Driver</Package>
+        <Package>Ding\Bean\Lifecycle</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Bean\Factory\Driver">
+      <Stats>
+        <TotalClasses>20</TotalClasses>
+        <ConcreteClasses>20</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>4</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationAspectDriver.php">AnnotationAspectDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanAnnotationDriver.php">BeanAnnotationDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanXmlDriver.php">BeanXmlDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/DependsOnDriver.php">DependsOnDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ErrorHandlerDriver.php">ErrorHandlerDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/FiltersDriver.php">FiltersDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MVCAnnotationDriver.php">MVCAnnotationDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ShutdownDriver.php">ShutdownDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SignalHandlerDriver.php">SignalHandlerDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/TimezoneDriver.php">TimezoneDriver</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+        <Package>Ding\Bean</Package>
+        <Package>Ding\Bean\Factory</Package>
+        <Package>Ding\Bean\Lifecycle</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Bean\Factory\Exception">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>0.5</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Exception/BeanFactoryException.php">BeanFactoryException</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>Ding\Exception</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\Container\Impl</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Bean\Factory\Filter">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>0</Ce>
+        <A>0.5</A>
+        <I>0</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Filter/PropertyFilter.php">PropertyFilter</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Filter/IFilter.php">IFilter</Class>
+      </AbstractClasses>
+      <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Bean\Factory">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>0</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>3</Ca>
+        <Ce>1</Ce>
+        <A>1</A>
+        <I>0.25</I>
+        <D>0.25</D>
+      </Stats>
+      <ConcreteClasses/>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/IBeanFactory.php">IBeanFactory</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package>Ding\Bean</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\Bean\Factory\Driver</Package>
+        <Package>Ding\Bean\Lifecycle</Package>
+        <Package>Ding\Container</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Bean\Lifecycle">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>0</ConcreteClasses>
+        <AbstractClasses>2</AbstractClasses>
+        <Ca>2</Ca>
+        <Ce>2</Ce>
+        <A>1</A>
+        <I>0.5</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses/>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/BeanLifecycle.php">BeanLifecycle</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/ILifecycleListener.php">ILifecycleListener</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package>Ding\Bean</Package>
+        <Package>Ding\Bean\Factory</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\Bean\Factory\Driver</Package>
+        <Package>Ding\Container\Impl</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Bean\Lifecycle\Exception">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/Exception/BeanLifecycleException.php">BeanLifecycleException</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>Ding\Exception</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Cache\Exception">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>2</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>0.5</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Exception/CacheException.php">CacheException</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Exception/FileCacheException.php">FileCacheException</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\Cache\Locator</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Cache">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>0</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>0</Ce>
+        <A>1</A>
+        <I>0</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses/>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/ICache.php">ICache</Class>
+      </AbstractClasses>
+      <DependsUpon/>
+      <UsedBy>
+        <Package>Ding\Cache\Impl</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Cache\Impl">
+      <Stats>
+        <TotalClasses>6</TotalClasses>
+        <ConcreteClasses>6</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>2</Ce>
+        <A>0</A>
+        <I>0.666666666667</I>
+        <D>0.333333333333</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/APCCacheImpl.php">APCCacheImpl</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/DummyCacheImpl.php">DummyCacheImpl</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/FileCacheImpl.php">FileCacheImpl</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/MemcachedCacheImpl.php">MemcachedCacheImpl</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/ZendCacheImpl.php">ZendCacheImpl</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+        <Package>Ding\Cache</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\Cache\Locator</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Cache\Locator">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>2</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Locator/CacheLocator.php">CacheLocator</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>Ding\Cache\Exception</Package>
+        <Package>Ding\Cache\Impl</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Container\Exception">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Exception/ContainerException.php">ContainerException</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>Ding\Exception</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Container">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>0</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>1</Ce>
+        <A>1</A>
+        <I>0.5</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses/>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/IContainer.php">IContainer</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package>Ding\Bean\Factory</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\Container\Impl</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Container\Impl">
+      <Stats>
+        <TotalClasses>21</TotalClasses>
+        <ConcreteClasses>21</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>4</Ce>
+        <A>0</A>
+        <I>0.8</I>
+        <D>0.2</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Impl/ContainerImpl.php">ContainerImpl</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+        <Package>Ding\Bean\Factory\Exception</Package>
+        <Package>Ding\Bean\Lifecycle</Package>
+        <Package>Ding\Container</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\MVC\Http</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Exception">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>4</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>0.2</I>
+        <D>0.8</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Exception/DingException.php">DingException</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\Bean\Factory\Exception</Package>
+        <Package>Ding\Bean\Lifecycle\Exception</Package>
+        <Package>Ding\Container\Exception</Package>
+        <Package>Ding\Helpers\TCP\Exception</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\Helpers\ErrorHandler">
+      <Stats>
+        <TotalClasses>3</TotalClasses>
+        <ConcreteClasses>2</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0.333333333333</A>
+        <I>1</I>
+        <D>0.333333333333</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/ErrorHandler/ErrorHandlerHelper.php">ErrorHandlerHelper</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/ErrorHandler/ErrorInfo.php">ErrorInfo</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/ErrorHandler/IErrorHandler.php">IErrorHandler</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\PAGI">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>0</Ce>
+        <A>0</A>
+        <I>0</I>
+        <D>1</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/PAGI/PagiExtensionMapper.php">PagiExtensionMapper</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\PAMI">
+      <Stats>
+        <TotalClasses>5</TotalClasses>
+        <ConcreteClasses>4</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>2</Ce>
+        <A>0.2</A>
+        <I>1</I>
+        <D>0.2</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/PAMI/PamiHelper.php">PamiHelper</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/PAMI/IPamiEventHandler.php">IPamiEventHandler</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package>PAMI\Listener</Package>
+        <Package>PAMI\Message\Event</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\ShutdownHandler">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0.5</A>
+        <I>1</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/ShutdownHandler/ShutdownHandlerHelper.php">ShutdownHandlerHelper</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/ShutdownHandler/IShutdownHandler.php">IShutdownHandler</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\SignalHandler">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0.5</A>
+        <I>1</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/SignalHandler/SignalHandlerHelper.php">SignalHandlerHelper</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/SignalHandler/ISignalHandler.php">ISignalHandler</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\Syslog">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>0</Ce>
+        <A>0</A>
+        <I>0</I>
+        <D>1</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Syslog/SyslogHelper.php">SyslogHelper</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\TCP\Exception">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/Exception/TCPException.php">TCPException</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>Ding\Exception</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\TCP">
+      <Stats>
+        <TotalClasses>5</TotalClasses>
+        <ConcreteClasses>3</ConcreteClasses>
+        <AbstractClasses>2</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>0</Ce>
+        <A>0.4</A>
+        <I>0</I>
+        <D>0.6</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPClientHelper.php">TCPClientHelper</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPServerHelper.php">TCPServerHelper</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/ITCPClientHandler.php">ITCPClientHandler</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/ITCPServerHandler.php">ITCPServerHandler</Class>
+      </AbstractClasses>
+      <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\Timer">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>0</Ce>
+        <A>0.5</A>
+        <I>0</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timer/TimerHelper.php">TimerHelper</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timer/ITimerHandler.php">ITimerHandler</Class>
+      </AbstractClasses>
+      <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\Timezone">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timezone/TimezoneHelper.php">TimezoneHelper</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\HttpSession">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>0</Ce>
+        <A>0</A>
+        <I>0</I>
+        <D>1</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/HttpSession/HttpSession.php">HttpSession</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Logger">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>0</Ce>
+        <A>0</A>
+        <I>0</I>
+        <D>1</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Logger/Logger.php">Logger</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\MVC">
+      <Stats>
+        <TotalClasses>7</TotalClasses>
+        <ConcreteClasses>2</ConcreteClasses>
+        <AbstractClasses>5</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>1</Ce>
+        <A>0.714285714286</A>
+        <I>0.5</I>
+        <D>0.214285714286</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ModelAndView.php">ModelAndView</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Action.php">Action</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Dispatcher.php">Dispatcher</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/IMapper.php">IMapper</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/IViewResolver.php">IViewResolver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/View.php">View</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Ding\MVC\Http</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\MVC\Exception">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Exception/MVCException.php">MVCException</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\MVC\Http">
+      <Stats>
+        <TotalClasses>11</TotalClasses>
+        <ConcreteClasses>11</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>3</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpAction.php">HttpAction</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpDispatcher.php">HttpDispatcher</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpExceptionMapper.php">HttpExceptionMapper</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpFrontController.php">HttpFrontController</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpUrlMapper.php">HttpUrlMapper</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpView.php">HttpView</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpViewResolver.php">HttpViewResolver</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+        <Package>Ding\Container\Impl</Package>
+        <Package>Ding\MVC</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Reflection">
+      <Stats>
+        <TotalClasses>3</TotalClasses>
+        <ConcreteClasses>3</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/ReflectionFactory.php">ReflectionFactory</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+  </Packages>
+  <Cycles/>
+</PDepend>

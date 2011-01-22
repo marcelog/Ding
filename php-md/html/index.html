@@ -1,0 +1,1730 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>PMD 0.2.8RC1 Report</title>
+<script type="text/javascript" src="sorttable.js"></script><style type="text/css">
+        body { margin-left: 2%; margin-right: 2%; font:normal verdana,arial,helvetica; color:#000000; }
+        table.sortable tr th { font-weight: bold; text-align:left; background:#a6caf0; }
+        table.sortable tr td { background:#eeeee0; }
+        table.classcount tr th { font-weight: bold; text-align:left; background:#a6caf0; }
+        table.classcount tr td { background:#eeeee0; }
+        table.summary tr th { font-weight: bold; text-align:left; background:#a6caf0; }
+        table.summary tr td { background:#eeeee0; text-align:center;}
+        .p1 { background:#FF9999; }
+        .p2 { background:#FFCC66; }
+        .p3 { background:#FFFF99; }
+        .p4 { background:#99FF99; }
+        .p5 { background:#9999FF; }
+		div.top{text-align:right;margin:1em 0;padding:0}
+		div.top div{display:inline;white-space:nowrap}
+		div.top div.left{float:left}
+		#content>div.top{display:table;width:100%}
+		#content>div.top div{display:table-cell}
+		#content>div.top div.left{float:none;text-align:left}
+		#content>div.top div.right{text-align:right}
+    </style>
+</head>
+<body>
+<H1><div class="top">
+<div class="left">PMD 0.2.8RC1 Report</div>
+<div class="right">2011-01-22 - </div>
+</div></H1>
+<hr>
+<h2>Summary</h2>
+<table border="0" class="summary">
+<tr>
+<th>Files</th>
+<th>Total</th>
+<th>Priority 1</th>
+<th>Priority 2</th>
+<th>Priority 3</th>
+<th>Priority 4</th>
+<th>Priority 5</th>
+</tr>
+<tr>
+<td>27</td>
+<td>208</td>
+<td><div class="p1">0</div></td>
+<td><div class="p2">0</div></td>
+<td><div class="p3">199</div></td>
+<td><div class="p4">9</div></td>
+<td><div class="p5">0</div></td>
+</tr>
+</table>
+<hr>
+<table border="0" width="100%" class="sortable" id="sortable_id">
+<tr>
+<th>Prio</th>
+<th>File</th>
+<th>Line</th>
+<th align="left">Description</th>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">42</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#longvariable">
+      Avoid excessively long variable names like $_methodsExceptionIntercepted
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">48</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedprivatefield">
+      Avoid unused private fields such as '$_logger'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">47</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedprivatefield">
+      Avoid unused private fields such as '$_cache'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">53</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">62</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">71</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">80</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">80</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">82</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">89</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">89</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">98</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">98</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanName'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">107</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">107</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">116</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">116</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">125</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">155</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">40</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#toomanymethods">
+      This class has too many methods, consider refactoring it.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">82</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">91</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">117</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+      The method _scan() has a Cyclomatic Complexity of 12.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">124</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$v'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">149</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$include_files'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">211</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$exception'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">224</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">224</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">226</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">233</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">233</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">246</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">268</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$annotation'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">282</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">282</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">291</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">291</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">300</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">36</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#toomanymethods">
+      This class has too many methods, consider refactoring it.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">36</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity">
+      This class BeanXmlDriver has an overall complexity of 56 which is very high. The configured complexity threshold is 50.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">118</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$aspects'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">208</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+      The method _loadBean() has a Cyclomatic Complexity of 20.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">208</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#npathcomplexity">
+      The method _loadBean() has an NPath complexity of 196608.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">316</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">325</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">334</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">343</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">343</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">345</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">352</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">352</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">357</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">362</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">362</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">367</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">372</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">64</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">73</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">82</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">82</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">84</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">91</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">91</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">100</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">100</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanName'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">109</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">109</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">118</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">118</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">127</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">157</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">48</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">57</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">71</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$e'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">97</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">97</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">99</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">106</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">106</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">115</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">115</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanName'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">124</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">124</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">133</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">133</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">142</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">172</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">38</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#toomanymethods">
+      This class has too many methods, consider refactoring it.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">77</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">92</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">101</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">110</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">110</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">112</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">119</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">119</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">128</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">128</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanName'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">137</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">137</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">146</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">146</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">155</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">47</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">56</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">94</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">94</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">96</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">103</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">103</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">116</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">116</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanName'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">125</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">125</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">134</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">134</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">143</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">173</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">49</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">58</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">72</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$e'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">98</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">98</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">100</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">107</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">107</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">116</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">116</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanName'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">125</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">125</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">134</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">134</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">143</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">173</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">55</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">64</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">78</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$e'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">108</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">108</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">110</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">117</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">117</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">126</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">126</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanName'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">135</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">135</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">144</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">144</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">153</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">183</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">47</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">56</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">71</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$e'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">79</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">79</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">81</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$bean'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">88</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">88</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">97</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">97</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanName'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">106</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">106</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">115</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">115</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">124</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$beanDefinition'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">154</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">31</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant BeforeConfig should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">32</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant AfterConfig should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">39</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant BeforeDefinition should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">46</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant AfterDefinition should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">52</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant BeforeCreate should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">58</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant AfterCreate should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">64</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant BeforeAssemble should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">70</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant AfterAssemble should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">76</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
+      Constant BeforeDestruction should be defined in uppercase
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">105</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">45</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$name'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">58</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$name'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">72</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$name'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">72</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$value'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">94</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$name'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">106</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">162</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedprivatemethod">
+      Avoid unused private methods such as '_init'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">69</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$result'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">57</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity">
+      This class ContainerImpl has an overall complexity of 71 which is very high. The configured complexity threshold is 50.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">130</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+      The method getBeanDefinition() has a Cyclomatic Complexity of 10.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">130</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#npathcomplexity">
+      The method getBeanDefinition() has an NPath complexity of 288.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">265</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable">
+      Avoid unused local variables such as '$exception'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">303</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+      The method _createBean() has a Cyclomatic Complexity of 23.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">303</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#npathcomplexity">
+      The method _createBean() has an NPath complexity of 36064.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">303</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#excessivemethodlength">
+      Avoid really long methods.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">105</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+      The method typeToString() has a Cyclomatic Complexity of 11.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">29</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#toomanymethods">
+      This class has too many methods, consider refactoring it.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">173</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#shortvariable">
+      Avoid variables with short names like $ex
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">208</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+      The method process() has a Cyclomatic Complexity of 10.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">215</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#shortvariable">
+      Avoid variables with short names like $ex
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">93</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#longvariable">
+      Avoid excessively long variable names like $_peersLastDataReceived
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">227</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+      The method process() has a Cyclomatic Complexity of 15.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">227</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#npathcomplexity">
+      The method process() has an NPath complexity of 1536.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">235</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#shortvariable">
+      Avoid variables with short names like $ex
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">41</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">59</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">69</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#shortvariable">
+      Avoid variables with short names like $id
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">57</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedprivatefield">
+      Avoid unused private fields such as '$_exceptionMapper'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">69</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#shortvariable">
+      Avoid variables with short names like $id
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">59</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#longvariable">
+      Avoid excessively long variable names like $_annotatedControllers
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">122</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
+      The method map() has a Cyclomatic Complexity of 15.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">122</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#npathcomplexity">
+      The method map() has an NPath complexity of 3504.
+    </a></td>
+</tr>
+</table>
+<br><p>Generated by <a href="http://pmd.sourceforge.net">PMD <b>0.2.8RC1</b></a> on 2011-01-22 - .</p>
+</body>
+</html>

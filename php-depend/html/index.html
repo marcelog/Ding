@@ -1,0 +1,1536 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<title>PDepend Analysis</title>
+<style type="text/css">
+      body {
+        font:normal 68% verdana,arial,helvetica;
+        color:#000000;
+      }
+      table tr td, tr th {
+          font-size: 68%;
+      }
+      table.details tr th{
+        font-weight: bold;
+        text-align:left;
+        background:#a6caf0;
+      }
+      table.details tr td{
+        background:#eeeee0;
+      }
+      
+      p {
+        line-height:1.5em;
+        margin-top:0.5em; margin-bottom:1.0em;
+        margin-left:2em;
+        margin-right:2em;
+      }
+      h1 {
+        margin: 0px 0px 5px; font: 165% verdana,arial,helvetica
+      }
+      h2 {
+        margin-top: 1em; margin-bottom: 0.5em; font: bold 125% verdana,arial,helvetica
+      }
+      h3 {
+        margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica
+      }
+      h4 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      h5 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      h6 {
+        margin-bottom: 0.5em; font: bold 100% verdana,arial,helvetica
+      }
+      .Error {
+        font-weight:bold; color:red;
+      }
+      .Failure {
+        font-weight:bold; color:purple;
+      }
+      .Properties {
+        text-align:right;
+      }
+      </style>
+</head>
+<body>
+<h1><a name="top">JDepend Analysis</a></h1>
+<p align="right">Designed for use with <a href="http://www.clarkware.com/software/JDepend.html">JDepend</a> and <a href="http://jakarta.apache.org">Ant</a>.</p>
+<hr size="2">
+<table width="100%"><tr>
+<td><a name="NVsummary"><h2>Summary</h2></a></td>
+<td align="right">
+    [<a href="#NVsummary">summary</a>]
+    [<a href="#NVpackages">packages</a>]
+    [<a href="#NVcycles">cycles</a>]
+    [<a href="#NVexplanations">explanations</a>]
+    </td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Package</th>
+<th>Total Classes</th>
+<th><a href="#EXnumber">Abstract Classes</a></th>
+<th><a href="#EXnumber">Concrete Classes</a></th>
+<th><a href="#EXafferent">Afferent Couplings</a></th>
+<th><a href="#EXefferent">Efferent Couplings</a></th>
+<th><a href="#EXabstractness">Abstractness</a></th>
+<th><a href="#EXinstability">Instability</a></th>
+<th><a href="#EXdistance">Distance</a></th>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CAspect">Ding\Aspect</a></td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a></td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.666666666667</td>
+<td align="right">1</td>
+<td align="right">0.666666666667</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKAutoloader">Autoloader</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CBean">Ding\Bean</a></td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a></td>
+<td align="right">20</td>
+<td align="right">0</td>
+<td align="right">20</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CBean%5CFactory%5CFilter">Ding\Bean\Factory\Filter</a></td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a></td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.25</td>
+<td align="right">0.25</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a></td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0.5</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CBean%5CLifecycle%5CException">Ding\Bean\Lifecycle\Exception</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CCache%5CException">Ding\Cache\Exception</a></td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CCache">Ding\Cache</a></td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CCache%5CImpl">Ding\Cache\Impl</a></td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0.666666666667</td>
+<td align="right">0.333333333333</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CCache%5CLocator">Ding\Cache\Locator</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CContainer%5CException">Ding\Container\Exception</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CContainer">Ding\Container</a></td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.5</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a></td>
+<td align="right">21</td>
+<td align="right">0</td>
+<td align="right">21</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0.8</td>
+<td align="right">0.2</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CException">Ding\Exception</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.2</td>
+<td align="right">0.8</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CErrorHandler">Ding\Helpers\ErrorHandler</a></td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.333333333333</td>
+<td align="right">1</td>
+<td align="right">0.333333333333</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CPAGI">Ding\Helpers\PAGI</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CPAMI">Ding\Helpers\PAMI</a></td>
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0.2</td>
+<td align="right">1</td>
+<td align="right">0.2</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CShutdownHandler">Ding\Helpers\ShutdownHandler</a></td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.5</td>
+<td align="right">1</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CSignalHandler">Ding\Helpers\SignalHandler</a></td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.5</td>
+<td align="right">1</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CSyslog">Ding\Helpers\Syslog</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CTCP%5CException">Ding\Helpers\TCP\Exception</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CTCP">Ding\Helpers\TCP</a></td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.4</td>
+<td align="right">0</td>
+<td align="right">0.6</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CTimer">Ding\Helpers\Timer</a></td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+<td align="right">0</td>
+<td align="right">0.5</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CTimezone">Ding\Helpers\Timezone</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHttpSession">Ding\HttpSession</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKLogger">Logger</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CMVC">Ding\MVC</a></td>
+<td align="right">7</td>
+<td align="right">5</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.714285714286</td>
+<td align="right">0.5</td>
+<td align="right">0.214285714286</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CMVC%5CException">Ding\MVC\Exception</a></td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CMVC%5CHttp">Ding\MVC\Http</a></td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CReflection">Ding\Reflection</a></td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</table>
+<table width="100%"><tr>
+<td><a name="NVpackages"><h2>Packages</h2></a></td>
+<td align="right">
+    [<a href="#NVsummary">summary</a>]
+    [<a href="#NVpackages">packages</a>]
+    [<a href="#NVcycles">cycles</a>]
+    [<a href="#NVexplanations">explanations</a>]
+    </td>
+</tr></table>
+<h3><a name="PKDing%5CAspect">Ding\Aspect</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">AspectDefinition<br>MethodInvocation<br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.666666666667</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.666666666667</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IDispatcher<br>IExceptionInterceptor<br>IInterceptor<br>IMethodInterceptor<br>
+</td>
+<td valign="top" width="25%">DispatcherImpl<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CAspect">Ding\Aspect</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKAutoloader">Autoloader</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 1</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">Ding_Autoloader<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CBean">Ding\Bean</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 3</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 1</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">BeanAnnotationDefinition<br>BeanConstructorArgumentDefinition<br>BeanDefinition<br>BeanPropertyDefinition<br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 4</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">AnnotationAspectDriver<br>BeanAnnotationDriver<br>BeanXmlDriver<br>DependsOnDriver<br>ErrorHandlerDriver<br>FiltersDriver<br>MVCAnnotationDriver<br>ShutdownDriver<br>SignalHandlerDriver<br>TimezoneDriver<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br><a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">BeanFactoryException<br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CException">Ding\Exception</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CBean%5CFactory%5CFilter">Ding\Bean\Factory\Filter</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.5</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IFilter<br>
+</td>
+<td valign="top" width="25%">PropertyFilter<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CBean%5CFactory">Ding\Bean\Factory</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 3</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 1</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.25</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.25</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IBeanFactory<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CContainer">Ding\Container</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CBean">Ding\Bean</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 2</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 2</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 1</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">BeanLifecycle<br>ILifecycleListener<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CBean%5CLifecycle%5CException">Ding\Bean\Lifecycle\Exception</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">BeanLifecycleException<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CException">Ding\Exception</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CCache%5CException">Ding\Cache\Exception</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">CacheException<br>FileCacheException<br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CCache%5CLocator">Ding\Cache\Locator</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CCache">Ding\Cache</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 1</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">ICache<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CCache%5CImpl">Ding\Cache\Impl</a><br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CCache%5CImpl">Ding\Cache\Impl</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 2</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.666666666667</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.333333333333</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">APCCacheImpl<br>DummyCacheImpl<br>FileCacheImpl<br>MemcachedCacheImpl<br>ZendCacheImpl<br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CCache%5CLocator">Ding\Cache\Locator</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br><a href="#PKDing%5CCache">Ding\Cache</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CCache%5CLocator">Ding\Cache\Locator</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 2</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">CacheLocator<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CCache%5CException">Ding\Cache\Exception</a><br><a href="#PKDing%5CCache%5CImpl">Ding\Cache\Impl</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CContainer%5CException">Ding\Container\Exception</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">ContainerException<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CException">Ding\Exception</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CContainer">Ding\Container</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 1</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IContainer<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CContainer%5CImpl">Ding\Container\Impl</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 4</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.8</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.2</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">ContainerImpl<br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CMVC%5CHttp">Ding\MVC\Http</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br><a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CContainer">Ding\Container</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CException">Ding\Exception</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 4</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.2</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.8</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">DingException<br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle%5CException">Ding\Bean\Lifecycle\Exception</a><br><a href="#PKDing%5CContainer%5CException">Ding\Container\Exception</a><br><a href="#PKDing%5CHelpers%5CTCP%5CException">Ding\Helpers\TCP\Exception</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CErrorHandler">Ding\Helpers\ErrorHandler</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.333333333333</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.333333333333</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IErrorHandler<br>
+</td>
+<td valign="top" width="25%">ErrorHandlerHelper<br>ErrorInfo<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CPAGI">Ding\Helpers\PAGI</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 1</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">PagiExtensionMapper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CPAMI">Ding\Helpers\PAMI</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 2</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.2</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.2</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IPamiEventHandler<br>
+</td>
+<td valign="top" width="25%">PamiHelper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKPAMI%5CListener">PAMI\Listener</a><br><a href="#PKPAMI%5CMessage%5CEvent">PAMI\Message\Event</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CShutdownHandler">Ding\Helpers\ShutdownHandler</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.5</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IShutdownHandler<br>
+</td>
+<td valign="top" width="25%">ShutdownHandlerHelper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CSignalHandler">Ding\Helpers\SignalHandler</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.5</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">ISignalHandler<br>
+</td>
+<td valign="top" width="25%">SignalHandlerHelper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CSyslog">Ding\Helpers\Syslog</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 1</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">SyslogHelper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CTCP%5CException">Ding\Helpers\TCP\Exception</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">TCPException<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CException">Ding\Exception</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CTCP">Ding\Helpers\TCP</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.4</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.6</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">ITCPClientHandler<br>ITCPServerHandler<br>
+</td>
+<td valign="top" width="25%">TCPClientHelper<br>TCPServerHelper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CTimer">Ding\Helpers\Timer</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.5</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">ITimerHandler<br>
+</td>
+<td valign="top" width="25%">TimerHelper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CTimezone">Ding\Helpers\Timezone</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">TimezoneHelper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHttpSession">Ding\HttpSession</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 1</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">HttpSession<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKLogger">Logger</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 1</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">Logger<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CMVC">Ding\MVC</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.714285714286</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.214285714286</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">Action<br>Dispatcher<br>IMapper<br>IViewResolver<br>View<br>
+</td>
+<td valign="top" width="25%">ModelAndView<br>
+</td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CMVC%5CHttp">Ding\MVC\Http</a><br>
+</td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CMVC%5CException">Ding\MVC\Exception</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">MVCException<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CMVC%5CHttp">Ding\MVC\Http</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 3</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">HttpAction<br>HttpDispatcher<br>HttpExceptionMapper<br>HttpFrontController<br>HttpUrlMapper<br>HttpView<br>HttpViewResolver<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br><a href="#PKDing%5CMVC">Ding\MVC</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CReflection">Ding\Reflection</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">ReflectionFactory<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PK"></a><br>
+</td>
+</tr>
+</table>
+<table width="100%"><tr>
+<td><a name="NVcycles"><h2>Cycles</h2></a></td>
+<td align="right">
+    [<a href="#NVsummary">summary</a>]
+    [<a href="#NVpackages">packages</a>]
+    [<a href="#NVcycles">cycles</a>]
+    [<a href="#NVexplanations">explanations</a>]
+    </td>
+</tr></table>
+<p>There are no cyclic dependancies.</p>
+<table width="100%"><tr>
+<td><a name="NVexplanations"><h2>Explanations</h2></a></td>
+<td align="right">
+    [<a href="#NVsummary">summary</a>]
+    [<a href="#NVpackages">packages</a>]
+    [<a href="#NVcycles">cycles</a>]
+    [<a href="#NVexplanations">explanations</a>]
+    </td>
+</tr></table>
+<p>The following explanations are for quick reference and are lifted directly from the original <a href="http://www.clarkware.com/software/JDepend.html">JDepend documentation</a>.</p>
+<h3><a name="EXnumber">Number of Classes</a></h3>
+<p>The number of concrete and abstract classes (and interfaces) in the package is an indicator of the extensibility of the package.</p>
+<h3><a name="EXafferent">Afferent Couplings</a></h3>
+<p>The number of other packages that depend upon classes within the package is an indicator of the package's responsibility. </p>
+<h3><a name="EXefferent">Efferent Couplings</a></h3>
+<p>The number of other packages that the classes in the package depend upon is an indicator of the package's independence. </p>
+<h3><a name="EXabstractness">Abstractness</a></h3>
+<p>The ratio of the number of abstract classes (and interfaces) in the analyzed package to the total number of classes in the analyzed package. </p>
+<p>The range for this metric is 0 to 1, with A=0 indicating a completely concrete package and A=1 indicating a completely abstract package. </p>
+<h3><a name="EXinstability">Instability</a></h3>
+<p>The ratio of efferent coupling (Ce) to total coupling (Ce / (Ce + Ca)). This metric is an indicator of the package's resilience to change. </p>
+<p>The range for this metric is 0 to 1, with I=0 indicating a completely stable package and I=1 indicating a completely instable package. </p>
+<h3><a name="EXdistance">Distance</a></h3>
+<p>The perpendicular distance of a package from the idealized line A + I = 1. This metric is an indicator of the package's balance between abstractness and stability. </p>
+<p>A package squarely on the main sequence is optimally balanced with respect to its abstractness and stability. Ideal packages are either completely abstract and stable (x=0, y=1) or completely concrete and instable (x=1, y=0). </p>
+<p>The range for this metric is 0 to 1, with D=0 indicating a package that is coincident with the main sequence and D=1 indicating a package that is as far from the main sequence as possible. </p>
+</body>
+</html>
