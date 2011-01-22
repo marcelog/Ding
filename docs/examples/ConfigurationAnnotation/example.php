@@ -57,13 +57,14 @@ require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
 Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
 
+include_once '/export/users/marcelog/src/sts/Telephony/trunk/src/main/php/ar/com/netlabs/NGNCore/Core/Autoloader/NP_Autoloader.php';
 // Here you configure the container, its subcomponents, drivers, etc.
 $properties = array(
     'ding' => array(
         'log4php.properties' => './log4php.properties',
         'factory' => array(
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
-                'annotation' => array('scanDir' => array(realpath(__DIR__)))
+                'annotation' => array('scanDir' => array(realpath(__DIR__), '/export/users/marcelog/src/sts/Telephony/trunk/src/main/php/ar/com/netlabs/NGNCore/Core'))
             ),
         ),
         // You can configure the cache for the bean definition, the beans, and the proxy definitions.

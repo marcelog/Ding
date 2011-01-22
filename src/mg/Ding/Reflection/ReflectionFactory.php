@@ -13,6 +13,8 @@
  */
 namespace Ding\Reflection;
 
+use Ding\Cache\Locator\CacheLocator;
+
 use Ding\Bean\BeanAnnotationDefinition;
 
 /**
@@ -79,6 +81,14 @@ class ReflectionFactory
         if (isset(self::$_classesAnnotated[$annotation])) {
             return self::$_classesAnnotated[$annotation];
         }
+        $cache = CacheLocator::getAnnotationsCacheInstance();
+        $cacheKey = str_replace('\\', '_', $annotation) . 'classbyannotations';
+        $result = false;
+        $classes = $cache->fetch($cacheKey, $result);
+        if ($result === true) {
+            self::$_classesAnnotated[$annotation] = $classes;
+            return $classes;
+        }
         return array();
     }
 
@@ -86,6 +96,14 @@ class ReflectionFactory
     {
         if (isset(self::$_annotatedClasses[$class])) {
             return self::$_annotatedClasses[$class];
+        }
+        $cache = CacheLocator::getAnnotationsCacheInstance();
+        $cacheKey = str_replace('\\', '_', $class) . '.classannotations';
+        $result = false;
+        $annotations = $cache->fetch($cacheKey, $result);
+        if ($result === true) {
+            self::$_annotatedClasses[$class] = $annotations;
+            return $annotations;
         }
         self::$_annotatedClasses[$class] = array();
         $rClass = ReflectionFactory::getClass($class);
@@ -108,6 +126,7 @@ class ReflectionFactory
             }
         }
         self::$_annotatedClasses[$class] = $ret;
+        $cache->store($cacheKey, $ret);
         return $ret;
     }
 

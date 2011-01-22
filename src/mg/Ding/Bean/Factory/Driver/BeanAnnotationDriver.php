@@ -106,6 +106,33 @@ class BeanAnnotationDriver implements ILifecycleListener
         }
         return true;
     }
+
+    /**
+     * Taken from: http://stackoverflow.com/questions/928928/determining-what-classes-are-defined-in-a-php-class-file
+     * Returns all php classes found in a code block.
+     *
+     * @param string $code PHP Code.
+     *
+     * @return string[]
+     */
+    private function _getClassesFromCode($code)
+    {
+        $classes = array();
+        $tokens = token_get_all($code);
+        $count = count($tokens);
+        for ($i = 2; $i < $count; $i++) {
+            if (
+                $tokens[$i - 2][0] == T_CLASS
+                && $tokens[$i - 1][0] == T_WHITESPACE
+                && $tokens[$i][0] == T_STRING
+            ) {
+                $class_name = $tokens[$i][1];
+                $classes[] = $class_name;
+            }
+        }
+        return $classes;
+    }
+
     /**
      * Recursively scans a directory looking for annotated classes.
      *
@@ -117,9 +144,16 @@ class BeanAnnotationDriver implements ILifecycleListener
     {
         $result = false;
         $cacheKey = str_replace('\\', '_', str_replace('/', '_', $dir)) . '.knownclasses';
-//        $knownClasses = $this->_cache->fetch($cacheKey, $result);
+        $knownClasses = $this->_cache->fetch($cacheKey, $result);
         if ($result === true) {
             self::$_knownClasses = array_merge_recursive(self::$_knownClasses, $knownClasses);
+            foreach ($knownClasses as $class => $v) {
+                $result = false;
+                $file = $this->_cache->fetch(str_replace('\\', '_', $class) . '.include_file', $result);
+                if ($result === true) {
+                    include_once $file;
+                }
+            }
             return;
         }
         foreach (scandir($dir) as $dirEntry) {
@@ -130,14 +164,13 @@ class BeanAnnotationDriver implements ILifecycleListener
             if (is_dir($dirEntry)) {
                 $this->_scan($dirEntry);
             } else if(is_file($dirEntry) && $this->_isScannable($dirEntry)) {
+                $classes = $this->_getClassesFromCode(file_get_contents($dirEntry));
                 include_once $dirEntry;
-                $classes = get_declared_classes();
-                $newClasses = array_combine($classes, $classes);
-                $diff = array_diff($newClasses, self::$_knownClasses);
-                $diff = array_combine($diff, $diff);
-                foreach ($diff as $aNewClass) {
+                foreach ($classes as $aNewClass) {
                     self::$_knownClasses[$aNewClass] = ReflectionFactory::getClassAnnotations($aNewClass);
                     $diff[$aNewClass] = self::$_knownClasses[$aNewClass];
+                    $include_files[$aNewClass] = $dirEntry;
+                    $this->_cache->store(str_replace('\\', '_', $aNewClass) . '.include_file', $dirEntry);
                 }
                 $this->_cache->store($cacheKey, $diff);
             }
