@@ -42,7 +42,36 @@ Ding\Helpers\TCP\TCPClientHelper
 
 <H3>Description</H3>
 <p>
-
+This helper is intended to help you write tcp clients by just implementing
+the Ding\Helpers\TCP\ITCPClientHandler interface. You will need to implement the
+following methods:
+<ul>
+  <li>connectTimeout(): Called when the connection has not been established in less
+  than the configured milliseconds.</li>
+  <li>readTimeout(): Called when the configured maximum read timeout has been
+  reached with less than the configured minimum bytes to read.</li>
+  <li>beforeConnect(): Called just before trying to connect to the server.</li>
+  <li>connect(): Called when the connection has been established successfully.</li>
+  <li>disconnect(): Called when either of the peers (you or the server) closes the connection.</li>
+  <li>data(): Called when data is ready to be consumed from the server.</li>
+</ul>
+<p>
+The helper itself has some useful method to control its behavior:
+<ul>
+  <li>open(): Opens the connection.</li>
+  <li>read(): Reads data from the server (usually used from the data() method above).</li>
+  <li>write(): Sends data to the server.</li>
+  <li>close(): Closes the connection.</li>
+  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper 
+  uses register_tick_function() to achieve this. If you dont want to declare(ticks=1), you need
+  to call this method from your own main loop. It will select() the socket, check for data
+  available, control timeouts, etc.</li>
+</ul>
+</p>
+<p>
+See the php doc API for more details.
+</p>
+</p>
 <H3>Example</H3>
 <ul>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPClientHelper">docs/examples/TCPClientHelper</a>: Using the xml driver.</li>

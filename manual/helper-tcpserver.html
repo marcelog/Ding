@@ -42,6 +42,33 @@ Ding\Helpers\TCP\TCPServerHelper
 
 <H3>Description</H3>
 <p>
+Use this helper to create one or more tcp server by just implementing the interface
+Ding\Helpers\TCP\ITCPServerHandler. You will need to implement the
+following methods:
+<ul>
+  <li>beforeOpen(): Called right before opening the socket.</li>
+  <li>beforeListen(): Called right before start listening in the socket for new connections.</li>
+  <li>close(): Called right after the server socket has ben closed.</li>
+  <li>handleConnection(): Called when a new connection has been established, will receive the ip:port of the client.</li>
+  <li>handleData(): Called when a client has sent data, will receive the ip:port of the client.</li>
+  <li>disconnect(): Called when a client disconnects, will receive the ip:port of the client.</li>
+  <li>readTimeout(): Called when the read timeout has expired on a client, will receive the ip:port of the client.</li>
+</ul>
+</p>
+<p>
+The helper itself has some useful method to control its behavior:
+<ul>
+  <li>disconnect(): Disconnects the given client.</li>
+  <li>open(): Opens the server socket.</li>
+  <li>read(): Reads data from the given client (usually used from the handleData() method above).</li>
+  <li>write(): Sends data to the given client.</li>
+  <li>close(): Closes the server socket.</li>
+  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper 
+  uses register_tick_function() to achieve this. If you dont want to declare(ticks=1), you need
+  to call this method from your own main loop. It will select() the socket, check for data
+  available, control timeouts, etc.</li>
+</ul>
+</p>
 
 <H3>Example</H3>
 <ul>
