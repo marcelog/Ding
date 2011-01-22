@@ -108,32 +108,6 @@ class BeanAnnotationDriver implements ILifecycleListener
     }
 
     /**
-     * Taken from: http://stackoverflow.com/questions/928928/determining-what-classes-are-defined-in-a-php-class-file
-     * Returns all php classes found in a code block.
-     *
-     * @param string $code PHP Code.
-     *
-     * @return string[]
-     */
-    private function _getClassesFromCode($code)
-    {
-        $classes = array();
-        $tokens = token_get_all($code);
-        $count = count($tokens);
-        for ($i = 2; $i < $count; $i++) {
-            if (
-                $tokens[$i - 2][0] == T_CLASS
-                && $tokens[$i - 1][0] == T_WHITESPACE
-                && $tokens[$i][0] == T_STRING
-            ) {
-                $class_name = $tokens[$i][1];
-                $classes[] = $class_name;
-            }
-        }
-        return $classes;
-    }
-
-    /**
      * Recursively scans a directory looking for annotated classes.
      *
      * @param string $dir Directory to scan.
@@ -164,7 +138,7 @@ class BeanAnnotationDriver implements ILifecycleListener
             if (is_dir($dirEntry)) {
                 $this->_scan($dirEntry);
             } else if(is_file($dirEntry) && $this->_isScannable($dirEntry)) {
-                $classes = $this->_getClassesFromCode(file_get_contents($dirEntry));
+                $classes = ReflectionFactory::getClassesFromCode(@file_get_contents($dirEntry));
                 include_once $dirEntry;
                 foreach ($classes as $aNewClass) {
                     self::$_knownClasses[$aNewClass] = ReflectionFactory::getClassAnnotations($aNewClass);

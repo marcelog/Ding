@@ -14,7 +14,6 @@
 namespace Ding\Reflection;
 
 use Ding\Cache\Locator\CacheLocator;
-
 use Ding\Bean\BeanAnnotationDefinition;
 
 /**
@@ -35,8 +34,45 @@ class ReflectionFactory
      * @var ReflectionClass[]
      */
     private static $_reflectionClasses = array();
+    /**
+     * A map where the key is the class, and the value is an array with the
+     * 'class annotations and its annotated methods.
+     * @var string[]
+     */
     private static $_annotatedClasses = array();
+
+    /**
+     * A map where the key is the annotations, and the value is an array with
+     * all the classes (not their methods) with this annotation.
+     * @var string[]
+     */
     private static $_classesAnnotated = array();
+
+    /**
+     * Taken from: http://stackoverflow.com/questions/928928/determining-what-classes-are-defined-in-a-php-class-file
+     * Returns all php classes found in a code block.
+     *
+     * @param string $code PHP Code.
+     *
+     * @return string[]
+     */
+    public static function getClassesFromCode($code)
+    {
+        $classes = array();
+        $tokens = token_get_all($code);
+        $count = count($tokens);
+        for ($i = 2; $i < $count; $i++) {
+            if (
+                $tokens[$i - 2][0] == T_CLASS
+                && $tokens[$i - 1][0] == T_WHITESPACE
+                && $tokens[$i][0] == T_STRING
+            ) {
+                $class_name = $tokens[$i][1];
+                $classes[] = $class_name;
+            }
+        }
+        return $classes;
+    }
 
     /**
      * Parses all annotations in the given text.
@@ -76,6 +112,13 @@ class ReflectionFactory
         return $ret;
     }
 
+    /**
+     * Returns all classes annotated with the given annotation.
+     *
+     * @param string $annotation Annotation name.
+     *
+     * @return string[]
+     */
     public static function getClassesByAnnotation($annotation)
     {
         if (isset(self::$_classesAnnotated[$annotation])) {
@@ -92,6 +135,13 @@ class ReflectionFactory
         return array();
     }
 
+    /**
+     * Returns all annotations for the given class.
+     *
+     * @param string $class Class name.
+     *
+     * @return string[]
+     */
     public static function getClassAnnotations($class)
     {
         if (isset(self::$_annotatedClasses[$class])) {
