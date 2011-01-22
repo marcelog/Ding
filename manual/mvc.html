@@ -36,8 +36,51 @@
 <body>
 
 <H1><u>The MVC Implementation</u></H1>
+The MVC implementation of Ding is in the namespace Ding\MVC. The components are:
 
-<H3>Example</H3>
+<ul>
+  <li><u>Actions</u>: Actions are strings, that uniquely identifies an action (usually triggered with a request) in 
+  your software. Actions can have arguments, which are nothing more than key/value
+  pairs.</li>
+  <li><u>Mapper</u>: The mapper knows and returns the controller that can handle the given Action name.</li>
+  <li><u>Dispatcher</u>: The dispatcher is the responsible for calling the right controller with the right Action object.</li>
+  <li><u>ModelAndView</u>: This is the result of the execution of a controller. A controller must
+  return a ModelAndView object containing the name of the view to render and other optional data.</li>
+  <li><u>ViewResolver</u>: The ViewResolver knows how to get a ViewResolver based on the given View name from the ModelAndView object.</li>
+  <li><u>View</u>: Views are in charge of rendering the ModelAndView in a proper way for the actor that triggered the request.</li>
+</ul>
+<H2>HTTP implementation</H2>
+In the case of http, the following components exist:
+<ul>
+  <li><u>HttpAction</u>: The HttpAction encapsulated the uri, the method used, and the arguments.</li>
+  <li><u>HttpDispatcher</u>: Dispatches the request, using the mapper and the view resolver to render the view.
+  The controller are mapped with both method and uri's. The action names, however, are invoked by convention. Suppose
+  the uri /MyController/List, will mean that the controller that handles /MyController, needs to have a method
+  named ListAction.</li>
+  <li><u>HttpView</u>: Render the given view (a file in the filesystem), outputing headers and data.</li>
+  <li><u>HttpViewResolver</u>: Maps a view name with a file in the filesystem. The root directory, an optional prefix and suffix can be
+  configured.</li>
+  <li><u>HttpUrlMapper</u>: Maps an uri and its method to a controller.</li>
+  <li><u>HttpFrontController</u>: This is intended to be instantiated and called from your own entry point, will load the
+  container and also, invoke the dispatcher and completely handle the request.</li>
+</ul>
+<p>
+A special setup is required in the web server. You need to forward ALL uri's (at least the ones you're interested
+in manage with Ding) to your entry point, let's say index.php. In lighttpd you would do:<br/><br/>
+url.rewrite-once = ( "^/(.*)" => "/index.php" )
+<p>
+And you're index.php would be something like this:
+</p>
+<p>
+HttpFrontController::configure($properties);<br/>
+$frontController = new HttpFrontController();<br/>
+$frontController->handle();<br/>
+</p>
+<p>
+And that's it. Take a look at the example below to know how to actually configure the HttpViewResolver and HttpUrlMapper
+in the container.
+</p>
+<H3>Http Example</H3>
 <ul>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc">docs/examples/mvc</a>: Using the xml and annotation driver.</li>
 </ul>
