@@ -10,7 +10,15 @@
 						<a href="#Post-parsing">Post-parsing</a><br>
 <a href="#BeanXmlDriver.php">BeanXmlDriver.php</a><br>
 <a href="#Ding_Autoloader.php">Ding_Autoloader.php</a><br>
-<a href="#ILifecycleListener.php">ILifecycleListener.php</a><br>
+<a href="#IAfterAssembleListener.php">IAfterAssembleListener.php</a><br>
+<a href="#IAfterConfigListener.php">IAfterConfigListener.php</a><br>
+<a href="#IAfterCreateListener.php">IAfterCreateListener.php</a><br>
+<a href="#IAfterDefinitionListener.php">IAfterDefinitionListener.php</a><br>
+<a href="#IBeforeAssembleListener.php">IBeforeAssembleListener.php</a><br>
+<a href="#IBeforeConfigListener.php">IBeforeConfigListener.php</a><br>
+<a href="#IBeforeCreateListener.php">IBeforeCreateListener.php</a><br>
+<a href="#IBeforeDefinitionListener.php">IBeforeDefinitionListener.php</a><br>
+<a href="#IBeforeDestructListener.php">IBeforeDestructListener.php</a><br>
 <a href="#MemcachedCacheImpl.php">MemcachedCacheImpl.php</a><br>
 <a href="#PagiHelper.php">PagiHelper.php</a><br>
 <a href="#ZendCacheImpl.php">ZendCacheImpl.php</a><br>
@@ -18,40 +26,55 @@
 <h1>Post-parsing</h1>
 <h2>Warnings:</h2><br>
 <b>Warning</b> - Class DingException parent \ not found<br>
-<b>Warning</b> - Class CacheException parent \ not found<br>
 <b>Warning</b> - Class MVCException parent \ not found<br>
+<b>Warning</b> - Class CacheException parent \ not found<br>
 <a name="BeanAnnotationDriver.php"></a>
 <h1>BeanAnnotationDriver.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 63</b> - Unknown tag "@Configuration" used<br>
-<b>Warning on line 69</b> - Unknown tag "@Configuration" used<br>
-<b>Warning on line 107</b> - Method "_isScannable" has no method-level DocBlock.<br>
-<b>Warning on line 194</b> - Method "_loadBean" has no method-level DocBlock.<br>
-<a name="BeanXmlDriver.php"></a>
-<h1>BeanXmlDriver.php</h1>
-<h2>Warnings:</h2><br>
-<b>Warning on line 359</b> - Method "afterDefinition" has no method-level DocBlock.<br>
-<b>Warning on line 364</b> - Method "beforeAssemble" has no method-level DocBlock.<br>
-<b>Warning on line 369</b> - Method "afterAssemble" has no method-level DocBlock.<br>
-<b>Warning on line 374</b> - Method "destruct" has no method-level DocBlock.<br>
-<h2>Errors:</h2><br>
-<b>Error on line 398</b> - "@param" tag was used without any parameters, illegal<br>
+<b>Warning on line 66</b> - Unknown tag "@Configuration" used<br>
+<b>Warning on line 72</b> - Unknown tag "@Configuration" used<br>
+<b>Warning on line 101</b> - Method "_isScannable" has no method-level DocBlock.<br>
+<b>Warning on line 188</b> - Method "_loadBean" has no method-level DocBlock.<br>
 <a name="Ding_Autoloader.php"></a>
 <h1>Ding_Autoloader.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 22</b> - Page-level DocBlock precedes "require_once $truePath", use another DocBlock to document the source element<br>
-<a name="ILifecycleListener.php"></a>
-<h1>ILifecycleListener.php</h1>
+<a name="IAfterAssembleListener.php"></a>
+<h1>IAfterAssembleListener.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 33</b> - Method "beforeConfig" has no method-level DocBlock.<br>
-<b>Warning on line 34</b> - Method "afterConfig" has no method-level DocBlock.<br>
-<b>Warning on line 36</b> - Method "beforeDefinition" has no method-level DocBlock.<br>
-<b>Warning on line 37</b> - Method "afterDefinition" has no method-level DocBlock.<br>
-<b>Warning on line 39</b> - Method "beforeCreate" has no method-level DocBlock.<br>
-<b>Warning on line 40</b> - Method "afterCreate" has no method-level DocBlock.<br>
-<b>Warning on line 42</b> - Method "beforeAssemble" has no method-level DocBlock.<br>
-<b>Warning on line 43</b> - Method "afterAssemble" has no method-level DocBlock.<br>
-<b>Warning on line 45</b> - Method "destruct" has no method-level DocBlock.<br>
+<b>Warning on line 33</b> - Method "afterAssemble" has no method-level DocBlock.<br>
+<a name="IAfterConfigListener.php"></a>
+<h1>IAfterConfigListener.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 32</b> - Method "afterConfig" has no method-level DocBlock.<br>
+<a name="IAfterCreateListener.php"></a>
+<h1>IAfterCreateListener.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 33</b> - Method "afterCreate" has no method-level DocBlock.<br>
+<a name="IAfterDefinitionListener.php"></a>
+<h1>IAfterDefinitionListener.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 33</b> - Method "afterDefinition" has no method-level DocBlock.<br>
+<a name="IBeforeAssembleListener.php"></a>
+<h1>IBeforeAssembleListener.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 33</b> - Method "beforeAssemble" has no method-level DocBlock.<br>
+<a name="IBeforeConfigListener.php"></a>
+<h1>IBeforeConfigListener.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 32</b> - Method "beforeConfig" has no method-level DocBlock.<br>
+<a name="IBeforeCreateListener.php"></a>
+<h1>IBeforeCreateListener.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 33</b> - Method "beforeCreate" has no method-level DocBlock.<br>
+<a name="IBeforeDefinitionListener.php"></a>
+<h1>IBeforeDefinitionListener.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 33</b> - Method "beforeDefinition" has no method-level DocBlock.<br>
+<a name="IBeforeDestructListener.php"></a>
+<h1>IBeforeDestructListener.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 32</b> - Method "destruct" has no method-level DocBlock.<br>
 <a name="MemcachedCacheImpl.php"></a>
 <h1>MemcachedCacheImpl.php</h1>
 <h2>Warnings:</h2><br>
@@ -65,8 +88,12 @@
 <h2>Warnings:</h2><br>
 <b>Warning on line 41</b> - Unknown tag "@Zend_Cache" used<br>
 <b>Warning on line 58</b> - Method "_transform" has no method-level DocBlock.<br>
+<a name="BeanXmlDriver.php"></a>
+<h1>BeanXmlDriver.php</h1>
+<h2>Errors:</h2><br>
+<b>Error on line 343</b> - "@param" tag was used without any parameters, illegal<br>
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 22 Jan 2011 15:45:52 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 22 Jan 2011 17:45:47 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</body>
 </html>

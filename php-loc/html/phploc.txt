@@ -1,28 +1,28 @@
 phploc 1.5.1 by Sebastian Bergmann.
 
 Directories:                                         33
-Files:                                               80
+Files:                                               89
 
-Lines of Code (LOC):                              10145
+Lines of Code (LOC):                               9981
   Cyclomatic Complexity / Lines of Code:           0.07
-Comment Lines of Code (CLOC):                      5454
-Non-Comment Lines of Code (NCLOC):                 4691
+Comment Lines of Code (CLOC):                      5518
+Non-Comment Lines of Code (NCLOC):                 4463
 
 Namespaces:                                          32
-Interfaces:                                          18
+Interfaces:                                          27
 Classes:                                             61
   Abstract:                                           4 (6.56%)
   Concrete:                                          57 (93.44%)
-  Average Class Length (NCLOC):                      79
-Methods:                                            446
+  Average Class Length (NCLOC):                      73
+Methods:                                            394
   Scope:
-    Non-Static:                                     386 (86.55%)
-    Static:                                          60 (13.45%)
+    Non-Static:                                     334 (84.77%)
+    Static:                                          60 (15.23%)
   Visibility:
-    Public:                                         347 (77.80%)
-    Non-Public:                                      99 (22.20%)
-  Average Method Length (NCLOC):                     10
-  Cyclomatic Complexity / Number of Methods:       1.73
+    Public:                                         295 (74.87%)
+    Non-Public:                                      99 (25.13%)
+  Average Method Length (NCLOC):                     11
+  Cyclomatic Complexity / Number of Methods:       1.83
 
 Anonymous Functions:                                  0
 Functions:                                            0

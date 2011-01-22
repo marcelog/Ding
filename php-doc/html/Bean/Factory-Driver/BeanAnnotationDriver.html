@@ -103,7 +103,7 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../../Bean/Lifecycle/ILifecycleListener.html">ILifecycleListener</a></li>            </ul>
+                <li><a href="../../Bean/Lifecycle/IBeforeConfigListener.html">IBeforeConfigListener</a></li><li><a href="../../Bean/Lifecycle/IAfterConfigListener.html">IAfterConfigListener</a></li><li><a href="../../Bean/Lifecycle/IBeforeDefinitionListener.html">IBeforeDefinitionListener</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">This driver will look up all annotations for the class and each method of  the class (of the bean, of course).</p>
@@ -114,7 +114,7 @@
 				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Bean---Factory---Driver---BeanAnnotationDriver.php.html">/Bean/Factory/Driver/BeanAnnotationDriver.php</a> (line <span class="field">40</span>)
+			Located in <a class="field" href="_Bean---Factory---Driver---BeanAnnotationDriver.php.html">/Bean/Factory/Driver/BeanAnnotationDriver.php</a> (line <span class="field">42</span>)
 		</p>
 		
 				
@@ -183,7 +183,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																											
+																																											
 				<div class="method-definition">
 					<img src="../../media/images/StaticMethod.png" alt=" "/>
 					static 						<span class="method-result"><a href="../../Bean/Factory-Driver/BeanAnnotationDriver.html">BeanAnnotationDriver</a></span>
@@ -208,36 +208,8 @@
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#afterAssemble" title="details" class="method-name">afterAssemble</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
 										<a href="#afterConfig" title="details" class="method-name">afterConfig</a>
 											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>)
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#afterCreate" title="details" class="method-name">afterCreate</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#afterDefinition" title="details" class="method-name">afterDefinition</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span>)
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#beforeAssemble" title="details" class="method-name">beforeAssemble</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -249,23 +221,9 @@
 															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#beforeCreate" title="details" class="method-name">beforeCreate</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
 										<a href="#beforeDefinition" title="details" class="method-name">beforeDefinition</a>
 											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$beanName</span>, [<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span> = <span class="var-default">null</span>])
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#destruct" title="details" class="method-name">destruct</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
 									</div>
 																															
 				<div class="method-definition">
@@ -313,7 +271,7 @@
 		<span class="var-title">
 			static <span class="var-type"><a href="../../Bean/Factory-Driver/BeanAnnotationDriver.html">BeanAnnotationDriver</a></span>
 			<span class="var-name">$_instance</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">46</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">49</span>)
 		</span>
 	</div>
 
@@ -336,7 +294,7 @@
 		<span class="var-title">
 			static <span class="var-type">string[]</span>
 			<span class="var-name">$_knownClasses</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">58</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">61</span>)
 		</span>
 	</div>
 
@@ -360,7 +318,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Cache/ICache.html">ICache</a></span>
 			<span class="var-name">$_cache</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">76</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">79</span>)
 		</span>
 	</div>
 
@@ -383,7 +341,7 @@
 		<span class="var-title">
 			<span class="var-type">object[]</span>
 			<span class="var-name">$_configBeans</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">70</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">73</span>)
 		</span>
 	</div>
 
@@ -405,7 +363,7 @@
 		<span class="var-title">
 			<span class="var-type">string[]</span>
 			<span class="var-name">$_configClasses</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">64</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">67</span>)
 		</span>
 	</div>
 
@@ -427,7 +385,7 @@
 		<span class="var-title">
 			<span class="var-type">string[]</span>
 			<span class="var-name">$_scanDirs</span>
-						(line <span class="line-number">52</span>)
+						(line <span class="line-number">55</span>)
 		</span>
 	</div>
 
@@ -462,7 +420,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">312</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">261</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -492,7 +450,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getKnownClasses</span> (line <span class="line-number">162</span>)
+		<span class="method-title">static getKnownClasses</span> (line <span class="line-number">156</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -517,7 +475,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">330</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">279</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -542,54 +500,12 @@
 		
 			
 	</div>
-<a name="methodafterAssemble" id="afterAssemble"><!-- --></a>
+<a name="methodafterConfig" id="afterConfig"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterAssemble</span> (line <span class="line-number">291</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">(non-PHPdoc)</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			afterAssemble
-		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
-				<span class="var-name">$factory</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$bean</span>			</li>
-					<li>
-				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
-				<span class="var-name">$beanDefinition</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methodafterAssemble">ILifecycleListener::afterAssemble()</a></dt>
-					</dl>
-			
-	</div>
-<a name="methodafterConfig" id="afterConfig"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterConfig</span> (line <span class="line-number">201</span>)
+		<span class="method-title">afterConfig</span> (line <span class="line-number">195</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -616,130 +532,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methodafterConfig">ILifecycleListener::afterConfig()</a></dt>
-					</dl>
-			
-	</div>
-<a name="methodafterCreate" id="afterCreate"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterCreate</span> (line <span class="line-number">233</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">(non-PHPdoc)</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			afterCreate
-		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
-				<span class="var-name">$factory</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$bean</span>			</li>
-					<li>
-				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
-				<span class="var-name">$beanDefinition</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methodafterCreate">ILifecycleListener::afterCreate()</a></dt>
-					</dl>
-			
-	</div>
-<a name="methodafterDefinition" id="afterDefinition"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterDefinition</span> (line <span class="line-number">82</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">(non-PHPdoc)</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			afterDefinition
-		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
-				<span class="var-name">$factory</span>			</li>
-					<li>
-				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
-				<span class="var-name">&$bean</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methodafterDefinition">ILifecycleListener::afterDefinition()</a></dt>
-					</dl>
-			
-	</div>
-<a name="methodbeforeAssemble" id="beforeAssemble"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">beforeAssemble</span> (line <span class="line-number">282</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">(non-PHPdoc)</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			beforeAssemble
-		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
-				<span class="var-name">$factory</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$bean</span>			</li>
-					<li>
-				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
-				<span class="var-name">$beanDefinition</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methodbeforeAssemble">ILifecycleListener::beforeAssemble()</a></dt>
+			<dt><a href="../../Bean/Lifecycle/IAfterConfigListener.html#methodafterConfig">IAfterConfigListener::afterConfig()</a></dt>
 					</dl>
 			
 	</div>
@@ -748,7 +541,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">beforeConfig</span> (line <span class="line-number">91</span>)
+		<span class="method-title">beforeConfig</span> (line <span class="line-number">85</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -775,55 +568,16 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methodbeforeConfig">ILifecycleListener::beforeConfig()</a></dt>
-					</dl>
-			
-	</div>
-<a name="methodbeforeCreate" id="beforeCreate"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">beforeCreate</span> (line <span class="line-number">224</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">(non-PHPdoc)</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			beforeCreate
-		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
-				<span class="var-name">$factory</span>			</li>
-					<li>
-				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
-				<span class="var-name">$beanDefinition</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methodbeforeCreate">ILifecycleListener::beforeCreate()</a></dt>
+			<dt><a href="../../Bean/Lifecycle/IBeforeConfigListener.html#methodbeforeConfig">IBeforeConfigListener::beforeConfig()</a></dt>
 					</dl>
 			
 	</div>
 <a name="methodbeforeDefinition" id="beforeDefinition"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">beforeDefinition</span> (line <span class="line-number">246</span>)
+		<span class="method-title">beforeDefinition</span> (line <span class="line-number">222</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -856,46 +610,7 @@
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methodbeforeDefinition">ILifecycleListener::beforeDefinition()</a></dt>
-					</dl>
-			
-	</div>
-<a name="methoddestruct" id="destruct"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">destruct</span> (line <span class="line-number">300</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">(non-PHPdoc)</p>
-	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::destruct()</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			destruct
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$bean</span>			</li>
-					<li>
-				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
-				<span class="var-name">$beanDefinition</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../../Bean/Lifecycle/ILifecycleListener.html#methoddestruct">ILifecycleListener::destruct()</a></dt>
+			<dt><a href="../../Bean/Lifecycle/IBeforeDefinitionListener.html#methodbeforeDefinition">IBeforeDefinitionListener::beforeDefinition()</a></dt>
 					</dl>
 			
 	</div>
@@ -904,7 +619,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_isScannable</span> (line <span class="line-number">98</span>)
+		<span class="method-title">_isScannable</span> (line <span class="line-number">92</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -933,7 +648,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadBean</span> (line <span class="line-number">167</span>)
+		<span class="method-title">_loadBean</span> (line <span class="line-number">161</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -968,7 +683,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_scan</span> (line <span class="line-number">117</span>)
+		<span class="method-title">_scan</span> (line <span class="line-number">111</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -999,7 +714,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 22 Jan 2011 15:45:44 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 22 Jan 2011 17:45:39 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

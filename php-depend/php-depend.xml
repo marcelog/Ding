@@ -94,11 +94,11 @@
     </Package>
     <Package name="Ding\Bean\Factory\Driver">
       <Stats>
-        <TotalClasses>20</TotalClasses>
-        <ConcreteClasses>20</ConcreteClasses>
+        <TotalClasses>19</TotalClasses>
+        <ConcreteClasses>19</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
-        <Ce>4</Ce>
+        <Ce>6</Ce>
         <A>0</A>
         <I>1</I>
         <D>0</D>
@@ -121,6 +121,8 @@
         <Package>Ding\Bean</Package>
         <Package>Ding\Bean\Factory</Package>
         <Package>Ding\Bean\Lifecycle</Package>
+        <Package>Ding\MVC\Http</Package>
+        <Package>Ding\Reflection</Package>
       </DependsUpon>
       <UsedBy/>
     </Package>
@@ -192,18 +194,27 @@
     </Package>
     <Package name="Ding\Bean\Lifecycle">
       <Stats>
-        <TotalClasses>2</TotalClasses>
+        <TotalClasses>11</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
-        <AbstractClasses>2</AbstractClasses>
-        <Ca>2</Ca>
+        <AbstractClasses>11</AbstractClasses>
+        <Ca>3</Ca>
         <Ce>2</Ce>
         <A>1</A>
-        <I>0.5</I>
-        <D>0.5</D>
+        <I>0.4</I>
+        <D>0.4</D>
       </Stats>
       <ConcreteClasses/>
       <AbstractClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/BeanLifecycle.php">BeanLifecycle</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IAfterAssembleListener.php">IAfterAssembleListener</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IAfterConfigListener.php">IAfterConfigListener</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IAfterCreateListener.php">IAfterCreateListener</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IAfterDefinitionListener.php">IAfterDefinitionListener</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IBeforeAssembleListener.php">IBeforeAssembleListener</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IBeforeConfigListener.php">IBeforeConfigListener</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IBeforeCreateListener.php">IBeforeCreateListener</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IBeforeDefinitionListener.php">IBeforeDefinitionListener</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IBeforeDestructListener.php">IBeforeDestructListener</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/ILifecycleListener.php">ILifecycleListener</Class>
       </AbstractClasses>
       <DependsUpon>
@@ -212,6 +223,7 @@
       </DependsUpon>
       <UsedBy>
         <Package>Ding\Bean\Factory\Driver</Package>
+        <Package>Ding\Container</Package>
         <Package>Ding\Container\Impl</Package>
       </UsedBy>
     </Package>
@@ -352,10 +364,10 @@
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>1</AbstractClasses>
         <Ca>1</Ca>
-        <Ce>1</Ce>
+        <Ce>2</Ce>
         <A>1</A>
-        <I>0.5</I>
-        <D>0.5</D>
+        <I>0.666666666667</I>
+        <D>0.666666666667</D>
       </Stats>
       <ConcreteClasses/>
       <AbstractClasses>
@@ -363,6 +375,7 @@
       </AbstractClasses>
       <DependsUpon>
         <Package>Ding\Bean\Factory</Package>
+        <Package>Ding\Bean\Lifecycle</Package>
       </DependsUpon>
       <UsedBy>
         <Package>Ding\Container\Impl</Package>
@@ -370,8 +383,8 @@
     </Package>
     <Package name="Ding\Container\Impl">
       <Stats>
-        <TotalClasses>21</TotalClasses>
-        <ConcreteClasses>21</ConcreteClasses>
+        <TotalClasses>29</TotalClasses>
+        <ConcreteClasses>29</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
         <Ce>4</Ce>
@@ -715,11 +728,11 @@
         <TotalClasses>11</TotalClasses>
         <ConcreteClasses>11</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
-        <Ca>0</Ca>
+        <Ca>1</Ca>
         <Ce>3</Ce>
         <A>0</A>
-        <I>1</I>
-        <D>0</D>
+        <I>0.75</I>
+        <D>0.25</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpAction.php">HttpAction</Class>
@@ -736,18 +749,20 @@
         <Package>Ding\Container\Impl</Package>
         <Package>Ding\MVC</Package>
       </DependsUpon>
-      <UsedBy/>
+      <UsedBy>
+        <Package>Ding\Bean\Factory\Driver</Package>
+      </UsedBy>
     </Package>
     <Package name="Ding\Reflection">
       <Stats>
         <TotalClasses>3</TotalClasses>
         <ConcreteClasses>3</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
-        <Ca>0</Ca>
+        <Ca>1</Ca>
         <Ce>1</Ce>
         <A>0</A>
-        <I>1</I>
-        <D>0</D>
+        <I>0.5</I>
+        <D>0.5</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/ReflectionFactory.php">ReflectionFactory</Class>
@@ -756,7 +771,9 @@
       <DependsUpon>
         <Package></Package>
       </DependsUpon>
-      <UsedBy/>
+      <UsedBy>
+        <Package>Ding\Bean\Factory\Driver</Package>
+      </UsedBy>
     </Package>
   </Packages>
   <Cycles/>
