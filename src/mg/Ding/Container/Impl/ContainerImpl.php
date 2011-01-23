@@ -46,6 +46,7 @@ use Ding\Bean\Factory\Driver\FiltersDriver;
 use Ding\Bean\Factory\Driver\ErrorHandlerDriver;
 use Ding\Bean\Factory\Driver\SignalHandlerDriver;
 use Ding\Bean\Factory\Driver\SetterInjectionDriver;
+use Ding\Bean\Factory\Driver\AutowiredInjectionDriver;
 use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
@@ -334,7 +335,7 @@ class ContainerImpl implements IContainer
             }
         }
         foreach ($this->_lifecyclers[BeanLifecycle::AfterCreate] as $lifecycleListener) {
-            $bean = $lifecycleListener->beforeCreate($this, $bean, $beanDefinition);
+            $bean = $lifecycleListener->afterCreate($this, $bean, $beanDefinition);
         }
         try
         {
@@ -585,6 +586,7 @@ class ContainerImpl implements IContainer
             $this->addBeforeDefinitionListener(
                 BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation'])
             );
+            //$this->addAfterCreateListener(AutowiredInjectionDriver::getInstance($soullessArray));
         }
         $this->addAfterConfigListener(ErrorHandlerDriver::getInstance($soullessArray));
         $this->addAfterConfigListener(SignalHandlerDriver::getInstance($soullessArray));

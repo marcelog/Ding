@@ -81,7 +81,7 @@ class ReflectionFactory
      *
      * @return BeanAnnotationDefinition[]
      */
-    private static function _getAnnotations($text)
+    public static function getAnnotations($text)
     {
         $ret = array();
         if (preg_match_all('/@[a-zA-Z0-9=,\(\)]+/', $text, $matches) > 0) {
@@ -160,7 +160,7 @@ class ReflectionFactory
         $rClass = ReflectionFactory::getClass($class);
         $ret = array();
         $ret['class'] = array();
-        foreach (self::_getAnnotations($rClass->getDocComment()) as $annotation) {
+        foreach (self::getAnnotations($rClass->getDocComment()) as $annotation) {
             $name = $annotation->getName();
             $ret['class'][$name] = $annotation;
             if (!isset(self::$_classesAnnotated[$name])) {
@@ -173,7 +173,7 @@ class ReflectionFactory
         foreach ($rClass->getMethods() as $method) {
             $methodName = $method->getName();
             $ret[$methodName] = array();
-            foreach (self::_getAnnotations($method->getDocComment()) as $annotation) {
+            foreach (self::getAnnotations($method->getDocComment()) as $annotation) {
                 $name = $annotation->getName();
                 $ret[$methodName][$name] = $annotation;
             }

@@ -32,7 +32,7 @@ class SomeBeanProviderClass
      * This bean should be called someBean (if no name= arguments where passed to the
      * bean annotation.)
      *
-     * @Bean(name=someBeanRenamed)
+     * @Bean(name=someBeanRenamed,class=MyBean)
      * @Scope(value=prototype)
      * @InitMethod(method=aMethod)
      * @DestroyMethod(method=bMethod)
@@ -72,6 +72,7 @@ class MyBean
     {
         return $this->_someProperty;
     }
+
     public function __construct()
     {
 

@@ -183,6 +183,9 @@ class BeanAnnotationDriver
             if (isset($overrideName['name'])) {
                 $name = $overrideName['name'];
             }
+            if (isset($overrideName['class'])) {
+                $def->setClass($overrideName['class']);
+            }
         }
         $def->setFactoryMethod($factoryMethod);
         if (isset($annotations['Scope'])) {
