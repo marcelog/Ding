@@ -181,6 +181,16 @@ class PamiHelper implements IEventListener
     }
 
     /**
+     * Process all incoming messages. Call this one from your own loop.
+     *
+     * @return void
+     */
+    public function process()
+    {
+        $this->_ami->process();
+    }
+
+    /**
      * Sends a message to ami.
      *
      * @param ActionMessage $message AMI Command.

@@ -60,5 +60,6 @@ $a = ContainerImpl::getInstance($properties);
 $ami = $a->getBean('Pami');
 var_dump($ami->send(new ListCommandsAction()));
 while(true){
+    $ami->process();
     usleep(1);
 }
