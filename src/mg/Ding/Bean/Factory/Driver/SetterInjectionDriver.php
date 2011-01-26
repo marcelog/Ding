@@ -20,6 +20,7 @@ use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
+use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 /**
  * This driver will make the setter injection.
