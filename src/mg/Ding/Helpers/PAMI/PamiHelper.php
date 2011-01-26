@@ -154,9 +154,15 @@ class PamiHelper implements IEventListener
      */
     private function _load()
     {
-	    $this->_ami = new ClientImpl(
-	        $this->_host, $this->_port, $this->_user, $this->_pass, 0, 0
-	    );
+        $options = array(
+            'host' => $this->_host,
+            'port' => $this->_port,
+            'username' => $this->_user,
+            'secret' => $this->_pass,
+            'connect_timeout' => 0,
+            'read_timeout' => 0
+        );
+        $this->_ami = new ClientImpl($options);
         $this->_init = true;
     }
 
