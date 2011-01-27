@@ -77,6 +77,13 @@ class Ding_Autoloader
         self::$_cache = $cache;
     }
 
+    /**
+     * Resolves a class name to a filesystem entry. False if none found.
+     *
+     * @param string $class Class name.
+     *
+     * @return string
+     */
     private static function _resolve($class)
     {
         $file = realpath(implode(
