@@ -72,6 +72,10 @@ optional bean from the container, named "SignalHandler", that should be of class
 "Ding\Helpers\SignalHandlerHelper". If this bean exists, it will be set as the
 signal handler. The helper will in turn, call the handler set via the "signalHandler"
 property. This driver registers at AfterConfig in the Container lifecycle.
+<p>
+You need to add an option when instantiating the container: <br/>
+$options['drivers'] => array('signalhandler' => array())
+</p>
 
 
 <H3>Example</H3>

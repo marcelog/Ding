@@ -180,6 +180,21 @@ $properties['ding']['cache']['bdef'] = array(<br/>
 )<br/>
 </p>
 <hr/>
+<H2>Driver properties</H2>
+<p>
+Some drivers are optional:
+<ul>
+  <li>SignalHandler</li>
+  <li>ErrorHandler</li>
+  <li>Shutdown</li>
+  <li>Timezone</li>
+</ul>
+You can explicitely tell the container to use them with the following options:<br/>
+$options['drivers'] => array('signalhandler' => array())<br/><br/>
+$options['drivers'] => array('errorhandler' => array())<br/><br/>
+$options['drivers'] => array('shutdown' => array())<br/><br/>
+$options['drivers'] => array('timezone' => array())<br/><br/>
+</p>
 
 </body>
 </html>

@@ -60,6 +60,10 @@ optional bean from the container, named "ErrorHandler", that should be of class
 error handler. The helper will in turn, call the handler set via the "errorHandler"
 property. This driver registers at AfterConfig in the Container lifecycle.
 
+<p>
+You need to add an option when instantiating the container: <br/>
+$options['drivers'] => array('errorhandler' => array())
+</p>
 
 <H3>Example</H3>
 <ul>

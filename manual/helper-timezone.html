@@ -52,6 +52,10 @@ optional bean from the container, named "Timezone", that should be of class
 "Ding\Helpers\TimezoneHelper". If this bean exists, it will get the its property
 "timezone" and call date_default_time_set() with that value.
 This driver registers at AfterConfig in the Container lifecycle.
+<p>
+You need to add an option when instantiating the container: <br/>
+$options['drivers'] => array('timezone' => array())
+</p>
 
 
 <H3>Example</H3>

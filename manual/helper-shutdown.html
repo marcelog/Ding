@@ -60,6 +60,10 @@ optional bean from the container, named "ShutdownHandler", that should be of cla
 shutdown handler. The helper will in turn, call the handler set via the "shutdownHandler"
 property. This driver registers at AfterConfig in the Container lifecycle.
 
+<p>
+You need to add an option when instantiating the container: <br/>
+$options['drivers'] => array('shutdown' => array())
+</p>
 
 <H3>Example</H3>
 <ul>
