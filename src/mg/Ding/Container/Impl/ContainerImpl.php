@@ -281,9 +281,9 @@ class ContainerImpl implements IContainer
         foreach ($beanDefinition->getArguments() as $argument) {
             $args[] = $this->_loadArgument($argument);
         }
-        $dispatcher = new DispatcherImpl();
-        $methods = array();
         if ($beanDefinition->hasAspects()) {
+            $dispatcher = new DispatcherImpl();
+            $methods = array();
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 $method = $aspectDefinition->getPointcut();
@@ -337,8 +337,8 @@ class ContainerImpl implements IContainer
         foreach ($this->_lifecyclers[BeanLifecycle::AfterCreate] as $lifecycleListener) {
             $bean = $lifecycleListener->afterCreate($this, $bean, $beanDefinition);
         }
-        try
-        {
+        //try
+        //{
             $this->_assemble($bean, $beanDefinition);
             if (!empty($beanClass) && isset(self::$_options['bdef']['annotation'])) {
                 $annotations = ReflectionFactory::getClassAnnotations($beanDefinition->getClass());
@@ -363,9 +363,9 @@ class ContainerImpl implements IContainer
             if ($destroyMethod) {
                 $this->registerShutdownMethod($bean, $destroyMethod);
             }
-        } catch(\ReflectionException $exception) {
-            throw new BeanFactoryException('DI Error', 0, $exception);
-        }
+        //} catch(\ReflectionException $exception) {
+        //    throw new BeanFactoryException('DI Error', 0, $exception);
+        //}
         return $bean;
     }
 
@@ -578,28 +578,26 @@ class ContainerImpl implements IContainer
         $this->_lifecyclers[BeanLifecycle::AfterAssemble] = $soullessArray;
 
         if (isset(self::$_options['bdef']['annotation'])) {
-            $this->addBeforeConfigListener(
-                BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation'])
-            );
-            $this->addAfterConfigListener(
-                BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation'])
-            );
-            $this->addBeforeDefinitionListener(
-                BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation'])
-            );
+            $anDriver = BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation']);
+            $this->addBeforeConfigListener($anDriver);
+            $this->addAfterConfigListener($anDriver);
+            $this->addBeforeDefinitionListener($anDriver);
+            $this->addAfterConfigListener(MVCAnnotationDriver::getInstance($soullessArray));
             //$this->addAfterCreateListener(AutowiredInjectionDriver::getInstance($soullessArray));
         }
         $this->addAfterConfigListener(ErrorHandlerDriver::getInstance($soullessArray));
         $this->addAfterConfigListener(SignalHandlerDriver::getInstance($soullessArray));
         $this->addAfterConfigListener(ShutdownDriver::getInstance($soullessArray));
         $this->addAfterConfigListener(TimezoneDriver::getInstance($soullessArray));
-        $this->addAfterDefinitionListener(FiltersDriver::getInstance(self::$_options['properties']));
+        if (isset(self::$_options['properties'])) {
+            $this->addAfterDefinitionListener(FiltersDriver::getInstance(self::$_options['properties']));
+        }
         $this->addAfterDefinitionListener(DependsOnDriver::getInstance($soullessArray));
 
         if (isset(self::$_options['bdef']['xml'])) {
             $this->addBeforeDefinitionListener(BeanXmlDriver::getInstance(self::$_options['bdef']['xml']));
         }
-        $this->addAfterConfigListener(MVCAnnotationDriver::getInstance($soullessArray));
+
         $this->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
 
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeConfig] as $lifecycleListener) {

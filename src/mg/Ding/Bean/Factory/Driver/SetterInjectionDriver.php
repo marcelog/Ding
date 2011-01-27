@@ -57,20 +57,20 @@ class SetterInjectionDriver implements IBeforeAssembleListener
      */
     private function _loadProperty(IBeanFactory $factory, BeanPropertyDefinition $property)
     {
-        $value = null;
         if ($property->isBean()) {
-            $value = $factory->getBean($property->getValue());
-        } else if ($property->isArray()) {
+            return $factory->getBean($property->getValue());
+        }
+        if ($property->isArray()) {
             $value = array();
             foreach ($property->getValue() as $k => $v) {
                 $value[$k] = $this->_loadProperty($factory, $v);
             }
-        } else if ($property->isCode()) {
-            $value = eval($property->getValue());
-        } else {
-            $value = $property->getValue();
+            return $value;
         }
-        return $value;
+        if ($property->isCode()) {
+            return eval($property->getValue());
+        }
+        return $property->getValue();
     }
 
     public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
