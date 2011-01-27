@@ -85,7 +85,8 @@ class ContainerImpl implements IContainer
      */
     private static $_options = array(
         'bdef' => array(),
-        'properties' => array()
+        'properties' => array(),
+        'drivers' => array()
     );
 
     /**
@@ -592,10 +593,23 @@ class ContainerImpl implements IContainer
             $this->addAfterConfigListener(MVCAnnotationDriver::getInstance($soullessArray));
             //$this->addAfterCreateListener(AutowiredInjectionDriver::getInstance($soullessArray));
         }
-        $this->addAfterConfigListener(ErrorHandlerDriver::getInstance($soullessArray));
-        $this->addAfterConfigListener(SignalHandlerDriver::getInstance($soullessArray));
-        $this->addAfterConfigListener(ShutdownDriver::getInstance($soullessArray));
-        $this->addAfterConfigListener(TimezoneDriver::getInstance($soullessArray));
+
+        if (isset(self::$_options['drivers']['errorhandler'])) {
+            $this->addAfterConfigListener(ErrorHandlerDriver::getInstance($soullessArray));
+        }
+
+        if (isset(self::$_options['drivers']['signalhandler'])) {
+            $this->addAfterConfigListener(SignalHandlerDriver::getInstance($soullessArray));
+        }
+
+        if (isset(self::$_options['drivers']['shutdown'])) {
+            $this->addAfterConfigListener(ShutdownDriver::getInstance($soullessArray));
+        }
+
+        if (isset(self::$_options['drivers']['timezone'])) {
+            $this->addAfterConfigListener(TimezoneDriver::getInstance($soullessArray));
+        }
+
         if (isset(self::$_options['properties'])) {
             $this->addAfterDefinitionListener(FiltersDriver::getInstance(self::$_options['properties']));
         }

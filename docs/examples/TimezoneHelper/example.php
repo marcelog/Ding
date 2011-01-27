@@ -34,6 +34,9 @@ $properties = array(
     'ding' => array(
         'log4php.properties' => './log4php.properties',
         'factory' => array(
+            'drivers' => array(
+                'timezone' => array()
+            ),
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
                 'xml' => array('filename' => 'beans.xml'),
             ),
