@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos  -->
-			<title>Docs For Class MVCAnnotationDriver</title>
+			<title>Docs For Class AutowiredInjectionDriver</title>
 			<link rel="stylesheet" href="../../media/stylesheet.css" />
 						<script src="../../media/lib/classTree.js"></script>
 												<script language="javascript" type="text/javascript">
@@ -88,7 +88,7 @@
 <h2 class="class-name"><img src="../../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> MVCAnnotationDriver</h2>
+														style="vertical-align: middle"> AutowiredInjectionDriver</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -103,17 +103,18 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../../Bean/Lifecycle/IAfterConfigListener.html">IAfterConfigListener</a></li>            </ul>
+                <li><a href="../../Bean/Lifecycle/IAfterCreateListener.html">IAfterCreateListener</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">PHP Version 5</p>
+<p class="short-description">This driver will make the autowired injection.</p>
+<p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
 				<li><span class="field">link:</span> <a href="http://www.noneyet.ar/">http://www.noneyet.ar/</a></li>
 				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Bean---Factory---Driver---MVCAnnotationDriver.php.html">/Bean/Factory/Driver/MVCAnnotationDriver.php</a> (line <span class="field">35</span>)
+			Located in <a class="field" href="_Bean---Factory---Driver---AutowiredInjectionDriver.php.html">/Bean/Factory/Driver/AutowiredInjectionDriver.php</a> (line <span class="field">36</span>)
 		</p>
 		
 				
@@ -138,10 +139,15 @@
 			<div class="var-summary">
 												<div class="var-title">
 					<img src="../../media/images/StaticVariable.png" alt=" " />
-					static <span class="var-type"><a href="../../Bean/Factory-Driver/MVCAnnotationDriver.html">MVCAnnotationDriver</a></span>
+					static <span class="var-type"><a href="../../Bean/Factory-Driver/AutowiredInjectionDriver.html">AutowiredInjectionDriver</a></span>
 					<a href="#$_instance" title="details" class="var-name">$_instance</a>
 				</div>
-																							</div>
+																																				<div class="var-title">
+					<img src="../../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">array[]</span>
+					<a href="#$_propertiesNameCache" title="details" class="var-name">$_propertiesNameCache</a>
+				</div>
+											</div>
 		</div>
 	</div>
 
@@ -160,11 +166,11 @@
 																											
 				<div class="method-definition">
 					<img src="../../media/images/StaticMethod.png" alt=" "/>
-					static 						<span class="method-result"><a href="../../Bean/Factory-Driver/MVCAnnotationDriver.html">MVCAnnotationDriver</a></span>
+					static 						<span class="method-result"><a href="../../Bean/Factory-Driver/AutowiredInjectionDriver.html">AutowiredInjectionDriver</a></span>
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
 									</div>
-																			
+																											
 				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -175,10 +181,17 @@
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#afterConfig" title="details" class="method-name">afterConfig</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>)
+										<a href="#afterCreate" title="details" class="method-name">afterCreate</a>
+											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
 									</div>
-																			</div>
+																							
+				<div class="method-definition">
+					<img src="../../media/images/PrivateMethod.png" alt=" "/>
+											<span class="method-result">mixed</span>
+										<a href="#_loadProperty" title="details" class="method-name">_loadProperty</a>
+											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a></span>&nbsp;<span class="var-name">$property</span>)
+									</div>
+											</div>
 		</div>
 	</div>		
 
@@ -196,14 +209,14 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_instance" id="$_instance"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/StaticVariable.png" />
 		<span class="var-title">
-			static <span class="var-type"><a href="../../Bean/Factory-Driver/MVCAnnotationDriver.html">MVCAnnotationDriver</a></span>
+			static <span class="var-type"><a href="../../Bean/Factory-Driver/AutowiredInjectionDriver.html">AutowiredInjectionDriver</a></span>
 			<span class="var-name">$_instance</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">41</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">48</span>)
 		</span>
 	</div>
 
@@ -219,6 +232,29 @@
 
 </div>
 
+<a name="var$_propertiesNameCache" id="$_propertiesNameCache"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">array[]</span>
+			<span class="var-name">$_propertiesNameCache</span>
+						(line <span class="line-number">42</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Cache property setters names.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
 						
 		</div>
 	</div>
@@ -239,7 +275,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">79</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">115</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -249,7 +285,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		static <span class="method-result"><a href="../../Bean/Factory-Driver/MVCAnnotationDriver.html">MVCAnnotationDriver</a></span>
+		static <span class="method-result"><a href="../../Bean/Factory-Driver/AutowiredInjectionDriver.html">AutowiredInjectionDriver</a></span>
 		<span class="method-name">
 			getInstance
 		</span>
@@ -269,7 +305,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">97</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">133</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -294,41 +330,77 @@
 		
 			
 	</div>
-<a name="methodafterConfig" id="afterConfig"><!-- --></a>
+<a name="methodafterCreate" id="afterCreate"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterConfig</span> (line <span class="line-number">51</span>)
+		<span class="method-title">afterCreate</span> (line <span class="line-number">75</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Will call HttpUrlMapper::addAnnotatedController to add new mappings  from the @Controller annotated classes. Also, creates a new bean  definition for every one of them.</p>
-<p class="description"><p>(non-PHPdoc)</p></p>
 	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			afterConfig
+			afterCreate
 		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>)
+					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
 				<span class="var-name">$factory</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$bean</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
+				<span class="var-name">$beanDefinition</span>			</li>
 				</ul>
 		
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../../Bean/Lifecycle/IAfterConfigListener.html#methodafterConfig">IAfterConfigListener::afterConfig()</a></dt>
+			<dt><a href="../../Bean/Lifecycle/IAfterCreateListener.html#methodafterCreate">IAfterCreateListener::afterCreate()</a></dt>
 					</dl>
+			
+	</div>
+<a name="method_loadProperty" id="_loadProperty"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/PrivateMethod.png" />
+		<span class="method-title">_loadProperty</span> (line <span class="line-number">57</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This will return the property value from a definition.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			_loadProperty
+		</span>
+					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a></span>&nbsp;<span class="var-name">$property</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a></span>
+				<span class="var-name">$property</span><span class="var-description">: Property definition.</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
+				<span class="var-name">$factory</span>			</li>
+				</ul>
+		
 			
 	</div>
 						
@@ -337,7 +409,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 27 Jan 2011 11:57:19 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 27 Jan 2011 11:57:14 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

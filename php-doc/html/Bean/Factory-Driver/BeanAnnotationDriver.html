@@ -230,14 +230,14 @@
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#_isScannable" title="details" class="method-name">_isScannable</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$dirEntry</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$dirEntry</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
-											<span class="method-result">void</span>
+											<span class="method-result"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
 										<a href="#_loadBean" title="details" class="method-name">_loadBean</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$factoryBean</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$annotations</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$factoryBean</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$factoryMethod</span>, <span class="var-type">BeanAnnotationDefinition[]</span>&nbsp;<span class="var-name">$annotations</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -420,7 +420,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">261</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">295</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -450,7 +450,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getKnownClasses</span> (line <span class="line-number">156</span>)
+		<span class="method-title">static getKnownClasses</span> (line <span class="line-number">161</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -475,7 +475,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">279</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">313</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -505,7 +505,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterConfig</span> (line <span class="line-number">195</span>)
+		<span class="method-title">afterConfig</span> (line <span class="line-number">220</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -577,7 +577,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">beforeDefinition</span> (line <span class="line-number">222</span>)
+		<span class="method-title">beforeDefinition</span> (line <span class="line-number">247</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -619,10 +619,11 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_isScannable</span> (line <span class="line-number">92</span>)
+		<span class="method-title">_isScannable</span> (line <span class="line-number">97</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns true if the given filesystem entry is interesting to scan.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -632,13 +633,13 @@
 		<span class="method-name">
 			_isScannable
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$dirEntry</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$dirEntry</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$dirEntry</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$dirEntry</span><span class="var-description">: Filesystem entry.</span>			</li>
 				</ul>
 		
 			
@@ -648,32 +649,36 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadBean</span> (line <span class="line-number">161</span>)
+		<span class="method-title">_loadBean</span> (line <span class="line-number">176</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Loads a bean definition from the given annotations.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
 		<span class="method-name">
 			_loadBean
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$factoryBean</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$annotations</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$factoryBean</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$factoryMethod</span>, <span class="var-type">BeanAnnotationDefinition[]</span>&nbsp;<span class="var-name">$annotations</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$name</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Candidate name.</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$factoryBean</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$factoryBean</span><span class="var-description">: Factory bean name.</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$annotations</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$factoryMethod</span><span class="var-description">: Factory bean method.</span>			</li>
+					<li>
+				<span class="var-type">BeanAnnotationDefinition[]</span>
+				<span class="var-name">$annotations</span><span class="var-description">: Annotations with data.</span>			</li>
 				</ul>
 		
 			
@@ -683,7 +688,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_scan</span> (line <span class="line-number">111</span>)
+		<span class="method-title">_scan</span> (line <span class="line-number">116</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -714,7 +719,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 22 Jan 2011 17:45:39 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 27 Jan 2011 11:57:14 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
