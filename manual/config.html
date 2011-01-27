@@ -92,6 +92,8 @@ $properties['ding']['factory']['properties'] = array(<br/>
 The cache subsystems use $properties['ding']['cache']. The subsystems are:
 
 <ul>
+  <li><u>autoloader</u>: In order to avoid resolving the ding's class names to
+  a filesystem entry every time, a cache is used.</li>
   <li><u>proxy</u>: To cache proxy definitions: its expensive to create proxies
   because php lacks this hability, so we have to actually generate code. This code
   can be cached.</li>
@@ -111,6 +113,7 @@ The resulting properties needed to configure each one of the cache subsystems:
 
 <p>
 <ul>
+  <li>$properties['ding']['cache']['autoloader']</li>
   <li>$properties['ding']['cache']['proxy']</li>
   <li>$properties['ding']['cache']['bdef']</li>
   <li>$properties['ding']['cache']['beans']</li>
@@ -152,7 +155,12 @@ $properties['ding']['cache']['proxy'] = array(<br/>
 )<br/>
 </p>
 <hr/>
-
+<p>
+$properties['ding']['cache']['autoloader'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
+)<br/>
+</p>
+<hr/>
 <p>
 $properties['ding']['cache']['annotations'] = array(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
