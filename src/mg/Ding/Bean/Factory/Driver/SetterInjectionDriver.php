@@ -83,11 +83,9 @@ class SetterInjectionDriver implements IBeforeAssembleListener
                 $methodName = 'set' . ucfirst($propertyName);
                 $this->_propertiesNameCache[$propertyName] = $methodName;
             }
-            try
-            {
+            $rClass = ReflectionFactory::getClass($beanDefinition->getClass());
+            if ($rClass->hasMethod($methodName)) {
                 $bean->$methodName($this->_loadProperty($factory, $property));
-            } catch (\ReflectionException $exception) {
-                throw new BeanFactoryException('Error calling: ' . $methodName);
             }
         }
     }
