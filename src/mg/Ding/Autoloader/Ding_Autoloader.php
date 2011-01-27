@@ -86,6 +86,9 @@ class Ding_Autoloader
      */
     private static function _resolve($class)
     {
+        if (strpos($class, 'Ding\\') !== 0) {
+            return false;
+        }
         $file = realpath(implode(
             DIRECTORY_SEPARATOR,
             array(
@@ -93,9 +96,6 @@ class Ding_Autoloader
                 str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php'
             )
         ));
-        if (!file_exists($file)) {
-            return false;
-        }
         return $file;
     }
 
@@ -108,8 +108,8 @@ class Ding_Autoloader
     public static function load($class)
     {
         $cacheKey = $class . '.autoloader';
-        $result = false;
         if (self::$_cache !== false) {
+            $result = false;
             $file = self::$_cache->fetch($cacheKey, $result);
             if ($result === false) {
                 $file = self::_resolve($class);
