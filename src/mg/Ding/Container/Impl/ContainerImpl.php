@@ -340,7 +340,7 @@ class ContainerImpl implements IContainer
         try
         {
             $this->_assemble($bean, $beanDefinition);
-            if (!empty($beanClass)) {
+            if (!empty($beanClass) && isset(self::$_options['bdef']['annotation'])) {
                 $annotations = ReflectionFactory::getClassAnnotations($beanDefinition->getClass());
                 if (isset($annotations['class']['InitMethod'])) {
                     $arguments = $annotations['class']['InitMethod']->getArguments();
