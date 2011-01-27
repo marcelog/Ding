@@ -74,6 +74,12 @@ class ContainerImpl implements IContainer
     private $_logger;
 
     /**
+     * Cache for isDebugEnabled()
+     * @var boolean
+     */
+    private $_logDebugEnabled;
+
+    /**
      * Default options.
      * @var array
      */
@@ -136,7 +142,7 @@ class ContainerImpl implements IContainer
     {
         $beanName = $name . '.beandef';
         if (isset($this->_beanDefs[$name])) {
-            if ($this->_logger->isDebugEnabled()) {
+            if ($this->_logDebugEnabled) {
                 $this->_logger->debug('Serving already known: ' . $beanName);
             }
             return $this->_beanDefs[$name];
@@ -146,13 +152,13 @@ class ContainerImpl implements IContainer
         $beanDefinition = $this->_beanDefCache->fetch($beanName, $result);
         if ($result !== false) {
             $this->_beanDefs[$name] = $beanDefinition;
-            if ($this->_logger->isDebugEnabled()) {
+            if ($this->_logDebugEnabled) {
                 $this->_logger->debug('Serving cached: ' . $beanName);
             }
             return $beanDefinition;
         }
         $beanDefinition = null;
-        if ($this->_logger->isDebugEnabled()) {
+        if ($this->_logDebugEnabled) {
             $this->_logger->debug('Running BeforeDefinition: ' . $beanName);
         }
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeDefinition] as $lifecycleListener) {
@@ -163,7 +169,7 @@ class ContainerImpl implements IContainer
         if ($beanDefinition === null) {
             throw new BeanFactoryException('Unknown bean: ' . $name);
         }
-        if ($this->_logger->isDebugEnabled()) {
+        if ($this->_logDebugEnabled) {
             $this->_logger->debug('Running AfterDefinition: ' . $beanName);
         }
         foreach ($this->_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
@@ -186,7 +192,7 @@ class ContainerImpl implements IContainer
         $beanName = $name . '.beandef';
         $this->_beanDefs[$name] = $definition;
         $this->_beanDefCache->store($beanName, $definition);
-        if ($this->_logger->isDebugEnabled()) {
+        if ($this->_logDebugEnabled) {
             $this->_logger->debug('New: ' . $beanName);
         }
     }
@@ -213,7 +219,7 @@ class ContainerImpl implements IContainer
         if (!isset($bean::$iAmADingProxy)) {
             $this->_beanCache->store($beanName, $bean);
         }
-        if ($this->_logger->isDebugEnabled()) {
+        if ($this->_logDebugEnabled) {
             $this->_logger->debug('New: ' . $beanName);
         }
     }
@@ -394,13 +400,13 @@ class ContainerImpl implements IContainer
                 if ($result === false) {
                     $ret = $this->_createBean($beanDefinition);
                 } else {
-                    if ($this->_logger->isDebugEnabled()) {
+                    if ($this->_logDebugEnabled) {
                         $this->_logger->debug('Serving cached: ' . $beanName);
                     }
                 }
                 $this->setBean($name, $ret);
             } else {
-                if ($this->_logger->isDebugEnabled()) {
+                if ($this->_logDebugEnabled) {
                     $this->_logger->debug('Serving already known: ' . $beanName);
                 }
                 $ret = $this->_beans[$name];
@@ -558,6 +564,7 @@ class ContainerImpl implements IContainer
     protected function __construct(array $options)
     {
         $this->_logger = \Logger::getLogger('Ding.Container');
+        $this->_logDebugEnabled = $this->_logger->isDebugEnabled();
         $soullessArray = array();
         self::$_options = array_replace_recursive(self::$_options, $options);
 
