@@ -355,6 +355,17 @@ Define an array as a property:<br/>
 &lt;/beans&gt;<br/>
 </p>
 <hr/>
+<H3><u>Inner beans</u></H3>
+You can define beans inside properties and constructor arguments, like this:<br/><br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="D\E\F" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean class="A\B\C" scope="prototype"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+Ding will automatically choose a name for this inner bean. The same syntax applies to
+constructor arguments as well.
 <H3><u>Annotations metadata</u></H3>
 <ul>
   <li><u>Name:</u>The name of the annotation (i.e: @InitMethod).
