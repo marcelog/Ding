@@ -262,7 +262,8 @@ injection, i.e: a property called 'name' will be injected calling setName()</li>
   <li><u>Value:</u>The actual value, whatever the type. The value can also be
   a string like ${some.value}, which resembles java properties. The container will
   notice this and will put the correct value (assuming you passed the right value
-  when instantiating the container).</li>
+  when instantiating the container). Special values like false, true, and null
+  are specified explicitely (see below).</li>
 </ul>
 <p>
 The value for the properties is run through a chain of filters. One of these filters
@@ -275,6 +276,23 @@ Define a scalar property:<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;aValue&lt;/value&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+</p>
+<hr/>
+<p>
+Define a scalar property with special values like false, true, and null:<br/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty1"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;null/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty2"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;true/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty3"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;false/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
 &lt;/beans&gt;<br/>
