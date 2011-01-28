@@ -151,6 +151,15 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         if (isset($simpleXmlProperty->ref)) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
             $propValue = (string)$simpleXmlProperty->ref->attributes()->bean;
+        } else if (isset($simpleXmlProperty->null)) {
+            $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
+            $propValue = null;
+        } else if (isset($simpleXmlProperty->false)) {
+            $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
+            $propValue = false;
+        } else if (isset($simpleXmlProperty->true)) {
+            $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
+            $propValue = true;
         } else if (isset($simpleXmlProperty->bean)) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
             if (isset($simpleXmlProperty->bean->attributes()->name)) {
@@ -199,6 +208,15 @@ class BeanXmlDriver implements IBeforeDefinitionListener
                 $simpleXmlArg->bean->addAttribute('id', $name);
             }
             $argValue = $name;
+        } else if (isset($simpleXmlArg->null)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
+            $argValue = null;
+        } else if (isset($simpleXmlArg->false)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
+            $argValue = false;
+        } else if (isset($simpleXmlArg->true)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
+            $argValue = true;
         } else if (isset($simpleXmlArg->array)) {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY;
             $argValue = array();

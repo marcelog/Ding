@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="myBeanName" class="MyBean" scope="singleton">
+    <constructor-arg><true/></constructor-arg>
+    <constructor-arg><false/></constructor-arg>
+    <constructor-arg><null/></constructor-arg>
+    <property name="trueProperty"><true/></property>
+    <property name="falseProperty"><false/></property>
+    <property name="nullProperty"><null/></property>
+  </bean>
+</beans>
