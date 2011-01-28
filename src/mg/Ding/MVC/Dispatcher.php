@@ -36,6 +36,12 @@ abstract class Dispatcher
     private $_logger;
 
     /**
+     * Cache for isDebugEnabled()
+     * @var boolean
+     */
+    private $_loggerDebugEnabled;
+
+    /**
      * Known controllers.
      * @var Controller[]
      */
@@ -104,7 +110,7 @@ abstract class Dispatcher
 
         $controller = $dispatchInfo[0];
         $actionHandler = $dispatchInfo[1];
-        if ($this->_logger->isDebugEnabled()) {
+        if ($this->_loggerDebugEnabled) {
             $this->_logger->debug(
             	'Found mapped controller: '
                 . get_class($controller)
@@ -119,7 +125,7 @@ abstract class Dispatcher
         if (!($modelAndView instanceof ModelAndView)) {
             $modelAndView = new ModelAndView('Main');
         }
-        if ($this->_logger->isDebugEnabled()) {
+        if ($this->_loggerDebugEnabled) {
             $this->_logger->debug(
             	'Using ModelAndView: ' . $modelAndView->getName()
             );
@@ -180,5 +186,6 @@ abstract class Dispatcher
     public function __construct()
     {
         $this->_logger = \Logger::getLogger('Ding.MVC');
+        $this->_loggerDebugEnabled = $this->_logger->isDebugEnabled();
     }
 }

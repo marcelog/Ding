@@ -53,7 +53,7 @@ abstract class View
      * Constructor.
      *
      * @param ModelAndView $modelAndView Model to render.
-     * 
+     *
      * @return void
      */
     protected function __construct(ModelAndView $modelAndView)

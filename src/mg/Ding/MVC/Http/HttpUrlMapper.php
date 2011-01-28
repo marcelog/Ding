@@ -36,6 +36,12 @@ use Ding\MVC\Action;
 class HttpUrlMapper implements IMapper
 {
     /**
+     * Cache for isDebugEnabled()
+     * @var boolean
+     */
+    private $_loggerDebugEnabled;
+
+    /**
      * log4php logger or our own.
      * @var Logger
      */
@@ -123,7 +129,7 @@ class HttpUrlMapper implements IMapper
     {
         $url = $action->getId();
         $urlStart = strpos($url, $this->_baseUrl);
-        if ($this->_logger->isDebugEnabled()) {
+        if ($this->_loggerDebugEnabled) {
             $this->_logger->debug('Trying to match: ' . $url);
         }
         if ($urlStart === false || $urlStart > 0) {
@@ -144,7 +150,7 @@ class HttpUrlMapper implements IMapper
             $url .= '/';
         }
 
-        if ($this->_logger->isDebugEnabled()) {
+        if ($this->_loggerDebugEnabled) {
             $this->_logger->debug('Trying to match: ' . $url);
         }
         // Lookup a controller that can handle this url.
@@ -171,7 +177,7 @@ class HttpUrlMapper implements IMapper
             $action = explode('/', $action);
             $action = $action[0];
             if (!is_object($controller)) {
-                if ($this->_logger->isDebugEnabled()) {
+                if ($this->_loggerDebugEnabled) {
                     $this->_logger->debug(
                     	'Found as annotated controller: ' . $controller
                     );
@@ -194,5 +200,6 @@ class HttpUrlMapper implements IMapper
         $this->_logger = \Logger::getLogger('Ding.MVC');
         $this->_map = array();
         $this->_baseUrl = '/';
+        $this->_loggerDebugEnabled = $this->_logger->isDebugEnabled();
     }
 }
