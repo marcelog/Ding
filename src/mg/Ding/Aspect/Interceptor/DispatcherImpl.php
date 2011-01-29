@@ -135,14 +135,8 @@ class DispatcherImpl implements IDispatcher
         $total = count($interceptors) - 1;
         $invocationChain = $invocation;
         for ($i = $total; $i >= 0; $i--) {
-            if (isset($this->_interceptorClasses[$i])) {
-                $class = $this->_interceptorClasses[$i];
-            } else {
-                $class = get_class($interceptors[$i]);
-                $this->_interceptorClasses[$i] = $class;
-            }
             $newInvocation = new MethodInvocation(
-                    $class, 'invoke',
+                    get_class($interceptors[$i]), 'invoke',
                     array($invocationChain),
                     $interceptors[$i], $invocation
                 );
