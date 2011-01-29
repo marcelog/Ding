@@ -278,8 +278,10 @@ use it). This *will* create a difference in performance.
 --------------------------------------------------------------------------------
 Performance tips
 ================
-* Put log4php into your include path (i.e: /usr/share/php/log4php) and configure
-the rootLogger and ding logger in ERROR level.
+* Do not include log4php in your include path.
+* If you use it, or need logging, put log4php into your include path
+(i.e: /usr/share/php/log4php) and configure the rootLogger and ding logger
+in ERROR level.
 * If your code is running on the php module for apache or iis, use apc for
 all the cache subsytems. Otherwise, use memcached or file.
 * Do not use annotations at all. Only use the XML.

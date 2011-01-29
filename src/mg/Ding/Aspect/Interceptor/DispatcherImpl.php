@@ -132,7 +132,7 @@ class DispatcherImpl implements IDispatcher
     private function _callInterceptors(
         MethodInvocation $invocation, array $interceptors
     ) {
-        $total = $this->_totalExceptionInterceptors - 1;
+        $total = count($interceptors) - 1;
         $invocationChain = $invocation;
         for ($i = $total; $i >= 0; $i--) {
             if (isset($this->_interceptorClasses[$i])) {
