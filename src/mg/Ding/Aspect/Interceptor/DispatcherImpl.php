@@ -158,8 +158,7 @@ class DispatcherImpl implements IDispatcher
      */
     public function invokeException(MethodInvocation $invocation)
     {
-        $method = $invocation->getMethod();
-        $interceptors = $this->_methodsExceptionIntercepted[$method];
+        $interceptors = $this->getExceptionInterceptors($method = $invocation->getMethod());
         if ($interceptors != false) {
             return $this->_callInterceptors($invocation, $interceptors);
         }
@@ -175,8 +174,7 @@ class DispatcherImpl implements IDispatcher
      */
     public function invoke(MethodInvocation $invocation)
     {
-        $method = $invocation->getMethod();
-        $interceptors = $this->_methodsIntercepted[$method];
+        $interceptors = $this->getInterceptors($invocation->getMethod());
         if ($interceptors != false) {
             return $this->_callInterceptors($invocation, $interceptors);
         }
