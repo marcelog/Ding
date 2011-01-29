@@ -398,7 +398,10 @@ class ContainerImpl implements IContainer
         switch ($beanDefinition->getScope())
         {
         case BeanDefinition::BEAN_PROTOTYPE:
-            $ret = $this->_createBean($beanDefinition);
+            if (!isset($this->_beans[$name])) {
+                $this->_beans[$name] = $this->_createBean($beanDefinition);
+            }
+            return clone $this->_beans[$name];
             break;
         case BeanDefinition::BEAN_SINGLETON:
             if (!isset($this->_beans[$name])) {
