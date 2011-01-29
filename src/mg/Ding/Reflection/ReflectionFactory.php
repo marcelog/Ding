@@ -55,6 +55,12 @@ class ReflectionFactory
     private static $_reflectionMethods = array();
 
     /**
+     * Wether to use annotations or not.
+     * @var boolean
+     */
+    private static $_withAnnotations = false;
+
+    /**
      * Taken from: http://stackoverflow.com/questions/928928/determining-what-classes-are-defined-in-a-php-class-file
      * Returns all php classes found in a code block.
      *
@@ -127,6 +133,9 @@ class ReflectionFactory
      */
     public static function getClassesByAnnotation($annotation)
     {
+        if (!self::$_withAnnotations) {
+            return array();
+        }
         if (isset(self::$_classesAnnotated[$annotation])) {
             return self::$_classesAnnotated[$annotation];
         }
@@ -150,6 +159,9 @@ class ReflectionFactory
      */
     public static function getClassAnnotations($class)
     {
+        if (!self::$_withAnnotations) {
+            return array();
+        }
         if (isset(self::$_annotatedClasses[$class])) {
             return self::$_annotatedClasses[$class];
         }
@@ -204,6 +216,11 @@ class ReflectionFactory
         }
         self::$_reflectionClasses[$class] = new \ReflectionClass($class);
         return self::$_reflectionClasses[$class];
+    }
+
+    public static function configure($withAnnotations)
+    {
+        self::$_withAnnotations = $withAnnotations;
     }
 
     /**

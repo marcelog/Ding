@@ -435,6 +435,9 @@ class ContainerImpl implements IContainer
     public static function getInstance(array $properties = array())
     {
         if (self::$_containerInstance === false) {
+            // Init ReflectionFactory
+            ReflectionFactory::configure(isset($properties['ding']['factory']['bdef']['annotation']));
+
             // Init cache subsystems.
             if (isset($properties['ding']['cache'])) {
                 CacheLocator::configure($properties['ding']['cache']);

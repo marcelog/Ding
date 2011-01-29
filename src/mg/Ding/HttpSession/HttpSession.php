@@ -82,11 +82,9 @@ class HttpSession
     public static function getSession()
     {
         if (self::$_instance === false) {
-            $ret = new HttpSession();
-        } else {
-            $ret = self::$_instance;
+            self::$_instance = new HttpSession();
         }
-        return $ret;
+        return self::$_instance;
     }
 
     /**
