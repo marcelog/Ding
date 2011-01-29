@@ -111,9 +111,8 @@ class MethodInvocation
         if (!$target->isPublic()) {
             $target->setAccessible(true);
         }
-        $result = $target->invokeArgs($this->_object, $this->_args);
-        $this->setResult($result);
-        return $result;
+        $this->_result = $target->invokeArgs($this->_object, $this->_args);
+        return $this->_result;
     }
 
     /**

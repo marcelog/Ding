@@ -42,6 +42,18 @@ class DispatcherImpl implements IDispatcher
     private $_methodsExceptionIntercepted;
 
     /**
+     * Count for interceptors;
+     * @var integer
+     */
+    private $_totalInterceptors;
+
+    /**
+     * Count for exception interceptors;
+     * @var integer
+     */
+    private $_totalExceptionInterceptors;
+
+    /**
      * Adds a method interceptor to the chain of a given method name.
      *
      * @param string             $method      Method name.
@@ -53,6 +65,7 @@ class DispatcherImpl implements IDispatcher
         $method, IMethodInterceptor $interceptor
     ) {
         $this->_methodsIntercepted[$method][] = $interceptor;
+        $this->_totalInterceptors++;
     }
 
     /**
@@ -68,6 +81,7 @@ class DispatcherImpl implements IDispatcher
         $method, IExceptionInterceptor $interceptor
     ) {
         $this->_methodsExceptionIntercepted[$method][] = $interceptor;
+        $this->_totalExceptionInterceptors++;
     }
 
     /**
@@ -112,7 +126,7 @@ class DispatcherImpl implements IDispatcher
     private function _callInterceptors(
         MethodInvocation $invocation, array $interceptors
     ) {
-        $total = count($interceptors) - 1;
+        $total = $this->_totalExceptionInterceptors - 1;
         $invocationChain = $invocation;
         for ($i = $total; $i >= 0; $i--) {
             $newInvocation = new MethodInvocation(
