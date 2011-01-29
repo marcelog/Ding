@@ -280,6 +280,19 @@ Of course it is recommended that you do not set DEBUG output in your log4php
 configuration (or remove it from the include path so Ding will notice and not
 use it). This *will* create a difference in performance.
 --------------------------------------------------------------------------------
+Performance tips
+================
+* Put log4php into your include path (i.e: /usr/share/php/log4php) and configure
+the rootLogger and ding logger in ERROR level.
+* If your code is running on the php module for apache or iis, use apc for
+all the cache subsytems. Otherwise, use memcached or file.
+* Do not use annotations at all. Only use the XML.
+* If you are using annotations (good for you! ;)) use the annotations cache
+with apc or memcached or file (in that order).
+* Do not include the driver you wont be using (like SignalHandler, ErrorHandler,
+Timezone, Shutdown, etc).
+* Do not abuse the aop feature.
+--------------------------------------------------------------------------------
 
  Collaborators:
  ============
