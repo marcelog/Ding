@@ -50,22 +50,22 @@ class AspectDefinition
      * @var string
      */
     private $_pointcut;
-    
+
     /**
      * Aspect bean name.
      * @var string
      */
     private $_beanName;
-    
+
     /**
      * Aspect type (or when the advice should be invoked).
      * @var integer
      */
     private $_type;
-    
+
     /**
      * Returns pointcut name.
-     * 
+     *
      * @return string
      */
     public function getPointcut()
@@ -74,27 +74,63 @@ class AspectDefinition
     }
 
     /**
+     * Sets the pointcut for this aspect.
+     *
+     * @param string $pointcut Pointcut definition.
+     *
+     * @return void
+     */
+    public function setPointcut($pointcut)
+    {
+        $this->_pointcut = $pointcut;
+    }
+
+    /**
+     * Sets the type for this aspect.
+     *
+     * @param integer $type Interceptor type
+     *
+     * @return void
+     */
+    public function setType($type)
+    {
+        $this->_type = $type;
+    }
+
+    /**
      * Returns advice type.
-     * 
+     *
      * @return integer
      */
     public function getType()
     {
         return $this->_type;
     }
-    
+
     /**
      * Returns bean name.
-     * 
+     *
      * @return string
      */
     public function getBeanName()
     {
         return $this->_beanName;
     }
-    
+
     /**
-     * Standard function, you know the drill.. 
+     * Sets the aspect bean name.
+     *
+     * @param string $name Bean name for this aspect.
+     *
+     * @return void
+     */
+    public function setBeanName($name)
+    {
+        $this->_beanName = $name;
+    }
+
+    /**
+     * Standard function, you know the drill..
      *
      * @return string
      */
@@ -109,14 +145,14 @@ class AspectDefinition
             . ']'
         ;
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string  $pointcut Pointcut name.
      * @param integer $type     Aspect type (see this class constants).
      * @param string  $beanName Aspect bean name.
-     * 
+     *
      * @return void
      */
     public function __construct($pointcut, $type, $beanName)

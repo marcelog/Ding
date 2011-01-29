@@ -50,7 +50,7 @@ class BeanPropertyDefinition
      * @var integer
      */
     const PROPERTY_CODE = 3;
-    
+
     /**
      * Property name
      * @var string
@@ -71,7 +71,7 @@ class BeanPropertyDefinition
 
     /**
      * Returns true if this property is a reference to another bean.
-     * 
+     *
      * @return boolean
      */
     public function isBean()
@@ -81,24 +81,24 @@ class BeanPropertyDefinition
 
     /**
      * Returns true if this property is php code.
-     * 
+     *
      * @return boolean
      */
     public function isCode()
     {
         return $this->getType() == self::PROPERTY_CODE;
     }
-    
+
     /**
      * Returns true if this property is an array.
-     * 
+     *
      * @return boolean
      */
     public function isArray()
     {
         return $this->getType() == self::PROPERTY_ARRAY;
     }
-    
+
     /**
      * Returns property value (or bean name in the case of a bean property).
      *
@@ -108,19 +108,19 @@ class BeanPropertyDefinition
     {
         return $this->_value;
     }
-    
+
     /**
      * Change the value for this property.
      *
      * @param mixed $value
-     * 
+     *
      * @return void
      */
     public function setValue($value)
     {
         $this->_value = $value;
     }
-    
+
     /**
      * Returns property name
      *
@@ -129,6 +129,18 @@ class BeanPropertyDefinition
     public function getName()
     {
         return $this->_name;
+    }
+
+    /**
+     * Sets the name for this property.
+     *
+     * @param string $name Name for this property.
+     *
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
     }
 
     /**
@@ -142,7 +154,19 @@ class BeanPropertyDefinition
     }
 
     /**
-     * Standard function, you know the drill.. 
+     * Sets the type for this property.
+     *
+     * @param integer $type Property type.
+     *
+     * @return void
+     */
+    public function setType($type)
+    {
+        $this->_type = $type;
+    }
+
+    /**
+     * Standard function, you know the drill..
      *
      * @return string
      */
@@ -157,14 +181,14 @@ class BeanPropertyDefinition
             . ']'
         ;
     }
-        
+
     /**
      * Constructor.
-     * 
+     *
      * @param string  $name  Target property name.
      * @param integer $type  Target property type (See this class constants).
      * @param string  $value Target property value.
-     * 
+     *
      * @return void
      */
     public function __construct($name, $type, $value)

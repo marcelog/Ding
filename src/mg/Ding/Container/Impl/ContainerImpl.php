@@ -80,6 +80,12 @@ class ContainerImpl implements IContainer
     private $_logDebugEnabled;
 
     /**
+     * Dispatcher to be cloned for proxy.
+     * @var DispatcherImpl
+     */
+    private $_dispatcherTemplate = false;
+
+    /**
      * Default options.
      * @var array
      */
@@ -217,9 +223,9 @@ class ContainerImpl implements IContainer
 		 * container to know that this bean cant be cached (although it can cache
 		 * its definition).
 		 */
-        if (!isset($bean::$iAmADingProxy)) {
-            $this->_beanCache->store($beanName, $bean);
-        }
+        //if (!isset($bean::$iAmADingProxy)) {
+        //    $this->_beanCache->store($beanName, $bean);
+        //}
         if ($this->_logDebugEnabled) {
             $this->_logger->debug('New: ' . $beanName);
         }
@@ -289,7 +295,7 @@ class ContainerImpl implements IContainer
             $args[] = $this->_loadArgument($argument);
         }
         if ($beanDefinition->hasAspects()) {
-            $dispatcher = new DispatcherImpl();
+            $dispatcher = clone $this->_dispatcherTemplate;
             $methods = array();
             foreach ($beanDefinition->getAspects() as $aspectDefinition) {
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
@@ -565,6 +571,7 @@ class ContainerImpl implements IContainer
     protected function __construct(array $options)
     {
         $this->_logger = \Logger::getLogger('Ding.Container');
+        $this->_dispatcherTemplate = new DispatcherImpl;
         $this->_logDebugEnabled = $this->_logger->isDebugEnabled();
         $soullessArray = array();
         self::$_options = array_replace_recursive(self::$_options, $options);

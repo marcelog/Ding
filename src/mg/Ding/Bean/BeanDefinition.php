@@ -202,7 +202,7 @@ class BeanDefinition
      */
     public function hasAspects()
     {
-        return count($this->getAspects()) > 0;
+        return is_array($this->_aspects);
     }
 
     /**
@@ -466,7 +466,7 @@ class BeanDefinition
         $this->_destroyMethod = $soullessString;
         $this->_dependsOn = $soullessArray;
         $this->_properties = $soullessArray;
-        $this->_aspects = $soullessArray;
+        $this->_aspects = false;
         $this->_constructorArgs = $soullessArray;
     }
 }

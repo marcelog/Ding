@@ -31,7 +31,7 @@ class BeanConstructorArgumentDefinition
      * @var integer
      */
     const BEAN_CONSTRUCTOR_BEAN = 0;
-    
+
     /**
      * Means this argument is a literal value.
      * @var integer
@@ -49,13 +49,13 @@ class BeanConstructorArgumentDefinition
      * @var integer
      */
     const BEAN_CONSTRUCTOR_CODE = 3;
-    
+
     /**
      * Argument type.
      * @var integer
      */
     private $_type;
-    
+
     /**
      * Returns value for this argument. This is a bean name (string) in the
      * case of an argument of type bean. If this argument is an array, the
@@ -64,7 +64,7 @@ class BeanConstructorArgumentDefinition
      * @var mixed
      */
     private $_value;
-    
+
     /**
      * Returns argument value. This is a bean name (string) in the
      * case of an argument of type bean.
@@ -75,22 +75,22 @@ class BeanConstructorArgumentDefinition
     {
         return $this->_value;
     }
-    
+
     /**
      * Changes the value for this constructor argument.
-     * 
+     *
      * @param mixed $value Value to set.
-     * 
+     *
      * @return void
      */
     public function setValue($value)
     {
         return $this->_value = $value;
     }
-    
+
     /**
      * Returns true if this argument is a reference to another bean.
-     * 
+     *
      * @return boolean
      */
     public function isBean()
@@ -100,40 +100,52 @@ class BeanConstructorArgumentDefinition
 
     /**
      * Returns true if this argument is php code to be evaluated.
-     * 
+     *
      * @return boolean
      */
     public function isCode()
     {
         return $this->getType() == self::BEAN_CONSTRUCTOR_CODE;
     }
-    
+
     /**
      * Returns true if this argument is an array.
-     * 
+     *
      * @return boolean
      */
     public function isArray()
     {
         return $this->getType() == self::BEAN_CONSTRUCTOR_ARRAY;
     }
-    
+
+    /**
+     * Sets the type for this constructor argument.
+     *
+     * @param integer $type Sets the type for this constructor argument.
+     *
+     * @return void
+     */
+    public function setType($type)
+    {
+        $this->_type = $type;
+    }
+
     /**
      * Returns type for this argument.
-     * 
+     *
      * @return integer
      */
     public function getType()
     {
         return $this->_type;
     }
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param integer $type  Argument type.
      * @param mixed   $value Argument value.
-     * 
+     *
      * @return void
      */
     public function __construct($type, $value)

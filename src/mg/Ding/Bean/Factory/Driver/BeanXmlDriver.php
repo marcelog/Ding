@@ -55,6 +55,30 @@ class BeanXmlDriver implements IBeforeDefinitionListener
     private $_simpleXml;
 
     /**
+     * Bean definition template to clone.
+     * @var BeanDefinition
+     */
+    private $_templateBeanDef;
+
+    /**
+     * Bean property definition template to clone.
+     * @var BeanPropertyDefinition
+     */
+    private $_templatePropDef;
+
+    /**
+     * Bean constructor argument definition template to clone.
+     * @var BeanConstructorArgumentDefinition
+     */
+    private $_templateArgDef;
+
+    /**
+     * Aspect definition template to clone.
+     * @var AspectDefinition
+     */
+    private $_templateAspectDef;
+
+    /**
      * Current instance.
      * @var BeanFactoryXmlImpl
      */
@@ -128,11 +152,10 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             throw new BeanFactoryException('Invalid aspect type');
         }
         foreach ($simpleXmlAspect->pointcut as $pointcut) {
-            $aspect = new AspectDefinition(
-                (string)$pointcut->attributes()->expression,
-                intval($type),
-                $aspectBean
-            );
+            $aspect = clone $this->_templateAspectDef;
+            $aspect->setPointcut((string)$pointcut->attributes()->expression);
+            $aspect->setType($type);
+            $aspect->setBeanName($aspectBean);
         }
         return $aspect;
     }
@@ -183,7 +206,11 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
             $propValue = (string)$simpleXmlProperty->value;
         }
-        return new BeanPropertyDefinition($propName, $propType, $propValue);
+        $def = clone $this->_templatePropDef;
+        $def->setName($propName);
+        $def->setType($propType);
+        $def->setValue($propValue);
+        return $def;
     }
 
     /**
@@ -231,7 +258,10 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
             $argValue = (string)$simpleXmlArg->value;
         }
-        return new BeanConstructorArgumentDefinition($argType, $argValue);
+        $def = clone $this->_templateArgDef;
+        $def->setType($argType);
+        $def->setValue($argValue);
+        return $def;
     }
 
     /**
@@ -262,8 +292,9 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         // asume valid xml (only one bean with that id)
         $simpleXmlBean = $simpleXmlBean[0];
         if ($bean === null) {
-            $bean = new BeanDefinition($beanName);
+            $bean = clone $this->_templateBeanDef;
         }
+        $bean->setName($beanName);
         $bean->setClass((string)$simpleXmlBean->attributes()->class);
         $bScope = (string)$simpleXmlBean->attributes()->scope;
         if ($bScope == 'prototype') {
@@ -301,9 +332,7 @@ class BeanXmlDriver implements IBeforeDefinitionListener
                 (string)$simpleXmlBean->attributes()->{'destroy-method'}
             );
         }
-        $bProps = array();
-        $bAspects = array();
-        $constructorArgs = array();
+        $bProps = $bAspects = $constructorArgs = array();
         foreach ($simpleXmlBean->property as $property) {
             $bProps[] = $this->_loadProperty($property);
         }
@@ -383,5 +412,9 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         $this->_beanDefs = array();
         $this->_filename = $filename;
         $this->_simpleXml = false;
+        $this->_templateBeanDef = new BeanDefinition('');
+        $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
+        $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
+        $this->_templateAspectDef = new AspectDefinition('', 0, '');
     }
 }
