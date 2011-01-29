@@ -121,6 +121,12 @@ class BeanDefinition
     private $_dependsOn;
 
     /**
+     * Methods injection.
+     * @var string[]
+     */
+    private $_lookupMethods;
+
+    /**
      * This will annotated this bean with the given annotation.
      *
      * @param BeanAnnotationDefinition $annotation Annotation.
@@ -247,6 +253,28 @@ class BeanDefinition
     public function getScope()
     {
         return $this->_scope;
+    }
+
+    /**
+     * Sets new method injections.
+     *
+     * @param string[] $methods Methods injected.
+     *
+     * @return void
+     */
+    public function setMethodInjections($methods)
+    {
+        $this->_lookupMethods = $methods;
+    }
+
+    /**
+     * Returns the method injections.
+     *
+     * @return string[]
+     */
+    public function getMethodInjections()
+    {
+        return $this->_lookupMethods;
     }
 
     /**
@@ -463,6 +491,7 @@ class BeanDefinition
         $this->_factoryMethod = $soullessString;
         $this->_factoryBean = $soullessString;
         $this->_initMethod = $soullessString;
+        $this->_lookupMethods = $soullessString;
         $this->_destroyMethod = $soullessString;
         $this->_dependsOn = $soullessArray;
         $this->_properties = $soullessArray;

@@ -162,9 +162,8 @@ class DispatcherImpl implements IDispatcher
         $interceptors = $this->_methodsExceptionIntercepted[$method];
         if ($interceptors != false) {
             return $this->_callInterceptors($invocation, $interceptors);
-        } else {
-            return $invocation->proceed();
         }
+        return $invocation->proceed();
     }
 
     /**
@@ -180,9 +179,8 @@ class DispatcherImpl implements IDispatcher
         $interceptors = $this->_methodsIntercepted[$method];
         if ($interceptors != false) {
             return $this->_callInterceptors($invocation, $interceptors);
-        } else {
-            return $invocation->proceed();
         }
+        return $invocation->proceed();
     }
 
     /**

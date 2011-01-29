@@ -326,7 +326,7 @@ class BeanXmlDriver implements IBeforeDefinitionListener
                 (string)$simpleXmlBean->attributes()->{'destroy-method'}
             );
         }
-        $bProps = $bAspects = $constructorArgs = array();
+        $bMethods = $bProps = $bAspects = $constructorArgs = array();
         foreach ($simpleXmlBean->property as $property) {
             $bProps[] = $this->_loadProperty($property);
         }
@@ -336,6 +336,10 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         foreach ($simpleXmlBean->{'constructor-arg'} as $arg) {
             $constructorArgs[] = $this->_loadConstructorArg($arg);
         }
+        foreach ($simpleXmlBean->{'lookup-method'} as $method) {
+            $atts = $method->attributes();
+            $bMethods[] = array((string)$atts->name, (string)$atts->bean);
+        }
         if (!empty($bProps)) {
             $bean->setProperties($bProps);
         }
@@ -344,6 +348,9 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         }
         if (!empty($constructorArgs)) {
             $bean->setArguments($constructorArgs);
+        }
+        if (!empty($bMethods)) {
+            $bean->setMethodInjections($bMethods);
         }
         return $bean;
     }
