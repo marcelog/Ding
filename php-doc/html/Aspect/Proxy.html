@@ -135,6 +135,11 @@
 			<div class="var-summary">
 												<div class="var-title">
 					<img src="../media/images/StaticVariable.png" alt=" " />
+					static <span class="var-type"><a href="../Cache/ICache.html">ICache</a></span>
+					<a href="#$_cache" title="details" class="var-name">$_cache</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/StaticVariable.png" alt=" " />
 					static <span class="var-type">string</span>
 					<a href="#$_methodTemplate" title="details" class="var-name">$_methodTemplate</a>
 				</div>
@@ -148,7 +153,7 @@
 					static <span class="var-type">string</span>
 					<a href="#$_proxyTemplate" title="details" class="var-name">$_proxyTemplate</a>
 				</div>
-																																							</div>
+																																															</div>
 		</div>
 	</div>
 
@@ -209,15 +214,38 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$_methodTemplate" id="$_methodTemplate"><!-- --></A>
+			<a name="var$_cache" id="$_cache"><!-- --></A>
 <div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/StaticVariable.png" />
+		<span class="var-title">
+			static <span class="var-type"><a href="../Cache/ICache.html">ICache</a></span>
+			<span class="var-name">$_cache</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">48</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Proxy cache implementation.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_methodTemplate" id="$_methodTemplate"><!-- --></A>
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/StaticVariable.png" />
 		<span class="var-title">
 			static <span class="var-type">string</span>
 			<span class="var-name">$_methodTemplate</span>
-			 = <span class="var-default"> &lt;&lt;&lt;TEXT<br />    VISIBILITY ADDITIONAL function METHOD_NAME(METHOD_ARGS)<br />    {<br />        \$invocation = new MethodInvocation(<br />            'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this<br />        );<br />        try<br />        {<br />        	return self::\$_dispatcher-&gt;invoke(\$invocation);<br />        } catch (Exception \$exception) {<br />            \$invocation-&gt;setException(\$exception);<br />        	self::\$_dispatcher-&gt;invokeException(\$invocation);<br />        }<br />	}<br />TEXT</span>			(line <span class="line-number">89</span>)
+			 = <span class="var-default"> &lt;&lt;&lt;TEXT<br />    VISIBILITY ADDITIONAL function METHOD_NAME(METHOD_ARGS)<br />    {<br />        \$invocation = new MethodInvocation(<br />            'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this<br />        );<br />        try<br />        {<br />        	return self::\$_dispatcher-&gt;invoke(\$invocation);<br />        } catch (Exception \$exception) {<br />            \$invocation-&gt;setException(\$exception);<br />        	self::\$_dispatcher-&gt;invokeException(\$invocation);<br />        }<br />	}<br />TEXT</span>			(line <span class="line-number">95</span>)
 		</span>
 	</div>
 
@@ -233,7 +261,7 @@
 
 </div>
 <a name="var$_proxyCount" id="$_proxyCount"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/StaticVariable.png" />
@@ -256,14 +284,14 @@
 
 </div>
 <a name="var$_proxyTemplate" id="$_proxyTemplate"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/StaticVariable.png" />
 		<span class="var-title">
 			static <span class="var-type">string</span>
 			<span class="var-name">$_proxyTemplate</span>
-			 = <span class="var-default"> &lt;&lt;&lt;TEXT<br /><br />use Ding\Aspect\Interceptor\IDispatcher;<br />use Ding\Aspect\MethodInvocation;<br /><br />final class NEW_NAME extends CLASS_NAME {<br />    /**<br />     * Holds advice dispatcher.<br />     * @var Dispatcher<br />     */<br />    private static \$_dispatcher = false;<br /><br />    /**<br />     * This is not suppose to exist. We need to refactor the proxy so it<br />     * can be correctly serialized. This check is used internally by the<br />     * container to know that this bean cant be cached (although it can cache<br />     * its definition).<br />     * @var boolean<br />     */<br />    public static \$iAmADingProxy = true;<br /><br />    /**<br />     * This is used from the container to set the dispatcher for the aspects.<br />     *<br />     * @param IDispatcher \$dispatcher Advice dispatcher.<br />     *<br />     * @return void<br />     */<br />    public static function setDispatcher(IDispatcher \$dispatcher)<br />    {<br />        self::\$_dispatcher = \$dispatcher;<br />    }<br /><br />    METHODS<br />}<br />TEXT</span>			(line <span class="line-number">48</span>)
+			 = <span class="var-default"> &lt;&lt;&lt;TEXT<br /><br />use Ding\Aspect\Interceptor\IDispatcher;<br />use Ding\Aspect\MethodInvocation;<br /><br />final class NEW_NAME extends CLASS_NAME {<br />    /**<br />     * Holds advice dispatcher.<br />     * @var Dispatcher<br />     */<br />    private static \$_dispatcher = false;<br /><br />    /**<br />     * This is not suppose to exist. We need to refactor the proxy so it<br />     * can be correctly serialized. This check is used internally by the<br />     * container to know that this bean cant be cached (although it can cache<br />     * its definition).<br />     * @var boolean<br />     */<br />    public static \$iAmADingProxy = true;<br /><br />    /**<br />     * This is used from the container to set the dispatcher for the aspects.<br />     *<br />     * @param IDispatcher \$dispatcher Advice dispatcher.<br />     *<br />     * @return void<br />     */<br />    public static function setDispatcher(IDispatcher \$dispatcher)<br />    {<br />        self::\$_dispatcher = \$dispatcher;<br />    }<br /><br />    METHODS<br />}<br />TEXT</span>			(line <span class="line-number">54</span>)
 		</span>
 	</div>
 
@@ -295,11 +323,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodcreate" id="create"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static create</span> (line <span class="line-number">228</span>)
+		<span class="method-title">static create</span> (line <span class="line-number">234</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -332,11 +360,11 @@
 			
 	</div>
 <a name="method_createClass" id="_createClass"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static _createClass</span> (line <span class="line-number">115</span>)
+		<span class="method-title">static _createClass</span> (line <span class="line-number">121</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -372,11 +400,11 @@
 			
 	</div>
 <a name="method_createMethod" id="_createMethod"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static _createMethod</span> (line <span class="line-number">177</span>)
+		<span class="method-title">static _createMethod</span> (line <span class="line-number">183</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -406,11 +434,11 @@
 			
 	</div>
 <a name="method_createParameter" id="_createParameter"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static _createParameter</span> (line <span class="line-number">140</span>)
+		<span class="method-title">static _createParameter</span> (line <span class="line-number">146</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -445,7 +473,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 28 Jan 2011 16:41:41 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 29 Jan 2011 15:44:02 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
