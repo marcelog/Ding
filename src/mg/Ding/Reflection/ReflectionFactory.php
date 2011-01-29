@@ -49,6 +49,12 @@ class ReflectionFactory
     private static $_classesAnnotated = array();
 
     /**
+     * Reflection methods, indexed by class.
+     * @var string[]
+     */
+    private static $_reflectionMethods = array();
+
+    /**
      * Taken from: http://stackoverflow.com/questions/928928/determining-what-classes-are-defined-in-a-php-class-file
      * Returns all php classes found in a code block.
      *
@@ -199,6 +205,29 @@ class ReflectionFactory
         } else {
             $ret = new \ReflectionClass($class);
             self::$_reflectionClasses[$class] = $ret;
+        }
+        return $ret;
+    }
+
+    /**
+     * Returns a (cached) reflection class method.
+     *
+     * @param string $class  Class name.
+     * @param string $method Method name.
+     *
+     * @throws ReflectionException
+     * @return ReflectionClass
+     */
+    public static function getMethod($class, $method)
+    {
+        if (isset(self::$_reflectionMethods[$class][$method])) {
+            $ret = self::$_reflectionMethods[$class][$method];
+        } else {
+            if (!isset(self::$_reflectionMethods[$class])) {
+                self::$_reflectionMethods[$class] = array();
+            }
+            $ret = new \ReflectionMethod($class, $method);
+            self::$_reflectionMethods[$class][$method] = $ret;
         }
         return $ret;
     }
