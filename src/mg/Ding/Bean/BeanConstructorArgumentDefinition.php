@@ -95,7 +95,7 @@ class BeanConstructorArgumentDefinition
      */
     public function isBean()
     {
-        return $this->getType() == self::BEAN_CONSTRUCTOR_BEAN;
+        return $this->_type == self::BEAN_CONSTRUCTOR_BEAN;
     }
 
     /**
@@ -105,7 +105,7 @@ class BeanConstructorArgumentDefinition
      */
     public function isCode()
     {
-        return $this->getType() == self::BEAN_CONSTRUCTOR_CODE;
+        return $this->_type == self::BEAN_CONSTRUCTOR_CODE;
     }
 
     /**
@@ -115,7 +115,7 @@ class BeanConstructorArgumentDefinition
      */
     public function isArray()
     {
-        return $this->getType() == self::BEAN_CONSTRUCTOR_ARRAY;
+        return $this->_type == self::BEAN_CONSTRUCTOR_ARRAY;
     }
 
     /**

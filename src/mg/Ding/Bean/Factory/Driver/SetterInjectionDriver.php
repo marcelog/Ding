@@ -99,10 +99,9 @@ class SetterInjectionDriver implements IBeforeAssembleListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance !== false) {
-            return self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new SetterInjectionDriver;
         }
-        self::$_instance = new SetterInjectionDriver;
         return self::$_instance;
     }
 

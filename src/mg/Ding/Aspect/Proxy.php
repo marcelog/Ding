@@ -42,6 +42,12 @@ class Proxy
     private static $_proxyCount = 1;
 
     /**
+     * Proxy cache implementation.
+     * @var ICache
+     */
+    private static $_cache = false;
+
+    /**
      * Proxy class template (i.e: the dynamic class)
      * @var string
      */
@@ -228,14 +234,17 @@ TEXT;
     public static function create(
         $class, array $proxyMethods = array(), IDispatcher $dispatcher = null
     ) {
-        $cache = CacheLocator::getProxyCacheInstance();
+        if (self::$_cache === false) {
+            self::$_cache = CacheLocator::getProxyCacheInstance();
+        }
         $subject = ReflectionFactory::getClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
+        $cacheKey = $proxyClassName . '.proxy';
         $result = false;
-        $src = $cache->fetch($proxyClassName . '.proxy', $result);
+        $src = self::$_cache->fetch($cacheKey, $result);
         if (!$result) {
             $src = self::_createClass($proxyClassName, $proxyMethods, $subject);
-            $cache->store($proxyClassName . '.proxy', $src);
+            self::$_cache->store($cacheKey, $src);
         }
         eval($src);
         if ($dispatcher != null) {

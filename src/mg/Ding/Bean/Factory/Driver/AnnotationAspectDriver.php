@@ -136,10 +136,9 @@ class AnnotationAspectDriver implements ILifecycleListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance !== false) {
-            return self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new AnnotationAspectDriver;
         }
-        self::$_instance = new AnnotationAspectDriver;
         return self::$_instance;
     }
 

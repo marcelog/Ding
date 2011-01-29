@@ -76,7 +76,7 @@ class BeanPropertyDefinition
      */
     public function isBean()
     {
-        return $this->getType() == self::PROPERTY_BEAN;
+        return $this->_type == self::PROPERTY_BEAN;
     }
 
     /**
@@ -86,7 +86,7 @@ class BeanPropertyDefinition
      */
     public function isCode()
     {
-        return $this->getType() == self::PROPERTY_CODE;
+        return $this->_type == self::PROPERTY_CODE;
     }
 
     /**
@@ -96,7 +96,7 @@ class BeanPropertyDefinition
      */
     public function isArray()
     {
-        return $this->getType() == self::PROPERTY_ARRAY;
+        return $this->_type == self::PROPERTY_ARRAY;
     }
 
     /**

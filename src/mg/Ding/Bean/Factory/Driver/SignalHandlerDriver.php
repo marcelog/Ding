@@ -92,10 +92,9 @@ class SignalHandlerDriver implements IAfterConfigListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance !== false) {
-            return self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new SignalHandlerDriver;
         }
-        self::$_instance = new SignalHandlerDriver;
         return self::$_instance;
     }
 

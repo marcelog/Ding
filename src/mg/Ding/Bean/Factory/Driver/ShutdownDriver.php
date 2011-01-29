@@ -82,10 +82,9 @@ class ShutdownDriver implements IAfterConfigListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance !== false) {
-            return self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new ShutdownDriver;
         }
-        self::$_instance = new ShutdownDriver;
         return self::$_instance;
     }
 

@@ -443,12 +443,9 @@ class ContainerImpl implements IContainer
             if (isset($properties['ding']['log4php.properties'])) {
                 \Logger::configure($properties['ding']['log4php.properties']);
             }
-            $ret = new ContainerImpl($properties['ding']['factory']);
-            self::$_containerInstance = $ret;
-        } else {
-            $ret = self::$_containerInstance;
+            self::$_containerInstance = new ContainerImpl($properties['ding']['factory']);
         }
-        return $ret;
+        return self::$_containerInstance;
     }
 
     /**

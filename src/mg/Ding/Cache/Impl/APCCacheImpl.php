@@ -34,12 +34,12 @@ class APCCacheImpl implements ICache
      * @var APCCacheImpl
      */
     private static $_instance = false;
-    
+
     /**
      * Returns true if this cache has the given key.
      *
      * @param string $name Key to check for.
-     * 
+     *
      * @return boolean
      */
     public function has($name)
@@ -49,10 +49,10 @@ class APCCacheImpl implements ICache
 
     /**
      * Returns a cached value.
-     * 
+     *
      * @param string  $name    Key to look for.
      * @param boolean &$result True on success, false otherwise.
-     * 
+     *
      * @return mixed
      */
     public function fetch($name, &$result)
@@ -62,10 +62,10 @@ class APCCacheImpl implements ICache
 
     /**
      * Stores a key/value.
-     * 
+     *
      * @param string $name  Key to use.
      * @param mixed  $value Value.
-     * 
+     *
      * @return boolean
      */
     public function store($name, $value)
@@ -75,7 +75,7 @@ class APCCacheImpl implements ICache
 
     /**
      * Empties the cache.
-     * 
+     *
 	 * @return boolean
      */
     public function flush()
@@ -87,7 +87,7 @@ class APCCacheImpl implements ICache
      * Removes a key from the cache.
      *
      * @param string $name Key to remove.
-     * 
+     *
      * @return boolean
      */
     public function remove($name)
@@ -99,23 +99,20 @@ class APCCacheImpl implements ICache
      * Returns an instance of a cache.
      *
      * @param array $options Options for the cache backend.
-     * 
+     *
      * @return APCCacheImpl
      */
     public static function getInstance($options = array())
     {
-        if (self::$_instance === false) {
-            $ret = new APCCacheImpl();
-            self::$_instance = $ret;
-        } else {
-            $ret = self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new APCCacheImpl;
         }
-        return $ret;
+        return self::$_instance;
     }
 
     /**
      * Constructor.
-     * 
+     *
 	 * @return void
      */
     private function __construct()

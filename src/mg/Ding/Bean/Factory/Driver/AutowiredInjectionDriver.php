@@ -114,23 +114,18 @@ class AutowiredInjectionDriver implements IAfterCreateListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance === false) {
-            $ret = new AutowiredInjectionDriver($options);
-            self::$_instance = $ret;
-        } else {
-            $ret = self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new AutowiredInjectionDriver;
         }
-        return $ret;
+        return self::$_instance;
     }
 
     /**
      * Constructor.
      *
-     * @param array $options Optional options.
-     *
      * @return void
      */
-    private function __construct(array $options)
+    private function __construct()
     {
         $this->_propertiesNameCache = array();
     }

@@ -62,10 +62,9 @@ class TimezoneDriver implements IAfterConfigListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance !== false) {
-            return self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new TimezoneDriver;
         }
-        self::$_instance = new TimezoneDriver;
         return self::$_instance;
     }
 

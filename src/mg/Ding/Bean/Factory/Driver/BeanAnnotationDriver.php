@@ -294,10 +294,9 @@ class BeanAnnotationDriver
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance !== false) {
-            return self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new BeanAnnotationDriver($options);
         }
-        self::$_instance = new BeanAnnotationDriver($options);
         return self::$_instance;
     }
 

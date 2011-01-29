@@ -66,10 +66,9 @@ class DependsOnDriver implements IAfterDefinitionListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance !== false) {
-            return self::$_instance;
+        if (self::$_instance == false) {
+            self::$_instance = new DependsOnDriver;
         }
-        self::$_instance = new DependsOnDriver;
         return self::$_instance;
     }
 
