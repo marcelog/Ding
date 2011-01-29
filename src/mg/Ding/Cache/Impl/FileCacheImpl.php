@@ -51,11 +51,7 @@ class FileCacheImpl implements ICache
      */
     public function has($name)
     {
-        $filename = implode(
-            DIRECTORY_SEPARATOR,
-            array($this->_directory, $name)
-        );
-        return @file_exists($filename);
+        return @file_exists($this->_directory . $name);
     }
 
     /**
@@ -69,13 +65,13 @@ class FileCacheImpl implements ICache
     public function fetch($name, &$result)
     {
         $result = false;
-        $filename = $this->_getFilenameFor($name);
+        $filename = $this->_directory . $name;
         if (!@file_exists($filename)) {
             return false;
         }
+        $result = true;
         $data = @file_get_contents($filename);
         $data = unserialize($data);
-        $result = ($data != false);
         return $data;
     }
 
@@ -101,9 +97,8 @@ class FileCacheImpl implements ICache
      */
     public function store($name, $value)
     {
-        $filename = $this->_getFilenameFor($name);
         $value = serialize($value);
-        return @file_put_contents($filename, $value);
+        return @file_put_contents($this->_directory . $name, $value);
     }
 
     /**
@@ -126,8 +121,7 @@ class FileCacheImpl implements ICache
      */
     public function remove($name)
     {
-        $filename = $this->_getFilenameFor($name);
-        return @unlink($filename);
+        return @unlink($this->_directory . $name);
     }
 
     /**
