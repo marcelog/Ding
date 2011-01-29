@@ -73,6 +73,16 @@ final class NEW_NAME extends CLASS_NAME {
     public static \$iAmADingProxy = true;
 
     /**
+     * Clone this object.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        self::\$_dispatcher = clone self::\$_dispatcher;
+    }
+
+    /**
      * This is used from the container to set the dispatcher for the aspects.
      *
      * @param IDispatcher \$dispatcher Advice dispatcher.
