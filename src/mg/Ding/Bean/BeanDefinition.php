@@ -202,7 +202,7 @@ class BeanDefinition
      */
     public function hasAspects()
     {
-        return is_array($this->_aspects);
+        return $this->_aspects !== false;
     }
 
     /**
