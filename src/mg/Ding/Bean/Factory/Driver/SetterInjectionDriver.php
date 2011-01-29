@@ -99,23 +99,19 @@ class SetterInjectionDriver implements IBeforeAssembleListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance === false) {
-            $ret = new SetterInjectionDriver($options);
-            self::$_instance = $ret;
-        } else {
-            $ret = self::$_instance;
+        if (self::$_instance !== false) {
+            return self::$_instance;
         }
-        return $ret;
+        self::$_instance = new SetterInjectionDriver;
+        return self::$_instance;
     }
 
     /**
      * Constructor.
      *
-     * @param array $options Optional options.
-     *
      * @return void
      */
-    private function __construct(array $options)
+    private function __construct()
     {
         $this->_propertiesNameCache = array();
     }

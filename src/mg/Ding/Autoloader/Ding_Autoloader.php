@@ -89,13 +89,11 @@ class Ding_Autoloader
         if (strpos($class, 'Ding\\') !== 0) {
             return false;
         }
-        $file = realpath(implode(
-            DIRECTORY_SEPARATOR,
-            array(
-                self::$_myPath,
-                str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php'
-            )
-        ));
+        $file
+            = self::$_myPath
+            . DIRECTORY_SEPARATOR
+            . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php'
+        ;
         return $file;
     }
 

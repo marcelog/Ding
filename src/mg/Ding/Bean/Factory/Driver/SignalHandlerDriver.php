@@ -92,23 +92,19 @@ class SignalHandlerDriver implements IAfterConfigListener
      */
     public static function getInstance(array $options)
     {
-        if (self::$_instance === false) {
-            $ret = new SignalHandlerDriver($options);
-            self::$_instance = $ret;
-        } else {
-            $ret = self::$_instance;
+        if (self::$_instance !== false) {
+            return self::$_instance;
         }
-        return $ret;
+        self::$_instance = new SignalHandlerDriver;
+        return self::$_instance;
     }
 
     /**
      * Constructor.
      *
-     * @param array $options Optional options.
-     *
      * @return void
      */
-    private function __construct(array $options)
+    private function __construct()
     {
         self::$_signals = array(
             SIGQUIT, SIGHUP, SIGINT, SIGCHLD, SIGTERM, SIGUSR1, SIGUSR2

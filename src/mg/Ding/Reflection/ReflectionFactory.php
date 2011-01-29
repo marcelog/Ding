@@ -199,14 +199,11 @@ class ReflectionFactory
      */
     public static function getClass($class)
     {
-        $ret = false;
         if (isset(self::$_reflectionClasses[$class])) {
-            $ret = self::$_reflectionClasses[$class];
-        } else {
-            $ret = new \ReflectionClass($class);
-            self::$_reflectionClasses[$class] = $ret;
+            return self::$_reflectionClasses[$class];
         }
-        return $ret;
+        self::$_reflectionClasses[$class] = new \ReflectionClass($class);
+        return self::$_reflectionClasses[$class];
     }
 
     /**
