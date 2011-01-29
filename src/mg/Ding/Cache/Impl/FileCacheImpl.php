@@ -88,10 +88,7 @@ class FileCacheImpl implements ICache
      */
     private function _getFilenameFor($name)
     {
-        return implode(
-            DIRECTORY_SEPARATOR,
-            array($this->_directory, $name)
-        );
+        return $this->_directory . $name;
     }
 
     /**
@@ -181,6 +178,6 @@ class FileCacheImpl implements ICache
      */
     private function __construct(array $options)
     {
-        $this->_directory = $options['directory'];
+        $this->_directory = $options['directory'] . DIRECTORY_SEPARATOR;
     }
 }

@@ -54,6 +54,12 @@ class DispatcherImpl implements IDispatcher
     private $_totalExceptionInterceptors;
 
     /**
+     * Interceptor classes.
+     * @var string[]
+     */
+    private $_interceptorClasses;
+
+    /**
      * Adds a method interceptor to the chain of a given method name.
      *
      * @param string             $method      Method name.
@@ -129,9 +135,16 @@ class DispatcherImpl implements IDispatcher
         $total = $this->_totalExceptionInterceptors - 1;
         $invocationChain = $invocation;
         for ($i = $total; $i >= 0; $i--) {
+            if (isset($this->_interceptorClasses[$i])) {
+                $class = $this->_interceptorClasses[$i];
+            } else {
+                $class = get_class($interceptors[$i]);
+                $this->_interceptorClasses[$i] = $class;
+            }
             $newInvocation = new MethodInvocation(
-                get_class($interceptors[$i]), 'invoke',
-                    array($invocationChain), $interceptors[$i], $invocation
+                    $class, 'invoke',
+                    array($invocationChain),
+                    $interceptors[$i], $invocation
                 );
             $invocationChain = $newInvocation;
         }
