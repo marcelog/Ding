@@ -152,10 +152,11 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             throw new BeanFactoryException('Invalid aspect type');
         }
         foreach ($simpleXmlAspect->pointcut as $pointcut) {
-            $aspect = clone $this->_templateAspectDef;
-            $aspect->setPointcut((string)$pointcut->attributes()->expression);
-            $aspect->setType($type);
-            $aspect->setBeanName($aspectBean);
+            $aspect = new AspectDefinition(
+                (string)$pointcut->attributes()->expression,
+                $type,
+                $aspectBean
+            );
         }
         return $aspect;
     }
@@ -206,11 +207,7 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
             $propValue = (string)$simpleXmlProperty->value;
         }
-        $def = clone $this->_templatePropDef;
-        $def->setName($propName);
-        $def->setType($propType);
-        $def->setValue($propValue);
-        return $def;
+        return new BeanPropertyDefinition($propName, $propType, $propValue);
     }
 
     /**
@@ -258,10 +255,7 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
             $argValue = (string)$simpleXmlArg->value;
         }
-        $def = clone $this->_templateArgDef;
-        $def->setType($argType);
-        $def->setValue($argValue);
-        return $def;
+        return new BeanConstructorArgumentDefinition($argType, $argValue);
     }
 
     /**

@@ -218,14 +218,12 @@ class ReflectionFactory
     public static function getMethod($class, $method)
     {
         if (isset(self::$_reflectionMethods[$class][$method])) {
-            $ret = self::$_reflectionMethods[$class][$method];
-        } else {
-            if (!isset(self::$_reflectionMethods[$class])) {
-                self::$_reflectionMethods[$class] = array();
-            }
-            $ret = new \ReflectionMethod($class, $method);
-            self::$_reflectionMethods[$class][$method] = $ret;
+            return self::$_reflectionMethods[$class][$method];
         }
-        return $ret;
+        if (!isset(self::$_reflectionMethods[$class])) {
+            self::$_reflectionMethods[$class] = array();
+        }
+        self::$_reflectionMethods[$class][$method] = new \ReflectionMethod($class, $method);
+        return self::$_reflectionMethods[$class][$method];
     }
 }

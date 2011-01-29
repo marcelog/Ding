@@ -209,10 +209,10 @@ class MethodInvocation
         return
             '['
             . __CLASS__
-            . ' Class: ' . $this->getClass()
-            . ' Method: ' . $this->getMethod()
-            . ' Args: ' . print_r($this->getArguments(), true)
-            . ' result: ' . $this->getResult()
+            . ' Class: ' . $this->_class
+            . ' Method: ' . $this->_method
+            . ' Args: ' . print_r($this->_args, true)
+            . ' result: ' . print_r($this->_result, true)
             . ']'
         ;
     }
