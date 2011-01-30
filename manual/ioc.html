@@ -100,6 +100,7 @@ This metadata includes:
   <li><u>Shutdown method</u>Optional. You may declare an optional method to call when the container
   is destroyed, so you can cleanup internal stuff.</li>
   <li><u>Method annotations:</u>Optional. All method-level annotations.</li>
+  <li><u>Method injections:</u>Optional. All methods that must return a prototype scoped bean (dependency).</li>
   <li><u>Bean dependencies:</u>Optional. Which beans need to be created before creating
   this bean. This has nothing to do with properties that reference other beans
   (those are resolved when creating each property), but with indirect
