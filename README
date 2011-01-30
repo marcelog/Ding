@@ -74,6 +74,8 @@ let you split your beans among several configuration files.
  other beans).
 * Constructor injection (php evaluated code, arrays, values, and/or references
  to other beans).
+* Method injection (ala spring lookup-method) allows you to have singletons that
+can deliver prototypes scoped beans.
 * A bean can be: singleton or prototype (multiple instances).
 * Can create beans by specifying a static method of the bean class itself.
 * Can create beans by specifying another bean (and its method) as a factory.
