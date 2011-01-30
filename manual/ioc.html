@@ -384,6 +384,30 @@ You can define beans inside properties and constructor arguments, like this:<br/
 &lt;/beans&gt;<br/>
 Ding will automatically choose a name for this inner bean. The same syntax applies to
 constructor arguments as well.
+
+<H3><u>Method injection</u></H3>
+<p>
+Suppose you have a singleton bean, and you need to have one of its methods to return an instance
+of one of its dependencies, but this dependency has the scope 'prototype'. The problem here
+is that when the container created the singleton, it injected its dependencies right in the
+beginning of its lifecycle, meaning that every access to the prototype dependency bean will always
+be to the same instance. If this dependency is a prototype scoped bean, this is not what you want.
+</p>
+<p>
+To help you resolve these kind of issues, the controller offers method injection. Take a look:
+</p>
+<hr/>
+&lt;beans&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="dependencyName" class="AClass" scope="prototype"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="singletonBean" class="SingletonClass" scope="singleton"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;lookup-method name="createDependency" bean="dependencyName"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
+&lt;/beans&gt;<br/>
+<hr/>
+<p>
+In this example, the singleton just uses createDependency() to get instances of the bean named "dependencyName".
+The container will (via AOP) take care of the rest ;)
+</p>
 <H3><u>Annotations metadata</u></H3>
 <ul>
   <li><u>Name:</u>The name of the annotation (i.e: @InitMethod).
@@ -391,7 +415,6 @@ constructor arguments as well.
   will result in an annotation named InitMethod with an argument 'method' having the
   value 'xxx'.</li>
 </ul>
-
 
 <H2><u>Container</u></H2>
 

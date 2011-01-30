@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos  -->
-			<title>Docs For Class ShutdownDriver</title>
+			<title>Docs For Class MethodInjectionAspect</title>
 			<link rel="stylesheet" href="../../media/stylesheet.css" />
 						<script src="../../media/lib/classTree.js"></script>
 												<script language="javascript" type="text/javascript">
@@ -88,7 +88,7 @@
 <h2 class="class-name"><img src="../../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> ShutdownDriver</h2>
+														style="vertical-align: middle"> MethodInjectionAspect</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -103,18 +103,18 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../../Bean/Lifecycle/IAfterConfigListener.html">IAfterConfigListener</a></li>            </ul>
+                <li><a href="../../Aspect/Interceptor/IMethodInterceptor.html">IMethodInterceptor</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This driver will look up an optional bean called ShutdownHandler and if it  finds it, will set up a register_shutdown_function().</p>
-<p class="description"><p>PHP Version 5</p></p>
+<p class="short-description">An &quot;inner&quot; class. This is the aspect that runs when the method is called.</p>
+<p class="description"><p>Enter description here ...</p><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
 				<li><span class="field">link:</span> <a href="http://www.noneyet.ar/">http://www.noneyet.ar/</a></li>
 				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Bean---Factory---Driver---ShutdownDriver.php.html">/Bean/Factory/Driver/ShutdownDriver.php</a> (line <span class="field">37</span>)
+			Located in <a class="field" href="_Bean---Factory---Driver---MethodInjectionDriver.php.html">/Bean/Factory/Driver/MethodInjectionDriver.php</a> (line <span class="field">41</span>)
 		</p>
 		
 				
@@ -137,12 +137,17 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-												<div class="var-title">
-					<img src="../../media/images/StaticVariable.png" alt=" " />
-					static <span class="var-type"><a href="../../Bean/Factory-Driver/ShutdownDriver.html">ShutdownDriver</a></span>
-					<a href="#$_instance" title="details" class="var-name">$_instance</a>
+																																<div class="var-title">
+					<img src="../../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$_beanName" title="details" class="var-name">$_beanName</a>
 				</div>
-																							</div>
+																<div class="var-title">
+					<img src="../../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
+					<a href="#$_factory" title="details" class="var-name">$_factory</a>
+				</div>
+											</div>
 		</div>
 	</div>
 
@@ -158,28 +163,28 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																											
+																																							
 				<div class="method-definition">
-					<img src="../../media/images/StaticMethod.png" alt=" "/>
-					static 						<span class="method-result"><a href="../../Bean/Factory-Driver/ShutdownDriver.html">ShutdownDriver</a></span>
-										<a href="#getInstance" title="details" class="method-name">getInstance</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
-									</div>
-																			
-				<div class="method-definition">
-					<img src="../../media/images/Constructor.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#__construct" title="details" class="method-name">__construct</a>
-										()
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">object</span>
+										<a href="#invoke" title="details" class="method-name">invoke</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$invocation</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#afterConfig" title="details" class="method-name">afterConfig</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>)
+										<a href="#setBeanName" title="details" class="method-name">setBeanName</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$beanName</span>)
 									</div>
-																			</div>
+															
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#setFactory" title="details" class="method-name">setFactory</a>
+											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$beanName</span>)
+									</div>
+											</div>
 		</div>
 	</div>		
 
@@ -196,20 +201,21 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$_instance" id="$_instance"><!-- --></A>
+			
+<a name="var$_beanName" id="$_beanName"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
-		<img src="../../media/images/StaticVariable.png" />
+		<img src="../../media/images/PrivateVariable.png" />
 		<span class="var-title">
-			static <span class="var-type"><a href="../../Bean/Factory-Driver/ShutdownDriver.html">ShutdownDriver</a></span>
-			<span class="var-name">$_instance</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">43</span>)
+			<span class="var-type">string</span>
+			<span class="var-name">$_beanName</span>
+						(line <span class="line-number">53</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Holds current instance.</p>
+<p class="short-description">Bean to generate.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -219,7 +225,29 @@
 		
 
 </div>
+<a name="var$_factory" id="$_factory"><!-- --></A>
+<div class="evenrow">
 
+	<div class="var-header">
+		<img src="../../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
+			<span class="var-name">$_factory</span>
+						(line <span class="line-number">47</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Factory to use.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
 						
 		</div>
 	</div>
@@ -235,95 +263,97 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="methodgetInstance" id="getInstance"><!-- --></a>
-<div class="evenrow">
+<a name="methodinvoke" id="invoke"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
-		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">83</span>)
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">invoke</span> (line <span class="line-number">86</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns an instance.</p>
+<p class="short-description">Creates a new bean (prototypes).</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		static <span class="method-result"><a href="../../Bean/Factory-Driver/ShutdownDriver.html">ShutdownDriver</a></span>
+		<span class="method-result">object</span>
 		<span class="method-name">
-			getInstance
+			invoke
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$invocation</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$options</span><span class="var-description">: Optional options.</span>			</li>
+				<span class="var-type"><a href="../../Aspect/MethodInvocation.html">MethodInvocation</a></span>
+				<span class="var-name">$invocation</span><span class="var-description">: The call.</span>			</li>
 				</ul>
 		
 			
 	</div>
-<a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">96</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Constructor.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			__construct
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodafterConfig" id="afterConfig"><!-- --></a>
+<a name="methodsetBeanName" id="setBeanName"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterConfig</span> (line <span class="line-number">49</span>)
+		<span class="method-title">setBeanName</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">(non-PHPdoc)</p>
+<p class="short-description">Setter injection for bean name.</p>
 	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			afterConfig
+			setBeanName
 		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$beanName</span>)
 			</div>
 	
 			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$beanName</span><span class="var-description">: Bean name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetFactory" id="setFactory"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">setFactory</span> (line <span class="line-number">74</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Setter injection for bean name.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setFactory
+		</span>
+					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$beanName</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$beanName</span><span class="var-description">: Bean name.</span>			</li>
 					<li>
 				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
 				<span class="var-name">$factory</span>			</li>
 				</ul>
 		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../../Bean/Lifecycle/IAfterConfigListener.html#methodafterConfig">IAfterConfigListener::afterConfig()</a></dt>
-					</dl>
 			
 	</div>
 						
@@ -332,7 +362,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 30 Jan 2011 12:46:11 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 30 Jan 2011 12:46:10 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

@@ -128,11 +128,27 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_lookupMethods</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/BeanDefinition.html#var$_lookupMethods">BeanDefinition::$_lookupMethods</a> in BeanDefinition.php</div>
+							<div class="index-item-description">Methods injection.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
 			<span class="var-title">$_methodAnnotations</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/BeanDefinition.html#var$_methodAnnotations">BeanDefinition::$_methodAnnotations</a> in BeanDefinition.php</div>
 							<div class="index-item-description">Annotations for this bean methods.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_name</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/BeanAnnotationDefinition.html#var$_name">BeanAnnotationDefinition::$_name</a> in BeanAnnotationDefinition.php</div>
+							<div class="index-item-description">Annotation name.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
@@ -149,14 +165,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/BeanDefinition.html#var$_name">BeanDefinition::$_name</a> in BeanDefinition.php</div>
 							<div class="index-item-description">Bean name</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
-			<span class="var-title">$_name</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/BeanAnnotationDefinition.html#var$_name">BeanAnnotationDefinition::$_name</a> in BeanAnnotationDefinition.php</div>
-							<div class="index-item-description">Annotation name.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
@@ -195,16 +203,16 @@
 			<span class="var-title">$_value</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/BeanPropertyDefinition.html#var$_value">BeanPropertyDefinition::$_value</a> in BeanPropertyDefinition.php</div>
-							<div class="index-item-description">Property value (in the case of a bean property, this is the bean name).</div>
+			<div class="index-item-details"><a href="Bean/BeanConstructorArgumentDefinition.html#var$_value">BeanConstructorArgumentDefinition::$_value</a> in BeanConstructorArgumentDefinition.php</div>
+							<div class="index-item-description">Returns value for this argument. This is a bean name (string) in the  case of an argument of type bean. If this argument is an array, the  value is a BeanConstructorArgument[] where the key of the array is the  name of the key for the target array.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
 			<span class="var-title">$_value</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/BeanConstructorArgumentDefinition.html#var$_value">BeanConstructorArgumentDefinition::$_value</a> in BeanConstructorArgumentDefinition.php</div>
-							<div class="index-item-description">Returns value for this argument. This is a bean name (string) in the  case of an argument of type bean. If this argument is an array, the  value is a BeanConstructorArgument[] where the key of the array is the  name of the key for the target array.</div>
+			<div class="index-item-details"><a href="Bean/BeanPropertyDefinition.html#var$_value">BeanPropertyDefinition::$_value</a> in BeanPropertyDefinition.php</div>
+							<div class="index-item-description">Property value (in the case of a bean property, this is the bean name).</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Constructor.png" alt="Method" title="Method" />
@@ -219,7 +227,7 @@
 			<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/BeanConstructorArgumentDefinition.html#method__construct">BeanConstructorArgumentDefinition::__construct()</a> in BeanConstructorArgumentDefinition.php</div>
+			<div class="index-item-details"><a href="Bean/BeanDefinition.html#method__construct">BeanDefinition::__construct()</a> in BeanDefinition.php</div>
 							<div class="index-item-description">Constructor.</div>
 					</dd>
 			<dt class="field">
@@ -235,7 +243,7 @@
 			<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/BeanDefinition.html#method__construct">BeanDefinition::__construct()</a> in BeanDefinition.php</div>
+			<div class="index-item-details"><a href="Bean/BeanConstructorArgumentDefinition.html#method__construct">BeanConstructorArgumentDefinition::__construct()</a> in BeanConstructorArgumentDefinition.php</div>
 							<div class="index-item-description">Constructor.</div>
 					</dd>
 			<dt class="field">
@@ -376,11 +384,11 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
-			<span class="var-title">$_cache</span>
+			<span class="var-title">$_beanName</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#var$_cache">AnnotationAspectDriver::$_cache</a> in AnnotationAspectDriver.php</div>
-							<div class="index-item-description">References cache.</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionAspect.html#var$_beanName">MethodInjectionAspect::$_beanName</a> in MethodInjectionDriver.php</div>
+							<div class="index-item-description">Bean to generate.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
@@ -389,6 +397,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#var$_cache">BeanAnnotationDriver::$_cache</a> in BeanAnnotationDriver.php</div>
 							<div class="index-item-description">Our cache.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_cache</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#var$_cache">AnnotationAspectDriver::$_cache</a> in AnnotationAspectDriver.php</div>
+							<div class="index-item-description">References cache.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
@@ -403,6 +419,14 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#var$_configClasses">BeanAnnotationDriver::$_configClasses</a> in BeanAnnotationDriver.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_factory</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionAspect.html#var$_factory">MethodInjectionAspect::$_factory</a> in MethodInjectionDriver.php</div>
+							<div class="index-item-description">Factory to use.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
@@ -425,7 +449,7 @@
 			<span class="var-title">$_instance</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/DependsOnDriver.html#var$_instance">DependsOnDriver::$_instance</a> in DependsOnDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionDriver.html#var$_instance">MethodInjectionDriver::$_instance</a> in MethodInjectionDriver.php</div>
 							<div class="index-item-description">Holds current instance.</div>
 					</dd>
 			<dt class="field">
@@ -441,7 +465,7 @@
 			<span class="var-title">$_instance</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/SetterInjectionDriver.html#var$_instance">SetterInjectionDriver::$_instance</a> in SetterInjectionDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/DependsOnDriver.html#var$_instance">DependsOnDriver::$_instance</a> in DependsOnDriver.php</div>
 							<div class="index-item-description">Holds current instance.</div>
 					</dd>
 			<dt class="field">
@@ -457,7 +481,7 @@
 			<span class="var-title">$_instance</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#var$_instance">BeanAnnotationDriver::$_instance</a> in BeanAnnotationDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/SetterInjectionDriver.html#var$_instance">SetterInjectionDriver::$_instance</a> in SetterInjectionDriver.php</div>
 							<div class="index-item-description">Holds current instance.</div>
 					</dd>
 			<dt class="field">
@@ -465,7 +489,7 @@
 			<span class="var-title">$_instance</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/ShutdownDriver.html#var$_instance">ShutdownDriver::$_instance</a> in ShutdownDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#var$_instance">BeanAnnotationDriver::$_instance</a> in BeanAnnotationDriver.php</div>
 							<div class="index-item-description">Holds current instance.</div>
 					</dd>
 			<dt class="field">
@@ -502,6 +526,14 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_instance</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/ShutdownDriver.html#var$_instance">ShutdownDriver::$_instance</a> in ShutdownDriver.php</div>
+							<div class="index-item-description">Holds current instance.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
 			<span class="var-title">$_knownClasses</span>
 					</dt>
 		<dd class="index-item-body">
@@ -513,7 +545,7 @@
 			<span class="var-title">$_propertiesNameCache</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/SetterInjectionDriver.html#var$_propertiesNameCache">SetterInjectionDriver::$_propertiesNameCache</a> in SetterInjectionDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/AutowiredInjectionDriver.html#var$_propertiesNameCache">AutowiredInjectionDriver::$_propertiesNameCache</a> in AutowiredInjectionDriver.php</div>
 							<div class="index-item-description">Cache property setters names.</div>
 					</dd>
 			<dt class="field">
@@ -521,7 +553,7 @@
 			<span class="var-title">$_propertiesNameCache</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/AutowiredInjectionDriver.html#var$_propertiesNameCache">AutowiredInjectionDriver::$_propertiesNameCache</a> in AutowiredInjectionDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/SetterInjectionDriver.html#var$_propertiesNameCache">SetterInjectionDriver::$_propertiesNameCache</a> in SetterInjectionDriver.php</div>
 							<div class="index-item-description">Cache property setters names.</div>
 					</dd>
 			<dt class="field">
@@ -601,14 +633,6 @@
 			<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/ShutdownDriver.html#method__construct">ShutdownDriver::__construct()</a> in ShutdownDriver.php</div>
-							<div class="index-item-description">Constructor.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Constructor.png" alt="Method" title="Method" />
-			<span class="method-title">__construct</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/SignalHandlerDriver.html#method__construct">SignalHandlerDriver::__construct()</a> in SignalHandlerDriver.php</div>
 							<div class="index-item-description">Constructor.</div>
 					</dd>
@@ -617,7 +641,23 @@
 			<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/DependsOnDriver.html#method__construct">DependsOnDriver::__construct()</a> in DependsOnDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/ShutdownDriver.html#method__construct">ShutdownDriver::__construct()</a> in ShutdownDriver.php</div>
+							<div class="index-item-description">Constructor.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Constructor.png" alt="Method" title="Method" />
+			<span class="method-title">__construct</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/ErrorHandlerDriver.html#method__construct">ErrorHandlerDriver::__construct()</a> in ErrorHandlerDriver.php</div>
+							<div class="index-item-description">Constructor.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Constructor.png" alt="Method" title="Method" />
+			<span class="method-title">__construct</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#method__construct">BeanAnnotationDriver::__construct()</a> in BeanAnnotationDriver.php</div>
 							<div class="index-item-description">Constructor.</div>
 					</dd>
 			<dt class="field">
@@ -641,7 +681,7 @@
 			<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#method__construct">BeanAnnotationDriver::__construct()</a> in BeanAnnotationDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/DependsOnDriver.html#method__construct">DependsOnDriver::__construct()</a> in DependsOnDriver.php</div>
 							<div class="index-item-description">Constructor.</div>
 					</dd>
 			<dt class="field">
@@ -649,7 +689,7 @@
 			<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/ErrorHandlerDriver.html#method__construct">ErrorHandlerDriver::__construct()</a> in ErrorHandlerDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/FiltersDriver.html#method__construct">FiltersDriver::__construct()</a> in FiltersDriver.php</div>
 							<div class="index-item-description">Constructor.</div>
 					</dd>
 			<dt class="field">
@@ -665,7 +705,7 @@
 			<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/FiltersDriver.html#method__construct">FiltersDriver::__construct()</a> in FiltersDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionDriver.html#method__construct">MethodInjectionDriver::__construct()</a> in MethodInjectionDriver.php</div>
 							<div class="index-item-description">Constructor.</div>
 					</dd>
 			<dt class="field">
@@ -1084,14 +1124,22 @@
 			<span class="method-title">beforeAssemble</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/SetterInjectionDriver.html#methodbeforeAssemble">SetterInjectionDriver::beforeAssemble()</a> in SetterInjectionDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#methodbeforeAssemble">AnnotationAspectDriver::beforeAssemble()</a> in AnnotationAspectDriver.php</div>
+							<div class="index-item-description">(non-PHPdoc)</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">beforeAssemble</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#methodbeforeAssemble">AnnotationAspectDriver::beforeAssemble()</a> in AnnotationAspectDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/SetterInjectionDriver.html#methodbeforeAssemble">SetterInjectionDriver::beforeAssemble()</a> in SetterInjectionDriver.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">beforeConfig</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#methodbeforeConfig">BeanAnnotationDriver::beforeConfig()</a> in BeanAnnotationDriver.php</div>
 							<div class="index-item-description">(non-PHPdoc)</div>
 					</dd>
 			<dt class="field">
@@ -1100,14 +1148,6 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#methodbeforeConfig">AnnotationAspectDriver::beforeConfig()</a> in AnnotationAspectDriver.php</div>
-							<div class="index-item-description">(non-PHPdoc)</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">beforeConfig</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#methodbeforeConfig">BeanAnnotationDriver::beforeConfig()</a> in BeanAnnotationDriver.php</div>
 							<div class="index-item-description">(non-PHPdoc)</div>
 					</dd>
 			<dt class="field">
@@ -1123,6 +1163,14 @@
 			<span class="method-title">beforeDefinition</span>
 					</dt>
 		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#methodbeforeDefinition">AnnotationAspectDriver::beforeDefinition()</a> in AnnotationAspectDriver.php</div>
+							<div class="index-item-description">(non-PHPdoc)</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">beforeDefinition</span>
+					</dt>
+		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/BeanAnnotationDriver.html#methodbeforeDefinition">BeanAnnotationDriver::beforeDefinition()</a> in BeanAnnotationDriver.php</div>
 							<div class="index-item-description">Annotates the given bean with the annotations found in the class and  every method.</div>
 					</dd>
@@ -1131,7 +1179,7 @@
 			<span class="method-title">beforeDefinition</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#methodbeforeDefinition">AnnotationAspectDriver::beforeDefinition()</a> in AnnotationAspectDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionDriver.html#methodbeforeDefinition">MethodInjectionDriver::beforeDefinition()</a> in MethodInjectionDriver.php</div>
 							<div class="index-item-description">(non-PHPdoc)</div>
 					</dd>
 			<dt class="field">
@@ -1429,6 +1477,14 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getMethodInjections</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/BeanDefinition.html#methodgetMethodInjections">BeanDefinition::getMethodInjections()</a> in BeanDefinition.php</div>
+							<div class="index-item-description">Returns the method injections.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getName</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1568,6 +1624,14 @@
 			<span class="method-title">getInstance</span>
 					</dt>
 		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionDriver.html#methodgetInstance">MethodInjectionDriver::getInstance()</a> in MethodInjectionDriver.php</div>
+							<div class="index-item-description">Returns an instance.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getInstance</span>
+					</dt>
+		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/FiltersDriver.html#methodgetInstance">FiltersDriver::getInstance()</a> in FiltersDriver.php</div>
 							<div class="index-item-description">Returns an instance.</div>
 					</dd>
@@ -1576,7 +1640,7 @@
 			<span class="method-title">getInstance</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/ErrorHandlerDriver.html#methodgetInstance">ErrorHandlerDriver::getInstance()</a> in ErrorHandlerDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/AutowiredInjectionDriver.html#methodgetInstance">AutowiredInjectionDriver::getInstance()</a> in AutowiredInjectionDriver.php</div>
 							<div class="index-item-description">Returns an instance.</div>
 					</dd>
 			<dt class="field">
@@ -1592,14 +1656,6 @@
 			<span class="method-title">getInstance</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#methodgetInstance">AnnotationAspectDriver::getInstance()</a> in AnnotationAspectDriver.php</div>
-							<div class="index-item-description">Returns an instance.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getInstance</span>
-					</dt>
-		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/DependsOnDriver.html#methodgetInstance">DependsOnDriver::getInstance()</a> in DependsOnDriver.php</div>
 							<div class="index-item-description">Returns an instance.</div>
 					</dd>
@@ -1608,7 +1664,15 @@
 			<span class="method-title">getInstance</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Bean/Factory-Driver/AutowiredInjectionDriver.html#methodgetInstance">AutowiredInjectionDriver::getInstance()</a> in AutowiredInjectionDriver.php</div>
+			<div class="index-item-details"><a href="Bean/Factory-Driver/ErrorHandlerDriver.html#methodgetInstance">ErrorHandlerDriver::getInstance()</a> in ErrorHandlerDriver.php</div>
+							<div class="index-item-description">Returns an instance.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getInstance</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/AnnotationAspectDriver.html#methodgetInstance">AnnotationAspectDriver::getInstance()</a> in AnnotationAspectDriver.php</div>
 							<div class="index-item-description">Returns an instance.</div>
 					</dd>
 			<dt class="field">
@@ -1737,6 +1801,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory/IBeanFactory.html">IBeanFactory</a> in IBeanFactory.php</div>
 							<div class="index-item-description">Interface for a bean factory.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">invoke</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionAspect.html#methodinvoke">MethodInjectionAspect::invoke()</a> in MethodInjectionDriver.php</div>
+							<div class="index-item-description">Creates a new bean (prototypes).</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Page.png" alt="Page" title="Page" />
@@ -1913,10 +1985,33 @@
 	<dl>
 			<dt class="field">
 						<img src="media/images/Page.png" alt="Page" title="Page" />
+			<span class="include-title">MethodInjectionDriver.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/_Bean---Factory---Driver---MethodInjectionDriver.php.html">MethodInjectionDriver.php</a> in MethodInjectionDriver.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Page.png" alt="Page" title="Page" />
 			<span class="include-title">MVCAnnotationDriver.php</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/_Bean---Factory---Driver---MVCAnnotationDriver.php.html">MVCAnnotationDriver.php</a> in MVCAnnotationDriver.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Class.png" alt="Class" title="Class" />
+			MethodInjectionAspect
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionAspect.html">MethodInjectionAspect</a> in MethodInjectionDriver.php</div>
+							<div class="index-item-description">An &quot;inner&quot; class. This is the aspect that runs when the method is called.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Class.png" alt="Class" title="Class" />
+			MethodInjectionDriver
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionDriver.html">MethodInjectionDriver</a> in MethodInjectionDriver.php</div>
+							<div class="index-item-description">This driver will take care of the method injection.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -2055,6 +2150,14 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setMethodInjections</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/BeanDefinition.html#methodsetMethodInjections">BeanDefinition::setMethodInjections()</a> in BeanDefinition.php</div>
+							<div class="index-item-description">Sets new method injections.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">setName</span>
 					</dt>
 		<dd class="index-item-body">
@@ -2153,6 +2256,22 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Bean/Factory-Driver/_Bean---Factory---Driver---SignalHandlerDriver.php.html">SignalHandlerDriver.php</a> in SignalHandlerDriver.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setBeanName</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionAspect.html#methodsetBeanName">MethodInjectionAspect::setBeanName()</a> in MethodInjectionDriver.php</div>
+							<div class="index-item-description">Setter injection for bean name.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setFactory</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Bean/Factory-Driver/MethodInjectionAspect.html#methodsetFactory">MethodInjectionAspect::setFactory()</a> in MethodInjectionDriver.php</div>
+							<div class="index-item-description">Setter injection for bean name.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
