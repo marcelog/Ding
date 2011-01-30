@@ -1,0 +1,163 @@
+<?php
+/**
+ * This driver will take care of the method injection.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @version    SVN: $Id$
+ * @link       http://www.noneyet.ar/
+ */
+namespace Ding\Bean\Factory\Driver;
+
+use Ding\Bean\BeanPropertyDefinition;
+
+use Ding\Aspect\Interceptor\IMethodInterceptor;
+use Ding\Aspect\MethodInvocation;
+use Ding\Aspect\AspectDefinition;
+use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
+use Ding\Bean\BeanDefinition;
+use Ding\Bean\BeanAnnotationDefinition;
+use Ding\Bean\Factory\IBeanFactory;
+use Ding\Reflection\ReflectionFactory;
+
+/**
+ * An "inner" class. This is the aspect that runs when the method is called.
+ * Enter description here ...
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @link       http://www.noneyet.ar/
+ */
+class MethodInjectionAspect implements IMethodInterceptor
+{
+    /**
+     * Factory to use.
+     * @var IBeanFactory
+     */
+    private $_factory;
+
+    /**
+     * Bean to generate.
+     * @var string
+     */
+    private $_beanName;
+
+    /**
+     * Setter injection for bean name.
+     *
+     * @param string $beanName Bean name.
+     *
+     * @return void
+     */
+    public function setBeanName($beanName)
+    {
+        $this->_beanName = $beanName;
+    }
+
+    /**
+     * Setter injection for bean name.
+     *
+     * @param string $beanName Bean name.
+     *
+     * @return void
+     */
+    public function setFactory(IBeanFactory $factory)
+    {
+        $this->_factory = $factory;
+    }
+
+    /**
+     * Creates a new bean (prototypes).
+     *
+     * @param MethodInvocation $invocation The call.
+     *
+     * @return object
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        return $this->_factory->getBean($this->_beanName);
+    }
+}
+
+/**
+ * This driver will take care of the method injection.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @link       http://www.noneyet.ar/
+ */
+class MethodInjectionDriver implements IBeforeDefinitionListener
+{
+    /**
+     * Holds current instance.
+     * @var MethodInjectionDriver
+     */
+    private static $_instance = false;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
+     */
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
+    {
+        if ($bean === null) {
+            return $bean;
+        }
+        foreach ($bean->getMethodInjections() as $method) {
+            $aspects = $bean->getAspects();
+            $aspectBeanName = 'MethodInjectionAspect' . microtime(true);
+            $aspectBean = new BeanDefinition($aspectBeanName);
+            $aspectBean->setScope(BeanDefinition::BEAN_SINGLETON);
+            $aspectBean->setClass('\\Ding\\Bean\\Factory\\Driver\\MethodInjectionAspect');
+            $aspectBean->setProperties(array(
+                new BeanPropertyDefinition('factory', BeanPropertyDefinition::PROPERTY_SIMPLE, $factory),
+                new BeanPropertyDefinition('beanName', BeanPropertyDefinition::PROPERTY_SIMPLE, $method[1])
+            ));
+            $factory->setBeanDefinition($aspectBeanName, $aspectBean);
+            $aspects[] = new AspectDefinition(
+                $method[0], AspectDefinition::ASPECT_METHOD, $aspectBeanName
+            );
+            $bean->setAspects($aspects);
+        }
+        return $bean;
+    }
+
+    /**
+     * Returns an instance.
+     *
+     * @param array $options Optional options.
+     *
+     * @return MethodInjectionDriver
+     */
+    public static function getInstance(array $options)
+    {
+        if (self::$_instance == false) {
+            self::$_instance = new MethodInjectionDriver;
+        }
+        return self::$_instance;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
+    private function __construct()
+    {
+    }
+}

@@ -491,7 +491,7 @@ class BeanDefinition
         $this->_factoryMethod = $soullessString;
         $this->_factoryBean = $soullessString;
         $this->_initMethod = $soullessString;
-        $this->_lookupMethods = $soullessString;
+        $this->_lookupMethods = $soullessArray;
         $this->_destroyMethod = $soullessString;
         $this->_dependsOn = $soullessArray;
         $this->_properties = $soullessArray;

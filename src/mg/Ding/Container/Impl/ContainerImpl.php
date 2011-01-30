@@ -37,6 +37,7 @@ use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
 use Ding\Bean\Factory\Driver\MVCAnnotationDriver;
 use Ding\Bean\Factory\Driver\DependsOnDriver;
+use Ding\Bean\Factory\Driver\MethodInjectionDriver;
 use Ding\Bean\Factory\Driver\TimezoneDriver;
 use Ding\Bean\Factory\Driver\ShutdownDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
@@ -630,6 +631,7 @@ class ContainerImpl implements IContainer
         }
 
         $this->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
+        $this->addBeforeDefinitionListener(MethodInjectionDriver::getInstance($soullessArray));
 
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeConfig] as $lifecycleListener) {
             $lifecycleListener->beforeConfig($this);

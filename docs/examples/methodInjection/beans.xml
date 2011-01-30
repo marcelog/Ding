@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="anotherBean" class="MyOtherBean" scope="singleton"/>
+  <bean id="myBeanName" class="MyBean" scope="singleton">
+    <property name="someProperty"><value>${user.name}</value></property>
+    <lookup-method name="createAnotherBean" bean="anotherBean"/>
+  </bean>
+</beans>
