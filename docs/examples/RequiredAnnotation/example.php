@@ -34,7 +34,7 @@ class MyBean
      */
     public function setUnconfiguredProperty($value)
     {
-        $this->_someProperty = $value;
+        // never called
     }
 
     public function setSomeProperty($value)

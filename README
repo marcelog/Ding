@@ -42,6 +42,7 @@ any of the implementations below ;)
 * @Configuration and @Bean just like Java Configuration. So you dont even need
 a beans.xml (@Scope, @InitMethod, @DestroyMethod) for this annotated bean
 definitions.
+* @Required
 * @Controller (When using the MVC through http).
 * @RequestMapping (When using the MVC through http).
 * @SignalHandler
