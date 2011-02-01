@@ -163,6 +163,11 @@ For every of the @Bean annotated methods, you should also specify:
 container shutdown.
 </p>
 <p>
+@Required Use this one in your setter methods (i.e: setSomething()) and this
+will tell the container to throw an exception if this property isnt configured
+when instantiating the bean.
+</p>
+<p>
 /**<br/>
  * @Configuration<br/>
  */<br/>
