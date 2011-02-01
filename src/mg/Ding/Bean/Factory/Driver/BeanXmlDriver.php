@@ -328,7 +328,8 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         }
         $bMethods = $bProps = $bAspects = $constructorArgs = array();
         foreach ($simpleXmlBean->property as $property) {
-            $bProps[] = $this->_loadProperty($property);
+            $bProp = $this->_loadProperty($property);
+            $bProps[$bProp->getName()] = $bProp;
         }
         foreach ($simpleXmlBean->aspect as $aspect) {
             $bAspects[] = $this->_loadAspect($aspect);

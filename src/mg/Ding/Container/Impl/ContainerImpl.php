@@ -49,6 +49,7 @@ use Ding\Bean\Factory\Driver\SignalHandlerDriver;
 use Ding\Bean\Factory\Driver\SetterInjectionDriver;
 use Ding\Bean\Factory\Driver\AutowiredInjectionDriver;
 use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
+use Ding\Bean\Factory\Driver\AnnotationRequiredDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
@@ -602,6 +603,7 @@ class ContainerImpl implements IContainer
             $this->addAfterConfigListener($anDriver);
             $this->addBeforeDefinitionListener($anDriver);
             $this->addAfterConfigListener(MVCAnnotationDriver::getInstance($soullessArray));
+            $this->addAfterDefinitionListener(AnnotationRequiredDriver::getInstance($soullessArray));
             //$this->addAfterCreateListener(AutowiredInjectionDriver::getInstance($soullessArray));
         }
 
