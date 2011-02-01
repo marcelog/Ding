@@ -38,12 +38,6 @@ use Ding\Reflection\ReflectionFactory;
 class AnnotationRequiredDriver implements IAfterDefinitionListener
 {
     /**
-     * Cache property setters names.
-     * @var array[]
-     */
-    private $_propertiesNameCache;
-
-    /**
      * Holds current instance.
      * @var AnnotationRequiredDriver
      */
@@ -94,6 +88,5 @@ class AnnotationRequiredDriver implements IAfterDefinitionListener
      */
     private function __construct()
     {
-        $this->_propertiesNameCache = array();
     }
 }
