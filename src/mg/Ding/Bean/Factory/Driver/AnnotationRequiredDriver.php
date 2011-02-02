@@ -61,6 +61,7 @@ class AnnotationRequiredDriver implements IAfterDefinitionListener
     public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
         $annotations = ReflectionFactory::getClassAnnotations($bean->getClass());
+        $props = $bean->getProperties();
         foreach ($annotations as $method => $annotations) {
             if ($method == 'class') {
                 continue;
@@ -71,7 +72,6 @@ class AnnotationRequiredDriver implements IAfterDefinitionListener
             $propName = lcfirst(substr($method, 3));
             foreach ($annotations as $annotation) {
                 if ($annotation->getName() == 'Required') {
-                    $props = $bean->getProperties();
                     if (!isset($props[$propName])) {
                         throw new BeanFactoryException('Missing @Required property: ' . $method);
                     }

@@ -62,6 +62,7 @@ class AnnotationResourceDriver implements IAfterDefinitionListener
     {
         $beanClass = $bean->getClass();
         $annotations = ReflectionFactory::getClassAnnotations($beanClass);
+        $properties = $bean->getProperties();
         foreach ($annotations as $method => $annotations) {
             if ($method == 'class') {
                 continue;
@@ -70,7 +71,6 @@ class AnnotationResourceDriver implements IAfterDefinitionListener
                 continue;
             }
             $propName = lcfirst(substr($method, 3));
-            $properties = $bean->getProperties();
             foreach ($annotations as $annotation) {
                 if ($annotation->getName() == 'Resource') {
                     $properties[] = new BeanPropertyDefinition(
@@ -78,8 +78,8 @@ class AnnotationResourceDriver implements IAfterDefinitionListener
                     );
                 }
             }
-            $bean->setProperties($properties);
         }
+        $bean->setProperties($properties);
         return $bean;
     }
 
