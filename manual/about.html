@@ -62,7 +62,8 @@ The name "Ding" comes from the action of using/doing dependency injection (DI),
 the result is something like "di'ing".<br/>
 Also, Ding is based on (and tries to be designed as) the Spring framework from SpringSource, 
 which offers a lot of great features not available to the php world. You now know where those
-great ideas came from ;)<br/>
+great ideas came from ;) Ding also supports some of the JSR-250 and JSR-330 annotations, like
+@Configuration, @Bean, @Required, @Resource, etc.<br/>
 
 Ding is intended to be used not only for web applications, but for desktop and embedded applications
 too. As a matter of fact, it has more features for desktop, server, and embedded applications than 
@@ -74,6 +75,7 @@ Ding offers the following features:<br/>
   <li>Scalable architecture, allowing to easily adopt new features.</li>
   <li>Lightweight, easy of use, and useful.</li>
   <li>Loosed-couple, just use what you need and nothing more.</li>
+  <li>Some JSR-250 and JSR-330 annotations.</li>
   <li>Setter Injection (For arrays, scalar values, php code, and references to other beans).</li>
   <li>Constructor Injection (For the same data types as above).</li>
   <li>Method Injection (So you can have dependencies in singletons that must be created on demand).</li>

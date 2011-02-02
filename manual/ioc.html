@@ -139,7 +139,7 @@ themselves with @Bean will became a source for bean definitions.
 @Configuration classes become factory beans. So, a class annotated with
 @Configuration, having a method called "someBean" which is in turn annotated
 with @Bean, will become the factory bean and factory method for the bean named
-"someBean". See docs/examples/ConfigurationAnnotation.
+"someBean". See docs/examples/ConfigurationAnnotation. (JSR-330)
 </p>
 <p>
 This behavior can be overriden if you use the argument name= in the @Bean
@@ -147,7 +147,7 @@ annotation, like:<br/>
 <br/>
 @Bean(name=someOtherName)<br/><br/>
 The string "someOtherName" is now the final name of the bean (although the method
-is still used as the factory method).
+is still used as the factory method). (JSR-330)
 </p>
 <p>
 For every of the @Bean annotated methods, you should also specify:
@@ -165,7 +165,12 @@ container shutdown.
 <p>
 @Required Use this one in your setter methods (i.e: setSomething()) and this
 will tell the container to throw an exception if this property isnt configured
-when instantiating the bean.
+when instantiating the bean. (JSR-330)
+</p>
+<p>
+@Resource Use it in setters to resolve the injected dependency by name. So
+for example, the method setDependency() will resolve to a bean named "dependency".
+(JSR-250)
 </p>
 <p>
 /**<br/>
