@@ -3,7 +3,7 @@
  * Your aspect classes must implement this interface in order to work with
  * this framework. (In the case you're interested in running advices
  * when an exception is thrown).
- *  
+ *
  * PHP Version 5
  *
  * @category   Ding
@@ -13,6 +13,21 @@
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @version    SVN: $Id$
  * @link       http://www.noneyet.ar/
+ *
+ * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 namespace Ding\Aspect\Interceptor;
 use Ding\Aspect\MethodInvocation;
@@ -21,7 +36,7 @@ use Ding\Aspect\MethodInvocation;
  * Your aspect classes must implement this interface in order to work with
  * this framework. (In the case you're interested in running advices
  * when an exception is thrown).
- *  
+ *
  * PHP Version 5
  *
  * @category   Ding

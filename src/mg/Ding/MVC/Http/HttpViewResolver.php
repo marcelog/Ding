@@ -11,6 +11,21 @@
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @version  SVN: $Id$
  * @link     http://www.noneyet.ar/
+ *
+ * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 namespace Ding\MVC\Http;
 
@@ -32,11 +47,11 @@ use Ding\MVC\ModelAndView;
 class HttpViewResolver implements IViewResolver
 {
     /**
-     * log4php logger or our own. 
+     * log4php logger or our own.
      * @var Logger
      */
     private $_logger;
-    
+
     /**
      * Path where views are stored.
      * @var string
@@ -54,13 +69,13 @@ class HttpViewResolver implements IViewResolver
      * @var string
      */
     private $_suffix;
-    
+
     /**
      * This will resolve the given ModelAndView to a view in the filesystem
      * (an absolute path to a file).
-     * 
+     *
      * @param ModelAndView $modelAndView What to render.
-     * 
+     *
      * @see Ding\MVC.IViewResolver::resolve()
      * @return HttpView
      */
@@ -81,7 +96,7 @@ class HttpViewResolver implements IViewResolver
      * Sets the path where views are located.
      *
      * @param string $path Path to the views directory.
-     * 
+     *
      * @return void
      */
     public function setViewPath($path)
@@ -92,24 +107,24 @@ class HttpViewResolver implements IViewResolver
         }
         $this->_path = realpath($path);
     }
-    
+
     /**
      * Sets the view prefix, like view.
      *
      * @param string $prefix Prefix to use for views.
-     * 
+     *
      * @return void
      */
     public function setViewPrefix($prefix)
     {
         $this->_prefix = $prefix;
     }
-    
+
     /**
      * Sets the view suffix, like .html
      *
      * @param string $suffix Suffix to use for views.
-     * 
+     *
      * @return void
      */
     public function setViewSuffix($suffix)
