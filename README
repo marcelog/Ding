@@ -13,6 +13,9 @@ Checkout the api (phpdoc) at: http://marcelog.github.com/Ding/php-doc/html/index
 In the homepage, you can find the user manual: http://marcelog.github.com/Ding
 
 --------------------------------------------------------------------------------
+Ding supports some of JSR-330 and JSR-250 annotations, like @Configuration,
+@Bean, @Required, @Resource, etc.
+--------------------------------------------------------------------------------
 Please see inside docs/examples for code samples. A good place to start are
 the "basic", "aop", "quickstart", "doctrine", and "mvc" examples.
 
@@ -43,6 +46,7 @@ any of the implementations below ;)
 a beans.xml (@Scope, @InitMethod, @DestroyMethod) for this annotated bean
 definitions.
 * @Required
+* @Resource
 * @Controller (When using the MVC through http).
 * @RequestMapping (When using the MVC through http).
 * @SignalHandler
