@@ -33,6 +33,7 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
@@ -50,7 +51,7 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://www.noneyet.ar/ Apache License 2.0
  * @link       http://www.noneyet.ar/
  */
-class AnnotationResourceDriver implements IAfterDefinitionListener
+class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreateListener
 {
     /**
      * Holds current instance.
@@ -58,12 +59,34 @@ class AnnotationResourceDriver implements IAfterDefinitionListener
      */
     private static $_instance = false;
 
+    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    {
+        $rClass = ReflectionFactory::getClass($beanDefinition->getClass());
+        foreach ($beanDefinition->getAutowiredProperties() as $property) {
+            $name = $property->getName();
+            $value = $factory->getBean($name);
+            $rProperty = $rClass->getProperty($name);
+            if (!$rProperty->isPublic()) {
+                $rProperty->setAccessible(true);
+                $rProperty->setValue($bean, $value);
+                $rProperty->setAccessible(false);
+            } else {
+                $rProperty->setValue($bean, $value);
+            }
+        }
+        return $bean;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
+     */
     public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
         $beanClass = $bean->getClass();
         $annotations = ReflectionFactory::getClassAnnotations($beanClass);
         $properties = $bean->getProperties();
-        foreach ($annotations as $method => $annotations) {
+        foreach ($annotations as $method => $methodAnnotations) {
             if ($method == 'class') {
                 continue;
             }
@@ -71,7 +94,7 @@ class AnnotationResourceDriver implements IAfterDefinitionListener
                 continue;
             }
             $propName = lcfirst(substr($method, 3));
-            foreach ($annotations as $annotation) {
+            foreach ($methodAnnotations as $annotation) {
                 if ($annotation->getName() == 'Resource') {
                     $properties[] = new BeanPropertyDefinition(
                         $propName, BeanPropertyDefinition::PROPERTY_BEAN, $propName
@@ -80,6 +103,20 @@ class AnnotationResourceDriver implements IAfterDefinitionListener
             }
         }
         $bean->setProperties($properties);
+        if (empty($annotations)) {
+            return $bean;
+        }
+        $properties = array();
+        foreach ($annotations['class']['properties'] as $property => $propertyAnnotations) {
+            foreach ($propertyAnnotations as $annotation) {
+                if ($annotation->getName() == 'Resource') {
+                    $properties[] = new BeanPropertyDefinition(
+                        $property, BeanPropertyDefinition::PROPERTY_BEAN, $property
+                    );
+                }
+            }
+        }
+        $bean->setAutowiredProperties($properties);
         return $bean;
     }
 
