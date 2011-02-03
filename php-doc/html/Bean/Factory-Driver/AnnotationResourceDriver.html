@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos  -->
-			<title>Docs For Class SignalHandlerHelper</title>
+			<title>Docs For Class AnnotationResourceDriver</title>
 			<link rel="stylesheet" href="../../media/stylesheet.css" />
 						<script src="../../media/lib/classTree.js"></script>
 												<script language="javascript" type="text/javascript">
@@ -88,7 +88,7 @@
 <h2 class="class-name"><img src="../../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> SignalHandlerHelper</h2>
+														style="vertical-align: middle"> AnnotationResourceDriver</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -100,16 +100,21 @@
 						
 					</div>
 	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../../Bean/Lifecycle/IAfterDefinitionListener.html">IAfterDefinitionListener</a></li><li><a href="../../Bean/Lifecycle/IAfterCreateListener.html">IAfterCreateListener</a></li>            </ul>
+        </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This is a bean that will call your own signal handler (only if it implements</p>
-<p class="description"><p>ISignalHandler). YOU MUST have declare(ticks=1); AS THE FIRST LINE IN YOUR  SCRIPT. IT SEEMS PHP SUCKS, AND THERE IS NO WAY TO CONTROL THAT FROM THIS  CLASS. NOT EVEN WITH pcntl_signal_dispatch() and/or register_tick_function()</p><p>PHP Version 5</p></p>
+<p class="short-description">This driver will search for @Resource setter methods.</p>
+<p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
 				<li><span class="field">link:</span> <a href="http://www.noneyet.ar/">http://www.noneyet.ar/</a></li>
 				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Helpers---SignalHandler---SignalHandlerHelper.php.html">/Helpers/SignalHandler/SignalHandlerHelper.php</a> (line <span class="field">50</span>)
+			Located in <a class="field" href="_Bean---Factory---Driver---AnnotationResourceDriver.php.html">/Bean/Factory/Driver/AnnotationResourceDriver.php</a> (line <span class="field">54</span>)
 		</p>
 		
 				
@@ -132,17 +137,12 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																<div class="var-title">
-					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type"><a href="../../Helpers/SignalHandler/ISignalHandler.html">ISignalHandler</a></span>
-					<a href="#$_handler" title="details" class="var-name">$_handler</a>
+												<div class="var-title">
+					<img src="../../media/images/StaticVariable.png" alt=" " />
+					static <span class="var-type"><a href="../../Bean/Factory-Driver/AnnotationResourceDriver.html">AnnotationResourceDriver</a></span>
+					<a href="#$_instance" title="details" class="var-name">$_instance</a>
 				</div>
-																<div class="var-title">
-					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type"><a href="../../Logger/Logger.html">Logger</a></span>
-					<a href="#$_logger" title="details" class="var-name">$_logger</a>
-				</div>
-											</div>
+																							</div>
 		</div>
 	</div>
 
@@ -158,7 +158,14 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																							
+																																			
+				<div class="method-definition">
+					<img src="../../media/images/StaticMethod.png" alt=" "/>
+					static 						<span class="method-result"><a href="../../Bean/Factory-Driver/AnnotationResourceDriver.html">AnnotationResourceDriver</a></span>
+										<a href="#getInstance" title="details" class="method-name">getInstance</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
+									</div>
+																			
 				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -168,18 +175,18 @@
 															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">boolean</span>
-										<a href="#handle" title="details" class="method-name">handle</a>
-											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$signal</span>)
+											<span class="method-result">void</span>
+										<a href="#afterCreate" title="details" class="method-name">afterCreate</a>
+											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#setSignalHandler" title="details" class="method-name">setSignalHandler</a>
-											(<span class="var-type"><a href="../../Helpers/SignalHandler/ISignalHandler.html">ISignalHandler</a></span>&nbsp;<span class="var-name">$handler</span>)
+										<a href="#afterDefinition" title="details" class="method-name">afterDefinition</a>
+											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span>)
 									</div>
-											</div>
+																			</div>
 		</div>
 	</div>		
 
@@ -196,44 +203,20 @@
 							
 					</div>
 		<div class="info-box-body">
-			
-<a name="var$_handler" id="$_handler"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<img src="../../media/images/PrivateVariable.png" />
-		<span class="var-title">
-			<span class="var-type"><a href="../../Helpers/SignalHandler/ISignalHandler.html">ISignalHandler</a></span>
-			<span class="var-name">$_handler</span>
-						(line <span class="line-number">62</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Signal handler to call.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$_logger" id="$_logger"><!-- --></A>
+			<a name="var$_instance" id="$_instance"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
-		<img src="../../media/images/PrivateVariable.png" />
+		<img src="../../media/images/StaticVariable.png" />
 		<span class="var-title">
-			<span class="var-type"><a href="../../Logger/Logger.html">Logger</a></span>
-			<span class="var-name">$_logger</span>
-						(line <span class="line-number">56</span>)
+			static <span class="var-type"><a href="../../Bean/Factory-Driver/AnnotationResourceDriver.html">AnnotationResourceDriver</a></span>
+			<span class="var-name">$_instance</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">60</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">log4php logger or our own.</p>
+<p class="short-description">Holds current instance.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -243,6 +226,7 @@
 		
 
 </div>
+
 						
 		</div>
 	</div>
@@ -258,18 +242,48 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="method__construct" id="__construct"><!-- --></a>
+<a name="methodgetInstance" id="getInstance"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
+		<img src="../../media/images/StaticMethod.png" />
+		<span class="method-title">static getInstance</span> (line <span class="line-number">130</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an instance.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result"><a href="../../Bean/Factory-Driver/AnnotationResourceDriver.html">AnnotationResourceDriver</a></span>
+		<span class="method-name">
+			getInstance
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$options</span><span class="var-description">: Optional options.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">97</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">143</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Constructor.</p>
 	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
+				<li><span class="field">access:</span> private</li>
 			</ul>
 	
 	<div class="method-signature">
@@ -283,46 +297,15 @@
 		
 			
 	</div>
-<a name="methodhandle" id="handle"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">handle</span> (line <span class="line-number">83</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns true.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			handle
-		</span>
-					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$signal</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">integer</span>
-				<span class="var-name">$signal</span><span class="var-description">: Signal caught.</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodsetSignalHandler" id="setSignalHandler"><!-- --></a>
+<a name="methodafterCreate" id="afterCreate"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setSignalHandler</span> (line <span class="line-number">71</span>)
+		<span class="method-title">afterCreate</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Set a handler to call upon signals.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -330,17 +313,67 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			setSignalHandler
+			afterCreate
 		</span>
-					(<span class="var-type"><a href="../../Helpers/SignalHandler/ISignalHandler.html">ISignalHandler</a></span>&nbsp;<span class="var-name">$handler</span>)
+					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><a href="../../Helpers/SignalHandler/ISignalHandler.html">ISignalHandler</a></span>
-				<span class="var-name">$handler</span><span class="var-description">: Handler to call.</span>			</li>
+				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
+				<span class="var-name">$factory</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$bean</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
+				<span class="var-name">$beanDefinition</span>			</li>
 				</ul>
 		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Bean/Lifecycle/IAfterCreateListener.html#methodafterCreate">IAfterCreateListener::afterCreate()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodafterDefinition" id="afterDefinition"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">afterDefinition</span> (line <span class="line-number">84</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">(non-PHPdoc)</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			afterDefinition
+		</span>
+					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
+				<span class="var-name">$factory</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
+				<span class="var-name">&$bean</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Bean/Lifecycle/IAfterDefinitionListener.html#methodafterDefinition">IAfterDefinitionListener::afterDefinition()</a></dt>
+					</dl>
 			
 	</div>
 						
@@ -349,7 +382,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Wed, 02 Feb 2011 22:15:18 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Wed, 02 Feb 2011 22:15:11 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

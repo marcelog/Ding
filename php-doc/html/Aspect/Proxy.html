@@ -110,7 +110,7 @@
 				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Aspect---Proxy.php.html">/Aspect/Proxy.php</a> (line <span class="field">36</span>)
+			Located in <a class="field" href="_Aspect---Proxy.php.html">/Aspect/Proxy.php</a> (line <span class="field">51</span>)
 		</p>
 		
 				
@@ -222,7 +222,7 @@
 		<span class="var-title">
 			static <span class="var-type"><a href="../Cache/ICache.html">ICache</a></span>
 			<span class="var-name">$_cache</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">48</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">63</span>)
 		</span>
 	</div>
 
@@ -245,7 +245,7 @@
 		<span class="var-title">
 			static <span class="var-type">string</span>
 			<span class="var-name">$_methodTemplate</span>
-			 = <span class="var-default"> &lt;&lt;&lt;TEXT<br />    VISIBILITY ADDITIONAL function METHOD_NAME(METHOD_ARGS)<br />    {<br />        \$invocation = new MethodInvocation(<br />            'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this<br />        );<br />        try<br />        {<br />        	return self::\$_dispatcher-&gt;invoke(\$invocation);<br />        } catch (Exception \$exception) {<br />            \$invocation-&gt;setException(\$exception);<br />        	self::\$_dispatcher-&gt;invokeException(\$invocation);<br />        }<br />	}<br />TEXT</span>			(line <span class="line-number">105</span>)
+			 = <span class="var-default"> &lt;&lt;&lt;TEXT<br />    VISIBILITY ADDITIONAL function METHOD_NAME(METHOD_ARGS)<br />    {<br />        \$invocation = new MethodInvocation(<br />            'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this<br />        );<br />        try<br />        {<br />        	return self::\$_dispatcher-&gt;invoke(\$invocation);<br />        } catch (Exception \$exception) {<br />            \$invocation-&gt;setException(\$exception);<br />        	self::\$_dispatcher-&gt;invokeException(\$invocation);<br />        }<br />	}<br />TEXT</span>			(line <span class="line-number">120</span>)
 		</span>
 	</div>
 
@@ -268,7 +268,7 @@
 		<span class="var-title">
 			static <span class="var-type">integer</span>
 			<span class="var-name">$_proxyCount</span>
-			 = <span class="var-default"> 1</span>			(line <span class="line-number">42</span>)
+			 = <span class="var-default"> 1</span>			(line <span class="line-number">57</span>)
 		</span>
 	</div>
 
@@ -291,7 +291,7 @@
 		<span class="var-title">
 			static <span class="var-type">string</span>
 			<span class="var-name">$_proxyTemplate</span>
-			 = <span class="var-default"> &lt;&lt;&lt;TEXT<br /><br />use Ding\Aspect\Interceptor\IDispatcher;<br />use Ding\Aspect\MethodInvocation;<br /><br />final class NEW_NAME extends CLASS_NAME {<br />    /**<br />     * Holds advice dispatcher.<br />     * @var Dispatcher<br />     */<br />    private static \$_dispatcher = false;<br /><br />    /**<br />     * This is not suppose to exist. We need to refactor the proxy so it<br />     * can be correctly serialized. This check is used internally by the<br />     * container to know that this bean cant be cached (although it can cache<br />     * its definition).<br />     * @var boolean<br />     */<br />    public static \$iAmADingProxy = true;<br /><br />    /**<br />     * Clone this object.<br />     *<br />     * @return void<br />     */<br />    public function __clone()<br />    {<br />        self::\$_dispatcher = clone self::\$_dispatcher;<br />    }<br /><br />    /**<br />     * This is used from the container to set the dispatcher for the aspects.<br />     *<br />     * @param IDispatcher \$dispatcher Advice dispatcher.<br />     *<br />     * @return void<br />     */<br />    public static function setDispatcher(IDispatcher \$dispatcher)<br />    {<br />        self::\$_dispatcher = \$dispatcher;<br />    }<br /><br />    METHODS<br />}<br />TEXT</span>			(line <span class="line-number">54</span>)
+			 = <span class="var-default"> &lt;&lt;&lt;TEXT<br /><br />use Ding\Aspect\Interceptor\IDispatcher;<br />use Ding\Aspect\MethodInvocation;<br /><br />final class NEW_NAME extends CLASS_NAME {<br />    /**<br />     * Holds advice dispatcher.<br />     * @var Dispatcher<br />     */<br />    private static \$_dispatcher = false;<br /><br />    /**<br />     * This is not suppose to exist. We need to refactor the proxy so it<br />     * can be correctly serialized. This check is used internally by the<br />     * container to know that this bean cant be cached (although it can cache<br />     * its definition).<br />     * @var boolean<br />     */<br />    public static \$iAmADingProxy = true;<br /><br />    /**<br />     * Clone this object.<br />     *<br />     * @return void<br />     */<br />    public function __clone()<br />    {<br />        self::\$_dispatcher = clone self::\$_dispatcher;<br />    }<br /><br />    /**<br />     * This is used from the container to set the dispatcher for the aspects.<br />     *<br />     * @param IDispatcher \$dispatcher Advice dispatcher.<br />     *<br />     * @return void<br />     */<br />    public static function setDispatcher(IDispatcher \$dispatcher)<br />    {<br />        self::\$_dispatcher = \$dispatcher;<br />    }<br /><br />    METHODS<br />}<br />TEXT</span>			(line <span class="line-number">69</span>)
 		</span>
 	</div>
 
@@ -327,7 +327,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static create</span> (line <span class="line-number">244</span>)
+		<span class="method-title">static create</span> (line <span class="line-number">259</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -364,7 +364,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static _createClass</span> (line <span class="line-number">131</span>)
+		<span class="method-title">static _createClass</span> (line <span class="line-number">146</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -404,7 +404,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static _createMethod</span> (line <span class="line-number">193</span>)
+		<span class="method-title">static _createMethod</span> (line <span class="line-number">208</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -438,7 +438,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static _createParameter</span> (line <span class="line-number">156</span>)
+		<span class="method-title">static _createParameter</span> (line <span class="line-number">171</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -473,7 +473,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 30 Jan 2011 12:46:10 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Wed, 02 Feb 2011 22:15:18 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

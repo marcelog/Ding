@@ -111,7 +111,7 @@
 				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Bean---BeanDefinition.php.html">/Bean/BeanDefinition.php</a> (line <span class="field">29</span>)
+			Located in <a class="field" href="_Bean---BeanDefinition.php.html">/Bean/BeanDefinition.php</a> (line <span class="field">44</span>)
 		</p>
 		
 				
@@ -164,7 +164,7 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																																																																																<div class="var-title">
+																																																																																																																																								<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">BeanAnnotationDefinition[]</span>
 					<a href="#$_annotations" title="details" class="var-name">$_annotations</a>
@@ -173,6 +173,11 @@
 					<img src="../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">AspectDefinition[]</span>
 					<a href="#$_aspects" title="details" class="var-name">$_aspects</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">BeanPropertyDefinition[]</span>
+					<a href="#$_autowiredProperties" title="details" class="var-name">$_autowiredProperties</a>
 				</div>
 																<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
@@ -252,7 +257,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																																															
+																																																																																																																																																																																																																																																																															
 				<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -292,6 +297,13 @@
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">AspectDefinition[]</span>
 										<a href="#getAspects" title="details" class="method-name">getAspects</a>
+										()
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">BeanPropertyDefinition[]</span>
+										<a href="#getAutowiredProperties" title="details" class="method-name">getAutowiredProperties</a>
 										()
 									</div>
 															
@@ -396,6 +408,13 @@
 				<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
+										<a href="#setAutowiredProperties" title="details" class="method-name">setAutowiredProperties</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$autowiredProperties</span>, <span class="var-type">BeanPropertyDefinition[]</span>&nbsp;<span class="var-name">$properties</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
 										<a href="#setClass" title="details" class="method-name">setClass</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
 									</div>
@@ -483,14 +502,14 @@
 		<div class="info-box-body">
 			
 <a name="var$_annotations" id="$_annotations"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/PrivateVariable.png" />
 		<span class="var-title">
 			<span class="var-type">BeanAnnotationDefinition[]</span>
 			<span class="var-name">$_annotations</span>
-						(line <span class="line-number">109</span>)
+						(line <span class="line-number">130</span>)
 		</span>
 	</div>
 
@@ -506,19 +525,42 @@
 
 </div>
 <a name="var$_aspects" id="$_aspects"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/PrivateVariable.png" />
 		<span class="var-title">
 			<span class="var-type">AspectDefinition[]</span>
 			<span class="var-name">$_aspects</span>
-						(line <span class="line-number">73</span>)
+						(line <span class="line-number">94</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Aspects mapped to this bean.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_autowiredProperties" id="$_autowiredProperties"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">BeanPropertyDefinition[]</span>
+			<span class="var-name">$_autowiredProperties</span>
+						(line <span class="line-number">88</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Properties to be autowired (no setters).</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -536,7 +578,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$_class</span>
-						(line <span class="line-number">55</span>)
+						(line <span class="line-number">70</span>)
 		</span>
 	</div>
 
@@ -559,7 +601,7 @@
 		<span class="var-title">
 			<span class="var-type">BeanConstructorArgumentDefinition[]</span>
 			<span class="var-name">$_constructorArgs</span>
-						(line <span class="line-number">79</span>)
+						(line <span class="line-number">100</span>)
 		</span>
 	</div>
 
@@ -582,7 +624,7 @@
 		<span class="var-title">
 			<span class="var-type">string[]</span>
 			<span class="var-name">$_dependsOn</span>
-						(line <span class="line-number">121</span>)
+						(line <span class="line-number">142</span>)
 		</span>
 	</div>
 
@@ -605,7 +647,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$_destroyMethod</span>
-						(line <span class="line-number">103</span>)
+						(line <span class="line-number">124</span>)
 		</span>
 	</div>
 
@@ -628,7 +670,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$_factoryBean</span>
-						(line <span class="line-number">91</span>)
+						(line <span class="line-number">112</span>)
 		</span>
 	</div>
 
@@ -651,7 +693,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$_factoryMethod</span>
-						(line <span class="line-number">85</span>)
+						(line <span class="line-number">106</span>)
 		</span>
 	</div>
 
@@ -674,7 +716,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$_initMethod</span>
-						(line <span class="line-number">97</span>)
+						(line <span class="line-number">118</span>)
 		</span>
 	</div>
 
@@ -697,7 +739,7 @@
 		<span class="var-title">
 			<span class="var-type">string[]</span>
 			<span class="var-name">$_lookupMethods</span>
-						(line <span class="line-number">127</span>)
+						(line <span class="line-number">148</span>)
 		</span>
 	</div>
 
@@ -720,7 +762,7 @@
 		<span class="var-title">
 			<span class="var-type">BeanAnnotationDefinition[]</span>
 			<span class="var-name">$_methodAnnotations</span>
-						(line <span class="line-number">115</span>)
+						(line <span class="line-number">136</span>)
 		</span>
 	</div>
 
@@ -743,7 +785,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$_name</span>
-						(line <span class="line-number">49</span>)
+						(line <span class="line-number">64</span>)
 		</span>
 	</div>
 
@@ -766,7 +808,7 @@
 		<span class="var-title">
 			<span class="var-type">BeanPropertyDefinition[]</span>
 			<span class="var-name">$_properties</span>
-						(line <span class="line-number">67</span>)
+						(line <span class="line-number">82</span>)
 		</span>
 	</div>
 
@@ -789,7 +831,7 @@
 		<span class="var-title">
 			<span class="var-type">integer</span>
 			<span class="var-name">$_scope</span>
-						(line <span class="line-number">61</span>)
+						(line <span class="line-number">76</span>)
 		</span>
 	</div>
 
@@ -826,7 +868,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">484</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">527</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -856,7 +898,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">annotate</span> (line <span class="line-number">137</span>)
+		<span class="method-title">annotate</span> (line <span class="line-number">158</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -889,7 +931,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getAnnotation</span> (line <span class="line-number">161</span>)
+		<span class="method-title">getAnnotation</span> (line <span class="line-number">182</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -922,7 +964,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getAnnotations</span> (line <span class="line-number">178</span>)
+		<span class="method-title">getAnnotations</span> (line <span class="line-number">199</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -952,7 +994,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getArguments</span> (line <span class="line-number">363</span>)
+		<span class="method-title">getArguments</span> (line <span class="line-number">406</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -977,7 +1019,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getAspects</span> (line <span class="line-number">231</span>)
+		<span class="method-title">getAspects</span> (line <span class="line-number">252</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -997,12 +1039,37 @@
 		
 			
 	</div>
-<a name="methodgetClass" id="getClass"><!-- --></a>
+<a name="methodgetAutowiredProperties" id="getAutowiredProperties"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getClass</span> (line <span class="line-number">319</span>)
+		<span class="method-title">getAutowiredProperties</span> (line <span class="line-number">384</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns autowired properties for this bean.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">BeanPropertyDefinition[]</span>
+		<span class="method-name">
+			getAutowiredProperties
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetClass" id="getClass"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getClass</span> (line <span class="line-number">340</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1023,11 +1090,11 @@
 			
 	</div>
 <a name="methodgetDependsOn" id="getDependsOn"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getDependsOn</span> (line <span class="line-number">460</span>)
+		<span class="method-title">getDependsOn</span> (line <span class="line-number">503</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1048,11 +1115,11 @@
 			
 	</div>
 <a name="methodgetDestroyMethod" id="getDestroyMethod"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getDestroyMethod</span> (line <span class="line-number">450</span>)
+		<span class="method-title">getDestroyMethod</span> (line <span class="line-number">493</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1073,11 +1140,11 @@
 			
 	</div>
 <a name="methodgetFactoryBean" id="getFactoryBean"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getFactoryBean</span> (line <span class="line-number">406</span>)
+		<span class="method-title">getFactoryBean</span> (line <span class="line-number">449</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1098,11 +1165,11 @@
 			
 	</div>
 <a name="methodgetFactoryMethod" id="getFactoryMethod"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getFactoryMethod</span> (line <span class="line-number">384</span>)
+		<span class="method-title">getFactoryMethod</span> (line <span class="line-number">427</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1123,11 +1190,11 @@
 			
 	</div>
 <a name="methodgetInitMethod" id="getInitMethod"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getInitMethod</span> (line <span class="line-number">428</span>)
+		<span class="method-title">getInitMethod</span> (line <span class="line-number">471</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1148,11 +1215,11 @@
 			
 	</div>
 <a name="methodgetMethodInjections" id="getMethodInjections"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getMethodInjections</span> (line <span class="line-number">275</span>)
+		<span class="method-title">getMethodInjections</span> (line <span class="line-number">296</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1173,11 +1240,11 @@
 			
 	</div>
 <a name="methodgetName" id="getName"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getName</span> (line <span class="line-number">297</span>)
+		<span class="method-title">getName</span> (line <span class="line-number">318</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1198,11 +1265,11 @@
 			
 	</div>
 <a name="methodgetProperties" id="getProperties"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getProperties</span> (line <span class="line-number">341</span>)
+		<span class="method-title">getProperties</span> (line <span class="line-number">362</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1223,11 +1290,11 @@
 			
 	</div>
 <a name="methodgetScope" id="getScope"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getScope</span> (line <span class="line-number">253</span>)
+		<span class="method-title">getScope</span> (line <span class="line-number">274</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1248,11 +1315,11 @@
 			
 	</div>
 <a name="methodhasAspects" id="hasAspects"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">hasAspects</span> (line <span class="line-number">209</span>)
+		<span class="method-title">hasAspects</span> (line <span class="line-number">230</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1273,11 +1340,11 @@
 			
 	</div>
 <a name="methodisAnnotated" id="isAnnotated"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">isAnnotated</span> (line <span class="line-number">195</span>)
+		<span class="method-title">isAnnotated</span> (line <span class="line-number">216</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1306,11 +1373,11 @@
 			
 	</div>
 <a name="methodsetArguments" id="setArguments"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setArguments</span> (line <span class="line-number">353</span>)
+		<span class="method-title">setArguments</span> (line <span class="line-number">396</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1336,11 +1403,11 @@
 			
 	</div>
 <a name="methodsetAspects" id="setAspects"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setAspects</span> (line <span class="line-number">221</span>)
+		<span class="method-title">setAspects</span> (line <span class="line-number">242</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1365,12 +1432,45 @@
 		
 			
 	</div>
+<a name="methodsetAutowiredProperties" id="setAutowiredProperties"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setAutowiredProperties</span> (line <span class="line-number">374</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets new autowired properties for this bean.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setAutowiredProperties
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$autowiredProperties</span>, <span class="var-type">BeanPropertyDefinition[]</span>&nbsp;<span class="var-name">$properties</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">BeanPropertyDefinition[]</span>
+				<span class="var-name">$properties</span><span class="var-description">: New autowired properties.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$autowiredProperties</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodsetClass" id="setClass"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setClass</span> (line <span class="line-number">309</span>)
+		<span class="method-title">setClass</span> (line <span class="line-number">330</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1400,7 +1500,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setDependsOn</span> (line <span class="line-number">472</span>)
+		<span class="method-title">setDependsOn</span> (line <span class="line-number">515</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1430,7 +1530,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setDestroyMethod</span> (line <span class="line-number">440</span>)
+		<span class="method-title">setDestroyMethod</span> (line <span class="line-number">483</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1460,7 +1560,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setFactoryBean</span> (line <span class="line-number">396</span>)
+		<span class="method-title">setFactoryBean</span> (line <span class="line-number">439</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1490,7 +1590,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setFactoryMethod</span> (line <span class="line-number">375</span>)
+		<span class="method-title">setFactoryMethod</span> (line <span class="line-number">418</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1520,7 +1620,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setInitMethod</span> (line <span class="line-number">418</span>)
+		<span class="method-title">setInitMethod</span> (line <span class="line-number">461</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1550,7 +1650,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setMethodInjections</span> (line <span class="line-number">265</span>)
+		<span class="method-title">setMethodInjections</span> (line <span class="line-number">286</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1580,7 +1680,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setName</span> (line <span class="line-number">287</span>)
+		<span class="method-title">setName</span> (line <span class="line-number">308</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1610,7 +1710,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setProperties</span> (line <span class="line-number">331</span>)
+		<span class="method-title">setProperties</span> (line <span class="line-number">352</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1640,7 +1740,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setScope</span> (line <span class="line-number">243</span>)
+		<span class="method-title">setScope</span> (line <span class="line-number">264</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1691,7 +1791,7 @@
 		<span class="const-title">
 			<span class="const-name">BEAN_PROTOTYPE</span>
 			 = <span class="const-default"> 0</span>
-			(line <span class="line-number">36</span>)
+			(line <span class="line-number">51</span>)
 		</span>
 	</div>
 
@@ -1708,7 +1808,7 @@
 		<span class="const-title">
 			<span class="const-name">BEAN_SINGLETON</span>
 			 = <span class="const-default"> 1</span>
-			(line <span class="line-number">43</span>)
+			(line <span class="line-number">58</span>)
 		</span>
 	</div>
 
@@ -1722,7 +1822,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 30 Jan 2011 12:46:04 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Wed, 02 Feb 2011 22:15:12 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
