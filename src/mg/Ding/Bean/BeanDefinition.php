@@ -82,6 +82,12 @@ class BeanDefinition
     private $_properties;
 
     /**
+     * Properties to be autowired (no setters).
+     * @var BeanPropertyDefinition[]
+     */
+    private $_autowiredProperties;
+
+    /**
      * Aspects mapped to this bean.
      * @var AspectDefinition[]
      */
@@ -359,6 +365,28 @@ class BeanDefinition
     }
 
     /**
+     * Sets new autowired properties for this bean.
+     *
+     * @param BeanPropertyDefinition[] $properties New autowired properties.
+     *
+     * @return void
+     */
+    public function setAutowiredProperties(array $autowiredProperties)
+    {
+        $this->_autowiredProperties = $autowiredProperties;
+    }
+
+    /**
+     * Returns autowired properties for this bean.
+     *
+     * @return BeanPropertyDefinition[]
+     */
+    public function getAutowiredProperties()
+    {
+        return $this->_autowiredProperties;
+    }
+
+    /**
      * Sets new arguments for this bean.
      *
      * @param BeanConstructorDefinition[] $arguments New arguments.
@@ -510,6 +538,7 @@ class BeanDefinition
         $this->_destroyMethod = $soullessString;
         $this->_dependsOn = $soullessArray;
         $this->_properties = $soullessArray;
+        $this->_autowiredProperties = $soullessArray;
         $this->_aspects = false;
         $this->_constructorArgs = $soullessArray;
     }
