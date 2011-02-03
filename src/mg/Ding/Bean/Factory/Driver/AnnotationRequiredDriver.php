@@ -58,6 +58,10 @@ class AnnotationRequiredDriver implements IAfterDefinitionListener
      */
     private static $_instance = false;
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
+     */
     public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
         $annotations = ReflectionFactory::getClassAnnotations($bean->getClass());
