@@ -111,12 +111,12 @@ class ReflectionFactory
     public static function getAnnotations($text)
     {
         $ret = array();
-        if (preg_match_all('/@[\/a-zA-Z0-9=,\(\)]+/', $text, $matches) > 0) {
+        if (preg_match_all('/@[\/a-zA-Z0-9=,\(\)\ ]+/', $text, $matches) > 0) {
             foreach ($matches[0] as $annotation) {
                 $argsStart = strpos($annotation, '(');
                 $arguments = array();
                 if ($argsStart !== false) {
-                    $name = substr($annotation, 1, $argsStart - 1);
+                    $name = trim(substr($annotation, 1, $argsStart - 1));
                     $args = substr($annotation, $argsStart + 1, -1);
                     // http://stackoverflow.com/questions/168171/regular-expression-for-parsing-name-value-pairs
                     $argsN = preg_match_all(
@@ -131,7 +131,9 @@ class ReflectionFactory
                         }
                     }
                 } else {
-                    $name = substr($annotation, 1);
+                    $stuff = explode(' ', $annotation);
+                    $name = substr($stuff[0], 1);
+                    $arguments[] = $stuff;
                 }
                 $ret[] = new BeanAnnotationDefinition($name, $arguments);
             }
@@ -193,6 +195,7 @@ class ReflectionFactory
         $rClass = ReflectionFactory::getClass($class);
         $ret = array();
         $ret['class'] = array();
+        $ret['class']['properties'] = array();
         foreach (self::getAnnotations($rClass->getDocComment()) as $annotation) {
             $name = $annotation->getName();
             $ret['class'][$name] = $annotation;
@@ -202,6 +205,14 @@ class ReflectionFactory
             self::$_classesAnnotated[$name][$class] = $class;
             $cacheKeyA = $name . '.classbyannotations';
             $cache->store($cacheKeyA, self::$_classesAnnotated[$name]);
+        }
+        foreach ($rClass->getProperties() as $property) {
+            $propertyName = $property->getName();
+            $ret['class']['properties'][$propertyName] = array();
+            foreach (self::getAnnotations($property->getDocComment()) as $annotation) {
+                $name = $annotation->getName();
+                $ret['class']['properties'][$propertyName][$name] = $annotation;
+            }
         }
         foreach ($rClass->getMethods() as $method) {
             $methodName = $method->getName();
