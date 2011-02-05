@@ -40,8 +40,27 @@ ini_set(
 /**
  * @Configuration
  */
+class SomeOtherProviderClass
+{
+    /**
+     * @Bean(class=Dependency)
+     * @Scope(value=singleton)
+     */
+    public function dependency()
+    {
+        return new Dependency();
+    }
+}
+/**
+ * @Configuration
+ */
 class SomeBeanProviderClass
 {
+    /**
+     * @Resource
+     */
+    protected $dependency;
+
     /**
      * Notice how the name= here replaces the bean name that comes from the method.
      * This bean should be called someBean (if no name= arguments where passed to the
@@ -54,10 +73,15 @@ class SomeBeanProviderClass
      */
     public function someBean()
     {
-        $ret = new MyBean();
+        $ret = new MyBean($this->dependency);
         $ret->setSomeProperty('hello world');
         return $ret;
     }
+}
+
+class Dependency
+{
+
 }
 
 /**
@@ -67,6 +91,7 @@ class SomeBeanProviderClass
 class MyBean
 {
     private $_someProperty;
+    private $_dependency;
 
     public function aMethod()
     {
@@ -88,9 +113,13 @@ class MyBean
         return $this->_someProperty;
     }
 
-    public function __construct()
+    public function getDependency()
     {
-
+        return $this->_dependency;
+    }
+    public function __construct($dependency)
+    {
+        $this->_dependency = $dependency;
     }
 }
 require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
@@ -120,4 +149,5 @@ $properties = array(
 $container = ContainerImpl::getInstance($properties);
 $bean = $container->getBean('someBeanRenamed');
 var_dump($bean->getSomeProperty());
+var_dump($bean->getDependency());
 var_dump(ReflectionFactory::getClassesByAnnotation('author'));

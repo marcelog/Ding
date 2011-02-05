@@ -36,6 +36,7 @@ use Ding\Bean\Lifecycle\IBeforeConfigListener;
 use Ding\Cache\Locator\CacheLocator;
 
 use Ding\Bean\BeanDefinition;
+use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Factory\IBeanFactory;
@@ -246,6 +247,20 @@ class BeanAnnotationDriver
                 $def = new BeanDefinition($configBeanName);
                 $def->setClass($configClass);
                 $def->setScope(BeanDefinition::BEAN_SINGLETON);
+                $properties = array();
+                $annotations = ReflectionFactory::getClassAnnotations($configClass);
+                if (isset($annotations['class']['properties'])) {
+                    foreach ($annotations['class']['properties'] as $property => $propAnnotations) {
+                        foreach ($propAnnotations as $propAnnotation) {
+                            if ($propAnnotation->getName() == 'Resource') {
+                                $properties[] = new BeanPropertyDefinition(
+                                    $property, BeanPropertyDefinition::PROPERTY_BEAN, $property
+                                );
+                            }
+                        }
+                    }
+                    $def->setAutowiredProperties($properties);
+                }
                 $factory->setBeanDefinition($configBeanName, $def);
             }
         }
