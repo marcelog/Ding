@@ -68,12 +68,6 @@ class HttpUrlMapper implements IMapper
     private $_map;
 
     /**
-     * Assigned base url.
-     * @var string
-     */
-    private $_baseUrl;
-
-    /**
      * Used from the MVC driver to setup annotated controllers.
      * @var string[]
      */
@@ -109,28 +103,6 @@ class HttpUrlMapper implements IMapper
     }
 
     /**
-     * Sets the base url for this mapper.
-     *
-     * @param string $baseUrl Base url.
-     *
-     * @return void
-     */
-    public function setBaseUrl($baseUrl)
-    {
-        $this->_baseUrl = $baseUrl;
-    }
-
-    /**
-     * Returns the base url for this mapper.
-     *
-     * @return string
-     */
-    public function getBaseUrl()
-    {
-        return $this->_baseUrl;
-    }
-
-    /**
      * This will map a full url, like /A/B/C to an HttpAction and will try to
      * find a controller that can handle it. This will isolate the baseUrl.
      *
@@ -143,20 +115,13 @@ class HttpUrlMapper implements IMapper
     public function map(Action $action)
     {
         $url = $action->getId();
-        $urlStart = strpos($url, $this->_baseUrl);
-        if ($this->_loggerDebugEnabled) {
-            $this->_logger->debug('Trying to match: ' . $url);
-        }
-        if ($urlStart === false || $urlStart > 0) {
-            throw new MVCException('Not a base url.');
-        }
         // Add a slash to the beginning is none is found after removing the
         // base url.
         if ($url[0] != '/') {
             $url = '/' . $url;
         }
         // Do not take into account the arguments part of the url.
-        $url = explode('?', substr($url, $urlStart + strlen($this->_baseUrl)));
+        $url = explode('?', $url);
         $url = $url[0];
 
         // Add a trailing slash to the result.
@@ -214,7 +179,6 @@ class HttpUrlMapper implements IMapper
     {
         $this->_logger = \Logger::getLogger('Ding.MVC');
         $this->_map = array();
-        $this->_baseUrl = '/';
         $this->_loggerDebugEnabled = $this->_logger->isDebugEnabled();
     }
 }

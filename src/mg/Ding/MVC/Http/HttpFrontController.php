@@ -29,6 +29,7 @@
  */
 namespace Ding\MVC\Http;
 
+use Ding\MVC\Exception\MVCException;
 use Ding\MVC\ModelAndView;
 use Ding\Container\Impl\ContainerImpl;
 
@@ -47,14 +48,6 @@ use Ding\Container\Impl\ContainerImpl;
 class HttpFrontController
 {
     /**
-     * Container properties.
-     * @var array
-     */
-    private static $_properties;
-
-    private $_logger;
-
-    /**
      * Handles the request. This will instantiate the container with the given
      * properties (via static method configure(), see below). Then it will
      * getBean(HttpDispatcher) and call dispatch() on it with an Action created
@@ -62,19 +55,31 @@ class HttpFrontController
      *
      * @return void
      */
-    public function handle()
+    public static function handle(array $properties = array(), $baseUrl = '/')
     {
+        $logger = \Logger::getLogger('Ding.MVC');
+        $loggerDebugEnabled = $logger->isDebugEnabled();
+        $baseUrlLen = strlen($baseUrl);
         session_start();
         ob_start();
         $exceptionMapper = false;
         try
         {
-            $container = ContainerImpl::getInstance(self::$_properties);
-            $this->_logger = \Logger::getLogger('Ding.HttpFrontController');
+            $container = ContainerImpl::getInstance($properties);
             $dispatcher = $container->getBean('HttpDispatcher');
             $exceptionMapper = $container->getBean('HttpExceptionMapper');
             $method = strtolower($_SERVER['REQUEST_METHOD']);
+
             $url = $_SERVER['REQUEST_URI'];
+            $urlStart = strpos($url, $baseUrl);
+
+            if ($loggerDebugEnabled) {
+                $logger->debug('Trying to match: ' . $url);
+            }
+            if ($urlStart === false || $urlStart > 0) {
+                throw new MVCException('Not a base url.');
+            }
+            $url = substr($url, $baseUrlLen);
             $variables = array();
             if ($method == 'get') {
                 $argsStart = strpos($url, '?');
@@ -94,8 +99,8 @@ class HttpFrontController
             $action->setMethod($method);
             $dispatcher->dispatch($action);
         } catch(\Exception $exception) {
-            if ($this->_logger->isDebugEnabled()) {
-                $this->_logger->debug('Got Exception: ' . $exception);
+            if ($logger->isDebugEnabled()) {
+                $logger->debug('Got Exception: ' . $exception);
             }
             ob_end_clean();
             ob_start();
@@ -128,7 +133,7 @@ class HttpFrontController
      *
      * @return void
      */
-    public function __construct()
+    private function __construct($baseUrl = '/')
     {
     }
 }

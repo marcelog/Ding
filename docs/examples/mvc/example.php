@@ -136,7 +136,6 @@ $properties = array(
                 'annotation' => array('scanDir' => array(realpath(__DIR__)))
             ),
         	'properties' => array(
-                'baseUrl' => '/Some/Mapped/Path',
     	    	'viewPath' => './views',
     			'viewSuffix' => '.html',
     			'viewPrefix' => 'view.',
@@ -150,7 +149,5 @@ $properties = array(
         )
     )
 );
-HttpFrontController::configure($properties);
-$frontController = new HttpFrontController();
-$frontController->handle();
+HttpFrontController::handle($properties, '/Some/Mapped/Path');
 ////////////////////////////////////////////////////////////////////////////////

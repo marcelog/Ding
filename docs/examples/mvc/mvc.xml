@@ -6,7 +6,6 @@
 	</bean>
 	
 	<bean id="HttpUrlMapper" class="Ding\MVC\Http\HttpUrlMapper" scope="singleton">
-		<property name="baseUrl"><value>${baseUrl}</value></property>
 		<property name="map">
         	<array>
         		<entry key="0">
