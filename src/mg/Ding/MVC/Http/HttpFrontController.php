@@ -33,6 +33,7 @@ use Ding\MVC\IMapper;
 use Ding\MVC\Exception\MVCException;
 use Ding\MVC\ModelAndView;
 use Ding\MVC\RedirectModelAndView;
+use Ding\MVC\ForwardModelAndView;
 use Ding\Container\Impl\ContainerImpl;
 
 /**
@@ -68,7 +69,7 @@ class HttpFrontController
         IMapper $mapper
     ) {
         $modelAndView = $dispatcher->dispatch($action, $mapper);
-        if ($modelAndView instanceof RedirectModelAndView) {
+        if ($modelAndView instanceof ForwardModelAndView) {
             if (self::$_loggerDebugEnabled) {
                 self::$_logger->debug(
                 	'Forwarding ModelAndView: ' . $modelAndView->getName()
@@ -77,6 +78,14 @@ class HttpFrontController
             $newAction = new HttpAction($modelAndView->getName(), $modelAndView->getModel());
             $newAction->getMethod($action->getMethod());
             self::dispatch($dispatcher, $viewResolver, $newAction, $mapper);
+        } else if ($modelAndView instanceof RedirectModelAndView) {
+            if (self::$_loggerDebugEnabled) {
+                self::$_logger->debug(
+                	'Redirecting ModelAndView: ' . $modelAndView->getName()
+                );
+            }
+            header('HTTP/1.1 302 Moved');
+            header('Location: ' . $modelAndView->getName());
         } else if ($modelAndView instanceof ModelAndView) {
             if (self::$_loggerDebugEnabled) {
                 self::$_logger->debug(

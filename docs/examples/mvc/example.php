@@ -30,7 +30,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Mandatory stuff to bootstrap ding. (START)
 ////////////////////////////////////////////////////////////////////////////////
-use Ding\MVC\RedirectModelAndView;
 ini_set(
     'include_path',
     implode(
@@ -47,6 +46,8 @@ use Ding\HttpSession\HttpSession;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\MVC\ModelAndView;
+use Ding\MVC\ForwardModelAndView;
+use Ding\MVC\RedirectModelAndView;
 use Ding\MVC\Http\HttpFrontController;
 ////////////////////////////////////////////////////////////////////////////////
 // Normal operation follows...
@@ -77,22 +78,14 @@ class MyController
 
     public function redirectAction(array $arguments = array())
     {
-        $modelAndView = new ModelAndView('some');
-        $modelAndView->add(
-            array(
-            	'headers' => array(
-                    'HTTP/1.1 302 Moved',
-                    'Location: http://github.com/marcelog/Ding'
-                )
-            )
-        );
+        $modelAndView = new RedirectModelAndView('http://github.com/marcelog/Ding');
         return $modelAndView;
     }
 
-    public function internalRedirectAction(array $arguments = array())
+    public function forwardAction(array $arguments = array())
     {
-        $arguments['Redirected-From'] = 'internalRedirect';
-        return new RedirectModelAndView('/MyController/some', $arguments);
+        $arguments['Forwarded-From'] = 'forwardAction';
+        return new ForwardModelAndView('/MyController/some', $arguments);
     }
 
     public function someAction(array $arguments = array())

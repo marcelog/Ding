@@ -1,6 +1,6 @@
 <?php
 /**
- * This class is a redirect to another model and view.
+ * This class is a forward to another model and view.
  *
  * PHP Version 5
  *
@@ -39,6 +39,6 @@ namespace Ding\MVC;
  * @license  http://www.noneyet.ar/ Apache License 2.0
  * @link     http://www.noneyet.ar/
  */
-class RedirectModelAndView extends ModelAndView
+class ForwardModelAndView extends ModelAndView
 {
 }
