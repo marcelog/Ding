@@ -81,6 +81,8 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <li><u>Dispatcher</u>: The dispatcher is the responsible for calling the right controller with the right Action object.</li>
   <li><u>ModelAndView</u>: This is the result of the execution of a controller. A controller must
   return a ModelAndView object containing the name of the view to render and other optional data.</li>
+  <li><u>RedirectModelAndView</u>: This is a special ModelAndView that has the meaning of calling again the
+  dispatcher with a new given action and new or same arguments.</li>
   <li><u>ViewResolver</u>: The ViewResolver knows how to get a ViewResolver based on the given View name from the ModelAndView object.</li>
   <li><u>View</u>: Views are in charge of rendering the ModelAndView in a proper way for the actor that triggered the request.</li>
 </ul>
@@ -149,9 +151,7 @@ url.rewrite-once = ( "^/(.*)" => "/index.php" )
 And you're index.php would be something like this:
 </p>
 <p>
-HttpFrontController::configure($properties);<br/>
-$frontController = new HttpFrontController();<br/>
-$frontController->handle();<br/>
+HttpFrontController::handle($properties, '/Some/Mapped/Path');<br/>
 </p>
 <p>
 And that's it. Take a look at the example below to know how to actually configure the HttpViewResolver and HttpUrlMapper
