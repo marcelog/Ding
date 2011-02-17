@@ -126,6 +126,9 @@ action, point your browser to: /Some/Mapped/Path/MyController/someException
 To try a redirect (no view render, just headers sent), point your browser to 
 /Some/Mapped/Path/MyController/redirect
 
+To try an internal redirect, point your browser to 
+/Some/Mapped/Path/MyController/internalRedirect.
+
 To try annotated controllers (see below), point your browser to 
 /Some/Mapped/Path/MyAnnotatedController/an.
 
