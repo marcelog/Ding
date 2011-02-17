@@ -53,6 +53,8 @@
 Ding\MVC\Action<br/>
 Ding\MVC\Dispatcher<br/>
 Ding\MVC\ModelAndView<br/>
+Ding\MVC\RedirectModelAndView<br/>
+Ding\MVC\ForwardModelAndView<br/>
 Ding\MVC\View<br/>
 
 <H3>Interfaces</H3>
@@ -81,8 +83,10 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <li><u>Dispatcher</u>: The dispatcher is the responsible for calling the right controller with the right Action object.</li>
   <li><u>ModelAndView</u>: This is the result of the execution of a controller. A controller must
   return a ModelAndView object containing the name of the view to render and other optional data.</li>
-  <li><u>RedirectModelAndView</u>: This is a special ModelAndView that has the meaning of calling again the
+  <li><u>ForwardModelAndView</u>: This is a special ModelAndView that has the meaning of calling again the
   dispatcher with a new given action and new or same arguments.</li>
+  <li><u>RedirectModelAndView</u>: This is a special ModelAndView that has the meaning of redirecting the request 
+  to somewhere else (i.e: http 302 header).</li>
   <li><u>ViewResolver</u>: The ViewResolver knows how to get a ViewResolver based on the given View name from the ModelAndView object.</li>
   <li><u>View</u>: Views are in charge of rendering the ModelAndView in a proper way for the actor that triggered the request.</li>
 </ul>
