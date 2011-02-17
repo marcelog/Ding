@@ -116,7 +116,7 @@ if (document.getElementById) {
 			tree_classe.openIcon = 'media/images/class_folder.png';
 			tree_classe.icon = 'media/images/class_folder.png';
 			
-						    						    						    						    				var classe = new WebFXTreeItem('IMapper', 'Mvc/IMapper.html');
+						    						    						    						    						    				var classe = new WebFXTreeItem('IMapper', 'Mvc/IMapper.html');
 				classe.openIcon = 'media/images/Interface.png';
 				classe.icon = 'media/images/Interface.png';
 				tree_classe.add(classe);
@@ -124,7 +124,7 @@ if (document.getElementById) {
 				classe.openIcon = 'media/images/Interface.png';
 				classe.icon = 'media/images/Interface.png';
 				tree_classe.add(classe);
-										    						    				
+										    						    						    				
 			tree.add(tree_classe);
 		
 					var tree_classe = new WebFXTreeItem('Class(es)', '');
@@ -139,11 +139,19 @@ if (document.getElementById) {
 				classe.openIcon = 'media/images/AbstractClass.png';
 				classe.icon = 'media/images/AbstractClass.png';
 				tree_classe.add(classe);
+										    				var classe = new WebFXTreeItem('ForwardModelAndView', 'Mvc/ForwardModelAndView.html');
+				classe.openIcon = 'media/images/Class.png';
+				classe.icon = 'media/images/Class.png';
+				tree_classe.add(classe);
 										    				var classe = new WebFXTreeItem('HttpViewResolver', 'Mvc/HttpViewResolver.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
 										    						    						    				var classe = new WebFXTreeItem('ModelAndView', 'Mvc/ModelAndView.html');
+				classe.openIcon = 'media/images/Class.png';
+				classe.icon = 'media/images/Class.png';
+				tree_classe.add(classe);
+										    				var classe = new WebFXTreeItem('RedirectModelAndView', 'Mvc/RedirectModelAndView.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
@@ -167,6 +175,10 @@ if (document.getElementById) {
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
+							var file = new WebFXTreeItem('ForwardModelAndView.php', 'Mvc/_MVC---ForwardModelAndView.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
 							var file = new WebFXTreeItem('HttpViewResolver.php', 'Mvc/_MVC---Http---HttpViewResolver.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
@@ -180,6 +192,10 @@ if (document.getElementById) {
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
 							var file = new WebFXTreeItem('ModelAndView.php', 'Mvc/_MVC---ModelAndView.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
+							var file = new WebFXTreeItem('RedirectModelAndView.php', 'Mvc/_MVC---RedirectModelAndView.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
