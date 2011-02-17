@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-	<bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton">
-		<property name="viewResolver"><ref bean="HttpViewResolver"/></property>
-		<property name="mapper"><ref bean="HttpUrlMapper"/></property>
-	</bean>
+	<bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton"/>
 	
 	<bean id="HttpUrlMapper" class="Ding\MVC\Http\HttpUrlMapper" scope="singleton">
 		<property name="map">
@@ -19,9 +16,9 @@
 	</bean>
 
 	<bean id="HttpViewResolver" class="Ding\MVC\Http\HttpViewResolver" scope="singleton">
-		<property name="viewPrefix"><value>${viewPrefix}</value></property>
-		<property name="viewSuffix"><value>${viewSuffix}</value></property>
-		<property name="viewPath"><value>${viewPath}</value></property>
+		<property name="viewPrefix"><value>view.</value></property>
+		<property name="viewSuffix"><value>.html</value></property>
+		<property name="viewPath"><value>./views</value></property>
 	</bean>
 
 	<bean id="HttpExceptionMapper" class="Ding\MVC\Http\HttpExceptionMapper" scope="singleton">

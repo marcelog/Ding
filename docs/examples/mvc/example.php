@@ -30,6 +30,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Mandatory stuff to bootstrap ding. (START)
 ////////////////////////////////////////////////////////////////////////////////
+use Ding\MVC\RedirectModelAndView;
 ini_set(
     'include_path',
     implode(
@@ -88,6 +89,12 @@ class MyController
         return $modelAndView;
     }
 
+    public function internalRedirectAction(array $arguments = array())
+    {
+        $arguments['Redirected-From'] = 'internalRedirect';
+        return new RedirectModelAndView('/MyController/some', $arguments);
+    }
+
     public function someAction(array $arguments = array())
     {
         $session = HttpSession::getSession();
@@ -124,28 +131,23 @@ class MyErrorHandler implements IErrorHandler
 
 $properties = array(
     'ding' => array(
-    	'log4php.properties' => realpath('./log4php.properties'),
+    	'log4php.properties' => realpath('/tmp/log4php.properties'),
         'factory' => array(
             'drivers' => array(
-                'signalhandler' => array(),
-				'shutdown' => array(),
+//                'signalhandler' => array(),
+//				'shutdown' => array(),
 				'errorhandler' => array()
             ),
             'bdef' => array(
              	'xml' => array('filename' => realpath('./beans.xml')),
-                'annotation' => array('scanDir' => array(realpath(__DIR__)))
+//                'annotation' => array('scanDir' => array(realpath(__DIR__)))
             ),
-        	'properties' => array(
-    	    	'viewPath' => './views',
-    			'viewSuffix' => '.html',
-    			'viewPrefix' => 'view.',
-                'timezone' => 'America/Buenos_Aires'
-            )
         ),
         'cache' => array(
-            'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
-            'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
+            'proxy' => array('impl' => 'apc', 'directory' => '/tmp/Ding/proxy'),
+            'bdef' => array('impl' => 'apc', 'directory' => '/tmp/Ding/bdef'),
             'beans' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans'),
+        	'autoloader' => array('impl' => 'apc', 'directory' => '/tmp/Ding/beans')
         )
     )
 );

@@ -29,8 +29,10 @@
  */
 namespace Ding\MVC\Http;
 
+use Ding\MVC\IMapper;
 use Ding\MVC\Exception\MVCException;
 use Ding\MVC\ModelAndView;
+use Ding\MVC\RedirectModelAndView;
 use Ding\Container\Impl\ContainerImpl;
 
 /**
@@ -48,6 +50,49 @@ use Ding\Container\Impl\ContainerImpl;
 class HttpFrontController
 {
     /**
+     * Log4PHP Logger or own dummy implementation.
+     * @var Logger
+     */
+    private static $_logger;
+
+    /**
+     * Cached isDebugEnabled() from Logger.
+     * @var boolean
+     */
+    private static $_loggerDebugEnabled;
+
+    public static function dispatch(
+        HttpDispatcher $dispatcher,
+        HttpViewResolver $viewResolver,
+        HttpAction $action,
+        IMapper $mapper
+    ) {
+        $modelAndView = $dispatcher->dispatch($action, $mapper);
+        if ($modelAndView instanceof RedirectModelAndView) {
+            if (self::$_loggerDebugEnabled) {
+                self::$_logger->debug(
+                	'Forwarding ModelAndView: ' . $modelAndView->getName()
+                );
+            }
+            $newAction = new HttpAction($modelAndView->getName(), $modelAndView->getModel());
+            $newAction->getMethod($action->getMethod());
+            self::dispatch($dispatcher, $viewResolver, $newAction, $mapper);
+        } else if ($modelAndView instanceof ModelAndView) {
+            if (self::$_loggerDebugEnabled) {
+                self::$_logger->debug(
+                	'Using ModelAndView: ' . $modelAndView->getName()
+                );
+            }
+            $view = $viewResolver->resolve($modelAndView);
+            $view->render();
+        } else {
+            if (self::$_loggerDebugEnabled) {
+                self::$_logger->debug('Using default action Main');
+            }
+            $modelAndView = new ModelAndView('Main');
+        }
+    }
+    /**
      * Handles the request. This will instantiate the container with the given
      * properties (via static method configure(), see below). Then it will
      * getBean(HttpDispatcher) and call dispatch() on it with an Action created
@@ -57,27 +102,26 @@ class HttpFrontController
      */
     public static function handle(array $properties = array(), $baseUrl = '/')
     {
-        $logger = \Logger::getLogger('Ding.MVC');
-        $loggerDebugEnabled = $logger->isDebugEnabled();
+        $container = ContainerImpl::getInstance($properties);
+        self::$_logger = \Logger::getLogger('Ding.MVC');
+        self::$_loggerDebugEnabled = self::$_logger->isDebugEnabled();
         $baseUrlLen = strlen($baseUrl);
         session_start();
         ob_start();
-        $exceptionMapper = false;
+        $exceptionMapper = $dispatcher = $viewResolver = false;
         try
         {
-            $container = ContainerImpl::getInstance($properties);
             $dispatcher = $container->getBean('HttpDispatcher');
-            $exceptionMapper = $container->getBean('HttpExceptionMapper');
+            $viewResolver = $container->getBean('HttpViewResolver');
             $method = strtolower($_SERVER['REQUEST_METHOD']);
-
             $url = $_SERVER['REQUEST_URI'];
             $urlStart = strpos($url, $baseUrl);
 
-            if ($loggerDebugEnabled) {
-                $logger->debug('Trying to match: ' . $url);
+            if (self::$_loggerDebugEnabled) {
+                self::$_logger->debug('Trying to match: ' . $url);
             }
             if ($urlStart === false || $urlStart > 0) {
-                throw new MVCException('Not a base url.');
+                throw new MVCException($url . ' is not a base url.');
             }
             $url = substr($url, $baseUrlLen);
             $variables = array();
@@ -97,10 +141,12 @@ class HttpFrontController
             }
             $action = new HttpAction($url, $variables);
             $action->setMethod($method);
-            $dispatcher->dispatch($action);
+            $mapper = $container->getBean('HttpUrlMapper');
+            self::dispatch($dispatcher, $viewResolver, $action, $mapper);
         } catch(\Exception $exception) {
-            if ($logger->isDebugEnabled()) {
-                $logger->debug('Got Exception: ' . $exception);
+            $exceptionMapper = $container->getBean('HttpExceptionMapper');
+            if (self::$_loggerDebugEnabled) {
+                self::$_logger->debug('Got Exception: ' . $exception);
             }
             ob_end_clean();
             ob_start();
@@ -110,7 +156,7 @@ class HttpFrontController
                 $action = new HttpAction(
                     get_class($exception), array('exception' => $exception)
                 );
-                $dispatcher->dispatch($action, $exceptionMapper);
+                self::dispatch($dispatcher, $viewResolver, $action, $exceptionMapper);
             }
         }
         ob_end_flush();

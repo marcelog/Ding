@@ -63,21 +63,6 @@ abstract class Dispatcher
     private $_controllers;
 
     /**
-     * @var IViewResolver
-     */
-    private $_viewResolver;
-
-    /**
-     * @var IMapper
-     */
-    private $_mapper;
-
-    /**
-     * @var IMapper
-     */
-    private $_exceptionMapper;
-
-    /**
      * Sets controller.
      *
      * @param Controller[] $controllers Controllers.
@@ -105,17 +90,12 @@ abstract class Dispatcher
      * can render the returned ModelAndView from the controller.
      *
      * @param Action  $action Action to dispatch.
-     * @param IMapper $mapper Optional mapper. Uses default if none specified.
      *
      * @throws MVCException
      * @return void
      */
-    public function dispatch(Action $action, $mapper = false)
+    public function dispatch(Action $action, IMapper $mapper)
     {
-        if ($mapper === false) {
-            $mapper = $this->_mapper;
-        }
-        $viewResolver = $this->_viewResolver;
         $dispatchInfo = $mapper->map($action);
         if ($dispatchInfo === false) {
             throw new MVCException(
@@ -136,61 +116,7 @@ abstract class Dispatcher
         if (!method_exists($controller, $actionHandler)) {
             throw new MVCException('No valid action handler found: ' . $actionHandler);
         }
-        $modelAndView = $controller->$actionHandler($action->getArguments());
-        if (!($modelAndView instanceof ModelAndView)) {
-            $modelAndView = new ModelAndView('Main');
-        }
-        if ($this->_loggerDebugEnabled) {
-            $this->_logger->debug(
-            	'Using ModelAndView: ' . $modelAndView->getName()
-            );
-        }
-        $view = $viewResolver->resolve($modelAndView);
-        $view->render();
-    }
-
-    /**
-     * Sets an action mapper.
-     *
-     * @param IMapper $mapper New action mapper to use.
-     *
-     * @return void
-     */
-    public function setMapper(IMapper $mapper)
-    {
-        $this->_mapper = $mapper;
-    }
-
-    /**
-     * Returns action mapper.
-     *
-     * @return IMapper
-     */
-    public function getMapper()
-    {
-        return $this->_mapper;
-    }
-
-    /**
-     * Sets a view resolver.
-     *
-     * @param IViewResolver $viewResolver New view resolver to use.
-     *
-     * @return void
-     */
-    public function setViewResolver(IViewResolver $viewResolver)
-    {
-        $this->_viewResolver = $viewResolver;
-    }
-
-    /**
-     * Returns view resolver.
-     *
-     * @return IViewResolver
-     */
-    public function getViewResolver()
-    {
-        return $this->_viewResolver;
+        return $controller->$actionHandler($action->getArguments());
     }
 
     /**
