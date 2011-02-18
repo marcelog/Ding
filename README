@@ -36,6 +36,12 @@ Notes about the source:
 it's because they're actually 2 different comments: one for the file, and one
 for the class.
 --------------------------------------------------------------------------------
+Supported bean definitions providers
+====================================
+* XML
+* YAML
+* Annotations (like JSR 250 and 303)
+--------------------------------------------------------------------------------
 Supported annotations
 =====================
 Remember that using annotations is completely optional. Not using them will
@@ -296,7 +302,7 @@ Performance tips
 in ERROR level.
 * If your code is running on the php module for apache or iis, use apc for
 all the cache subsytems. Otherwise, use memcached or file.
-* Do not use annotations at all. Only use the XML.
+* Do not use annotations at all. Only use the XML or even better, YAML.
 * If you are using annotations (good for you! just dont abuse ;)) use the
 annotations cache with apc or memcached or file (in that order).
 * Do not include the driver you wont be using (like SignalHandler, ErrorHandler,

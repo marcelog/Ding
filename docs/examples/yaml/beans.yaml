@@ -1,0 +1,63 @@
+beans: !!map
+  aspectA:
+    class: AspectA
+    scope: singleton
+
+  myBeanName:
+    class: MyBean
+    scope: singleton
+    init-method: init
+    destroy-method: destroy
+    depends-on: myOtherBeanName
+    aspects: !!map
+      targetMethod:
+        type: method
+        ref: aspectA
+    lookup-methods: !!map
+      aMethod: myOtherBeanName
+      bMethod: myOtherBeanName
+    constructor-args:
+      - a
+      - !!map
+          a: b
+          c: !!map
+            d: e
+      - eval: return "hello there\n";
+      - ref: myOtherBeanName
+    properties: !!map
+      property1:
+        value: something
+      property2:
+        ref: myOtherBeanName
+      property3:
+        value: null
+      property4:
+        value: false
+      property5:
+        value: true
+      property6:
+        value:
+          - value: b
+          - value: c 
+      property7:
+        value: !!map
+          a: 
+            value: b
+          c:
+            value: d
+          d:
+            ref: myOtherBeanName
+          e:
+            value: !!map
+              a:
+                value: c
+      property8:
+        eval: return "hello there\n";
+      property9:
+        bean:
+          class: MyInnerBean
+          scope: singleton
+      property10:
+        value: ${user.name}
+import:
+  - otherBeans.yaml

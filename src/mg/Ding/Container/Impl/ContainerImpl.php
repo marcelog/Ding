@@ -50,6 +50,7 @@ use Ding\Bean\Lifecycle\IAfterAssembleListener;
 use Ding\Bean\Lifecycle\IBeforeDestructListener;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
+use Ding\Bean\Factory\Driver\BeanYamlDriver;
 use Ding\Bean\Factory\Driver\MVCAnnotationDriver;
 use Ding\Bean\Factory\Driver\DependsOnDriver;
 use Ding\Bean\Factory\Driver\MethodInjectionDriver;
@@ -648,6 +649,9 @@ class ContainerImpl implements IContainer
 
         if (isset(self::$_options['bdef']['xml'])) {
             $this->addBeforeDefinitionListener(BeanXmlDriver::getInstance(self::$_options['bdef']['xml']));
+        }
+        if (isset(self::$_options['bdef']['yaml'])) {
+            $this->addBeforeDefinitionListener(BeanYamlDriver::getInstance(self::$_options['bdef']['yaml']));
         }
 
         $this->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
