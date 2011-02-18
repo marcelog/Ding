@@ -90,19 +90,19 @@ actually create and modify the bean's behavior.
 <p>
 This data is generated, and
 modified by "Drivers". Drivers are listeners of one or more events in the lifecycle
-of the container and the lifecycle of each bean. Currently, Ding supports 2 
-different drivers: "xml" and "annotations".
+of the container and the lifecycle of each bean. Currently, Ding supports 3 
+different drivers: "xml", "yaml", and "annotations".
 </p>
 <p>
-The first one reads and parses a xml
-file (normally called beans.xml) and the latter generates metadata from the annotations
+The first two read and parse a xml/yaml
+file (normally called beans.xml/beans.yaml) and the latter generates metadata from the annotations
 found in each of the classes of the project and their methods.
 </p>
 <p>
  Any number of drivers can be used at any
 given time, they are supposed to complement each one's metadata. So for example you may
 use an annotation in your class at the same time that is declared (with the same or
-different features or properties) in the beans.xml file.
+different features or properties) in the beans.xml/beans.yaml file.
 </p>
 This metadata includes:
 
@@ -258,7 +258,12 @@ of a configuration class with @Resource. This will tell the container to look fo
 a bean that is named like the annotated property. This bean can be provided in another
 @Configuration annotated class. See docs/examples/PropertiesAnnotations.
 </p>
-<u>Generic bean definition (xml driver)</u>
+<u>Generic bean definition (xml and yaml drivers)</u>
+<p>
+The examples here are based on the xml driver. If you want to take a look at the
+yaml syntax (fully compatible and almost equal to the xml syntax), please take a look at
+<a href="https://github.com/marcelog/Ding/tree/master/docs/examples/yaml">the yaml example</a>
+</p>
 <p>
 For a prototype bean (multiple instances allowed):<br/>
 &lt;beans&gt;<br/>
@@ -266,6 +271,7 @@ For a prototype bean (multiple instances allowed):<br/>
 &lt;/beans&gt;<br/>
 </p>
 <hr/>
+
 <p>
 For a singleton bean (only one instance allowed):<br/>
 &lt;beans&gt;<br/>
