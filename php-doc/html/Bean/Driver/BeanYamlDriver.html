@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos  -->
-			<title>Docs For Class BeanXmlDriver</title>
+			<title>Docs For Class BeanYamlDriver</title>
 			<link rel="stylesheet" href="../../media/stylesheet.css" />
 						<script src="../../media/lib/classTree.js"></script>
 												<script language="javascript" type="text/javascript">
@@ -88,7 +88,7 @@
 <h2 class="class-name"><img src="../../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> BeanXmlDriver</h2>
+														style="vertical-align: middle"> BeanYamlDriver</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -106,7 +106,7 @@
                 <li><a href="../../Bean/Lifecycle/IBeforeDefinitionListener.html">IBeforeDefinitionListener</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">XML bean factory.</p>
+<p class="short-description">YAML bean factory.</p>
 <p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
@@ -114,7 +114,7 @@
 				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Bean---Factory---Driver---BeanXmlDriver.php.html">/Bean/Factory/Driver/BeanXmlDriver.php</a> (line <span class="field">52</span>)
+			Located in <a class="field" href="_Bean---Factory---Driver---BeanYamlDriver.php.html">/Bean/Factory/Driver/BeanYamlDriver.php</a> (line <span class="field">52</span>)
 		</p>
 		
 				
@@ -154,11 +154,6 @@
 				</div>
 																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">SimpleXML[]</span>
-					<a href="#$_simpleXml" title="details" class="var-name">$_simpleXml</a>
-				</div>
-																<div class="var-title">
-					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type"><a href="../../Bean/BeanConstructorArgumentDefinition.html">BeanConstructorArgumentDefinition</a></span>
 					<a href="#$_templateArgDef" title="details" class="var-name">$_templateArgDef</a>
 				</div>
@@ -176,6 +171,11 @@
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a></span>
 					<a href="#$_templatePropDef" title="details" class="var-name">$_templatePropDef</a>
+				</div>
+																<div class="var-title">
+					<img src="../../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">string[]</span>
+					<a href="#$_yamlFiles" title="details" class="var-name">$_yamlFiles</a>
 				</div>
 											</div>
 		</div>
@@ -196,11 +196,11 @@
 																											
 				<div class="method-definition">
 					<img src="../../media/images/StaticMethod.png" alt=" "/>
-					static 						<span class="method-result"><a href="../../Bean/Driver/BeanXmlDriver.html">BeanXmlDriver</a></span>
+					static 						<span class="method-result"><a href="../../Bean/Driver/BeanYamlDriver.html">BeanYamlDriver</a></span>
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
 									</div>
-																																																																											
+																																																																			
 				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -217,13 +217,6 @@
 																							
 				<div class="method-definition">
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#_getXmlErrors" title="details" class="method-name">_getXmlErrors</a>
-										()
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/PrivateMethod.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#_load" title="details" class="method-name">_load</a>
 										()
@@ -233,7 +226,7 @@
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
 											<span class="method-result"><a href="../../Aspect/AspectDefinition.html">AspectDefinition</a></span>
 										<a href="#_loadAspect" title="details" class="method-name">_loadAspect</a>
-											(<span class="var-type">SimpleXML</span>&nbsp;<span class="var-name">$simpleXmlAspect</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed[]</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -247,20 +240,20 @@
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
 											<span class="method-result"><a href="../../Bean/BeanConstructorArgumentDefinition.html">BeanConstructorArgumentDefinition</a></span>
 										<a href="#_loadConstructorArg" title="details" class="method-name">_loadConstructorArg</a>
-											(<span class="var-type">SimpleXML</span>&nbsp;<span class="var-name">$simpleXmlArg</span>)
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
 											<span class="method-result"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a></span>
 										<a href="#_loadProperty" title="details" class="method-name">_loadProperty</a>
-											(<span class="var-type">SimpleXML</span>&nbsp;<span class="var-name">$simpleXmlProperty</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed[]</span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
-											<span class="method-result">SimpleXML</span>
-										<a href="#_loadXml" title="details" class="method-name">_loadXml</a>
+											<span class="method-result">mixed[]</span>
+										<a href="#_loadYaml" title="details" class="method-name">_loadYaml</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>)
 									</div>
 											</div>
@@ -350,31 +343,8 @@
 		
 
 </div>
-<a name="var$_simpleXml" id="$_simpleXml"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<img src="../../media/images/PrivateVariable.png" />
-		<span class="var-title">
-			<span class="var-type">SimpleXML[]</span>
-			<span class="var-name">$_simpleXml</span>
-						(line <span class="line-number">70</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">SimpleXML object.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
 <a name="var$_templateArgDef" id="$_templateArgDef"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -397,7 +367,7 @@
 
 </div>
 <a name="var$_templateAspectDef" id="$_templateAspectDef"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -420,7 +390,7 @@
 
 </div>
 <a name="var$_templateBeanDef" id="$_templateBeanDef"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -443,7 +413,7 @@
 
 </div>
 <a name="var$_templatePropDef" id="$_templatePropDef"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -456,6 +426,29 @@
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Bean property definition template to clone.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_yamlFiles" id="$_yamlFiles"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">string[]</span>
+			<span class="var-name">$_yamlFiles</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">70</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Yaml contents.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -485,7 +478,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">411</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">358</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -495,7 +488,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		static <span class="method-result"><a href="../../Bean/Driver/BeanXmlDriver.html">BeanXmlDriver</a></span>
+		static <span class="method-result"><a href="../../Bean/Driver/BeanYamlDriver.html">BeanYamlDriver</a></span>
 		<span class="method-name">
 			getInstance
 		</span>
@@ -515,7 +508,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">426</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">373</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -545,7 +538,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">beforeDefinition</span> (line <span class="line-number">399</span>)
+		<span class="method-title">beforeDefinition</span> (line <span class="line-number">346</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -585,41 +578,16 @@
 					</dl>
 			
 	</div>
-<a name="method_getXmlErrors" id="_getXmlErrors"><!-- --></a>
+<a name="method_load" id="_load"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_getXmlErrors</span> (line <span class="line-number">107</span>)
+		<span class="method-title">_load</span> (line <span class="line-number">330</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Gets xml errors.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			_getXmlErrors
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="method_load" id="_load"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_load</span> (line <span class="line-number">380</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Initialize SimpleXML.</p>
+<p class="short-description">Initialize YAML contents.</p>
 	<ul class="tags">
 				<li><span class="field">throws:</span> BeanFactoryException</li>
 				<li><span class="field">access:</span> private</li>
@@ -637,11 +605,11 @@
 			
 	</div>
 <a name="method_loadAspect" id="_loadAspect"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadAspect</span> (line <span class="line-number">156</span>)
+		<span class="method-title">_loadAspect</span> (line <span class="line-number">143</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -656,23 +624,29 @@
 		<span class="method-name">
 			_loadAspect
 		</span>
-					(<span class="var-type">SimpleXML</span>&nbsp;<span class="var-name">$simpleXmlAspect</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed[]</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">SimpleXML</span>
-				<span class="var-name">$simpleXmlAspect</span><span class="var-description">: Aspect node.</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Method to intercept.</span>			</li>
+					<li>
+				<span class="var-type">mixed[]</span>
+				<span class="var-name">$value</span><span class="var-description">: Aspect data.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="method_loadBean" id="_loadBean"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadBean</span> (line <span class="line-number">284</span>)
+		<span class="method-title">_loadBean</span> (line <span class="line-number">237</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -702,11 +676,11 @@
 			
 	</div>
 <a name="method_loadConstructorArg" id="_loadConstructorArg"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadConstructorArg</span> (line <span class="line-number">236</span>)
+		<span class="method-title">_loadConstructorArg</span> (line <span class="line-number">201</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -721,23 +695,23 @@
 		<span class="method-name">
 			_loadConstructorArg
 		</span>
-					(<span class="var-type">SimpleXML</span>&nbsp;<span class="var-name">$simpleXmlArg</span>)
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">SimpleXML</span>
-				<span class="var-name">$simpleXmlArg</span><span class="var-description">: Argument node.</span>			</li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Constructor arg YAML structure value.</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="method_loadProperty" id="_loadProperty"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadProperty</span> (line <span class="line-number">187</span>)
+		<span class="method-title">_loadProperty</span> (line <span class="line-number">167</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -752,36 +726,39 @@
 		<span class="method-name">
 			_loadProperty
 		</span>
-					(<span class="var-type">SimpleXML</span>&nbsp;<span class="var-name">$simpleXmlProperty</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed[]</span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">SimpleXML</span>
-				<span class="var-name">$simpleXmlProperty</span><span class="var-description">: Property node.</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Property name.</span>			</li>
+					<li>
+				<span class="var-type">mixed[]</span>
+				<span class="var-name">$value</span><span class="var-description">: Property YAML structure value.</span>			</li>
 				</ul>
 		
 			
 	</div>
-<a name="method_loadXml" id="_loadXml"><!-- --></a>
-<div class="oddrow">
+<a name="method_loadYaml" id="_loadYaml"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadXml</span> (line <span class="line-number">124</span>)
+		<span class="method-title">_loadYaml</span> (line <span class="line-number">110</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Initializes SimpleXML Object</p>
+<p class="short-description">Initializes yaml contents.</p>
 	<ul class="tags">
 				<li><span class="field">throws:</span> BeanFactoryException</li>
 				<li><span class="field">access:</span> private</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">SimpleXML</span>
+		<span class="method-result">mixed[]</span>
 		<span class="method-name">
-			_loadXml
+			_loadYaml
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$filename</span>)
 			</div>
@@ -800,7 +777,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 18 Feb 2011 15:23:49 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Fri, 18 Feb 2011 15:23:50 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
