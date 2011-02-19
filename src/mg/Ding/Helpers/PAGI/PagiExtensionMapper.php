@@ -70,9 +70,11 @@ class PagiExtensionMapper
      */
     public function resolve($extension)
     {
-        foreach ($this->_map as $map) {
-            if ($map['extension'] == $extension) {
-                return $map['application'];
+        if (is_array($this->_map)) {
+            foreach ($this->_map as $map) {
+                if ($map['extension'] == $extension) {
+                    return $map['application'];
+                }
             }
         }
         return $this->_map['default']['application'];

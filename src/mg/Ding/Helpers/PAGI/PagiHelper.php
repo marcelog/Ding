@@ -2,6 +2,7 @@
 /**
  * This is our "dispatcher", you should invoke this one from your dialplan.
  * This script will assume the existance of the following environment variables:
+ * -- PAGIApplication: Name of your application's class.
  * -- PAGIBootstrap: Name of the file (like a.php) that you want to include_once
  * before running the application.
  * -- log4php: Absolute full path to the log4php.properties (may be a dummy
@@ -42,7 +43,6 @@ use PAGI\Application\Exception\InvalidApplicationException;
 use Ding\Container\Impl\ContainerImpl;
 use PAGI\Client\Impl\ClientImpl;
 
-$appName = getenv('PAGIApplication');
 $bootstrap = getenv('PAGIBootstrap');
 $log4php = realpath(getenv('log4php_properties'));
 $agiLogger = false;
