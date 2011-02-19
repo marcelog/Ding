@@ -65,9 +65,12 @@ class DependsOnDriver implements IAfterDefinitionListener
          * @todo This should be done using a reference to the container (or
          * may be not, but it seems pretty clear we shouldn't be using the
          * factory directly from here).
+         *
+         * @todo Should the trim be here or force the developer to not use
+         * spaces? Issue #94
          */
         foreach ($bean->getDependsOn() as $depBean) {
-            $factory->getBean($depBean);
+            $factory->getBean(trim($depBean));
         }
         return $bean;
     }
