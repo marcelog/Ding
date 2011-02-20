@@ -70,7 +70,8 @@ following methods:
 <p>
 The helper itself has some useful method to control its behavior:
 <ul>
-  <li>open(): Opens the connection.</li>
+  <li>open(): Opens the connection. You may optionally pass the ip address and port number to use to make the connection
+  from. (i.e: 1.1.1.1:80 will try to make the connection FROM that address).</li>
   <li>read(): Reads data from the server (usually used from the data() method above).</li>
   <li>write(): Sends data to the server.</li>
   <li>close(): Closes the connection.</li>
