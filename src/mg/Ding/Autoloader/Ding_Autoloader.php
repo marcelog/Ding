@@ -153,7 +153,7 @@ class Ding_Autoloader
         self::$_cache = false;
         self::$_myPath = implode(
             DIRECTORY_SEPARATOR,
-            array(realpath(dirname(__FILE__)), '..', '..')
+            array(__DIR__, '..', '..')
         );
         return spl_autoload_register('Ding_Autoloader::load');
     }
