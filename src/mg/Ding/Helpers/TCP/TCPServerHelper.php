@@ -107,6 +107,8 @@ class TCPServerHelper
      */
     private $_peersLastDataReceived;
 
+    private $_reuse;
+
     /**
      * Call this to close the server.
      *
@@ -201,7 +203,9 @@ class TCPServerHelper
             	'Error opening socket: ' . socket_strerror(socket_last_error())
             );
         }
-        socket_set_option ($this->_socket, SOL_SOCKET, SO_REUSEADDR, 1);
+        if ($this->_reuse) {
+            socket_set_option ($this->_socket, SOL_SOCKET, SO_REUSEADDR, 1);
+        }
         if (!socket_bind($this->_socket, $this->_address, $this->_port)) {
             $error = socket_strerror(socket_last_error($this->_socket));
             socket_close($this->_socket);
@@ -384,6 +388,28 @@ class TCPServerHelper
     }
 
     /**
+     * Sets wether to reuse or not the socket bind.
+     *
+     * @param boolean $reuse True to reuse the binding address.
+     *
+     * @return void
+     */
+    public function setReuse($reuse)
+    {
+        $this->_reuse = $reuse;
+    }
+
+    /**
+     * Returns true if the socket binding is to be reused.
+     *
+     * @return boolean
+     */
+    public function getReuse()
+    {
+        return $this->_reuse;
+    }
+
+    /**
      * Constructor. Not much to see here. Will register a tick function(),
      * process().
      *
@@ -401,6 +427,7 @@ class TCPServerHelper
         $this->_connected = false;
         $this->_peers = array();
         $this->_peersLastDataReceived = array();
+        $this->_reuse = false;
         register_tick_function(array($this, 'process'));
     }
 }
