@@ -36,6 +36,15 @@ Notes about the source:
 it's because they're actually 2 different comments: one for the file, and one
 for the class.
 --------------------------------------------------------------------------------
+PHAR File
+=========
+Ding can also be used as a phar file. See docs/examples/basic-with-phar. To 
+generate the phar you can use the task "package" from the phing build.xml file or
+manually run resources/generatePhar.php from the top of the source directory.
+
+You have to add the directory that contains the phar file to the include file
+and you should be set.
+--------------------------------------------------------------------------------
 Supported bean definitions providers
 ====================================
 * XML

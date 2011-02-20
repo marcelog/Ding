@@ -97,7 +97,16 @@
     />
   </target>
 
-  <target name="all" depends="clean, prepare, report"/>
+  <target name="package">
+    <mkdir dir="${package.output.dir}"/>
+    <exec
+      command="${genphar.exec} ${genphar.args}"
+      dir="${project.basedir}"
+      passthru="true"
+    />
+  </target>
+
+  <target name="all" depends="clean, prepare, package, report"/>
   <target name="build" depends="test"/>
   <target name="test" depends="phpunit"/>
   <target name="report" depends="build, phploc, phpdoc, phpdepend, phpcs, phpmd, phpcpd"/>
