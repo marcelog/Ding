@@ -107,6 +107,10 @@ class TCPServerHelper
      */
     private $_peersLastDataReceived;
 
+    /**
+     * Wether to reuse or not the binding of the socket.
+     * @var boolean
+     */
     private $_reuse;
 
     /**
