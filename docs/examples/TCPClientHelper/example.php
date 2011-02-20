@@ -156,7 +156,7 @@ $properties = array(
 );
 $a = ContainerImpl::getInstance($properties);
 $client = $a->getBean('Client');
-$client->open();
+$client->open('192.168.0.10', 9998);
 while(!$connected && $run) {
     usleep(1000);
 }

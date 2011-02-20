@@ -102,6 +102,12 @@ class TCPClientHelper
     private $_lastDataReadTime;
 
     /**
+     * Wether to reuse or not the binding of the socket.
+     * @var boolean
+     */
+    private $_reuse;
+
+    /**
      * Call this to close the connection.
      *
      * @return void
@@ -146,10 +152,13 @@ class TCPClientHelper
      * Call this to open the connection to the server. Will also set the
      * socket non blocking and control the connection timeout.
      *
+     * @param string  $address Optional output ip address.
+     * @param integer $port    Optional output port.
+     *
      * @throws TCPException
      * @return void
      */
-    public function open()
+    public function open($address = false, $port = false)
     {
         $this->_connected = false;
         $this->_socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
@@ -157,6 +166,13 @@ class TCPClientHelper
             throw new TCPException(
             	'Error opening socket: ' . socket_strerror(socket_last_error())
             );
+        }
+        if ($address !== false) {
+            if (!socket_bind($this->_socket, $address, $port)) {
+                throw new TCPException(
+                	'Error binding socket: ' . socket_strerror(socket_last_error())
+                );
+            }
         }
         if ($this->_cTo > 0) {
             socket_set_nonblock($this->_socket);
@@ -198,6 +214,7 @@ class TCPClientHelper
         $this->_lastDataReadTime = $this->getMicrotime();
         $this->_connected = true;
         $this->_handler->connect();
+        register_tick_function(array($this, 'process'));
     }
 
     /**
@@ -335,6 +352,28 @@ class TCPClientHelper
     }
 
     /**
+     * Sets wether to reuse or not the socket bind.
+     *
+     * @param boolean $reuse True to reuse the binding address.
+     *
+     * @return void
+     */
+    public function setReuse($reuse)
+    {
+        $this->_reuse = $reuse;
+    }
+
+    /**
+     * Returns true if the socket binding is to be reused.
+     *
+     * @return boolean
+     */
+    public function getReuse()
+    {
+        return $this->_reuse;
+    }
+
+    /**
      * Constructor. Not much to see here. Will register a tick function(),
      * process().
      *
@@ -350,6 +389,6 @@ class TCPClientHelper
         $this->_rTo = 0;
         $this->_rLen = 1;
         $this->_connected = false;
-        register_tick_function(array($this, 'process'));
+        $this->_reuse = false;
     }
 }

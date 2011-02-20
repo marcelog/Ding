@@ -19,6 +19,7 @@
 		<property name="handler">
 			<ref bean="MyClientHandler"/>
 		</property>
+		<property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
 	</bean>
 	<bean id="MyClientHandler" class="MyClientHandler" scope="prototype"/>
 </beans>
