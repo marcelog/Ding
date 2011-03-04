@@ -31,7 +31,16 @@
  *
  */
 
-require_once 'Ding.phar';
+$dingPharFile = __DIR__ .'/../../../build/Ding.phar';
+if (!file_exists($dingPharFile)) {
+    echo 'Ding.phar is not created. ';
+    echo "Make sure to run:\n";
+    echo "> phing package\n";
+    echo "before testing this example\n";
+
+    return;
+}
+require_once $dingPharFile;
 
 /**
  * This is our bean.
