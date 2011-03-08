@@ -187,6 +187,7 @@ $properties = array(
             'proxy' => array('impl' => 'dummy'),
             'bdef' => array('impl' => 'dummy'),
             'beans' => array('impl' => 'dummy'),
+            'aspect' => array('impl' => 'dummy'),
             'autoloader' => array('impl' => 'dummy')
         )
     )

@@ -29,6 +29,9 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Aspect\PointcutDefinition;
+
+use Ding\Aspect\AspectManager;
 use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
@@ -94,10 +97,22 @@ class BeanYamlDriver implements IBeforeDefinitionListener
     private $_templateAspectDef;
 
     /**
+     * Pointcut definition template to clone.
+     * @var PointcutDefinition
+     */
+    private $_templatePointcutDef;
+
+    /**
      * Current instance.
      * @var BeanFactoryXmlImpl
      */
     private static $_instance = false;
+
+    /**
+     * The aspect manager.
+     * @var AspectManager
+     */
+    private $_aspectManager = false;
 
     /**
      * Initializes yaml contents.
@@ -134,17 +149,21 @@ class BeanYamlDriver implements IBeforeDefinitionListener
     /**
      * Returns an aspect definition.
      *
-     * @param string  $name  Method to intercept.
-     * @param mixed[] $value Aspect data.
+     * @param mixed[] $aspect Aspect data.
      *
      * @throws BeanFactoryException
      * @return AspectDefinition
      */
-    private function _loadAspect($method, $value)
+    private function _loadAspect($aspect)
     {
         $aspects = array();
-        $aspectBean = $value['ref'];
-        $type = $value['type'];
+        if (isset($aspect['id'])) {
+            $name = $aspect['id'];
+        } else {
+            $name = 'AspectYAML' . rand(1, microtime(true));
+        }
+        $aspectBean = $aspect['ref'];
+        $type = $aspect['type'];
         if ($type == 'method') {
             $type = AspectDefinition::ASPECT_METHOD;
         } else if ($type == 'exception') {
@@ -152,7 +171,20 @@ class BeanYamlDriver implements IBeforeDefinitionListener
         } else {
             throw new BeanFactoryException('Invalid aspect type');
         }
-        return new AspectDefinition($method, $type, $aspectBean);
+        $pointcuts = array();
+        foreach ($aspect['pointcut'] as $pointcut) {
+            if (isset($pointcut['id'])) {
+                $pointcutName = $pointcut['id'];
+            } else {
+                $pointcutName = 'PointcutYAML' . rand(1, microtime(true));
+            }
+            $pointcutDef = clone $this->_templatePointcutDef;
+            $pointcutDef->setName($pointcutName);
+            $pointcutDef->setExpression($pointcut['expression']);
+            $this->_aspectManager->setPointcut($pointcutDef);
+            $pointcuts[] = $pointcutName;
+        }
+        return new AspectDefinition($name, $pointcuts, $type, $aspectBean);
     }
 
     /**
@@ -174,7 +206,7 @@ class BeanYamlDriver implements IBeforeDefinitionListener
             $propValue = $value['eval'];
         } else if (isset($value['bean'])) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
-            $innerBean = 'Bean' . microtime(true);
+            $innerBean = 'Bean' . rand(1, microtime(true));
             $this->_yamlFiles[$this->_filename]['beans'][$innerBean] = $value['bean'];
             $propValue = $innerBean;
         } else if (is_array($value['value'])) {
@@ -296,8 +328,10 @@ class BeanYamlDriver implements IBeforeDefinitionListener
         }
 
         if (isset($beanDef['aspects'])) {
-            foreach ($beanDef['aspects'] as $key => $value) {
-                $bAspects[] = $this->_loadAspect($key, $value);
+            foreach ($beanDef['aspects'] as $aspect) {
+                $aspectDefinition = $this->_loadAspect($aspect);
+                $this->_aspectManager->setAspect($aspectDefinition);
+                $bAspects[] = $aspectDefinition->getName();
             }
         }
 
@@ -379,6 +413,8 @@ class BeanYamlDriver implements IBeforeDefinitionListener
         $this->_templateBeanDef = new BeanDefinition('');
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
-        $this->_templateAspectDef = new AspectDefinition('', 0, '');
+        $this->_templateAspectDef = new AspectDefinition('', '', 0, '');
+        $this->_templatePointcutDef = new PointcutDefinition('', '');
+        $this->_aspectManager = AspectManager::getInstance();
     }
 }

@@ -61,10 +61,16 @@ class AspectDefinition
     const ASPECT_EXCEPTION = 1;
 
     /**
-     * Target aspected method.
+     * Aspect name.
      * @var string
      */
-    private $_pointcut;
+    private $_name;
+
+    /**
+     * Target aspected methods.
+     * @var string[]
+     */
+    private $_pointcuts;
 
     /**
      * Aspect bean name.
@@ -79,25 +85,25 @@ class AspectDefinition
     private $_type;
 
     /**
-     * Returns pointcut name.
+     * Returns pointcut names.
      *
-     * @return string
+     * @return string[]
      */
-    public function getPointcut()
+    public function getPointcuts()
     {
-        return $this->_pointcut;
+        return $this->_pointcuts;
     }
 
     /**
-     * Sets the pointcut for this aspect.
+     * Sets the pointcuts for this aspect.
      *
-     * @param string $pointcut Pointcut definition.
+     * @param string[] $pointcuts Pointcut definition.
      *
      * @return void
      */
-    public function setPointcut($pointcut)
+    public function setPointcuts($pointcuts)
     {
-        $this->_pointcut = $pointcut;
+        $this->_pointcuts = $pointcuts;
     }
 
     /**
@@ -145,6 +151,28 @@ class AspectDefinition
     }
 
     /**
+     * Sets aspect name.
+     *
+     * @param string $name New aspect name.
+     *
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this->_name = $name;
+    }
+
+    /**
+     * Returns aspect name.
+     *
+	 * @return string
+     */
+    public function getName()
+    {
+        return $this->_name;
+    }
+
+    /**
      * Standard function, you know the drill..
      *
      * @return string
@@ -154,7 +182,8 @@ class AspectDefinition
         return
             '['
             . __CLASS__
-            . ' Pointcut: ' . $this->getPointcut()
+            . ' Name: ' . $this->getName()
+            . ' Pointcuts: ' . $this->getPointcuts()
             . ' Type: ' . intval($this->getType())
             . ' Aspect: ' . $this->getBeanName()
             . ']'
@@ -164,15 +193,17 @@ class AspectDefinition
     /**
      * Constructor.
      *
-     * @param string  $pointcut Pointcut name.
-     * @param integer $type     Aspect type (see this class constants).
-     * @param string  $beanName Aspect bean name.
+     * @param string   $name      Aspect name.
+     * @param string[] $pointcuts Pointcut names.
+     * @param integer  $type      Aspect type (see this class constants).
+     * @param string   $beanName  Aspect bean name.
      *
      * @return void
      */
-    public function __construct($pointcut, $type, $beanName)
+    public function __construct($name, $pointcuts, $type, $beanName)
     {
-        $this->_pointcut = $pointcut;
+        $this->_name = $name;
+        $this->_pointcuts = $pointcuts;
         $this->_beanName = $beanName;
         $this->_type = $type;
     }

@@ -33,6 +33,7 @@ use Ding\Cache\Locator\CacheLocator;
 use Ding\Container\IContainer;
 use Ding\Container\Exception\ContainerException;
 use Ding\Aspect\Proxy;
+use Ding\Aspect\AspectManager;
 use Ding\Aspect\InterceptorDefinition;
 use Ding\Aspect\AspectDefinition;
 use Ding\Aspect\Interceptor\IDispatcher;
@@ -155,6 +156,12 @@ class ContainerImpl implements IContainer
      * @var ContainerImpl
      */
     private static $_containerInstance = false;
+
+    /**
+     * The aspect manager.
+     * @var AspectManager
+     */
+    private $_aspectManager = false;
 
     /**
      * Returns a bean definition.
@@ -316,16 +323,20 @@ class ContainerImpl implements IContainer
         if ($beanDefinition->hasAspects()) {
             $dispatcher = clone $this->_dispatcherTemplate;
             $methods = array();
-            foreach ($beanDefinition->getAspects() as $aspectDefinition) {
+            foreach ($beanDefinition->getAspects() as $aspectName) {
+                $aspectDefinition = $this->_aspectManager->getAspect($aspectName);
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
-                $method = $aspectDefinition->getPointcut();
-                $methods[$method] = '';
-                if (
-                    $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
-                ) {
-                    $dispatcher->addMethodInterceptor($method, $aspect);
-                } else {
-                    $dispatcher->addExceptionInterceptor($method, $aspect);
+                foreach ($aspectDefinition->getPointcuts() as $pointcutName) {
+                    $pointcut = $this->_aspectManager->getPointcut($pointcutName);
+                    $pointcutExpression = $pointcut->getExpression();
+                    $methods[$pointcutExpression] = '';
+                    if (
+                        $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
+                    ) {
+                        $dispatcher->addMethodInterceptor($pointcutExpression, $aspect);
+                    } else {
+                        $dispatcher->addExceptionInterceptor($pointcutExpression, $aspect);
+                    }
                 }
             }
             $beanClass = Proxy::create($beanClass, $methods, $dispatcher);
@@ -598,6 +609,7 @@ class ContainerImpl implements IContainer
         $soullessArray = array();
         self::$_options = array_replace_recursive(self::$_options, $options);
 
+        $this->_aspectManager = AspectManager::getInstance();
         $this->_beanDefs = $soullessArray;
         $this->_beanDefCache = CacheLocator::getDefinitionsCacheInstance();
         $this->_beans = $soullessArray;

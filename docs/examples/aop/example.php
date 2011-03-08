@@ -117,7 +117,8 @@ try
     		'cache' => array(
     			'proxy' => array('impl' => 'dummy'),
             	'bdef' => array('impl' => 'dummy'),
-              	'beans' => array('impl' => 'dummy')
+              	'beans' => array('impl' => 'dummy'),
+                'aspect' => array('impl' => 'dummy')
             )
         )
     );

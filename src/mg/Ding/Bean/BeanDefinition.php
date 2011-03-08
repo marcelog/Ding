@@ -89,7 +89,7 @@ class BeanDefinition
 
     /**
      * Aspects mapped to this bean.
-     * @var AspectDefinition[]
+     * @var string[]
      */
     private $_aspects;
 
@@ -235,7 +235,7 @@ class BeanDefinition
     /**
      * Sets new aspects for this bean.
      *
-     * @param BeanAspectDefinition[] $aspects New aspects.
+     * @param string[] $aspects New aspects.
      *
      * @return void
      */
@@ -247,7 +247,7 @@ class BeanDefinition
     /**
      * Returns aspects for this bean.
      *
-     * @return AspectDefinition[]
+     * @return string[]
      */
     public function getAspects()
     {

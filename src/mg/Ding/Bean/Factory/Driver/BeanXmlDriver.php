@@ -29,6 +29,7 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Aspect\PointcutDefinition;
 use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
@@ -36,6 +37,7 @@ use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Aspect\AspectDefinition;
+use Ding\Aspect\AspectManager;
 
 /**
  * XML bean factory.
@@ -94,10 +96,22 @@ class BeanXmlDriver implements IBeforeDefinitionListener
     private $_templateAspectDef;
 
     /**
+     * Pointcut definition template to clone.
+     * @var PointcutDefinition
+     */
+    private $_templatePointcutDef;
+
+    /**
      * Current instance.
      * @var BeanFactoryXmlImpl
      */
     private static $_instance = false;
+
+    /**
+     * The aspect manager.
+     * @var AspectManager
+     */
+    private $_aspectManager = false;
 
     /**
      * Gets xml errors.
@@ -157,6 +171,11 @@ class BeanXmlDriver implements IBeforeDefinitionListener
     {
         $aspects = array();
         $atts = $simpleXmlAspect->attributes();
+        if (isset($atts->id)) {
+            $name = (string)$atts->id;
+        } else {
+            $name = 'AspectXML' . rand(1, microtime(true));
+        }
         $aspectBean = (string)$atts->ref;
         $type = (string)$atts->type;
         if ($type == 'method') {
@@ -166,13 +185,21 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         } else {
             throw new BeanFactoryException('Invalid aspect type');
         }
+        $pointcuts = array();
         foreach ($simpleXmlAspect->pointcut as $pointcut) {
-            $aspect = new AspectDefinition(
-                (string)$pointcut->attributes()->expression,
-                $type,
-                $aspectBean
-            );
+            $pointcutAtts = $pointcut->attributes();
+            if (isset($pointcutAtts->id)) {
+                $pointcutName = (string)$pointcutAtts->id;
+            } else {
+                $pointcutName = 'PointcutXML' . rand(1, microtime(true));
+            }
+            $pointcut = clone $this->_templatePointcutDef;
+            $pointcut->setName($pointcutName);
+            $pointcut->setExpression((string)$pointcutAtts->expression);
+            $this->_aspectManager->setPointcut($pointcut);
+            $pointcuts[] = $pointcutName;
         }
+        $aspect = new AspectDefinition($name, $pointcuts, $type, $aspectBean);
         return $aspect;
     }
 
@@ -243,7 +270,7 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             if (isset($simpleXmlArg->bean->attributes()->name)) {
                 $name = (string)$simpleXmlArg->bean->attributes()->name;
             } else {
-                $name = 'Bean' . microtime(true);
+                $name = 'Bean' . rand(1, microtime(true));
                 $simpleXmlArg->bean->addAttribute('id', $name);
             }
             $argValue = $name;
@@ -347,7 +374,9 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             $bProps[$bProp->getName()] = $bProp;
         }
         foreach ($simpleXmlBean->aspect as $aspect) {
-            $bAspects[] = $this->_loadAspect($aspect);
+            $aspectDefinition = $this->_loadAspect($aspect);
+            $this->_aspectManager->setAspect($aspectDefinition);
+            $bAspects[] = $aspectDefinition->getName();
         }
         foreach ($simpleXmlBean->{'constructor-arg'} as $arg) {
             $constructorArgs[] = $this->_loadConstructorArg($arg);
@@ -432,6 +461,8 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         $this->_templateBeanDef = new BeanDefinition('');
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
-        $this->_templateAspectDef = new AspectDefinition('', 0, '');
+        $this->_templateAspectDef = new AspectDefinition('', '', 0, '');
+        $this->_templatePointcutDef = new PointcutDefinition('', '');
+        $this->_aspectManager = AspectManager::getInstance();
     }
 }

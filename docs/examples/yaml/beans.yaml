@@ -10,7 +10,8 @@ beans: !!map
     destroy-method: destroy
     depends-on: myOtherBeanName
     aspects: !!map
-      targetMethod:
+      - pointcut: !!map
+          - expression: targetMethod
         type: method
         ref: aspectA
     lookup-methods: !!map
