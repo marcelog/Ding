@@ -1,0 +1,166 @@
+<?php
+/**
+ * Aspect Manager.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Aspect
+ * @author   Marcelo Gornstein <marcelog@gmail.com>
+ * @license  http://www.noneyet.ar/ Apache License 2.0
+ * @version  SVN: $Id$
+ * @link     http://www.noneyet.ar/
+ *
+ * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Aspect;
+
+use Ding\Cache\Locator\CacheLocator;
+
+/**
+ * Aspect Manager.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Aspect
+ * @author   Marcelo Gornstein <marcelog@gmail.com>
+ * @license  http://www.noneyet.ar/ Apache License 2.0
+ * @link     http://www.noneyet.ar/
+ */
+class AspectManager
+{
+    /**
+     * Holds instance.
+     * @var AspectManager
+     */
+    private static $_instance;
+
+    /**
+     * Holds known aspects.
+     * @var AspectDefinition[]
+     */
+    private $_aspects;
+
+    /**
+     * Holds known pointcuts.
+     * @var PointcutDefinition[]
+     */
+    private $_pointcuts;
+
+    /**
+     * Aspect cache to cache aspects and pointcuts.
+     * @var ICache
+     */
+    private $_aspectCache;
+
+    /**
+     * Adds or overwrites the given aspect.
+     *
+     * @param AspectDefinition $aspect Aspect.
+     *
+     * @return void
+     */
+    public function setAspect(AspectDefinition $aspect)
+    {
+        $name = $aspect->getName();
+        $this->_aspects[$name] = $aspect;
+        $this->_aspectCache->store('AspectManagerAspect' . $name, $aspect);
+    }
+
+    /**
+     * Adds or overwrites the given pointcut.
+     *
+     * @param PointcutDefinition $pointcut Pointcut.
+     *
+     * @return void
+     */
+    public function setPointcut(PointcutDefinition $pointcut)
+    {
+        $name = $pointcut->getName();
+        $this->_pointcuts[$name] = $pointcut;
+        $this->_aspectCache->store('AspectManagerPointcut' . $name, $pointcut);
+    }
+
+    /**
+     * Returns an AspectDefinition or false if none found.
+     *
+     * @param string $aspect Aspect id or name.
+     *
+     * @return AspectDefinition
+     */
+    public function getAspect($aspect)
+    {
+        if (isset($this->_aspects[$aspect])) {
+            return $this->_aspects[$aspect];
+        } else {
+            $result = false;
+            $value = $this->_aspectCache->fetch('AspectManagerAspect' . $aspect, $result);
+            if ($result === true) {
+                $this->_aspects[$aspect] = $value;
+                return $value;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns a PointcutDefinition or false if none found.
+     *
+     * @param string $pointcut Pointcut id or name.
+     *
+     * @return PointcutDefinition
+     */
+    public function getPointcut($pointcut)
+    {
+        if (isset($this->_pointcuts[$pointcut])) {
+            return $this->_pointcuts[$pointcut];
+        } else {
+            $result = false;
+            $value = $this->_aspectCache->fetch('AspectManagerPointcut' . $pointcut, $result);
+            if ($result === true) {
+                $this->_pointcuts[$pointcut] = $value;
+                return $value;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns an instance for this aspect manager.
+     *
+     * @return AspectManager
+     */
+    public static function getInstance()
+    {
+        if (self::$_instance == false) {
+            self::$_instance = new AspectManager();
+        }
+        return self::$_instance;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
+    protected function __construct()
+    {
+        $this->_aspectCache = CacheLocator::getAspectCacheInstance();
+        $this->_pointcuts = array();
+        $this->_aspects = array();
+    }
+}
