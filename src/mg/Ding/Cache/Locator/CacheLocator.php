@@ -61,6 +61,7 @@ class CacheLocator
         'bdef' => array('impl' => 'apc'),
         'beans' => array('impl' => 'dummy'),
     	'autoloader' => array('impl' => 'dummy'),
+        'aspect' => array('impl' => 'dummy'),
         'annotations' => array('impl' => 'dummy')
     );
 
@@ -153,5 +154,15 @@ class CacheLocator
     public static function getAutoloaderCacheInstance()
     {
         return self::_returnCacheFromImpl(self::$_options['autoloader']);
+    }
+
+    /**
+     * Returns a cache for aspects.
+	 *
+     * @return ICache
+     */
+    public static function getAspectCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['aspect']);
     }
 }
