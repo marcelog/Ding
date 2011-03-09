@@ -171,6 +171,7 @@ The cache subsystems use $properties['ding']['cache']. The subsystems are:
   sounds, so dont expect it to work as intended. Note: this is not a flaw of Ding itself but
   inherent to the architecture used generally in php, the lack of the concept of an
   application server, etc. It is recomended to use the dummy implementation for this cache.</li>
+  <li><u>aspect</u>: To cache aspect and pointcut definitions (i.e: AspectManager).</li>
 </ul>
 <p>
 The resulting properties needed to configure each one of the cache subsystems:
@@ -208,6 +209,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <li>$properties['ding']['cache']['proxy']</li>
   <li>$properties['ding']['cache']['bdef']</li>
   <li>$properties['ding']['cache']['beans']</li>
+  <li>$properties['ding']['cache']['aspect']</li>
   <li>$properties['ding']['cache']['annotations']</li>
 </ul>
 </p>
@@ -248,6 +250,12 @@ $properties['ding']['cache']['proxy'] = array(<br/>
 <hr/>
 <p>
 $properties['ding']['cache']['autoloader'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
+)<br/>
+</p>
+<hr/>
+<p>
+$properties['ding']['cache']['aspect'] = array(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
 )<br/>
 </p>
