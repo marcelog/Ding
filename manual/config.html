@@ -93,6 +93,7 @@ These drivers are configured with their own properties:
 <p>
 <ul>
   <li>$properties['ding']['factory']['bdef']['xml']</li>
+  <li>$properties['ding']['factory']['bdef']['yaml']</li>
   <li>$properties['ding']['factory']['bdef']['annotation']</li>
 </ul>
 </p>
@@ -100,6 +101,12 @@ Example:
 <p>
 $properties['ding']['factory']['bdef']['xml'] = array(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;'filename' => 'beans.xml'<br/>
+)<br/>
+</p>
+<hr/>
+<p>
+$properties['ding']['factory']['bdef']['annotation'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'scanDir' => array(realpath(__DIR__))<br/>
 )<br/>
 </p>
 <hr/>
@@ -114,13 +121,6 @@ $properties['ding']['factory']['bdef']['xml'] = array(<br/>
 <p>
 $properties['ding']['factory']['bdef']['yaml'] = array(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;'filename' => array('beans.yaml', 'otherBeans.yaml')<br/>
-)<br/>
-</p>
-<hr/>
-
-<p>
-$properties['ding']['factory']['bdef']['annotation'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'scanDir' => array(realpath(__DIR__))<br/>
 )<br/>
 </p>
 <hr/>
