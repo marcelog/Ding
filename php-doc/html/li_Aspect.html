@@ -116,7 +116,7 @@ if (document.getElementById) {
 			tree_classe.openIcon = 'media/images/class_folder.png';
 			tree_classe.icon = 'media/images/class_folder.png';
 			
-						    						    						    				
+						    						    						    						    						    				
 			tree.add(tree_classe);
 		
 					var tree_classe = new WebFXTreeItem('Class(es)', '');
@@ -127,7 +127,15 @@ if (document.getElementById) {
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
+										    				var classe = new WebFXTreeItem('AspectManager', 'Aspect/AspectManager.html');
+				classe.openIcon = 'media/images/Class.png';
+				classe.icon = 'media/images/Class.png';
+				tree_classe.add(classe);
 										    				var classe = new WebFXTreeItem('MethodInvocation', 'Aspect/MethodInvocation.html');
+				classe.openIcon = 'media/images/Class.png';
+				classe.icon = 'media/images/Class.png';
+				tree_classe.add(classe);
+										    				var classe = new WebFXTreeItem('PointcutDefinition', 'Aspect/PointcutDefinition.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
@@ -147,7 +155,15 @@ if (document.getElementById) {
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
+							var file = new WebFXTreeItem('AspectManager.php', 'Aspect/_Aspect---AspectManager.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
 							var file = new WebFXTreeItem('MethodInvocation.php', 'Aspect/_Aspect---MethodInvocation.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
+							var file = new WebFXTreeItem('PointcutDefinition.php', 'Aspect/_Aspect---PointcutDefinition.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);

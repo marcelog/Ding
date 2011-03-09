@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos  -->
-			<title>Docs For Class ModelAndView</title>
+			<title>Docs For Class AspectManager</title>
 			<link rel="stylesheet" href="../media/stylesheet.css" />
 						<script src="../media/lib/classTree.js"></script>
 												<script language="javascript" type="text/javascript">
@@ -88,21 +88,20 @@
 <h2 class="class-name"><img src="../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> ModelAndView</h2>
+														style="vertical-align: middle"> AspectManager</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-							<a href="#sec-descendents">Descendents</a>
-			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
 						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This class handles the mapping between the view and model.</p>
+<p class="short-description">Aspect Manager.</p>
 <p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
@@ -110,7 +109,7 @@
 				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_MVC---ModelAndView.php.html">/MVC/ModelAndView.php</a> (line <span class="field">42</span>)
+			Located in <a class="field" href="_Aspect---AspectManager.php.html">/Aspect/AspectManager.php</a> (line <span class="field">44</span>)
 		</p>
 		
 				
@@ -119,49 +118,6 @@
 			</div>
 </div>
 
-	<a name="sec-descendents"></a>
-	<div class="info-box">
-		<div class="info-box-title">Direct descendents</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-			<span class="disabled">Descendents</span>
-			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
-								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-								</div>
-		<div class="info-box-body">
-			<table cellpadding="2" cellspacing="0" class="class-table">
-				<tr>
-					<th class="class-table-header">Class</th>
-					<th class="class-table-header">Description</th>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../Mvc/ForwardModelAndView.html">ForwardModelAndView</a>
-					</td>
-					<td>
-											This class is a forward to another model and view.
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em; white-space: nowrap">
-						<img src="../media/images/Class.png"
-								 alt=" class"
-								 title=" class"
-								 style="vertical-align: center"/>
-						<a href="../Mvc/RedirectModelAndView.html">RedirectModelAndView</a>
-					</td>
-					<td>
-											This class is a forward to another model and view.
-										</td>
-				</tr>
-							</table>
-		</div>
-	</div>
 
 
 	<a name="sec-var-summary"></a>
@@ -169,7 +125,6 @@
 		<div class="info-box-title">Variable Summary</span></div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
 						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
 							| 
 									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
@@ -177,15 +132,25 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																<div class="var-title">
+																												<div class="var-title">
+					<img src="../media/images/StaticVariable.png" alt=" " />
+					static <span class="var-type"><a href="../Aspect/AspectManager.html">AspectManager</a></span>
+					<a href="#$_instance" title="details" class="var-name">$_instance</a>
+				</div>
+																												<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">string</span>
-					<a href="#$_name" title="details" class="var-name">$_name</a>
+					<span class="var-type"><a href="../Cache/ICache.html">ICache</a></span>
+					<a href="#$_aspectCache" title="details" class="var-name">$_aspectCache</a>
 				</div>
 																<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">mixed[]</span>
-					<a href="#$_objects" title="details" class="var-name">$_objects</a>
+					<span class="var-type">AspectDefinition[]</span>
+					<a href="#$_aspects" title="details" class="var-name">$_aspects</a>
+				</div>
+																								<div class="var-title">
+					<img src="../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">PointcutDefinition[]</span>
+					<a href="#$_pointcuts" title="details" class="var-name">$_pointcuts</a>
 				</div>
 											</div>
 		</div>
@@ -196,7 +161,6 @@
 		<div class="info-box-title">Method Summary</span></div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendants</a> |
 																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
 				 
 				|
@@ -204,33 +168,47 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																															
+																											
+				<div class="method-definition">
+					<img src="../media/images/StaticMethod.png" alt=" "/>
+					static 						<span class="method-result"><a href="../Aspect/AspectManager.html">AspectManager</a></span>
+										<a href="#getInstance" title="details" class="method-name">getInstance</a>
+										()
+									</div>
+																																											
 				<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+										()
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../Aspect/AspectDefinition.html">AspectDefinition</a></span>
+										<a href="#getAspect" title="details" class="method-name">getAspect</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$aspect</span>)
+									</div>
+																							
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result"><a href="../Aspect/PointcutDefinition.html">PointcutDefinition</a></span>
+										<a href="#getPointcut" title="details" class="method-name">getPointcut</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$pointcut</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#add" title="details" class="method-name">add</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$objects</span>)
+										<a href="#setAspect" title="details" class="method-name">setAspect</a>
+											(<span class="var-type"><a href="../Aspect/AspectDefinition.html">AspectDefinition</a></span>&nbsp;<span class="var-name">$aspect</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">array</span>
-										<a href="#getModel" title="details" class="method-name">getModel</a>
-										()
-									</div>
-															
-				<div class="method-definition">
-					<img src="../media/images/Method.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#getName" title="details" class="method-name">getName</a>
-										()
+											<span class="method-result">void</span>
+										<a href="#setPointcut" title="details" class="method-name">setPointcut</a>
+											(<span class="var-type"><a href="../Aspect/PointcutDefinition.html">PointcutDefinition</a></span>&nbsp;<span class="var-name">$pointcut</span>)
 									</div>
 											</div>
 		</div>
@@ -241,7 +219,6 @@
 		<div class="info-box-title">Variables</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
 										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
 						
 			
@@ -250,21 +227,20 @@
 							
 					</div>
 		<div class="info-box-body">
-			
-<a name="var$_name" id="$_name"><!-- --></A>
+			<a name="var$_instance" id="$_instance"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
-		<img src="../media/images/PrivateVariable.png" />
+		<img src="../media/images/StaticVariable.png" />
 		<span class="var-title">
-			<span class="var-type">string</span>
-			<span class="var-name">$_name</span>
-						(line <span class="line-number">54</span>)
+			static <span class="var-type"><a href="../Aspect/AspectManager.html">AspectManager</a></span>
+			<span class="var-name">$_instance</span>
+						(line <span class="line-number">50</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Model-View name. This will get used to find the view name.</p>
+<p class="short-description">Holds instance.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -274,20 +250,67 @@
 		
 
 </div>
-<a name="var$_objects" id="$_objects"><!-- --></A>
+
+<a name="var$_aspectCache" id="$_aspectCache"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/PrivateVariable.png" />
 		<span class="var-title">
-			<span class="var-type">mixed[]</span>
-			<span class="var-name">$_objects</span>
-						(line <span class="line-number">48</span>)
+			<span class="var-type"><a href="../Cache/ICache.html">ICache</a></span>
+			<span class="var-name">$_aspectCache</span>
+						(line <span class="line-number">68</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Objects from the model.</p>
+<p class="short-description">Aspect cache to cache aspects and pointcuts.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_aspects" id="$_aspects"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">AspectDefinition[]</span>
+			<span class="var-name">$_aspects</span>
+						(line <span class="line-number">56</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Holds known aspects.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_pointcuts" id="$_pointcuts"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">PointcutDefinition[]</span>
+			<span class="var-name">$_pointcuts</span>
+						(line <span class="line-number">62</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Holds known pointcuts.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -306,25 +329,49 @@
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-							<a href="#sec-descendents">Descendents</a> |
 															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
 																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="method__construct" id="__construct"><!-- --></a>
+<a name="methodgetInstance" id="getInstance"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
+		<img src="../media/images/StaticMethod.png" />
+		<span class="method-title">static getInstance</span> (line <span class="line-number">147</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an instance for this aspect manager.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result"><a href="../Aspect/AspectManager.html">AspectManager</a></span>
+		<span class="method-name">
+			getInstance
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">99</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">160</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Constructor.</p>
 	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
+				<li><span class="field">access:</span> protected</li>
 			</ul>
 	
 	<div class="method-signature">
@@ -332,30 +379,82 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAspect" id="getAspect"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getAspect</span> (line <span class="line-number">105</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns an AspectDefinition or false if none found.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Aspect/AspectDefinition.html">AspectDefinition</a></span>
+		<span class="method-name">
+			getAspect
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$aspect</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">string</span>
-				<span class="var-name">$name</span><span class="var-description">: Model-View name.</span>			</li>
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$options</span><span class="var-description">: Model-View objects.</span>			</li>
+				<span class="var-name">$aspect</span><span class="var-description">: Aspect id or name.</span>			</li>
 				</ul>
 		
 			
 	</div>
-<a name="methodadd" id="add"><!-- --></a>
+<a name="methodgetPointcut" id="getPointcut"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">add</span> (line <span class="line-number">63</span>)
+		<span class="method-title">getPointcut</span> (line <span class="line-number">127</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Add model objects.</p>
+<p class="short-description">Returns a PointcutDefinition or false if none found.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../Aspect/PointcutDefinition.html">PointcutDefinition</a></span>
+		<span class="method-name">
+			getPointcut
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$pointcut</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pointcut</span><span class="var-description">: Pointcut id or name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetAspect" id="setAspect"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setAspect</span> (line <span class="line-number">77</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds or overwrites the given aspect.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -363,67 +462,46 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			add
+			setAspect
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$objects</span>)
+					(<span class="var-type"><a href="../Aspect/AspectDefinition.html">AspectDefinition</a></span>&nbsp;<span class="var-name">$aspect</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$objects</span><span class="var-description">: Key = object name (string), value is mixed.</span>			</li>
+				<span class="var-type"><a href="../Aspect/AspectDefinition.html">AspectDefinition</a></span>
+				<span class="var-name">$aspect</span><span class="var-description">: Aspect.</span>			</li>
 				</ul>
 		
 			
 	</div>
-<a name="methodgetModel" id="getModel"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../media/images/Method.png" />
-		<span class="method-title">getModel</span> (line <span class="line-number">76</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the model. Intended to be used from the view.</p>
-<p class="description"><p>Key = object name (string), value is mixed.</p></p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">array</span>
-		<span class="method-name">
-			getModel
-		</span>
-				()
-			</div>
-	
-		
-			
-	</div>
-<a name="methodgetName" id="getName"><!-- --></a>
+<a name="methodsetPointcut" id="setPointcut"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getName</span> (line <span class="line-number">86</span>)
+		<span class="method-title">setPointcut</span> (line <span class="line-number">91</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the corresponding view name for this model-view.</p>
+<p class="short-description">Adds or overwrites the given pointcut.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">string</span>
+		<span class="method-result">void</span>
 		<span class="method-name">
-			getName
+			setPointcut
 		</span>
-				()
+					(<span class="var-type"><a href="../Aspect/PointcutDefinition.html">PointcutDefinition</a></span>&nbsp;<span class="var-name">$pointcut</span>)
 			</div>
 	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../Aspect/PointcutDefinition.html">PointcutDefinition</a></span>
+				<span class="var-name">$pointcut</span><span class="var-description">: Pointcut.</span>			</li>
+				</ul>
 		
 			
 	</div>
@@ -433,7 +511,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 08 Mar 2011 22:06:48 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 08 Mar 2011 22:06:42 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

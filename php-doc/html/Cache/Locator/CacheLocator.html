@@ -171,6 +171,13 @@
 				<div class="method-definition">
 					<img src="../../media/images/StaticMethod.png" alt=" "/>
 					static 						<span class="method-result"><a href="../../Cache/ICache.html">ICache</a></span>
+										<a href="#getAspectCacheInstance" title="details" class="method-name">getAspectCacheInstance</a>
+										()
+									</div>
+															
+				<div class="method-definition">
+					<img src="../../media/images/StaticMethod.png" alt=" "/>
+					static 						<span class="method-result"><a href="../../Cache/ICache.html">ICache</a></span>
 										<a href="#getAutoloaderCacheInstance" title="details" class="method-name">getAutoloaderCacheInstance</a>
 										()
 									</div>
@@ -202,7 +209,7 @@
 										<a href="#_returnCacheFromImpl" title="details" class="method-name">_returnCacheFromImpl</a>
 											(<span class="var-type">array</span>&nbsp;<span class="var-name">$options</span>)
 									</div>
-																																																																							</div>
+																																																																															</div>
 		</div>
 	</div>		
 
@@ -220,14 +227,14 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_options" id="$_options"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/StaticVariable.png" />
 		<span class="var-title">
 			static <span class="var-type">array</span>
 			<span class="var-name">$_options</span>
-			 = <span class="var-default">array(<br />    	'proxy' =&gt; array('impl' =&gt; 'file', 'directory' =&gt; '.'),'bdef'=&gt;array('impl'=&gt;'apc'),'beans'=&gt;array('impl'=&gt;'dummy'),'autoloader'=&gt;array('impl'=&gt;'dummy'),'annotations'=&gt;array('impl'=&gt;'dummy'))</span>			(line <span class="line-number">59</span>)
+			 = <span class="var-default">array(<br />    	'proxy' =&gt; array('impl' =&gt; 'file', 'directory' =&gt; '.'),'bdef'=&gt;array('impl'=&gt;'apc'),'beans'=&gt;array('impl'=&gt;'dummy'),'autoloader'=&gt;array('impl'=&gt;'dummy'),'aspect'=&gt;array('impl'=&gt;'dummy'),'annotations'=&gt;array('impl'=&gt;'dummy'))</span>			(line <span class="line-number">59</span>)
 		</span>
 	</div>
 
@@ -259,11 +266,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodconfigure" id="configure"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static configure</span> (line <span class="line-number">103</span>)
+		<span class="method-title">static configure</span> (line <span class="line-number">104</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -290,11 +297,11 @@
 			
 	</div>
 <a name="methodgetAnnotationsCacheInstance" id="getAnnotationsCacheInstance"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getAnnotationsCacheInstance</span> (line <span class="line-number">143</span>)
+		<span class="method-title">static getAnnotationsCacheInstance</span> (line <span class="line-number">144</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -314,12 +321,37 @@
 		
 			
 	</div>
+<a name="methodgetAspectCacheInstance" id="getAspectCacheInstance"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/StaticMethod.png" />
+		<span class="method-title">static getAspectCacheInstance</span> (line <span class="line-number">164</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a cache for aspects.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result"><a href="../../Cache/ICache.html">ICache</a></span>
+		<span class="method-name">
+			getAspectCacheInstance
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
 <a name="methodgetAutoloaderCacheInstance" id="getAutoloaderCacheInstance"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getAutoloaderCacheInstance</span> (line <span class="line-number">153</span>)
+		<span class="method-title">static getAutoloaderCacheInstance</span> (line <span class="line-number">154</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -344,7 +376,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getBeansCacheInstance</span> (line <span class="line-number">133</span>)
+		<span class="method-title">static getBeansCacheInstance</span> (line <span class="line-number">134</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -369,7 +401,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getDefinitionsCacheInstance</span> (line <span class="line-number">123</span>)
+		<span class="method-title">static getDefinitionsCacheInstance</span> (line <span class="line-number">124</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -394,7 +426,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getProxyCacheInstance</span> (line <span class="line-number">113</span>)
+		<span class="method-title">static getProxyCacheInstance</span> (line <span class="line-number">114</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -419,7 +451,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static _returnCacheFromImpl</span> (line <span class="line-number">75</span>)
+		<span class="method-title">static _returnCacheFromImpl</span> (line <span class="line-number">76</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -451,7 +483,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 18 Feb 2011 15:23:50 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Tue, 08 Mar 2011 22:06:44 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

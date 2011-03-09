@@ -412,11 +412,19 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
-			<span class="var-title">$_rTo</span>
+			<span class="var-title">$_reuse</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#var$_rTo">TCPClientHelper::$_rTo</a> in TCPClientHelper.php</div>
-							<div class="index-item-description">Read timeout in milliseconds.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_reuse">TCPServerHelper::$_reuse</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Wether to reuse or not the binding of the socket.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_reuse</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#var$_reuse">TCPClientHelper::$_reuse</a> in TCPClientHelper.php</div>
+							<div class="index-item-description">Wether to reuse or not the binding of the socket.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
@@ -424,6 +432,14 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_rTo">TCPServerHelper::$_rTo</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Read timeout in milliseconds.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_rTo</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#var$_rTo">TCPClientHelper::$_rTo</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Read timeout in milliseconds.</div>
 					</dd>
 			<dt class="field">
@@ -807,6 +823,22 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodgetPeerName">TCPServerHelper::getPeerName()</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Returns the peer name as a key for our internal arrays.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getReuse</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodgetReuse">TCPServerHelper::getReuse()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Returns true if the socket binding is to be reused.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getReuse</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodgetReuse">TCPClientHelper::getReuse()</a> in TCPClientHelper.php</div>
+							<div class="index-item-description">Returns true if the socket binding is to be reused.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1424,16 +1456,16 @@
 			<span class="method-title">setHandler</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetHandler">TCPServerHelper::setHandler()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Sets the tcp server handler.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetHandler">TCPClientHelper::setHandler()</a> in TCPClientHelper.php</div>
+							<div class="index-item-description">Sets the tcp client handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">setHandler</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetHandler">TCPClientHelper::setHandler()</a> in TCPClientHelper.php</div>
-							<div class="index-item-description">Sets the tcp client handler.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetHandler">TCPServerHelper::setHandler()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Sets the tcp server handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1456,16 +1488,16 @@
 			<span class="method-title">setReadMinLength</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReadMinLength">TCPClientHelper::setReadMinLength()</a> in TCPClientHelper.php</div>
-							<div class="index-item-description">Minimum needed bytes available in the socket before calling data() on the  client handler.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReadMinLength">TCPServerHelper::setReadMinLength()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Minimum needed bytes available in the socket before calling data() on the  server handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">setReadMinLength</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReadMinLength">TCPServerHelper::setReadMinLength()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Minimum needed bytes available in the socket before calling data() on the  server handler.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReadMinLength">TCPClientHelper::setReadMinLength()</a> in TCPClientHelper.php</div>
+							<div class="index-item-description">Minimum needed bytes available in the socket before calling data() on the  client handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1482,6 +1514,22 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReadTimeout">TCPClientHelper::setReadTimeout()</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Sets the read timeout in milliseconds. 0 to disable.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setReuse</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReuse">TCPServerHelper::setReuse()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Sets wether to reuse or not the socket bind.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setReuse</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReuse">TCPClientHelper::setReuse()</a> in TCPClientHelper.php</div>
+							<div class="index-item-description">Sets wether to reuse or not the socket bind.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />

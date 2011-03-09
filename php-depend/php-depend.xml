@@ -3,8 +3,8 @@
   <Packages>
     <Package name="Ding\Aspect">
       <Stats>
-        <TotalClasses>2</TotalClasses>
-        <ConcreteClasses>2</ConcreteClasses>
+        <TotalClasses>6</TotalClasses>
+        <ConcreteClasses>6</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
         <Ce>1</Ce>
@@ -14,7 +14,9 @@
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/AspectDefinition.php">AspectDefinition</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/AspectManager.php">AspectManager</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/MethodInvocation.php">MethodInvocation</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/PointcutDefinition.php">PointcutDefinition</Class>
       </ConcreteClasses>
       <AbstractClasses/>
       <DependsUpon>
@@ -29,11 +31,11 @@
         <TotalClasses>6</TotalClasses>
         <ConcreteClasses>2</ConcreteClasses>
         <AbstractClasses>4</AbstractClasses>
-        <Ca>0</Ca>
+        <Ca>1</Ca>
         <Ce>1</Ce>
         <A>0.666666666667</A>
-        <I>1</I>
-        <D>0.666666666667</D>
+        <I>0.5</I>
+        <D>0.166666666667</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/DispatcherImpl.php">DispatcherImpl</Class>
@@ -47,7 +49,9 @@
       <DependsUpon>
         <Package>Ding\Aspect</Package>
       </DependsUpon>
-      <UsedBy/>
+      <UsedBy>
+        <Package>Ding\Bean\Factory\Driver</Package>
+      </UsedBy>
     </Package>
     <Package name="Autoloader">
       <Stats>
@@ -55,16 +59,18 @@
         <ConcreteClasses>1</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
-        <Ce>0</Ce>
+        <Ce>1</Ce>
         <A>0</A>
-        <I>0</I>
-        <D>1</D>
+        <I>1</I>
+        <D>0</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Autoloader/Ding_Autoloader.php">Ding_Autoloader</Class>
       </ConcreteClasses>
       <AbstractClasses/>
-      <DependsUpon/>
+      <DependsUpon>
+        <Package>Ding\Cache</Package>
+      </DependsUpon>
       <UsedBy/>
     </Package>
     <Package name="Ding\Bean">
@@ -94,23 +100,30 @@
     </Package>
     <Package name="Ding\Bean\Factory\Driver">
       <Stats>
-        <TotalClasses>19</TotalClasses>
-        <ConcreteClasses>19</ConcreteClasses>
+        <TotalClasses>29</TotalClasses>
+        <ConcreteClasses>29</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
-        <Ce>6</Ce>
+        <Ce>8</Ce>
         <A>0</A>
         <I>1</I>
         <D>0</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationAspectDriver.php">AnnotationAspectDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationRequiredDriver.php">AnnotationRequiredDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationResourceDriver.php">AnnotationResourceDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AutowiredInjectionDriver.php">AutowiredInjectionDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanAnnotationDriver.php">BeanAnnotationDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanXmlDriver.php">BeanXmlDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanYamlDriver.php">BeanYamlDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/DependsOnDriver.php">DependsOnDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ErrorHandlerDriver.php">ErrorHandlerDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/FiltersDriver.php">FiltersDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MVCAnnotationDriver.php">MVCAnnotationDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">MethodInjectionAspect</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">MethodInjectionDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SetterInjectionDriver.php">SetterInjectionDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ShutdownDriver.php">ShutdownDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SignalHandlerDriver.php">SignalHandlerDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/TimezoneDriver.php">TimezoneDriver</Class>
@@ -118,8 +131,10 @@
       <AbstractClasses/>
       <DependsUpon>
         <Package></Package>
+        <Package>Ding\Aspect\Interceptor</Package>
         <Package>Ding\Bean</Package>
         <Package>Ding\Bean\Factory</Package>
+        <Package>Ding\Bean\Factory\Exception</Package>
         <Package>Ding\Bean\Lifecycle</Package>
         <Package>Ding\MVC\Http</Package>
         <Package>Ding\Reflection</Package>
@@ -131,11 +146,11 @@
         <TotalClasses>1</TotalClasses>
         <ConcreteClasses>1</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
-        <Ca>1</Ca>
+        <Ca>2</Ca>
         <Ce>1</Ce>
         <A>0</A>
-        <I>0.5</I>
-        <D>0.5</D>
+        <I>0.333333333333</I>
+        <D>0.666666666667</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Exception/BeanFactoryException.php">BeanFactoryException</Class>
@@ -145,6 +160,7 @@
         <Package>Ding\Exception</Package>
       </DependsUpon>
       <UsedBy>
+        <Package>Ding\Bean\Factory\Driver</Package>
         <Package>Ding\Container\Impl</Package>
       </UsedBy>
     </Package>
@@ -275,7 +291,7 @@
         <TotalClasses>1</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>1</AbstractClasses>
-        <Ca>1</Ca>
+        <Ca>2</Ca>
         <Ce>0</Ce>
         <A>1</A>
         <I>0</I>
@@ -287,6 +303,7 @@
       </AbstractClasses>
       <DependsUpon/>
       <UsedBy>
+        <Package>Autoloader</Package>
         <Package>Ding\Cache\Impl</Package>
       </UsedBy>
     </Package>
@@ -383,14 +400,14 @@
     </Package>
     <Package name="Ding\Container\Impl">
       <Stats>
-        <TotalClasses>29</TotalClasses>
-        <ConcreteClasses>29</ConcreteClasses>
+        <TotalClasses>34</TotalClasses>
+        <ConcreteClasses>34</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
-        <Ca>1</Ca>
+        <Ca>0</Ca>
         <Ce>4</Ce>
         <A>0</A>
-        <I>0.8</I>
-        <D>0.2</D>
+        <I>1</I>
+        <D>0</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Impl/ContainerImpl.php">ContainerImpl</Class>
@@ -402,9 +419,7 @@
         <Package>Ding\Bean\Lifecycle</Package>
         <Package>Ding\Container</Package>
       </DependsUpon>
-      <UsedBy>
-        <Package>Ding\MVC\Http</Package>
-      </UsedBy>
+      <UsedBy/>
     </Package>
     <Package name="Ding\Exception">
       <Stats>
@@ -677,17 +692,19 @@
     </Package>
     <Package name="Ding\MVC">
       <Stats>
-        <TotalClasses>7</TotalClasses>
-        <ConcreteClasses>2</ConcreteClasses>
+        <TotalClasses>9</TotalClasses>
+        <ConcreteClasses>4</ConcreteClasses>
         <AbstractClasses>5</AbstractClasses>
         <Ca>1</Ca>
         <Ce>1</Ce>
-        <A>0.714285714286</A>
+        <A>0.555555555556</A>
         <I>0.5</I>
-        <D>0.214285714286</D>
+        <D>0.0555555555556</D>
       </Stats>
       <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ForwardModelAndView.php">ForwardModelAndView</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ModelAndView.php">ModelAndView</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/RedirectModelAndView.php">RedirectModelAndView</Class>
       </ConcreteClasses>
       <AbstractClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Action.php">Action</Class>
@@ -729,10 +746,10 @@
         <ConcreteClasses>11</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
-        <Ce>3</Ce>
+        <Ce>2</Ce>
         <A>0</A>
-        <I>0.75</I>
-        <D>0.25</D>
+        <I>0.666666666667</I>
+        <D>0.333333333333</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpAction.php">HttpAction</Class>
@@ -746,7 +763,6 @@
       <AbstractClasses/>
       <DependsUpon>
         <Package></Package>
-        <Package>Ding\Container\Impl</Package>
         <Package>Ding\MVC</Package>
       </DependsUpon>
       <UsedBy>
