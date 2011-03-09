@@ -104,6 +104,21 @@ $properties['ding']['factory']['bdef']['xml'] = array(<br/>
 </p>
 <hr/>
 <p>
+You can also specify multiple files, for either xml or yaml drivers, like:
+</p>
+<p>
+$properties['ding']['factory']['bdef']['xml'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'filename' => array('beans.xml', 'otherBeans.xml')<br/>
+)<br/>
+</p>
+<p>
+$properties['ding']['factory']['bdef']['yaml'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'filename' => array('beans.yaml', 'otherBeans.yaml')<br/>
+)<br/>
+</p>
+<hr/>
+
+<p>
 $properties['ding']['factory']['bdef']['annotation'] = array(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;'scanDir' => array(realpath(__DIR__))<br/>
 )<br/>
