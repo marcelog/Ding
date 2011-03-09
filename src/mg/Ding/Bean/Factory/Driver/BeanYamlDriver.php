@@ -124,10 +124,18 @@ class BeanYamlDriver implements IBeforeDefinitionListener
      */
     private function _loadYaml($filename)
     {
+        $yamls = array();
+        if (is_array($filename)) {
+            foreach ($filename as $file) {
+                foreach ($this->_loadYaml($file) as $name => $yaml) {
+                    $yamls[$name] = $yaml;
+                }
+            }
+            return $yamls;
+        }
         if ($this->_logger->isDebugEnabled()) {
             $this->_logger->debug('Loading ' . $filename);
         }
-        $yamls = array();
         if (!file_exists($filename)) {
             throw new BeanFactoryException($filename . ' not found.');
         }
@@ -190,13 +198,14 @@ class BeanYamlDriver implements IBeforeDefinitionListener
     /**
      * Returns a property definition.
      *
-     * @param string  $name  Property name.
-     * @param mixed[] $value Property YAML structure value.
+     * @param string  $name         Property name.
+     * @param mixed[] $value        Property YAML structure value.
+     * @param string  $yamlFilename Filename for yaml file.
      *
      * @throws BeanFactoryException
      * @return BeanPropertyDefinition
      */
-    private function _loadProperty($name, $value)
+    private function _loadProperty($name, $value, $yamlFilename)
     {
         if (isset($value['ref'])) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
@@ -207,13 +216,13 @@ class BeanYamlDriver implements IBeforeDefinitionListener
         } else if (isset($value['bean'])) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
             $innerBean = 'Bean' . rand(1, microtime(true));
-            $this->_yamlFiles[$this->_filename]['beans'][$innerBean] = $value['bean'];
+            $this->_yamlFiles[$yamlFilename]['beans'][$innerBean] = $value['bean'];
             $propValue = $innerBean;
         } else if (is_array($value['value'])) {
             $propType = BeanPropertyDefinition::PROPERTY_ARRAY;
             $propValue = array();
             foreach ($value['value'] as $key => $inValue) {
-                $propValue[$key] = $this->_loadProperty($key, $inValue);
+                $propValue[$key] = $this->_loadProperty($key, $inValue, $yamlFilename);
             }
         } else {
             $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
@@ -225,12 +234,13 @@ class BeanYamlDriver implements IBeforeDefinitionListener
     /**
      * Returns a constructor argument definition.
      *
-     * @param mixed $value Constructor arg YAML structure value.
+     * @param mixed  $value Constructor arg YAML structure value.
+     * @param string $yamlFilename Filename for yaml file.
      *
      * @throws BeanFactoryException
      * @return BeanConstructorArgumentDefinition
      */
-    private function _loadConstructorArg($value)
+    private function _loadConstructorArg($value, $yamlFilename)
     {
         if (is_array($value)) {
             if (isset($value['ref'])) {
@@ -242,13 +252,13 @@ class BeanYamlDriver implements IBeforeDefinitionListener
             } else if (isset($value['bean'])) {
                 $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
                 $innerBean = 'Bean' . microtime(true);
-                $this->_yamlFiles[$this->_filename]['beans'][$innerBean] = $value['bean'];
+                $this->_yamlFiles[$yamlFilename]['beans'][$innerBean] = $value['bean'];
                 $argValue = $innerBean;
             } else {
                 $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY;
                 $argValue = array();
                 foreach ($value as $key => $inValue) {
-                    $argValue[$key] = $this->_loadConstructorArg($inValue);
+                    $argValue[$key] = $this->_loadConstructorArg($inValue, $yamlFilename);
                 }
             }
         } else {
@@ -272,10 +282,10 @@ class BeanYamlDriver implements IBeforeDefinitionListener
             $this->_load();
         }
         $beanDef = false;
-        foreach($this->_yamlFiles as $name => $yaml) {
+        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
             if (isset($yaml['beans'][$beanName])) {
                 if ($this->_logger->isDebugEnabled()) {
-                    $this->_logger->debug('Found ' . $beanName . ' in ' . $name);
+                    $this->_logger->debug('Found ' . $beanName . ' in ' . $yamlFilename);
                 }
                 $beanDef = $yaml['beans'][$beanName];
                 break;
@@ -317,13 +327,13 @@ class BeanYamlDriver implements IBeforeDefinitionListener
         $bMethods = $bProps = $bAspects = $constructorArgs = array();
         if (isset($beanDef['properties'])) {
             foreach ($beanDef['properties'] as $name => $value) {
-                $bProp = $this->_loadProperty($name, $value);
+                $bProp = $this->_loadProperty($name, $value, $yamlFilename);
                 $bProps[$name] = $bProp;
             }
         }
         if (isset($beanDef['constructor-args'])) {
             foreach ($beanDef['constructor-args'] as $arg) {
-                $constructorArgs[] = $this->_loadConstructorArg($arg);
+                $constructorArgs[] = $this->_loadConstructorArg($arg, $yamlFilename);
             }
         }
 

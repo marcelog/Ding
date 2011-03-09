@@ -137,11 +137,19 @@ class BeanXmlDriver implements IBeforeDefinitionListener
      */
     private function _loadXml($filename)
     {
+        $xmls = array();
+        libxml_use_internal_errors(true);
+        if (is_array($filename)) {
+            foreach ($filename as $file) {
+                foreach ($this->_loadXml($file) as $name => $xml) {
+                    $xmls[$name] = $xml;
+                }
+            }
+            return $xmls;
+        }
         if ($this->_logger->isDebugEnabled()) {
             $this->_logger->debug('Loading ' . $filename);
         }
-        $xmls = array();
-        libxml_use_internal_errors(true);
         if (!file_exists($filename)) {
             throw new BeanFactoryException($filename . ' not found.');
         }
