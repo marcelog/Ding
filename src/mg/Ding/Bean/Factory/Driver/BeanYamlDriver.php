@@ -115,6 +115,12 @@ class BeanYamlDriver implements IBeforeDefinitionListener
     private $_aspectManager = false;
 
     /**
+     * Optional directories to search for bean files.
+     * @var string[]
+     */
+    private $_directories = false;
+
+    /**
      * Initializes yaml contents.
      *
      * @param string $filename
@@ -133,13 +139,21 @@ class BeanYamlDriver implements IBeforeDefinitionListener
             }
             return $yamls;
         }
-        if ($this->_logger->isDebugEnabled()) {
-            $this->_logger->debug('Loading ' . $filename);
+            $contents = false;
+        foreach ($this->_directories as $directory) {
+            $fullname = $directory . DIRECTORY_SEPARATOR . $filename;
+            if (!file_exists($fullname)) {
+                continue;
+            }
+            if ($this->_logger->isDebugEnabled()) {
+                $this->_logger->debug('Loading ' . $fullname);
+            }
+            $contents = @file_get_contents($fullname);
         }
-        if (!file_exists($filename)) {
-            throw new BeanFactoryException($filename . ' not found.');
+        if ($contents === false) {
+            throw new BeanFactoryException($filename . ' not found in ' . print_r($this->_directories, true));
         }
-        $ret = yaml_parse(file_get_contents($filename));
+        $ret = yaml_parse($contents);
         if ($ret === false) {
             return $ret;
         }
@@ -402,7 +416,7 @@ class BeanYamlDriver implements IBeforeDefinitionListener
     public static function getInstance(array $options)
     {
         if (self::$_instance == false) {
-            self::$_instance = new BeanYamlDriver($options['filename']);
+            self::$_instance = new BeanYamlDriver($options);
         }
         return self::$_instance;
     }
@@ -414,11 +428,16 @@ class BeanYamlDriver implements IBeforeDefinitionListener
      *
      * @return void
      */
-    protected function __construct($filename)
+    protected function __construct(array $options)
     {
         $this->_logger = \Logger::getLogger('Ding.Factory.Driver.BeanYamlDriver');
         $this->_beanDefs = array();
-        $this->_filename = $filename;
+        $this->_filename = $options['filename'];
+        $this->_directories
+            = isset($options['directories'])
+            ? $options['directories']
+            : array('.')
+        ;
         $this->_yamlFiles = false;
         $this->_templateBeanDef = new BeanDefinition('');
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);

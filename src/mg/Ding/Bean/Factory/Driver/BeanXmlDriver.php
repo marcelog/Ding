@@ -114,6 +114,12 @@ class BeanXmlDriver implements IBeforeDefinitionListener
     private $_aspectManager = false;
 
     /**
+     * Optional directories to search for bean files.
+     * @var string[]
+     */
+    private $_directories = false;
+
+    /**
      * Gets xml errors.
      *
      * @return string
@@ -147,13 +153,21 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             }
             return $xmls;
         }
-        if ($this->_logger->isDebugEnabled()) {
-            $this->_logger->debug('Loading ' . $filename);
+        $contents = false;
+        foreach ($this->_directories as $directory) {
+            $fullname = $directory . DIRECTORY_SEPARATOR . $filename;
+            if (!file_exists($fullname)) {
+                continue;
+            }
+            if ($this->_logger->isDebugEnabled()) {
+                $this->_logger->debug('Loading ' . $fullname);
+            }
+            $contents = @file_get_contents($fullname);
         }
-        if (!file_exists($filename)) {
-            throw new BeanFactoryException($filename . ' not found.');
+        if ($contents === false) {
+            throw new BeanFactoryException($filename . ' not found in ' . print_r($this->_directories, true));
         }
-        $ret = simplexml_load_string(file_get_contents($filename));
+        $ret = simplexml_load_string($contents);
         if ($ret === false) {
             return $ret;
         }
@@ -448,7 +462,7 @@ class BeanXmlDriver implements IBeforeDefinitionListener
     public static function getInstance(array $options)
     {
         if (self::$_instance == false) {
-            self::$_instance = new BeanXmlDriver($options['filename']);
+            self::$_instance = new BeanXmlDriver($options);
         }
         return self::$_instance;
     }
@@ -456,16 +470,21 @@ class BeanXmlDriver implements IBeforeDefinitionListener
     /**
      * Constructor.
      *
-     * @param
+     * @param mixed $filename bean filename or array with files.
      *
      * @return void
      */
-    protected function __construct($filename)
+    protected function __construct(array $options)
     {
         $this->_logger = \Logger::getLogger('Ding.Factory.Driver.BeanXmlDriver');
         $this->_beanDefs = array();
-        $this->_filename = $filename;
+        $this->_filename = $options['filename'];
         $this->_simpleXml = false;
+        $this->_directories
+            = isset($options['directories'])
+            ? $options['directories']
+            : array('.')
+        ;
         $this->_templateBeanDef = new BeanDefinition('');
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
