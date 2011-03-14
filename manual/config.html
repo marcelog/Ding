@@ -86,7 +86,8 @@ Use the optional property: $properties['ding']['log4php.properties'] => './log4p
 <H2>Bean Factory Drivers</H2>
 You may configure any of the bean definition drivers available:
 <ul>
-  <li>xml: Parses the given xml file, usually beans.xml and get bean definitions from there. Requires the optional property 'filename'.</li>
+  <li>xml: Parses the given XML file(s), usually beans.xml and get bean definitions from there. Requires the property 'filename'.</li>
+  <li>yaml: Parses the given YAML file(s), usually beans.yaml and get bean definitions from there. Requires the property 'filename'.</li>
   <li>annotation: Extracts bean definitions and other information right from the annotated code. Requires the property 'scanDir'.</li>
 </ul>
 These drivers are configured with their own properties:
@@ -124,6 +125,16 @@ $properties['ding']['factory']['bdef']['yaml'] = array(<br/>
 )<br/>
 </p>
 <hr/>
+<p>
+You can also specify multiple search directories (paths), for either xml or yaml drivers, like:
+$properties['ding']['factory']['bdef']['yaml'] = array(<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;'filename' => array('beans.yaml', 'otherBeans.yaml'), 'directories' => array('/etc/Ding', '/usr/local/etc/Ding')<br/>
+)<br/>
+<hr/>
+This will tell the yaml driver (you can also use it with the xml driver) to look for the bean
+files beans.yaml and otherBeans.yaml in the directories specified. The order of the
+directories is important, so the file used will be the first available one.
+</p>
 <center>
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-6947936742546167";
