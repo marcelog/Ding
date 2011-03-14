@@ -126,11 +126,15 @@ $properties['ding']['factory']['bdef']['yaml'] = array(<br/>
 </p>
 <hr/>
 <p>
-You can also specify multiple search directories (paths), for either xml or yaml drivers, like:
+You can also specify multiple search directories (paths), for either xml or yaml drivers, like:<br/>
+</p>
+<p>
 $properties['ding']['factory']['bdef']['yaml'] = array(<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;'filename' => array('beans.yaml', 'otherBeans.yaml'), 'directories' => array('/etc/Ding', '/usr/local/etc/Ding')<br/>
 )<br/>
+</p>
 <hr/>
+<p>
 This will tell the yaml driver (you can also use it with the xml driver) to look for the bean
 files beans.yaml and otherBeans.yaml in the directories specified. The order of the
 directories is important, so the file used will be the first available one.
