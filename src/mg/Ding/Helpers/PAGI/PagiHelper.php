@@ -43,15 +43,15 @@ use PAGI\Application\Exception\InvalidApplicationException;
 use Ding\Container\Impl\ContainerImpl;
 use PAGI\Client\Impl\ClientImpl;
 
-$bootstrap = getenv('PAGIBootstrap');
-$log4php = realpath(getenv('log4php_properties'));
-$agiLogger = false;
 try
 {
+    $bootstrap = getenv('PAGIBootstrap');
     include_once $bootstrap;
-    $container = ContainerImpl::getInstance($properties);
+    $log4php = getenv('log4php_properties');
+    $agiLogger = false;
     $agi = ClientImpl::getInstance(array('log4php.properties' => $log4php));
     $agiLogger = $agi->getAsteriskLogger();
+    $container = ContainerImpl::getInstance($properties);
     $extension = $agi->getChannelVariables()->getDNIS();
     $mapper = $container->getBean('PagiExtensionMapper');
     $myApp = $mapper->resolve($extension);
