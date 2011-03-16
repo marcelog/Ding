@@ -72,7 +72,7 @@ class PagiExtensionMapper
     {
         if (is_array($this->_map)) {
             foreach ($this->_map as $map) {
-                if ($map['extension'] == $extension) {
+                if (isset($map['extension']) && $map['extension'] == $extension) {
                     return $map['application'];
                 }
             }
