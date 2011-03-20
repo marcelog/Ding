@@ -321,21 +321,35 @@ class ContainerImpl implements IContainer
             $args[] = $this->_loadArgument($argument);
         }
         if ($beanDefinition->hasAspects()) {
+            $rClass = ReflectionFactory::getClass($beanClass);
             $dispatcher = clone $this->_dispatcherTemplate;
             $methods = array();
+            /**
+             * @todo the operation of applying an aspect is really expensive!
+             */
             foreach ($beanDefinition->getAspects() as $aspectName) {
                 $aspectDefinition = $this->_aspectManager->getAspect($aspectName);
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 foreach ($aspectDefinition->getPointcuts() as $pointcutName) {
                     $pointcut = $this->_aspectManager->getPointcut($pointcutName);
                     $pointcutExpression = $pointcut->getExpression();
-                    $methods[$pointcutExpression] = '';
-                    if (
-                        $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
-                    ) {
-                        $dispatcher->addMethodInterceptor($pointcutExpression, $aspect);
-                    } else {
-                        $dispatcher->addExceptionInterceptor($pointcutExpression, $aspect);
+                    foreach  ($rClass->getMethods() as $method) {
+                        $methodName = $method->getName();
+                        if (
+                            preg_match(
+                            	'/' . $pointcutExpression . '/', $methodName
+                            ) === 0
+                        ) {
+                            continue;
+                        }
+                        $methods[$methodName] = '';
+                        if (
+                            $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
+                        ) {
+                            $dispatcher->addMethodInterceptor($methodName, $aspect);
+                        } else {
+                            $dispatcher->addExceptionInterceptor($methodName, $aspect);
+                        }
                     }
                 }
             }
