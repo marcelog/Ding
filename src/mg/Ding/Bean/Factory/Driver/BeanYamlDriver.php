@@ -449,9 +449,7 @@ class BeanYamlDriver
         foreach($this->_yamlFiles as $yamlFilename => $yaml) {
             if (isset($yaml['aspects'])) {
                 foreach ($yaml['aspects'] as $aspect) {
-                    foreach ($simpleXmlAspect as $aspect) {
-                        $aspects[] = $this->_loadAspect($aspect);
-                    }
+                    $aspects[] = $this->_loadAspect($aspect);
                 }
             }
         }

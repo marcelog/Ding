@@ -69,5 +69,13 @@ pointcuts: !!map
   aPointcut: 
     expression: ^target.
 
+aspects: !!map
+  globalAspect:
+    pointcut: !!map
+      - pointcut-ref: aPointcut
+    type: method
+    ref: aspectA
+    expression: MyBean
+
 import:
   - otherBeans.yaml
