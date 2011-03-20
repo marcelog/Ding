@@ -441,6 +441,23 @@ class BeanYamlDriver
         return false;
     }
 
+    public function getAspects()
+    {
+        if (!$this->_yamlFiles) {
+            $this->_load();
+        }
+        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
+            if (isset($yaml['aspects'])) {
+                foreach ($yaml['aspects'] as $aspect) {
+                    foreach ($simpleXmlAspect as $aspect) {
+                        $aspects[] = $this->_loadAspect($aspect);
+                    }
+                }
+            }
+        }
+        return $aspects;
+    }
+
     /**
      * Returns a instance for this driver.
      *

@@ -477,7 +477,6 @@ class BeanXmlDriver
                 }
             }
         }
-        var_dump($aspects);
         return $aspects;
     }
 
