@@ -56,7 +56,7 @@ can break or continue the chain by choosing to (or not to) call the proceed() me
   <li><u>Method</u>: Called when the method is called.</li>
   <li><u>Exception</u>: Called when the called method has thrown an exception not catched.</li>
 </ul>
-The aspects are declared in the xml driver like this:<br/>
+The aspects are declared in the xml driver like this (yaml is supported, please see: docs/examples/yaml for an example):<br/>
 <hr/>
 &lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
@@ -151,15 +151,27 @@ this function for details. Example:
 </p>
 &lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut expression="^get.$"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut expression="^get$"/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/aspect&gt;<br/>
 &lt;/bean&gt;<br/>
 <hr/>
-
+<H3>Sharing pointcuts (aka global pointcuts)</H3>
+<p>
+You can define global pointcuts and use them in your aspect definitions:
+</p>
+&lt;pointcut id="aPointcut" expression="^get$"/&gt;<br/>
+&lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut pointcut-ref="aPointcut"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/aspect&gt;<br/>
+&lt;/bean&gt;<br/>
+</p>
+<hr/>
 <H3>Example</H3>
 <ul>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop">docs/examples/aop</a>: Using the xml driver.</li>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-regex">docs/examples/aop-regex</a>: Using the xml driver and regular expressions.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-global">docs/examples/aop-global</a>: Using the xml driver, regular expressions, and global (shared) pointcuts.</li>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/yaml">docs/examples/yaml</a>: Using the yaml driver.</li>
 </ul>
 <center>
