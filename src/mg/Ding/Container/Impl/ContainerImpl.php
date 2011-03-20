@@ -332,6 +332,9 @@ class ContainerImpl implements IContainer
                 $aspect = $this->getBean($aspectDefinition->getBeanName());
                 foreach ($aspectDefinition->getPointcuts() as $pointcutName) {
                     $pointcut = $this->_aspectManager->getPointcut($pointcutName);
+                    if ($pointcut === false) {
+                        throw new BeanFactoryException('Could not find pointcut: ' . $pointcutName);
+                    }
                     $pointcutExpression = $pointcut->getExpression();
                     foreach  ($rClass->getMethods() as $method) {
                         $methodName = $method->getName();
@@ -674,10 +677,16 @@ class ContainerImpl implements IContainer
         $this->addAfterDefinitionListener(DependsOnDriver::getInstance($soullessArray));
 
         if (isset(self::$_options['bdef']['xml'])) {
-            $this->addBeforeDefinitionListener(BeanXmlDriver::getInstance(self::$_options['bdef']['xml']));
+            $xmlDriver = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']); 
+            $this->addBeforeDefinitionListener($xmlDriver);
+            $this->_aspectManager->registerAspectProvider($xmlDriver);
+            $this->_aspectManager->registerPointcutProvider($xmlDriver);
         }
         if (isset(self::$_options['bdef']['yaml'])) {
-            $this->addBeforeDefinitionListener(BeanYamlDriver::getInstance(self::$_options['bdef']['yaml']));
+            $yamlDriver = BeanYamlDriver::getInstance(self::$_options['bdef']['yaml']);
+            $this->addBeforeDefinitionListener($yamlDriver);
+            $this->_aspectManager->registerAspectProvider($yamlDriver);
+            $this->_aspectManager->registerPointcutProvider($yamlDriver);
         }
 
         $this->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));

@@ -72,6 +72,20 @@ class AspectA implements IMethodInterceptor
     }
 }
 
+class AspectB extends AspectA
+{
+    public function invoke(MethodInvocation $invocation)
+    {
+        echo "Before2: " . $invocation->getOriginalInvocation() . "\n";
+        $invocation->proceed(array('b', 'c', 'd'));
+        echo "After\n";
+    }
+
+    public function __construct()
+    {
+    } 
+}
+
 /**
  * This is our bean.
  */

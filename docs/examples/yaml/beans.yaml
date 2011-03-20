@@ -14,6 +14,10 @@ beans: !!map
           - expression: targetMethod
         type: method
         ref: aspectA
+      - pointcut: !!map
+          - pointcut-ref: aPointcut
+        type: method
+        ref: aspectA
     lookup-methods: !!map
       aMethod: myOtherBeanName
       bMethod: myOtherBeanName
@@ -60,5 +64,10 @@ beans: !!map
           scope: singleton
       property10:
         value: ${user.name}
+
+pointcuts: !!map
+  aPointcut: 
+    expression: ^target.
+
 import:
   - otherBeans.yaml

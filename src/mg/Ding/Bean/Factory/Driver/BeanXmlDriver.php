@@ -38,6 +38,8 @@ use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Aspect\AspectDefinition;
 use Ding\Aspect\AspectManager;
+use Ding\Aspect\IAspectProvider;
+use Ding\Aspect\IPointcutProvider;
 
 /**
  * XML bean factory.
@@ -51,7 +53,8 @@ use Ding\Aspect\AspectManager;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class BeanXmlDriver implements IBeforeDefinitionListener
+class BeanXmlDriver
+    implements IBeforeDefinitionListener, IAspectProvider, IPointcutProvider
 {
     /**
      * log4php logger or our own.
@@ -215,11 +218,15 @@ class BeanXmlDriver implements IBeforeDefinitionListener
             } else {
                 $pointcutName = 'PointcutXML' . rand(1, microtime(true));
             }
-            $pointcut = clone $this->_templatePointcutDef;
-            $pointcut->setName($pointcutName);
-            $pointcut->setExpression((string)$pointcutAtts->expression);
-            $this->_aspectManager->setPointcut($pointcut);
-            $pointcuts[] = $pointcutName;
+            if (isset($pointcutAtts->expression)) {
+                $pointcut = clone $this->_templatePointcutDef;
+                $pointcut->setName($pointcutName);
+                $pointcut->setExpression((string)$pointcutAtts->expression);
+                $this->_aspectManager->setPointcut($pointcut);
+                $pointcuts[] = $pointcutName;
+            } else if (isset($pointcutAtts->{'pointcut-ref'})) {
+                $pointcuts[] = (string)$pointcutAtts->{'pointcut-ref'};
+            }
         }
         $aspect = new AspectDefinition($name, $pointcuts, $type, $aspectBean);
         return $aspect;
@@ -452,6 +459,34 @@ class BeanXmlDriver implements IBeforeDefinitionListener
         return $this->_loadBean($beanName, $bean);
     }
 
+    public function getAspect($name)
+    {
+        
+    }
+    
+    public function getPointcut($name)
+    {
+        if (!$this->_simpleXml) {
+            $this->_load();
+        }
+        foreach($this->_simpleXml as $xmlName => $xml) {
+            $simpleXmlPointcut = $xml->xpath("//pointcut[@id='$name']");
+            if (!empty($simpleXmlPointcut)) {
+                if ($this->_logger->isDebugEnabled()) {
+                    $this->_logger->debug('Found pointcut ' . $name . ' in ' . $xmlName);
+                }
+                $simpleXmlPointcut = $simpleXmlPointcut[0];
+                $pointcutAtts = $simpleXmlPointcut->attributes();
+                $pointcutName = (string)$pointcutAtts->id;
+                $pointcut = clone $this->_templatePointcutDef;
+                $pointcut->setName($pointcutName);
+                $pointcut->setExpression((string)$pointcutAtts->expression);
+                return $pointcut;
+            }
+        }
+        return false;
+    }
+    
     /**
      * Returns a instance for this driver.
      *

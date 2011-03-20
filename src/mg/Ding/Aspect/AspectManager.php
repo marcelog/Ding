@@ -68,6 +68,18 @@ class AspectManager
     private $_aspectCache;
 
     /**
+     * Aspect definition providers. 
+     * @var IAspectProvider[]
+     */
+    private $_aspectProviders;
+    
+    /**
+     * Pointcut definition providers. 
+     * @var IPointcutProvider[]
+     */
+    private $_pointcutProviders;
+    
+    /**
      * Adds or overwrites the given aspect.
      *
      * @param AspectDefinition $aspect Aspect.
@@ -134,6 +146,14 @@ class AspectManager
             if ($result === true) {
                 $this->_pointcuts[$pointcut] = $value;
                 return $value;
+            } else {
+                foreach ($this->_pointcutProviders as $provider) {
+                    $value = $provider->getPointcut($pointcut);
+                    if ($value !== false) {
+                        $this->setPointcut($value);
+                        return $value;
+                    }
+                }
             }
         }
         return false;
@@ -152,6 +172,16 @@ class AspectManager
         return self::$_instance;
     }
 
+    public function registerAspectProvider(IAspectProvider $provider)
+    {
+        $this->_aspectProviders[] = $provider;
+    }
+    
+    public function registerPointcutProvider(IPointcutProvider $provider)
+    {
+        $this->_pointcutProviders[] = $provider;
+    }
+    
     /**
      * Constructor.
      *

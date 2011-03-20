@@ -39,6 +39,8 @@ use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Aspect\AspectDefinition;
+use Ding\Aspect\IAspectProvider;
+use Ding\Aspect\IPointcutProvider;
 
 /**
  * YAML bean factory.
@@ -52,7 +54,8 @@ use Ding\Aspect\AspectDefinition;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class BeanYamlDriver implements IBeforeDefinitionListener
+class BeanYamlDriver
+    implements IBeforeDefinitionListener, IAspectProvider, IPointcutProvider
 {
     /**
      * log4php logger or our own.
@@ -200,11 +203,15 @@ class BeanYamlDriver implements IBeforeDefinitionListener
             } else {
                 $pointcutName = 'PointcutYAML' . rand(1, microtime(true));
             }
-            $pointcutDef = clone $this->_templatePointcutDef;
-            $pointcutDef->setName($pointcutName);
-            $pointcutDef->setExpression($pointcut['expression']);
-            $this->_aspectManager->setPointcut($pointcutDef);
-            $pointcuts[] = $pointcutName;
+            if (isset($pointcut['expression'])) {
+                $pointcutDef = clone $this->_templatePointcutDef;
+                $pointcutDef->setName($pointcutName);
+                $pointcutDef->setExpression($pointcut['expression']);
+                $this->_aspectManager->setPointcut($pointcutDef);
+                $pointcuts[] = $pointcutName;
+            } else if (isset($pointcut['pointcut-ref'])) {
+                $pointcuts[] = $pointcut['pointcut-ref'];
+            }
         }
         return new AspectDefinition($name, $pointcuts, $type, $aspectBean);
     }
@@ -406,6 +413,30 @@ class BeanYamlDriver implements IBeforeDefinitionListener
         return $this->_loadBean($beanName, $bean);
     }
 
+    public function getAspect($name)
+    {
+        
+    }
+    
+    public function getPointcut($name)
+    {
+        if (!$this->_yamlFiles) {
+            $this->_load();
+        }
+        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
+            if (isset($yaml['pointcuts'][$name])) {
+                if ($this->_logger->isDebugEnabled()) {
+                    $this->_logger->debug('Found ' . $name . ' in ' . $yamlFilename);
+                }
+                $pointcutDef = clone $this->_templatePointcutDef;
+                $pointcutDef->setName($pointcutName);
+                $pointcutDef->setExpression($yaml['pointcuts'][$name]['expression']);
+                return $pointcutDef;
+            }
+        }
+        return false;
+    }
+    
     /**
      * Returns a instance for this driver.
      *

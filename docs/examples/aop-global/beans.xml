@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="ComponentA" class="ComponentA" scope="singleton">
+		<aspect ref="AspectA" type="method">
+            <pointcut pointcut-ref="aPointcut"/>
+		</aspect>
+		<aspect ref="AspectB" type="exception">
+			<pointcut pointcut-ref="aPointcut"/>
+		</aspect>
+	</bean>
+
+    <pointcut id="aPointcut" expression="^get.$"/>
+
+    <bean id="AspectA" class="AspectA" scope="singleton"/>
+    <bean id="AspectB" class="AspectB" scope="singleton"/>
+</beans>
