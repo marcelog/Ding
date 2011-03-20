@@ -159,7 +159,7 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
                 $aspectName, array($pointcutName),
                 AspectDefinition::ASPECT_METHOD, $aspectBeanName, ''
             );
-            $this->_aspectManager->setAspect($aspect);
+            //$this->_aspectManager->setAspect($aspect);
             $aspects = $bean->getAspects();
             $aspects[] = $aspect;
             $bean->setAspects($aspects);
