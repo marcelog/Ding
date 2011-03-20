@@ -26,6 +26,7 @@
  * limitations under the License.
  *
  */
+use Ding\Aspect\AspectDefinition;
 namespace Ding\Aspect;
 
 use Ding\Cache\Locator\CacheLocator;
@@ -50,13 +51,13 @@ class AspectManager
     private static $_instance;
 
     /**
-     * Holds known aspects.
+     * Holds known aspects. Indexed by name.
      * @var AspectDefinition[]
      */
     private $_aspects;
 
     /**
-     * Holds known pointcuts.
+     * Holds known pointcuts. Indexed by name.
      * @var PointcutDefinition[]
      */
     private $_pointcuts;
@@ -68,17 +69,17 @@ class AspectManager
     private $_aspectCache;
 
     /**
-     * Aspect definition providers. 
+     * Aspect definition providers.
      * @var IAspectProvider[]
      */
     private $_aspectProviders;
-    
+
     /**
-     * Pointcut definition providers. 
+     * Pointcut definition providers.
      * @var IPointcutProvider[]
      */
     private $_pointcutProviders;
-    
+
     /**
      * Adds or overwrites the given aspect.
      *
@@ -130,6 +131,16 @@ class AspectManager
     }
 
     /**
+     * Return all known aspects, indexed by name.
+     *
+     * @return AspectDefinition[]
+     */
+    public function getAspects()
+    {
+        return $this->_aspects;
+    }
+
+    /**
      * Returns a PointcutDefinition or false if none found.
      *
      * @param string $pointcut Pointcut id or name.
@@ -172,16 +183,33 @@ class AspectManager
         return self::$_instance;
     }
 
+    /**
+     * Will register an aspect definition provider in this manager.
+     *
+     * @param IAspectProvider $provider Aspect definition provider.
+     *
+     * @return void
+     */
     public function registerAspectProvider(IAspectProvider $provider)
     {
         $this->_aspectProviders[] = $provider;
+        foreach ($provider->getAspects() as $aspect) {
+            $this->setAspect($aspect);
+        }
     }
-    
+
+    /**
+     * Will register a pointcut definition provider in this manager.
+     *
+     * @param IPointcutProvider $provider Pointcut definition provider.
+     *
+     * @return void
+     */
     public function registerPointcutProvider(IPointcutProvider $provider)
     {
         $this->_pointcutProviders[] = $provider;
     }
-    
+
     /**
      * Constructor.
      *

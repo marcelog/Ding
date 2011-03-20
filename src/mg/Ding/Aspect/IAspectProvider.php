@@ -60,8 +60,15 @@ interface IAspectProvider
      * Returns the aspect definition identified by name, or false.
      *
      * @param string $name Aspect id or name.
-     * 
+     *
      * @return AspectDefinition
      */
     public function getAspect($name);
+
+    /**
+     * Returns all aspects known to this provider.
+     *
+     * @return AspectDefinition[]
+     */
+    public function getAspects();
 }

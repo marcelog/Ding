@@ -201,6 +201,11 @@ class BeanXmlDriver
         } else {
             $name = 'AspectXML' . rand(1, microtime(true));
         }
+        if (isset($atts->expression)) {
+            $expression = (string)$atts->expression;
+        } else {
+            $expression = '';
+        }
         $aspectBean = (string)$atts->ref;
         $type = (string)$atts->type;
         if ($type == 'method') {
@@ -228,7 +233,7 @@ class BeanXmlDriver
                 $pointcuts[] = (string)$pointcutAtts->{'pointcut-ref'};
             }
         }
-        $aspect = new AspectDefinition($name, $pointcuts, $type, $aspectBean);
+        $aspect = new AspectDefinition($name, $pointcuts, $type, $aspectBean, $expression);
         return $aspect;
     }
 
@@ -404,8 +409,7 @@ class BeanXmlDriver
         }
         foreach ($simpleXmlBean->aspect as $aspect) {
             $aspectDefinition = $this->_loadAspect($aspect);
-            $this->_aspectManager->setAspect($aspectDefinition);
-            $bAspects[] = $aspectDefinition->getName();
+            $bAspects[] = $aspectDefinition;
         }
         foreach ($simpleXmlBean->{'constructor-arg'} as $arg) {
             $constructorArgs[] = $this->_loadConstructorArg($arg);
@@ -459,11 +463,41 @@ class BeanXmlDriver
         return $this->_loadBean($beanName, $bean);
     }
 
+    public function getAspects()
+    {
+        $aspects = array();
+        if (!$this->_simpleXml) {
+            $this->_load();
+        }
+        foreach($this->_simpleXml as $xmlName => $xml) {
+            $simpleXmlAspect = $xml->xpath("//aspect");
+            if (!empty($simpleXmlAspect)) {
+                foreach ($simpleXmlAspect as $aspect) {
+                    $aspects[] = $this->_loadAspect($aspect);
+                }
+            }
+        }
+        return $aspects;
+    }
+
     public function getAspect($name)
     {
-        
+        if (!$this->_simpleXml) {
+            $this->_load();
+        }
+        foreach($this->_simpleXml as $xmlName => $xml) {
+            $simpleXmlAspect = $xml->xpath("//aspect[@id='$name']");
+            if (!empty($simpleXmlAspect)) {
+                if ($this->_logger->isDebugEnabled()) {
+                    $this->_logger->debug('Found aspect ' . $name . ' in ' . $xmlName);
+                }
+                $simpleXmlAspect = $simpleXmlAspect[0];
+                return $this->_loadAspect($simpleXmlAspect);
+            }
+        }
+        return false;
     }
-    
+
     public function getPointcut($name)
     {
         if (!$this->_simpleXml) {
@@ -486,7 +520,7 @@ class BeanXmlDriver
         }
         return false;
     }
-    
+
     /**
      * Returns a instance for this driver.
      *
@@ -523,7 +557,7 @@ class BeanXmlDriver
         $this->_templateBeanDef = new BeanDefinition('');
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
-        $this->_templateAspectDef = new AspectDefinition('', '', 0, '');
+        $this->_templateAspectDef = new AspectDefinition('', '', 0, '', '');
         $this->_templatePointcutDef = new PointcutDefinition('', '');
         $this->_aspectManager = AspectManager::getInstance();
     }

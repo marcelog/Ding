@@ -85,6 +85,34 @@ class AspectDefinition
     private $_type;
 
     /**
+     * Regular expression for this aspect (global).
+     * @var string
+     */
+    private $_expression;
+
+    /**
+     * Sets the expression for this aspect.
+     *
+     * @param string $expression Regular expression to set.
+     *
+     * @return void
+     */
+    public function setExpression($expression)
+    {
+        $this->_expression = $expression;
+    }
+
+    /**
+     * Returns the expression for this aspect.
+     *
+     * @return string
+     */
+    public function getExpression()
+    {
+        return $this->_expression;
+    }
+
+    /**
      * Returns pointcut names.
      *
      * @return string[]
@@ -186,6 +214,7 @@ class AspectDefinition
             . ' Pointcuts: ' . $this->getPointcuts()
             . ' Type: ' . intval($this->getType())
             . ' Aspect: ' . $this->getBeanName()
+            . ' Expression: ' . $this->getExpression()
             . ']'
         ;
     }
@@ -193,18 +222,20 @@ class AspectDefinition
     /**
      * Constructor.
      *
-     * @param string   $name      Aspect name.
-     * @param string[] $pointcuts Pointcut names.
-     * @param integer  $type      Aspect type (see this class constants).
-     * @param string   $beanName  Aspect bean name.
+     * @param string   $name       Aspect name.
+     * @param string[] $pointcuts  Pointcut names.
+     * @param integer  $type       Aspect type (see this class constants).
+     * @param string   $beanName   Aspect bean name.
+     * @param string   $expression Regular expression for this aspect.
      *
      * @return void
      */
-    public function __construct($name, $pointcuts, $type, $beanName)
+    public function __construct($name, $pointcuts, $type, $beanName, $expression)
     {
         $this->_name = $name;
         $this->_pointcuts = $pointcuts;
         $this->_beanName = $beanName;
         $this->_type = $type;
+        $this->_expression = $expression;
     }
 }

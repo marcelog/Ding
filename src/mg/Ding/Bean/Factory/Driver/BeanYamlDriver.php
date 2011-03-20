@@ -187,6 +187,11 @@ class BeanYamlDriver
         } else {
             $name = 'AspectYAML' . rand(1, microtime(true));
         }
+        if (isset($aspect['expression'])) {
+            $expression = $aspect['expression'];
+        } else {
+            $expression = '';
+        }
         $aspectBean = $aspect['ref'];
         $type = $aspect['type'];
         if ($type == 'method') {
@@ -213,7 +218,7 @@ class BeanYamlDriver
                 $pointcuts[] = $pointcut['pointcut-ref'];
             }
         }
-        return new AspectDefinition($name, $pointcuts, $type, $aspectBean);
+        return new AspectDefinition($name, $pointcuts, $type, $aspectBean, $expression);
     }
 
     /**
@@ -361,8 +366,7 @@ class BeanYamlDriver
         if (isset($beanDef['aspects'])) {
             foreach ($beanDef['aspects'] as $aspect) {
                 $aspectDefinition = $this->_loadAspect($aspect);
-                $this->_aspectManager->setAspect($aspectDefinition);
-                $bAspects[] = $aspectDefinition->getName();
+                $bAspects[] = $aspectDefinition;
             }
         }
 
@@ -415,9 +419,9 @@ class BeanYamlDriver
 
     public function getAspect($name)
     {
-        
+
     }
-    
+
     public function getPointcut($name)
     {
         if (!$this->_yamlFiles) {
@@ -436,7 +440,7 @@ class BeanYamlDriver
         }
         return false;
     }
-    
+
     /**
      * Returns a instance for this driver.
      *
@@ -473,7 +477,7 @@ class BeanYamlDriver
         $this->_templateBeanDef = new BeanDefinition('');
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
-        $this->_templateAspectDef = new AspectDefinition('', '', 0, '');
+        $this->_templateAspectDef = new AspectDefinition('', '', 0, '', '');
         $this->_templatePointcutDef = new PointcutDefinition('', '');
         $this->_aspectManager = AspectManager::getInstance();
     }

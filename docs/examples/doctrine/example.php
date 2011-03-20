@@ -88,15 +88,15 @@ try
             'log4php.properties' => './log4php.properties',
     		'factory' => array(
                 'bdef' => array(
-                	'xml' => array('filename' => __DIR__ . '/beans.xml'),
+                	'xml' => array('filename' => 'beans.xml', 'directories' => array(__DIR__)),
                 ),
                 'properties' => $myProperties
             ),
     		  'cache' => array(
-    			'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/proxy'),
+    			'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
 //        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
 //              'bdef' => array('impl' => 'apc'),
-        		'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/bdef'),
+        		'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
 //        		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
 //        		'beans' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),

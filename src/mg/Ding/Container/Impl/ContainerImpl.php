@@ -303,6 +303,33 @@ class ContainerImpl implements IContainer
         return $value;
     }
 
+    private function _applyAspect(
+        AspectDefinition $aspectDefinition, DispatcherImpl $dispatcher, \ReflectionClass $rClass, array &$methods
+    ) {
+        $aspect = $this->getBean($aspectDefinition->getBeanName());
+        foreach ($aspectDefinition->getPointcuts() as $pointcutName) {
+            $pointcut = $this->_aspectManager->getPointcut($pointcutName);
+            if ($pointcut === false) {
+                throw new BeanFactoryException('Could not find pointcut: ' . $pointcutName);
+            }
+            $expression = $pointcut->getExpression();
+            foreach  ($rClass->getMethods() as $method) {
+                $methodName = $method->getName();
+                if (preg_match('/' . $expression . '/', $methodName) === 0) {
+                    continue;
+                }
+                $methods[$methodName] = '';
+                if (
+                    $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
+                ) {
+                    $dispatcher->addMethodInterceptor($methodName, $aspect);
+                } else {
+                    $dispatcher->addExceptionInterceptor($methodName, $aspect);
+                }
+            }
+        }
+    }
+
     /**
      * This will create a new bean, injecting all properties and applying all
      * aspects.
@@ -320,42 +347,32 @@ class ContainerImpl implements IContainer
         foreach ($beanDefinition->getArguments() as $argument) {
             $args[] = $this->_loadArgument($argument);
         }
-        if ($beanDefinition->hasAspects()) {
+        if (!empty($beanClass)) {
             $rClass = ReflectionFactory::getClass($beanClass);
-            $dispatcher = clone $this->_dispatcherTemplate;
-            $methods = array();
+        } else {
+            $rClass = false;
+        }
+
+        $dispatcher = clone $this->_dispatcherTemplate;
+        $methods = array();
+        if ($beanDefinition->hasAspects()) {
             /**
              * @todo the operation of applying an aspect is really expensive!
              */
-            foreach ($beanDefinition->getAspects() as $aspectName) {
-                $aspectDefinition = $this->_aspectManager->getAspect($aspectName);
-                $aspect = $this->getBean($aspectDefinition->getBeanName());
-                foreach ($aspectDefinition->getPointcuts() as $pointcutName) {
-                    $pointcut = $this->_aspectManager->getPointcut($pointcutName);
-                    if ($pointcut === false) {
-                        throw new BeanFactoryException('Could not find pointcut: ' . $pointcutName);
-                    }
-                    $pointcutExpression = $pointcut->getExpression();
-                    foreach  ($rClass->getMethods() as $method) {
-                        $methodName = $method->getName();
-                        if (
-                            preg_match(
-                            	'/' . $pointcutExpression . '/', $methodName
-                            ) === 0
-                        ) {
-                            continue;
-                        }
-                        $methods[$methodName] = '';
-                        if (
-                            $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
-                        ) {
-                            $dispatcher->addMethodInterceptor($methodName, $aspect);
-                        } else {
-                            $dispatcher->addExceptionInterceptor($methodName, $aspect);
-                        }
-                    }
-                }
+            foreach ($beanDefinition->getAspects() as $aspect) {
+                $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
             }
+        }
+        if ($rClass !== false) {
+            foreach ($this->_aspectManager->getAspects() as $aspect) {
+                $expression = $aspect->getExpression();
+                if (preg_match('/' . $expression . '/', $beanClass) === 0) {
+                    continue;
+                }
+                $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
+            }
+        }
+        if (!empty($methods)) {
             $beanClass = Proxy::create($beanClass, $methods, $dispatcher);
         }
         /* @todo change this to a clone */
@@ -677,7 +694,7 @@ class ContainerImpl implements IContainer
         $this->addAfterDefinitionListener(DependsOnDriver::getInstance($soullessArray));
 
         if (isset(self::$_options['bdef']['xml'])) {
-            $xmlDriver = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']); 
+            $xmlDriver = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);
             $this->addBeforeDefinitionListener($xmlDriver);
             $this->_aspectManager->registerAspectProvider($xmlDriver);
             $this->_aspectManager->registerPointcutProvider($xmlDriver);

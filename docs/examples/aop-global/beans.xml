@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-	<bean id="ComponentA" class="ComponentA" scope="singleton">
-		<aspect ref="AspectA" type="method">
-            <pointcut pointcut-ref="aPointcut"/>
-		</aspect>
-		<aspect ref="AspectB" type="exception">
-			<pointcut pointcut-ref="aPointcut"/>
-		</aspect>
-	</bean>
-
     <pointcut id="aPointcut" expression="^get.$"/>
+
+    <aspect id="anAspect1" ref="AspectA" type="method" expression="Component.$">
+        <pointcut pointcut-ref="aPointcut"/>
+    </aspect>
+    <aspect id="anAspect2" ref="AspectB" type="exception" expression="Component.$">
+    	<pointcut expression="^get.$"/>
+    </aspect>
 
     <bean id="AspectA" class="AspectA" scope="singleton"/>
     <bean id="AspectB" class="AspectB" scope="singleton"/>
+
+    <bean id="ComponentA" class="ComponentA" scope="singleton">
+        <aspect id="anAspect1" ref="AspectA" type="method" expression="Component.$">
+            <pointcut pointcut-ref="aPointcut"/>
+        </aspect>
+    </bean>
 </beans>

@@ -314,12 +314,12 @@ try
                 )
             ),
     		'cache' => array(
-    			'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/proxy'),
+    			'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/cache/proxy'),
 //        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
 //              'bdef' => array('impl' => 'apc'),
 //              'bdef' => array('impl' => 'dummy'),
-                'aspect' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/aspect'),
-            	'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/bdef'),
+                'aspect' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/cache/aspect'),
+            	'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/cache/bdef'),
         		//'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
 //        		'beans' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
