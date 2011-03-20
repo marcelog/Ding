@@ -8,9 +8,9 @@
  * @package    Aspect
  * @subpackage Interceptor
  * @author     Marcelo Gornstein <marcelog@gmail.com>
- * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @license    http://marcelog.github.com/ Apache License 2.0
  * @version    SVN: $Id$
- * @link       http://www.noneyet.ar/
+ * @link       http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -39,8 +39,8 @@ use Ding\Aspect\MethodInvocation;
  * @package    Aspect
  * @subpackage Interceptor
  * @author     Marcelo Gornstein <marcelog@gmail.com>
- * @license    http://www.noneyet.ar/ Apache License 2.0
- * @link       http://www.noneyet.ar/
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
  */
 interface IDispatcher
 {
