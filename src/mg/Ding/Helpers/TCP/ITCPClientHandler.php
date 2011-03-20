@@ -8,9 +8,9 @@
  * @package    Helpers
  * @subpackage Tcp
  * @author     Marcelo Gornstein <marcelog@gmail.com>
- * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @license    http://marcelog.github.com/ Apache License 2.0
  * @version    SVN: $Id$
- * @link       http://www.noneyet.ar/
+ * @link       http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -38,9 +38,9 @@ namespace Ding\Helpers\TCP;
  * @package    Helpers
  * @subpackage Tcp
  * @author     Marcelo Gornstein <marcelog@gmail.com>
- * @license    http://www.noneyet.ar/ Apache License 2.0
+ * @license    http://marcelog.github.com/ Apache License 2.0
  * @version    SVN: $Id$
- * @link       http://www.noneyet.ar/
+ * @link       http://marcelog.github.com/
  */
 interface ITCPClientHandler
 {
