@@ -159,6 +159,7 @@ this function for details. Example:
 <p>
 You can define global pointcuts and use them in your aspect definitions:
 </p>
+<p>
 &lt;pointcut id="aPointcut" expression="^get$"/&gt;<br/>
 &lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
@@ -167,6 +168,28 @@ You can define global pointcuts and use them in your aspect definitions:
 &lt;/bean&gt;<br/>
 </p>
 <hr/>
+<H3>Global aspects</H3>
+<p>
+You can define global aspects using regular expressions for classes and references
+to global pointcuts (which can also use regular expressions):
+</p>
+<p>
+&lt;pointcut id="aPointcut" expression="^get$"/&gt;<br/>
+&lt;aspect id="anAspect" expression="Service$" ref="AnAspectBean" type="method"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut pointcut-ref="aPointcut"/&gt;<br/>
+&lt;/aspect&gt;<br/>
+</p>
+<hr/>
+<p>
+In the above example, the expression attribute of the aspect declaration is applied
+to the class names for the beans. If the name of the class is matched, then the pointcuts
+expressions are tried.
+</p>
+<p>
+So you can define pointcuts inside aspects or globally. You can also define aspects in beans
+or globally. The aspects can have references to global pointcuts or the pointcut definitions
+themselves.
+</p>
 <H3>Example</H3>
 <ul>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop">docs/examples/aop</a>: Using the xml driver.</li>
