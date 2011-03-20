@@ -137,9 +137,9 @@ try
     $a = ContainerImpl::getInstance($properties);
     $bean = $a->getBean('ComponentA');
     $bean->getA('a', 1, array('1', 'a'));
-    $bean->getB('a', 1, array('1', 'a'));
     $bean->setA('a', 1, array('1', 'a'));
     $bean->dontaspectgetA('a', 1, array('1', 'a'));
+    $bean->getB('a', 1, array('1', 'a'));
 } catch(Exception $exception) {
     echo $exception . "\n";
 }
