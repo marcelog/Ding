@@ -144,10 +144,23 @@ Whenever a call is made to the method defined in the pointcut tag (in this case 
 targetMethod), the invoke() method on your bean will be called. The same applies to exception interceptors.
 </p>
 
+<p>
+You can also use regular expressions to define a pointcut for more than one method. The syntax
+for the regular expression is the same as preg_match(), please see the php manual page for
+this function for details. Example:
+</p>
+&lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut expression="^get.$"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/aspect&gt;<br/>
+&lt;/bean&gt;<br/>
+<hr/>
+
 <H3>Example</H3>
 <ul>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop">docs/examples/aop</a>: Using the xml driver.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop">docs/examples/yaml</a>: Using the yaml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-regex">docs/examples/aop-regex</a>: Using the xml driver and regular expressions.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/yaml">docs/examples/yaml</a>: Using the yaml driver.</li>
 </ul>
 <center>
   <script type="text/javascript"><!--
