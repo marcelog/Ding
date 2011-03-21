@@ -174,8 +174,10 @@ class DispatcherImpl implements IDispatcher
     public function invokeException(MethodInvocation $invocation)
     {
         $interceptors = $this->getExceptionInterceptors($method = $invocation->getMethod());
-        if ($interceptors != false) {
+        if ($interceptors != false && !empty($interceptors)) {
             return $this->_callInterceptors($invocation, $interceptors);
+        } else {
+            throw $invocation->getException();
         }
         return $invocation->proceed();
     }
