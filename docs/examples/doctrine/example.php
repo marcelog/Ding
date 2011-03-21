@@ -93,10 +93,10 @@ try
                 'properties' => $myProperties
             ),
     		  'cache' => array(
-    			'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
+    			'proxy' => array('impl' => 'dummy', 'directories' => '/tmp/Ding/proxy'),
 //        		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
 //              'bdef' => array('impl' => 'apc'),
-        		'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
+        		'bdef' => array('impl' => 'dummy', 'directories' => '/tmp/Ding/bdef'),
 //        		'beans' => array('impl' => 'file', 'directory' => '/tmp/Ding/beans'),
 //        		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
 //        		'beans' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
