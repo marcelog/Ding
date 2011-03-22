@@ -68,7 +68,6 @@ class HttpSession
      */
     public function getAttribute($name)
     {
-        global $_SESSION;
         if (isset($_SESSION[$name])) {
             return $_SESSION[$name];
         }
@@ -85,7 +84,6 @@ class HttpSession
      */
     public function setAttribute($name, $value)
     {
-        global $_SESSION;
         $_SESSION[$name] = $value;
     }
 
