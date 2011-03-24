@@ -110,8 +110,8 @@
 <p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
-				<li><span class="field">link:</span> <a href="http://www.noneyet.ar/">http://www.noneyet.ar/</a></li>
-				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
+				<li><span class="field">link:</span> <a href="http://marcelog.github.com/">http://marcelog.github.com/</a></li>
+				<li><span class="field">license:</span> <a href="http://marcelog.github.com/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
 			Located in <a class="field" href="_Aspect---Interceptor---DispatcherImpl.php.html">/Aspect/Interceptor/DispatcherImpl.php</a> (line <span class="field">45</span>)
@@ -144,12 +144,12 @@
 				</div>
 																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">IExceptionInterceptor[]</span>
+					<span class="var-type">object[]</span>
 					<a href="#$_methodsExceptionIntercepted" title="details" class="var-name">$_methodsExceptionIntercepted</a>
 				</div>
 																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">IMethodInterceptor[]</span>
+					<span class="var-type">object[]</span>
 					<a href="#$_methodsIntercepted" title="details" class="var-name">$_methodsIntercepted</a>
 				</div>
 											</div>
@@ -180,26 +180,26 @@
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#addExceptionInterceptor" title="details" class="method-name">addExceptionInterceptor</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"><a href="../../Aspect/Interceptor/IExceptionInterceptor.html">IExceptionInterceptor</a></span>&nbsp;<span class="var-name">$interceptor</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$interceptor</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$interceptorMethod</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#addMethodInterceptor" title="details" class="method-name">addMethodInterceptor</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"><a href="../../Aspect/Interceptor/IMethodInterceptor.html">IMethodInterceptor</a></span>&nbsp;<span class="var-name">$interceptor</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$interceptor</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$interceptorMethod</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">IExceptionInterceptor[]</span>
+											<span class="method-result">object[]</span>
 										<a href="#getExceptionInterceptors" title="details" class="method-name">getExceptionInterceptors</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">IMethodInterceptor[]</span>
+											<span class="method-result">object[]</span>
 										<a href="#getInterceptors" title="details" class="method-name">getInterceptors</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
 									</div>
@@ -278,7 +278,7 @@
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
 		<span class="var-title">
-			<span class="var-type">IExceptionInterceptor[]</span>
+			<span class="var-type">object[]</span>
 			<span class="var-name">$_methodsExceptionIntercepted</span>
 						(line <span class="line-number">57</span>)
 		</span>
@@ -301,7 +301,7 @@
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
 		<span class="var-title">
-			<span class="var-type">IMethodInterceptor[]</span>
+			<span class="var-type">object[]</span>
 			<span class="var-name">$_methodsIntercepted</span>
 						(line <span class="line-number">51</span>)
 		</span>
@@ -338,7 +338,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">204</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">200</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -363,12 +363,13 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">addExceptionInterceptor</span> (line <span class="line-number">88</span>)
+		<span class="method-title">addExceptionInterceptor</span> (line <span class="line-number">80</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Adds a method interceptor to the chain of the exception interceptors  for a given method name.</p>
+<p class="short-description">(non-PHPdoc)</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> Ding\Aspect\Interceptor.IDispatcher::addExceptionInterceptor()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -377,16 +378,19 @@
 		<span class="method-name">
 			addExceptionInterceptor
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"><a href="../../Aspect/Interceptor/IExceptionInterceptor.html">IExceptionInterceptor</a></span>&nbsp;<span class="var-name">$interceptor</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$interceptor</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$interceptorMethod</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
 					<li>
-				<span class="var-type"><a href="../../Aspect/Interceptor/IExceptionInterceptor.html">IExceptionInterceptor</a></span>
-				<span class="var-name">$interceptor</span><span class="var-description">: Interceptor to call.</span>			</li>
+				<span class="var-type"></span>
+				<span class="var-name">$interceptor</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$interceptorMethod</span>			</li>
 				</ul>
 		
 				<hr class="separator" />
@@ -402,12 +406,13 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">addMethodInterceptor</span> (line <span class="line-number">73</span>)
+		<span class="method-title">addMethodInterceptor</span> (line <span class="line-number">69</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Adds a method interceptor to the chain of a given method name.</p>
+<p class="short-description">(non-PHPdoc)</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> Ding\Aspect\Interceptor.IDispatcher::addMethodInterceptor()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -416,16 +421,19 @@
 		<span class="method-name">
 			addMethodInterceptor
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"><a href="../../Aspect/Interceptor/IMethodInterceptor.html">IMethodInterceptor</a></span>&nbsp;<span class="var-name">$interceptor</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$interceptor</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$interceptorMethod</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
 					<li>
-				<span class="var-type"><a href="../../Aspect/Interceptor/IMethodInterceptor.html">IMethodInterceptor</a></span>
-				<span class="var-name">$interceptor</span><span class="var-description">: Interceptor to call.</span>			</li>
+				<span class="var-type"></span>
+				<span class="var-name">$interceptor</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$interceptorMethod</span>			</li>
 				</ul>
 		
 				<hr class="separator" />
@@ -441,7 +449,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getExceptionInterceptors</span> (line <span class="line-number">134</span>)
+		<span class="method-title">getExceptionInterceptors</span> (line <span class="line-number">127</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -451,7 +459,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">IExceptionInterceptor[]</span>
+		<span class="method-result">object[]</span>
 		<span class="method-name">
 			getExceptionInterceptors
 		</span>
@@ -471,7 +479,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getInterceptors</span> (line <span class="line-number">118</span>)
+		<span class="method-title">getInterceptors</span> (line <span class="line-number">111</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -481,7 +489,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">IMethodInterceptor[]</span>
+		<span class="method-result">object[]</span>
 		<span class="method-name">
 			getInterceptors
 		</span>
@@ -501,7 +509,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">invoke</span> (line <span class="line-number">190</span>)
+		<span class="method-title">invoke</span> (line <span class="line-number">186</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -537,7 +545,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">invokeException</span> (line <span class="line-number">174</span>)
+		<span class="method-title">invokeException</span> (line <span class="line-number">168</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -573,7 +581,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_callInterceptors</span> (line <span class="line-number">150</span>)
+		<span class="method-title">_callInterceptors</span> (line <span class="line-number">143</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -595,7 +603,7 @@
 				<span class="var-type"><a href="../../Aspect/MethodInvocation.html">MethodInvocation</a></span>
 				<span class="var-name">$invocation</span><span class="var-description">: Original invocation to preserve.</span>			</li>
 					<li>
-				<span class="var-type">IInterceptor[]</span>
+				<span class="var-type">object[]</span>
 				<span class="var-name">$interceptors</span><span class="var-description">: Array of interceptors.</span>			</li>
 				</ul>
 		
@@ -606,7 +614,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">__clone</span> (line <span class="line-number">99</span>)
+		<span class="method-title">__clone</span> (line <span class="line-number">92</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -632,7 +640,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 08 Mar 2011 22:06:45 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 24 Mar 2011 20:34:29 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

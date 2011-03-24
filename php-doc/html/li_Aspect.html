@@ -116,7 +116,15 @@ if (document.getElementById) {
 			tree_classe.openIcon = 'media/images/class_folder.png';
 			tree_classe.icon = 'media/images/class_folder.png';
 			
-						    						    						    						    						    				
+						    						    						    				var classe = new WebFXTreeItem('IAspectProvider', 'Aspect/IAspectProvider.html');
+				classe.openIcon = 'media/images/Interface.png';
+				classe.icon = 'media/images/Interface.png';
+				tree_classe.add(classe);
+										    				var classe = new WebFXTreeItem('IPointcutProvider', 'Aspect/IPointcutProvider.html');
+				classe.openIcon = 'media/images/Interface.png';
+				classe.icon = 'media/images/Interface.png';
+				tree_classe.add(classe);
+										    						    						    				
 			tree.add(tree_classe);
 		
 					var tree_classe = new WebFXTreeItem('Class(es)', '');
@@ -131,7 +139,7 @@ if (document.getElementById) {
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
-										    				var classe = new WebFXTreeItem('MethodInvocation', 'Aspect/MethodInvocation.html');
+										    						    						    				var classe = new WebFXTreeItem('MethodInvocation', 'Aspect/MethodInvocation.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
@@ -156,6 +164,14 @@ if (document.getElementById) {
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
 							var file = new WebFXTreeItem('AspectManager.php', 'Aspect/_Aspect---AspectManager.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
+							var file = new WebFXTreeItem('IAspectProvider.php', 'Aspect/_Aspect---IAspectProvider.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
+							var file = new WebFXTreeItem('IPointcutProvider.php', 'Aspect/_Aspect---IPointcutProvider.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
@@ -184,23 +200,15 @@ if (document.getElementById) {
 			subpackagetree_classe.openIcon = 'media/images/class_folder.png';
 			subpackagetree_classe.icon = 'media/images/class_folder.png';
 			
+							var classe = new WebFXTreeItem('AdviceDefinition', 'Aspect/Interceptor/AdviceDefinition.html');
+				classe.openIcon = 'media/images/Class.png';
+				classe.icon = 'media/images/Class.png';
+				subpackagetree_classe.add(classe);
 							var classe = new WebFXTreeItem('DispatcherImpl', 'Aspect/Interceptor/DispatcherImpl.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				subpackagetree_classe.add(classe);
 							var classe = new WebFXTreeItem('IDispatcher', 'Aspect/Interceptor/IDispatcher.html');
-				classe.openIcon = 'media/images/Class.png';
-				classe.icon = 'media/images/Class.png';
-				subpackagetree_classe.add(classe);
-							var classe = new WebFXTreeItem('IExceptionInterceptor', 'Aspect/Interceptor/IExceptionInterceptor.html');
-				classe.openIcon = 'media/images/Class.png';
-				classe.icon = 'media/images/Class.png';
-				subpackagetree_classe.add(classe);
-							var classe = new WebFXTreeItem('IInterceptor', 'Aspect/Interceptor/IInterceptor.html');
-				classe.openIcon = 'media/images/Class.png';
-				classe.icon = 'media/images/Class.png';
-				subpackagetree_classe.add(classe);
-							var classe = new WebFXTreeItem('IMethodInterceptor', 'Aspect/Interceptor/IMethodInterceptor.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				subpackagetree_classe.add(classe);
@@ -212,23 +220,15 @@ if (document.getElementById) {
 			subpackagetree_file.openIcon = 'media/images/folder.png';
 			subpackagetree_file.icon = 'media/images/folder.png';
 			
+							var file = new WebFXTreeItem('AdviceDefinition.php', 'Aspect/Interceptor/_Aspect---Interceptor---AdviceDefinition.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				subpackagetree_file.add(file);
 							var file = new WebFXTreeItem('DispatcherImpl.php', 'Aspect/Interceptor/_Aspect---Interceptor---DispatcherImpl.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				subpackagetree_file.add(file);
 							var file = new WebFXTreeItem('IDispatcher.php', 'Aspect/Interceptor/_Aspect---Interceptor---IDispatcher.php.html');
-				file.openIcon = 'media/images/Page.png';
-				file.icon = 'media/images/Page.png';
-				subpackagetree_file.add(file);
-							var file = new WebFXTreeItem('IExceptionInterceptor.php', 'Aspect/Interceptor/_Aspect---Interceptor---IExceptionInterceptor.php.html');
-				file.openIcon = 'media/images/Page.png';
-				file.icon = 'media/images/Page.png';
-				subpackagetree_file.add(file);
-							var file = new WebFXTreeItem('IInterceptor.php', 'Aspect/Interceptor/_Aspect---Interceptor---IInterceptor.php.html');
-				file.openIcon = 'media/images/Page.png';
-				file.icon = 'media/images/Page.png';
-				subpackagetree_file.add(file);
-							var file = new WebFXTreeItem('IMethodInterceptor.php', 'Aspect/Interceptor/_Aspect---Interceptor---IMethodInterceptor.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				subpackagetree_file.add(file);

@@ -60,7 +60,7 @@ The aspects are declared in the xml driver like this (yaml is supported, please 
 <hr/>
 &lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut expression="targetMethod"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut expression="targetMethod" method="invoke"/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/aspect&gt;<br/>
 &lt;/bean&gt;<br/>
 <hr/>
@@ -107,12 +107,11 @@ The above example defines a bean named "some". When the container is requested t
 instance of this bean, it will notice that is has an aspect attached, so the bean's class is
 automatically proxied and the instance of that proxy is what is really returned.<br/><br/>
 In this case, the aspect references another bean that should also be known to the container. That
-bean must implement Ding\Aspect\Interceptor\IMethodInterceptor.
+bean must have a method named like in the method attribute, which is to be called.
 </p>
 <p>
 Notice the "type" attribute in the aspect tag. The other possible value for this attribute is "exception", this will attach an
-ExceptionInterceptor instead of a MethodInterceptor, and your aspect bean must implement IExceptionInterceptor
-instead of IMethodInterceptor.
+ExceptionInterceptor instead of a MethodInterceptor.
 </p>
 <center>
 <script type="text/javascript"><!--
@@ -141,7 +140,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script></center>
 <p>
 Whenever a call is made to the method defined in the pointcut tag (in this case the method is called
-targetMethod), the invoke() method on your bean will be called. The same applies to exception interceptors.
+targetMethod), the method on your bean will be called. The same applies to exception interceptors.
 </p>
 
 <p>
@@ -151,7 +150,7 @@ this function for details. Example:
 </p>
 &lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut expression="^get$"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut expression="^get$" method="invoke"/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/aspect&gt;<br/>
 &lt;/bean&gt;<br/>
 <hr/>
@@ -163,7 +162,7 @@ You can define global pointcuts and use them in your aspect definitions:
 &lt;pointcut id="aPointcut" expression="^get$"/&gt;<br/>
 &lt;bean id="some" class="AClass" scope="prototype"&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;aspect ref="AnAspectBean" type="method"&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut pointcut-ref="aPointcut"/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;pointcut pointcut-ref="aPointcut" method="invoke"/&gt;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&lt;/aspect&gt;<br/>
 &lt;/bean&gt;<br/>
 </p>

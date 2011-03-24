@@ -103,18 +103,18 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../../Bean/Lifecycle/IBeforeDefinitionListener.html">IBeforeDefinitionListener</a></li>            </ul>
+                <li><a href="../../Bean/Lifecycle/IBeforeDefinitionListener.html">IBeforeDefinitionListener</a></li><li><a href="../../Aspect/IAspectProvider.html">IAspectProvider</a></li><li><a href="../../Aspect/IPointcutProvider.html">IPointcutProvider</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">YAML bean factory.</p>
 <p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
-				<li><span class="field">link:</span> <a href="http://www.noneyet.ar/">http://www.noneyet.ar/</a></li>
-				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
+				<li><span class="field">link:</span> <a href="http://marcelog.github.com/">http://marcelog.github.com/</a></li>
+				<li><span class="field">license:</span> <a href="http://marcelog.github.com/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Bean---Factory---Driver---BeanYamlDriver.php.html">/Bean/Factory/Driver/BeanYamlDriver.php</a> (line <span class="field">55</span>)
+			Located in <a class="field" href="_Bean---Factory---Driver---BeanYamlDriver.php.html">/Bean/Factory/Driver/BeanYamlDriver.php</a> (line <span class="field">57</span>)
 		</p>
 		
 				
@@ -137,7 +137,7 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																												<div class="var-title">
+																																				<div class="var-title">
 					<img src="../../media/images/StaticVariable.png" alt=" " />
 					static <span class="var-type">BeanFactoryXmlImpl</span>
 					<a href="#$_instance" title="details" class="var-name">$_instance</a>
@@ -146,6 +146,11 @@
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type"><a href="../../Aspect/AspectManager.html">AspectManager</a></span>
 					<a href="#$_aspectManager" title="details" class="var-name">$_aspectManager</a>
+				</div>
+																<div class="var-title">
+					<img src="../../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">string[]</span>
+					<a href="#$_directories" title="details" class="var-name">$_directories</a>
 				</div>
 																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
@@ -203,19 +208,19 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																											
+																																											
 				<div class="method-definition">
 					<img src="../../media/images/StaticMethod.png" alt=" "/>
 					static 						<span class="method-result"><a href="../../Bean/Driver/BeanYamlDriver.html">BeanYamlDriver</a></span>
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
 									</div>
-																																																																			
+																																																																											
 				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$filename</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -224,7 +229,28 @@
 										<a href="#beforeDefinition" title="details" class="method-name">beforeDefinition</a>
 											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$beanName</span>, [<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span> = <span class="var-default">null</span>], <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$bean</span>)
 									</div>
+															
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#getAspect" title="details" class="method-name">getAspect</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#getAspects" title="details" class="method-name">getAspects</a>
+										()
+									</div>
 																							
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#getPointcut" title="details" class="method-name">getPointcut</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+															
 				<div class="method-definition">
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -250,14 +276,14 @@
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
 											<span class="method-result"><a href="../../Bean/BeanConstructorArgumentDefinition.html">BeanConstructorArgumentDefinition</a></span>
 										<a href="#_loadConstructorArg" title="details" class="method-name">_loadConstructorArg</a>
-											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$yamlFilename</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../../media/images/PrivateMethod.png" alt=" "/>
 											<span class="method-result"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a></span>
 										<a href="#_loadProperty" title="details" class="method-name">_loadProperty</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed[]</span>&nbsp;<span class="var-name">$value</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed[]</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$yamlFilename</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -284,14 +310,14 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_instance" id="$_instance"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/StaticVariable.png" />
 		<span class="var-title">
 			static <span class="var-type">BeanFactoryXmlImpl</span>
 			<span class="var-name">$_instance</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">109</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">112</span>)
 		</span>
 	</div>
 
@@ -308,19 +334,42 @@
 </div>
 
 <a name="var$_aspectManager" id="$_aspectManager"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
 		<span class="var-title">
 			<span class="var-type"><a href="../../Aspect/AspectManager.html">AspectManager</a></span>
 			<span class="var-name">$_aspectManager</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">115</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">118</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">The aspect manager.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_directories" id="$_directories"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">string[]</span>
+			<span class="var-name">$_directories</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">124</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Optional directories to search for bean files.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -338,7 +387,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$_filename</span>
-						(line <span class="line-number">67</span>)
+						(line <span class="line-number">70</span>)
 		</span>
 	</div>
 
@@ -361,7 +410,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Logger/Logger.html">Logger</a></span>
 			<span class="var-name">$_logger</span>
-						(line <span class="line-number">61</span>)
+						(line <span class="line-number">64</span>)
 		</span>
 	</div>
 
@@ -384,7 +433,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Bean/BeanConstructorArgumentDefinition.html">BeanConstructorArgumentDefinition</a></span>
 			<span class="var-name">$_templateArgDef</span>
-						(line <span class="line-number">91</span>)
+						(line <span class="line-number">94</span>)
 		</span>
 	</div>
 
@@ -407,7 +456,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Aspect/AspectDefinition.html">AspectDefinition</a></span>
 			<span class="var-name">$_templateAspectDef</span>
-						(line <span class="line-number">97</span>)
+						(line <span class="line-number">100</span>)
 		</span>
 	</div>
 
@@ -430,7 +479,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
 			<span class="var-name">$_templateBeanDef</span>
-						(line <span class="line-number">79</span>)
+						(line <span class="line-number">82</span>)
 		</span>
 	</div>
 
@@ -453,7 +502,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Aspect/PointcutDefinition.html">PointcutDefinition</a></span>
 			<span class="var-name">$_templatePointcutDef</span>
-						(line <span class="line-number">103</span>)
+						(line <span class="line-number">106</span>)
 		</span>
 	</div>
 
@@ -476,7 +525,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a></span>
 			<span class="var-name">$_templatePropDef</span>
-						(line <span class="line-number">85</span>)
+						(line <span class="line-number">88</span>)
 		</span>
 	</div>
 
@@ -499,7 +548,7 @@
 		<span class="var-title">
 			<span class="var-type">string[]</span>
 			<span class="var-name">$_yamlFiles</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">73</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">76</span>)
 		</span>
 	</div>
 
@@ -534,7 +583,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">392</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">468</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -564,7 +613,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">407</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">483</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -578,13 +627,13 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$filename</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$filename</span>			</li>
+				<span class="var-type">array</span>
+				<span class="var-name">$options</span>			</li>
 				</ul>
 		
 			
@@ -594,7 +643,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">beforeDefinition</span> (line <span class="line-number">380</span>)
+		<span class="method-title">beforeDefinition</span> (line <span class="line-number">416</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -634,12 +683,94 @@
 					</dl>
 			
 	</div>
-<a name="method_load" id="_load"><!-- --></a>
+<a name="methodgetAspect" id="getAspect"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getAspect</span> (line <span class="line-number">421</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getAspect
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetAspects" id="getAspects"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getAspects</span> (line <span class="line-number">446</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getAspects
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPointcut" id="getPointcut"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getPointcut</span> (line <span class="line-number">426</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getPointcut
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method_load" id="_load"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_load</span> (line <span class="line-number">364</span>)
+		<span class="method-title">_load</span> (line <span class="line-number">400</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -661,11 +792,11 @@
 			
 	</div>
 <a name="method_loadAspect" id="_loadAspect"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadAspect</span> (line <span class="line-number">157</span>)
+		<span class="method-title">_loadAspect</span> (line <span class="line-number">182</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -692,11 +823,11 @@
 			
 	</div>
 <a name="method_loadBean" id="_loadBean"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadBean</span> (line <span class="line-number">269</span>)
+		<span class="method-title">_loadBean</span> (line <span class="line-number">306</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -726,11 +857,11 @@
 			
 	</div>
 <a name="method_loadConstructorArg" id="_loadConstructorArg"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadConstructorArg</span> (line <span class="line-number">233</span>)
+		<span class="method-title">_loadConstructorArg</span> (line <span class="line-number">270</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -745,23 +876,26 @@
 		<span class="method-name">
 			_loadConstructorArg
 		</span>
-					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$yamlFilename</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">mixed</span>
 				<span class="var-name">$value</span><span class="var-description">: Constructor arg YAML structure value.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$yamlFilename</span><span class="var-description">: Filename for yaml file.</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="method_loadProperty" id="_loadProperty"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadProperty</span> (line <span class="line-number">199</span>)
+		<span class="method-title">_loadProperty</span> (line <span class="line-number">235</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -776,7 +910,7 @@
 		<span class="method-name">
 			_loadProperty
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed[]</span>&nbsp;<span class="var-name">$value</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">mixed[]</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$yamlFilename</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -786,16 +920,19 @@
 					<li>
 				<span class="var-type">mixed[]</span>
 				<span class="var-name">$value</span><span class="var-description">: Property YAML structure value.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$yamlFilename</span><span class="var-description">: Filename for yaml file.</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="method_loadYaml" id="_loadYaml"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadYaml</span> (line <span class="line-number">125</span>)
+		<span class="method-title">_loadYaml</span> (line <span class="line-number">134</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -827,7 +964,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 08 Mar 2011 22:06:43 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 24 Mar 2011 20:34:28 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

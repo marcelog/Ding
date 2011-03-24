@@ -105,11 +105,11 @@
 <p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
-				<li><span class="field">link:</span> <a href="http://www.noneyet.ar/">http://www.noneyet.ar/</a></li>
-				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
+				<li><span class="field">link:</span> <a href="http://marcelog.github.com/">http://marcelog.github.com/</a></li>
+				<li><span class="field">license:</span> <a href="http://marcelog.github.com/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Aspect---AspectManager.php.html">/Aspect/AspectManager.php</a> (line <span class="field">44</span>)
+			Located in <a class="field" href="_Aspect---AspectManager.php.html">/Aspect/AspectManager.php</a> (line <span class="field">45</span>)
 		</p>
 		
 				
@@ -132,15 +132,20 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																												<div class="var-title">
+																																				<div class="var-title">
 					<img src="../media/images/StaticVariable.png" alt=" " />
 					static <span class="var-type"><a href="../Aspect/AspectManager.html">AspectManager</a></span>
 					<a href="#$_instance" title="details" class="var-name">$_instance</a>
 				</div>
-																												<div class="var-title">
+																																				<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type"><a href="../Cache/ICache.html">ICache</a></span>
 					<a href="#$_aspectCache" title="details" class="var-name">$_aspectCache</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">IAspectProvider[]</span>
+					<a href="#$_aspectProviders" title="details" class="var-name">$_aspectProviders</a>
 				</div>
 																<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
@@ -148,6 +153,11 @@
 					<a href="#$_aspects" title="details" class="var-name">$_aspects</a>
 				</div>
 																								<div class="var-title">
+					<img src="../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">IPointcutProvider[]</span>
+					<a href="#$_pointcutProviders" title="details" class="var-name">$_pointcutProviders</a>
+				</div>
+																<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">PointcutDefinition[]</span>
 					<a href="#$_pointcuts" title="details" class="var-name">$_pointcuts</a>
@@ -168,14 +178,14 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																											
+																																			
 				<div class="method-definition">
 					<img src="../media/images/StaticMethod.png" alt=" "/>
 					static 						<span class="method-result"><a href="../Aspect/AspectManager.html">AspectManager</a></span>
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 										()
 									</div>
-																																											
+																																																											
 				<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -189,12 +199,33 @@
 										<a href="#getAspect" title="details" class="method-name">getAspect</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$aspect</span>)
 									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">AspectDefinition[]</span>
+										<a href="#getAspects" title="details" class="method-name">getAspects</a>
+										()
+									</div>
 																							
 				<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result"><a href="../Aspect/PointcutDefinition.html">PointcutDefinition</a></span>
 										<a href="#getPointcut" title="details" class="method-name">getPointcut</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$pointcut</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#registerAspectProvider" title="details" class="method-name">registerAspectProvider</a>
+											(<span class="var-type"><a href="../Aspect/IAspectProvider.html">IAspectProvider</a></span>&nbsp;<span class="var-name">$provider</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#registerPointcutProvider" title="details" class="method-name">registerPointcutProvider</a>
+											(<span class="var-type"><a href="../Aspect/IPointcutProvider.html">IPointcutProvider</a></span>&nbsp;<span class="var-name">$provider</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -235,7 +266,7 @@
 		<span class="var-title">
 			static <span class="var-type"><a href="../Aspect/AspectManager.html">AspectManager</a></span>
 			<span class="var-name">$_instance</span>
-						(line <span class="line-number">50</span>)
+						(line <span class="line-number">51</span>)
 		</span>
 	</div>
 
@@ -259,7 +290,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../Cache/ICache.html">ICache</a></span>
 			<span class="var-name">$_aspectCache</span>
-						(line <span class="line-number">68</span>)
+						(line <span class="line-number">69</span>)
 		</span>
 	</div>
 
@@ -274,20 +305,66 @@
 		
 
 </div>
-<a name="var$_aspects" id="$_aspects"><!-- --></A>
+<a name="var$_aspectProviders" id="$_aspectProviders"><!-- --></A>
 <div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">IAspectProvider[]</span>
+			<span class="var-name">$_aspectProviders</span>
+						(line <span class="line-number">75</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Aspect definition providers.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_aspects" id="$_aspects"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../media/images/PrivateVariable.png" />
 		<span class="var-title">
 			<span class="var-type">AspectDefinition[]</span>
 			<span class="var-name">$_aspects</span>
-						(line <span class="line-number">56</span>)
+						(line <span class="line-number">57</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Holds known aspects.</p>
+<p class="short-description">Holds known aspects. Indexed by name.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_pointcutProviders" id="$_pointcutProviders"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<img src="../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">IPointcutProvider[]</span>
+			<span class="var-name">$_pointcutProviders</span>
+						(line <span class="line-number">81</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Pointcut definition providers.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -305,12 +382,12 @@
 		<span class="var-title">
 			<span class="var-type">PointcutDefinition[]</span>
 			<span class="var-name">$_pointcuts</span>
-						(line <span class="line-number">62</span>)
+						(line <span class="line-number">63</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Holds known pointcuts.</p>
+<p class="short-description">Holds known pointcuts. Indexed by name.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> private</li>
 			</ul>
@@ -340,7 +417,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">147</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">178</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -365,7 +442,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">160</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">218</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -390,7 +467,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getAspect</span> (line <span class="line-number">105</span>)
+		<span class="method-title">getAspect</span> (line <span class="line-number">118</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -415,12 +492,37 @@
 		
 			
 	</div>
-<a name="methodgetPointcut" id="getPointcut"><!-- --></a>
+<a name="methodgetAspects" id="getAspects"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getPointcut</span> (line <span class="line-number">127</span>)
+		<span class="method-title">getAspects</span> (line <span class="line-number">138</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return all known aspects, indexed by name.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">AspectDefinition[]</span>
+		<span class="method-name">
+			getAspects
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPointcut" id="getPointcut"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getPointcut</span> (line <span class="line-number">150</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -445,12 +547,72 @@
 		
 			
 	</div>
-<a name="methodsetAspect" id="setAspect"><!-- --></a>
+<a name="methodregisterAspectProvider" id="registerAspectProvider"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">registerAspectProvider</span> (line <span class="line-number">193</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will register an aspect definition provider in this manager.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			registerAspectProvider
+		</span>
+					(<span class="var-type"><a href="../Aspect/IAspectProvider.html">IAspectProvider</a></span>&nbsp;<span class="var-name">$provider</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../Aspect/IAspectProvider.html">IAspectProvider</a></span>
+				<span class="var-name">$provider</span><span class="var-description">: Aspect definition provider.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodregisterPointcutProvider" id="registerPointcutProvider"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setAspect</span> (line <span class="line-number">77</span>)
+		<span class="method-title">registerPointcutProvider</span> (line <span class="line-number">208</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will register a pointcut definition provider in this manager.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			registerPointcutProvider
+		</span>
+					(<span class="var-type"><a href="../Aspect/IPointcutProvider.html">IPointcutProvider</a></span>&nbsp;<span class="var-name">$provider</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../Aspect/IPointcutProvider.html">IPointcutProvider</a></span>
+				<span class="var-name">$provider</span><span class="var-description">: Pointcut definition provider.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetAspect" id="setAspect"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setAspect</span> (line <span class="line-number">90</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -476,11 +638,11 @@
 			
 	</div>
 <a name="methodsetPointcut" id="setPointcut"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setPointcut</span> (line <span class="line-number">91</span>)
+		<span class="method-title">setPointcut</span> (line <span class="line-number">104</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -511,7 +673,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 08 Mar 2011 22:06:42 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 24 Mar 2011 20:34:26 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

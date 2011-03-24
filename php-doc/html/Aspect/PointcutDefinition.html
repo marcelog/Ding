@@ -105,8 +105,8 @@
 <p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
-				<li><span class="field">link:</span> <a href="http://www.noneyet.ar/">http://www.noneyet.ar/</a></li>
-				<li><span class="field">license:</span> <a href="http://www.noneyet.ar/">Apache License 2.0</a></li>
+				<li><span class="field">link:</span> <a href="http://marcelog.github.com/">http://marcelog.github.com/</a></li>
+				<li><span class="field">license:</span> <a href="http://marcelog.github.com/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
 			Located in <a class="field" href="_Aspect---PointcutDefinition.php.html">/Aspect/PointcutDefinition.php</a> (line <span class="field">42</span>)
@@ -132,10 +132,15 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																<div class="var-title">
+																																								<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">string</span>
 					<a href="#$_expression" title="details" class="var-name">$_expression</a>
+				</div>
+																<div class="var-title">
+					<img src="../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">string</span>
+					<a href="#$_method" title="details" class="var-name">$_method</a>
 				</div>
 																<div class="var-title">
 					<img src="../media/images/PrivateVariable.png" alt=" " />
@@ -158,18 +163,25 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																															
+																																																																															
 				<div class="method-definition">
 					<img src="../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$expression</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$expression</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
 									</div>
 															
 				<div class="method-definition">
 					<img src="../media/images/Method.png" alt=" "/>
 											<span class="method-result">string</span>
 										<a href="#getExpression" title="details" class="method-name">getExpression</a>
+										()
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">string</span>
+										<a href="#getMethod" title="details" class="method-name">getMethod</a>
 										()
 									</div>
 															
@@ -185,6 +197,13 @@
 											<span class="method-result">void</span>
 										<a href="#setExpression" title="details" class="method-name">setExpression</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$expression</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#setMethod" title="details" class="method-name">setMethod</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -241,8 +260,31 @@
 		
 
 </div>
-<a name="var$_name" id="$_name"><!-- --></A>
+<a name="var$_method" id="$_method"><!-- --></A>
 <div class="evenrow">
+
+	<div class="var-header">
+		<img src="../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$_method</span>
+						(line <span class="line-number">60</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Target method to execute.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_name" id="$_name"><!-- --></A>
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../media/images/PrivateVariable.png" />
@@ -280,11 +322,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">124</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">154</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -298,7 +340,7 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$expression</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$expression</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -306,18 +348,21 @@
 				<span class="var-type">string</span>
 				<span class="var-name">$name</span><span class="var-description">: Pointcut name.</span>			</li>
 					<li>
-				<span class="var-type">integer</span>
+				<span class="var-type">string</span>
 				<span class="var-name">$expression</span><span class="var-description">: Pointcut expression.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Target method to execute.</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodgetExpression" id="getExpression"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getExpression</span> (line <span class="line-number">83</span>)
+		<span class="method-title">getExpression</span> (line <span class="line-number">111</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -337,12 +382,37 @@
 		
 			
 	</div>
+<a name="methodgetMethod" id="getMethod"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">getMethod</span> (line <span class="line-number">89</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the target method.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getMethod
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
 <a name="methodgetName" id="getName"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">getName</span> (line <span class="line-number">61</span>)
+		<span class="method-title">getName</span> (line <span class="line-number">67</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -367,7 +437,7 @@
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setExpression</span> (line <span class="line-number">95</span>)
+		<span class="method-title">setExpression</span> (line <span class="line-number">123</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -392,12 +462,42 @@
 		
 			
 	</div>
-<a name="methodsetName" id="setName"><!-- --></a>
+<a name="methodsetMethod" id="setMethod"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">setName</span> (line <span class="line-number">73</span>)
+		<span class="method-title">setMethod</span> (line <span class="line-number">101</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the target method.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setMethod
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Sets the target method to execute.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetName" id="setName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<img src="../media/images/Method.png" />
+		<span class="method-title">setName</span> (line <span class="line-number">79</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -423,11 +523,11 @@
 			
 	</div>
 <a name="method__toString" id="__toString"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../media/images/Method.png" />
-		<span class="method-title">__toString</span> (line <span class="line-number">105</span>)
+		<span class="method-title">__toString</span> (line <span class="line-number">133</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -453,7 +553,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 08 Mar 2011 22:06:48 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Thu, 24 Mar 2011 20:34:33 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
