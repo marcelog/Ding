@@ -322,9 +322,9 @@ class ContainerImpl implements IContainer
                 if (
                     $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
                 ) {
-                    $dispatcher->addMethodInterceptor($methodName, $aspect);
+                    $dispatcher->addMethodInterceptor($methodName, $aspect, $pointcut->getMethod());
                 } else {
-                    $dispatcher->addExceptionInterceptor($methodName, $aspect);
+                    $dispatcher->addExceptionInterceptor($methodName, $aspect, $pointcut->getMethod());
                 }
             }
         }

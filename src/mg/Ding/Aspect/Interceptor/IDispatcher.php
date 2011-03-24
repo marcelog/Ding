@@ -47,27 +47,25 @@ interface IDispatcher
     /**
      * Adds a method interceptor to the chain of a given method name.
      *
-     * @param string             $method      Method name.
-     * @param IMethodInterceptor $interceptor Interceptor to call.
+     * @param string $method            Method name.
+     * @param object $interceptor       Interceptor object.
+     * @param string $interceptorMethod Interceptor method name.
      *
      * @return void
      */
-    public function addMethodInterceptor(
-        $method, IMethodInterceptor $interceptor
-    );
+    public function addMethodInterceptor($method, $interceptor, $interceptorMethod);
 
     /**
      * Adds a method interceptor to the chain of the exception interceptors
      * for a given method name.
      *
-     * @param string                $method      Method name.
-     * @param IExceptionInterceptor $interceptor Interceptor to call.
+     * @param string $method            Method name.
+     * @param object $interceptor       Interceptor object.
+     * @param string $interceptorMethod Interceptor method name.
      *
      * @return void
      */
-    public function addExceptionInterceptor(
-        $method, IExceptionInterceptor $interceptor
-    );
+    public function addExceptionInterceptor($method, $interceptor, $interceptorMethod);
 
     /**
      * The proxy will call this method when an aspected method throws an

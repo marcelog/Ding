@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-    <pointcut id="aPointcut" expression="^getA$"/>
+    <pointcut id="aPointcut" expression="^getA$" method="invoke"/>
 
     <aspect id="anAspect1" ref="AspectA" type="method" expression="Component.$">
-        <pointcut pointcut-ref="aPointcut"/>
+        <pointcut pointcut-ref="aPointcut" method="invoke"/>
     </aspect>
     <aspect id="anAspect2" ref="AspectB" type="exception" expression="Component.$">
-    	<pointcut expression="^getB$"/>
+    	<pointcut expression="^getB$" method="invoke"/>
     </aspect>
 
     <bean id="AspectA" class="AspectA" scope="singleton"/>

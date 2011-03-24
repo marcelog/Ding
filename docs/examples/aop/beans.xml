@@ -2,10 +2,10 @@
 <beans>
 	<bean id="ComponentA" class="ComponentA" scope="singleton">
 		<aspect ref="AspectA" type="method">
-			<pointcut expression="targetMethod"/>
+			<pointcut expression="targetMethod" method="invoke"/>
 		</aspect>
 		<aspect ref="AspectB" type="exception">
-			<pointcut expression="targetException"/>
+			<pointcut expression="targetException" method="invoke"/>
 		</aspect>
 	</bean>
 	<bean id="AspectA" class="AspectA" scope="singleton"/>

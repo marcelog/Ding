@@ -41,8 +41,6 @@ Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Aspect\MethodInvocation;
-use Ding\Aspect\Interceptor\IMethodInterceptor;
-use Ding\Aspect\Interceptor\IExceptionInterceptor;
 
 class MyOtherBean
 {
@@ -58,7 +56,7 @@ class MyInnerBean
 
 }
 
-class AspectA implements IMethodInterceptor
+class AspectA
 {
     public function invoke(MethodInvocation $invocation)
     {
@@ -83,7 +81,7 @@ class AspectB extends AspectA
 
     public function __construct()
     {
-    } 
+    }
 }
 
 /**

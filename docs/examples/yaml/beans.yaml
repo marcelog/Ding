@@ -9,13 +9,18 @@ beans: !!map
     init-method: init
     destroy-method: destroy
     depends-on: myOtherBeanName
-    aspects: !!map
-      - pointcut: !!map
-          - expression: targetMethod
+    aspects:
+      aspectA:
+        pointcuts:
+          pointcutA:
+            method: invoke
+            expression: targetMethod
         type: method
         ref: aspectA
-      - pointcut: !!map
-          - pointcut-ref: aPointcut
+      aspectB:
+        pointcuts:
+          pointcutA:
+            pointcut-ref: aPointcut
         type: method
         ref: aspectA
     lookup-methods: !!map
@@ -68,11 +73,13 @@ beans: !!map
 pointcuts: !!map
   aPointcut: 
     expression: ^target.
+    method: invoke
 
 aspects: !!map
   globalAspect:
-    pointcut: !!map
-      - pointcut-ref: aPointcut
+    pointcuts:
+      apointCut:
+        pointcut-ref: aPointcut
     type: method
     ref: aspectA
     expression: MyBean

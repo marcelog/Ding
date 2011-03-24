@@ -9,7 +9,7 @@
 			<ref bean="ComponentX"/>
 		</property>
 		<aspect ref="AspectC" type="method">
-			<pointcut expression="setAComponent"/>
+			<pointcut expression="setAComponent" method="invoke"/>
 		</aspect>
 	</bean>
 	<bean id="AspectE" class="AspectE" scope="singleton"/>

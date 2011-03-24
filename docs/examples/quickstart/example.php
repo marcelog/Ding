@@ -49,8 +49,6 @@ use Ding\Helpers\SignalHandler\ISignalHandler;
 use Ding\Helpers\ShutdownHandler\IShutdownHandler;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Aspect\MethodInvocation;
-use Ding\Aspect\Interceptor\IMethodInterceptor;
-use Ding\Aspect\Interceptor\IExceptionInterceptor;
 
 // Uncomment these two lines if you want to try zend_cache instead of
 // the default available cache backends. Also, modify one of the 'impl' options
@@ -163,7 +161,7 @@ class ClassC
     }
 }
 
-class AspectA implements IMethodInterceptor
+class AspectA
 {
     public function invoke(MethodInvocation $invocation)
     {
@@ -177,7 +175,7 @@ class AspectA implements IMethodInterceptor
     }
 }
 
-class AspectB implements IMethodInterceptor
+class AspectB
 {
     public function invoke(MethodInvocation $invocation)
     {
@@ -190,7 +188,7 @@ class AspectB implements IMethodInterceptor
     {
     }
 }
-class AspectC implements IMethodInterceptor
+class AspectC
 {
     public function invoke(MethodInvocation $invocation)
     {
@@ -203,7 +201,7 @@ class AspectC implements IMethodInterceptor
     {
     }
 }
-class AspectD implements IExceptionInterceptor
+class AspectD
 {
     public function invoke(MethodInvocation $invocation)
     {
@@ -219,7 +217,7 @@ class AspectD implements IExceptionInterceptor
     {
     }
 }
-class AspectE implements IMethodInterceptor
+class AspectE
 {
     public function invoke(MethodInvocation $invocation)
     {

@@ -46,13 +46,13 @@ class DispatcherImpl implements IDispatcher
 {
     /**
      * Associated array for methods intercepted.
-     * @var IMethodInterceptor[]
+     * @var object[]
      */
     private $_methodsIntercepted;
 
     /**
      * Associated array for methods intercepted for exceptions.
-     * @var IExceptionInterceptor[]
+     * @var object[]
      */
     private $_methodsExceptionIntercepted;
 
@@ -63,32 +63,25 @@ class DispatcherImpl implements IDispatcher
     private $_interceptorClasses;
 
     /**
-     * Adds a method interceptor to the chain of a given method name.
-     *
-     * @param string             $method      Method name.
-     * @param IMethodInterceptor $interceptor Interceptor to call.
-     *
-     * @return void
+     * (non-PHPdoc)
+     * @see Ding\Aspect\Interceptor.IDispatcher::addMethodInterceptor()
      */
-    public function addMethodInterceptor(
-        $method, IMethodInterceptor $interceptor
-    ) {
-        $this->_methodsIntercepted[$method][] = $interceptor;
+    public function addMethodInterceptor($method, $interceptor, $interceptorMethod)
+    {
+        $this->_methodsIntercepted[$method][] = new AdviceDefinition(
+            $method, $interceptor, $interceptorMethod
+        );
     }
 
     /**
-     * Adds a method interceptor to the chain of the exception interceptors
-     * for a given method name.
-     *
-     * @param string                $method      Method name.
-     * @param IExceptionInterceptor $interceptor Interceptor to call.
-     *
-     * @return void
+     * (non-PHPdoc)
+     * @see Ding\Aspect\Interceptor.IDispatcher::addExceptionInterceptor()
      */
-    public function addExceptionInterceptor(
-        $method, IExceptionInterceptor $interceptor
-    ) {
-        $this->_methodsExceptionIntercepted[$method][] = $interceptor;
+    public function addExceptionInterceptor($method, $interceptor, $interceptorMethod)
+    {
+        $this->_methodsExceptionIntercepted[$method][] = new AdviceDefinition(
+            $method, $interceptor, $interceptorMethod
+        );
     }
 
     /**
@@ -113,7 +106,7 @@ class DispatcherImpl implements IDispatcher
      *
      * @param string $method Method to check for.
      *
-     * @return IMethodInterceptor[]
+     * @return object[]
      */
     public function getInterceptors($method)
     {
@@ -129,7 +122,7 @@ class DispatcherImpl implements IDispatcher
      *
      * @param string $method Method to check for.
      *
-     * @return IExceptionInterceptor[]
+     * @return object[]
      */
     public function getExceptionInterceptors($method)
     {
@@ -143,7 +136,7 @@ class DispatcherImpl implements IDispatcher
      * Will chain and return the result of the chained call of interceptors.
      *
      * @param MethodInvocation $invocation   Original invocation to preserve.
-     * @param IInterceptor[]   $interceptors Array of interceptors.
+     * @param object[]         $interceptors Array of interceptors.
      *
      * @return mixed
      */
@@ -154,9 +147,10 @@ class DispatcherImpl implements IDispatcher
         $invocationChain = $invocation;
         for ($i = $total; $i >= 0; $i--) {
             $newInvocation = new MethodInvocation(
-                get_class($interceptors[$i]), 'invoke',
+                get_class($interceptors[$i]->getInterceptor()),
+                $interceptors[$i]->getInterceptorMethod(),
                 array($invocationChain),
-                $interceptors[$i], $invocation
+                $interceptors[$i]->getInterceptor(), $invocation
             );
             $invocationChain = $newInvocation;
         }

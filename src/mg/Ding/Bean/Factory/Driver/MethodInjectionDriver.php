@@ -33,7 +33,6 @@ use Ding\Aspect\PointcutDefinition;
 
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Aspect\AspectManager;
-use Ding\Aspect\Interceptor\IMethodInterceptor;
 use Ding\Aspect\MethodInvocation;
 use Ding\Aspect\AspectDefinition;
 use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
@@ -55,7 +54,7 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class MethodInjectionAspect implements IMethodInterceptor
+class MethodInjectionAspect
 {
     /**
      * Factory to use.
@@ -153,7 +152,7 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
             $factory->setBeanDefinition($aspectBeanName, $aspectBean);
             $aspectName = 'MethodInjectionAspect' . rand(1, microtime(true));
             $pointcutName = 'MethodInjectionPointcut' . rand(1, microtime(true));
-            $pointcut = new PointcutDefinition($pointcutName, $method[0]);
+            $pointcut = new PointcutDefinition($pointcutName, $method[0], 'invoke');
             $this->_aspectManager->setPointcut($pointcut);
             $aspect = new AspectDefinition(
                 $aspectName, array($pointcutName),

@@ -112,11 +112,11 @@ AOP
 Aspects work via an implementation of the interceptor pattern. There are 2
 available interceptors:
 
-* IMethodInterceptor: Implement this one to be called before every method
+* Method: Use this one to be called before every method
  execution (use proceed() to continue the chained execution), resuming your
  own afterwards.
 
-* IExceptionInterceptor: Implement this one to be called when an aspected
+* Exception: Use this one to be called when an aspected
  method throws an exception.
 
 --------------------------------------------------------------------------------

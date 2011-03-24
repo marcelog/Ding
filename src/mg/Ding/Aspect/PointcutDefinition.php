@@ -54,6 +54,12 @@ class PointcutDefinition
     private $_expression;
 
     /**
+     * Target method to execute.
+     * @var string
+     */
+    private $_method;
+
+    /**
      * Returns pointcut name.
      *
      * @return string
@@ -73,6 +79,28 @@ class PointcutDefinition
     public function setName($name)
     {
         $this->_name = $name;
+    }
+
+    /**
+     * Returns the target method.
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->_method;
+    }
+
+    /**
+     * Sets the target method.
+	 *
+     * @param string $method Sets the target method to execute.
+     *
+     * @return void
+     */
+    public function setMethod($method)
+    {
+        return $this->_method = $method;
     }
 
     /**
@@ -109,6 +137,7 @@ class PointcutDefinition
             . __CLASS__
             . ' Name: ' . $this->getName()
             . ' Expression: ' . $this->getExpression()
+            . ' Method: ' . $this->getMethod()
             . ']'
         ;
     }
@@ -116,14 +145,16 @@ class PointcutDefinition
     /**
      * Constructor.
      *
-     * @param string  $name       Pointcut name.
-     * @param integer $expression Pointcut expression.
+     * @param string $name       Pointcut name.
+     * @param string $expression Pointcut expression.
+     * @param string $method     Target method to execute.
      *
      * @return void
      */
-    public function __construct($name, $expression)
+    public function __construct($name, $expression, $method)
     {
         $this->_name = $name;
         $this->_expression = $expression;
+        $this->_method = $method;
     }
 }

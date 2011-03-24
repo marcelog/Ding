@@ -227,6 +227,7 @@ class BeanXmlDriver
                 $pointcut = clone $this->_templatePointcutDef;
                 $pointcut->setName($pointcutName);
                 $pointcut->setExpression((string)$pointcutAtts->expression);
+                $pointcut->setMethod((string)$pointcutAtts->method);
                 $this->_aspectManager->setPointcut($pointcut);
                 $pointcuts[] = $pointcutName;
             } else if (isset($pointcutAtts->{'pointcut-ref'})) {
@@ -515,6 +516,7 @@ class BeanXmlDriver
                 $pointcut = clone $this->_templatePointcutDef;
                 $pointcut->setName($pointcutName);
                 $pointcut->setExpression((string)$pointcutAtts->expression);
+                $pointcut->setMethod((string)$pointcutAtts->method);
                 return $pointcut;
             }
         }
@@ -558,7 +560,7 @@ class BeanXmlDriver
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
         $this->_templateAspectDef = new AspectDefinition('', '', 0, '', '');
-        $this->_templatePointcutDef = new PointcutDefinition('', '');
+        $this->_templatePointcutDef = new PointcutDefinition('', '', '');
         $this->_aspectManager = AspectManager::getInstance();
     }
 }

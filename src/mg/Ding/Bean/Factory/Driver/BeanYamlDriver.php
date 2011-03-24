@@ -202,7 +202,7 @@ class BeanYamlDriver
             throw new BeanFactoryException('Invalid aspect type');
         }
         $pointcuts = array();
-        foreach ($aspect['pointcut'] as $pointcut) {
+        foreach ($aspect['pointcuts'] as $pointcut) {
             if (isset($pointcut['id'])) {
                 $pointcutName = $pointcut['id'];
             } else {
@@ -212,6 +212,7 @@ class BeanYamlDriver
                 $pointcutDef = clone $this->_templatePointcutDef;
                 $pointcutDef->setName($pointcutName);
                 $pointcutDef->setExpression($pointcut['expression']);
+                $pointcutDef->setMethod($pointcut['method']);
                 $this->_aspectManager->setPointcut($pointcutDef);
                 $pointcuts[] = $pointcutName;
             } else if (isset($pointcut['pointcut-ref'])) {
@@ -435,6 +436,7 @@ class BeanYamlDriver
                 $pointcutDef = clone $this->_templatePointcutDef;
                 $pointcutDef->setName($pointcutName);
                 $pointcutDef->setExpression($yaml['pointcuts'][$name]['expression']);
+                $pointcutDef->setMethod($yaml['pointcuts'][$name]['method']);
                 return $pointcutDef;
             }
         }
@@ -493,7 +495,7 @@ class BeanYamlDriver
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
         $this->_templateAspectDef = new AspectDefinition('', '', 0, '', '');
-        $this->_templatePointcutDef = new PointcutDefinition('', '');
+        $this->_templatePointcutDef = new PointcutDefinition('', '', '');
         $this->_aspectManager = AspectManager::getInstance();
     }
 }

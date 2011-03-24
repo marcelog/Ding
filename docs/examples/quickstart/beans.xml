@@ -15,10 +15,10 @@
 			<value>Some string B</value>
 		</property>
 		<aspect ref="AspectE" type="method">
-			<pointcut expression="targetMethod"/>
+			<pointcut expression="targetMethod" method="invoke"/>
 		</aspect>
 		<aspect ref="AspectD" type="exception">
-			<pointcut expression="targetMethod"/>
+			<pointcut expression="targetMethod" method="invoke"/>
 		</aspect>
 	</bean>
 
@@ -54,13 +54,13 @@
 			<ref bean="ComponentB"/>
 		</property>
 		<aspect ref="AspectA" type="method">
-			<pointcut expression="targetMethod"/>
+			<pointcut expression="targetMethod" method="invoke"/>
 		</aspect>
 		<aspect ref="AspectB" type="method">
-			<pointcut expression="targetMethod"/>
+			<pointcut expression="targetMethod" method="invoke"/>
 		</aspect>
 		<aspect ref="AspectC" type="method">
-			<pointcut expression="targetMethod"/>
+			<pointcut expression="targetMethod" method="invoke"/>
 		</aspect>
 	</bean>
 	<!--  This is an optional bean, you can comment it out if you want -->
