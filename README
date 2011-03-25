@@ -70,6 +70,7 @@ definitions.
 * @ShutdownHandler
 * @InitMethod(method=xxx)
 * @DestroyMethod(method=xxx)
+* @Aspect for classes and @ExceptionInterceptor/@MethodInterceptor for methods.
 --------------------------------------------------------------------------------
 CACHE
 =====
@@ -110,7 +111,8 @@ be specified via the @InitMethod(method=xxx) annotation).
 AOP
 ===
 Aspects work via an implementation of the interceptor pattern. There are 2
-available interceptors:
+available interceptors, both of them available in xml, yaml, and annotation
+drivers.
 
 * Method: Use this one to be called before every method
  execution (use proceed() to continue the chained execution), resuming your
