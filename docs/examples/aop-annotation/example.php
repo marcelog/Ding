@@ -69,6 +69,11 @@ class ComponentB
         echo "Hello world $a $b $c \n";
     }
 
+    public function getB($a, $b, $c)
+    {
+        throw new Exception("an exception");
+    }
+
     public function __construct()
     {
     }
@@ -81,6 +86,7 @@ class AspectA
 {
     /**
      * @MethodInterceptor(class-expression=C.+,expression=g.+)
+     * @ExceptionInterceptor(class-expression=C.+,expression=getB)
      */
     public function invoke(MethodInvocation $invocation)
     {
@@ -137,6 +143,7 @@ try
     $bean->getA('a', 1, array('1', 'a'));
     $bean = $a->getBean('ComponentB');
     $bean->getA('a', 1, array('1', 'a'));
+    $bean->getB('a', 1, array('1', 'a'));
 } catch(Exception $exception) {
     echo $exception . "\n";
 }
