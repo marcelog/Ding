@@ -77,11 +77,14 @@ google_ad_height = 15;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </center>	
-<p>
+<pre>
 $a = ContainerImpl::getInstance($properties);
-</p>
+</pre>
 <H2>Logging</H2>
-Use the optional property: $properties['ding']['log4php.properties'] => './log4php.properties'
+Use the optional property:
+<pre>
+$properties['ding']['log4php.properties'] => './log4php.properties'
+</pre>
 
 <H2>Bean Factory Drivers</H2>
 You may configure any of the bean definition drivers available:
@@ -99,40 +102,37 @@ These drivers are configured with their own properties:
 </ul>
 </p>
 Example:
-<p>
-$properties['ding']['factory']['bdef']['xml'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'filename' => 'beans.xml'<br/>
-)<br/>
-</p>
-<hr/>
-<p>
-$properties['ding']['factory']['bdef']['annotation'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'scanDir' => array(realpath(__DIR__))<br/>
-)<br/>
-</p>
+<pre>
+$properties['ding']['factory']['bdef']['xml'] = array(
+    'filename' => 'beans.xml'
+)
+
+$properties['ding']['factory']['bdef']['annotation'] = array(
+    'scanDir' => array(realpath(__DIR__))
+)
+</pre>
 <hr/>
 <p>
 You can also specify multiple files, for either xml or yaml drivers, like:
 </p>
-<p>
-$properties['ding']['factory']['bdef']['xml'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'filename' => array('beans.xml', 'otherBeans.xml')<br/>
-)<br/>
-</p>
-<p>
-$properties['ding']['factory']['bdef']['yaml'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'filename' => array('beans.yaml', 'otherBeans.yaml')<br/>
-)<br/>
-</p>
+<pre>
+$properties['ding']['factory']['bdef']['xml'] = array(
+    'filename' => array('beans.xml', 'otherBeans.xml')
+)
+
+$properties['ding']['factory']['bdef']['yaml'] = array(
+    'filename' => array('beans.yaml', 'otherBeans.yaml')
+)
+</pre>
 <hr/>
 <p>
 You can also specify multiple search directories (paths), for either xml or yaml drivers, like:<br/>
 </p>
-<p>
-$properties['ding']['factory']['bdef']['yaml'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'filename' => array('beans.yaml', 'otherBeans.yaml'), 'directories' => array('/etc/Ding', '/usr/local/etc/Ding')<br/>
-)<br/>
-</p>
+<pre>
+$properties['ding']['factory']['bdef']['yaml'] = array(
+    'filename' => array('beans.yaml', 'otherBeans.yaml'), 'directories' => array('/etc/Ding', '/usr/local/etc/Ding')
+)
+</pre>
 <hr/>
 <p>
 This will tell the yaml driver (you can also use it with the xml driver) to look for the bean
@@ -168,20 +168,20 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <H2>User properties</H2>
 Use the optional property: $properties['ding']['factory']['properties'] to
 specify any key/value pair that you may want search and replace via the PropertyFilter. Example:
-<p>
-&lt;beans&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="someProperty"&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;value&gt;${some.value}&lt;/value&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/property&gt;<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;<br/>
-&lt;/beans&gt;<br/>
-</p>
-<p>
-$properties['ding']['factory']['properties'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'some.value' => 'This is the final property value'<br/>
-)<br/>
-</p>
+<pre>
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;value&gt;${some.value}&lt;/value&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<pre>
+$properties['ding']['factory']['properties'] = array(
+    'some.value' => 'This is the final property value'
+)
+</pre>
 
 <H2>Cache Subsystems</H2>
 The cache subsystems use $properties['ding']['cache']. The subsystems are:
@@ -258,63 +258,50 @@ of the possible cache implementations:
 Then, you can configure any of the cache subsystems with any of the cache implementations:<
 </p>
 <hr/>
+<pre>
+$properties['ding']['cache']['proxy'] = array(
+    'impl' => 'file', 'directory' => '/tmp/Ding/cache'
+)
 
-<p>
-$properties['ding']['cache']['proxy'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'file', 'directory' => '/tmp/Ding/cache'<br/>
-)<br/>
-</p>
-<hr/>
+$properties['ding']['cache']['bdef'] = array(
+    'impl' => 'memcached', 'memcached' => array('host' => '127.0.0.1', 'port' => 11211)
+)
 
-<p>
-$properties['ding']['cache']['bdef'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'memcached', 'memcached' => array('host' => '127.0.0.1', 'port' => 11211)<br/>
-)<br/>
-</p>
+$properties['ding']['cache']['proxy'] = array(
+    'impl' => 'apc'
+)
 
-<p>
-$properties['ding']['cache']['proxy'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
-)<br/>
-</p>
-<hr/>
-<p>
-$properties['ding']['cache']['autoloader'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
-)<br/>
-</p>
-<hr/>
-<p>
-$properties['ding']['cache']['aspect'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
-)<br/>
-</p>
-<hr/>
-<p>
-$properties['ding']['cache']['annotations'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'apc'<br/>
-)<br/>
-</p>
+$properties['ding']['cache']['autoloader'] = array(
+    'impl' => 'apc'
+)
+
+$properties['ding']['cache']['aspect'] = array(
+    'impl' => 'apc'
+)
+
+$properties['ding']['cache']['annotations'] = array(
+    'impl' => 'apc'
+)
+
+$properties['ding']['cache']['bdef'] = array(
+    'impl' => 'dummy'
+)
+</pre>
 <hr/>
 
 <p>
-$properties['ding']['cache']['bdef'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'dummy'<br/>
-)<br/>
-</p>
-<hr/>
+<pre>
+$zendCacheOptions = array(
+    'frontend' => 'Core',
+    'backend' => 'File',
+    'backendoptions' => array('cache_dir' => '/tmp/Ding/zend/cache'),
+    'frontendoptions' => array('lifetime' => 10000, 'automatic_serialization' => true)
+);
 
-<p>
-$zendCacheOptions = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'frontend' => 'Core',<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'backend' => 'File',<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'backendoptions' => array('cache_dir' => '/tmp/Ding/zend/cache'),<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'frontendoptions' => array('lifetime' => 10000, 'automatic_serialization' => true)<br/>
-);<br/>
-<br/>
-$properties['ding']['cache']['bdef'] = array(<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;'impl' => 'zend', 'zend' => $zendCacheOptions<br/>
-)<br/>
+$properties['ding']['cache']['bdef'] = array(
+    'impl' => 'zend', 'zend' => $zendCacheOptions
+)
+</pre>
 </p>
 <hr/>
 <H2>Driver properties</H2>
@@ -327,10 +314,12 @@ Some drivers are optional:
   <li>Timezone</li>
 </ul>
 You can explicitely tell the container to use them with the following options:<br/>
-$options['drivers'] => array('signalhandler' => array())<br/><br/>
-$options['drivers'] => array('errorhandler' => array())<br/><br/>
-$options['drivers'] => array('shutdown' => array())<br/><br/>
-$options['drivers'] => array('timezone' => array())<br/><br/>
+<pre>
+$options['drivers'] => array('signalhandler' => array())
+$options['drivers'] => array('errorhandler' => array())
+$options['drivers'] => array('shutdown' => array())
+$options['drivers'] => array('timezone' => array())
+</pre>
 </p>
     <p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
