@@ -29,11 +29,14 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
-use Ding\Bean\Lifecycle\ILifecycleListener;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
+use Ding\Aspect\AspectManager;
+use Ding\Aspect\AspectDefinition;
+use Ding\Aspect\PointcutDefinition;
 
 /**
  * This driver will lookup all aspect-annotated beans.
@@ -47,7 +50,7 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationAspectDriver implements ILifecycleListener
+class AnnotationAspectDriver implements IAfterConfigListener
 {
     /**
      * Holds current instance.
@@ -56,90 +59,70 @@ class AnnotationAspectDriver implements ILifecycleListener
     private static $_instance = false;
 
     /**
+     * Aspect manager instance.
+     * @var AspectManager
+     */
+    private $_aspectManager = false;
+
+    /**
      * References cache.
      * @var ICache
      */
     private $_cache;
 
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
-     */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
+    private function _newAspect($aspectClass, $factory, $classExpression, $expression, $method, $type)
     {
-        return $bean;
+        // Create bean.
+        $aspectBeanName = 'AnnotationAspectedBean' . rand(1, microtime(true));
+        $aspectBean = new BeanDefinition($aspectBeanName);
+        $aspectBean->setScope(BeanDefinition::BEAN_SINGLETON);
+        $aspectBean->setClass($aspectClass);
+        $factory->setBeanDefinition($aspectBeanName, $aspectBean);
+        $pointcutName = 'PointcutAnnotationAspectDriver' . rand(1, microtime(true));
+        $pointcutDef = new PointcutDefinition($pointcutName, $expression, $method);
+        $aspectName = 'AnnotationAspected' . rand(1, microtime(true));
+        $aspectDef = new AspectDefinition(
+            $aspectName, array($pointcutName), $type,
+            $aspectBeanName, $classExpression
+        );
+        $this->_aspectManager->setPointcut($pointcutDef);
+        $this->_aspectManager->setAspect($aspectDef);
     }
 
     /**
      * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
-     */
-    public function beforeConfig(IBeanFactory $factory)
-    {
-
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
+     * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
      */
     public function afterConfig(IBeanFactory $factory)
     {
-
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeCreate()
-     */
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterCreate()
-     */
-    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
-     */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeAssemble()
-     */
-    public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterAssemble()
-     */
-    public function afterAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::destruct()
-     */
-    public function destruct($bean, BeanDefinition $beanDefinition)
-    {
-        return $bean;
+        // Create aspects and pointcuts.
+        $aspects = ReflectionFactory::getClassesByAnnotation('Aspect');
+        foreach ($aspects as $name) {
+            $annotations = ReflectionFactory::getClassAnnotations($name);
+            foreach ($annotations as $key => $annotation) {
+                if ($key == 'class') {
+                    continue;
+                }
+                if (isset($annotation['MethodInterceptor'])) {
+                    $arguments = $annotation['MethodInterceptor']->getArguments();
+                    $classExpression = $arguments['class-expression'];
+                    $expression = $arguments['expression'];
+                    $method = $key;
+                    $this->_newAspect(
+                        $name, $factory, $classExpression, $expression, $method, AspectDefinition::ASPECT_METHOD
+                    );
+                }
+                if (isset($annotation['ExceptionInterceptor'])) {
+                    $arguments = $annotation['ExceptionInterceptor']->getArguments();
+                    $classExpression = $arguments['class-expression'];
+                    $expression = $arguments['expression'];
+                    $method = $key;
+                    $this->_newAspect(
+                        $name, $factory, $classExpression, $expression, $method, AspectDefinition::ASPECT_EXCEPTION
+                    );
+                }
+            }
+        }
     }
 
     /**
@@ -164,5 +147,6 @@ class AnnotationAspectDriver implements ILifecycleListener
      */
     private function __construct()
     {
+        $this->_aspectManager = AspectManager::getInstance();
     }
 }
