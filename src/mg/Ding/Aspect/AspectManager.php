@@ -26,7 +26,6 @@
  * limitations under the License.
  *
  */
-use Ding\Aspect\AspectDefinition;
 namespace Ding\Aspect;
 
 use Ding\Cache\Locator\CacheLocator;
