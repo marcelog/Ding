@@ -445,6 +445,7 @@ class BeanYamlDriver
 
     public function getAspects()
     {
+        $aspects = array();
         if (!$this->_yamlFiles) {
             $this->_load();
         }
