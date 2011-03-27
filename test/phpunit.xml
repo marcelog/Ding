@@ -9,11 +9,18 @@
   <filter>
     <whitelist>
       <directory suffix=".php">../src/mg/Ding</directory>
+      <exclude>
+        <directory suffix=".php">../src/mg/Ding/Helpers/PAGI</directory>
+        <directory suffix=".php">../src/mg/Ding/Helpers/PAMI</directory>
+      </exclude>
     </whitelist>
   </filter>
   <testsuites>
-    <testsuite name="Tests">
-      <directory suffix=".php">Ding</directory>
+    <testsuite name="IoC XML">
+      <directory suffix=".php">ioc/xml</directory>
+    </testsuite>
+    <testsuite name="IoC YAML">
+      <directory suffix=".php">ioc/yaml</directory>
     </testsuite>
   </testsuites>
 </phpunit>

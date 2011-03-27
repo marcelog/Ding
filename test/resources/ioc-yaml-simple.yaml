@@ -1,0 +1,31 @@
+beans: !!map
+  aSimpleSingletonBean:
+    class: ClassSimpleYAML
+    scope: singleton
+
+  aSimplePrototypeBean:
+    class: ClassSimpleYAML
+    scope: prototype
+
+  aSimpleConstArgBean:
+    class: ClassSimpleYAML2
+    scope: singleton
+    constructor-args:
+      - 1a$
+      - true
+      - false
+      - null
+      - eval: return "evaled code";
+      - ref: aSimpleSingletonBean
+      - !!map
+          key1: 1a$
+          key2: true
+          key3: false
+          key4: null
+          key5: !!map
+            eval: return "evaled code";
+          key6: !!map
+            ref: aSimpleSingletonBean
+          key7: !!map
+            d: e
+      

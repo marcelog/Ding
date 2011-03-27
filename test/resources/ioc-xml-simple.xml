@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="aSimpleSingletonBean" scope="singleton" class="ClassSimpleXML"/>
+    <bean id="aSimplePrototypeBean" scope="prototype" class="ClassSimpleXML"/>
+    
+    <bean id="aSimpleConstArgBean" scope="singleton" class="ClassSimpleXML2">
+      <constructor-arg><value>1a$</value></constructor-arg>
+      <constructor-arg><true/></constructor-arg>
+      <constructor-arg><false/></constructor-arg>
+      <constructor-arg><null/></constructor-arg>
+      <constructor-arg><eval><![CDATA[ return 'evaled code'; ]]></eval></constructor-arg>
+      <constructor-arg><ref bean="aSimpleSingletonBean"/></constructor-arg>
+      <constructor-arg><array>
+        <entry key="key1"><value>1a$</value></entry>
+        <entry key="key2"><true/></entry>
+        <entry key="key3"><false/></entry>
+        <entry key="key4"><null/></entry>
+        <entry key="key5"><eval><![CDATA[ return 'evaled code'; ]]></eval></entry>
+        <entry key="key6"><ref bean="aSimpleSingletonBean"/></entry>
+        <entry key="key7"><array><entry key="0"><true/></entry></array></entry>
+      </array></constructor-arg>
+    </bean>
+</beans>
