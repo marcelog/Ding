@@ -88,6 +88,29 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_setter_args()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleSetArgBean');
+        $this->assertEquals($bean->value, '1a$');
+        $this->assertTrue($bean->true);
+        $this->assertFalse($bean->false);
+        $this->assertNull($bean->null);
+        $this->assertEquals($bean->eval, 'evaled code');
+        $this->assertTrue($bean->ref instanceof ClassSimpleYAML);
+        $this->assertTrue(is_array($bean->array));
+        $this->assertEquals($bean->array['key1'], '1a$');
+        $this->assertTrue($bean->array['key2']);
+        $this->assertFalse($bean->array['key3']);
+        $this->assertNull($bean->array['key4']);
+        $this->assertEquals($bean->array['key5'], 'evaled code');
+        $this->assertTrue($bean->array['key6'] instanceof ClassSimpleYAML);
+        $this->assertTrue(is_array($bean->array['key7']));
+    }
+    
+    /**
+     * @test
+     */
     public function can_singleton()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -161,5 +184,51 @@ class ClassSimpleYAML2
         $this->eval = $eval;
         $this->ref = $ref;
         $this->array = $array;
+    }
+}
+
+class ClassSimpleYAML3
+{
+    public $value = 'not set';
+    public $true = 'not set';
+    public $false = 'not set';
+    public $null = 'not set';
+    public $eval = 'not set';
+    public $ref = 'not set';
+    public $array = 'not set';
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function setTrue($value)
+    {
+        $this->true = $value;
+    }
+
+    public function setFalse($value)
+    {
+        $this->false = $value;
+    }
+
+    public function setNull($value)
+    {
+        $this->null = $value;
+    }
+
+    public function setEvaledCode($value)
+    {
+        $this->eval = $value;
+    }
+
+    public function setRef($value)
+    {
+        $this->ref = $value;
+    }
+
+    public function setArray($value)
+    {
+        $this->array = $value;
     }
 }

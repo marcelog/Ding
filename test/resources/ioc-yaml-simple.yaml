@@ -7,6 +7,41 @@ beans: !!map
     class: ClassSimpleYAML
     scope: prototype
 
+  aSimpleSetArgBean:
+    class: ClassSimpleYAML3
+    scope: singleton
+    properties: !!map
+      value:
+        value: 1a$
+      "true":
+        value: true
+      "false":
+        value: false
+      "null":
+        value: null
+      "evaledCode":
+        eval: return "evaled code";
+      "ref":
+        ref: aSimpleSingletonBean
+      "array": 
+        value: !!map
+          key1:
+            value: 1a$
+          key2:
+            value: true
+          key3:
+            value: false
+          key4:
+            value: null
+          key5:
+            eval: return "evaled code";
+          key6:
+            ref: aSimpleSingletonBean
+          key7:
+            value: !!map
+              key:
+                value: e
+  
   aSimpleConstArgBean:
     class: ClassSimpleYAML2
     scope: singleton

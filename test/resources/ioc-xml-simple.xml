@@ -20,4 +20,23 @@
         <entry key="key7"><array><entry key="0"><true/></entry></array></entry>
       </array></constructor-arg>
     </bean>
+
+
+    <bean id="aSimpleSetArgBean" scope="singleton" class="ClassSimpleXML3">
+      <property name="value"><value>1a$</value></property>
+      <property name="true"><true/></property>
+      <property name="false"><false/></property>
+      <property name="null"><null/></property>
+      <property name="evaledCode"><eval><![CDATA[ return 'evaled code'; ]]></eval></property>
+      <property name="ref"><ref bean="aSimpleSingletonBean"/></property>
+      <property name="array"><array>
+        <entry key="key1"><value>1a$</value></entry>
+        <entry key="key2"><true/></entry>
+        <entry key="key3"><false/></entry>
+        <entry key="key4"><null/></entry>
+        <entry key="key5"><eval><![CDATA[ return 'evaled code'; ]]></eval></entry>
+        <entry key="key6"><ref bean="aSimpleSingletonBean"/></entry>
+        <entry key="key7"><array><entry key="0"><true/></entry></array></entry>
+      </array></property>
+    </bean>
 </beans>
