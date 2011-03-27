@@ -194,6 +194,30 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue(ClassSimpleYAML7::$value);
         $this->assertTrue(ClassSimpleYAML8::$value);
     }
+
+    /**
+     * @test
+     */
+    public function can_multiple_dirs()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'yaml' => array(
+                        	'filename' => array('ioc-yaml-simple.yaml', 'moreBeans.yaml'),
+                        	'directories' => array(RESOURCES_DIR, RESOURCES_DIR . DIRECTORY_SEPARATOR . 'moreBeans')
+                        )
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('aSecretBean');
+        $this->assertTrue($bean instanceof ClassSimpleYAML9);
+        $this->assertTrue($bean->value instanceof ClassSimpleYAML);
+    }
 }
 
 class ClassSimpleYAML
@@ -346,5 +370,19 @@ class ClassSimpleYAML8
     public function __construct()
     {
         self::$value = true;
+    }
+}
+
+class ClassSimpleYAML9
+{
+    public $value = null;
+
+    public function setSecretBean($value)
+    {
+        $this->value = $value;
+    }
+
+    public function __construct()
+    {
     }
 }

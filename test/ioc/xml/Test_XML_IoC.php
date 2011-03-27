@@ -196,6 +196,30 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue(ClassSimpleXML7::$value);
         $this->assertTrue(ClassSimpleXML8::$value);
     }
+
+    /**
+     * @test
+     */
+    public function can_multiple_dirs()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'xml' => array(
+                        	'filename' => array('ioc-xml-simple.xml', 'moreBeans.xml'),
+                        	'directories' => array(RESOURCES_DIR, RESOURCES_DIR . DIRECTORY_SEPARATOR . 'moreBeans')
+                        )
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('aSecretBean');
+        $this->assertTrue($bean instanceof ClassSimpleXML9);
+        $this->assertTrue($bean->value instanceof ClassSimpleXML);
+    }
 }
 
 class ClassSimpleXML
@@ -349,5 +373,19 @@ class ClassSimpleXML8
     public function __construct()
     {
         self::$value = true;
+    }
+}
+
+class ClassSimpleXML9
+{
+    public $value = null;
+
+    public function setSecretBean($value)
+    {
+        $this->value = $value;
+    }
+
+    public function __construct()
+    {
     }
 }

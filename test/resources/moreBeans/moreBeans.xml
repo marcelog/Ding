@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="aSecretBean" class="ClassSimpleXML9" scope="singleton">
+      <property name="secretBean"><ref bean="aSimpleSingletonBean"/></property>
+  </bean>
+</beans>
