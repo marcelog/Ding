@@ -96,7 +96,7 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
             $propName = lcfirst(substr($method, 3));
             foreach ($methodAnnotations as $annotation) {
                 if ($annotation->getName() == 'Resource') {
-                    $properties[] = new BeanPropertyDefinition(
+                    $properties[$propName] = new BeanPropertyDefinition(
                         $propName, BeanPropertyDefinition::PROPERTY_BEAN, $propName
                     );
                 }
@@ -110,7 +110,7 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
         foreach ($annotations['class']['properties'] as $property => $propertyAnnotations) {
             foreach ($propertyAnnotations as $annotation) {
                 if ($annotation->getName() == 'Resource') {
-                    $properties[] = new BeanPropertyDefinition(
+                    $properties[$property] = new BeanPropertyDefinition(
                         $property, BeanPropertyDefinition::PROPERTY_BEAN, $property
                     );
                 }
