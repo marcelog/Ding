@@ -471,7 +471,7 @@ class BeanXmlDriver
             $this->_load();
         }
         foreach($this->_simpleXml as $xmlName => $xml) {
-            $simpleXmlAspect = $xml->xpath("/aspect");
+            $simpleXmlAspect = $xml->xpath("/beans/aspect");
             if (!empty($simpleXmlAspect)) {
                 foreach ($simpleXmlAspect as $aspect) {
                     $aspects[] = $this->_loadAspect($aspect);
