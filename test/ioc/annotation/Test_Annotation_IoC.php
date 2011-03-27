@@ -140,7 +140,28 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('injectedBean');
         $this->assertTrue($bean->aSimplePrototypeBean instanceof ClassSimpleAnnotation);
+        $this->assertTrue($bean->getPrivateProperty() instanceof ClassSimpleAnnotation);
         $this->assertTrue($bean->somethingElse instanceof ClassSimpleAnnotation);
+    }
+
+    /**
+     * @test
+     */
+    public function can_at_required()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('required');
+        $this->assertTrue($bean->value1 instanceof ClassSimpleAnnotation2);
+    }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_at_required_missing_property()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('requiredFails');
     }
 }
 
@@ -185,6 +206,24 @@ class ClassSimpleAnnotationConfiguration
     public function whateverHere()
     {
         return new ClassSimpleAnnotation();
+    }
+
+    /**
+     * @Bean(class=ClassSimpleAnnotation3)
+     * @Scope(value=singleton)
+     */
+    public function required()
+    {
+        return new ClassSimpleAnnotation3();
+    }
+
+    /**
+     * @Bean(class=ClassSimpleAnnotation5)
+     * @Scope(value=singleton)
+     */
+    public function requiredFails()
+    {
+        return new ClassSimpleAnnotation5();
     }
 
     /**
@@ -235,7 +274,17 @@ class ClassSimpleAnnotation2
      * @Resource
      */
     public $aSimplePrototypeBean = null;
+
+    /**
+     * @Resource
+     */
+    private $aSimpleSingletonBean = null;
     public $somethingElse = null;
+
+    public function getPrivateProperty()
+    {
+        return $this->aSimpleSingletonBean;
+    }
 
     /**
      * @Resource
@@ -266,5 +315,33 @@ class ClassSimpleAnnotation4
 
     public function __construct()
     {
+    }
+}
+
+class ClassSimpleAnnotation3
+{
+    public $value1;
+    public $value2;
+
+    /**
+     * @Required
+     * @Resource
+     */
+    public function setInjectedBean($value)
+    {
+        $this->value1 = $value;
+    }
+}
+
+class ClassSimpleAnnotation5
+{
+    public $value2;
+
+    /**
+     * @Required
+     */
+    public function setThisWillFail($value)
+    {
+        $this->value2 = $value;
     }
 }
