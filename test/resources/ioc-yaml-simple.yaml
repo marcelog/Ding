@@ -3,6 +3,16 @@ beans: !!map
     class: ClassSimpleYAML
     scope: singleton
 
+  aSimpleInitMethodBean:
+    class: ClassSimpleYAML4
+    scope: singleton
+    init-method: initMethod
+  
+  aSimpleDestroyMethodBean:
+    class: ClassSimpleYAML4
+    scope: singleton
+    destroy-method: destroyMethod
+
   aSimplePrototypeBean:
     class: ClassSimpleYAML
     scope: prototype

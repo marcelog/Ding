@@ -39,4 +39,6 @@
         <entry key="key7"><array><entry key="0"><true/></entry></array></entry>
       </array></property>
     </bean>
+    <bean id="aSimpleInitMethodBean" init-method="initMethod" scope="singleton" class="ClassSimpleXML4"/>
+    <bean id="aSimpleDestroyMethodBean" destroy-method="destroyMethod" scope="singleton" class="ClassSimpleXML4"/>
 </beans>

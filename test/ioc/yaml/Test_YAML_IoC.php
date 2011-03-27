@@ -88,6 +88,29 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_init_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleInitMethodBean');
+        $this->assertTrue($bean->something);
+    }
+
+    /**
+     * @test
+     */
+    public function can_destroy_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleDestroyMethodBean');
+         // XXX bad... unset() does not work because ContainerImpl is a singleton
+         // and holds a reference to itself, so the destructor is never called.
+        $container->__destruct();
+        $this->assertNull($bean->something);
+    }
+
+    /**
+     * @test
+     */
     public function can_setter_args()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -107,7 +130,7 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean->array['key6'] instanceof ClassSimpleYAML);
         $this->assertTrue(is_array($bean->array['key7']));
     }
-    
+
     /**
      * @test
      */
@@ -230,5 +253,24 @@ class ClassSimpleYAML3
     public function setArray($value)
     {
         $this->array = $value;
+    }
+}
+
+class ClassSimpleYAML4
+{
+    public $something = false;
+
+    public function initMethod()
+    {
+        $this->something = true;
+    }
+
+    public function destroyMethod()
+    {
+        $this->something = null;
+    }
+
+    public function __construct()
+    {
     }
 }

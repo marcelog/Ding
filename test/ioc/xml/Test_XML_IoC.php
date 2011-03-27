@@ -65,6 +65,29 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_init_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleInitMethodBean');
+        $this->assertTrue($bean->something);
+    }
+
+    /**
+     * @test
+     */
+    public function can_destroy_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleDestroyMethodBean');
+         // XXX bad... unset() does not work because ContainerImpl is a singleton
+         // and holds a reference to itself, so the destructor is never called.
+        $container->__destruct();
+        $this->assertNull($bean->something);
+    }
+
+    /**
+     * @test
+     */
     public function can_constructor_args()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -232,5 +255,24 @@ class ClassSimpleXML3
     public function setArray($value)
     {
         $this->array = $value;
+    }
+}
+
+class ClassSimpleXML4
+{
+    public $something = false;
+
+    public function initMethod()
+    {
+        $this->something = true;
+    }
+
+    public function destroyMethod()
+    {
+        $this->something = null;
+    }
+
+    public function __construct()
+    {
     }
 }
