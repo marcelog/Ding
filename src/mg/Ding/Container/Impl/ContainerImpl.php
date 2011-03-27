@@ -111,7 +111,6 @@ class ContainerImpl implements IContainer
      */
     private static $_options = array(
         'bdef' => array(),
-        'properties' => array(),
         'drivers' => array()
     );
 
