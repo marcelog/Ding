@@ -182,6 +182,18 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof ClassSimpleYAML5);
         $this->assertTrue($bean->dependency instanceof ClassSimpleYAML);
     }
+
+    /**
+     * @test
+     */
+    public function can_depends_on()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleDependsOn');
+        $this->assertTrue($bean instanceof ClassSimpleYAML6);
+        $this->assertTrue(ClassSimpleYAML7::$value);
+        $this->assertTrue(ClassSimpleYAML8::$value);
+    }
 }
 
 class ClassSimpleYAML
@@ -304,5 +316,35 @@ class ClassSimpleYAML5
     public function __construct($value)
     {
         $this->dependency = $value;
+    }
+}
+
+class ClassSimpleYAML6
+{
+    public static $value = null;
+
+    public function __construct()
+    {
+        self::$value = true;
+    }
+}
+
+class ClassSimpleYAML7
+{
+    public static $value = null;
+
+    public function __construct()
+    {
+        self::$value = true;
+    }
+}
+
+class ClassSimpleYAML8
+{
+    public static $value = null;
+
+    public function __construct()
+    {
+        self::$value = true;
     }
 }

@@ -184,6 +184,18 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof ClassSimpleXML5);
         $this->assertTrue($bean->dependency instanceof ClassSimpleXML);
     }
+
+    /**
+     * @test
+     */
+    public function can_depends_on()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleDependsOn');
+        $this->assertTrue($bean instanceof ClassSimpleXML6);
+        $this->assertTrue(ClassSimpleXML7::$value);
+        $this->assertTrue(ClassSimpleXML8::$value);
+    }
 }
 
 class ClassSimpleXML
@@ -307,5 +319,35 @@ class ClassSimpleXML5
     public function __construct($value)
     {
         $this->dependency = $value;
+    }
+}
+
+class ClassSimpleXML6
+{
+    public static $value = null;
+
+    public function __construct()
+    {
+        self::$value = true;
+    }
+}
+
+class ClassSimpleXML7
+{
+    public static $value = null;
+
+    public function __construct()
+    {
+        self::$value = true;
+    }
+}
+
+class ClassSimpleXML8
+{
+    public static $value = null;
+
+    public function __construct()
+    {
+        self::$value = true;
     }
 }

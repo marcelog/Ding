@@ -88,6 +88,19 @@ beans: !!map
               scope: singleton
           key8: !!map
             d: e
+  aSimpleDependsOn:
+    depends-on: aSimpleDependency, anotherSimpleDependency
+    class: ClassSimpleYAML6
+    scope: singleton
+
+  aSimpleDependency:
+    class: ClassSimpleYAML7
+    scope: singleton
+
+  anotherSimpleDependency:
+    class: ClassSimpleYAML8
+    scope: singleton
+
 import:
   - someOtherFile.yaml
-  
+

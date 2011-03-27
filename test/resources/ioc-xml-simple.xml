@@ -45,5 +45,8 @@
     </bean>
     <bean id="aSimpleInitMethodBean" init-method="initMethod" scope="singleton" class="ClassSimpleXML4"/>
     <bean id="aSimpleDestroyMethodBean" destroy-method="destroyMethod" scope="singleton" class="ClassSimpleXML4"/>
+    <bean id="aSimpleDependsOn" scope="singleton" class="ClassSimpleXML6" depends-on="aSimpleDependency, anotherSimpleDependency"/>
+    <bean id="aSimpleDependency" scope="singleton" class="ClassSimpleXML7"/>
+    <bean id="anotherSimpleDependency" scope="singleton" class="ClassSimpleXML8"/>
     <import resource="someOtherFile.xml"/>
 </beans>
