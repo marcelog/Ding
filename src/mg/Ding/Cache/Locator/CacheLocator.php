@@ -57,8 +57,8 @@ class CacheLocator
      * @var array
      */
     private static $_options = array(
-    	'proxy' => array('impl' => 'file', 'directory' => '.'),
-        'bdef' => array('impl' => 'apc'),
+    	'proxy' => array('impl' => 'dummy'),
+        'bdef' => array('impl' => 'dummy'),
         'beans' => array('impl' => 'dummy'),
     	'autoloader' => array('impl' => 'dummy'),
         'aspect' => array('impl' => 'dummy'),
