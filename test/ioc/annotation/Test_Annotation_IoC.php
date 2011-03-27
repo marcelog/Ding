@@ -102,6 +102,16 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_rename()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('renamedBean');
+        $this->assertTrue($bean instanceof ClassSimpleAnnotation);
+    }
+
+    /**
+     * @test
+     */
     public function can_init_method()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -120,6 +130,17 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
          // and holds a reference to itself, so the destructor is never called.
         $container->__destruct();
         $this->assertNull($bean->something);
+    }
+
+    /**
+     * @test
+     */
+    public function can_at_resource()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('injectedBean');
+        $this->assertTrue($bean->aSimplePrototypeBean instanceof ClassSimpleAnnotation);
+        $this->assertTrue($bean->somethingElse instanceof ClassSimpleAnnotation);
     }
 }
 
@@ -158,6 +179,24 @@ class ClassSimpleAnnotationConfiguration
     }
 
     /**
+     * @Bean(name=renamedBean,class=ClassSimpleAnnotation)
+     * @Scope(value=singleton)
+     */
+    public function whateverHere()
+    {
+        return new ClassSimpleAnnotation();
+    }
+
+    /**
+     * @Bean(class=ClassSimpleAnnotation2)
+     * @Scope(value=singleton)
+     */
+    public function injectedBean()
+    {
+        return new ClassSimpleAnnotation2();
+    }
+
+    /**
      * @Bean(class=ClassSimpleAnnotation)
      * @Scope(value=prototype)
      */
@@ -183,6 +222,27 @@ class ClassSimpleAnnotation
     public function setSomething($v)
     {
         $this->_something = $v;
+    }
+
+    public function __construct()
+    {
+    }
+}
+
+class ClassSimpleAnnotation2
+{
+    /**
+     * @Resource
+     */
+    public $aSimplePrototypeBean = null;
+    public $somethingElse = null;
+
+    /**
+     * @Resource
+     */
+    public function setASimpleSingletonBean($value)
+    {
+        $this->somethingElse = $value;
     }
 
     public function __construct()

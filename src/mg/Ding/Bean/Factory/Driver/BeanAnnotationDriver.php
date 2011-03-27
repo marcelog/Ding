@@ -286,27 +286,27 @@ class BeanAnnotationDriver
             }
             if (empty($this->_configBeans[$configBeanName])) {
                 $this->_configBeans[$configBeanName] = array();
-                foreach (
-                    ReflectionFactory::getClassAnnotations($configClass)
-                    as $method => $annotations
-                ) {
-                    if ($method == 'class') {
-                        continue;
+            }
+            foreach (
+                ReflectionFactory::getClassAnnotations($configClass)
+                as $method => $annotations
+            ) {
+                if ($method == 'class') {
+                    continue;
+                }
+                if (isset($annotations['Bean'])) {
+                    $beanAnnotation = $annotations['Bean'];
+                    $args = $beanAnnotation->getArguments();
+                    if (isset($args['name'])) {
+                        $name = $args['name'];
+                    } else {
+                        $name = $method;
                     }
-                    if (isset($annotations['Bean'])) {
-                        $beanAnnotation = $annotations['Bean'];
-                        $args = $beanAnnotation->getArguments();
-                        if (isset($args['name'])) {
-                            $name = $args['name'];
-                        } else {
-                            $name = $method;
-                        }
-                        if ($name == $beanName) {
-                            if (isset($annotations['Bean'])) {
-                                $bean = $this->_loadBean($name, $configBeanName, $method, $annotations);
-                                $this->_configBeans[$configBeanName][$name] = $annotation;
-                                return $bean;
-                            }
+                    if ($name == $beanName) {
+                        if (isset($annotations['Bean'])) {
+                            $bean = $this->_loadBean($name, $configBeanName, $method, $annotations);
+                            $this->_configBeans[$configBeanName][$name] = $bean;
+                            return $bean;
                         }
                     }
                 }
