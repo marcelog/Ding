@@ -101,6 +101,12 @@ beans: !!map
     class: ClassSimpleYAML8
     scope: singleton
 
+  aSimpleMethodLookupBean:
+    class: ClassSimpleYAML10
+    scope: singleton
+    lookup-methods: !!map
+      createAnotherBean: aSimpleSingletonBean
+
 import:
   - someOtherFile.yaml
 

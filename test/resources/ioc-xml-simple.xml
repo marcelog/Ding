@@ -49,4 +49,7 @@
     <bean id="aSimpleDependency" scope="singleton" class="ClassSimpleXML7"/>
     <bean id="anotherSimpleDependency" scope="singleton" class="ClassSimpleXML8"/>
     <import resource="someOtherFile.xml"/>
+    <bean id="aSimpleMethodLookupBean" class="ClassSimpleXML10" scope="singleton">
+        <lookup-method name="createAnotherBean" bean="aSimpleSingletonBean"/>
+    </bean>
 </beans>

@@ -200,6 +200,17 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_method_lookup()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleMethodLookupBean');
+        $this->assertTrue($bean instanceof ClassSimpleXML10);
+        $this->assertTrue($bean->createAnotherBean() instanceof ClassSimpleXML);
+    }
+
+    /**
+     * @test
+     */
     public function can_multiple_dirs()
     {
         $properties = array(
@@ -383,6 +394,18 @@ class ClassSimpleXML9
     public function setSecretBean($value)
     {
         $this->value = $value;
+    }
+
+    public function __construct()
+    {
+    }
+}
+
+class ClassSimpleXML10
+{
+    public function createAnotherBean()
+    {
+
     }
 
     public function __construct()

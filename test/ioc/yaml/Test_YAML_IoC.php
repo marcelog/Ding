@@ -218,6 +218,17 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof ClassSimpleYAML9);
         $this->assertTrue($bean->value instanceof ClassSimpleYAML);
     }
+
+    /**
+     * @test
+     */
+    public function can_method_lookup()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleMethodLookupBean');
+        $this->assertTrue($bean instanceof ClassSimpleYAML10);
+        $this->assertTrue($bean->createAnotherBean() instanceof ClassSimpleYAML);
+    }
 }
 
 class ClassSimpleYAML
@@ -380,6 +391,18 @@ class ClassSimpleYAML9
     public function setSecretBean($value)
     {
         $this->value = $value;
+    }
+
+    public function __construct()
+    {
+    }
+}
+
+class ClassSimpleYAML10
+{
+    public function createAnotherBean()
+    {
+
     }
 
     public function __construct()
