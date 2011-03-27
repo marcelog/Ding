@@ -64,7 +64,7 @@ class BeanYamlDriver
     private $_logger;
 
     /**
-     * beans.xml file path.
+     * beans.yaml file path.
      * @var string
      */
     private $_filename;
@@ -107,7 +107,7 @@ class BeanYamlDriver
 
     /**
      * Current instance.
-     * @var BeanFactoryXmlImpl
+     * @var BeanFactoryYamlImpl
      */
     private static $_instance = false;
 
