@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
+  <aspect id="anAspect" ref="aspectBean" type="method" expression="ClassSimpleAOPXMLGlobal.+">
+    <pointcut expression="^.+" method="invoke"/>
+  </aspect>
+
   <bean id="methodIntercepted" class="ClassSimpleAOPXML" scope="singleton">
     <aspect ref="aspectBean" type="method">
       <pointcut expression="targetMethod" method="invoke"/>
@@ -11,4 +15,7 @@
     </aspect>
   </bean>
   <bean id="aspectBean" class="ClassSimpleAOPXMLAspect" scope="singleton"/>
+
+  <bean id="globalAspectedBeanA" class="ClassSimpleAOPXMLGlobalSomething" scope="singleton" />
+  <bean id="globalAspectedBeanB" class="ClassSimpleAOPXMLGlobalSomethingElse" scope="singleton" />
 </beans>

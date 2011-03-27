@@ -83,6 +83,20 @@ class Test_XML_AOP extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->getSomething('aSd'), 'BEFOREmethodReturnForaSdAFTER');
         $this->assertEquals($bean->getSomethingElse('aSd'), 'BEFOREmethodReturnForaSdAFTER');
     }
+
+    /**
+     * @test
+     */
+    public function can_define_global_aspects()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('globalAspectedBeanA');
+        $this->assertEquals($bean->getSomething('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+        $this->assertEquals($bean->getSomethingElse('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+        $bean = $container->getBean('globalAspectedBeanB');
+        $this->assertEquals($bean->getSomething('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+        $this->assertEquals($bean->getSomethingElse('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+    }
 }
 
 class ClassSimpleAOPXML
@@ -101,6 +115,30 @@ class ClassSimpleAOPXMLAspect
 }
 
 class ClassSimpleAOPXML2
+{
+    public function getSomething($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+    public function getSomethingElse($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+}
+
+class ClassSimpleAOPXMLGlobalSomething
+{
+    public function getSomething($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+    public function getSomethingElse($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+}
+
+class ClassSimpleAOPXMLGlobalSomethingElse
 {
     public function getSomething($a)
     {

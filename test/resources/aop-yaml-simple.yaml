@@ -27,4 +27,21 @@ beans: !!map
             expression: ^.+
         type: method
         ref: aspectBean
-        
+
+  globalAspectedBeanA:
+    class: ClassSimpleAOPXMLGlobalSomething
+    scope: singleton
+
+  globalAspectedBeanB:
+    class: ClassSimpleAOPXMLGlobalSomethingElse
+    scope: singleton
+
+aspects: !!map
+  globalAspect:
+    pointcuts:
+      apointCut:
+        method: invoke
+        expression: ^.+
+    type: method
+    ref: aspectBean
+    expression: ClassSimpleAOPXMLGlobal.+

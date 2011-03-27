@@ -83,6 +83,20 @@ class Test_YAML_AOP extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->getSomething('aSd'), 'BEFOREmethodReturnForaSdAFTER');
         $this->assertEquals($bean->getSomethingElse('aSd'), 'BEFOREmethodReturnForaSdAFTER');
     }
+
+    /**
+     * @test
+     */
+    public function can_define_global_aspects()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('globalAspectedBeanA');
+        $this->assertEquals($bean->getSomething('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+        $this->assertEquals($bean->getSomethingElse('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+        $bean = $container->getBean('globalAspectedBeanB');
+        $this->assertEquals($bean->getSomething('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+        $this->assertEquals($bean->getSomethingElse('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+    }
 }
 
 class ClassSimpleAOPYAML
@@ -101,6 +115,30 @@ class ClassSimpleAOPYAMLAspect
 }
 
 class ClassSimpleAOPYAML2
+{
+    public function getSomething($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+    public function getSomethingElse($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+}
+
+class ClassSimpleAOPYAMLGlobalSomething
+{
+    public function getSomething($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+    public function getSomethingElse($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+}
+
+class ClassSimpleAOPYAMLGlobalSomethingElse
 {
     public function getSomething($a)
     {
