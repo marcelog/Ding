@@ -169,6 +169,17 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $bean2->setSomething(rand(1, microtime(true)));
         $this->assertFalse($bean->getSomething() === $bean2->getSomething());
     }
+
+    /**
+     * @test
+     */
+    public function can_import()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('importedBean');
+        $this->assertTrue($bean instanceof ClassSimpleXML5);
+        $this->assertTrue($bean->dependency instanceof ClassSimpleXML);
+    }
 }
 
 class ClassSimpleXML
@@ -274,5 +285,15 @@ class ClassSimpleXML4
 
     public function __construct()
     {
+    }
+}
+
+class ClassSimpleXML5
+{
+    public $dependency;
+
+    public function __construct($value)
+    {
+        $this->dependency = $value;
     }
 }

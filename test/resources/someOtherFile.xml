@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="importedBean" class="ClassSimpleXML5" scope="singleton">
+    <constructor-arg><ref bean="aSimpleSingletonBean"/></constructor-arg>
+  </bean>
+</beans>

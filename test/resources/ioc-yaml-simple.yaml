@@ -73,4 +73,6 @@ beans: !!map
             ref: aSimpleSingletonBean
           key7: !!map
             d: e
-      
+import:
+  - someOtherFile.yaml
+  

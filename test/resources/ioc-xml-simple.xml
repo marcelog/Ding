@@ -41,4 +41,5 @@
     </bean>
     <bean id="aSimpleInitMethodBean" init-method="initMethod" scope="singleton" class="ClassSimpleXML4"/>
     <bean id="aSimpleDestroyMethodBean" destroy-method="destroyMethod" scope="singleton" class="ClassSimpleXML4"/>
+    <import resource="someOtherFile.xml"/>
 </beans>

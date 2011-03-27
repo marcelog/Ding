@@ -168,6 +168,17 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $bean2->setSomething(rand(1, microtime(true)));
         $this->assertFalse($bean->getSomething() === $bean2->getSomething());
     }
+
+    /**
+     * @test
+     */
+    public function can_import()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('importedBean');
+        $this->assertTrue($bean instanceof ClassSimpleYAML5);
+        $this->assertTrue($bean->dependency instanceof ClassSimpleYAML);
+    }
 }
 
 class ClassSimpleYAML
@@ -272,5 +283,15 @@ class ClassSimpleYAML4
 
     public function __construct()
     {
+    }
+}
+
+class ClassSimpleYAML5
+{
+    public $dependency;
+
+    public function __construct($value)
+    {
+        $this->dependency = $value;
     }
 }
