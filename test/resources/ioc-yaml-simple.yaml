@@ -33,6 +33,10 @@ beans: !!map
         eval: return "evaled code";
       "ref":
         ref: aSimpleSingletonBean
+      "innerBean":
+        bean:
+          class: ClassSimpleYAML
+          scope: singleton
       "array": 
         value: !!map
           key1:
@@ -48,6 +52,10 @@ beans: !!map
           key6:
             ref: aSimpleSingletonBean
           key7:
+            bean:
+              class: ClassSimpleYAML
+              scope: singleton
+          key8:
             value: !!map
               key:
                 value: e
@@ -62,6 +70,9 @@ beans: !!map
       - null
       - eval: return "evaled code";
       - ref: aSimpleSingletonBean
+      - bean:
+          class: ClassSimpleYAML
+          scope: singleton
       - !!map
           key1: 1a$
           key2: true
@@ -71,7 +82,11 @@ beans: !!map
             eval: return "evaled code";
           key6: !!map
             ref: aSimpleSingletonBean
-          key7: !!map
+          key7:
+            bean:
+              class: ClassSimpleYAML
+              scope: singleton
+          key8: !!map
             d: e
 import:
   - someOtherFile.yaml

@@ -10,6 +10,7 @@
       <constructor-arg><null/></constructor-arg>
       <constructor-arg><eval><![CDATA[ return 'evaled code'; ]]></eval></constructor-arg>
       <constructor-arg><ref bean="aSimpleSingletonBean"/></constructor-arg>
+      <constructor-arg><bean class="ClassSimpleXML" scope="singleton"/></constructor-arg>
       <constructor-arg><array>
         <entry key="key1"><value>1a$</value></entry>
         <entry key="key2"><true/></entry>
@@ -17,7 +18,8 @@
         <entry key="key4"><null/></entry>
         <entry key="key5"><eval><![CDATA[ return 'evaled code'; ]]></eval></entry>
         <entry key="key6"><ref bean="aSimpleSingletonBean"/></entry>
-        <entry key="key7"><array><entry key="0"><true/></entry></array></entry>
+        <entry key="key7"><bean class="ClassSimpleXML" scope="singleton"/></entry>
+        <entry key="key8"><array><entry key="0"><true/></entry></array></entry>
       </array></constructor-arg>
     </bean>
 
@@ -29,6 +31,7 @@
       <property name="null"><null/></property>
       <property name="evaledCode"><eval><![CDATA[ return 'evaled code'; ]]></eval></property>
       <property name="ref"><ref bean="aSimpleSingletonBean"/></property>
+      <property name="innerBean"><bean class="ClassSimpleXML" scope="singleton"/></property>
       <property name="array"><array>
         <entry key="key1"><value>1a$</value></entry>
         <entry key="key2"><true/></entry>
@@ -36,7 +39,8 @@
         <entry key="key4"><null/></entry>
         <entry key="key5"><eval><![CDATA[ return 'evaled code'; ]]></eval></entry>
         <entry key="key6"><ref bean="aSimpleSingletonBean"/></entry>
-        <entry key="key7"><array><entry key="0"><true/></entry></array></entry>
+        <entry key="key7"><bean class="ClassSimpleXML" scope="singleton"/></entry>
+        <entry key="key8"><array><entry key="0"><true/></entry></array></entry>
       </array></property>
     </bean>
     <bean id="aSimpleInitMethodBean" init-method="initMethod" scope="singleton" class="ClassSimpleXML4"/>

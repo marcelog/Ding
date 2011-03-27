@@ -75,6 +75,7 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertNull($bean->null);
         $this->assertEquals($bean->eval, 'evaled code');
         $this->assertTrue($bean->ref instanceof ClassSimpleYAML);
+        $this->assertTrue($bean->innerBean instanceof ClassSimpleYAML);
         $this->assertTrue(is_array($bean->array));
         $this->assertEquals($bean->array['key1'], '1a$');
         $this->assertTrue($bean->array['key2']);
@@ -82,7 +83,8 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertNull($bean->array['key4']);
         $this->assertEquals($bean->array['key5'], 'evaled code');
         $this->assertTrue($bean->array['key6'] instanceof ClassSimpleYAML);
-        $this->assertTrue(is_array($bean->array['key7']));
+        $this->assertTrue($bean->array['key7'] instanceof ClassSimpleYAML);
+        $this->assertTrue(is_array($bean->array['key8']));
     }
 
     /**
@@ -128,7 +130,8 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertNull($bean->array['key4']);
         $this->assertEquals($bean->array['key5'], 'evaled code');
         $this->assertTrue($bean->array['key6'] instanceof ClassSimpleYAML);
-        $this->assertTrue(is_array($bean->array['key7']));
+        $this->assertTrue($bean->array['key7'] instanceof ClassSimpleYAML);
+        $this->assertTrue(is_array($bean->array['key8']));
     }
 
     /**
@@ -207,9 +210,10 @@ class ClassSimpleYAML2
     public $null = 'not set';
     public $eval = 'not set';
     public $ref = 'not set';
+    public $innerBean = 'not set';
     public $array = 'not set';
 
-    public function __construct($value, $true, $false, $null, $eval, $ref, $array)
+    public function __construct($value, $true, $false, $null, $eval, $ref, $innerBean, $array)
     {
         $this->value = $value;
         $this->true = $true;
@@ -217,6 +221,7 @@ class ClassSimpleYAML2
         $this->null = $null;
         $this->eval = $eval;
         $this->ref = $ref;
+        $this->innerBean = $innerBean;
         $this->array = $array;
     }
 }
@@ -229,6 +234,7 @@ class ClassSimpleYAML3
     public $null = 'not set';
     public $eval = 'not set';
     public $ref = 'not set';
+    public $innerBean = 'not set';
     public $array = 'not set';
 
     public function setValue($value)
@@ -259,6 +265,11 @@ class ClassSimpleYAML3
     public function setRef($value)
     {
         $this->ref = $value;
+    }
+
+    public function setInnerBean($value)
+    {
+        $this->innerBean = $value;
     }
 
     public function setArray($value)
