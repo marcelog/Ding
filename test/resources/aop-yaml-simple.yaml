@@ -1,0 +1,30 @@
+beans: !!map
+
+  aspectBean:
+    class: ClassSimpleAOPYAMLAspect
+    scope: singleton
+
+  methodIntercepted:
+    class: ClassSimpleAOPYAML
+    scope: singleton
+    aspects:
+      aspectA:
+        pointcuts:
+          pointcutA:
+            method: invoke
+            expression: targetMethod
+        type: method
+        ref: aspectBean
+
+  multipleMethodIntercepted:
+    class: ClassSimpleAOPYAML2
+    scope: singleton
+    aspects:
+      aspectA:
+        pointcuts:
+          pointcutA:
+            method: invoke
+            expression: ^.+
+        type: method
+        ref: aspectBean
+        

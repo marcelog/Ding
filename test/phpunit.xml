@@ -25,5 +25,11 @@
     <testsuite name="IoC Annotation">
       <directory suffix=".php">ioc/annotation</directory>
     </testsuite>
+    <testsuite name="AOP XML">
+      <directory suffix=".php">aop/xml</directory>
+    </testsuite>
+    <testsuite name="AOP YAML">
+      <directory suffix=".php">aop/yaml</directory>
+    </testsuite>
   </testsuites>
 </phpunit>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="methodIntercepted" class="ClassSimpleAOPXML" scope="singleton">
+    <aspect ref="aspectBean" type="method">
+      <pointcut expression="targetMethod" method="invoke"/>
+    </aspect>
+  </bean>
+  <bean id="multipleMethodIntercepted" class="ClassSimpleAOPXML2" scope="singleton">
+    <aspect ref="aspectBean" type="method">
+      <pointcut expression="^.+" method="invoke"/>
+    </aspect>
+  </bean>
+  <bean id="aspectBean" class="ClassSimpleAOPXMLAspect" scope="singleton"/>
+</beans>
