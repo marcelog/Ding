@@ -1,5 +1,9 @@
-beans: !!map
+pointcuts: !!map
+  aPointcut: 
+    expression: ^.+
+    method: invoke
 
+beans: !!map
   aspectBean:
     class: ClassSimpleAOPYAMLAspect
     scope: singleton
@@ -35,6 +39,17 @@ beans: !!map
   globalAspectedBeanB:
     class: ClassSimpleAOPXMLGlobalSomethingElse
     scope: singleton
+
+  globalPointcut:
+    class: ClassSimpleAOPYAML3
+    scope: singleton
+    aspects:
+      aspectA:
+        pointcuts:
+          pointcutA:
+            pointcut-ref: aPointcut
+        type: method
+        ref: aspectBean
 
 aspects: !!map
   globalAspect:

@@ -97,6 +97,17 @@ class Test_XML_AOP extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->getSomething('aSd'), 'BEFOREmethodReturnForaSdAFTER');
         $this->assertEquals($bean->getSomethingElse('aSd'), 'BEFOREmethodReturnForaSdAFTER');
     }
+
+    /**
+     * @test
+     */
+    public function can_define_global_pointcuts()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('globalPointcut');
+        $this->assertEquals($bean->getSomething('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+        $this->assertEquals($bean->getSomethingElse('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+    }
 }
 
 class ClassSimpleAOPXML
@@ -139,6 +150,18 @@ class ClassSimpleAOPXMLGlobalSomething
 }
 
 class ClassSimpleAOPXMLGlobalSomethingElse
+{
+    public function getSomething($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+    public function getSomethingElse($a)
+    {
+        return 'methodReturnFor' . $a;
+    }
+}
+
+class ClassSimpleAOPXML3
 {
     public function getSomething($a)
     {
