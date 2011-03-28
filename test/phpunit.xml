@@ -31,5 +31,8 @@
     <testsuite name="AOP YAML">
       <directory suffix=".php">aop/yaml</directory>
     </testsuite>
+    <testsuite name="Filter XML">
+      <directory suffix=".php">filter/xml</directory>
+    </testsuite>
   </testsuites>
 </phpunit>

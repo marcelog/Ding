@@ -1,0 +1,9 @@
+beans: !!map
+  aBean:
+    class: ClassSimpleYAMLFilter
+    scope: singleton
+    constructor-args:
+      - value: ${a.b.value}
+    properties: !!map
+      value:
+        value: ${a.b.value}

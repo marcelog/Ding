@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="aBean" class="ClassSimpleXMLFilter" scope="singleton">
+    <constructor-arg><value>${a.b.value}</value></constructor-arg>
+    <constructor-arg><array><entry key="0"><value>${a.b.value}</value></entry></array></constructor-arg>
+    <property name="value"><value>${a.b.value}</value></property>
+    <property name="array"><array><entry key="0"><value>${a.b.value}</value></entry></array></property>
+  </bean>  
+</beans>
