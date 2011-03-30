@@ -128,7 +128,7 @@ TEXT;
         	return self::\$_dispatcher->invoke(\$invocation);
         } catch (Exception \$exception) {
             \$invocation->setException(\$exception);
-        	self::\$_dispatcher->invokeException(\$invocation);
+        	return self::\$_dispatcher->invokeException(\$invocation);
         }
 	}
 TEXT;
