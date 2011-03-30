@@ -34,5 +34,8 @@
     <testsuite name="Filter XML">
       <directory suffix=".php">filter/xml</directory>
     </testsuite>
+    <testsuite name="Driver Timezone">
+      <directory suffix=".php">timezone</directory>
+    </testsuite>
   </testsuites>
 </phpunit>
