@@ -33,11 +33,11 @@ beans: !!map
         ref: aspectBean
 
   globalAspectedBeanA:
-    class: ClassSimpleAOPXMLGlobalSomething
+    class: ClassSimpleAOPYAMLGlobalSomething
     scope: singleton
 
   globalAspectedBeanB:
-    class: ClassSimpleAOPXMLGlobalSomethingElse
+    class: ClassSimpleAOPYAMLGlobalSomethingElse
     scope: singleton
 
   globalPointcut:
@@ -51,6 +51,22 @@ beans: !!map
         type: method
         ref: aspectBean
 
+  aspectExceptionBean:
+    class: ClassSimpleAOPExceptionYAMLAspect
+    scope: singleton
+
+  exceptionIntercepted:
+    class: ClassSimpleAOPExceptionYAML
+    scope: singleton
+    aspects:
+      aspectA:
+        pointcuts:
+          pointcutA:
+            expression: ^.+
+            method: invoke
+        type: exception
+        ref: aspectExceptionBean
+    
 aspects: !!map
   globalAspect:
     pointcuts:
@@ -59,4 +75,4 @@ aspects: !!map
         expression: ^.+
     type: method
     ref: aspectBean
-    expression: ClassSimpleAOPXMLGlobal.+
+    expression: ClassSimpleAOPYAMLGlobal.+

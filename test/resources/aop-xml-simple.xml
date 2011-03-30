@@ -25,4 +25,18 @@
       <pointcut pointcut-ref="aPointcut" method="invoke"/>
     </aspect>
   </bean>
+
+  <bean id="aspectExceptionBean" class="ClassSimpleAOPExceptionXMLAspect" scope="singleton"/>
+  <bean id="exceptionIntercepted" class="ClassSimpleAOPExceptionXML" scope="singleton">
+    <aspect ref="aspectExceptionBean" type="exception">
+      <pointcut expression="^.+" method="invoke"/>
+    </aspect>
+  </bean>
+
+  <bean id="aspectExceptionAndProceedBean" class="ClassSimpleAOPExceptionAndProceedXMLAspect" scope="singleton"/>
+  <bean id="exceptionInterceptedAndProceed" class="ClassSimpleAOPExceptionAndProceedXML" scope="singleton">
+    <aspect ref="aspectExceptionAndProceedBean" type="exception">
+      <pointcut expression="^.+" method="invoke"/>
+    </aspect>
+  </bean>
 </beans>

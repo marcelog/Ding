@@ -66,6 +66,27 @@ class Test_XML_AOP extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_intercept_exception_from_bean_aop()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('exceptionIntercepted');
+        $this->assertEquals($bean->thisWillThrowAnException('aSd'), 'aSd');
+    }
+
+    /**
+     * @test
+     * @expectedException Exception
+     */
+    public function can_intercept_and_proceed_exception_from_bean_aop()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('exceptionInterceptedAndProceed');
+        $bean->thisWillThrowAnException();
+    }
+
+    /**
+     * @test
+     */
     public function can_intercept_method_from_bean_aop()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -170,5 +191,38 @@ class ClassSimpleAOPXML3
     public function getSomethingElse($a)
     {
         return 'methodReturnFor' . $a;
+    }
+}
+
+class ClassSimpleAOPExceptionXML
+{
+    public function thisWillThrowAnException()
+    {
+        throw new Exception('too bad!');
+    }
+}
+
+class ClassSimpleAOPExceptionXMLAspect
+{
+    public function invoke(MethodInvocation $invocation)
+    {
+        $args = $invocation->getArguments();
+        return $args[0];
+    }
+}
+
+class ClassSimpleAOPExceptionAndProceedXML
+{
+    public function thisWillThrowAnException()
+    {
+        throw new Exception('too bad!');
+    }
+}
+
+class ClassSimpleAOPExceptionAndProceedXMLAspect
+{
+    public function invoke(MethodInvocation $invocation)
+    {
+        return $invocation->proceed();
     }
 }
