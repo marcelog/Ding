@@ -669,7 +669,6 @@ class ContainerImpl implements IContainer
             $this->addAfterCreateListener(AnnotationResourceDriver::getInstance($soullessArray));
             $this->addAfterConfigListener(AnnotationAspectDriver::getInstance($soullessArray));
             $this->addAfterDefinitionListener(AnnotationRequiredDriver::getInstance($soullessArray));
-            //$this->addAfterCreateListener(AutowiredInjectionDriver::getInstance($soullessArray));
         }
 
         if (isset(self::$_options['drivers']['errorhandler'])) {
