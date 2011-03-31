@@ -103,9 +103,6 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
             }
         }
         $bean->setProperties($properties);
-        if (empty($annotations)) {
-            return $bean;
-        }
         $properties = array();
         foreach ($annotations['class']['properties'] as $property => $propertyAnnotations) {
             foreach ($propertyAnnotations as $annotation) {

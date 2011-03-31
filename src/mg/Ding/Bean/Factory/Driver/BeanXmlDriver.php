@@ -501,9 +501,6 @@ class BeanXmlDriver
 
     public function getPointcut($name)
     {
-        if (!$this->_simpleXml) {
-            $this->_load();
-        }
         foreach($this->_simpleXml as $xmlName => $xml) {
             $simpleXmlPointcut = $xml->xpath("//pointcut[@id='$name']");
             if (!empty($simpleXmlPointcut)) {
@@ -554,8 +551,7 @@ class BeanXmlDriver
         $this->_directories
             = isset($options['directories'])
             ? $options['directories']
-            : array('.')
-        ;
+            : array('.');
         $this->_templateBeanDef = new BeanDefinition('');
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);

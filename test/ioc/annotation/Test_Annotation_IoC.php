@@ -345,3 +345,4 @@ class ClassSimpleAnnotation5
         $this->value2 = $value;
     }
 }
+

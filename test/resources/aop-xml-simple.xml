@@ -12,7 +12,7 @@
   </bean>
   <bean id="multipleMethodIntercepted" class="ClassSimpleAOPXML2" scope="singleton">
     <aspect ref="aspectBean" type="method">
-      <pointcut expression="^.+" method="invoke"/>
+      <pointcut id="aNicePointcut" expression="^.+" method="invoke"/>
     </aspect>
   </bean>
   <bean id="aspectBean" class="ClassSimpleAOPXMLAspect" scope="singleton"/>

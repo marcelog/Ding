@@ -29,6 +29,7 @@
  */
 
 use Ding\Container\Impl\ContainerImpl;
+use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 /**
  * This class will test the XML driver.
@@ -60,6 +61,28 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
                 )
             )
         );
+    }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_read_beans_file()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'xml' => array(
+                        	'filename' => 'ioc-xml-inexistant.xml', 'directories' => array('neverland')
+                        )
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('aSimpleInitMethodBean');
     }
 
     /**

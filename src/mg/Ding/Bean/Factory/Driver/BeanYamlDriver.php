@@ -365,7 +365,8 @@ class BeanYamlDriver
         }
 
         if (isset($beanDef['aspects'])) {
-            foreach ($beanDef['aspects'] as $aspect) {
+            foreach ($beanDef['aspects'] as $name => $aspect) {
+                $aspect['id'] = $name;
                 $aspectDefinition = $this->_loadAspect($aspect);
                 $bAspects[] = $aspectDefinition;
             }
@@ -425,9 +426,6 @@ class BeanYamlDriver
 
     public function getPointcut($name)
     {
-        if (!$this->_yamlFiles) {
-            $this->_load();
-        }
         foreach($this->_yamlFiles as $yamlFilename => $yaml) {
             if (isset($yaml['pointcuts'][$name])) {
                 if ($this->_logger->isDebugEnabled()) {
@@ -489,8 +487,7 @@ class BeanYamlDriver
         $this->_directories
             = isset($options['directories'])
             ? $options['directories']
-            : array('.')
-        ;
+            : array('.');
         $this->_yamlFiles = false;
         $this->_templateBeanDef = new BeanDefinition('');
         $this->_templatePropDef = new BeanPropertyDefinition('', 0, null);
