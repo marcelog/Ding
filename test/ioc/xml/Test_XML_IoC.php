@@ -87,6 +87,29 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_parse_beans_file()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'xml' => array(
+                        	'filename' => 'ioc-xml-invalid.xml', 'directories' => array(RESOURCES_DIR)
+                        )
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('aSimpleInitMethodBean');
+    }
+
+
+    /**
+     * @test
      */
     public function can_init_method()
     {
