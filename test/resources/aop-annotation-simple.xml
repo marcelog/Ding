@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="methodIntercepted" class="ClassSimpleAOPAnnotation1" scope="singleton"/>
+  <bean id="exceptionIntercepted" class="ClassSimpleAOPAnnotation2" scope="singleton"/>
+</beans>
