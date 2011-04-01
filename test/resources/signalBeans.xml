@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="SignalHandler" class="Ding\Helpers\SignalHandler\SignalHandlerHelper" scope="singleton">
+        <property name="signalHandler">
+            <ref bean="mySignalHandler"/>
+        </property>
+    </bean>
+    <bean id="mySignalHandler" class="MySignalHandler" scope="singleton"/>
+</beans>

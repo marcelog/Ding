@@ -125,6 +125,48 @@ beans: !!map
       - value1
       - value2
       - value3
+  aSimpleSetArgBean2:
+    class: ClassSimpleYAML12
+    scope: singleton
+    properties: !!map
+      value:
+        value: 1a$
+      "true":
+        value: true
+      "false":
+        value: false
+      "null":
+        value: null
+      "evaledCode":
+        eval: return "evaled code";
+      "ref":
+        ref: aSimpleSingletonBean
+      "innerBean":
+        bean:
+          class: ClassSimpleYAML
+          scope: singleton
+      "array": 
+        value: !!map
+          key1:
+            value: 1a$
+          key2:
+            value: true
+          key3:
+            value: false
+          key4:
+            value: null
+          key5:
+            eval: return "evaled code";
+          key6:
+            ref: aSimpleSingletonBean
+          key7:
+            bean:
+              class: ClassSimpleYAML
+              scope: singleton
+          key8:
+            value: !!map
+              key:
+                value: e
 
 import:
   - someOtherFile.yaml

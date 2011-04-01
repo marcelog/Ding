@@ -256,6 +256,19 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->b, 'value2');
         $this->assertEquals($bean->c, 'value3');
     }
+
+    /**
+     * @test
+     */
+    public function can_cache_property_name_for_setter_driver()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleSetArgBean');
+        $bean2 = $container->getBean('aSimpleSetArgBean2');
+
+        $this->assertTrue($bean instanceof ClassSimpleYAML3);
+        $this->assertTrue($bean2 instanceof ClassSimpleYAML12);
+    }
 }
 
 class ClassSimpleYAML
@@ -458,5 +471,57 @@ class ClassSimpleYAML11
         $this->a = $a;
         $this->b = $b;
         $this->c = $c;
+    }
+}
+
+class ClassSimpleYAML12
+{
+    public $value = 'not set';
+    public $true = 'not set';
+    public $false = 'not set';
+    public $null = 'not set';
+    public $eval = 'not set';
+    public $ref = 'not set';
+    public $innerBean = 'not set';
+    public $array = 'not set';
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function setTrue($value)
+    {
+        $this->true = $value;
+    }
+
+    public function setFalse($value)
+    {
+        $this->false = $value;
+    }
+
+    public function setNull($value)
+    {
+        $this->null = $value;
+    }
+
+    public function setEvaledCode($value)
+    {
+        $this->eval = $value;
+    }
+
+    public function setRef($value)
+    {
+        $this->ref = $value;
+    }
+
+    public function setInnerBean($value)
+    {
+        $this->innerBean = $value;
+    }
+
+    public function setArray($value)
+    {
+        $this->array = $value;
     }
 }

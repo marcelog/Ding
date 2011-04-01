@@ -40,6 +40,9 @@
     <testsuite name="Driver Timezone">
       <directory suffix=".php">timezone</directory>
     </testsuite>
+    <testsuite name="Driver SignalHandler">
+      <directory suffix=".php">signal</directory>
+    </testsuite>
     <testsuite name="Aware">
       <directory suffix=".php">aware</directory>
     </testsuite>

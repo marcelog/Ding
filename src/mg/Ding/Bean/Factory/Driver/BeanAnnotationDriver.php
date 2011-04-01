@@ -288,8 +288,7 @@ class BeanAnnotationDriver
                 $this->_configBeans[$configBeanName] = array();
             }
             foreach (
-                ReflectionFactory::getClassAnnotations($configClass)
-                as $method => $annotations
+                ReflectionFactory::getClassAnnotations($configClass) as $method => $annotations
             ) {
                 if ($method == 'class') {
                     continue;
