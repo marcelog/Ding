@@ -1,13 +1,12 @@
 <?php
-declare(ticks=1);
 /**
- * This class will test the signal handler driver.
+ * This class will test the shutdown handler driver.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Test
- * @subpackage Signal
+ * @subpackage Shutdown
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @version    SVN: $Id$
@@ -30,53 +29,67 @@ declare(ticks=1);
  */
 
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\SignalHandler\ISignalHandler;
+use Ding\Helpers\ShutdownHandler\IShutdownHandler;
 
 /**
- * This class will test the signal handler driver.
+ * This class will test the shutdown handler driver.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Test
- * @subpackage Signal
+ * @subpackage Shutdown
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_Signal extends PHPUnit_Framework_TestCase
+class Test_Shutdown extends PHPUnit_Framework_TestCase
 {
+    public static $tempFile = '/tmp/DingTestForShutdownDriver';
+
     /**
      * @test
      */
-    public function can_set_signal_handler()
+    public function can_set_shutdown_handler()
     {
+        @unlink(self::$tempFile);
+        touch(self::$tempFile);
+        $this->assertFileExists(self::$tempFile);
         $properties = array(
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('signalhandler' => array()),
+        			'drivers' => array('shutdown' => array()),
                     'bdef' => array(
-                        'xml' => array('filename' => 'signalBeans.xml', 'directories' => array(RESOURCES_DIR))
+                        'xml' => array('filename' => 'shutdownBeans.xml', 'directories' => array(RESOURCES_DIR))
                     )
                 )
             )
         );
         $container = ContainerImpl::getInstance($properties);
-        posix_kill(posix_getpid(), SIGUSR1);
-        $this->assertTrue(MySignalHandler::$something);
     }
 
     /**
      * @test
      */
-    public function can_set_annotated_signal_handler()
+    public function can_call_shutdown()
     {
+        $this->assertFileNotExists(self::$tempFile);
+    }
+
+    /**
+     * @test
+     */
+    public function can_set_annotated_shutdown_handler()
+    {
+        @unlink(self::$tempFile);
+        touch(self::$tempFile);
+        $this->assertFileExists(self::$tempFile);
         $properties = array(
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('signalhandler' => array()),
+        			'drivers' => array('shutdown' => array()),
                     'bdef' => array(
                         'annotation' => array('scanDir' => array(__DIR__))
                     )
@@ -84,8 +97,14 @@ class Test_Signal extends PHPUnit_Framework_TestCase
             )
         );
         $container = ContainerImpl::getInstance($properties);
-        posix_kill(posix_getpid(), SIGUSR1);
-        $this->assertTrue(MySignalHandler2::$something);
+    }
+
+    /**
+     * @test
+     */
+    public function can_call_annotated_shutdown()
+    {
+        $this->assertFileNotExists(self::$tempFile);
     }
 
     /**
@@ -97,7 +116,7 @@ class Test_Signal extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('signalhandler' => array()),
+        			'drivers' => array('shutdown' => array()),
                 )
             )
         );
@@ -105,25 +124,21 @@ class Test_Signal extends PHPUnit_Framework_TestCase
     }
 }
 
-class MySignalHandler implements ISignalHandler
+class MyShutdownHandler implements IShutdownHandler
 {
-    public static $something = null;
-
-    public function handleSignal($signal)
+    public function handleShutdown()
     {
-        self::$something = true;
+        unlink(Test_Shutdown::$tempFile);
     }
 }
 
 /**
- * @SignalHandler
+ * @ShutdownHandler
  */
-class MySignalHandler2 implements ISignalHandler
+class MyShutdownHandler2 implements IShutdownHandler
 {
-    public static $something = null;
-
-    public function handleSignal($signal)
+    public function handleShutdown()
     {
-        self::$something = true;
+        unlink(Test_Shutdown::$tempFile);
     }
 }
