@@ -67,6 +67,7 @@ use Ding\Bean\Factory\Driver\SetterInjectionDriver;
 use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
 use Ding\Bean\Factory\Driver\AnnotationRequiredDriver;
 use Ding\Bean\Factory\Driver\AnnotationResourceDriver;
+use Ding\Bean\Factory\Driver\AnnotationInitDestroyMethodDriver;
 use Ding\Bean\Factory\Driver\ContainerAwareDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
@@ -416,21 +417,6 @@ class ContainerImpl implements IContainer
         //try
         //{
             $this->_assemble($bean, $beanDefinition);
-            if (!empty($beanClass) && isset(self::$_options['bdef']['annotation'])) {
-                $annotations = ReflectionFactory::getClassAnnotations($beanDefinition->getClass());
-                if (isset($annotations['class']['InitMethod'])) {
-                    $arguments = $annotations['class']['InitMethod']->getArguments();
-                    if (isset($arguments['method'])) {
-                        $beanDefinition->setInitMethod($arguments['method']);
-                    }
-                }
-                if (isset($annotations['class']['DestroyMethod'])) {
-                    $arguments = $annotations['class']['DestroyMethod']->getArguments();
-                    if (isset($arguments['method'])) {
-                        $beanDefinition->setDestroyMethod($arguments['method']);
-                    }
-                }
-            }
             $initMethod = $beanDefinition->getInitMethod();
             if ($initMethod) {
                 $bean->$initMethod();
@@ -669,6 +655,7 @@ class ContainerImpl implements IContainer
             $this->addAfterCreateListener(AnnotationResourceDriver::getInstance($soullessArray));
             $this->addAfterConfigListener(AnnotationAspectDriver::getInstance($soullessArray));
             $this->addAfterDefinitionListener(AnnotationRequiredDriver::getInstance($soullessArray));
+            $this->addAfterDefinitionListener(AnnotationInitDestroyMethodDriver::getInstance($soullessArray));
         }
 
         if (isset(self::$_options['drivers']['errorhandler'])) {

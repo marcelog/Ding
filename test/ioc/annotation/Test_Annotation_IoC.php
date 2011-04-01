@@ -164,6 +164,51 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('requiredFails');
     }
+    /**
+     * @test
+     */
+    public function can_class_init_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleInitMethodClass');
+        $this->assertTrue($bean->something);
+    }
+
+    /**
+     * @test
+     */
+    public function can_class_destroy_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleDestroyMethodClass');
+         // XXX bad... unset() does not work because ContainerImpl is a singleton
+         // and holds a reference to itself, so the destructor is never called.
+        $container->__destruct();
+        $this->assertNull($bean->something);
+    }
+}
+
+/**
+ * @InitMethod(method=initMethod)
+ * @DestroyMethod(method=destroyMethod)
+ */
+class ASimpleDestroyInitClass
+{
+    public $something = false;
+
+    public function initMethod()
+    {
+        $this->something = true;
+    }
+
+    public function destroyMethod()
+    {
+        $this->something = null;
+    }
+
+    public function __construct()
+    {
+    }
 }
 
 /**
@@ -171,6 +216,24 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
  */
 class ClassSimpleAnnotationConfiguration
 {
+    /**
+     * @Bean(class=ASimpleDestroyInitClass)
+     * @Scope(value=singleton)
+     */
+    public function aSimpleInitMethodClass()
+    {
+        return new ASimpleDestroyInitClass();
+    }
+
+    /**
+     * @Bean(class=ASimpleDestroyInitClass)
+     * @Scope(value=singleton)
+     */
+    public function aSimpleDestroyMethodClass()
+    {
+        return new ASimpleDestroyInitClass();
+    }
+
     /**
      * @Bean(class=ClassSimpleAnnotation)
      * @Scope(value=singleton)
