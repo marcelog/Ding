@@ -40,5 +40,8 @@
     <testsuite name="Driver Timezone">
       <directory suffix=".php">timezone</directory>
     </testsuite>
+    <testsuite name="Aware">
+      <directory suffix=".php">aware</directory>
+    </testsuite>
   </testsuites>
 </phpunit>

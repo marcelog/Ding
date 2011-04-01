@@ -52,7 +52,8 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-                    'bdef' => array(
+                'cache' => array(),
+        		'bdef' => array(
                         'yaml' => array(
                         	'filename' => 'ioc-yaml-simple.yaml', 'directories' => array(RESOURCES_DIR)
                         )

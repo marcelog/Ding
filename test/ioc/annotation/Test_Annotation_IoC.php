@@ -61,6 +61,7 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
             )
         );
     }
+
     /**
      * @test
      */

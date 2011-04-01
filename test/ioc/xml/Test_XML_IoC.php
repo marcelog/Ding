@@ -52,6 +52,7 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $this->_properties = array(
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'cache' => array(),
                 'factory' => array(
                     'bdef' => array(
                         'xml' => array(
