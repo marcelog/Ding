@@ -46,6 +46,9 @@
     <testsuite name="Driver ShutdownHandler">
       <directory suffix=".php">shutdown</directory>
     </testsuite>
+    <testsuite name="Driver ErrorHandler">
+      <directory suffix=".php">error</directory>
+    </testsuite>
     <testsuite name="Aware">
       <directory suffix=".php">aware</directory>
     </testsuite>
