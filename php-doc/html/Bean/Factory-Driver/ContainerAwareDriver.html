@@ -3,7 +3,7 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos  -->
-			<title>Docs For Class FiltersDriver</title>
+			<title>Docs For Class ContainerAwareDriver</title>
 			<link rel="stylesheet" href="../../media/stylesheet.css" />
 						<script src="../../media/lib/classTree.js"></script>
 												<script language="javascript" type="text/javascript">
@@ -88,7 +88,7 @@
 <h2 class="class-name"><img src="../../media/images/Class_logo.png"
 														alt=" Class"
 														title=" Class"
-														style="vertical-align: middle"> FiltersDriver</h2>
+														style="vertical-align: middle"> ContainerAwareDriver</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -106,7 +106,7 @@
                 <li><a href="../../Bean/Lifecycle/IAfterDefinitionListener.html">IAfterDefinitionListener</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">This driver will apply all filters to property values.</p>
+<p class="short-description">This driver will make the injection of the container instance for beans that  implement IContainerAware.</p>
 <p class="description"><p>PHP Version 5</p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Marcelo Gornstein &lt;<a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a>&gt;</li>
@@ -114,7 +114,7 @@
 				<li><span class="field">license:</span> <a href="http://marcelog.github.com/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Bean---Factory---Driver---FiltersDriver.php.html">/Bean/Factory/Driver/FiltersDriver.php</a> (line <span class="field">53</span>)
+			Located in <a class="field" href="_Bean---Factory---Driver---ContainerAwareDriver.php.html">/Bean/Factory/Driver/ContainerAwareDriver.php</a> (line <span class="field">52</span>)
 		</p>
 		
 				
@@ -137,17 +137,12 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																				<div class="var-title">
+												<div class="var-title">
 					<img src="../../media/images/StaticVariable.png" alt=" " />
-					static <span class="var-type"><a href="../../Bean/Factory-Driver/DependsOnDriver.html">DependsOnDriver</a></span>
+					static <span class="var-type"><a href="../../Bean/Factory-Driver/ContainerAwareDriver.html">ContainerAwareDriver</a></span>
 					<a href="#$_instance" title="details" class="var-name">$_instance</a>
 				</div>
-																				<div class="var-title">
-					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">IFilter[]</span>
-					<a href="#$_filters" title="details" class="var-name">$_filters</a>
-				</div>
-																			</div>
+																							</div>
 		</div>
 	</div>
 
@@ -166,16 +161,16 @@
 																											
 				<div class="method-definition">
 					<img src="../../media/images/StaticMethod.png" alt=" "/>
-					static 						<span class="method-result"><a href="../../Bean/Factory-Driver/FiltersDriver.html">FiltersDriver</a></span>
+					static 						<span class="method-result"><a href="../../Bean/Factory-Driver/ContainerAwareDriver.html">ContainerAwareDriver</a></span>
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
 									</div>
-																											
+																			
 				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
+										()
 									</div>
 															
 				<div class="method-definition">
@@ -184,14 +179,7 @@
 										<a href="#afterDefinition" title="details" class="method-name">afterDefinition</a>
 											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span>)
 									</div>
-																							
-				<div class="method-definition">
-					<img src="../../media/images/PrivateMethod.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#_applyFilter" title="details" class="method-name">_applyFilter</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">&$def</span>, <span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a>|BeanConstructoruArgumentDefinition</span>&nbsp;<span class="var-name">$def</span>)
-									</div>
-											</div>
+																			</div>
 		</div>
 	</div>		
 
@@ -214,9 +202,9 @@
 	<div class="var-header">
 		<img src="../../media/images/StaticVariable.png" />
 		<span class="var-title">
-			static <span class="var-type"><a href="../../Bean/Factory-Driver/DependsOnDriver.html">DependsOnDriver</a></span>
+			static <span class="var-type"><a href="../../Bean/Factory-Driver/ContainerAwareDriver.html">ContainerAwareDriver</a></span>
 			<span class="var-name">$_instance</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">59</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">58</span>)
 		</span>
 	</div>
 
@@ -232,29 +220,6 @@
 
 </div>
 
-<a name="var$_filters" id="$_filters"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<img src="../../media/images/PrivateVariable.png" />
-		<span class="var-title">
-			<span class="var-type">IFilter[]</span>
-			<span class="var-name">$_filters</span>
-						(line <span class="line-number">65</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Registered filters to apply.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
 						
 		</div>
 	</div>
@@ -271,11 +236,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodgetInstance" id="getInstance"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">110</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">79</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -285,7 +250,7 @@
 			</ul>
 	
 	<div class="method-signature">
-		static <span class="method-result"><a href="../../Bean/Factory-Driver/FiltersDriver.html">FiltersDriver</a></span>
+		static <span class="method-result"><a href="../../Bean/Factory-Driver/ContainerAwareDriver.html">ContainerAwareDriver</a></span>
 		<span class="method-name">
 			getInstance
 		</span>
@@ -301,11 +266,11 @@
 			
 	</div>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">125</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">92</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -319,29 +284,22 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>)
+				()
 			</div>
 	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">array</span>
-				<span class="var-name">$options</span><span class="var-description">: Optional options.</span>			</li>
-				</ul>
 		
 			
 	</div>
 <a name="methodafterDefinition" id="afterDefinition"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterDefinition</span> (line <span class="line-number">92</span>)
+		<span class="method-title">afterDefinition</span> (line <span class="line-number">60</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">(non-PHPdoc)</p>
 	<ul class="tags">
-				<li><span class="field">see:</span> Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -369,46 +327,13 @@
 					</dl>
 			
 	</div>
-<a name="method_applyFilter" id="_applyFilter"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_applyFilter</span> (line <span class="line-number">74</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Recursively, apply filter to property or constructor arguments values.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			_applyFilter
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">&$def</span>, <span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a>|BeanConstructoruArgumentDefinition</span>&nbsp;<span class="var-name">$def</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a>|BeanConstructoruArgumentDefinition</span>
-				<span class="var-name">$def</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$def</span>			</li>
-				</ul>
-		
-			
-	</div>
 						
 		</div>
 	</div>
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 01 Apr 2011 12:52:48 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Fri, 01 Apr 2011 12:52:47 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
