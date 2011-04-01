@@ -263,12 +263,8 @@ class BeanXmlDriver
             $propValue = true;
         } else if (isset($simpleXmlProperty->bean)) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
-            if (isset($simpleXmlProperty->bean->attributes()->name)) {
-                $name = (string)$simpleXmlProperty->bean->attributes()->name;
-            } else {
-                $name = 'Bean' . microtime(true);
-                $simpleXmlProperty->bean->addAttribute('id', $name);
-            }
+            $name = 'Bean' . microtime(true);
+            $simpleXmlProperty->bean->addAttribute('id', $name);
             $propValue = $name;
         } else if (isset($simpleXmlProperty->array)) {
             $propType = BeanPropertyDefinition::PROPERTY_ARRAY;
@@ -302,13 +298,9 @@ class BeanXmlDriver
             $argValue = (string)$simpleXmlArg->ref->attributes()->bean;
         } else if (isset($simpleXmlArg->bean)) {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
-            if (isset($simpleXmlArg->bean->attributes()->name)) {
-                $name = (string)$simpleXmlArg->bean->attributes()->name;
-            } else {
-                $name = 'Bean' . rand(1, microtime(true));
-                $simpleXmlArg->bean->addAttribute('id', $name);
-            }
+            $name = 'Bean' . rand(1, microtime(true));
             $argValue = $name;
+            $simpleXmlArg->bean->addAttribute('id', $name);
         } else if (isset($simpleXmlArg->null)) {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
             $argValue = null;

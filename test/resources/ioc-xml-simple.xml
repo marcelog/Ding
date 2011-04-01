@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
+    <bean id="invalidScopeBean" scope="aa" class="ClassSimpleXML"/>
     <bean id="aSimpleSingletonBean" scope="singleton" class="ClassSimpleXML"/>
     <bean id="aSimplePrototypeBean" scope="prototype" class="ClassSimpleXML"/>
     

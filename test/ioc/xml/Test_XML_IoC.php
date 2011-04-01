@@ -110,6 +110,26 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_unknown_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $this->assertFalse($container->getBean('unknownBean'));
+    }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_invalid_scope()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $container->getBean('invalidScopeBean');
+    }
+
+    /**
+     * @test
      */
     public function can_init_method()
     {
