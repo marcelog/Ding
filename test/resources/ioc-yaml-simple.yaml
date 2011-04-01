@@ -107,6 +107,25 @@ beans: !!map
     lookup-methods: !!map
       createAnotherBean: aSimpleSingletonBean
 
+  aSimpleBeanFactory:
+    class: ClassSimpleYAML11
+    scope: singleton
+    factory-method: getInstance
+    constructor-args:
+      - value1
+      - value2
+      - value3
+
+  aSimpleBeanFactoryFromOtherBean:
+    class: ClassSimpleYAML11
+    scope: singleton
+    factory-method: factoryMethod
+    factory-bean: aSimpleBeanFactory
+    constructor-args:
+      - value1
+      - value2
+      - value3
+
 import:
   - someOtherFile.yaml
 

@@ -24,7 +24,6 @@
       </array></constructor-arg>
     </bean>
 
-
     <bean id="aSimpleSetArgBean" scope="singleton" class="ClassSimpleXML3">
       <property name="value"><value>1a$</value></property>
       <property name="true"><true/></property>
@@ -52,5 +51,17 @@
     <import resource="someOtherFile.xml"/>
     <bean id="aSimpleMethodLookupBean" class="ClassSimpleXML10" scope="singleton">
         <lookup-method name="createAnotherBean" bean="aSimpleSingletonBean"/>
+    </bean>
+    
+    <bean id="aSimpleBeanFactory" class="ClassSimpleXML11" scope="singleton" factory-method="getInstance">
+      <constructor-arg><value>value1</value></constructor-arg>
+      <constructor-arg><value>value2</value></constructor-arg>
+      <constructor-arg><value>value3</value></constructor-arg>
+    </bean>
+
+    <bean id="aSimpleBeanFactoryFromOtherBean" class="ClassSimpleXML11" scope="singleton" factory-bean="aSimpleBeanFactory" factory-method="factoryMethod">
+      <constructor-arg><value>value1</value></constructor-arg>
+      <constructor-arg><value>value2</value></constructor-arg>
+      <constructor-arg><value>value3</value></constructor-arg>
     </bean>
 </beans>

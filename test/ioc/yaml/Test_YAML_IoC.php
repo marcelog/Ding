@@ -230,6 +230,32 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof ClassSimpleYAML10);
         $this->assertTrue($bean->createAnotherBean() instanceof ClassSimpleYAML);
     }
+
+    /**
+     * @test
+     */
+    public function can_factory_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleBeanFactory');
+        $this->assertTrue($bean instanceof ClassSimpleYAML11);
+        $this->assertEquals($bean->a, 'value1');
+        $this->assertEquals($bean->b, 'value2');
+        $this->assertEquals($bean->c, 'value3');
+    }
+
+    /**
+     * @test
+     */
+    public function can_factory_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleBeanFactoryFromOtherBean');
+        $this->assertTrue($bean instanceof ClassSimpleYAML11);
+        $this->assertEquals($bean->a, 'value1');
+        $this->assertEquals($bean->b, 'value2');
+        $this->assertEquals($bean->c, 'value3');
+    }
 }
 
 class ClassSimpleYAML
@@ -408,5 +434,29 @@ class ClassSimpleYAML10
 
     public function __construct()
     {
+    }
+}
+
+class ClassSimpleYAML11
+{
+    public $a;
+    public $b;
+    public $c;
+
+    public static function getInstance($a, $b, $c)
+    {
+        return new ClassSimpleYAML11($a, $b, $c);
+    }
+
+    public function factoryMethod($a, $b, $c)
+    {
+        return new ClassSimpleYAML11($a, $b, $c);
+    }
+
+    public function __construct($a, $b, $c)
+    {
+        $this->a = $a;
+        $this->b = $b;
+        $this->c = $c;
     }
 }
