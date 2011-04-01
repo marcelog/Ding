@@ -106,6 +106,12 @@ can deliver prototypes scoped beans.
 be specified via the @InitMethod(method=xxx) annotation).
 * Optional destroy-method will be called when the container is shutting down.
 (Can also be specified via the @DestroyMethod(method=xxx) annotation).
+
+Aware Interfaces
+================
+IContainerAware: Whenever ding is going to instantiate a bean whose class
+implements IContainerAware interface, it will inject the container instace to
+this bean.
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 AOP
