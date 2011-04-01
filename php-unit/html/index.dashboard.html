@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!--[if IE]><script src="excanvas.compressed.js"></script><![endif]-->
+    <script src="RGraph.common.core.js" ></script>
+    <script src="RGraph.common.tooltips.js" ></script>
+    <script src="RGraph.bar.js" ></script>
+    <script src="RGraph.scatter.js" ></script>
+  </head>
+
+  <body>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="title"></td></tr>
+      <tr><td><div align="center"><p><a href="index.html">Back to Code Coverage report</a></p></div></td></tr>
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+    </table>
+
+    <br />
+
+    <center>
+      <table width="90%" cellpadding="2" cellspacing="1" border="0">
+        <tr>
+          <td valign="top">
+            <h2>Class Coverage Distribution</h2>
+            <canvas id="classCoverageDistribution" width="475" height="200"></canvas>
+            <script>
+            var ccd = new RGraph.Bar('classCoverageDistribution', [36,0,0,0,0,3,1,1,8,3,5,14]);
+            ccd.Set('chart.background.barcolor1', 'white');
+            ccd.Set('chart.background.barcolor2', 'white');
+            ccd.Set('chart.colors', ['blue']);
+            ccd.Set('chart.shadow', true);
+            ccd.Set('chart.shadow.offsetx', 3);
+            ccd.Set('chart.shadow.offsety', 3);
+            ccd.Set('chart.labels', ['0%','0-10%','10-20%','20-30%','30-40%','40-50%','50-60%','60-70%','70-80%','80-90%','90-100%','100%']);
+            ccd.Set('chart.text.size', 5);
+            ccd.Draw();
+            </script>
+          </td>
+
+          <td valign="top">
+            <h2>Class Complexity</h2>
+            <canvas id="classComplexity" width="475" height="200"></canvas>
+            <script>
+            var cc = new RGraph.Scatter('classComplexity', [[41.3793103448,12,"blue","AspectDefinition"],[74.4680851064,17,"blue","AspectManager"],[87.5,4,"blue","AdviceDefinition"],[91.1111111111,17,"blue","DispatcherImpl"],[45.4545454545,14,"blue","MethodInvocation"],[72.2222222222,8,"blue","PointcutDefinition"],[70.1149425287,24,"blue","Proxy"],[70,9,"blue","Ding_Autoloader"],[100,3,"blue","BeanAnnotationDefinition"],[75,8,"blue","BeanConstructorArgumentDefinition"],[70,40,"blue","BeanDefinition"],[54.5454545455,11,"blue","BeanPropertyDefinition"],[100,10,"blue","AnnotationAspectDriver"],[100,10,"blue","AnnotationRequiredDriver"],[100,15,"blue","AnnotationResourceDriver"],[82.7814569536,51,"blue","BeanAnnotationDriver"],[91.0034602076,83,"blue","BeanXmlDriver"],[92.8571428571,76,"blue","BeanYamlDriver"],[100,5,"blue","ContainerAwareDriver"],[100,5,"blue","DependsOnDriver"],[0,6,"blue","ErrorHandlerDriver"],[100,10,"blue","FiltersDriver"],[40.9090909091,7,"blue","MVCAnnotationDriver"],[100,3,"blue","MethodInjectionAspect"],[100,6,"blue","MethodInjectionDriver"],[93.5483870968,12,"blue","SetterInjectionDriver"],[0,6,"blue","ShutdownDriver"],[0,7,"blue","SignalHandlerDriver"],[100,5,"blue","TimezoneDriver"],[100,0,"blue","BeanFactoryException"],[73.0769230769,14,"blue","PropertyFilter"],[100,0,"blue","BeanLifecycle"],[0,0,"blue","BeanLifecycleException"],[0,0,"blue","CacheException"],[0,0,"blue","FileCacheException"],[0,8,"blue","APCCacheImpl"],[75,8,"blue","DummyCacheImpl"],[0,14,"blue","FileCacheImpl"],[0,11,"blue","MemcachedCacheImpl"],[0,10,"blue","ZendCacheImpl"],[60.8695652174,13,"blue","CacheLocator"],[0,0,"blue","ContainerException"],[85.4368932039,88,"blue","ContainerImpl"],[100,0,"blue","DingException"],[0,4,"blue","ErrorHandlerHelper"],[0,17,"blue","ErrorInfo"],[0,3,"blue","ShutdownHandlerHelper"],[0,4,"blue","SignalHandlerHelper"],[0,15,"blue","SyslogHelper"],[0,0,"blue","TCPException"],[0,34,"blue","TCPClientHelper"],[0,37,"blue","TCPServerHelper"],[0,9,"blue","TimerHelper"],[100,3,"blue","TimezoneHelper"],[0,7,"blue","HttpSession"],[0,5,"blue","Logger"],[0,3,"blue","Action"],[0,7,"blue","Dispatcher"],[0,0,"blue","MVCException"],[0,0,"blue","ForwardModelAndView"],[0,3,"blue","HttpAction"],[0,0,"blue","HttpDispatcher"],[0,8,"blue","HttpExceptionMapper"],[0,22,"blue","HttpFrontController"],[0,15,"blue","HttpUrlMapper"],[0,5,"blue","HttpView"],[0,6,"blue","HttpViewResolver"],[0,5,"blue","ModelAndView"],[0,0,"blue","RedirectModelAndView"],[0,3,"blue","View"],[94.6428571429,31,"blue","ReflectionFactory"]]);
+            cc.Set('chart.xmax', 100);
+            cc.Set('chart.background.barcolor1', 'white');
+            cc.Set('chart.background.barcolor2', 'white');
+            cc.Set('chart.tickmarks', 'plus');
+            cc.Set('chart.ticksize', 5);
+            cc.Set('chart.text.size', 5);
+            cc.Set('chart.ylabels', false);
+            cc.Draw();
+            </script>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">
+            <h2>Top Project Risks</h2>
+            <ul>
+              <li><a href="Cache_Locator_CacheLocator.php.html#53">CacheLocator</a> (23)</li>
+              <li><a href="Aspect_AspectManager.php.html#44">AspectManager</a> (21)</li>
+              <li><a href="Helpers_ErrorHandler_ErrorHandlerHelper.php.html#46">ErrorHandlerHelper</a> (20)</li>
+              <li><a href="Helpers_SignalHandler_SignalHandlerHelper.php.html#50">SignalHandlerHelper</a> (20)</li>
+              <li><a href="Bean_Factory_Filter_PropertyFilter.php.html#44">PropertyFilter</a> (17)</li>
+              <li><a href="Aspect_Interceptor_DispatcherImpl.php.html#45">DispatcherImpl</a> (17)</li>
+              <li><a href="Bean_Factory_Driver_MVCAnnotationDriver.php.html#50">MVCAnnotationDriver</a> (17)</li>
+              <li><a href="Bean_Factory_Driver_SetterInjectionDriver.php.html#52">SetterInjectionDriver</a> (12)</li>
+              <li><a href="Autoloader_Ding_Autoloader.php.html#63">Ding_Autoloader</a> (11)</li>
+              <li><a href="Cache_Impl_DummyCacheImpl.php.html#45">DummyCacheImpl</a> (9)</li>
+
+            </ul>
+          </td>
+
+          <td valign="top">
+            <h2>Least Tested Methods</h2>
+            <ul>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#313">TCPClientHelper::setConnectTimeout</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#301">TCPClientHelper::setReadTimeout</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#325">TCPClientHelper::setHandler</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#337">TCPClientHelper::setPort</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#361">TCPClientHelper::setReuse</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#349">TCPClientHelper::setAddress</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#289">TCPClientHelper::setReadMinLength</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#240">TCPClientHelper::process</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#132">TCPClientHelper::read</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPClientHelper.php.html#115">TCPClientHelper::close</a> (0%)</li>
+
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </center>
+
+    <br />
+
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Fri Apr 1 12:52:19 ART 2011.</td></tr>
+    </table>
+
+    <br/>
+  </body>
+</html>
