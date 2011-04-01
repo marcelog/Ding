@@ -254,7 +254,7 @@
 <span class="lineNum" id="container50"><a name="50"></a><a href="#50" id="line50">      50</a> </span>                :  * @license    http://marcelog.github.com/ Apache License 2.0                                    
 <span class="lineNum" id="container51"><a name="51"></a><a href="#51" id="line51">      51</a> </span>                :  * @link       http://marcelog.github.com/                                                       
 <span class="lineNum" id="container52"><a name="52"></a><a href="#52" id="line52">      52</a> </span>                :  */                                                                                              
-<span class="lineNum" id="container53"><a name="53"></a><a href="#53" id="line53">      53</a> </span><span class="lineCov">             11 : class AnnotationRequiredDriver implements IAfterDefinitionListener                               </span>
+<span class="lineNum" id="container53"><a name="53"></a><a href="#53" id="line53">      53</a> </span><span class="lineCov">             12 : class AnnotationRequiredDriver implements IAfterDefinitionListener                               </span>
 <span class="lineNum" id="container54"><a name="54"></a><a href="#54" id="line54">      54</a> </span>                : {                                                                                                
 <span class="lineNum" id="container55"><a name="55"></a><a href="#55" id="line55">      55</a> </span>                :     /**                                                                                          
 <span class="lineNum" id="container56"><a name="56"></a><a href="#56" id="line56">      56</a> </span>                :      * Holds current instance.                                                                   
@@ -298,10 +298,10 @@
 <span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span>                :      */                                                                                          
 <span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span>                :     public static function getInstance(array $options)                                           
 <span class="lineNum" id="container96"><a name="96"></a><a href="#96" id="line96">      96</a> </span>                :     {                                                                                            
-<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span><span class="lineCov">             11 :         if (self::$_instance == false) {                                                         </span>
-<span class="lineNum" id="container98"><a name="98"></a><a href="#98" id="line98">      98</a> </span><span class="lineCov">             11 :             self::$_instance = new AnnotationRequiredDriver;                                     </span>
-<span class="lineNum" id="container99"><a name="99"></a><a href="#99" id="line99">      99</a> </span><span class="lineCov">             11 :         }                                                                                        </span>
-<span class="lineNum" id="container100"><a name="100"></a><a href="#100" id="line100">     100</a> </span><span class="lineCov">             11 :         return self::$_instance;                                                                 </span>
+<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span><span class="lineCov">             12 :         if (self::$_instance == false) {                                                         </span>
+<span class="lineNum" id="container98"><a name="98"></a><a href="#98" id="line98">      98</a> </span><span class="lineCov">             12 :             self::$_instance = new AnnotationRequiredDriver;                                     </span>
+<span class="lineNum" id="container99"><a name="99"></a><a href="#99" id="line99">      99</a> </span><span class="lineCov">             12 :         }                                                                                        </span>
+<span class="lineNum" id="container100"><a name="100"></a><a href="#100" id="line100">     100</a> </span><span class="lineCov">             12 :         return self::$_instance;                                                                 </span>
 <span class="lineNum" id="container101"><a name="101"></a><a href="#101" id="line101">     101</a> </span><span class="lineDeadCode">                :     }                                                                                            </span>
 <span class="lineNum" id="container102"><a name="102"></a><a href="#102" id="line102">     102</a> </span>                :                                                                                                  
 <span class="lineNum" id="container103"><a name="103"></a><a href="#103" id="line103">     103</a> </span>                :     /**                                                                                          
@@ -311,7 +311,7 @@
 <span class="lineNum" id="container107"><a name="107"></a><a href="#107" id="line107">     107</a> </span>                :      */                                                                                          
 <span class="lineNum" id="container108"><a name="108"></a><a href="#108" id="line108">     108</a> </span>                :     private function __construct()                                                               
 <span class="lineNum" id="container109"><a name="109"></a><a href="#109" id="line109">     109</a> </span>                :     {                                                                                            
-<span class="lineNum" id="container110"><a name="110"></a><a href="#110" id="line110">     110</a> </span><span class="lineCov">             11 :     }                                                                                            </span>
+<span class="lineNum" id="container110"><a name="110"></a><a href="#110" id="line110">     110</a> </span><span class="lineCov">             12 :     }                                                                                            </span>
 
 </pre>
         </td>
@@ -320,7 +320,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Fri Apr 1 12:52:19 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Fri Apr 1 14:48:19 ART 2011.</td></tr>
     </table>
 
     <br />
@@ -331,8 +331,8 @@
       YAHOO.namespace("phpunit.container");
       YAHOO.phpunit.container.panelsData = {
         "panel53": {
-          "header": "11 tests cover line 53",
-          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
+          "header": "12 tests cover line 53",
+          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Signal::can_set_annotated_signal_handler</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
           "footer": ""
         },
         "panel67": {
@@ -416,28 +416,28 @@
           "footer": ""
         },
         "panel97": {
-          "header": "11 tests cover line 97",
-          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
+          "header": "12 tests cover line 97",
+          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Signal::can_set_annotated_signal_handler</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
           "footer": ""
         },
         "panel98": {
-          "header": "11 tests cover line 98",
-          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
+          "header": "12 tests cover line 98",
+          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Signal::can_set_annotated_signal_handler</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
           "footer": ""
         },
         "panel99": {
-          "header": "11 tests cover line 99",
-          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
+          "header": "12 tests cover line 99",
+          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Signal::can_set_annotated_signal_handler</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
           "footer": ""
         },
         "panel100": {
-          "header": "11 tests cover line 100",
-          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
+          "header": "12 tests cover line 100",
+          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Signal::can_set_annotated_signal_handler</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
           "footer": ""
         },
         "panel110": {
-          "header": "11 tests cover line 110",
-          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
+          "header": "12 tests cover line 110",
+          "body": "<ul><li class=\"testPassed\">Test_Annotation_IoC::can_singleton</li><li class=\"testPassed\">Test_Annotation_IoC::can_prototype</li><li class=\"testPassed\">Test_Annotation_IoC::can_rename</li><li class=\"testPassed\">Test_Annotation_IoC::can_init_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_destroy_method</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_resource</li><li class=\"testPassed\">Test_Annotation_IoC::can_at_required</li><li class=\"testPassed\">Test_Annotation_IoC::cannot_at_required_missing_property</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_method</li><li class=\"testPassed\">Test_Annotation_AOP::can_intercept_exception</li><li class=\"testPassed\">Test_Signal::can_set_annotated_signal_handler</li><li class=\"testPassed\">Test_Container_Aware::can_be_container_aware</li></ul>",
           "footer": ""
         },
       "dummy": ""
