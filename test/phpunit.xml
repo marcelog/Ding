@@ -37,6 +37,9 @@
     <testsuite name="Filter XML">
       <directory suffix=".php">filter/xml</directory>
     </testsuite>
+    <testsuite name="Dummy Logger">
+      <directory suffix=".php">logger</directory>
+    </testsuite>
     <testsuite name="Driver Timezone">
       <directory suffix=".php">timezone</directory>
     </testsuite>

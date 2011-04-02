@@ -11,6 +11,8 @@ ini_set(
         )
     )
 );
+require_once 'Ding/Logger/Logger.php';
+
 define('RESOURCES_DIR', __DIR__ . DIRECTORY_SEPARATOR . 'resources');
 
 require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
