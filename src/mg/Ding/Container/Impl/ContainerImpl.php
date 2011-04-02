@@ -31,7 +31,6 @@ namespace Ding\Container\Impl;
 
 use Ding\Cache\Locator\CacheLocator;
 use Ding\Container\IContainer;
-use Ding\Container\Exception\ContainerException;
 use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectManager;
 use Ding\Aspect\InterceptorDefinition;
