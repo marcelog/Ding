@@ -7,8 +7,8 @@ namespace Some\Namespaces\Clazz;
 class SomeNamespacedClass
 {
     /**
-     * @Bean(class="Some\Namespaces\Clazz\SomeOtherNamespacedClass")
-     * Enter description here ...
+     * @Bean(class=Some\Namespaces\Clazz\SomeOtherNamespacedClass)
+     * @Scope(value=singleton)
      */
     public function aBeanFromANamespacedClass()
     {
@@ -18,5 +18,8 @@ class SomeNamespacedClass
 
 class SomeOtherNamespacedClass
 {
-
+    /**
+     * @Resource
+     */
+    public $aBeanFromANamespacedClass;
 }
