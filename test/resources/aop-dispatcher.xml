@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <pointcut id="aPointcut" expression="^.+" method="invoke"/>
+  <bean id="aspectBean" class="ClassSimpleAOPDispatcherAspect" scope="singleton"/>
+  <bean id="throwsUnaspectedException" class="ClassSimpleAOPDispatcher" scope="singleton">
+    <aspect ref="aspectBean" type="method">
+      <pointcut pointcut-ref="aPointcut" method="invoke"/>
+    </aspect>
+  </bean>
+</beans>
