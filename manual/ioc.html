@@ -575,7 +575,8 @@ metadata associated with it (and its subparts, like properties, annotations, etc
 
 <H2><u>Aware Interfaces</u></H2>
 <ul>
-  <li><u>IContainerAware</u>: Whenever ding is going to instantiate a bean whose class implements IContainerAware interface, it will inject the container instace to this bean</li>
+  <li><u>Ding\Container\IContainerAware</u>: Whenever ding is going to instantiate a bean whose class implements IContainerAware interface, it will inject the container instace to this bean</li>
+  <li><u>Ding\Bean\IBeanNameAware</u>: Whenever ding is going to instantiate a bean whose class implements IBeanNameAware interface, it will inject the name of the bean</li>
 </ul>
 
 <H3><u>Extension points</u></H3>
