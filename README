@@ -113,8 +113,13 @@ IContainerAware: Whenever ding is going to instantiate a bean whose class
 implements IContainerAware interface, it will inject the container instace to
 this bean.
 
-IBeanName: Whenever ding is going to instantiate a bean whose class
+IBeanNameAware: Whenever ding is going to instantiate a bean whose class
 implements IBeanNameAware interface, it will inject the bean name.
+
+IAspectManagerAware: Whenever ding is going to instantiate a bean whose class
+implements IAspectManagerAware interface, it will inject the current instance
+of the aspect manager (giving the ability to inject pointcuts, aspects, and
+general aop management).
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 AOP
