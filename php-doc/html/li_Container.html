@@ -150,36 +150,6 @@ if (document.getElementById) {
 				
 			tree.add(tree_file);
 		
-							var subpackagetree = new WebFXTreeItem('<span class="sub-package">Exception</span>', '');
-		
-		subpackagetree.openIcon = 'media/images/package.png';
-		subpackagetree.icon = 'media/images/package.png';
-
-			
-					var subpackagetree_classe = new WebFXTreeItem('Class(es)', '');
-			subpackagetree_classe.openIcon = 'media/images/class_folder.png';
-			subpackagetree_classe.icon = 'media/images/class_folder.png';
-			
-							var classe = new WebFXTreeItem('ContainerException', 'Container/Exception/ContainerException.html');
-				classe.openIcon = 'media/images/Class.png';
-				classe.icon = 'media/images/Class.png';
-				subpackagetree_classe.add(classe);
-						
-			subpackagetree.add(subpackagetree_classe);
-		
-				
-					var subpackagetree_file = new WebFXTreeItem('File(s)', '');
-			subpackagetree_file.openIcon = 'media/images/folder.png';
-			subpackagetree_file.icon = 'media/images/folder.png';
-			
-							var file = new WebFXTreeItem('ContainerException.php', 'Container/Exception/_Container---Exception---ContainerException.php.html');
-				file.openIcon = 'media/images/Page.png';
-				file.icon = 'media/images/Page.png';
-				subpackagetree_file.add(file);
-					
-			subpackagetree.add(subpackagetree_file);
-			
-	  tree.add(subpackagetree);
 							var subpackagetree = new WebFXTreeItem('<span class="sub-package">Impl</span>', '');
 		
 		subpackagetree.openIcon = 'media/images/package.png';
