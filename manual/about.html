@@ -114,7 +114,7 @@ Ding offers the following features:<br/>
   <li>Annotations used by helpers and the container (i.e: @InitMethod, @DestroyMethod, @Controller, @ErrorHandler, etc).</li>
   <li>Can cache proxies and bean definitions with Zend_Cache, Memcached, Filesystem, and APC.</li>
   <li>Integration with PAMI and PAGI. So you can make asterisk (telephony) applications via agi and ami.</li>
-  <li>Aware interfaces: <u>IContainerAware</u> (Whenever ding is going to instantiate a bean whose class implements IContainerAware interface, it will inject the container instace to this bean)</li>
+  <li>Aware interfaces: <u>IContainerAware, IBeanNameAware, IAspectManagerAware</u></li>
   <li>Helpers: SignalHandler, ErrorHandler, ShutdownHandler, Timer, Syslog, TCPServer, TCPClient, etc.</li>
 </ul>
     <p>
