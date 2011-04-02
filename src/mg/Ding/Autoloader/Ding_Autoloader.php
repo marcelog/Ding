@@ -31,13 +31,15 @@
 use Ding\Cache\Impl\DummyCacheImpl;
 use Ding\Cache\ICache;
 
-foreach (explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
-    $truePath = implode(
-        DIRECTORY_SEPARATOR,
-        array($path, 'log4php', 'Logger.php')
-    );
-    if (file_exists($truePath)) {
-        require_once $truePath;
+if (!class_exists('Logger')) {
+    foreach (explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
+        $truePath = implode(
+            DIRECTORY_SEPARATOR,
+            array($path, 'log4php', 'Logger.php')
+        );
+        if (file_exists($truePath)) {
+            require_once $truePath;
+        }
     }
 }
 // If not found, include our own dummy logger.
