@@ -62,6 +62,12 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         );
     }
 
+    public function can_get_from_a_namespaced_class()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aBeanFromANamespacedClass');
+        $this->assertTrue($bean instanceof Some\Namespaces\Clazz\SomeOtherNamespacedClass);
+    }
     /**
      * @test
      */

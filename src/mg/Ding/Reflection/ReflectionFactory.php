@@ -88,14 +88,26 @@ class ReflectionFactory
         $classes = array();
         $tokens = token_get_all($code);
         $count = count($tokens);
-        for ($i = 2; $i < $count; $i++) {
+        $namespace = '';
+        for ($i = 0; $i < $count; $i++) {
             if (
-                $tokens[$i - 2][0] == T_CLASS
-                && $tokens[$i - 1][0] == T_WHITESPACE
-                && $tokens[$i][0] == T_STRING
+                $tokens[$i][0] == T_CLASS
+                && $tokens[$i + 1][0] == T_WHITESPACE
+                && $tokens[$i + 2][0] == T_STRING
             ) {
-                $class_name = $tokens[$i][1];
-                $classes[] = $class_name;
+                $class_name = $tokens[$i + 2][1];
+                $classes[] = empty($namespace) ? $class_name : $namespace . "\\" . $class_name;
+                $i += 2;
+            } else if ($tokens[$i][0] === T_NAMESPACE) {
+                if (!empty($namespace)) {
+                    $namespace = '';
+                }
+                for(; $tokens[$i][0] !== T_STRING; $i++);
+                $namespace = $tokens[$i][1];
+                for($i++; $tokens[$i][0] !== ';'; $i++) {
+                        for(; $tokens[$i][0] !== T_STRING; $i++);
+                        $namespace .= "\\" . $tokens[$i][1];
+                }
             }
         }
         return $classes;
