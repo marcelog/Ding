@@ -81,25 +81,25 @@
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CAspect">Ding\Aspect</a></td>
+<td align="right">9</td>
+<td align="right">3</td>
 <td align="right">6</td>
-<td align="right">0</td>
-<td align="right">6</td>
+<td align="right">2</td>
 <td align="right">1</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">0.5</td>
-<td align="right">0.5</td>
+<td align="right">0.333333333333</td>
+<td align="right">0.333333333333</td>
+<td align="right">0.333333333333</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a></td>
-<td align="right">6</td>
 <td align="right">4</td>
-<td align="right">2</td>
 <td align="right">1</td>
+<td align="right">3</td>
+<td align="right">0</td>
 <td align="right">1</td>
-<td align="right">0.666666666667</td>
-<td align="right">0.5</td>
-<td align="right">0.166666666667</td>
+<td align="right">0.25</td>
+<td align="right">1</td>
+<td align="right">0.25</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKAutoloader">Autoloader</a></td>
@@ -114,20 +114,20 @@
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CBean">Ding\Bean</a></td>
-<td align="right">4</td>
-<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">1</td>
 <td align="right">4</td>
 <td align="right">3</td>
 <td align="right">0</td>
+<td align="right">0.2</td>
 <td align="right">0</td>
-<td align="right">0</td>
-<td align="right">1</td>
+<td align="right">0.8</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a></td>
-<td align="right">29</td>
+<td align="right">32</td>
 <td align="right">0</td>
-<td align="right">29</td>
+<td align="right">32</td>
 <td align="right">0</td>
 <td align="right">8</td>
 <td align="right">0</td>
@@ -234,20 +234,9 @@
 <td align="right">0</td>
 </tr>
 <tr>
-<td align="left"><a href="#PKDing%5CContainer%5CException">Ding\Container\Exception</a></td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">0</td>
-</tr>
-<tr>
 <td align="left"><a href="#PKDing%5CContainer">Ding\Container</a></td>
-<td align="right">1</td>
-<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">2</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">2</td>
@@ -257,9 +246,9 @@
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a></td>
-<td align="right">34</td>
+<td align="right">39</td>
 <td align="right">0</td>
-<td align="right">34</td>
+<td align="right">39</td>
 <td align="right">0</td>
 <td align="right">4</td>
 <td align="right">0</td>
@@ -271,11 +260,11 @@
 <td align="right">1</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">4</td>
+<td align="right">3</td>
 <td align="right">1</td>
 <td align="right">0</td>
-<td align="right">0.2</td>
-<td align="right">0.8</td>
+<td align="right">0.25</td>
+<td align="right">0.75</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CHelpers%5CErrorHandler">Ding\Helpers\ErrorHandler</a></td>
@@ -466,15 +455,15 @@
 <h3><a name="PKDing%5CAspect">Ding\Aspect</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<a href="#EXafferent">Afferent Couplings</a>: 2</td>
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 1</td>
 <td>
-<a href="#EXabstractness">Abstractness</a>: 0</td>
+<a href="#EXabstractness">Abstractness</a>: 0.333333333333</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.5</td>
+<a href="#EXinstability">Instability</a>: 0.333333333333</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.5</td>
+<a href="#EXdistance">Distance</a>: 0.333333333333</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -484,11 +473,12 @@
 <th>Uses Packages</th>
 </tr>
 <tr>
-<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">IAspectManagerAware<br>IAspectProvider<br>IPointcutProvider<br>
+</td>
 <td valign="top" width="25%">AspectDefinition<br>AspectManager<br>MethodInvocation<br>PointcutDefinition<br>
 </td>
 <td valign="top" width="25%">
-<a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a><br>
+<a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a><br><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br>
 </td>
 <td valign="top" width="25%">
 <a href="#PK"></a><br>
@@ -498,15 +488,15 @@
 <h3><a name="PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 1</td>
 <td>
-<a href="#EXabstractness">Abstractness</a>: 0.666666666667</td>
+<a href="#EXabstractness">Abstractness</a>: 0.25</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.5</td>
+<a href="#EXinstability">Instability</a>: 1</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.166666666667</td>
+<a href="#EXdistance">Distance</a>: 0.25</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -516,13 +506,11 @@
 <th>Uses Packages</th>
 </tr>
 <tr>
-<td valign="top" width="25%">IDispatcher<br>IExceptionInterceptor<br>IInterceptor<br>IMethodInterceptor<br>
+<td valign="top" width="25%">IDispatcher<br>
 </td>
-<td valign="top" width="25%">DispatcherImpl<br>
+<td valign="top" width="25%">AdviceDefinition<br>DispatcherImpl<br>
 </td>
-<td valign="top" width="25%">
-<a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br>
-</td>
+<td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
 <a href="#PKDing%5CAspect">Ding\Aspect</a><br>
 </td>
@@ -565,11 +553,11 @@
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 0</td>
 <td>
-<a href="#EXabstractness">Abstractness</a>: 0</td>
+<a href="#EXabstractness">Abstractness</a>: 0.2</td>
 <td>
 <a href="#EXinstability">Instability</a>: 0</td>
 <td>
-<a href="#EXdistance">Distance</a>: 1</td>
+<a href="#EXdistance">Distance</a>: 0.8</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -579,7 +567,8 @@
 <th>Uses Packages</th>
 </tr>
 <tr>
-<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">IBeanNameAware<br>
+</td>
 <td valign="top" width="25%">BeanAnnotationDefinition<br>BeanConstructorArgumentDefinition<br>BeanDefinition<br>BeanPropertyDefinition<br>
 </td>
 <td valign="top" width="25%">
@@ -610,11 +599,11 @@
 </tr>
 <tr>
 <td valign="top" width="25%"><i>None</i></td>
-<td valign="top" width="25%">AnnotationAspectDriver<br>AnnotationRequiredDriver<br>AnnotationResourceDriver<br>AutowiredInjectionDriver<br>BeanAnnotationDriver<br>BeanXmlDriver<br>BeanYamlDriver<br>DependsOnDriver<br>ErrorHandlerDriver<br>FiltersDriver<br>MVCAnnotationDriver<br>MethodInjectionAspect<br>MethodInjectionDriver<br>SetterInjectionDriver<br>ShutdownDriver<br>SignalHandlerDriver<br>TimezoneDriver<br>
+<td valign="top" width="25%">AnnotationAspectDriver<br>AnnotationInitDestroyMethodDriver<br>AnnotationRequiredDriver<br>AnnotationResourceDriver<br>AspectManagerAwareDriver<br>BeanAnnotationDriver<br>BeanNameAwareDriver<br>BeanXmlDriver<br>BeanYamlDriver<br>ContainerAwareDriver<br>DependsOnDriver<br>ErrorHandlerDriver<br>FiltersDriver<br>MVCAnnotationDriver<br>MethodInjectionAspect<br>MethodInjectionDriver<br>SetterInjectionDriver<br>ShutdownDriver<br>SignalHandlerDriver<br>TimezoneDriver<br>
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
-<a href="#PK"></a><br><a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a><br><a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br><a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CMVC%5CHttp">Ding\MVC\Http</a><br><a href="#PKDing%5CReflection">Ding\Reflection</a><br>
+<a href="#PK"></a><br><a href="#PKDing%5CAspect">Ding\Aspect</a><br><a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br><a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CMVC%5CHttp">Ding\MVC\Http</a><br><a href="#PKDing%5CReflection">Ding\Reflection</a><br>
 </td>
 </tr>
 </table>
@@ -897,36 +886,6 @@
 </td>
 </tr>
 </table>
-<h3><a name="PKDing%5CContainer%5CException">Ding\Container\Exception</a></h3>
-<table width="100%"><tr>
-<td>
-<a href="#EXafferent">Afferent Couplings</a>: 0</td>
-<td>
-<a href="#EXefferent">Efferent Couplings</a>: 1</td>
-<td>
-<a href="#EXabstractness">Abstractness</a>: 0</td>
-<td>
-<a href="#EXinstability">Instability</a>: 1</td>
-<td>
-<a href="#EXdistance">Distance</a>: 0</td>
-</tr></table>
-<table width="100%" class="details">
-<tr>
-<th>Abstract Classes</th>
-<th>Concrete Classes</th>
-<th>Used by Packages</th>
-<th>Uses Packages</th>
-</tr>
-<tr>
-<td valign="top" width="25%"><i>None</i></td>
-<td valign="top" width="25%">ContainerException<br>
-</td>
-<td valign="top" width="25%"><i>None</i></td>
-<td valign="top" width="25%">
-<a href="#PKDing%5CException">Ding\Exception</a><br>
-</td>
-</tr>
-</table>
 <h3><a name="PKDing%5CContainer">Ding\Container</a></h3>
 <table width="100%"><tr>
 <td>
@@ -948,7 +907,7 @@
 <th>Uses Packages</th>
 </tr>
 <tr>
-<td valign="top" width="25%">IContainer<br>
+<td valign="top" width="25%">IContainer<br>IContainerAware<br>
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
@@ -992,15 +951,15 @@
 <h3><a name="PKDing%5CException">Ding\Exception</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 4</td>
+<a href="#EXafferent">Afferent Couplings</a>: 3</td>
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 1</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 0</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.2</td>
+<a href="#EXinstability">Instability</a>: 0.25</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.8</td>
+<a href="#EXdistance">Distance</a>: 0.75</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -1014,7 +973,7 @@
 <td valign="top" width="25%">DingException<br>
 </td>
 <td valign="top" width="25%">
-<a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle%5CException">Ding\Bean\Lifecycle\Exception</a><br><a href="#PKDing%5CContainer%5CException">Ding\Container\Exception</a><br><a href="#PKDing%5CHelpers%5CTCP%5CException">Ding\Helpers\TCP\Exception</a><br>
+<a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle%5CException">Ding\Bean\Lifecycle\Exception</a><br><a href="#PKDing%5CHelpers%5CTCP%5CException">Ding\Helpers\TCP\Exception</a><br>
 </td>
 <td valign="top" width="25%">
 <a href="#PK"></a><br>
