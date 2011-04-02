@@ -65,6 +65,70 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_read_beans_file()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'yaml' => array(
+                        	'filename' => 'ioc-yaml-inexistant.yaml', 'directories' => array('neverland')
+                        )
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('aSimpleInitMethodBean');
+    }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_invalid_scope()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $container->getBean('invalidScopeBean');
+    }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_unknown_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $this->assertFalse($container->getBean('unknownBean'));
+    }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_parse_beans_file()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'yaml' => array(
+                        	'filename' => 'ioc-yaml-invalid.yaml', 'directories' => array(RESOURCES_DIR)
+                        )
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('aSimpleInitMethodBean');
+    }
+
+    /**
+     * @test
      */
     public function can_constructor_args()
     {

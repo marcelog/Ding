@@ -4,6 +4,18 @@ pointcuts: !!map
     method: invoke
 
 beans: !!map
+  invalidAspectType:
+    class: ClassSimpleAOPYAML
+    scope: singleton
+    aspects:
+      aspectA:
+        pointcuts:
+          pointcutA:
+            method: invoke
+            expression: ^.+
+        type: blah
+        ref: aspectBean
+  
   aspectBean:
     class: ClassSimpleAOPYAMLAspect
     scope: singleton
@@ -15,6 +27,7 @@ beans: !!map
       aspectA:
         pointcuts:
           pointcutA:
+            id: some
             method: invoke
             expression: targetMethod
         type: method

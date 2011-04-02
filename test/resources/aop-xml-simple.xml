@@ -10,6 +10,10 @@
       <pointcut expression="targetMethod" method="invoke"/>
     </aspect>
   </bean>
+  <bean id="invalidAspectType" class="ClassSimpleAOPXML2" scope="singleton">
+    <aspect ref="asdasd" type="asdasd"/>
+  </bean>
+  
   <bean id="multipleMethodIntercepted" class="ClassSimpleAOPXML2" scope="singleton">
     <aspect ref="aspectBean" type="method">
       <pointcut id="aNicePointcut" expression="^.+" method="invoke"/>

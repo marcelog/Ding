@@ -167,6 +167,9 @@ beans: !!map
             value: !!map
               key:
                 value: e
+  invalidScopeBean:
+    scope: blah
+    class: ClassSimpleYAML
 
 import:
   - someOtherFile.yaml

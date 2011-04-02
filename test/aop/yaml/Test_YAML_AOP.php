@@ -75,6 +75,16 @@ class Test_YAML_AOP extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_invalid_aspect_type()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('invalidAspectType');
+    }
+
+    /**
+     * @test
      */
     public function can_intercept_method_from_bean_aop()
     {
