@@ -156,7 +156,7 @@ class BeanYamlDriver
         if ($contents === false) {
             throw new BeanFactoryException($filename . ' not found in ' . print_r($this->_directories, true));
         }
-        $ret = yaml_parse($contents);
+        $ret = @yaml_parse($contents);
         if ($ret === false) {
             return $ret;
         }
