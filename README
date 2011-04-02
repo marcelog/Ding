@@ -112,6 +112,9 @@ Aware Interfaces
 IContainerAware: Whenever ding is going to instantiate a bean whose class
 implements IContainerAware interface, it will inject the container instace to
 this bean.
+
+IBeanName: Whenever ding is going to instantiate a bean whose class
+implements IBeanNameAware interface, it will inject the bean name.
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 AOP
