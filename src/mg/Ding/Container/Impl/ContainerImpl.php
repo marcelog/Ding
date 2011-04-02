@@ -69,6 +69,7 @@ use Ding\Bean\Factory\Driver\AnnotationRequiredDriver;
 use Ding\Bean\Factory\Driver\AnnotationResourceDriver;
 use Ding\Bean\Factory\Driver\AnnotationInitDestroyMethodDriver;
 use Ding\Bean\Factory\Driver\ContainerAwareDriver;
+use Ding\Bean\Factory\Driver\BeanNameAwareDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
@@ -695,6 +696,7 @@ class ContainerImpl implements IContainer
         $this->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
         $this->addBeforeDefinitionListener(MethodInjectionDriver::getInstance($soullessArray));
         $this->addAfterDefinitionListener(ContainerAwareDriver::getInstance($soullessArray));
+        $this->addAfterDefinitionListener(BeanNameAwareDriver::getInstance($soullessArray));
 
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeConfig] as $lifecycleListener) {
             $lifecycleListener->beforeConfig($this);
