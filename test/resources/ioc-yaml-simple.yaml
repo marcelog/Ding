@@ -107,6 +107,11 @@ beans: !!map
     lookup-methods: !!map
       createAnotherBean: aSimpleSingletonBean
 
+  aSimpleBeanFactoryNoArgs:
+    class: ClassSimpleYAML11
+    scope: singleton
+    factory-method: getInstanceNoArgs
+
   aSimpleBeanFactory:
     class: ClassSimpleYAML11
     scope: singleton
@@ -115,6 +120,12 @@ beans: !!map
       - value1
       - value2
       - value3
+
+  aSimpleBeanFactoryFromOtherBeanNoArgs:
+    class: ClassSimpleYAML11
+    scope: singleton
+    factory-method: factoryMethodNoArgs
+    factory-bean: aSimpleBeanFactory
 
   aSimpleBeanFactoryFromOtherBean:
     class: ClassSimpleYAML11

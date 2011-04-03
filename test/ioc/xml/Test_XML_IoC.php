@@ -310,6 +310,11 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->a, 'value1');
         $this->assertEquals($bean->b, 'value2');
         $this->assertEquals($bean->c, 'value3');
+        $bean = $container->getBean('aSimpleBeanFactoryNoArgs');
+        $this->assertTrue($bean instanceof ClassSimpleXML11);
+        $this->assertEquals($bean->a, 1);
+        $this->assertEquals($bean->b, 2);
+        $this->assertEquals($bean->c, 3);
     }
 
     /**
@@ -323,6 +328,11 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->a, 'value1');
         $this->assertEquals($bean->b, 'value2');
         $this->assertEquals($bean->c, 'value3');
+        $bean = $container->getBean('aSimpleBeanFactoryFromOtherBeanNoArgs');
+        $this->assertTrue($bean instanceof ClassSimpleXML11);
+        $this->assertEquals($bean->a, 1);
+        $this->assertEquals($bean->b, 2);
+        $this->assertEquals($bean->c, 3);
     }
 
     /**
@@ -524,6 +534,16 @@ class ClassSimpleXML11
     public $a;
     public $b;
     public $c;
+
+    public static function getInstanceNoArgs()
+    {
+        return new ClassSimpleXML11(1, 2, 3);
+    }
+
+    public function factoryMethodNoArgs()
+    {
+        return new ClassSimpleXML11(1, 2, 3);
+    }
 
     public static function getInstance($a, $b, $c)
     {

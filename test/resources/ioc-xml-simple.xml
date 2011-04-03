@@ -85,4 +85,7 @@
       <constructor-arg><value>value2</value></constructor-arg>
       <constructor-arg><value>value3</value></constructor-arg>
     </bean>
+
+    <bean id="aSimpleBeanFactoryNoArgs" class="ClassSimpleXML11" scope="singleton" factory-method="getInstanceNoArgs"/>
+    <bean id="aSimpleBeanFactoryFromOtherBeanNoArgs" class="ClassSimpleXML11" scope="singleton" factory-bean="aSimpleBeanFactory" factory-method="factoryMethodNoArgs"/>
 </beans>
