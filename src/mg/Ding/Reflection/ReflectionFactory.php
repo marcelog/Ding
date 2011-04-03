@@ -77,7 +77,7 @@ class ReflectionFactory
 
     /**
      * Taken from: http://stackoverflow.com/questions/928928/determining-what-classes-are-defined-in-a-php-class-file
-     * Returns all php classes found in a code block.
+     * Returns all php classes found in a code block. Multiple namespaces in one file are not supported.
      *
      * @param string $code PHP Code.
      *
@@ -99,9 +99,6 @@ class ReflectionFactory
                 $classes[] = empty($namespace) ? $class_name : $namespace . "\\" . $class_name;
                 $i += 2;
             } else if ($tokens[$i][0] === T_NAMESPACE) {
-                if (!empty($namespace)) {
-                    $namespace = '';
-                }
                 for(; $tokens[$i][0] !== T_STRING; $i++);
                 $namespace = $tokens[$i][1];
                 for($i++; $tokens[$i][0] !== ';'; $i++) {
@@ -123,7 +120,7 @@ class ReflectionFactory
     public static function getAnnotations($text)
     {
         $ret = array();
-        if (preg_match_all('/@[\-\/a-zA-Z0-9=,\(\+\.\$\^\*\)\ ]+/', $text, $matches) > 0) {
+        if (preg_match_all('/@[\-\/a-zA-Z0-9=,\\\\\(\+\.\$\^\*\)\ ]+/', $text, $matches) > 0) {
             foreach ($matches[0] as $annotation) {
                 $argsStart = strpos($annotation, '(');
                 $arguments = array();
