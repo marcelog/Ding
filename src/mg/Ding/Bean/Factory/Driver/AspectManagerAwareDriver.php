@@ -60,7 +60,11 @@ class AspectManagerAwareDriver implements IAfterDefinitionListener
 
     public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
-        $rClass = ReflectionFactory::getClass($bean->getClass());
+        $class = $bean->getClass();
+        if ($class === false || empty($class)) {
+            return $bean;
+        }
+        $rClass = ReflectionFactory::getClass($class);
         if ($rClass->implementsInterface('Ding\Aspect\IAspectManagerAware')) {
             $property = new BeanPropertyDefinition('aspectManager', BeanPropertyDefinition::PROPERTY_SIMPLE, AspectManager::getInstance());
             $properties = $bean->getProperties();

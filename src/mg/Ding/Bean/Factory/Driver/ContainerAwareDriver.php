@@ -63,7 +63,11 @@ class ContainerAwareDriver implements IAfterCreateListener
      */
     public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
-        $rClass = ReflectionFactory::getClass($beanDefinition->getClass());
+        $class = $beanDefinition->getClass();
+        if ($class === false || empty($class)) {
+            return $bean;
+        }
+        $rClass = ReflectionFactory::getClass($class);
         if ($rClass->implementsInterface('Ding\Container\IContainerAware')) {
             $bean->setContainer($factory);
         }

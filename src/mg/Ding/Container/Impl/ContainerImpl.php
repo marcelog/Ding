@@ -358,7 +358,10 @@ class ContainerImpl implements IContainer
         foreach ($beanDefinition->getArguments() as $argument) {
             $args[] = $this->_loadArgument($argument);
         }
-        $rClass = ReflectionFactory::getClass($beanClass);
+        $rClass = false;
+        if (!empty($beanClass)) {
+            $rClass = ReflectionFactory::getClass($beanClass);
+        }
         $dispatcher = clone $this->_dispatcherTemplate;
         $methods = array();
         if ($beanDefinition->hasAspects()) {

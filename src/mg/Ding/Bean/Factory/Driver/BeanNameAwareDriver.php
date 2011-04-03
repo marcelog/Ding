@@ -59,7 +59,11 @@ class BeanNameAwareDriver implements IAfterDefinitionListener
 
     public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
     {
-        $rClass = ReflectionFactory::getClass($bean->getClass());
+        $class = $bean->getClass();
+        if ($class === false || empty($class)) {
+            return $bean;
+        }
+        $rClass = ReflectionFactory::getClass($class);
         if ($rClass->implementsInterface('Ding\Bean\IBeanNameAware')) {
             $property = new BeanPropertyDefinition('beanName', BeanPropertyDefinition::PROPERTY_SIMPLE, $bean->getName());
             $properties = $bean->getProperties();
