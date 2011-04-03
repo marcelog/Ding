@@ -29,7 +29,7 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
-use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+use Ding\Bean\Lifecycle\IBeforeCreateListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
@@ -47,7 +47,7 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class DependsOnDriver implements IAfterDefinitionListener
+class DependsOnDriver implements IBeforeCreateListener
 {
     /**
      * Holds current instance.
@@ -57,9 +57,9 @@ class DependsOnDriver implements IAfterDefinitionListener
 
     /**
      * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
+     * @see Ding\Bean\Lifecycle.IBeforeCreateListener::beforeCreate()
      */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
+    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
     {
         /**
          * @todo This should be done using a reference to the container (or
@@ -69,7 +69,7 @@ class DependsOnDriver implements IAfterDefinitionListener
          * @todo Should the trim be here or force the developer to not use
          * spaces? Issue #94
          */
-        foreach ($bean->getDependsOn() as $depBean) {
+        foreach ($beanDefinition->getDependsOn() as $depBean) {
             $factory->getBean(trim($depBean));
         }
         return $bean;

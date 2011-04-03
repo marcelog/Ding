@@ -678,7 +678,7 @@ class ContainerImpl implements IContainer
         if (isset(self::$_options['properties'])) {
             $this->addAfterDefinitionListener(FiltersDriver::getInstance(self::$_options['properties']));
         }
-        $this->addAfterDefinitionListener(DependsOnDriver::getInstance($soullessArray));
+        $this->addBeforeCreateListener(DependsOnDriver::getInstance($soullessArray));
 
         if (isset(self::$_options['bdef']['xml'])) {
             $xmlDriver = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);
