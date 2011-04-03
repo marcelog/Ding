@@ -14,6 +14,15 @@ class SomeNamespacedClass
     {
         return new SomeOtherNamespacedClass();
     }
+
+    /**
+     * @Bean(class=Some\Namespaces\Clazz\SomeOtherNamespacedClass2)
+     * @Scope(value=singleton)
+     */
+    public function someOtherBean()
+    {
+        return new SomeOtherNamespacedClass2;
+    }
 }
 
 class SomeOtherNamespacedClass
@@ -21,5 +30,10 @@ class SomeOtherNamespacedClass
     /**
      * @Resource
      */
-    public $aBeanFromANamespacedClass;
+    public $someOtherBean;
+}
+
+class SomeOtherNamespacedClass2
+{
+
 }
