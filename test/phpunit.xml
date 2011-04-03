@@ -76,6 +76,9 @@
     <testsuite name="ReflectionFactory">
       <directory suffix=".php">reflection</directory>
     </testsuite>
+    <testsuite name="Autoloader">
+      <directory suffix=".php">autoloader</directory>
+    </testsuite>
     <!-- 
     <testsuite name="Container">
       <directory suffix=".php">container</directory>
