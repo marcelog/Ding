@@ -50,7 +50,7 @@ Supported bean definitions providers
 ====================================
 * XML
 * YAML
-* Annotations (like JSR 250 and 303)
+* Annotations (like JSR 250 and 330)
 --------------------------------------------------------------------------------
 Supported annotations
 =====================
