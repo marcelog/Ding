@@ -27,7 +27,7 @@
             <h2>Class Coverage Distribution</h2>
             <canvas id="classCoverageDistribution" width="475" height="200"></canvas>
             <script>
-            var ccd = new RGraph.Bar('classCoverageDistribution', [7,0,0,1,0,2,0,4,3,1,0,10]);
+            var ccd = new RGraph.Bar('classCoverageDistribution', [1,0,0,0,0,1,1,0,3,1,2,19]);
             ccd.Set('chart.background.barcolor1', 'white');
             ccd.Set('chart.background.barcolor2', 'white');
             ccd.Set('chart.colors', ['blue']);
@@ -44,7 +44,7 @@
             <h2>Class Complexity</h2>
             <canvas id="classComplexity" width="475" height="200"></canvas>
             <script>
-            var cc = new RGraph.Scatter('classComplexity', [[100,3,"blue","BeanAnnotationDefinition"],[66.6666666667,8,"blue","BeanConstructorArgumentDefinition"],[70,40,"blue","BeanDefinition"],[45.4545454545,11,"blue","BeanPropertyDefinition"],[22.4489795918,10,"blue","AnnotationAspectDriver"],[100,8,"blue","AnnotationInitDestroyMethodDriver"],[100,10,"blue","AnnotationRequiredDriver"],[100,15,"blue","AnnotationResourceDriver"],[64.2857142857,5,"blue","AspectManagerAwareDriver"],[83.3333333333,51,"blue","BeanAnnotationDriver"],[64.2857142857,5,"blue","BeanNameAwareDriver"],[71.724137931,84,"blue","BeanXmlDriver"],[72.268907563,76,"blue","BeanYamlDriver"],[64.2857142857,5,"blue","ContainerAwareDriver"],[100,5,"blue","DependsOnDriver"],[0,6,"blue","ErrorHandlerDriver"],[0,10,"blue","FiltersDriver"],[40.9090909091,7,"blue","MVCAnnotationDriver"],[100,3,"blue","MethodInjectionAspect"],[100,6,"blue","MethodInjectionDriver"],[100,12,"blue","SetterInjectionDriver"],[0,6,"blue","ShutdownDriver"],[0,7,"blue","SignalHandlerDriver"],[0,5,"blue","TimezoneDriver"],[100,0,"blue","BeanFactoryException"],[0,14,"blue","PropertyFilter"],[100,0,"blue","BeanLifecycle"],[0,0,"blue","BeanLifecycleException"]]);
+            var cc = new RGraph.Scatter('classComplexity', [[100,3,"blue","BeanAnnotationDefinition"],[75,8,"blue","BeanConstructorArgumentDefinition"],[71.25,40,"blue","BeanDefinition"],[54.5454545455,11,"blue","BeanPropertyDefinition"],[100,10,"blue","AnnotationAspectDriver"],[100,8,"blue","AnnotationInitDestroyMethodDriver"],[100,10,"blue","AnnotationRequiredDriver"],[100,15,"blue","AnnotationResourceDriver"],[100,5,"blue","AspectManagerAwareDriver"],[83.3333333333,51,"blue","BeanAnnotationDriver"],[100,5,"blue","BeanNameAwareDriver"],[91.724137931,84,"blue","BeanXmlDriver"],[95.3781512605,76,"blue","BeanYamlDriver"],[100,5,"blue","ContainerAwareDriver"],[100,5,"blue","DependsOnDriver"],[100,6,"blue","ErrorHandlerDriver"],[100,10,"blue","FiltersDriver"],[40.9090909091,7,"blue","MVCAnnotationDriver"],[100,3,"blue","MethodInjectionAspect"],[100,6,"blue","MethodInjectionDriver"],[100,12,"blue","SetterInjectionDriver"],[100,6,"blue","ShutdownDriver"],[100,7,"blue","SignalHandlerDriver"],[100,5,"blue","TimezoneDriver"],[100,0,"blue","BeanFactoryException"],[73.0769230769,14,"blue","PropertyFilter"],[100,0,"blue","BeanLifecycle"],[0,0,"blue","BeanLifecycleException"]]);
             cc.Set('chart.xmax', 100);
             cc.Set('chart.background.barcolor1', 'white');
             cc.Set('chart.background.barcolor2', 'white');
@@ -60,16 +60,12 @@
           <td valign="top">
             <h2>Top Project Risks</h2>
             <ul>
+              <li><a href="Bean_Factory_Driver_BeanXmlDriver.php.html#56">BeanXmlDriver</a> (88)</li>
+              <li><a href="Bean_BeanDefinition.php.html#44">BeanDefinition</a> (78)</li>
+              <li><a href="Bean_Factory_Driver_BeanYamlDriver.php.html#57">BeanYamlDriver</a> (76)</li>
               <li><a href="Bean_Factory_Driver_BeanAnnotationDriver.php.html#58">BeanAnnotationDriver</a> (63)</li>
-              <li><a href="Bean_Factory_Driver_AnnotationAspectDriver.php.html#53">AnnotationAspectDriver</a> (56)</li>
-              <li><a href="Bean_Factory_Driver_SignalHandlerDriver.php.html#52">SignalHandlerDriver</a> (56)</li>
-              <li><a href="Bean_Factory_Driver_ErrorHandlerDriver.php.html#52">ErrorHandlerDriver</a> (42)</li>
-              <li><a href="Bean_Factory_Driver_ShutdownDriver.php.html#52">ShutdownDriver</a> (42)</li>
-              <li><a href="Bean_Factory_Driver_TimezoneDriver.php.html#49">TimezoneDriver</a> (30)</li>
+              <li><a href="Bean_Factory_Filter_PropertyFilter.php.html#44">PropertyFilter</a> (17)</li>
               <li><a href="Bean_Factory_Driver_MVCAnnotationDriver.php.html#50">MVCAnnotationDriver</a> (17)</li>
-              <li><a href="Bean_Factory_Driver_ContainerAwareDriver.php.html#52">ContainerAwareDriver</a> (6)</li>
-              <li><a href="Bean_Factory_Driver_AspectManagerAwareDriver.php.html#53">AspectManagerAwareDriver</a> (6)</li>
-              <li><a href="Bean_Factory_Driver_BeanNameAwareDriver.php.html#52">BeanNameAwareDriver</a> (6)</li>
 
             </ul>
           </td>
@@ -77,16 +73,16 @@
           <td valign="top">
             <h2>Least Tested Methods</h2>
             <ul>
-              <li><a href="Bean_Factory_Driver_FiltersDriver.php.html#74">FiltersDriver::_applyFilter</a> (0%)</li>
-              <li><a href="Bean_Factory_Driver_ErrorHandlerDriver.php.html#109">ErrorHandlerDriver::__construct</a> (0%)</li>
-              <li><a href="Bean_Factory_Driver_FiltersDriver.php.html#92">FiltersDriver::afterDefinition</a> (0%)</li>
-              <li><a href="Bean_Factory_Driver_FiltersDriver.php.html#110">FiltersDriver::getInstance</a> (0%)</li>
-              <li><a href="Bean_Factory_Driver_FiltersDriver.php.html#125">FiltersDriver::__construct</a> (0%)</li>
-              <li><a href="Bean_Factory_Driver_ErrorHandlerDriver.php.html#96">ErrorHandlerDriver::getInstance</a> (0%)</li>
-              <li><a href="Bean_Factory_Driver_ErrorHandlerDriver.php.html#63">ErrorHandlerDriver::afterConfig</a> (0%)</li>
-              <li><a href="Bean_BeanConstructorArgumentDefinition.php.html#101">BeanConstructorArgumentDefinition::setValue</a> (0%)</li>
-              <li><a href="Bean_Factory_Filter_PropertyFilter.php.html#126">PropertyFilter::getInstance</a> (0%)</li>
-              <li><a href="Bean_Factory_Driver_BeanYamlDriver.php.html#182">BeanYamlDriver::_loadAspect</a> (0%)</li>
+              <li><a href="Bean_BeanConstructorArgumentDefinition.php.html#143">BeanConstructorArgumentDefinition::setType</a> (0%)</li>
+              <li><a href="Bean_Factory_Driver_BeanYamlDriver.php.html#422">BeanYamlDriver::getAspect</a> (0%)</li>
+              <li><a href="Bean_Factory_Driver_BeanAnnotationDriver.php.html#177">BeanAnnotationDriver::getKnownClasses</a> (0%)</li>
+              <li><a href="Bean_Factory_Driver_BeanXmlDriver.php.html#134">BeanXmlDriver::__sleep</a> (0%)</li>
+              <li><a href="Bean_Factory_Filter_PropertyFilter.php.html#114">PropertyFilter::set</a> (0%)</li>
+              <li><a href="Bean_Factory_Driver_BeanXmlDriver.php.html#490">BeanXmlDriver::getAspect</a> (0%)</li>
+              <li><a href="Bean_Factory_Filter_PropertyFilter.php.html#98">PropertyFilter::get</a> (0%)</li>
+              <li><a href="Bean_Factory_Filter_PropertyFilter.php.html#86">PropertyFilter::has</a> (0%)</li>
+              <li><a href="Bean_BeanPropertyDefinition.php.html#188">BeanPropertyDefinition::__toString</a> (0%)</li>
+              <li><a href="Bean_BeanDefinition.php.html#199">BeanDefinition::getAnnotations</a> (0%)</li>
 
             </ul>
           </td>
@@ -98,7 +94,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sat Apr 2 23:10:13 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sat Apr 2 23:19:08 ART 2011.</td></tr>
     </table>
 
     <br/>
