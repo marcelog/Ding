@@ -31,7 +31,7 @@
 namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\BeanPropertyDefinition;
-use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
@@ -49,7 +49,7 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class ContainerAwareDriver implements IAfterDefinitionListener
+class ContainerAwareDriver implements IAfterCreateListener
 {
     /**
      * Holds current instance.
@@ -57,14 +57,15 @@ class ContainerAwareDriver implements IAfterDefinitionListener
      */
     private static $_instance = false;
 
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterCreateListener::afterCreate()
+     */
+    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
     {
-        $rClass = ReflectionFactory::getClass($bean->getClass());
+        $rClass = ReflectionFactory::getClass($beanDefinition->getClass());
         if ($rClass->implementsInterface('Ding\Container\IContainerAware')) {
-            $property = new BeanPropertyDefinition('container', BeanPropertyDefinition::PROPERTY_SIMPLE, $factory);
-            $properties = $bean->getProperties();
-            $properties['container'] = $property;
-            $bean->setProperties($properties);
+            $bean->setContainer($factory);
         }
         return $bean;
     }

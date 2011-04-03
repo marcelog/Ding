@@ -28,9 +28,9 @@
  *
  */
 namespace Ding\Bean\Factory\Driver;
-
+use Ding\Container\IContainerAware;
+use Ding\Container\IContainer;
 use Ding\Aspect\PointcutDefinition;
-
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Aspect\AspectManager;
 use Ding\Aspect\MethodInvocation;
@@ -54,25 +54,19 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class MethodInjectionAspect
+class MethodInjectionAspect implements IContainerAware
 {
     /**
      * Factory to use.
      * @var IBeanFactory
      */
-    private $_factory;
+    private $_container;
 
     /**
      * Bean to generate.
      * @var string
      */
     private $_beanName;
-
-    /**
-     * The aspect manager instance in use.
-     * @var AspectManager
-     */
-    private $_aspectManager;
 
     /**
      * Setter injection for bean name.
@@ -86,16 +80,9 @@ class MethodInjectionAspect
         $this->_beanName = $beanName;
     }
 
-    /**
-     * Setter injection for bean name.
-     *
-     * @param string $beanName Bean name.
-     *
-     * @return void
-     */
-    public function setFactory(IBeanFactory $factory)
+    public function setContainer(IContainer $container)
     {
-        $this->_factory = $factory;
+        $this->_container = $container;
     }
 
     /**
@@ -107,7 +94,7 @@ class MethodInjectionAspect
      */
     public function invoke(MethodInvocation $invocation)
     {
-        return $this->_factory->getBean($this->_beanName);
+        return $this->_container->getBean($this->_beanName);
     }
 }
 
@@ -146,7 +133,6 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
             $aspectBean->setScope(BeanDefinition::BEAN_SINGLETON);
             $aspectBean->setClass('\\Ding\\Bean\\Factory\\Driver\\MethodInjectionAspect');
             $aspectBean->setProperties(array(
-                new BeanPropertyDefinition('factory', BeanPropertyDefinition::PROPERTY_SIMPLE, $factory),
                 new BeanPropertyDefinition('beanName', BeanPropertyDefinition::PROPERTY_SIMPLE, $method[1])
             ));
             $factory->setBeanDefinition($aspectBeanName, $aspectBean);
