@@ -70,7 +70,7 @@ class ZendCacheImpl implements ICache
 
     private function _transform($name)
     {
-        return str_replace('.', '_', $name);
+        return str_replace('.', '_', str_replace('\\', '_', $name));
     }
 
     /**
@@ -137,7 +137,7 @@ class ZendCacheImpl implements ICache
     public static function getInstance($options = array())
     {
         if (self::$_instance == false) {
-            self::$_instance = new ZendCacheImpl($options['filename']);
+            self::$_instance = new ZendCacheImpl($options);
         }
         return self::$_instance;
     }
