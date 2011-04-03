@@ -62,6 +62,9 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @test
+     */
     public function can_get_from_a_namespaced_class()
     {
         $container = ContainerImpl::getInstance($this->_properties);
