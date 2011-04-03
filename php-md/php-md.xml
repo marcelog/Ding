@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pmd version="0.2.8RC1" timestamp="2011-04-02T17:01:19-03:00">
+<pmd version="0.2.8RC1" timestamp="2011-04-02T23:11:16-03:00">
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/DispatcherImpl.php">
     <violation beginline="57" endline="57" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
       Avoid excessively long variable names like $_methodsExceptionIntercepted
@@ -97,28 +97,28 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanXmlDriver.php">
-    <violation beginline="56" endline="554" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="BeanXmlDriver" priority="3">
-      This class BeanXmlDriver has an overall complexity of 83 which is very high. The configured complexity threshold is 50.
+    <violation beginline="56" endline="568" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="BeanXmlDriver" priority="3">
+      This class BeanXmlDriver has an overall complexity of 84 which is very high. The configured complexity threshold is 50.
     </violation>
-    <violation beginline="147" endline="185" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanXmlDriver" method="_loadXml" priority="3">
+    <violation beginline="161" endline="199" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanXmlDriver" method="_loadXml" priority="3">
       The method _loadXml() has a Cyclomatic Complexity of 11.
     </violation>
-    <violation beginline="147" endline="185" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanXmlDriver" method="_loadXml" priority="3">
+    <violation beginline="161" endline="199" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanXmlDriver" method="_loadXml" priority="3">
       The method _loadXml() has an NPath complexity of 240.
     </violation>
-    <violation beginline="197" endline="197" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="211" endline="211" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$aspects'.
     </violation>
-    <violation beginline="338" endline="427" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanXmlDriver" method="_loadBean" priority="3">
+    <violation beginline="352" endline="441" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanXmlDriver" method="_loadBean" priority="3">
       The method _loadBean() has a Cyclomatic Complexity of 22.
     </violation>
-    <violation beginline="338" endline="427" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanXmlDriver" method="_loadBean" priority="3">
+    <violation beginline="352" endline="441" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanXmlDriver" method="_loadBean" priority="3">
       The method _loadBean() has an NPath complexity of 786432.
     </violation>
-    <violation beginline="454" endline="454" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+    <violation beginline="468" endline="468" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
       Avoid unused parameters such as '$factory'.
     </violation>
-    <violation beginline="465" endline="465" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="479" endline="479" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$xmlName'.
     </violation>
   </file>
@@ -293,28 +293,28 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Impl/ContainerImpl.php">
-    <violation beginline="90" endline="709" rule="TooManyMethods" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="ContainerImpl" priority="3">
+    <violation beginline="90" endline="719" rule="TooManyMethods" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="ContainerImpl" priority="3">
       This class has too many methods, consider refactoring it.
     </violation>
-    <violation beginline="90" endline="709" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ContainerImpl" priority="3">
-      This class ContainerImpl has an overall complexity of 82 which is very high. The configured complexity threshold is 50.
+    <violation beginline="90" endline="719" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ContainerImpl" priority="3">
+      This class ContainerImpl has an overall complexity of 83 which is very high. The configured complexity threshold is 50.
     </violation>
-    <violation beginline="175" endline="214" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="getBeanDefinition" priority="3">
+    <violation beginline="185" endline="224" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="getBeanDefinition" priority="3">
       The method getBeanDefinition() has a Cyclomatic Complexity of 10.
     </violation>
-    <violation beginline="175" endline="214" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="getBeanDefinition" priority="3">
+    <violation beginline="185" endline="224" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="getBeanDefinition" priority="3">
       The method getBeanDefinition() has an NPath complexity of 288.
     </violation>
-    <violation beginline="341" endline="433" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="_createBean" priority="3">
+    <violation beginline="351" endline="443" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="_createBean" priority="3">
       The method _createBean() has a Cyclomatic Complexity of 19.
     </violation>
-    <violation beginline="341" endline="433" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="_createBean" priority="3">
+    <violation beginline="351" endline="443" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="_createBean" priority="3">
       The method _createBean() has an NPath complexity of 10752.
     </violation>
-    <violation beginline="624" endline="708" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="__construct" priority="3">
+    <violation beginline="634" endline="718" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="__construct" priority="3">
       The method __construct() has a Cyclomatic Complexity of 11.
     </violation>
-    <violation beginline="624" endline="708" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="__construct" priority="3">
+    <violation beginline="634" endline="718" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="__construct" priority="3">
       The method __construct() has an NPath complexity of 1024.
     </violation>
   </file>
@@ -400,13 +400,13 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/ReflectionFactory.php">
-    <violation beginline="86" endline="114" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Reflection" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ReflectionFactory" method="getClassesFromCode" priority="3">
-      The method getClassesFromCode() has a Cyclomatic Complexity of 11.
+    <violation beginline="86" endline="111" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Reflection" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ReflectionFactory" method="getClassesFromCode" priority="3">
+      The method getClassesFromCode() has a Cyclomatic Complexity of 10.
     </violation>
-    <violation beginline="189" endline="240" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Reflection" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ReflectionFactory" method="getClassAnnotations" priority="3">
+    <violation beginline="186" endline="237" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Reflection" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ReflectionFactory" method="getClassAnnotations" priority="3">
       The method getClassAnnotations() has a Cyclomatic Complexity of 10.
     </violation>
-    <violation beginline="189" endline="240" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Reflection" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ReflectionFactory" method="getClassAnnotations" priority="3">
+    <violation beginline="186" endline="237" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Reflection" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ReflectionFactory" method="getClassAnnotations" priority="3">
       The method getClassAnnotations() has an NPath complexity of 216.
     </violation>
   </file>

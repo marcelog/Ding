@@ -1,141 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="77" assertions="187" failures="0" errors="0" time="7.009043">
-    <testsuite name="IoC XML" tests="17" assertions="63" failures="0" errors="0" time="0.679364">
-      <testsuite name="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" fullPackage="Test.Ioc.Xml" category="Ding" package="Test" subpackage="Ioc.Xml" tests="17" assertions="63" failures="0" errors="0" time="0.679364">
-        <testcase name="cannot_read_beans_file" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="71" assertions="1" time="0.024371"/>
-        <testcase name="cannot_parse_beans_file" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="93" assertions="1" time="0.026423"/>
-        <testcase name="cannot_unknown_bean" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="116" assertions="1" time="0.033199"/>
-        <testcase name="cannot_invalid_scope" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="126" assertions="1" time="0.033047"/>
-        <testcase name="can_init_method" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="135" assertions="1" time="0.035073"/>
-        <testcase name="can_destroy_method" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="145" assertions="1" time="0.035770"/>
-        <testcase name="can_constructor_args" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="158" assertions="16" time="0.052307"/>
-        <testcase name="can_setter_args" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="184" assertions="16" time="0.055173"/>
-        <testcase name="can_singleton" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="209" assertions="3" time="0.035920"/>
-        <testcase name="can_prototype" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="228" assertions="3" time="0.035868"/>
-        <testcase name="can_import" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="247" assertions="2" time="0.039322"/>
-        <testcase name="can_depends_on" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="258" assertions="3" time="0.041587"/>
-        <testcase name="can_method_lookup" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="270" assertions="2" time="0.046720"/>
-        <testcase name="can_multiple_dirs" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="281" assertions="2" time="0.039302"/>
-        <testcase name="can_factory_method" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="305" assertions="4" time="0.039494"/>
-        <testcase name="can_factory_bean" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="318" assertions="4" time="0.040171"/>
-        <testcase name="can_cache_property_name_for_setter_driver" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="331" assertions="2" time="0.065617"/>
+  <testsuite name="" tests="66" assertions="220" failures="0" errors="1" time="6.983676">
+    <testsuite name="IoC XML" tests="17" assertions="63" failures="0" errors="0" time="0.699816">
+      <testsuite name="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" fullPackage="Test.Ioc.Xml" category="Ding" package="Test" subpackage="Ioc.Xml" tests="17" assertions="63" failures="0" errors="0" time="0.699816">
+        <testcase name="cannot_read_beans_file" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="71" assertions="1" time="0.024350"/>
+        <testcase name="cannot_parse_beans_file" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="93" assertions="1" time="0.025810"/>
+        <testcase name="cannot_unknown_bean" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="116" assertions="1" time="0.033393"/>
+        <testcase name="cannot_invalid_scope" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="126" assertions="1" time="0.034101"/>
+        <testcase name="can_init_method" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="135" assertions="1" time="0.035945"/>
+        <testcase name="can_destroy_method" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="145" assertions="1" time="0.036381"/>
+        <testcase name="can_constructor_args" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="158" assertions="16" time="0.058666"/>
+        <testcase name="can_setter_args" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="184" assertions="16" time="0.057397"/>
+        <testcase name="can_singleton" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="209" assertions="3" time="0.035886"/>
+        <testcase name="can_prototype" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="228" assertions="3" time="0.035996"/>
+        <testcase name="can_import" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="247" assertions="2" time="0.038295"/>
+        <testcase name="can_depends_on" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="258" assertions="3" time="0.042115"/>
+        <testcase name="can_method_lookup" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="270" assertions="2" time="0.048750"/>
+        <testcase name="can_multiple_dirs" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="281" assertions="2" time="0.039549"/>
+        <testcase name="can_factory_method" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="305" assertions="4" time="0.040133"/>
+        <testcase name="can_factory_bean" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="318" assertions="4" time="0.044282"/>
+        <testcase name="can_cache_property_name_for_setter_driver" class="Test_XML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/xml/Test_XML_IoC.php" line="331" assertions="2" time="0.068767"/>
       </testsuite>
     </testsuite>
-    <testsuite name="IoC YAML" tests="17" assertions="62" failures="0" errors="0" time="0.669180">
-      <testsuite name="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" fullPackage="Test.Ioc.Yaml" category="Ding" package="Test" subpackage="Ioc.Yaml" tests="17" assertions="62" failures="0" errors="0" time="0.669180">
-        <testcase name="cannot_read_beans_file" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="70" assertions="1" time="0.025411"/>
-        <testcase name="cannot_invalid_scope" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="92" assertions="1" time="0.030034"/>
-        <testcase name="cannot_unknown_bean" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="102" assertions="1" time="0.029933"/>
-        <testcase name="cannot_parse_beans_file" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="112" assertions="1" time="0.025694"/>
-        <testcase name="can_constructor_args" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="133" assertions="16" time="0.053722"/>
-        <testcase name="can_init_method" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="158" assertions="1" time="0.038014"/>
-        <testcase name="can_destroy_method" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="168" assertions="1" time="0.032364"/>
-        <testcase name="can_setter_args" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="181" assertions="15" time="0.057932"/>
-        <testcase name="can_singleton" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="205" assertions="3" time="0.035640"/>
-        <testcase name="can_prototype" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="224" assertions="3" time="0.035684"/>
-        <testcase name="can_import" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="243" assertions="2" time="0.037954"/>
-        <testcase name="can_depends_on" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="254" assertions="3" time="0.037283"/>
-        <testcase name="can_multiple_dirs" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="266" assertions="2" time="0.035724"/>
-        <testcase name="can_method_lookup" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="290" assertions="2" time="0.046311"/>
-        <testcase name="can_factory_method" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="301" assertions="4" time="0.038312"/>
-        <testcase name="can_factory_bean" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="314" assertions="4" time="0.041567"/>
-        <testcase name="can_cache_property_name_for_setter_driver" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="327" assertions="2" time="0.067601"/>
+    <testsuite name="IoC YAML" tests="17" assertions="62" failures="0" errors="0" time="0.675607">
+      <testsuite name="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" fullPackage="Test.Ioc.Yaml" category="Ding" package="Test" subpackage="Ioc.Yaml" tests="17" assertions="62" failures="0" errors="0" time="0.675607">
+        <testcase name="cannot_read_beans_file" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="70" assertions="1" time="0.026574"/>
+        <testcase name="cannot_invalid_scope" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="92" assertions="1" time="0.032091"/>
+        <testcase name="cannot_unknown_bean" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="102" assertions="1" time="0.033008"/>
+        <testcase name="cannot_parse_beans_file" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="112" assertions="1" time="0.023831"/>
+        <testcase name="can_constructor_args" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="133" assertions="16" time="0.053441"/>
+        <testcase name="can_init_method" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="158" assertions="1" time="0.035560"/>
+        <testcase name="can_destroy_method" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="168" assertions="1" time="0.032909"/>
+        <testcase name="can_setter_args" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="181" assertions="15" time="0.053184"/>
+        <testcase name="can_singleton" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="205" assertions="3" time="0.033973"/>
+        <testcase name="can_prototype" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="224" assertions="3" time="0.036657"/>
+        <testcase name="can_import" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="243" assertions="2" time="0.038736"/>
+        <testcase name="can_depends_on" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="254" assertions="3" time="0.037865"/>
+        <testcase name="can_multiple_dirs" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="266" assertions="2" time="0.036312"/>
+        <testcase name="can_method_lookup" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="290" assertions="2" time="0.047300"/>
+        <testcase name="can_factory_method" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="301" assertions="4" time="0.043727"/>
+        <testcase name="can_factory_bean" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="314" assertions="4" time="0.041140"/>
+        <testcase name="can_cache_property_name_for_setter_driver" class="Test_YAML_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/yaml/Test_YAML_IoC.php" line="327" assertions="2" time="0.069299"/>
       </testsuite>
     </testsuite>
-    <testsuite name="IoC Annotation" tests="10" assertions="16" failures="0" errors="0" time="2.346042">
-      <testsuite name="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" fullPackage="Test.Ioc.Annotation" category="Ding" package="Test" subpackage="Ioc.Annotation" tests="10" assertions="16" failures="0" errors="0" time="2.346042">
-        <testcase name="can_singleton" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="74" assertions="3" time="0.229021"/>
-        <testcase name="can_prototype" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="93" assertions="3" time="0.238314"/>
-        <testcase name="can_rename" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="112" assertions="1" time="0.229335"/>
-        <testcase name="can_init_method" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="122" assertions="1" time="0.233746"/>
-        <testcase name="can_destroy_method" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="132" assertions="1" time="0.217129"/>
-        <testcase name="can_at_resource" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="145" assertions="3" time="0.249462"/>
-        <testcase name="can_at_required" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="157" assertions="1" time="0.248810"/>
-        <testcase name="cannot_at_required_missing_property" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="168" assertions="1" time="0.233360"/>
-        <testcase name="can_class_init_method" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="176" assertions="1" time="0.230681"/>
-        <testcase name="can_class_destroy_method" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="186" assertions="1" time="0.236184"/>
+    <testsuite name="IoC Annotation" tests="11" assertions="17" failures="0" errors="0" time="2.544316">
+      <testsuite name="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" fullPackage="Test.Ioc.Annotation" category="Ding" package="Test" subpackage="Ioc.Annotation" tests="11" assertions="17" failures="0" errors="0" time="2.544316">
+        <testcase name="can_get_from_a_namespaced_class" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="68" assertions="1" time="0.235266"/>
+        <testcase name="can_singleton" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="77" assertions="3" time="0.221885"/>
+        <testcase name="can_prototype" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="96" assertions="3" time="0.235808"/>
+        <testcase name="can_rename" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="115" assertions="1" time="0.217625"/>
+        <testcase name="can_init_method" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="125" assertions="1" time="0.239144"/>
+        <testcase name="can_destroy_method" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="135" assertions="1" time="0.228826"/>
+        <testcase name="can_at_resource" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="148" assertions="3" time="0.233158"/>
+        <testcase name="can_at_required" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="160" assertions="1" time="0.238995"/>
+        <testcase name="cannot_at_required_missing_property" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="171" assertions="1" time="0.229286"/>
+        <testcase name="can_class_init_method" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="179" assertions="1" time="0.227675"/>
+        <testcase name="can_class_destroy_method" class="Test_Annotation_IoC" file="/export/users/marcelog/src/sts/Ding/test/ioc/annotation/Test_Annotation_IoC.php" line="189" assertions="1" time="0.236648"/>
       </testsuite>
     </testsuite>
-    <testsuite name="AOP Dispatcher" tests="1" assertions="1" failures="0" errors="0" time="0.043085">
-      <testsuite name="Test_Dispatcher" file="/export/users/marcelog/src/sts/Ding/test/aop/dispatcher/Test_Dispatcher.php" fullPackage="Test.Aop.Dispatcher" category="Ding" package="Test" subpackage="Aop.Dispatcher" tests="1" assertions="1" failures="0" errors="0" time="0.043085">
-        <testcase name="can_throw_exception_when_no_exception_interceptors" class="Test_Dispatcher" file="/export/users/marcelog/src/sts/Ding/test/aop/dispatcher/Test_Dispatcher.php" line="70" assertions="1" time="0.043085"/>
+    <testsuite name="IoC File Cache" tests="21" assertions="78" failures="0" errors="1" time="3.063937">
+      <testsuite name="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" fullPackage="Test.Cache.File" category="Ding" package="Test" subpackage="Cache.File" tests="11" assertions="17" failures="0" errors="0" time="2.692983">
+        <testcase name="can_get_from_a_namespaced_class" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="75" assertions="1" time="0.247729"/>
+        <testcase name="can_singleton" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="84" assertions="3" time="0.242357"/>
+        <testcase name="can_prototype" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="103" assertions="3" time="0.253201"/>
+        <testcase name="can_rename" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="122" assertions="1" time="0.239216"/>
+        <testcase name="can_init_method" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="132" assertions="1" time="0.241687"/>
+        <testcase name="can_destroy_method" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="142" assertions="1" time="0.238435"/>
+        <testcase name="can_at_resource" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="155" assertions="3" time="0.258268"/>
+        <testcase name="can_at_required" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="167" assertions="1" time="0.260043"/>
+        <testcase name="cannot_at_required_missing_property" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="178" assertions="1" time="0.245459"/>
+        <testcase name="can_class_init_method" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="186" assertions="1" time="0.239059"/>
+        <testcase name="can_class_destroy_method" class="Test_IoC_Annotation" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC_Annotation.php" line="196" assertions="1" time="0.227529"/>
       </testsuite>
-    </testsuite>
-    <testsuite name="AOP XML" tests="7" assertions="12" failures="0" errors="0" time="0.315873">
-      <testsuite name="Test_XML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/xml/Test_XML_AOP.php" fullPackage="Test.Aop.Xml" category="Ding" package="Test" subpackage="Aop.Xml" tests="7" assertions="12" failures="0" errors="0" time="0.315873">
-        <testcase name="can_intercept_exception_from_bean_aop" class="Test_XML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/xml/Test_XML_AOP.php" line="69" assertions="1" time="0.046284"/>
-        <testcase name="can_intercept_and_proceed_exception_from_bean_aop" class="Test_XML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/xml/Test_XML_AOP.php" line="80" assertions="1" time="0.043355"/>
-        <testcase name="cannot_invalid_aspect_type" class="Test_XML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/xml/Test_XML_AOP.php" line="91" assertions="1" time="0.033024"/>
-        <testcase name="can_intercept_method_from_bean_aop" class="Test_XML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/xml/Test_XML_AOP.php" line="100" assertions="1" time="0.042138"/>
-        <testcase name="can_intercept_multiple_methods_from_bean_aop" class="Test_XML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/xml/Test_XML_AOP.php" line="110" assertions="2" time="0.047510"/>
-        <testcase name="can_define_global_aspects" class="Test_XML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/xml/Test_XML_AOP.php" line="121" assertions="4" time="0.055130"/>
-        <testcase name="can_define_global_pointcuts" class="Test_XML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/xml/Test_XML_AOP.php" line="135" assertions="2" time="0.048432"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="AOP YAML" tests="6" assertions="11" failures="0" errors="0" time="0.265641">
-      <testsuite name="Test_YAML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/yaml/Test_YAML_AOP.php" fullPackage="Test.Aop.Yaml" category="Ding" package="Test" subpackage="Aop.Yaml" tests="6" assertions="11" failures="0" errors="0" time="0.265641">
-        <testcase name="can_intercept_exception_from_bean_aop" class="Test_YAML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/yaml/Test_YAML_AOP.php" line="69" assertions="1" time="0.044981"/>
-        <testcase name="cannot_invalid_aspect_type" class="Test_YAML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/yaml/Test_YAML_AOP.php" line="80" assertions="1" time="0.033818"/>
-        <testcase name="can_intercept_method_from_bean_aop" class="Test_YAML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/yaml/Test_YAML_AOP.php" line="89" assertions="1" time="0.042124"/>
-        <testcase name="can_intercept_multiple_methods_from_bean_aop" class="Test_YAML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/yaml/Test_YAML_AOP.php" line="99" assertions="2" time="0.047117"/>
-        <testcase name="can_define_global_aspects" class="Test_YAML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/yaml/Test_YAML_AOP.php" line="110" assertions="4" time="0.054172"/>
-        <testcase name="can_define_global_pointcuts" class="Test_YAML_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/yaml/Test_YAML_AOP.php" line="124" assertions="2" time="0.043430"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="AOP Annotation" tests="2" assertions="2" failures="0" errors="0" time="0.404732">
-      <testsuite name="Test_Annotation_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/annotation/Test_Annotation_AOP.php" fullPackage="Test.Aop.Annotation" category="Ding" package="Test" subpackage="Aop.Annotation" tests="2" assertions="2" failures="0" errors="0" time="0.404732">
-        <testcase name="can_intercept_method" class="Test_Annotation_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/annotation/Test_Annotation_AOP.php" line="70" assertions="1" time="0.196749"/>
-        <testcase name="can_intercept_exception" class="Test_Annotation_AOP" file="/export/users/marcelog/src/sts/Ding/test/aop/annotation/Test_Annotation_AOP.php" line="80" assertions="1" time="0.207983"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="Filter XML" tests="1" assertions="4" failures="0" errors="0" time="0.040614">
-      <testsuite name="Test_XML_Filter" file="/export/users/marcelog/src/sts/Ding/test/filter/xml/Test_XML_Filter.php" fullPackage="Test.Filter.Xml" category="Ding" package="Test" subpackage="Filter.Xml" tests="1" assertions="4" failures="0" errors="0" time="0.040614">
-        <testcase name="can_use_properties" class="Test_XML_Filter" file="/export/users/marcelog/src/sts/Ding/test/filter/xml/Test_XML_Filter.php" line="53" assertions="4" time="0.040614"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="Dummy Logger" tests="1" assertions="2" failures="0" errors="0" time="0.008701">
-      <testsuite name="Test_Logger" file="/export/users/marcelog/src/sts/Ding/test/logger/Test_Logger.php" fullPackage="Test.Logger" category="Ding" package="Test" subpackage="Logger" tests="1" assertions="2" failures="0" errors="0" time="0.008701">
-        <testcase name="can_use_dummy_logger" class="Test_Logger" file="/export/users/marcelog/src/sts/Ding/test/logger/Test_Logger.php" line="51" assertions="2" time="0.008701"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="Driver Timezone" tests="1" assertions="3" failures="0" errors="0" time="0.043171">
-      <testsuite name="Test_Timezone" file="/export/users/marcelog/src/sts/Ding/test/timezone/Test_Timezone.php" fullPackage="Test.Timezone" category="Ding" package="Test" subpackage="Timezone" tests="1" assertions="3" failures="0" errors="0" time="0.043171">
-        <testcase name="can_set_timezone" class="Test_Timezone" file="/export/users/marcelog/src/sts/Ding/test/timezone/Test_Timezone.php" line="51" assertions="3" time="0.043171"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="Driver SignalHandler" tests="3" assertions="2" failures="0" errors="0" time="0.255138">
-      <testsuite name="Test_Signal" file="/export/users/marcelog/src/sts/Ding/test/signal/Test_Signal.php" fullPackage="Test.Signal" category="Ding" package="Test" subpackage="Signal" tests="3" assertions="2" failures="0" errors="0" time="0.255138">
-        <testcase name="can_set_signal_handler" class="Test_Signal" file="/export/users/marcelog/src/sts/Ding/test/signal/Test_Signal.php" line="52" assertions="1" time="0.037819"/>
-        <testcase name="can_set_annotated_signal_handler" class="Test_Signal" file="/export/users/marcelog/src/sts/Ding/test/signal/Test_Signal.php" line="73" assertions="1" time="0.193007"/>
-        <testcase name="can_do_nothing_if_no_handlers" class="Test_Signal" file="/export/users/marcelog/src/sts/Ding/test/signal/Test_Signal.php" line="94" assertions="0" time="0.024312"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="Driver ShutdownHandler" tests="5" assertions="4" failures="0" errors="0" time="0.260964">
-      <testsuite name="Test_Shutdown" file="/export/users/marcelog/src/sts/Ding/test/shutdown/Test_Shutdown.php" fullPackage="Test.Shutdown" category="Ding" package="Test" subpackage="Shutdown" tests="5" assertions="4" failures="0" errors="0" time="0.260964">
-        <testcase name="can_set_shutdown_handler" class="Test_Shutdown" file="/export/users/marcelog/src/sts/Ding/test/shutdown/Test_Shutdown.php" line="53" assertions="1" time="0.041255"/>
-        <testcase name="can_call_shutdown" class="Test_Shutdown" file="/export/users/marcelog/src/sts/Ding/test/shutdown/Test_Shutdown.php" line="75" assertions="1" time="0.003572"/>
-        <testcase name="can_set_annotated_shutdown_handler" class="Test_Shutdown" file="/export/users/marcelog/src/sts/Ding/test/shutdown/Test_Shutdown.php" line="83" assertions="1" time="0.190407"/>
-        <testcase name="can_call_annotated_shutdown" class="Test_Shutdown" file="/export/users/marcelog/src/sts/Ding/test/shutdown/Test_Shutdown.php" line="105" assertions="1" time="0.003455"/>
-        <testcase name="can_do_nothing_if_no_handlers" class="Test_Shutdown" file="/export/users/marcelog/src/sts/Ding/test/shutdown/Test_Shutdown.php" line="113" assertions="0" time="0.022275"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="Driver ErrorHandler" tests="3" assertions="2" failures="0" errors="0" time="0.257677">
-      <testsuite name="Test_Error" file="/export/users/marcelog/src/sts/Ding/test/error/Test_Error.php" fullPackage="Test.Error" category="Ding" package="Test" subpackage="Error" tests="3" assertions="2" failures="0" errors="0" time="0.257677">
-        <testcase name="can_set_error_handler" class="Test_Error" file="/export/users/marcelog/src/sts/Ding/test/error/Test_Error.php" line="52" assertions="1" time="0.041615"/>
-        <testcase name="can_set_annotated_error_handler" class="Test_Error" file="/export/users/marcelog/src/sts/Ding/test/error/Test_Error.php" line="73" assertions="1" time="0.192023"/>
-        <testcase name="can_do_nothing_if_no_handlers" class="Test_Error" file="/export/users/marcelog/src/sts/Ding/test/error/Test_Error.php" line="94" assertions="0" time="0.024039"/>
-      </testsuite>
-    </testsuite>
-    <testsuite name="Aware" tests="3" assertions="3" failures="0" errors="0" time="1.418860">
-      <testsuite name="Test_AspectManager_Aware" file="/export/users/marcelog/src/sts/Ding/test/aware/Test_AspectManager_Aware.php" fullPackage="Test.Aware" category="Ding" package="Test" subpackage="Aware" tests="1" assertions="1" failures="0" errors="0" time="0.475394">
-        <testcase name="can_be_aspect_manager_aware" class="Test_AspectManager_Aware" file="/export/users/marcelog/src/sts/Ding/test/aware/Test_AspectManager_Aware.php" line="70" assertions="1" time="0.475394"/>
-      </testsuite>
-      <testsuite name="Test_BeanName_Aware" file="/export/users/marcelog/src/sts/Ding/test/aware/Test_BeanName_Aware.php" fullPackage="Test.Aware" category="Ding" package="Test" subpackage="Aware" tests="1" assertions="1" failures="0" errors="0" time="0.473925">
-        <testcase name="can_be_bean_name_aware" class="Test_BeanName_Aware" file="/export/users/marcelog/src/sts/Ding/test/aware/Test_BeanName_Aware.php" line="70" assertions="1" time="0.473925"/>
-      </testsuite>
-      <testsuite name="Test_Container_Aware" file="/export/users/marcelog/src/sts/Ding/test/aware/Test_Container_Aware.php" fullPackage="Test.Aware" category="Ding" package="Test" subpackage="Aware" tests="1" assertions="1" failures="0" errors="0" time="0.469541">
-        <testcase name="can_be_container_aware" class="Test_Container_Aware" file="/export/users/marcelog/src/sts/Ding/test/aware/Test_Container_Aware.php" line="70" assertions="1" time="0.469541"/>
+      <testsuite name="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" fullPackage="Test.Cache.File" category="Ding" package="Test" subpackage="Cache.File" tests="10" assertions="61" failures="0" errors="1" time="0.370954">
+        <testcase name="can_init_method" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="96" assertions="1" time="0.032801"/>
+        <testcase name="can_destroy_method" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="106" assertions="1" time="0.035387"/>
+        <testcase name="can_constructor_args" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="119" assertions="16" time="0.050831"/>
+        <testcase name="can_setter_args" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="145" assertions="16" time="0.050368"/>
+        <testcase name="can_setter_args_cached" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="170" assertions="16" time="0.051705"/>
+        <testcase name="can_singleton" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="195" assertions="3" time="0.035898"/>
+        <testcase name="can_prototype" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="214" assertions="3" time="0.037331"/>
+        <testcase name="can_import" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="233" assertions="2" time="0.037756"/>
+        <testcase name="can_depends_on" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="244" assertions="3" time="0.038877"/>
+        <testcase name="can_method_lookup" class="Test_IoC" file="/export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php" line="256" assertions="0" time="0.000000">
+          <error type="RuntimeException">Test_IoC::can_method_lookup
+RuntimeException: Fatal error: Call to a member function fetch() on a non-object in /export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Impl/ContainerImpl.php on line 196
+
+Call Stack:
+    0.0009     821840   1. {main}() -:0
+    0.0455    6113456   2. __phpunit_run_isolated_test() -:399
+    0.0465    6336424   3. PHPUnit_Framework_TestCase-&gt;run() -:22
+    0.0474    6484120   4. PHPUnit_Framework_TestResult-&gt;run() /usr/share/php/PHPUnit/Framework/TestCase.php:576
+    0.1720    6535744   5. PHPUnit_Framework_TestCase-&gt;runBare() /usr/share/php/PHPUnit/Framework/TestResult.php:666
+    0.1725    6541424   6. PHPUnit_Framework_TestCase-&gt;runTest() /usr/share/php/PHPUnit/Framework/TestCase.php:628
+    0.1725    6542872   7. ReflectionMethod-&gt;invokeArgs() /usr/share/php/PHPUnit/Framework/TestCase.php:738
+    0.1725    6542904   8. Test_IoC-&gt;can_method_lookup() /export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php:0
+    0.2107    8004784   9. ProxyClassSimpleXML10-&gt;createAnotherBean() /export/users/marcelog/src/sts/Ding/test/cache/file/Test_IoC.php:261
+    0.2115    8046448  10. Ding\Aspect\Interceptor\DispatcherImpl-&gt;invoke() /export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Proxy.php(274) : eval()'d code:50
+    0.2117    8046448  11. Ding\Aspect\Interceptor\DispatcherImpl-&gt;_callInterceptors() /export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/DispatcherImpl.php:188
+    0.2120    8048224  12. Ding\Aspect\MethodInvocation-&gt;proceed() /export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/DispatcherImpl.php:157
+    0.2122    8049448  13. ReflectionMethod-&gt;invokeArgs() /export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/MethodInvocation.php:129
+    0.2122    8049480  14. Ding\Bean\Factory\Driver\MethodInjectionAspect-&gt;invoke() /export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php:0
+    0.2122    8049480  15. Ding\Container\Impl\ContainerImpl-&gt;getBean() /export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php:110
+    0.2123    8049528  16. Ding\Container\Impl\ContainerImpl-&gt;getBeanDefinition() /export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Impl/ContainerImpl.php:456
+
+Dump $_SERVER
+Dump $_GET
+Dump $_POST
+Dump $_COOKIE
+Dump $_FILES
+Dump $_ENV
+Dump $_SESSION
+Dump $_REQUEST
+
+</error>
+        </testcase>
       </testsuite>
     </testsuite>
   </testsuite>

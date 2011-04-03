@@ -152,11 +152,11 @@
         <TotalClasses>1</TotalClasses>
         <ConcreteClasses>1</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
-        <Ca>2</Ca>
+        <Ca>1</Ca>
         <Ce>1</Ce>
         <A>0</A>
-        <I>0.333333333333</I>
-        <D>0.666666666667</D>
+        <I>0.5</I>
+        <D>0.5</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Exception/BeanFactoryException.php">BeanFactoryException</Class>
@@ -167,7 +167,6 @@
       </DependsUpon>
       <UsedBy>
         <Package>Ding\Bean\Factory\Driver</Package>
-        <Package>Ding\Container\Impl</Package>
       </UsedBy>
     </Package>
     <Package name="Ding\Bean\Factory\Filter">
@@ -219,11 +218,11 @@
         <TotalClasses>11</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>11</AbstractClasses>
-        <Ca>3</Ca>
+        <Ca>2</Ca>
         <Ce>2</Ce>
         <A>1</A>
-        <I>0.4</I>
-        <D>0.4</D>
+        <I>0.5</I>
+        <D>0.5</D>
       </Stats>
       <ConcreteClasses/>
       <AbstractClasses>
@@ -246,7 +245,6 @@
       <UsedBy>
         <Package>Ding\Bean\Factory\Driver</Package>
         <Package>Ding\Container</Package>
-        <Package>Ding\Container\Impl</Package>
       </UsedBy>
     </Package>
     <Package name="Ding\Bean\Lifecycle\Exception">
@@ -391,7 +389,7 @@
         <ConcreteClasses>39</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
-        <Ce>4</Ce>
+        <Ce>2</Ce>
         <A>0</A>
         <I>1</I>
         <D>0</D>
@@ -402,8 +400,6 @@
       <AbstractClasses/>
       <DependsUpon>
         <Package></Package>
-        <Package>Ding\Bean\Factory\Exception</Package>
-        <Package>Ding\Bean\Lifecycle</Package>
         <Package>Ding\Container</Package>
       </DependsUpon>
       <UsedBy/>
