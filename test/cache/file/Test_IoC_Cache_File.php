@@ -44,15 +44,13 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_IoC extends PHPUnit_Framework_TestCase
+class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
 {
     private $_properties = array();
 
     public function setUp()
     {
-        $cachedir = implode(
-            DIRECTORY_SEPARATOR, array(sys_get_temp_dir(), 'Ding', __CLASS__)
-        );
+        $cachedir = implode(DIRECTORY_SEPARATOR, array(getenv('TMPDIR'), 'cache', __CLASS__));
         $this->_properties = array(
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
@@ -61,6 +59,7 @@ class Test_IoC extends PHPUnit_Framework_TestCase
                 	'aspect' => array('impl' => 'file', 'directory' => $cachedir),
                     'autoloader' => array('impl' => 'file', 'directory' => $cachedir),
             		'bdef' => array('impl' => 'file', 'directory' => $cachedir),
+        			'annotations' => array('impl' => 'file', 'directory' => $cachedir),
               		'beans' => array('impl' => 'dummy')
                 ),
                 'factory' => array(

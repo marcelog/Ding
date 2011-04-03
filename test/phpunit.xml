@@ -25,8 +25,14 @@
     <testsuite name="IoC Annotation">
       <directory suffix=".php">ioc/annotation</directory>
     </testsuite>
+    <testsuite name="IoC ZF Cache">
+      <directory suffix=".php">cache/zfcache</directory>
+    </testsuite>
     <testsuite name="IoC File Cache">
       <directory suffix=".php">cache/file</directory>
+    </testsuite>
+    <testsuite name="IoC APC Cache">
+      <directory suffix=".php">cache/apc</directory>
     </testsuite>
     <testsuite name="AOP Dispatcher">
       <directory suffix=".php">aop/dispatcher</directory>
@@ -60,6 +66,9 @@
     </testsuite>
     <testsuite name="Aware">
       <directory suffix=".php">aware</directory>
+    </testsuite>
+    <testsuite name="ReflectionFactory">
+      <directory suffix=".php">reflection</directory>
     </testsuite>
   </testsuites>
 </phpunit>

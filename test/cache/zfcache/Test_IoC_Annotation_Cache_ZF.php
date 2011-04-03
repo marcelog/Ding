@@ -1,12 +1,12 @@
 <?php
 /**
- * This class will test the annotation driver with file cache.
+ * This class will test the annotation driver with zf cache.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Test
- * @subpackage Cache.File
+ * @subpackage Cache.Zfcache
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @version    SVN: $Id$
@@ -29,33 +29,44 @@
  */
 
 use Ding\Container\Impl\ContainerImpl;
+require_once 'Zend/Loader/Autoloader.php';
+Zend_Loader_Autoloader::getInstance();
 
 /**
- * This class will test the annotation driver with file cache.
+ * This class will test the annotation driver with zf cache.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Test
- * @subpackage Cache.File
+ * @subpackage Cache.Zfcache
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_IoC_Annotation extends PHPUnit_Framework_TestCase
+class Test_IoC_Annotation_Cache_ZF extends PHPUnit_Framework_TestCase
 {
     private $_properties = array();
 
     public function setUp()
     {
+        $cachedir = implode(DIRECTORY_SEPARATOR, array(getenv('TMPDIR'), 'cache', __CLASS__));
+        @mkdir($cachedir, 0755, true);
+        $zendCacheOptions = array(
+            'frontend' => 'Core',
+            'backend' => 'File',
+            'backendoptions' => array('cache_dir' => $cachedir),
+            'frontendoptions' => array('lifetime' => 10000, 'automatic_serialization' => true)
+        );
         $this->_properties = array(
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'cache' => array(
-    				'proxy' => array('impl' => 'file', 'directory' => $cachedir),
-                	'aspect' => array('impl' => 'file', 'directory' => $cachedir),
-                    'autoloader' => array('impl' => 'file', 'directory' => $cachedir),
-            		'bdef' => array('impl' => 'file', 'directory' => $cachedir),
+    				'proxy' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
+                	'aspect' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
+                    'autoloader' => array('impl' => 'dummy', 'zend' => $zendCacheOptions),
+        			'annotations' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
+               		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
               		'beans' => array('impl' => 'dummy')
                 ),
         		'factory' => array(
