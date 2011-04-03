@@ -165,7 +165,7 @@ class MemcachedCacheImpl implements ICache
     public static function getInstance($options = array())
     {
         if (self::$_instance == false) {
-            self::$_instance = new MemcachedCacheImpl($options['filename']);
+            self::$_instance = new MemcachedCacheImpl($options);
         }
         return self::$_instance;
     }
