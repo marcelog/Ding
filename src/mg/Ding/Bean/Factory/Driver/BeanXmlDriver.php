@@ -123,6 +123,20 @@ class BeanXmlDriver
     private $_directories = false;
 
     /**
+     * Dont serialize anything here. The container and the aspect manager have
+     * references to this driver, and because of IContainerAware or IAspectManagerAware
+     * and others, like the methodInjection, some beans and bean definitions will have
+     * a reference to the container, so when serializing these beans/definitions, ultimately
+     * this driver will be try for serialization.
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array();
+    }
+
+    /**
      * Gets xml errors.
      *
      * @return string

@@ -165,6 +165,16 @@ class ContainerImpl implements IContainer
     private $_aspectManager = false;
 
     /**
+     * Prevent serialization.
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array();
+    }
+
+    /**
      * Returns a bean definition.
      *
      * @param string $name Bean name.
