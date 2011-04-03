@@ -27,7 +27,7 @@
             <h2>Class Coverage Distribution</h2>
             <canvas id="classCoverageDistribution" width="475" height="200"></canvas>
             <script>
-            var ccd = new RGraph.Bar('classCoverageDistribution', [22,0,1,0,0,3,1,2,9,5,5,25]);
+            var ccd = new RGraph.Bar('classCoverageDistribution', [22,0,1,0,0,3,1,0,8,2,4,32]);
             ccd.Set('chart.background.barcolor1', 'white');
             ccd.Set('chart.background.barcolor2', 'white');
             ccd.Set('chart.colors', ['blue']);
@@ -44,7 +44,7 @@
             <h2>Class Complexity</h2>
             <canvas id="classComplexity" width="475" height="200"></canvas>
             <script>
-            var cc = new RGraph.Scatter('classComplexity', [[41.3793103448,12,"blue","AspectDefinition"],[74.4680851064,17,"blue","AspectManager"],[87.5,4,"blue","AdviceDefinition"],[95.5555555556,17,"blue","DispatcherImpl"],[48.4848484848,14,"blue","MethodInvocation"],[72.2222222222,8,"blue","PointcutDefinition"],[70.1149425287,24,"blue","Proxy"],[76.6666666667,9,"blue","Ding_Autoloader"],[100,3,"blue","BeanAnnotationDefinition"],[75,8,"blue","BeanConstructorArgumentDefinition"],[71.25,40,"blue","BeanDefinition"],[54.5454545455,11,"blue","BeanPropertyDefinition"],[100,10,"blue","AnnotationAspectDriver"],[100,8,"blue","AnnotationInitDestroyMethodDriver"],[100,10,"blue","AnnotationRequiredDriver"],[100,15,"blue","AnnotationResourceDriver"],[100,5,"blue","AspectManagerAwareDriver"],[89.3333333333,51,"blue","BeanAnnotationDriver"],[100,5,"blue","BeanNameAwareDriver"],[91.724137931,84,"blue","BeanXmlDriver"],[95.3781512605,76,"blue","BeanYamlDriver"],[100,5,"blue","ContainerAwareDriver"],[100,5,"blue","DependsOnDriver"],[100,6,"blue","ErrorHandlerDriver"],[100,10,"blue","FiltersDriver"],[40.9090909091,7,"blue","MVCAnnotationDriver"],[100,3,"blue","MethodInjectionAspect"],[100,6,"blue","MethodInjectionDriver"],[100,12,"blue","SetterInjectionDriver"],[100,6,"blue","ShutdownDriver"],[100,7,"blue","SignalHandlerDriver"],[100,5,"blue","TimezoneDriver"],[100,0,"blue","BeanFactoryException"],[73.0769230769,14,"blue","PropertyFilter"],[100,0,"blue","BeanLifecycle"],[0,0,"blue","BeanLifecycleException"],[100,0,"blue","CacheException"],[0,0,"blue","FileCacheException"],[81.8181818182,8,"blue","APCCacheImpl"],[83.3333333333,8,"blue","DummyCacheImpl"],[74.2857142857,14,"blue","FileCacheImpl"],[65.5172413793,11,"blue","MemcachedCacheImpl"],[90.9090909091,10,"blue","ZendCacheImpl"],[100,13,"blue","CacheLocator"],[90.5084745763,82,"blue","ContainerImpl"],[100,0,"blue","DingException"],[69.2307692308,4,"blue","ErrorHandlerHelper"],[15.3846153846,17,"blue","ErrorInfo"],[71.4285714286,3,"blue","ShutdownHandlerHelper"],[80,4,"blue","SignalHandlerHelper"],[0,15,"blue","SyslogHelper"],[0,0,"blue","TCPException"],[0,34,"blue","TCPClientHelper"],[0,37,"blue","TCPServerHelper"],[0,9,"blue","TimerHelper"],[100,3,"blue","TimezoneHelper"],[0,7,"blue","HttpSession"],[100,5,"blue","Logger"],[0,3,"blue","Action"],[0,7,"blue","Dispatcher"],[0,0,"blue","MVCException"],[0,0,"blue","ForwardModelAndView"],[0,3,"blue","HttpAction"],[0,0,"blue","HttpDispatcher"],[0,8,"blue","HttpExceptionMapper"],[0,22,"blue","HttpFrontController"],[0,15,"blue","HttpUrlMapper"],[0,5,"blue","HttpView"],[0,6,"blue","HttpViewResolver"],[0,5,"blue","ModelAndView"],[0,0,"blue","RedirectModelAndView"],[0,3,"blue","View"],[100,36,"blue","ReflectionFactory"]]);
+            var cc = new RGraph.Scatter('classComplexity', [[41.3793103448,12,"blue","AspectDefinition"],[74.4680851064,17,"blue","AspectManager"],[87.5,4,"blue","AdviceDefinition"],[95.5555555556,17,"blue","DispatcherImpl"],[48.4848484848,14,"blue","MethodInvocation"],[72.2222222222,8,"blue","PointcutDefinition"],[70.1149425287,24,"blue","Proxy"],[76.6666666667,9,"blue","Ding_Autoloader"],[100,3,"blue","BeanAnnotationDefinition"],[75,8,"blue","BeanConstructorArgumentDefinition"],[71.25,40,"blue","BeanDefinition"],[54.5454545455,11,"blue","BeanPropertyDefinition"],[100,10,"blue","AnnotationAspectDriver"],[100,8,"blue","AnnotationInitDestroyMethodDriver"],[100,10,"blue","AnnotationRequiredDriver"],[100,15,"blue","AnnotationResourceDriver"],[100,5,"blue","AspectManagerAwareDriver"],[89.3333333333,51,"blue","BeanAnnotationDriver"],[100,5,"blue","BeanNameAwareDriver"],[93.7931034483,84,"blue","BeanXmlDriver"],[97.8991596639,76,"blue","BeanYamlDriver"],[100,5,"blue","ContainerAwareDriver"],[100,5,"blue","DependsOnDriver"],[100,6,"blue","ErrorHandlerDriver"],[100,10,"blue","FiltersDriver"],[40.9090909091,7,"blue","MVCAnnotationDriver"],[100,3,"blue","MethodInjectionAspect"],[100,6,"blue","MethodInjectionDriver"],[100,12,"blue","SetterInjectionDriver"],[100,6,"blue","ShutdownDriver"],[100,7,"blue","SignalHandlerDriver"],[100,5,"blue","TimezoneDriver"],[100,0,"blue","BeanFactoryException"],[73.0769230769,14,"blue","PropertyFilter"],[100,0,"blue","BeanLifecycle"],[0,0,"blue","BeanLifecycleException"],[100,0,"blue","CacheException"],[100,0,"blue","FileCacheException"],[100,7,"blue","APCCacheImpl"],[100,7,"blue","DummyCacheImpl"],[100,12,"blue","FileCacheImpl"],[100,8,"blue","MemcachedCacheImpl"],[100,9,"blue","ZendCacheImpl"],[100,13,"blue","CacheLocator"],[95.2542372881,82,"blue","ContainerImpl"],[100,0,"blue","DingException"],[100,4,"blue","ErrorHandlerHelper"],[15.3846153846,17,"blue","ErrorInfo"],[71.4285714286,3,"blue","ShutdownHandlerHelper"],[100,4,"blue","SignalHandlerHelper"],[0,15,"blue","SyslogHelper"],[0,0,"blue","TCPException"],[0,34,"blue","TCPClientHelper"],[0,37,"blue","TCPServerHelper"],[0,9,"blue","TimerHelper"],[100,3,"blue","TimezoneHelper"],[0,7,"blue","HttpSession"],[0,5,"blue","Logger"],[0,3,"blue","Action"],[0,7,"blue","Dispatcher"],[0,0,"blue","MVCException"],[0,0,"blue","ForwardModelAndView"],[0,3,"blue","HttpAction"],[0,0,"blue","HttpDispatcher"],[0,8,"blue","HttpExceptionMapper"],[0,22,"blue","HttpFrontController"],[0,15,"blue","HttpUrlMapper"],[0,5,"blue","HttpView"],[0,6,"blue","HttpViewResolver"],[0,5,"blue","ModelAndView"],[0,0,"blue","RedirectModelAndView"],[0,3,"blue","View"],[100,36,"blue","ReflectionFactory"]]);
             cc.Set('chart.xmax', 100);
             cc.Set('chart.background.barcolor1', 'white');
             cc.Set('chart.background.barcolor2', 'white');
@@ -60,16 +60,16 @@
           <td valign="top">
             <h2>Top Project Risks</h2>
             <ul>
-              <li><a href="Cache_Impl_FileCacheImpl.php.html#46">FileCacheImpl</a> (17)</li>
+              <li><a href="Aspect_MethodInvocation.php.html#48">MethodInvocation</a> (40)</li>
+              <li><a href="Aspect_Proxy.php.html#51">Proxy</a> (39)</li>
+              <li><a href="MVC_Http_HttpView.php.html#47">HttpView</a> (30)</li>
+              <li><a href="Logger_Logger.php.html#41">Logger</a> (30)</li>
+              <li><a href="MVC_ModelAndView.php.html#42">ModelAndView</a> (30)</li>
+              <li><a href="Aspect_AspectManager.php.html#44">AspectManager</a> (21)</li>
+              <li><a href="Bean_Factory_Filter_PropertyFilter.php.html#44">PropertyFilter</a> (17)</li>
               <li><a href="Bean_Factory_Driver_MVCAnnotationDriver.php.html#50">MVCAnnotationDriver</a> (17)</li>
               <li><a href="Aspect_Interceptor_DispatcherImpl.php.html#45">DispatcherImpl</a> (17)</li>
-              <li><a href="Cache_Impl_MemcachedCacheImpl.php.html#47">MemcachedCacheImpl</a> (15)</li>
-              <li><a href="Cache_Impl_ZendCacheImpl.php.html#45">ZendCacheImpl</a> (10)</li>
               <li><a href="Autoloader_Ding_Autoloader.php.html#65">Ding_Autoloader</a> (10)</li>
-              <li><a href="Cache_Impl_APCCacheImpl.php.html#45">APCCacheImpl</a> (8)</li>
-              <li><a href="Cache_Impl_DummyCacheImpl.php.html#45">DummyCacheImpl</a> (8)</li>
-              <li><a href="Helpers_ErrorHandler_ErrorHandlerHelper.php.html#46">ErrorHandlerHelper</a> (4)</li>
-              <li><a href="Helpers_SignalHandler_SignalHandlerHelper.php.html#50">SignalHandlerHelper</a> (4)</li>
 
             </ul>
           </td>
@@ -77,16 +77,16 @@
           <td valign="top">
             <h2>Least Tested Methods</h2>
             <ul>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#200">TCPServerHelper::open</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#236">TCPServerHelper::getMicrotime</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#250">TCPServerHelper::process</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#329">TCPServerHelper::setReadMinLength</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#182">TCPServerHelper::disconnect</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#169">TCPServerHelper::getPeerName</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPClientHelper.php.html#382">TCPClientHelper::__construct</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#121">TCPServerHelper::close</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#138">TCPServerHelper::read</a> (0%)</li>
-              <li><a href="Helpers_TCP_TCPServerHelper.php.html#154">TCPServerHelper::write</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPServerHelper.php.html#401">TCPServerHelper::setReuse</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPServerHelper.php.html#411">TCPServerHelper::getReuse</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPServerHelper.php.html#422">TCPServerHelper::__construct</a> (0%)</li>
+              <li><a href="Helpers_Timer_TimerHelper.php.html#77">TimerHelper::setHandler</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPServerHelper.php.html#389">TCPServerHelper::setAddress</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPServerHelper.php.html#377">TCPServerHelper::setPort</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPServerHelper.php.html#341">TCPServerHelper::setReadTimeout</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPServerHelper.php.html#353">TCPServerHelper::setBacklog</a> (0%)</li>
+              <li><a href="Helpers_TCP_TCPServerHelper.php.html#365">TCPServerHelper::setHandler</a> (0%)</li>
+              <li><a href="Helpers_Timer_TimerHelper.php.html#89">TimerHelper::setMilliseconds</a> (0%)</li>
 
             </ul>
           </td>
@@ -98,7 +98,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sun Apr 3 15:21:59 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sun Apr 3 17:21:56 ART 2011.</td></tr>
     </table>
 
     <br/>
