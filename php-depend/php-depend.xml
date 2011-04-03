@@ -248,26 +248,6 @@
         <Package>Ding\Container</Package>
       </UsedBy>
     </Package>
-    <Package name="Ding\Bean\Lifecycle\Exception">
-      <Stats>
-        <TotalClasses>1</TotalClasses>
-        <ConcreteClasses>1</ConcreteClasses>
-        <AbstractClasses>0</AbstractClasses>
-        <Ca>0</Ca>
-        <Ce>1</Ce>
-        <A>0</A>
-        <I>1</I>
-        <D>0</D>
-      </Stats>
-      <ConcreteClasses>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/Exception/BeanLifecycleException.php">BeanLifecycleException</Class>
-      </ConcreteClasses>
-      <AbstractClasses/>
-      <DependsUpon>
-        <Package>Ding\Exception</Package>
-      </DependsUpon>
-      <UsedBy/>
-    </Package>
     <Package name="Ding\Cache\Exception">
       <Stats>
         <TotalClasses>2</TotalClasses>
@@ -411,11 +391,11 @@
         <TotalClasses>1</TotalClasses>
         <ConcreteClasses>1</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
-        <Ca>3</Ca>
+        <Ca>2</Ca>
         <Ce>1</Ce>
         <A>0</A>
-        <I>0.25</I>
-        <D>0.75</D>
+        <I>0.333333333333</I>
+        <D>0.666666666667</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Exception/DingException.php">DingException</Class>
@@ -426,7 +406,6 @@
       </DependsUpon>
       <UsedBy>
         <Package>Ding\Bean\Factory\Exception</Package>
-        <Package>Ding\Bean\Lifecycle\Exception</Package>
         <Package>Ding\Helpers\TCP\Exception</Package>
       </UsedBy>
     </Package>

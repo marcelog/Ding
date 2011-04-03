@@ -142,17 +142,7 @@
 					static <span class="var-type"><a href="../../Cache/Impl/MemcachedCacheImpl.html">MemcachedCacheImpl</a></span>
 					<a href="#$_instance" title="details" class="var-name">$_instance</a>
 				</div>
-																																																				<div class="var-title">
-					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">string</span>
-					<a href="#$_lastAskedName" title="details" class="var-name">$_lastAskedName</a>
-				</div>
-																<div class="var-title">
-					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">mixed</span>
-					<a href="#$_lastAskedValue" title="details" class="var-name">$_lastAskedValue</a>
-				</div>
-																<div class="var-title">
+																																				<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">mixed</span>
 					<a href="#$_memcached" title="details" class="var-name">$_memcached</a>
@@ -180,7 +170,7 @@
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 											([<span class="var-type">array</span>&nbsp;<span class="var-name">$options</span> = <span class="var-default">array()</span>])
 									</div>
-																																											
+																																			
 				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -202,13 +192,6 @@
 										()
 									</div>
 																							
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">boolean</span>
-										<a href="#has" title="details" class="method-name">has</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
-									</div>
-															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">boolean</span>
@@ -263,52 +246,6 @@
 
 </div>
 
-<a name="var$_lastAskedName" id="$_lastAskedName"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<img src="../../media/images/PrivateVariable.png" />
-		<span class="var-title">
-			<span class="var-type">string</span>
-			<span class="var-name">$_lastAskedName</span>
-						(line <span class="line-number">66</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Last asked-for object (name) in either has() or get() (see comments  below).</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$_lastAskedValue" id="$_lastAskedValue"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<img src="../../media/images/PrivateVariable.png" />
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$_lastAskedValue</span>
-						(line <span class="line-number">73</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Last asked-for object (value) in either has() or get() (see comments  below).</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
 <a name="var$_memcached" id="$_memcached"><!-- --></A>
 <div class="oddrow">
 
@@ -352,7 +289,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">165</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">122</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -382,7 +319,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">178</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">135</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -412,7 +349,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">fetch</span> (line <span class="line-number">102</span>)
+		<span class="method-title">fetch</span> (line <span class="line-number">69</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -451,7 +388,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">flush</span> (line <span class="line-number">141</span>)
+		<span class="method-title">flush</span> (line <span class="line-number">98</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -477,48 +414,12 @@
 					</dl>
 			
 	</div>
-<a name="methodhas" id="has"><!-- --></a>
+<a name="methodremove" id="remove"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">has</span> (line <span class="line-number">82</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns true if this cache has the given key.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">boolean</span>
-		<span class="method-name">
-			has
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$name</span><span class="var-description">: Key to check for.</span>			</li>
-				</ul>
-		
-				<hr class="separator" />
-		<div class="notes">Implementation of:</div>
-			<dl>
-			<dt><a href="../../Cache/ICache.html#methodhas">ICache::has()</a></dt>
-						<dd>Returns true if this cache has the given key.</dd>
-					</dl>
-			
-	</div>
-<a name="methodremove" id="remove"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">remove</span> (line <span class="line-number">153</span>)
+		<span class="method-title">remove</span> (line <span class="line-number">110</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -550,11 +451,11 @@
 			
 	</div>
 <a name="methodstore" id="store"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">store</span> (line <span class="line-number">131</span>)
+		<span class="method-title">store</span> (line <span class="line-number">88</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -594,7 +495,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 03 Apr 2011 12:04:55 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 03 Apr 2011 19:52:56 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

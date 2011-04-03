@@ -108,7 +108,7 @@
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AspectManagerAwareDriver.php">
   <error line="61" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="65" column="140" severity="warning" message="Line exceeds 85 characters; contains 139 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="69" column="140" severity="warning" message="Line exceeds 85 characters; contains 139 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanAnnotationDriver.php">
   <error line="97" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
@@ -138,7 +138,7 @@
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanNameAwareDriver.php">
   <error line="60" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="64" column="123" severity="warning" message="Line exceeds 85 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="68" column="123" severity="warning" message="Line exceeds 85 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanXmlDriver.php">
   <error line="127" column="1" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -313,8 +313,6 @@
   <error line="94" column="11" severity="error" message="Class constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase"/>
   <error line="100" column="11" severity="error" message="Class constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase"/>
  </file>
- <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/Exception/BeanLifecycleException.php">
- </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IAfterAssembleListener.php">
   <error line="49" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
   <error line="49" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -354,33 +352,31 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Exception/FileCacheException.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/ICache.php">
-  <error line="77" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="68" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/APCCacheImpl.php">
-  <error line="94" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="131" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="82" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="119" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/DummyCacheImpl.php">
-  <error line="95" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="132" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="83" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="120" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/FileCacheImpl.php">
-  <error line="123" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="178" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="178" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="183" column="5" severity="error" message="Doc comment for &quot;$options&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="186" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="99" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="155" column="5" severity="error" message="Doc comment for &quot;$options&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="158" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/MemcachedCacheImpl.php">
-  <error line="139" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="173" column="5" severity="error" message="Doc comment for &quot;$options&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="176" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="96" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="130" column="5" severity="error" message="Doc comment for &quot;$options&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="133" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Impl/ZendCacheImpl.php">
-  <error line="71" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="111" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="145" column="5" severity="error" message="Doc comment for &quot;$options&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="148" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="59" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="100" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="134" column="5" severity="error" message="Doc comment for &quot;$options&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="137" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Locator/CacheLocator.php">
   <error line="60" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
@@ -420,78 +416,78 @@
   <error line="344" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
   <error line="353" column="53" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
   <error line="353" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="425" column="53" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="425" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="432" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="436" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="502" column="103" severity="warning" message="Line exceeds 85 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="512" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="546" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="548" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="549" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="552" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="555" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="557" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="558" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="561" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="564" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="566" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="567" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="570" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="573" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="575" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="576" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="579" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="582" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="584" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="585" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="588" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="591" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="593" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="594" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="597" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="600" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="602" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="603" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="606" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="609" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="611" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="612" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="615" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="618" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="620" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="621" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="624" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDESTRUCTION but found BeforeDestruction" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="650" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="651" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="652" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="653" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="654" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="655" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="656" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="657" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="660" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="664" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="665" column="102" severity="warning" message="Line exceeds 85 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="666" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="667" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="668" column="102" severity="warning" message="Line exceeds 85 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="669" column="111" severity="warning" message="Line exceeds 85 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="673" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="677" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="681" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="685" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="689" column="106" severity="warning" message="Line exceeds 85 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="700" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="706" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="707" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="708" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="709" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="710" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="712" column="53" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="712" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="715" column="53" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="715" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="423" column="53" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="423" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="430" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="434" column="13" severity="error" message="Line indented incorrectly; expected 8 spaces, found 12" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="500" column="103" severity="warning" message="Line exceeds 85 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="510" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="544" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="546" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="547" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="550" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="553" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="555" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="556" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="559" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="562" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="564" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="565" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="568" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="571" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="573" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="574" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="577" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="580" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="582" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="583" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="586" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="589" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="591" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="592" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="595" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="598" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="600" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="601" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="604" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="607" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="609" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="610" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="613" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="616" column="5" severity="error" message="Doc comment for &quot;$listener&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="618" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="619" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="622" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDESTRUCTION but found BeforeDestruction" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="648" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="649" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="650" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="651" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="652" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="653" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="654" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="655" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="658" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="662" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="663" column="102" severity="warning" message="Line exceeds 85 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="664" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="665" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="666" column="102" severity="warning" message="Line exceeds 85 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="667" column="111" severity="warning" message="Line exceeds 85 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="671" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="675" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="679" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="683" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="687" column="106" severity="warning" message="Line exceeds 85 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="698" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="704" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="705" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="706" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="707" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="708" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="710" column="53" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="710" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="713" column="53" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="713" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Exception/DingException.php">
  </file>
@@ -637,16 +633,26 @@
   <error line="80" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="81" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="82" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="83" column="5" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="83" column="18" severity="error" message="Line indented incorrectly; expected 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="85" column="9" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 8" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="88" column="5" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="89" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="90" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="83" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="84" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="85" column="5" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="85" column="25" severity="error" message="Line indented incorrectly; expected 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="87" column="9" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 8" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="90" column="5" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="91" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="92" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="93" column="5" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="93" column="21" severity="error" message="Line indented incorrectly; expected 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="93" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="94" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="95" column="5" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="95" column="18" severity="error" message="Line indented incorrectly; expected 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="97" column="9" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 8" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="100" column="5" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="101" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="102" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="103" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="104" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="105" column="5" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="105" column="21" severity="error" message="Line indented incorrectly; expected 8 spaces, found 4" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Action.php">
  </file>
