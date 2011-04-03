@@ -100,6 +100,11 @@
 						
 					</div>
 	<div class="info-box-body">
+                <p class="implements">
+            Implements interfaces:
+            <ul>
+                <li><a href="../../Container/IContainerAware.html">IContainerAware</a></li>            </ul>
+        </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">An &quot;inner&quot; class. This is the aspect that runs when the method is called.</p>
 <p class="description"><p>Enter description here ...</p><p>PHP Version 5</p></p>
@@ -132,12 +137,7 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																								<div class="var-title">
-					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type"><a href="../../Aspect/AspectManager.html">AspectManager</a></span>
-					<a href="#$_aspectManager" title="details" class="var-name">$_aspectManager</a>
-				</div>
-																<div class="var-title">
+																																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">string</span>
 					<a href="#$_beanName" title="details" class="var-name">$_beanName</a>
@@ -145,7 +145,7 @@
 																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
-					<a href="#$_factory" title="details" class="var-name">$_factory</a>
+					<a href="#$_container" title="details" class="var-name">$_container</a>
 				</div>
 											</div>
 		</div>
@@ -181,8 +181,8 @@
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#setFactory" title="details" class="method-name">setFactory</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$beanName</span>)
+										<a href="#setContainer" title="details" class="method-name">setContainer</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$container</span>)
 									</div>
 											</div>
 		</div>
@@ -202,31 +202,8 @@
 					</div>
 		<div class="info-box-body">
 			
-<a name="var$_aspectManager" id="$_aspectManager"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<img src="../../media/images/PrivateVariable.png" />
-		<span class="var-title">
-			<span class="var-type"><a href="../../Aspect/AspectManager.html">AspectManager</a></span>
-			<span class="var-name">$_aspectManager</span>
-						(line <span class="line-number">75</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">The aspect manager instance in use.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> private</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
 <a name="var$_beanName" id="$_beanName"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -248,14 +225,14 @@
 		
 
 </div>
-<a name="var$_factory" id="$_factory"><!-- --></A>
-<div class="oddrow">
+<a name="var$_container" id="$_container"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
 		<span class="var-title">
 			<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
-			<span class="var-name">$_factory</span>
+			<span class="var-name">$_container</span>
 						(line <span class="line-number">63</span>)
 		</span>
 	</div>
@@ -287,11 +264,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodinvoke" id="invoke"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">invoke</span> (line <span class="line-number">108</span>)
+		<span class="method-title">invoke</span> (line <span class="line-number">95</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -317,11 +294,11 @@
 			
 	</div>
 <a name="methodsetBeanName" id="setBeanName"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setBeanName</span> (line <span class="line-number">84</span>)
+		<span class="method-title">setBeanName</span> (line <span class="line-number">78</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -346,16 +323,15 @@
 		
 			
 	</div>
-<a name="methodsetFactory" id="setFactory"><!-- --></a>
-<div class="evenrow">
+<a name="methodsetContainer" id="setContainer"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setFactory</span> (line <span class="line-number">96</span>)
+		<span class="method-title">setContainer</span> (line <span class="line-number">83</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Setter injection for bean name.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -363,18 +339,15 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			setFactory
+			setContainer
 		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$beanName</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$container</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$beanName</span><span class="var-description">: Bean name.</span>			</li>
-					<li>
-				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
-				<span class="var-name">$factory</span>			</li>
+				<span class="var-type"><a href="../../Container/IContainer.html">IContainer</a></span>
+				<span class="var-name">$container</span>			</li>
 				</ul>
 		
 			
@@ -385,7 +358,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 02 Apr 2011 23:10:55 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 03 Apr 2011 12:04:55 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

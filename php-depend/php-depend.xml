@@ -103,11 +103,11 @@
     </Package>
     <Package name="Ding\Bean\Factory\Driver">
       <Stats>
-        <TotalClasses>32</TotalClasses>
-        <ConcreteClasses>32</ConcreteClasses>
+        <TotalClasses>33</TotalClasses>
+        <ConcreteClasses>33</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
-        <Ce>8</Ce>
+        <Ce>9</Ce>
         <A>0</A>
         <I>1</I>
         <D>0</D>
@@ -142,6 +142,7 @@
         <Package>Ding\Bean\Factory</Package>
         <Package>Ding\Bean\Factory\Exception</Package>
         <Package>Ding\Bean\Lifecycle</Package>
+        <Package>Ding\Container</Package>
         <Package>Ding\MVC\Http</Package>
         <Package>Ding\Reflection</Package>
       </DependsUpon>
@@ -364,11 +365,11 @@
         <TotalClasses>2</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>2</AbstractClasses>
-        <Ca>1</Ca>
+        <Ca>2</Ca>
         <Ce>2</Ce>
         <A>1</A>
-        <I>0.666666666667</I>
-        <D>0.666666666667</D>
+        <I>0.5</I>
+        <D>0.5</D>
       </Stats>
       <ConcreteClasses/>
       <AbstractClasses>
@@ -380,6 +381,7 @@
         <Package>Ding\Bean\Lifecycle</Package>
       </DependsUpon>
       <UsedBy>
+        <Package>Ding\Bean\Factory\Driver</Package>
         <Package>Ding\Container\Impl</Package>
       </UsedBy>
     </Package>

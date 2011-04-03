@@ -206,8 +206,12 @@
   <error line="478" column="1" severity="error" message="Missing comment for param &quot;[ UNKNOWN ]&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ContainerAwareDriver.php">
-  <error line="60" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="64" column="116" severity="warning" message="Line exceeds 85 characters; contains 115 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="60" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="60" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="60" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="62" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="63" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="64" column="95" severity="warning" message="Line exceeds 85 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/DependsOnDriver.php">
   <error line="58" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
@@ -240,18 +244,17 @@
   <error line="68" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">
-  <error line="92" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="134" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="134" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="134" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="136" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="137" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="138" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="147" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="148" column="26" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="149" column="106" severity="warning" message="Line exceeds 85 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="150" column="108" severity="warning" message="Line exceeds 85 characters; contains 107 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="151" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="83" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="121" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="121" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="121" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="123" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="124" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="125" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="134" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="135" column="26" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="136" column="108" severity="warning" message="Line exceeds 85 characters; contains 107 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="137" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SetterInjectionDriver.php">
   <error line="69" column="1" severity="error" message="Doc comment for var $property does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
@@ -482,7 +485,7 @@
   <error line="700" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="706" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="707" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="708" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="708" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="709" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="710" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="712" column="53" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
@@ -578,7 +581,7 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timer/ITimerHandler.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timer/TimerHelper.php">
-  <error line="98" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="97" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timezone/TimezoneHelper.php">
  </file>

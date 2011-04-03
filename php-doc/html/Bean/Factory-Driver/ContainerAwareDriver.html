@@ -103,7 +103,7 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../../Bean/Lifecycle/IAfterDefinitionListener.html">IAfterDefinitionListener</a></li>            </ul>
+                <li><a href="../../Bean/Lifecycle/IAfterCreateListener.html">IAfterCreateListener</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">This driver will make the injection of the container instance for beans that  implement IContainerAware.</p>
@@ -176,8 +176,8 @@
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
-										<a href="#afterDefinition" title="details" class="method-name">afterDefinition</a>
-											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span>)
+										<a href="#afterCreate" title="details" class="method-name">afterCreate</a>
+											(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
 									</div>
 																			</div>
 		</div>
@@ -240,7 +240,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">79</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">80</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -270,7 +270,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">92</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">93</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -290,25 +290,27 @@
 		
 			
 	</div>
-<a name="methodafterDefinition" id="afterDefinition"><!-- --></a>
+<a name="methodafterCreate" id="afterCreate"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">afterDefinition</span> (line <span class="line-number">60</span>)
+		<span class="method-title">afterCreate</span> (line <span class="line-number">64</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">(non-PHPdoc)</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> Ding\Bean\Lifecycle.IAfterCreateListener::afterCreate()</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			afterDefinition
+			afterCreate
 		</span>
-					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">&$bean</span>)
+					(<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>&nbsp;<span class="var-name">$factory</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$bean</span>, <span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>&nbsp;<span class="var-name">$beanDefinition</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -316,14 +318,17 @@
 				<span class="var-type"><a href="../../Bean/Factory/IBeanFactory.html">IBeanFactory</a></span>
 				<span class="var-name">$factory</span>			</li>
 					<li>
-				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
+				<span class="var-type"></span>
 				<span class="var-name">&$bean</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
+				<span class="var-name">$beanDefinition</span>			</li>
 				</ul>
 		
 				<hr class="separator" />
 		<div class="notes">Implementation of:</div>
 			<dl>
-			<dt><a href="../../Bean/Lifecycle/IAfterDefinitionListener.html#methodafterDefinition">IAfterDefinitionListener::afterDefinition()</a></dt>
+			<dt><a href="../../Bean/Lifecycle/IAfterCreateListener.html#methodafterCreate">IAfterCreateListener::afterCreate()</a></dt>
 					</dl>
 			
 	</div>
@@ -333,7 +338,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 02 Apr 2011 23:10:50 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 03 Apr 2011 12:04:50 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
