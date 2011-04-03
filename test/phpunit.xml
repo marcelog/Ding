@@ -34,6 +34,12 @@
     <testsuite name="IoC APC Cache">
       <directory suffix=".php">cache/apc</directory>
     </testsuite>
+    <testsuite name="IoC Memcached Cache">
+      <directory suffix=".php">cache/memcached</directory>
+    </testsuite>
+    <testsuite name="Cache Locator">
+      <directory suffix=".php">cache/locator</directory>
+    </testsuite>
     <testsuite name="AOP Dispatcher">
       <directory suffix=".php">aop/dispatcher</directory>
     </testsuite>
@@ -70,5 +76,10 @@
     <testsuite name="ReflectionFactory">
       <directory suffix=".php">reflection</directory>
     </testsuite>
+    <!-- 
+    <testsuite name="Container">
+      <directory suffix=".php">container</directory>
+    </testsuite>
+     -->
   </testsuites>
 </phpunit>

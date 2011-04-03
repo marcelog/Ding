@@ -2,7 +2,7 @@
 <beans>
     <bean id="invalidScopeBean" scope="aa" class="ClassSimpleXML"/>
     <bean id="aSimpleSingletonBean" scope="singleton" class="ClassSimpleXML"/>
-    
+    <bean id="beanWithNoClass" scope="singleton"/>
     <bean id="aSimplePrototypeBean" scope="prototype" class="ClassSimpleXML"/>
     
     <bean id="aSimpleConstArgBean" scope="singleton" class="ClassSimpleXML2">
