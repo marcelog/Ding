@@ -72,7 +72,7 @@ class DependsOnDriver implements IBeforeCreateListener
         foreach ($beanDefinition->getDependsOn() as $depBean) {
             $factory->getBean(trim($depBean));
         }
-        return $bean;
+        return $beanDefinition;
     }
 
     /**
