@@ -11,7 +11,7 @@ ini_set(
         )
     )
 );
-//require_once 'Ding/Logger/Logger.php';
+require_once 'Ding/Logger/Logger.php';
 
 define('RESOURCES_DIR', __DIR__ . DIRECTORY_SEPARATOR . 'resources');
 

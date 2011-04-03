@@ -53,6 +53,6 @@ class Test_Logger extends PHPUnit_Framework_TestCase
         $logger = Logger::getLogger(array());
         $this->assertTrue($logger instanceof Logger);
         Logger::configure(array());
-        $this->assertFalse($logger->isDebugEnabled());
+        $this->assertTrue($logger->isDebugEnabled());
     }
 }

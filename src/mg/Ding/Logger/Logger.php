@@ -76,13 +76,25 @@ final class Logger
     }
 
     /**
+     * Dummy log.
+     *
+     * @param string $msg Message not to log.
+     *
+     * @return void
+     */
+    public final static function debug($msg)
+    {
+        return;
+    }
+
+    /**
      * Dummy is debug enabled?
      *
      * @return false
      */
     public final function isDebugEnabled()
     {
-        return false;
+        return getenv('TEST') === 'true';
     }
 
     /**
