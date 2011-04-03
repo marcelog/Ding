@@ -51,18 +51,6 @@ class APCCacheImpl implements ICache
     private static $_instance = false;
 
     /**
-     * Returns true if this cache has the given key.
-     *
-     * @param string $name Key to check for.
-     *
-     * @return boolean
-     */
-    public function has($name)
-    {
-        return apc_exists($name);
-    }
-
-    /**
      * Returns a cached value.
      *
      * @param string  $name    Key to look for.

@@ -92,6 +92,30 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function can_remove()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $cache = CacheLocator::getProxyCacheInstance();
+
+        $result = false;
+        $cache->fetch('a', $result);
+        $this->assertFalse($result);
+
+        $cache->store('a', 'something');
+        $result = false;
+        $value = $cache->fetch('a', $result);
+        $this->assertTrue($result);
+        $this->assertEquals($value, 'something');
+        $cache->remove('a');
+
+        $result = false;
+        $cache->fetch('a', $result);
+        $this->assertFalse($result);
+    }
+
+    /**
+     * @test
      * @expectedException Ding\Cache\Exception\FileCacheException
      */
     public function cannot_if_not_directory()

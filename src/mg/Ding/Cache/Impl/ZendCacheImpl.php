@@ -56,18 +56,6 @@ class ZendCacheImpl implements ICache
      */
     private $_zfCache;
 
-    /**
-     * Returns true if this cache has the given key.
-     *
-     * @param string $name Key to check for.
-     *
-     * @return boolean
-     */
-    public function has($name)
-    {
-        return $this->_zfCache->test($this->_transform($name));
-    }
-
     private function _transform($name)
     {
         return str_replace('.', '_', str_replace('\\', '_', $name));
@@ -84,7 +72,8 @@ class ZendCacheImpl implements ICache
     public function fetch($name, &$result)
     {
         $result = false;
-        $value = $this->_zfCache->load($this->_transform($name));
+        $key = $this->_transform($name);
+        $value = $this->_zfCache->load($key);
         if ($value != false) {
             $result = true;
             return $value;

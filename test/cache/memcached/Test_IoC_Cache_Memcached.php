@@ -88,7 +88,30 @@ class Test_IoC_Cache_Memcached extends PHPUnit_Framework_TestCase
         $cache = CacheLocator::getAspectCacheInstance();
         $cache->flush();
     }
+    /**
+     * @test
+     */
+    public function can_remove()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $cache = CacheLocator::getProxyCacheInstance();
 
+        $result = false;
+        $cache->fetch('a', $result);
+        $this->assertFalse($result);
+
+        $cache->store('a', 'something');
+        $result = false;
+        $value = $cache->fetch('a', $result);
+        $this->assertTrue($result);
+        $this->assertEquals($value, 'something');
+
+        $cache->remove('a');
+
+        $result = false;
+        $cache->fetch('a', $result);
+        $this->assertFalse($result);
+    }
     /**
      * @test
      */

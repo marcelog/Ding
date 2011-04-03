@@ -58,18 +58,6 @@ class FileCacheImpl implements ICache
     private $_directory;
 
     /**
-     * Returns true if this cache has the given key.
-     *
-     * @param string $name Key to check for.
-     *
-     * @return boolean
-     */
-    public function has($name)
-    {
-        return @file_exists($this->_directory . $name);
-    }
-
-    /**
      * Returns a cached value.
      *
      * @param string  $name    Key to look for.
@@ -88,18 +76,6 @@ class FileCacheImpl implements ICache
         $data = @file_get_contents($filename);
         $data = unserialize($data);
         return $data;
-    }
-
-    /**
-     * Generates a filename from a given cache key.
-     *
-     * @param string $name Cache key name
-     *
-     * @return string
-     */
-    private function _getFilenameFor($name)
-    {
-        return $this->_directory . $name;
     }
 
     /**

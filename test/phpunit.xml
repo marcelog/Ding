@@ -25,6 +25,9 @@
     <testsuite name="IoC Annotation">
       <directory suffix=".php">ioc/annotation</directory>
     </testsuite>
+    <testsuite name="Cache Dummy">
+      <directory suffix=".php">cache/dummy</directory>
+    </testsuite>
     <testsuite name="IoC ZF Cache">
       <directory suffix=".php">cache/zfcache</directory>
     </testsuite>
@@ -55,9 +58,6 @@
     <testsuite name="Filter XML">
       <directory suffix=".php">filter/xml</directory>
     </testsuite>
-    <testsuite name="Dummy Logger">
-      <directory suffix=".php">logger</directory>
-    </testsuite>
     <testsuite name="Driver Timezone">
       <directory suffix=".php">timezone</directory>
     </testsuite>
@@ -79,6 +79,9 @@
     <!-- 
     <testsuite name="Container">
       <directory suffix=".php">container</directory>
+    </testsuite>
+    <testsuite name="Dummy Logger">
+      <directory suffix=".php">logger</directory>
     </testsuite>
      -->
   </testsuites>
