@@ -173,10 +173,6 @@ class FileCacheImpl implements ICache
                     'Could not create: ' . $this->_directory
                 );
             }
-        } else if (!is_dir($this->_directory)) {
-            throw new FileCacheException(
-            	'Not a directory: ' . $this->_directory
-            );
         }
     }
 
@@ -187,6 +183,9 @@ class FileCacheImpl implements ICache
      */
     private function __construct(array $options)
     {
-        $this->_directory = $options['directory'] . DIRECTORY_SEPARATOR;
+        $this->_directory = $options['directory'];
+        if ($this->_directory[strlen($this->_directory) - 1] !== '/') {
+            $this->_directory .= '/';
+        }
     }
 }

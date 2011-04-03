@@ -31,6 +31,7 @@
 use Ding\Cache\Locator\CacheLocator;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
+use Ding\Cache\Exception\FileCacheException;
 
 /**
  * This class will test the ioc with file cache.
@@ -87,6 +88,37 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
         $cache->flush();
         $cache = CacheLocator::getAspectCacheInstance();
         $cache->flush();
+    }
+
+    /**
+     * @test
+     * @expectedException Ding\Cache\Exception\FileCacheException
+     */
+    public function cannot_if_not_directory()
+    {
+        $cachedir = __FILE__;
+        $this->_properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'cache' => array(
+    				'proxy' => array('impl' => 'file', 'directory' => $cachedir),
+                	'aspect' => array('impl' => 'file', 'directory' => $cachedir),
+                    'autoloader' => array('impl' => 'file', 'directory' => $cachedir),
+            		'bdef' => array('impl' => 'file', 'directory' => $cachedir),
+        			'annotations' => array('impl' => 'file', 'directory' => $cachedir),
+              		'beans' => array('impl' => 'dummy')
+                ),
+                'factory' => array(
+                    'bdef' => array(
+                        'xml' => array(
+                        	'filename' => 'ioc-xml-simple.xml', 'directories' => array(RESOURCES_DIR)
+                        )
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleInitMethodBean');
     }
 
     /**
