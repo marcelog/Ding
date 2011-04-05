@@ -120,6 +120,17 @@ IAspectManagerAware: Whenever ding is going to instantiate a bean whose class
 implements IAspectManagerAware interface, it will inject the current instance
 of the aspect manager (giving the ability to inject pointcuts, aspects, and
 general aop management).
+
+Extension points
+================
+You can easily hook in the bean lifecycle by just implementing one of:
+ * Ding\Bean\Lifecycle\IBeforeDefinition
+ * Ding\Bean\Lifecycle\IAfterDefinition
+ * Ding\Bean\Lifecycle\IBeforeCreate
+ * Ding\Bean\Lifecycle\IAfterCreate
+ * Ding\Bean\Lifecycle\IBeforeAssemble
+ * Ding\Bean\Lifecycle\IAfterAssemble
+This will allow you to extend the container functionality as much as you like :)
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
 AOP
