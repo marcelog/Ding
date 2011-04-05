@@ -46,5 +46,5 @@ use Ding\Bean\Factory\IBeanFactory;
  */
 interface IBeforeDefinitionListener extends ILifecycleListener
 {
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null);
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null);
 }

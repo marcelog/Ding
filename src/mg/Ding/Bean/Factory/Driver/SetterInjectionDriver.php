@@ -88,7 +88,7 @@ class SetterInjectionDriver implements IBeforeAssembleListener
         return $property->getValue();
     }
 
-    public function beforeAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
     {
         foreach ($beanDefinition->getProperties() as $property) {
             $propertyName = $property->getName();

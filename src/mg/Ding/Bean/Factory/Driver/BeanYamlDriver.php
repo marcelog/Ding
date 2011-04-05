@@ -303,7 +303,7 @@ class BeanYamlDriver
      * @throws BeanFactoryException
      * @return BeanDefinition
      */
-    private function _loadBean($beanName, BeanDefinition &$bean = null)
+    private function _loadBean($beanName, BeanDefinition $bean = null)
     {
         if (!$this->_yamlFiles) {
             $this->_load();
@@ -414,7 +414,7 @@ class BeanYamlDriver
 	 * @throws BeanFactoryException
 	 * @return BeanDefinition
      */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
         return $this->_loadBean($beanName, $bean);
     }

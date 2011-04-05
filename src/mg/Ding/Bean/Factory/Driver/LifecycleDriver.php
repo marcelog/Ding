@@ -1,7 +1,6 @@
 <?php
 /**
- * This driver will make the injection of the current aspect manager instance
- * for beans that implement IAspectManagerAware.
+ * This driver will call lifecycle hooks.
  *
  * PHP Version 5
  *
@@ -29,17 +28,15 @@
  *
  */
 namespace Ding\Bean\Factory\Driver;
-
-use Ding\Aspect\AspectManager;
+use Ding\Bean\Lifecycle\BeanLifecycleManager;
+use Ding\Bean\Lifecycle\IAfterAssembleListener;
 use Ding\Bean\BeanPropertyDefinition;
-use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
+
 /**
- * This driver will make the injection of the current aspect manager instance
- * for beans that implement IAspectManagerAware.
+ * This driver will call lifecycle hooks.
  *
  * PHP Version 5
  *
@@ -50,26 +47,41 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AspectManagerAwareDriver implements IAfterDefinitionListener
+class LifecycleDriver implements IAfterAssembleListener
 {
     /**
      * Holds current instance.
-     * @var AspectManagerAwareDriver
+     * @var LifecycleDriver
      */
     private static $_instance = false;
 
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
     {
-        $class = $bean->getClass();
-        if ($class === false || empty($class)) {
+        $class = $beanDefinition->getClass();
+        if ($bean === null || empty($class)) {
             return $bean;
         }
         $rClass = ReflectionFactory::getClass($class);
-        if ($rClass->implementsInterface('Ding\Aspect\IAspectManagerAware')) {
-            $property = new BeanPropertyDefinition('aspectManager', BeanPropertyDefinition::PROPERTY_SIMPLE, AspectManager::getInstance());
-            $properties = $bean->getProperties();
-            $properties['aspectManager'] = $property;
-            $bean->setProperties($properties);
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IBeforeDefinitionListener')) {
+            $this->_lifecycleManager->addBeforeDefinitionListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IAfterDefinitionListener')) {
+            $this->_lifecycleManager->addAfterDefinitionListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IBeforeCreateListener')) {
+            $this->_lifecycleManager->addBeforeCreateListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IAfterCreateListener')) {
+            $this->_lifecycleManager->addAfterCreateListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IBeforeAssembleListener')) {
+            $this->_lifecycleManager->addBeforeAssembleListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IAfterAssembleListener')) {
+            $this->_lifecycleManager->addAfterAssembleListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IBeforeDestructListener')) {
+            $this->_lifecycleManager->addBeforeDestructListener($bean);
         }
         return $bean;
     }
@@ -79,12 +91,12 @@ class AspectManagerAwareDriver implements IAfterDefinitionListener
      *
      * @param array $options Optional options.
      *
-     * @return AspectManagerAwareDriver
+     * @return LifecycleDriver
      */
     public static function getInstance(array $options)
     {
         if (self::$_instance == false) {
-            self::$_instance = new AspectManagerAwareDriver;
+            self::$_instance = new LifecycleDriver;
         }
         return self::$_instance;
     }
@@ -96,5 +108,6 @@ class AspectManagerAwareDriver implements IAfterDefinitionListener
      */
     private function __construct()
     {
+        $this->_lifecycleManager = BeanLifecycleManager::getInstance();
     }
 }

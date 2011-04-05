@@ -349,7 +349,7 @@ class BeanXmlDriver
      * @throws BeanFactoryException
      * @return BeanDefinition
      */
-    private function _loadBean($beanName, BeanDefinition &$bean = null)
+    private function _loadBean($beanName, BeanDefinition $bean = null)
     {
         if (!$this->_simpleXml) {
             $this->_load();
@@ -465,7 +465,7 @@ class BeanXmlDriver
 	 * @throws BeanFactoryException
 	 * @return BeanDefinition
      */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
         return $this->_loadBean($beanName, $bean);
     }

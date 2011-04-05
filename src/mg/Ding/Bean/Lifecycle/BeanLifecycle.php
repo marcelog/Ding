@@ -41,7 +41,7 @@ namespace Ding\Bean\Lifecycle;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-abstract class BeanLifecycle
+class BeanLifecycle
 {
     /**
      * The bean is in the process of being defined. Typically by a final

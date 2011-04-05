@@ -57,7 +57,7 @@ class BeanNameAwareDriver implements IAfterDefinitionListener
      */
     private static $_instance = false;
 
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
+    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
     {
         $class = $bean->getClass();
         if ($class === false || empty($class)) {

@@ -39,15 +39,7 @@ use Ding\Aspect\Interceptor\IDispatcher;
 use Ding\Aspect\Interceptor\DispatcherImpl;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Lifecycle\BeanLifecycle;
-use Ding\Bean\Lifecycle\IBeforeConfigListener;
-use Ding\Bean\Lifecycle\IAfterConfigListener;
-use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
-use Ding\Bean\Lifecycle\IAfterDefinitionListener;
-use Ding\Bean\Lifecycle\IBeforeCreateListener;
-use Ding\Bean\Lifecycle\IAfterCreateListener;
-use Ding\Bean\Lifecycle\IBeforeAssembleListener;
-use Ding\Bean\Lifecycle\IAfterAssembleListener;
-use Ding\Bean\Lifecycle\IBeforeDestructListener;
+use Ding\Bean\Lifecycle\BeanLifecycleManager;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Driver\BeanXmlDriver;
 use Ding\Bean\Factory\Driver\BeanYamlDriver;
@@ -70,6 +62,7 @@ use Ding\Bean\Factory\Driver\AnnotationInitDestroyMethodDriver;
 use Ding\Bean\Factory\Driver\ContainerAwareDriver;
 use Ding\Bean\Factory\Driver\BeanNameAwareDriver;
 use Ding\Bean\Factory\Driver\AspectManagerAwareDriver;
+use Ding\Bean\Factory\Driver\LifecycleDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
@@ -147,12 +140,6 @@ class ContainerImpl implements IContainer
     private $_beanDefCache;
 
     /**
-     * Lifecycle handlers for beans.
-     * @var ILifecycleListener
-     */
-    private $_lifecyclers;
-
-    /**
      * Container instance.
      * @var ContainerImpl
      */
@@ -163,6 +150,12 @@ class ContainerImpl implements IContainer
      * @var AspectManager
      */
     private $_aspectManager = false;
+
+    /**
+     * The lifecycle manager.
+     * @var BeanLifecycleManager
+     */
+    private $_lifecycleManager = false;
 
     /**
      * Prevent serialization.
@@ -205,20 +198,15 @@ class ContainerImpl implements IContainer
         if ($this->_logDebugEnabled) {
             $this->_logger->debug('Running BeforeDefinition: ' . $beanName);
         }
-        foreach ($this->_lifecyclers[BeanLifecycle::BeforeDefinition] as $lifecycleListener) {
-            $beanDefinition = $lifecycleListener->beforeDefinition(
-                $this, $name, $beanDefinition
-            );
-        }
+        $beanDefinition = $this->_lifecycleManager->beforeDefinition($this, $name, $beanDefinition);
+
         if ($beanDefinition === null) {
             throw new BeanFactoryException('Unknown bean: ' . $name);
         }
         if ($this->_logDebugEnabled) {
             $this->_logger->debug('Running AfterDefinition: ' . $beanName);
         }
-        foreach ($this->_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
-            $beanDefinition = $lifecycleListener->afterDefinition($this, $beanDefinition);
-        }
+        $beanDefinition = $this->_lifecycleManager->afterDefinition($this, $beanDefinition);
         $this->setBeanDefinition($name, $beanDefinition);
         return $beanDefinition;
     }
@@ -265,27 +253,6 @@ class ContainerImpl implements IContainer
         //}
         if ($this->_logDebugEnabled) {
             $this->_logger->debug('New: ' . $beanName);
-        }
-    }
-
-    /**
-     * This will assembly a bean (inject dependencies, loading other needed
-     * beans in the way).
-     *
-     * @param object         $bean Where to call 'setXXX' methods.
-     * @param BeanDefinition $def  Bean definition, used to get needed
-     * properties.
-     *
-     * @throws BeanFactoryException
-     * @return void
-     */
-    private function _assemble($bean, BeanDefinition $def)
-    {
-        foreach ($this->_lifecyclers[BeanLifecycle::BeforeAssemble] as $lifecycleListener) {
-            $bean = $lifecycleListener->beforeAssemble($this, $bean, $def);
-        }
-        foreach ($this->_lifecyclers[BeanLifecycle::AfterAssemble] as $lifecycleListener) {
-            $bean = $lifecycleListener->afterAssemble($this, $bean, $def);
         }
     }
 
@@ -350,9 +317,8 @@ class ContainerImpl implements IContainer
      */
     private function _createBean(BeanDefinition $beanDefinition)
     {
-        foreach ($this->_lifecyclers[BeanLifecycle::BeforeCreate] as $lifecycleListener) {
-            $lifecycleListener->beforeCreate($this, $beanDefinition);
-        }
+        $this->_lifecycleManager->beforeCreate($this, $beanDefinition);
+
         $beanClass = $beanDefinition->getClass();
         $args = array();
         foreach ($beanDefinition->getArguments() as $argument) {
@@ -420,23 +386,18 @@ class ContainerImpl implements IContainer
                 }
             }
         }
-        foreach ($this->_lifecyclers[BeanLifecycle::AfterCreate] as $lifecycleListener) {
-            $bean = $lifecycleListener->afterCreate($this, $bean, $beanDefinition);
+        $this->_lifecycleManager->afterCreate($this, $bean, $beanDefinition);
+        $this->_lifecycleManager->beforeAssemble($this, $bean, $beanDefinition);
+
+        $initMethod = $beanDefinition->getInitMethod();
+        if ($initMethod) {
+            $bean->$initMethod();
         }
-        //try
-        //{
-            $this->_assemble($bean, $beanDefinition);
-            $initMethod = $beanDefinition->getInitMethod();
-            if ($initMethod) {
-                $bean->$initMethod();
-            }
-            $destroyMethod = $beanDefinition->getDestroyMethod();
-            if ($destroyMethod) {
-                $this->registerShutdownMethod($bean, $destroyMethod);
-            }
-        //} catch(\ReflectionException $exception) {
-        //    throw new BeanFactoryException('DI Error', 0, $exception);
-        //}
+        $destroyMethod = $beanDefinition->getDestroyMethod();
+        if ($destroyMethod) {
+            $this->registerShutdownMethod($bean, $destroyMethod);
+        }
+        $this->_lifecycleManager->afterAssemble($this, $bean, $beanDefinition);
         return $bean;
     }
 
@@ -542,87 +503,6 @@ class ContainerImpl implements IContainer
     }
 
     /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addBeforeConfigListener()
-     */
-    public function addBeforeConfigListener(IBeforeConfigListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::BeforeConfig][] = $listener;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addAfterConfigListener()
-     */
-    public function addAfterConfigListener(IAfterConfigListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::AfterConfig][] = $listener;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addBeforeDefinitionListener()
-     */
-    public function addBeforeDefinitionListener(IBeforeDefinitionListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::BeforeDefinition][] = $listener;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addAfterDefinitionListener()
-     */
-    public function addAfterDefinitionListener(IAfterDefinitionListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::AfterDefinition][] = $listener;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addBeforeCreateListener()
-     */
-    public function addBeforeCreateListener(IBeforeCreateListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::BeforeCreate][] = $listener;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addAfterCreateListener()
-     */
-    public function addAfterCreateListener(IAfterCreateListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::AfterCreate][] = $listener;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addBeforeAssembleListener()
-     */
-    public function addBeforeAssembleListener(IBeforeAssembleListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::BeforeAssemble][] = $listener;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addAfterAssembleListener()
-     */
-    public function addAfterAssembleListener(IAfterAssembleListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::AfterAssemble][] = $listener;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Container.IContainer::addBeforeDestructListener()
-     */
-    public function addBeforeDestructListener(IBeforeDestructListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::BeforeDestruction][] = $listener;
-    }
-
-    /**
      * Constructor.
      *
      * @param array $options options.
@@ -632,6 +512,7 @@ class ContainerImpl implements IContainer
     protected function __construct(array $options)
     {
         $this->_logger = \Logger::getLogger('Ding.Container');
+        $this->_lifecycleManager = BeanLifecycleManager::getInstance();
         $this->_dispatcherTemplate = new DispatcherImpl;
         $this->_logDebugEnabled = $this->_logger->isDebugEnabled();
         $soullessArray = array();
@@ -644,74 +525,61 @@ class ContainerImpl implements IContainer
         $this->_beanCache = CacheLocator::getBeansCacheInstance();
         $this->_shutdowners = $soullessArray;
 
-        $this->_lifecyclers = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::BeforeConfig] = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::AfterConfig] = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::BeforeDefinition] = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::AfterDefinition] = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::BeforeCreate] = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::AfterCreate] = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::BeforeAssemble] = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::AfterAssemble] = $soullessArray;
-
         if (isset(self::$_options['bdef']['annotation'])) {
             $anDriver = BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation']);
-            $this->addBeforeConfigListener($anDriver);
-            $this->addAfterConfigListener($anDriver);
-            $this->addBeforeDefinitionListener($anDriver);
-            $this->addAfterConfigListener(MVCAnnotationDriver::getInstance($soullessArray));
-            $this->addAfterDefinitionListener(AnnotationResourceDriver::getInstance($soullessArray));
-            $this->addAfterCreateListener(AnnotationResourceDriver::getInstance($soullessArray));
-            $this->addAfterConfigListener(AnnotationAspectDriver::getInstance($soullessArray));
-            $this->addAfterDefinitionListener(AnnotationRequiredDriver::getInstance($soullessArray));
-            $this->addAfterDefinitionListener(AnnotationInitDestroyMethodDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addBeforeConfigListener($anDriver);
+            $this->_lifecycleManager->addAfterConfigListener($anDriver);
+            $this->_lifecycleManager->addBeforeDefinitionListener($anDriver);
+            $this->_lifecycleManager->addAfterConfigListener(MVCAnnotationDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterDefinitionListener(AnnotationResourceDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterCreateListener(AnnotationResourceDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(AnnotationAspectDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterDefinitionListener(AnnotationRequiredDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterDefinitionListener(AnnotationInitDestroyMethodDriver::getInstance($soullessArray));
         }
 
         if (isset(self::$_options['drivers']['errorhandler'])) {
-            $this->addAfterConfigListener(ErrorHandlerDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(ErrorHandlerDriver::getInstance($soullessArray));
         }
 
         if (isset(self::$_options['drivers']['signalhandler'])) {
-            $this->addAfterConfigListener(SignalHandlerDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(SignalHandlerDriver::getInstance($soullessArray));
         }
 
         if (isset(self::$_options['drivers']['shutdown'])) {
-            $this->addAfterConfigListener(ShutdownDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(ShutdownDriver::getInstance($soullessArray));
         }
 
         if (isset(self::$_options['drivers']['timezone'])) {
-            $this->addAfterConfigListener(TimezoneDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(TimezoneDriver::getInstance($soullessArray));
         }
 
         if (isset(self::$_options['properties'])) {
-            $this->addAfterDefinitionListener(FiltersDriver::getInstance(self::$_options['properties']));
+            $this->_lifecycleManager->addAfterDefinitionListener(FiltersDriver::getInstance(self::$_options['properties']));
         }
-        $this->addBeforeCreateListener(DependsOnDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addBeforeCreateListener(DependsOnDriver::getInstance($soullessArray));
 
         if (isset(self::$_options['bdef']['xml'])) {
             $xmlDriver = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);
-            $this->addBeforeDefinitionListener($xmlDriver);
+            $this->_lifecycleManager->addBeforeDefinitionListener($xmlDriver);
             $this->_aspectManager->registerAspectProvider($xmlDriver);
             $this->_aspectManager->registerPointcutProvider($xmlDriver);
         }
         if (isset(self::$_options['bdef']['yaml'])) {
             $yamlDriver = BeanYamlDriver::getInstance(self::$_options['bdef']['yaml']);
-            $this->addBeforeDefinitionListener($yamlDriver);
+            $this->_lifecycleManager->addBeforeDefinitionListener($yamlDriver);
             $this->_aspectManager->registerAspectProvider($yamlDriver);
             $this->_aspectManager->registerPointcutProvider($yamlDriver);
         }
 
-        $this->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
-        $this->addBeforeDefinitionListener(MethodInjectionDriver::getInstance($soullessArray));
-        $this->addAfterCreateListener(ContainerAwareDriver::getInstance($soullessArray));
-        $this->addAfterDefinitionListener(BeanNameAwareDriver::getInstance($soullessArray));
-        $this->addAfterDefinitionListener(AspectManagerAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addBeforeDefinitionListener(MethodInjectionDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterCreateListener(ContainerAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterDefinitionListener(BeanNameAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterDefinitionListener(AspectManagerAwareDriver::getInstance($soullessArray));
 
-        foreach ($this->_lifecyclers[BeanLifecycle::BeforeConfig] as $lifecycleListener) {
-            $lifecycleListener->beforeConfig($this);
-        }
-        foreach ($this->_lifecyclers[BeanLifecycle::AfterConfig] as $lifecycleListener) {
-            $lifecycleListener->afterConfig($this);
-        }
+        $this->_lifecycleManager->addAfterAssembleListener(LifecycleDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->beforeConfig($this);
+        $this->_lifecycleManager->afterConfig($this);
     }
 }

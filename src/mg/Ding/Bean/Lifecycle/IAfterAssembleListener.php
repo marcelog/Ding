@@ -46,5 +46,5 @@ use Ding\Bean\Factory\IBeanFactory;
  */
 interface IAfterAssembleListener extends ILifecycleListener
 {
-    public function afterAssemble(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition);
+    public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition);
 }

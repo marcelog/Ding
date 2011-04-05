@@ -89,7 +89,7 @@ class FiltersDriver implements IAfterDefinitionListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
      */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
+    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
     {
         foreach ($bean->getProperties() as $property) {
             $this->_applyFilter($property);

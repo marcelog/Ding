@@ -61,7 +61,7 @@ class ContainerAwareDriver implements IAfterCreateListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterCreateListener::afterCreate()
      */
-    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
     {
         $class = $beanDefinition->getClass();
         if ($class === false || empty($class)) {

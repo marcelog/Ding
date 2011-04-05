@@ -122,7 +122,7 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
      */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
         if ($bean === null) {
             return $bean;

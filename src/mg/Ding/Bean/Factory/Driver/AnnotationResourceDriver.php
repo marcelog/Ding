@@ -59,7 +59,7 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
      */
     private static $_instance = false;
 
-    public function afterCreate(IBeanFactory $factory, &$bean, BeanDefinition $beanDefinition)
+    public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
     {
         $rClass = ReflectionFactory::getClass($beanDefinition->getClass());
         foreach ($beanDefinition->getAutowiredProperties() as $property) {
@@ -81,7 +81,7 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
      */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition &$bean)
+    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
     {
         $beanClass = $bean->getClass();
         $annotations = ReflectionFactory::getClassAnnotations($beanClass);

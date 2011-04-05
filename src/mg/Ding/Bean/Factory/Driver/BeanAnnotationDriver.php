@@ -274,7 +274,7 @@ class BeanAnnotationDriver
      *
      * @return BeanDefinition
      */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &$bean = null)
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
         if ($bean != null) {
             return $bean;
