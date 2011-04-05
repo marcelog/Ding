@@ -596,20 +596,33 @@ Drivers are normal "lifecyclers". These can be any object that implements
 ILifecycleListener and listens on one or more of the container lifecycle events:
 
 <ul>
-  <li>BeforeConfig</li>
-  <li>AfterConfig</li> 
-  <li>BeforeDefinition</li>
-  <li>AfterDefinition</li>
-  <li>BeforeCreate</li>
-  <li>AfterCreate</li>
-  <li>BeforeAssembly</li>
-  <li>AfterAssembly</li>
+  <li><u>BeforeConfig</u></li>
+  <li><u>AfterConfig</u></li> 
+  <li><u>BeforeDefinition:</u></li>
+  <li><u>AfterDefinition</u></li>
+  <li><u>BeforeCreate</u></li>
+  <li><u>AfterCreate</u></li>
+  <li><u>BeforeAssemble</u></li>
+  <li><u>AfterAssemble</u></li>
 </ul>
 These classes usually reside in the namespace Ding\Bean\Factory\Driver.
 
 Each lifecycle event triggers a chain of the lifecyclers for that particular
-event, so the order might be important. The chain cant be interrupted.
+event, so the order is important. 
 
+Just like an aware interface, whenever ding instantiates a bean of a class that implements any of: 
+<ul>
+  <li>Ding\Bean\Lifecycle\IBeforeConfigListener</li>
+  <li>Ding\Bean\Lifecycle\IAfterConfigListener</li> 
+  <li>Ding\Bean\Lifecycle\IBeforeDefinitionListener</li>
+  <li>Ding\Bean\Lifecycle\IAfterDefinitionListener</li>
+  <li>Ding\Bean\Lifecycle\IBeforeCreateListener</li>
+  <li>Ding\Bean\Lifecycle\IAfterCreateListener</li>
+  <li>Ding\Bean\Lifecycle\IBeforeAssembleListener</li>
+  <li>Ding\Bean\Lifecycle\IAfterAssembleListener</li>
+</ul>
+
+the bean will be registered in the given lifecycle points. See docs/examples/lifecycle.
 
 <H3><u>Filters</u></H3>
 

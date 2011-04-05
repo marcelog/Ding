@@ -28,7 +28,7 @@
 <body>
 <H1><div class="top">
 <div class="left">PMD 0.2.8RC1 Report</div>
-<div class="right">2011-04-03 - </div>
+<div class="right">2011-04-05 - </div>
 </div></H1>
 <hr>
 <h2>Summary</h2>
@@ -43,12 +43,12 @@
 <th>Priority 5</th>
 </tr>
 <tr>
-<td>36</td>
-<td>109</td>
+<td>38</td>
+<td>108</td>
 <td><div class="p1">0</div></td>
 <td><div class="p2">0</div></td>
 <td><div class="p3">98</div></td>
-<td><div class="p4">11</div></td>
+<td><div class="p4">10</div></td>
 <td><div class="p5">0</div></td>
 </tr>
 </table>
@@ -455,6 +455,22 @@
 <tr>
 <td style="padding: 3px" align="right"><div class="p3">3</div></td>
 <td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">58</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$factory'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">93</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$options'.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
 <td style="padding: 3px" align="right">94</td>
 <td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
       Avoid unused parameters such as '$options'.
@@ -593,7 +609,7 @@
 <td style="padding: 3px" align="left"></td>
 <td style="padding: 3px" align="right">88</td>
 <td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
-      Constant BeforeDestruction should be defined in uppercase
+      Constant BeforeConfig should be defined in uppercase
     </a></td>
 </tr>
 <tr>
@@ -601,15 +617,23 @@
 <td style="padding: 3px" align="left"></td>
 <td style="padding: 3px" align="right">94</td>
 <td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
-      Constant BeforeConfig should be defined in uppercase
+      Constant AfterConfig should be defined in uppercase
     </a></td>
 </tr>
 <tr>
-<td style="padding: 3px" align="right"><div class="p4">4</div></td>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
 <td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">100</td>
-<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/naming.html#constantnamingconventions">
-      Constant AfterConfig should be defined in uppercase
+<td style="padding: 3px" align="right">54</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#toomanymethods">
+      This class has too many methods, consider refactoring it.
+    </a></td>
+</tr>
+<tr>
+<td style="padding: 3px" align="right"><div class="p3">3</div></td>
+<td style="padding: 3px" align="left"></td>
+<td style="padding: 3px" align="right">296</td>
+<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/unusedcode.html#unusedformalparameter">
+      Avoid unused parameters such as '$properties'.
     </a></td>
 </tr>
 <tr>
@@ -671,65 +695,33 @@
 <tr>
 <td style="padding: 3px" align="right"><div class="p3">3</div></td>
 <td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">90</td>
-<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#toomanymethods">
-      This class has too many methods, consider refactoring it.
-    </a></td>
-</tr>
-<tr>
-<td style="padding: 3px" align="right"><div class="p3">3</div></td>
-<td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">90</td>
+<td style="padding: 3px" align="right">83</td>
 <td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity">
-      This class ContainerImpl has an overall complexity of 83 which is very high. The configured complexity threshold is 50.
+      This class ContainerImpl has an overall complexity of 65 which is very high. The configured complexity threshold is 50.
     </a></td>
 </tr>
 <tr>
 <td style="padding: 3px" align="right"><div class="p3">3</div></td>
 <td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">185</td>
+<td style="padding: 3px" align="right">318</td>
 <td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
-      The method getBeanDefinition() has a Cyclomatic Complexity of 10.
+      The method _createBean() has a Cyclomatic Complexity of 17.
     </a></td>
 </tr>
 <tr>
 <td style="padding: 3px" align="right"><div class="p3">3</div></td>
 <td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">185</td>
+<td style="padding: 3px" align="right">318</td>
 <td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#npathcomplexity">
-      The method getBeanDefinition() has an NPath complexity of 288.
+      The method _createBean() has an NPath complexity of 2688.
     </a></td>
 </tr>
 <tr>
 <td style="padding: 3px" align="right"><div class="p3">3</div></td>
 <td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">351</td>
-<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
-      The method _createBean() has a Cyclomatic Complexity of 19.
-    </a></td>
-</tr>
-<tr>
-<td style="padding: 3px" align="right"><div class="p3">3</div></td>
-<td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">351</td>
+<td style="padding: 3px" align="right">512</td>
 <td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#npathcomplexity">
-      The method _createBean() has an NPath complexity of 10752.
-    </a></td>
-</tr>
-<tr>
-<td style="padding: 3px" align="right"><div class="p3">3</div></td>
-<td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">632</td>
-<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity">
-      The method __construct() has a Cyclomatic Complexity of 11.
-    </a></td>
-</tr>
-<tr>
-<td style="padding: 3px" align="right"><div class="p3">3</div></td>
-<td style="padding: 3px" align="left"></td>
-<td style="padding: 3px" align="right">632</td>
-<td style="padding: 3px" align="left" width="100%"><a href="http://phpmd.org/rules/codesize.html#npathcomplexity">
-      The method __construct() has an NPath complexity of 1024.
+      The method __construct() has an NPath complexity of 256.
     </a></td>
 </tr>
 <tr>
@@ -933,6 +925,6 @@
     </a></td>
 </tr>
 </table>
-<br><p>Generated by <a href="http://pmd.sourceforge.net">PMD <b>0.2.8RC1</b></a> on 2011-04-03 - .</p>
+<br><p>Generated by <a href="http://pmd.sourceforge.net">PMD <b>0.2.8RC1</b></a> on 2011-04-05 - .</p>
 </body>
 </html>

@@ -176,7 +176,7 @@
 <span class="lineNum" id="container41"><a name="41"></a><a href="#41" id="line41">      41</a> </span>                :  * @license    http://marcelog.github.com/ Apache License 2.0                   
 <span class="lineNum" id="container42"><a name="42"></a><a href="#42" id="line42">      42</a> </span>                :  * @link       http://marcelog.github.com/                                      
 <span class="lineNum" id="container43"><a name="43"></a><a href="#43" id="line43">      43</a> </span>                :  */                                                                             
-<span class="lineNum" id="container44"><a name="44"></a><a href="#44" id="line44">      44</a> </span>                : abstract class BeanLifecycle                                                    
+<span class="lineNum" id="container44"><a name="44"></a><a href="#44" id="line44">      44</a> </span>                : class BeanLifecycle                                                             
 <span class="lineNum" id="container45"><a name="45"></a><a href="#45" id="line45">      45</a> </span><span class="lineCov">            181 : {                                                                               </span>
 <span class="lineNum" id="container46"><a name="46"></a><a href="#46" id="line46">      46</a> </span>                :     /**                                                                         
 <span class="lineNum" id="container47"><a name="47"></a><a href="#47" id="line47">      47</a> </span>                :      * The bean is in the process of being defined. Typically by a final        
@@ -217,23 +217,17 @@
 <span class="lineNum" id="container82"><a name="82"></a><a href="#82" id="line82">      82</a> </span>                :     const AfterAssemble = 5;                                                    
 <span class="lineNum" id="container83"><a name="83"></a><a href="#83" id="line83">      83</a> </span>                :                                                                                 
 <span class="lineNum" id="container84"><a name="84"></a><a href="#84" id="line84">      84</a> </span>                :     /**                                                                         
-<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span>                :      * When the container is shutting down                                      
+<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span>                :      * When the container is about to configure itself and its subsytems.       
 <span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span>                :      * @var integer                                                             
 <span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span>                :      */                                                                         
-<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span>                :     const BeforeDestruction = 6;                                                
+<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span>                :     const BeforeConfig = 7;                                                     
 <span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span>                :                                                                                 
 <span class="lineNum" id="container90"><a name="90"></a><a href="#90" id="line90">      90</a> </span>                :     /**                                                                         
-<span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span>                :      * When the container is about to configure itself and its subsytems.       
+<span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span>                :      * Right after configuring everything, ready to be used by the user.        
 <span class="lineNum" id="container92"><a name="92"></a><a href="#92" id="line92">      92</a> </span>                :      * @var integer                                                             
 <span class="lineNum" id="container93"><a name="93"></a><a href="#93" id="line93">      93</a> </span>                :      */                                                                         
-<span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span>                :     const BeforeConfig = 7;                                                     
-<span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span>                :                                                                                 
-<span class="lineNum" id="container96"><a name="96"></a><a href="#96" id="line96">      96</a> </span>                :     /**                                                                         
-<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span>                :      * Right after configuring everything, ready to be used by the user.        
-<span class="lineNum" id="container98"><a name="98"></a><a href="#98" id="line98">      98</a> </span>                :      * @var integer                                                             
-<span class="lineNum" id="container99"><a name="99"></a><a href="#99" id="line99">      99</a> </span>                :      */                                                                         
-<span class="lineNum" id="container100"><a name="100"></a><a href="#100" id="line100">     100</a> </span>                :     const AfterConfig = 8;                                                      
-<span class="lineNum" id="container101"><a name="101"></a><a href="#101" id="line101">     101</a> </span>                : }                                                                               
+<span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span>                :     const AfterConfig = 8;                                                      
+<span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span>                : }                                                                               
 
 </pre>
         </td>
@@ -242,7 +236,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sun Apr 3 19:51:22 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Tue Apr 5 19:59:12 ART 2011.</td></tr>
     </table>
 
     <br />

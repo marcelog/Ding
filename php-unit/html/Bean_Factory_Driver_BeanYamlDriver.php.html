@@ -213,7 +213,7 @@
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#306">_loadBean($beanName, BeanDefinition &amp;$bean = null)</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#306">_loadBean($beanName, BeanDefinition $bean = null)</a></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -259,7 +259,7 @@
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#417">beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &amp;$bean = null)</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#417">beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)</a></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -714,7 +714,7 @@
 <span class="lineNum" id="container303"><a name="303"></a><a href="#303" id="line303">     303</a> </span>                :      * @throws BeanFactoryException                                                                           
 <span class="lineNum" id="container304"><a name="304"></a><a href="#304" id="line304">     304</a> </span>                :      * @return BeanDefinition                                                                                 
 <span class="lineNum" id="container305"><a name="305"></a><a href="#305" id="line305">     305</a> </span>                :      */                                                                                                       
-<span class="lineNum" id="container306"><a name="306"></a><a href="#306" id="line306">     306</a> </span>                :     private function _loadBean($beanName, BeanDefinition &amp;$bean = null)                                       
+<span class="lineNum" id="container306"><a name="306"></a><a href="#306" id="line306">     306</a> </span>                :     private function _loadBean($beanName, BeanDefinition $bean = null)                                        
 <span class="lineNum" id="container307"><a name="307"></a><a href="#307" id="line307">     307</a> </span>                :     {                                                                                                         
 <span class="lineNum" id="container308"><a name="308"></a><a href="#308" id="line308">     308</a> </span><span class="lineCov">             21 :         if (!$this-&gt;_yamlFiles) {                                                                             </span>
 <span class="lineNum" id="container309"><a name="309"></a><a href="#309" id="line309">     309</a> </span><span class="lineNoCov">              0 :             $this-&gt;_load();                                                                                   </span>
@@ -825,7 +825,7 @@
 <span class="lineNum" id="container414"><a name="414"></a><a href="#414" id="line414">     414</a> </span>                :      * @throws BeanFactoryException                                                                           
 <span class="lineNum" id="container415"><a name="415"></a><a href="#415" id="line415">     415</a> </span>                :      * @return BeanDefinition                                                                                 
 <span class="lineNum" id="container416"><a name="416"></a><a href="#416" id="line416">     416</a> </span>                :      */                                                                                                       
-<span class="lineNum" id="container417"><a name="417"></a><a href="#417" id="line417">     417</a> </span>                :     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition &amp;$bean = null)          
+<span class="lineNum" id="container417"><a name="417"></a><a href="#417" id="line417">     417</a> </span>                :     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)           
 <span class="lineNum" id="container418"><a name="418"></a><a href="#418" id="line418">     418</a> </span>                :     {                                                                                                         
 <span class="lineNum" id="container419"><a name="419"></a><a href="#419" id="line419">     419</a> </span><span class="lineCov">             21 :         return $this-&gt;_loadBean($beanName, $bean);                                                            </span>
 <span class="lineNum" id="container420"><a name="420"></a><a href="#420" id="line420">     420</a> </span><span class="lineDeadCode">                :     }                                                                                                         </span>
@@ -916,7 +916,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sun Apr 3 19:51:22 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Tue Apr 5 19:59:12 ART 2011.</td></tr>
     </table>
 
     <br />
