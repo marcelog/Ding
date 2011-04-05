@@ -80,9 +80,6 @@ class LifecycleDriver implements IAfterAssembleListener
         if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IAfterAssembleListener')) {
             $this->_lifecycleManager->addAfterAssembleListener($bean);
         }
-        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IBeforeDestructListener')) {
-            $this->_lifecycleManager->addBeforeDestructListener($bean);
-        }
         return $bean;
     }
 

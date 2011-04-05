@@ -36,7 +36,6 @@ use Ding\Bean\Lifecycle\IBeforeCreateListener;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\Lifecycle\IBeforeAssembleListener;
 use Ding\Bean\Lifecycle\IAfterAssembleListener;
-use Ding\Bean\Lifecycle\IBeforeDestructListener;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\BeanDefinition;
 
@@ -163,18 +162,6 @@ class BeanLifecycleManager
     }
 
     /**
-     * Adds a lifecycler to the BeforeDestruction point.
-     *
-     * @param IBeforeDestructListener $listener Listener to add
-     *
-     * @return void
-     */
-    public function addBeforeDestructListener(IBeforeDestructListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::BeforeDestruction][] = $listener;
-    }
-
-    /**
      * Runs the BeforeDefinition point of the lifecycle.
      *
      * @param IBeanFactory   $factory  Container instance.
@@ -270,21 +257,6 @@ class BeanLifecycleManager
     {
         foreach ($this->_lifecyclers[BeanLifecycle::AfterAssemble] as $lifecycleListener) {
             $lifecycleListener->afterAssemble($factory, $bean, $beanDefinition);
-        }
-    }
-
-    /**
-     * Runs the BeforeDestruction point of the lifecycle.
-     *
-     * @param object         $bean           The bean being destroyed.
-     * @param BeanDefinition $beanDefinition Actual definition.
-     *
-     * @return void
-     */
-    public function destruct($bean, BeanDefinition $beanDefinition)
-    {
-        foreach ($this->_lifecyclers[BeanLifecycle::BeforeDestruction] as $lifecycleListener) {
-            $lifecycleListener->destruct($bean, $beanDefinition);
         }
     }
 

@@ -29,16 +29,6 @@
 namespace Ding\Container;
 
 use Ding\Bean\Factory\IBeanFactory;
-use Ding\Bean\Lifecycle\IBeforeConfigListener;
-use Ding\Bean\Lifecycle\IAfterConfigListener;
-use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
-use Ding\Bean\Lifecycle\IAfterDefinitionListener;
-use Ding\Bean\Lifecycle\IBeforeCreateListener;
-use Ding\Bean\Lifecycle\IAfterCreateListener;
-use Ding\Bean\Lifecycle\IBeforeAssembleListener;
-use Ding\Bean\Lifecycle\IAfterAssembleListener;
-use Ding\Bean\Lifecycle\IBeforeDestructListener;
-use Ding\Bean\Lifecycle\BeanLifecycle;
 
 /**
  * Interface for a container.

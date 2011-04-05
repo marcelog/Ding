@@ -82,12 +82,6 @@ class BeanLifecycle
     const AfterAssemble = 5;
 
     /**
-     * When the container is shutting down
-     * @var integer
-     */
-    const BeforeDestruction = 6;
-
-    /**
      * When the container is about to configure itself and its subsytems.
      * @var integer
      */

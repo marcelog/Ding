@@ -51,7 +51,6 @@ use Ding\Bean\Lifecycle\IBeforeCreateListener;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\Lifecycle\IBeforeAssembleListener;
 use Ding\Bean\Lifecycle\IAfterAssembleListener;
-use Ding\Bean\Lifecycle\IBeforeDestructListener;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\BeanDefinition;
 
@@ -69,8 +68,7 @@ class ComponentA
 class MyLifecycler implements
     IBeforeDefinitionListener, IAfterDefinitionListener,
     IBeforeCreateListener, IAfterCreateListener,
-    IBeforeAssembleListener, IAfterAssembleListener,
-    IBeforeDestructListener
+    IBeforeAssembleListener, IAfterAssembleListener
 {
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
@@ -102,11 +100,6 @@ class MyLifecycler implements
     public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
     {
         echo "afterAssemble called\n";
-    }
-
-    public function destruct($bean, BeanDefinition $beanDefinition)
-    {
-        echo "destruct called\n";
     }
 
     public function __construct()
