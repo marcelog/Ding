@@ -47,6 +47,11 @@
       dir="${project.basedir}/test"
       passthru="true"
     />
+    <xslt
+      file="${phpunit.output.xml.file}"
+      tofile="${junit.output.xml.file}"
+      style="${junit.style}"
+    />
   </target>
 
   <target name="phpmd">
