@@ -432,7 +432,7 @@ class BeanYamlDriver
                     $this->_logger->debug('Found ' . $name . ' in ' . $yamlFilename);
                 }
                 $pointcutDef = clone $this->_templatePointcutDef;
-                $pointcutDef->setName($pointcutName);
+                $pointcutDef->setName($yaml['pointcuts'][$name]);
                 $pointcutDef->setExpression($yaml['pointcuts'][$name]['expression']);
                 $pointcutDef->setMethod($yaml['pointcuts'][$name]['method']);
                 return $pointcutDef;
