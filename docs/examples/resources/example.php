@@ -27,7 +27,6 @@
  *
  */
 
-use Ding\Resource\IResourceLoader;
 ini_set(
     'include_path',
     implode(
@@ -43,6 +42,9 @@ require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
 Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Resource\IResourceLoaderAware;
+use Ding\Resource\Impl\URLResource;
+use Ding\Resource\Impl\IncludePathResource;
+use Ding\Resource\IResourceLoader;
 
 error_reporting(E_ALL);
 ini_set('display_errorrs', 1);
@@ -81,7 +83,9 @@ class SomeClass implements IResourceLoaderAware
 
     public function __construct()
     {
-
+        // You can use resource right from your own code.
+        $resource = new URLResource('http://www.google.com');
+        var_dump(fread($resource->getStream(), 1000));
     }
 }
 // Here you configure the container, its subcomponents, drivers, etc.
@@ -100,5 +104,6 @@ $bean = $container->getBean('aBean');
 var_dump($bean->loadSomething('/bin/login'));
 var_dump($bean->loadSomething('includepath:///Ding/Autoloader/Ding_Autoloader.php'));
 var_dump($bean->loadSomething('http://www.google.com'));
+echo "Now type something, since we've opened the resource php://stdin\n";
 var_dump($bean->loadSomething('php://stdin'));
 var_dump($bean->loadSomething('zip://' . __DIR__ . '/test.zip#example.php'));
