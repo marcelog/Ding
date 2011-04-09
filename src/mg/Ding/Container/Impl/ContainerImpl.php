@@ -29,6 +29,9 @@
  */
 namespace Ding\Container\Impl;
 
+use Ding\Resource\Impl\IncludePathResource;
+use Ding\Resource\Impl\FilesystemResource;
+use Ding\Resource\Impl\URLResource;
 use Ding\Cache\Locator\CacheLocator;
 use Ding\Container\IContainer;
 use Ding\Aspect\Proxy;
@@ -60,6 +63,7 @@ use Ding\Bean\Factory\Driver\AnnotationRequiredDriver;
 use Ding\Bean\Factory\Driver\AnnotationResourceDriver;
 use Ding\Bean\Factory\Driver\AnnotationInitDestroyMethodDriver;
 use Ding\Bean\Factory\Driver\ContainerAwareDriver;
+use Ding\Bean\Factory\Driver\ResourceLoaderAwareDriver;
 use Ding\Bean\Factory\Driver\BeanNameAwareDriver;
 use Ding\Bean\Factory\Driver\AspectManagerAwareDriver;
 use Ding\Bean\Factory\Driver\LifecycleDriver;
@@ -156,6 +160,12 @@ class ContainerImpl implements IContainer
      * @var BeanLifecycleManager
      */
     private $_lifecycleManager = false;
+
+    /**
+     * Resources multiton.
+     * @var IResource[]
+     */
+    private $_resources = false;
 
     /**
      * Prevent serialization.
@@ -503,6 +513,33 @@ class ContainerImpl implements IContainer
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResourceLoader::getResource()
+     */
+    public function getResource($location, $context = false)
+    {
+        // Missing scheme?
+        $scheme = strpos($location, '://');
+        if ($scheme === false) {
+            $location = 'file://' . $location;
+        }
+        // Already served?
+        if (isset($this->_resources[$location])) {
+            return $this->_resources[$location];
+        }
+        // See what kind of resource to return.
+        if (strpos($location, 'file://') === 0) {
+            $resource = new FilesystemResource($location, $context);
+        } else if (strpos($location, 'includepath://') === 0) {
+            $resource = new IncludePathResource($location, $context);
+        } else {
+            $resource = new URLResource($location, $context);
+        }
+        $this->_resources[$location] = $resource;
+        return $resource;
+    }
+
+    /**
      * Constructor.
      *
      * @param array $options options.
@@ -524,6 +561,7 @@ class ContainerImpl implements IContainer
         $this->_beans = $soullessArray;
         $this->_beanCache = CacheLocator::getBeansCacheInstance();
         $this->_shutdowners = $soullessArray;
+        $this->_resources = $soullessArray;
 
         if (isset(self::$_options['bdef']['annotation'])) {
             $anDriver = BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation']);
@@ -575,6 +613,7 @@ class ContainerImpl implements IContainer
         $this->_lifecycleManager->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addBeforeDefinitionListener(MethodInjectionDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterCreateListener(ContainerAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterCreateListener(ResourceLoaderAwareDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterDefinitionListener(BeanNameAwareDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterDefinitionListener(AspectManagerAwareDriver::getInstance($soullessArray));
 
