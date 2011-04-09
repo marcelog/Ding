@@ -121,6 +121,10 @@ implements IAspectManagerAware interface, it will inject the current instance
 of the aspect manager (giving the ability to inject pointcuts, aspects, and
 general aop management).
 
+IResourceLoaderAware: Whenever ding is going to instantiate a bean whose class
+implements IResourceLoaderAware interface, it will inject the instance of the
+resource loader in use, which is usually the container itself.
+
 Extension points
 ================
 You can easily hook in the bean lifecycle by just implementing one of:
