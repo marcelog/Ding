@@ -103,6 +103,7 @@ Ding offers the following features:<br/>
   <li>Lightweight, easy of use, and useful.</li>
   <li>Loosed-couple, just use what you need and nothing more.</li>
   <li>Some JSR-250 and JSR-330 annotations.</li>
+  <li>Resources through php streams.</li>
   <li>Setter Injection (For arrays, scalar values, php code, and references to other beans).</li>
   <li>Constructor Injection (For the same data types as above).</li>
   <li>Method Injection (So you can have dependencies in singletons that must be created on demand).</li>
@@ -114,7 +115,7 @@ Ding offers the following features:<br/>
   <li>Annotations used by helpers and the container (i.e: @InitMethod, @DestroyMethod, @Controller, @ErrorHandler, etc).</li>
   <li>Can cache proxies and bean definitions with Zend_Cache, Memcached, Filesystem, and APC.</li>
   <li>Integration with PAMI and PAGI. So you can make asterisk (telephony) applications via agi and ami.</li>
-  <li>Aware interfaces: <u>IContainerAware, IBeanNameAware, IAspectManagerAware</u></li>
+  <li>Aware interfaces: <u>IContainerAware, IResourceLoaderAware, IBeanNameAware, IAspectManagerAware</u></li>
   <li>Extensions in the lifecycle: BeforeDefinition, AfterDefinition, BeforeCreate, AfterCreate, BeforeAssemble, AfterAssemble</li>
   <li>Helpers: SignalHandler, ErrorHandler, ShutdownHandler, Timer, Syslog, TCPServer, TCPClient, etc.</li>
 </ul>

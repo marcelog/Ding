@@ -578,6 +578,7 @@ metadata associated with it (and its subparts, like properties, annotations, etc
   <li><u>Ding\Container\IContainerAware</u>: Whenever ding is going to instantiate a bean whose class implements IContainerAware interface, it will inject the container instace to this bean</li>
   <li><u>Ding\Bean\IBeanNameAware</u>: Whenever ding is going to instantiate a bean whose class implements IBeanNameAware interface, it will inject the name of the bean</li>
   <li><u>Ding\Bean\IAspectManagerAware</u>: Whenever ding is going to instantiate a bean whose class implements IAspectManagerAware interface, it will inject current instance of the aspect manager (giving the ability to inject pointcuts, aspects, and general aop management).</li>
+  <li><u>Ding\Bean\IResourceLoaderAware</u>: Whenever ding is going to instantiate a bean whose class implements IResourceLoaderAware interface, it will inject the instance of the resource loader in use, which is usually the container itself.</li>
 </ul>
 
 <H3><u>Extension points</u></H3>
