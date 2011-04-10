@@ -58,26 +58,8 @@ use Ding\Resource\IResource;
  * limitations under the License.
  *
  */
-class IncludePathResource implements IResource
+class IncludePathResource extends FilesystemResource implements IResource
 {
-    /**
-     * Holds true filename.
-     * @var string
-     */
-    private $_filename;
-
-    /**
-     * Holds file resource.
-     * @var stream
-     */
-    private $_fd;
-
-    /**
-     * Holds context, created with stream_context_create()
-     * @var resource
-     */
-    private $_context;
-
     /**
      * This scheme identifies this resource.
      * @var string
@@ -91,104 +73,27 @@ class IncludePathResource implements IResource
     const SCHEMELEN = 14;
 
     /**
-     * (non-PHPdoc)
-     * @see Ding\Resource.IResource::exists()
-     */
-    public function exists()
-    {
-        return
-            $this->_filename !== false
-            ? file_exists($this->_filename)
-            : false
-        ;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Resource.IResource::isOpen()
-     */
-    public function isOpen()
-    {
-        return $this->_fd !== false;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Resource.IResource::getURL()
-     */
-    public function getURL()
-    {
-        return $this->_filename;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Resource.IResource::getStream()
-     */
-    public function getStream()
-    {
-        if ($this->_filename === self::SCHEME) {
-            throw new ResourceException('Could not open: ' . $this->_filename);
-        }
-        if ($this->_fd === false) {
-            $this->_fd
-                = $this->_context === false
-                ? @fopen($this->_filename, 'r', false)
-                : @fopen($this->_filename, 'r', false, $this->_context);
-            if ($this->_fd === false) {
-                throw new ResourceException('Could not open: ' . $this->_filename);
-            }
-        }
-        return $this->_fd;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Resource.IResource::createRelative()
-     */
-    public function createRelative($relativePath)
-    {
-        return new FilesystemResource(
-            self::SCHEME . $this->getFilename() . DIRECTORY_SEPARATOR . $relativePath
-        );
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Resource.IResource::getFilename()
-     */
-    public function getFilename()
-    {
-        return
-            $this->_filename !== false
-            ? substr($this->_filename, strlen('file://'))
-            : false
-        ;
-    }
-
-    /**
      * Constructor.
      *
-     * @param string $filename Filename with or without includepath://.
+     * @param string   $filename Filename with or without file://.
      * @param resource $context  Context created with stream_context_create().
      *
      * @return void
      */
     public function __construct($filename, $context = false)
     {
-        $this->_filename = false;
-        if (strpos($filename, self::SCHEME) !== 0) {
-            $filename = self::SCHEME . $filename;
-        }
-        $filename = substr($filename, strlen(self::SCHEME));
+        $filename = str_replace(self::SCHEME, '', $filename);
+        $filename = str_replace(FilesystemResource::SCHEME, '', $filename);
+        $this->filename = false;
         foreach(explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
-            $path = $path . DIRECTORY_SEPARATOR . $filename;
+            $path = realpath($path . DIRECTORY_SEPARATOR . $filename);
             if (file_exists($path)) {
-                $this->_filename = FilesystemResource::SCHEME . realpath($path);
+                $this->filename = $path;
                 break;
             }
         }
-        $this->_fd = false;
-        $this->_context = $context;
+
+        $this->fd = false;
+        $this->context = $context;
     }
 }

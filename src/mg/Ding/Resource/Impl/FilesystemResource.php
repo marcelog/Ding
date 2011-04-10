@@ -64,19 +64,19 @@ class FilesystemResource implements IResource
      * Holds true filename.
      * @var string
      */
-    private $_filename;
+    protected $filename;
 
     /**
      * Holds file resource.
      * @var stream
      */
-    private $_fd;
+    protected $fd;
 
     /**
      * Holds context, created with stream_context_create()
      * @var resource
      */
-    private $_context;
+    protected $context;
 
     /**
      * This scheme identifies this resource.
@@ -96,7 +96,7 @@ class FilesystemResource implements IResource
      */
     public function exists()
     {
-        return $this->_filename !== false && file_exists($this->_filename);
+        return $this->filename !== false && file_exists($this->filename);
     }
 
     /**
@@ -105,7 +105,7 @@ class FilesystemResource implements IResource
      */
     public function isOpen()
     {
-        return $this->_fd !== false;
+        return $this->fd !== false;
     }
 
     /**
@@ -114,7 +114,7 @@ class FilesystemResource implements IResource
      */
     public function getURL()
     {
-        return $this->_filename;
+        return self::SCHEME . $this->filename;
     }
 
     /**
@@ -123,19 +123,19 @@ class FilesystemResource implements IResource
      */
     public function getStream()
     {
-        if ($this->_filename === self::SCHEME) {
-            throw new ResourceException('Could not open: ' . $this->_filename);
+        if ($this->filename === self::SCHEME) {
+            throw new ResourceException('Could not open: ' . $this->filename);
         }
-        if ($this->_fd === false) {
-            $this->_fd
-                = $this->_context === false
-                ? @fopen($this->_filename, 'r', false)
-                : @fopen($this->_filename, 'r', false, $this->_context);
-            if ($this->_fd === false) {
-                throw new ResourceException('Could not open: ' . $this->_filename);
+        if ($this->fd === false) {
+            $this->fd
+                = $this->context === false
+                ? @fopen($this->getURL(), 'r', false)
+                : @fopen($this->getURL(), 'r', false, $this->context);
+            if ($this->fd === false) {
+                throw new ResourceException('Could not open: ' . $this->filename);
             }
         }
-        return $this->_fd;
+        return $this->fd;
     }
 
     /**
@@ -155,7 +155,7 @@ class FilesystemResource implements IResource
      */
     public function getFilename()
     {
-        return substr($this->_filename, strlen(self::SCHEME));
+        return $this->filename;
     }
 
     /**
@@ -169,12 +169,10 @@ class FilesystemResource implements IResource
      */
     public function __construct($filename, $context = false)
     {
-        if (strpos($filename, self::SCHEME) !== 0) {
-            $filename = self::SCHEME . $filename;
-        }
-        $realpath = realpath(substr($filename, strlen(self::SCHEME)));
-        $this->_filename = self::SCHEME . $realpath;
-        $this->_fd = false;
-        $this->_context = $context;
+        $filename = str_replace(self::SCHEME, '', $filename);
+        $realpath = realpath($filename);
+        $this->filename = $realpath ? $realpath : $filename;
+        $this->fd = false;
+        $this->context = $context;
     }
 }
