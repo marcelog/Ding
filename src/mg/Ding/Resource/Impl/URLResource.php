@@ -138,14 +138,7 @@ class URLResource implements IResource
      */
     public function createRelative($relativePath)
     {
-        if ($this->_filename === false) {
-             throw new ResourceException('Could not create: ' . $relativePath);
-        }
-        $path = $this->_filename . DIRECTORY_SEPARATOR . $relativePath;
-        $result = @mkdir($path, 0755, true);
-        if ($result === false) {
-            throw new ResourceException('Could not create: ' . $path);
-        }
+       return $this->_filename . DIRECTORY_SEPARATOR . $relativePath;
     }
 
     /**

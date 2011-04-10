@@ -79,6 +79,18 @@ class FilesystemResource implements IResource
     private $_context;
 
     /**
+     * This scheme identifies this resource.
+     * @var string
+     */
+    const SCHEME = 'file://';
+
+    /**
+     * Length for self::SCHEME
+     * @var integer
+     */
+    const SCHEMELEN = 7;
+
+    /**
      * (non-PHPdoc)
      * @see Ding\Resource.IResource::exists()
      */
@@ -111,12 +123,14 @@ class FilesystemResource implements IResource
      */
     public function getStream()
     {
+        if ($this->_filename === self::SCHEME) {
+            throw new ResourceException('Could not open: ' . $this->_filename);
+        }
         if ($this->_fd === false) {
             $this->_fd
                 = $this->_context === false
                 ? @fopen($this->_filename, 'r', false)
-                : @fopen($this->_filename, 'r', false, $this->_context)
-            ;
+                : @fopen($this->_filename, 'r', false, $this->_context);
             if ($this->_fd === false) {
                 throw new ResourceException('Could not open: ' . $this->_filename);
             }
@@ -130,11 +144,9 @@ class FilesystemResource implements IResource
      */
     public function createRelative($relativePath)
     {
-        $path = realpath($this->getFilename() . DIRECTORY_SEPARATOR . $relativePath);
-        $result = @mkdir($path, 0755, true);
-        if ($result === false) {
-            throw new ResourceException('Could not create: ' . $path);
-        }
+        return new FilesystemResource(
+            self::SCHEME . $this->getFilename() . DIRECTORY_SEPARATOR . $relativePath
+        );
     }
 
     /**
@@ -143,7 +155,7 @@ class FilesystemResource implements IResource
      */
     public function getFilename()
     {
-        return substr($this->_filename, strlen('file://'));
+        return substr($this->_filename, strlen(self::SCHEME));
     }
 
     /**
@@ -152,14 +164,16 @@ class FilesystemResource implements IResource
      * @param string   $filename Filename with or without file://.
      * @param resource $context  Context created with stream_context_create().
      *
+     * @throws ResourceException
      * @return void
      */
     public function __construct($filename, $context = false)
     {
-        if (strpos($filename, 'file://') !== 0) {
-            $filename = 'file://' . $filename;
+        if (strpos($filename, self::SCHEME) !== 0) {
+            $filename = self::SCHEME . $filename;
         }
-        $this->_filename = 'file://' . realpath(substr($filename, strlen('file://')));
+        $realpath = realpath(substr($filename, strlen(self::SCHEME)));
+        $this->_filename = self::SCHEME . $realpath;
         $this->_fd = false;
         $this->_context = $context;
     }

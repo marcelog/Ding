@@ -83,7 +83,7 @@ interface IResource
      * @param string $relativePath Directory to create.
      *
      * @throws ResourceException
-     * @return void
+     * @return IResource
      */
     public function createRelative($relativePath);
 

@@ -79,6 +79,18 @@ class IncludePathResource implements IResource
     private $_context;
 
     /**
+     * This scheme identifies this resource.
+     * @var string
+     */
+    const SCHEME = 'includepath://';
+
+    /**
+     * Length for self::SCHEME
+     * @var integer
+     */
+    const SCHEMELEN = 14;
+
+    /**
      * (non-PHPdoc)
      * @see Ding\Resource.IResource::exists()
      */
@@ -115,15 +127,14 @@ class IncludePathResource implements IResource
      */
     public function getStream()
     {
-        if ($this->_filename === false) {
-            throw new ResourceException('Could not open resource');
+        if ($this->_filename === self::SCHEME) {
+            throw new ResourceException('Could not open: ' . $this->_filename);
         }
         if ($this->_fd === false) {
             $this->_fd
                 = $this->_context === false
                 ? @fopen($this->_filename, 'r', false)
-                : @fopen($this->_filename, 'r', false, $this->_context)
-            ;
+                : @fopen($this->_filename, 'r', false, $this->_context);
             if ($this->_fd === false) {
                 throw new ResourceException('Could not open: ' . $this->_filename);
             }
@@ -137,14 +148,9 @@ class IncludePathResource implements IResource
      */
     public function createRelative($relativePath)
     {
-        if ($this->_filename === false) {
-             throw new ResourceException('Could not create: ' . $relativePath);
-        }
-        $path = $this->_filename . DIRECTORY_SEPARATOR . $relativePath;
-        $result = @mkdir($path, 0755, true);
-        if ($result === false) {
-            throw new ResourceException('Could not create: ' . $path);
-        }
+        return new FilesystemResource(
+            self::SCHEME . $this->getFilename() . DIRECTORY_SEPARATOR . $relativePath
+        );
     }
 
     /**
@@ -171,14 +177,14 @@ class IncludePathResource implements IResource
     public function __construct($filename, $context = false)
     {
         $this->_filename = false;
-        if (strpos($filename, 'includepath://') !== 0) {
-            $filename = 'includepath://' . $filename;
+        if (strpos($filename, self::SCHEME) !== 0) {
+            $filename = self::SCHEME . $filename;
         }
-        $filename = substr($filename, strlen('includepath://'));
+        $filename = substr($filename, strlen(self::SCHEME));
         foreach(explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
             $path = $path . DIRECTORY_SEPARATOR . $filename;
             if (file_exists($path)) {
-                $this->_filename = 'file://' . realpath($path);
+                $this->_filename = FilesystemResource::SCHEME . realpath($path);
                 break;
             }
         }
