@@ -521,16 +521,16 @@ class ContainerImpl implements IContainer
         // Missing scheme?
         $scheme = strpos($location, '://');
         if ($scheme === false) {
-            $location = 'file://' . $location;
+            $location = FilesystemResource::SCHEME . $location;
         }
         // Already served?
         if (isset($this->_resources[$location])) {
             return $this->_resources[$location];
         }
         // See what kind of resource to return.
-        if (strpos($location, 'file://') === 0) {
+        if (strpos($location, FilesystemResource::SCHEME) === 0) {
             $resource = new FilesystemResource($location, $context);
-        } else if (strpos($location, 'includepath://') === 0) {
+        } else if (strpos($location, IncludePathResource::SCHEME) === 0) {
             $resource = new IncludePathResource($location, $context);
         } else {
             $resource = new URLResource($location, $context);
