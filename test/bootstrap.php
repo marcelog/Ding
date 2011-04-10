@@ -11,6 +11,9 @@ ini_set(
         )
     )
 );
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once 'Ding/Logger/Logger.php';
 
 if (!defined('RESOURCES_DIR')) {

@@ -95,7 +95,6 @@ class Test_URL_Resource extends PHPUnit_Framework_TestCase
     public function cannot_open_invalid_file()
     {
         $resource = new URLResource('/please/dont/create/this/path/so/this/test/will/work');
-        $resource->getStream();
     }
 
     /**
@@ -112,7 +111,7 @@ class Test_URL_Resource extends PHPUnit_Framework_TestCase
      */
     public function cannot_check_exists_on_invalid_file()
     {
-        $resource = new URLResource('/please/dont/create/this/path/so/this/test/will/work');
+        $resource = new URLResource('file:///please/dont/create/this/path/so/this/test/will/work');
         $this->assertFalse($resource->exists());
     }
 }
