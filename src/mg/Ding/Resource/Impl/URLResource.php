@@ -138,7 +138,7 @@ class URLResource implements IResource
      */
     public function createRelative($relativePath)
     {
-       return $this->_filename . DIRECTORY_SEPARATOR . $relativePath;
+       return new URLResource($this->_scheme . $this->_filename . DIRECTORY_SEPARATOR . $relativePath);
     }
 
     /**
