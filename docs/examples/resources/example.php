@@ -106,4 +106,4 @@ var_dump($bean->loadSomething('includepath:///Ding/Autoloader/Ding_Autoloader.ph
 var_dump($bean->loadSomething('http://www.google.com'));
 echo "Now type something, since we've opened the resource php://stdin\n";
 var_dump($bean->loadSomething('php://stdin'));
-var_dump($bean->loadSomething('zip://' . __DIR__ . '/test.zip#example.php'));
+var_dump($bean->loadSomething('zip://test.zip#example.php'));
