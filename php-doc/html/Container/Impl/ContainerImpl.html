@@ -114,7 +114,7 @@
 				<li><span class="field">license:</span> <a href="http://marcelog.github.com/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Container---Impl---ContainerImpl.php.html">/Container/Impl/ContainerImpl.php</a> (line <span class="field">83</span>)
+			Located in <a class="field" href="_Container---Impl---ContainerImpl.php.html">/Container/Impl/ContainerImpl.php</a> (line <span class="field">87</span>)
 		</p>
 		
 				
@@ -147,7 +147,7 @@
 					static <span class="var-type">array</span>
 					<a href="#$_options" title="details" class="var-name">$_options</a>
 				</div>
-																												<div class="var-title">
+																																				<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type"><a href="../../Aspect/AspectManager.html">AspectManager</a></span>
 					<a href="#$_aspectManager" title="details" class="var-name">$_aspectManager</a>
@@ -194,6 +194,11 @@
 				</div>
 																								<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">IResource[]</span>
+					<a href="#$_resources" title="details" class="var-name">$_resources</a>
+				</div>
+																<div class="var-title">
+					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">array</span>
 					<a href="#$_shutdowners" title="details" class="var-name">$_shutdowners</a>
 				</div>
@@ -220,7 +225,7 @@
 										<a href="#getInstance" title="details" class="method-name">getInstance</a>
 											([<span class="var-type"></span>&nbsp;<span class="var-name">$properties</span> = <span class="var-default">array()</span>])
 									</div>
-																																																																											
+																																																																																			
 				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -249,6 +254,13 @@
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
 									</div>
 																							
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#getResource" title="details" class="method-name">getResource</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$location</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">false</span>])
+									</div>
+															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -322,7 +334,7 @@
 		<span class="var-title">
 			static <span class="var-type"><a href="../../Container/Impl/ContainerImpl.html">ContainerImpl</a></span>
 			<span class="var-name">$_containerInstance</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">146</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">150</span>)
 		</span>
 	</div>
 
@@ -345,7 +357,7 @@
 		<span class="var-title">
 			static <span class="var-type">array</span>
 			<span class="var-name">$_options</span>
-			 = <span class="var-default">array(<br />        'bdef' =&gt; array(),'drivers'=&gt;array())</span>			(line <span class="line-number">107</span>)
+			 = <span class="var-default">array(<br />        'bdef' =&gt; array(),'drivers'=&gt;array())</span>			(line <span class="line-number">111</span>)
 		</span>
 	</div>
 
@@ -369,7 +381,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Aspect/AspectManager.html">AspectManager</a></span>
 			<span class="var-name">$_aspectManager</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">152</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">156</span>)
 		</span>
 	</div>
 
@@ -392,7 +404,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Cache/ICache.html">ICache</a></span>
 			<span class="var-name">$_beanCache</span>
-						(line <span class="line-number">128</span>)
+						(line <span class="line-number">132</span>)
 		</span>
 	</div>
 
@@ -415,7 +427,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Cache/ICache.html">ICache</a></span>
 			<span class="var-name">$_beanDefCache</span>
-						(line <span class="line-number">140</span>)
+						(line <span class="line-number">144</span>)
 		</span>
 	</div>
 
@@ -438,7 +450,7 @@
 		<span class="var-title">
 			<span class="var-type">BeanDefinition[]</span>
 			<span class="var-name">$_beanDefs</span>
-						(line <span class="line-number">134</span>)
+						(line <span class="line-number">138</span>)
 		</span>
 	</div>
 
@@ -461,7 +473,7 @@
 		<span class="var-title">
 			<span class="var-type">object[]</span>
 			<span class="var-name">$_beans</span>
-						(line <span class="line-number">122</span>)
+						(line <span class="line-number">126</span>)
 		</span>
 	</div>
 
@@ -484,7 +496,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Aspect/Interceptor/DispatcherImpl.html">DispatcherImpl</a></span>
 			<span class="var-name">$_dispatcherTemplate</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">101</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">105</span>)
 		</span>
 	</div>
 
@@ -507,7 +519,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Bean/Lifecycle/BeanLifecycleManager.html">BeanLifecycleManager</a></span>
 			<span class="var-name">$_lifecycleManager</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">158</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">162</span>)
 		</span>
 	</div>
 
@@ -530,7 +542,7 @@
 		<span class="var-title">
 			<span class="var-type">boolean</span>
 			<span class="var-name">$_logDebugEnabled</span>
-						(line <span class="line-number">95</span>)
+						(line <span class="line-number">99</span>)
 		</span>
 	</div>
 
@@ -553,7 +565,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Logger/Logger.html">Logger</a></span>
 			<span class="var-name">$_logger</span>
-						(line <span class="line-number">89</span>)
+						(line <span class="line-number">93</span>)
 		</span>
 	</div>
 
@@ -568,15 +580,38 @@
 		
 
 </div>
-<a name="var$_shutdowners" id="$_shutdowners"><!-- --></A>
+<a name="var$_resources" id="$_resources"><!-- --></A>
 <div class="evenrow">
+
+	<div class="var-header">
+		<img src="../../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">IResource[]</span>
+			<span class="var-name">$_resources</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">168</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Resources multiton.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_shutdowners" id="$_shutdowners"><!-- --></A>
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$_shutdowners</span>
-						(line <span class="line-number">116</span>)
+						(line <span class="line-number">120</span>)
 		</span>
 	</div>
 
@@ -607,11 +642,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodgetInstance" id="getInstance"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">457</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">467</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -637,11 +672,11 @@
 			
 	</div>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">512</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">549</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -667,11 +702,11 @@
 			
 	</div>
 <a name="method__destruct" id="__destruct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Destructor.png" />
-		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">496</span>)
+		<span class="method-title">Destructor __destruct</span> (line <span class="line-number">506</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -692,11 +727,11 @@
 			
 	</div>
 <a name="methodgetBean" id="getBean"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getBean</span> (line <span class="line-number">412</span>)
+		<span class="method-title">getBean</span> (line <span class="line-number">422</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -729,11 +764,11 @@
 			
 	</div>
 <a name="methodgetBeanDefinition" id="getBeanDefinition"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getBeanDefinition</span> (line <span class="line-number">178</span>)
+		<span class="method-title">getBeanDefinition</span> (line <span class="line-number">188</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -765,12 +800,46 @@
 					</dl>
 			
 	</div>
+<a name="methodgetResource" id="getResource"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">getResource</span> (line <span class="line-number">519</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">(non-PHPdoc)</p>
+	<ul class="tags">
+				<li><span class="field">see:</span> Ding\Resource.IResourceLoader::getResource()</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getResource
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$location</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$context</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$location</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$context</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodregisterShutdownMethod" id="registerShutdownMethod"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">registerShutdownMethod</span> (line <span class="line-number">486</span>)
+		<span class="method-title">registerShutdownMethod</span> (line <span class="line-number">496</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -810,7 +879,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setBean</span> (line <span class="line-number">240</span>)
+		<span class="method-title">setBean</span> (line <span class="line-number">250</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -849,7 +918,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setBeanDefinition</span> (line <span class="line-number">222</span>)
+		<span class="method-title">setBeanDefinition</span> (line <span class="line-number">232</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -888,7 +957,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_applyAspect</span> (line <span class="line-number">284</span>)
+		<span class="method-title">_applyAspect</span> (line <span class="line-number">294</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -926,7 +995,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_createBean</span> (line <span class="line-number">318</span>)
+		<span class="method-title">_createBean</span> (line <span class="line-number">328</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -957,7 +1026,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadArgument</span> (line <span class="line-number">266</span>)
+		<span class="method-title">_loadArgument</span> (line <span class="line-number">276</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -987,7 +1056,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">__sleep</span> (line <span class="line-number">165</span>)
+		<span class="method-title">__sleep</span> (line <span class="line-number">175</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1013,7 +1082,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 05 Apr 2011 20:08:17 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sun, 10 Apr 2011 15:10:31 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
