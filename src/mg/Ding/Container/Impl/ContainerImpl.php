@@ -29,6 +29,8 @@
  */
 namespace Ding\Container\Impl;
 
+use Ding\Bean\Factory\Driver\PropertiesDriver;
+use Ding\Bean\Factory\Driver\ResourcesDriver;
 use Ding\Resource\Impl\IncludePathResource;
 use Ding\Resource\Impl\FilesystemResource;
 use Ding\Resource\Impl\URLResource;
@@ -54,7 +56,6 @@ use Ding\Bean\Factory\Driver\ShutdownDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
 use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
 use Ding\Bean\Factory\Driver\BeanAspectDriver;
-use Ding\Bean\Factory\Driver\FiltersDriver;
 use Ding\Bean\Factory\Driver\ErrorHandlerDriver;
 use Ding\Bean\Factory\Driver\SignalHandlerDriver;
 use Ding\Bean\Factory\Driver\SetterInjectionDriver;
@@ -591,9 +592,8 @@ class ContainerImpl implements IContainer
         if (isset(self::$_options['drivers']['timezone'])) {
             $this->_lifecycleManager->addAfterConfigListener(TimezoneDriver::getInstance($soullessArray));
         }
-
         if (isset(self::$_options['properties'])) {
-            $this->_lifecycleManager->addAfterDefinitionListener(FiltersDriver::getInstance(self::$_options['properties']));
+            $this->_lifecycleManager->addAfterDefinitionListener(PropertiesDriver::getInstance(self::$_options['properties']));
         }
         $this->_lifecycleManager->addBeforeCreateListener(DependsOnDriver::getInstance($soullessArray));
 
@@ -618,6 +618,7 @@ class ContainerImpl implements IContainer
         $this->_lifecycleManager->addAfterDefinitionListener(AspectManagerAwareDriver::getInstance($soullessArray));
 
         $this->_lifecycleManager->addAfterAssembleListener(LifecycleDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addBeforeCreateListener(ResourcesDriver::getInstance($soullessArray));
         $this->_lifecycleManager->beforeConfig($this);
         $this->_lifecycleManager->afterConfig($this);
     }

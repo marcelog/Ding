@@ -28,6 +28,7 @@
  *
  */
 
+use Ding\Resource\IResource;
 use Ding\Resource\Impl\FilesystemResource;
 use Ding\Container\Impl\ContainerImpl;
 
@@ -78,6 +79,32 @@ class Test_Filesystem_Resource extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_inject()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'properties' => array('aResource' => 'file://' . RESOURCES_DIR . DIRECTORY_SEPARATOR . 'someresource.txt'),
+                    'bdef' => array(
+                        'xml' => array(
+                        	'filename' => 'resource-autoload.xml', 'directories' => array(RESOURCES_DIR)
+                        )
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('aBean');
+        $this->assertTrue($bean->resource1 instanceof IResource);
+        $this->assertTrue($bean->resource2 instanceof IResource);
+        $this->assertTrue($bean->resource3[0] instanceof IResource);
+        $this->assertTrue($bean->resource4[0] instanceof IResource);
+    }
+
+    /**
+     * @test
+     */
     public function can_open()
     {
         $resource = new FilesystemResource($this->_filename);
@@ -107,5 +134,29 @@ class Test_Filesystem_Resource extends PHPUnit_Framework_TestCase
     {
         $resource = new FilesystemResource('/please/dont/create/this/path/so/this/test/will/work');
         $resource->getStream();
+    }
+}
+
+class AnInjectedResourceClass
+{
+    public $resource1 = null;
+    public $resource2 = null;
+    public $resource3 = null;
+    public $resource4 = null;
+
+    public function setSomeResource($resource)
+    {
+        $this->resource2 = $resource;
+    }
+
+    public function setSomeResourceArray($resource)
+    {
+        $this->resource4 = $resource;
+    }
+
+    public function __construct($resource, $resource2)
+    {
+        $this->resource1 = $resource;
+        $this->resource3 = $resource2;
     }
 }

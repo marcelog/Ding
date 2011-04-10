@@ -28,15 +28,15 @@
  *
  */
 namespace Ding\Bean\Factory\Driver;
-
+use Ding\Bean\Factory\Filter\ResourceFilter;
 use Ding\Bean\BeanPropertyDefinition;
-
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Factory\Filter\PropertyFilter;
+use Ding\Container\IContainer;
 
 /**
  * This driver will apply all filters to property values.
@@ -50,38 +50,50 @@ use Ding\Bean\Factory\Filter\PropertyFilter;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class FiltersDriver implements IAfterDefinitionListener
+class PropertiesDriver implements IAfterDefinitionListener
 {
     /**
      * Holds current instance.
-     * @var DependsOnDriver
+     * @var PropertiesDriver
      */
     private static $_instance = false;
 
     /**
-     * Registered filters to apply.
-     * @var IFilter[]
+     * Properties.
+     * @var array
      */
-    private $_filters;
+    private $_properties;
+
+    public function _apply($value)
+    {
+        if (is_string($value)) {
+            foreach ($this->_properties as $k => $v) {
+                if (strpos($value, $k) !== false) {
+                    $value = str_replace($k, $v, $value);
+                    break;
+                }
+            }
+        }
+        return $value;
+    }
 
     /**
      * Recursively, apply filter to property or constructor arguments values.
      *
      * @param BeanPropertyDefinition|BeanConstructoruArgumentDefinition $def
+     * @param IContainer $factory Container in use.
      *
      * @return void
      */
-    private function _applyFilter(&$def)
+    private function _applyFilter($def, IContainer $factory)
     {
         $value = $def->getValue();
         if (is_array($value)) {
-            foreach ($value as $otherDef) {
-                $this->_applyFilter($otherDef);
+            foreach ($value as $def) {
+                $this->_applyFilter($def, $factory);
             }
-        } else {
-            foreach ($this->_filters as $filter) {
-                $def->setValue($filter->apply($value));
-            }
+        } else if (is_string($value)) {
+            $def->setValue($this->_apply($value));
         }
     }
 
@@ -92,10 +104,10 @@ class FiltersDriver implements IAfterDefinitionListener
     public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
     {
         foreach ($bean->getProperties() as $property) {
-            $this->_applyFilter($property);
+            $this->_applyFilter($property, $factory);
         }
         foreach ($bean->getArguments() as $argument) {
-            $this->_applyFilter($argument);
+            $this->_applyFilter($argument, $factory);
         }
         return $bean;
     }
@@ -103,14 +115,14 @@ class FiltersDriver implements IAfterDefinitionListener
     /**
      * Returns an instance.
      *
-     * @param array $options Optional options.
+     * @param array $properties Properties to use.
      *
-     * @return FiltersDriver
+     * @return PropertiesDriver
      */
-    public static function getInstance(array $options)
+    public static function getInstance(array $properties)
     {
         if (self::$_instance == false) {
-            self::$_instance = new FiltersDriver($options);
+            self::$_instance = new PropertiesDriver($properties);
         }
         return self::$_instance;
     }
@@ -124,6 +136,11 @@ class FiltersDriver implements IAfterDefinitionListener
      */
     private function __construct(array $options)
     {
-        $this->_filters = array(PropertyFilter::getInstance($options));
+    	$this->_properties = array();
+        foreach (array_keys($options) as $key) {
+            /* Change keys. 'property' becomes ${property} */
+            $propName = '${' . $key . '}';
+            $this->_properties[$propName] = $options[$key];
+        }
     }
 }

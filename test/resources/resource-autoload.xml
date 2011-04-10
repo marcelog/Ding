@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="aBean" scope="singleton" class="AnInjectedResourceClass">
+        <property name="someResource"><value>resource://${aResource}</value></property>
+        <property name="someResourceArray"><array><entry key="0"><value>resource://${aResource}</value></entry></array></property>
+        <constructor-arg><value>resource://${aResource}</value></constructor-arg>
+        <constructor-arg><array><entry key="0"><value>resource://${aResource}</value></entry></array></constructor-arg>
+    </bean>
+</beans>

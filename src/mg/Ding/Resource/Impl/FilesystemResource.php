@@ -123,9 +123,6 @@ class FilesystemResource implements IResource
      */
     public function getStream()
     {
-        if ($this->filename === self::SCHEME) {
-            throw new ResourceException('Could not open: ' . $this->filename);
-        }
         if ($this->fd === false) {
             $this->fd
                 = $this->context === false
