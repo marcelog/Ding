@@ -116,6 +116,20 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <H2><u>IResourceLoaderAware interface</u></H2>
 Implement <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/Resource/IResourceLoaderAware.php">Ding\Resource\IResourceLoaderAware</a> interface in your own beans and they will be automatically injected with the resource loader (the container)
 in use.
+<H2><u>Resources as dependencies</u></H2>
+<p>
+You can also declare resources in your bean properties and constructor arguments, like:
+<pre>
+&lt;beans&gt;
+    &lt;bean id="aBean" class="MyBeanClass" scope="singleton"&gt;
+        &lt;property name="aResource"&gt;&lt;value&gt;resource://${anUrl}&lt;/value&gt;&lt;/property&gt;
+        &lt;property name="aResource2"&gt;&lt;value&gt;resource://includepath://config.php&lt;/value&gt;&lt;/property&gt;
+        &lt;constructor-arg&gt;&lt;value&gt;resource://http://www.something.com&lt;/value&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+Ding will autodetect the <b>resource://</b> prefix and return a property of type IResource instead of the string.
+</p>
 <center>
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-6947936742546167";

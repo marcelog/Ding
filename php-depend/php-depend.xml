@@ -125,12 +125,13 @@
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ContainerAwareDriver.php">ContainerAwareDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/DependsOnDriver.php">DependsOnDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ErrorHandlerDriver.php">ErrorHandlerDriver</Class>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/FiltersDriver.php">FiltersDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/LifecycleDriver.php">LifecycleDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MVCAnnotationDriver.php">MVCAnnotationDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">MethodInjectionAspect</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">MethodInjectionDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/PropertiesDriver.php">PropertiesDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ResourceLoaderAwareDriver.php">ResourceLoaderAwareDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ResourcesDriver.php">ResourcesDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SetterInjectionDriver.php">SetterInjectionDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ShutdownDriver.php">ShutdownDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SignalHandlerDriver.php">SignalHandlerDriver</Class>
@@ -171,26 +172,6 @@
       <UsedBy>
         <Package>Ding\Bean\Factory\Driver</Package>
       </UsedBy>
-    </Package>
-    <Package name="Ding\Bean\Factory\Filter">
-      <Stats>
-        <TotalClasses>2</TotalClasses>
-        <ConcreteClasses>1</ConcreteClasses>
-        <AbstractClasses>1</AbstractClasses>
-        <Ca>0</Ca>
-        <Ce>0</Ce>
-        <A>0.5</A>
-        <I>0</I>
-        <D>0.5</D>
-      </Stats>
-      <ConcreteClasses>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Filter/PropertyFilter.php">PropertyFilter</Class>
-      </ConcreteClasses>
-      <AbstractClasses>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Filter/IFilter.php">IFilter</Class>
-      </AbstractClasses>
-      <DependsUpon/>
-      <UsedBy/>
     </Package>
     <Package name="Ding\Bean\Factory">
       <Stats>
@@ -369,8 +350,8 @@
     </Package>
     <Package name="Ding\Container\Impl">
       <Stats>
-        <TotalClasses>35</TotalClasses>
-        <ConcreteClasses>35</ConcreteClasses>
+        <TotalClasses>36</TotalClasses>
+        <ConcreteClasses>36</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
         <Ce>2</Ce>

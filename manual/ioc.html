@@ -391,8 +391,7 @@ injection, i.e: a property called 'name' will be injected calling setName()</li>
   are specified explicitely (see below).</li>
 </ul>
 <p>
-The value for the properties is run through a chain of filters. One of these filters
-is PropertyFilter, responsible for replacing the ${property} kind of values.
+The PropertyDriver, is responsible for replacing the ${property} kind of values.
 </p>
 <H4><u>Examples:</u></H4>
 <p>
@@ -588,7 +587,6 @@ there are some predefined "kind" of extension points:
 
 <ul>
   <li>Drivers</li>
-  <li>Filters</li>
   <li>Helpers</li>
 </ul>
 
@@ -626,20 +624,11 @@ Just like an aware interface, whenever ding instantiates a bean of a class that 
 the bean will be registered in the given lifecycle points. See docs/examples/lifecycle.
 This will allow you to extend the container functionality as much as you like.
 
-<H3><u>Filters</u></H3>
-
-Filters are used to transform a value of a property or constructor argument.
-For example, PropertyFilter searches for the ${xxx} syntax 
-
-in a property value and tries to replace it with a property named xxx.
-
-Filters are chained and the chain cant be interrumpted.
-
 <H3><u>Helpers</u></H3>
 Helpers reside in the namespace Ding\Helpers. The helpers are usually normal
 beans, lets call them "user space" code (meaning that they 
 
-are not part of Ding's architecture per se, unlike Drivers and Filters that are
+are not part of Ding's architecture per se, unlike Drivers that are
 active players in the bean creation process).
 
 <H3><u>ReflectionFactory</u></H3>
