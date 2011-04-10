@@ -43,7 +43,7 @@ use Ding\Container\Impl\ContainerImpl;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_Resources extends PHPUnit_Framework_TestCase
+class Test_Filesystem_Resource extends PHPUnit_Framework_TestCase
 {
     private $_url;
     private $_filename;

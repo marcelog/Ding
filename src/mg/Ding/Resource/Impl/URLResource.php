@@ -87,12 +87,24 @@ class URLResource implements IResource
     private $_context;
 
     /**
+     * URL data from parse_url
+     * @var string[]
+     */
+    private $_urlData;
+
+    /**
      * (non-PHPdoc)
      * @see Ding\Resource.IResource::exists()
      */
     public function exists()
     {
-        return file_exists($this->_filename);
+        try
+        {
+            $stream = $this->getStream();
+            return $stream !== false;
+        } catch(ResourceException $exception) {
+        }
+        return false;
     }
 
     /**
@@ -110,7 +122,7 @@ class URLResource implements IResource
      */
     public function getURL()
     {
-        return $this->_scheme . $this->_filename;
+        return $this->_filename;
     }
 
     /**
@@ -122,11 +134,10 @@ class URLResource implements IResource
         if ($this->_fd === false) {
             $this->_fd
                 = $this->_context === false
-                ? @fopen($this->_scheme . $this->_filename, 'r', false)
-                : @fopen($this->_scheme . $this->_filename, 'r', false, $this->_context)
-            ;
+                ? @fopen($this->_filename, 'r', false)
+                : @fopen($this->_filename, 'r', false, $this->_context);
             if ($this->_fd === false) {
-                throw new ResourceException('Could not open: ' . $this->_scheme . $this->_filename);
+                throw new ResourceException('Could not open: ' . $this->_filename);
             }
         }
         return $this->_fd;
@@ -138,7 +149,7 @@ class URLResource implements IResource
      */
     public function createRelative($relativePath)
     {
-       return new URLResource($this->_scheme . $this->_filename . DIRECTORY_SEPARATOR . $relativePath);
+       return new URLResource($this->_filename . DIRECTORY_SEPARATOR . $relativePath);
     }
 
     /**
@@ -147,7 +158,7 @@ class URLResource implements IResource
      */
     public function getFilename()
     {
-        return $this->_filename;
+        return $this->_urlData['path'];
     }
 
     /**
@@ -160,13 +171,28 @@ class URLResource implements IResource
      */
     public function __construct($filename, $context = false)
     {
-        $pos = strpos($filename, '://') + 3;
-        if ($pos === false) {
-            $pos = strlen($filename);
+        $this->_urlData = parse_url($filename);
+        if ($this->_urlData === false) {
+            throw new ResourceException('Invalid url: ' . $filename);
         }
-        $this->_filename = substr($filename, $pos);
-        $this->_scheme = substr($filename, 0, $pos);
+        $this->_filename = $filename;
+        $this->_scheme = $this->_urlData['scheme'];
         $this->_fd = false;
         $this->_context = $context;
     }
 }
+/*
+ * On seriously malformed URLs, parse_url() may return FALSE.
+
+If the component parameter is omitted, an associative array is returned. At least one element will be present within the array. Potential keys within this array are:
+
+scheme - e.g. http
+host
+port
+user
+pass
+path
+query - after the question mark ?
+fragment - after the hashmark #
+If the component parameter is specified, parse_url() returns a string (or an integer, in the case of PHP_URL_PORT) instead of an array. If the requested component doesn't exist within the given URL, NULL will be returned.
+*/
