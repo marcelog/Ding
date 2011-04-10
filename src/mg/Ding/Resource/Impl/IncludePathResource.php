@@ -92,7 +92,6 @@ class IncludePathResource extends FilesystemResource implements IResource
                 break;
             }
         }
-
         $this->fd = false;
         $this->context = $context;
     }
