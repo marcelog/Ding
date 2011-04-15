@@ -64,6 +64,17 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * For issue #104
+     */
+    public function can_get_class_with_underscore()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aBeanFromUnderscoreClass');
+        $this->assertTrue($bean instanceof Some_UnderScore_Class);
+    }
+
+    /**
+     * @test
      */
     public function can_get_from_a_namespaced_class()
     {
@@ -220,6 +231,10 @@ class ASimpleDestroyInitClass
     }
 }
 
+class Some_UnderScore_Class
+{
+
+}
 /**
  * @Configuration
  */
@@ -234,6 +249,14 @@ class ClassSimpleAnnotationConfiguration
         return new ASimpleDestroyInitClass();
     }
 
+    /**
+     * @Bean(class=Some_UnderScore_Class)
+     * @Scope(value=singleton)
+     */
+    public function aBeanFromUnderscoreClass()
+    {
+        return new Some_UnderScore_Class;
+    }
     /**
      * @Bean(class=ASimpleDestroyInitClass)
      * @Scope(value=singleton)

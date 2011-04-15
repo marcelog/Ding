@@ -120,7 +120,7 @@ class ReflectionFactory
     public static function getAnnotations($text)
     {
         $ret = array();
-        if (preg_match_all('/@[\-\/a-zA-Z0-9=\?,\\\\\(\+\.\$\^\*\)\ ]+/', $text, $matches) > 0) {
+        if (preg_match_all('/@[\-\/a-zA-Z0-9=_\?,\\\\\(\+\.\$\^\*\)\ ]+/', $text, $matches) > 0) {
             foreach ($matches[0] as $annotation) {
                 $argsStart = strpos($annotation, '(');
                 $arguments = array();
