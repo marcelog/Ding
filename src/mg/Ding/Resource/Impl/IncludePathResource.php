@@ -84,7 +84,7 @@ class IncludePathResource extends FilesystemResource implements IResource
     {
         $filename = str_replace(self::SCHEME, '', $filename);
         $filename = str_replace(FilesystemResource::SCHEME, '', $filename);
-        $this->filename = false;
+        $this->filename = $filename;
         foreach(explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
             $path = realpath($path . DIRECTORY_SEPARATOR . $filename);
             if (file_exists($path)) {
