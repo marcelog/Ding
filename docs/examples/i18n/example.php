@@ -6,7 +6,7 @@
  *
  * @category   Ding
  * @package    Examples
- * @subpackage Lifecycle
+ * @subpackage i18n
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @version    SVN: $Id$
@@ -45,67 +45,38 @@ ini_set(
 require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
 Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
-use Ding\Bean\Lifecycle\IAfterDefinitionListener;
-use Ding\Bean\Lifecycle\IBeforeCreateListener;
-use Ding\Bean\Lifecycle\IAfterCreateListener;
-use Ding\Bean\Lifecycle\IBeforeAssembleListener;
-use Ding\Bean\Lifecycle\IAfterAssembleListener;
-use Ding\Bean\Factory\IBeanFactory;
-use Ding\Bean\BeanDefinition;
+use Ding\MessageSource\IMessageSourceAware;
+use Ding\MessageSource\IMessageSource;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ////////////////////////////////////////////////////////////////////////////////
-class ComponentA
+class AClass implements IMessageSourceAware
 {
+    private $_messageSource;
+
+    public function setMessageSource(IMessageSource $messageSource)
+    {
+        $this->_messageSource = $messageSource;
+    }
+
+    public function something()
+    {
+        return $this->_messageSource->getMessage(
+        	'default', 'message.example', array('argument1'), 'es'
+       );
+    }
+    public function something2()
+    {
+        return $this->_messageSource->getMessage(
+        	'another_bundle', 'message.one', array('argument1'), 'es'
+       );
+    }
     public function __construct()
     {
     }
 }
 
-
-class MyLifecycler implements
-    IBeforeDefinitionListener, IAfterDefinitionListener,
-    IBeforeCreateListener, IAfterCreateListener,
-    IBeforeAssembleListener, IAfterAssembleListener
-{
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
-    {
-        echo "beforeDefinition called\n";
-        return $bean; // mandatory
-    }
-
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
-    {
-        echo "afterDefinition called\n";
-        return $bean; // mandatory
-    }
-
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
-    {
-        echo "beforeCreate called\n";
-    }
-
-    public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
-    {
-        echo "afterCreate called\n";
-    }
-
-    public function beforeAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
-    {
-        echo "beforeAssemble called\n";
-    }
-
-    public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
-    {
-        echo "afterAssemble called\n";
-    }
-
-    public function __construct()
-    {
-    }
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 try
@@ -128,8 +99,9 @@ try
         )
     );
     $a = ContainerImpl::getInstance($properties);
-    $bean = $a->getBean('lifecycler');
     $bean = $a->getBean('dummyBean');
+    var_dump($bean->something());
+    var_dump($bean->something2());
 } catch(Exception $exception) {
     echo $exception . "\n";
 }

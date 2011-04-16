@@ -50,6 +50,7 @@ use Ding\Bean\Factory\Driver\BeanXmlDriver;
 use Ding\Bean\Factory\Driver\BeanYamlDriver;
 use Ding\Bean\Factory\Driver\MVCAnnotationDriver;
 use Ding\Bean\Factory\Driver\DependsOnDriver;
+use Ding\Bean\Factory\Driver\MessageSourceDriver;
 use Ding\Bean\Factory\Driver\MethodInjectionDriver;
 use Ding\Bean\Factory\Driver\TimezoneDriver;
 use Ding\Bean\Factory\Driver\ShutdownDriver;
@@ -72,6 +73,7 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
+use Ding\MessageSource\IMessageSource;
 
 /**
  * Container implementation.
@@ -104,6 +106,12 @@ class ContainerImpl implements IContainer
      * @var DispatcherImpl
      */
     private $_dispatcherTemplate = false;
+
+    /**
+     * MessageSource implementation.
+     * @var IMessageSource
+     */
+    private $_messageSource = false;
 
     /**
      * Default options.
@@ -513,6 +521,23 @@ class ContainerImpl implements IContainer
         }
     }
 
+    public function setMessageSource(IMessageSource $messageSource)
+    {
+        $this->_messageSource = $messageSource;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\MessageSource.IMessageSource::getMessage()
+     */
+    public function getMessage($bundle, $message, array $arguments, $locale)
+    {
+        return
+            $this->_messageSource !== false
+            ? $this->_messageSource->getMessage($bundle, $message, $arguments, $locale)
+            : NULL;
+    }
+
     /**
      * (non-PHPdoc)
      * @see Ding\Resource.IResourceLoader::getResource()
@@ -619,6 +644,9 @@ class ContainerImpl implements IContainer
 
         $this->_lifecycleManager->addAfterAssembleListener(LifecycleDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addBeforeCreateListener(ResourcesDriver::getInstance($soullessArray));
+        $messageSourceDriver = MessageSourceDriver::getInstance($soullessArray);
+        $this->_lifecycleManager->addAfterConfigListener($messageSourceDriver);
+        $this->_lifecycleManager->addAfterCreateListener($messageSourceDriver);
         $this->_lifecycleManager->beforeConfig($this);
         $this->_lifecycleManager->afterConfig($this);
     }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="dummyBean" class="AClass" scope="singleton"/>
+	<bean id="messageSource" class="Ding\MessageSource\Impl\MessageSourceImpl" scope="singleton">
+	   <property name="basenames">
+	       <array>
+	           <entry key="0"><value>default</value></entry>
+	           <entry key="1"><value>another_bundle</value></entry>
+	       </array>
+	   </property>
+	</bean>
+</beans>

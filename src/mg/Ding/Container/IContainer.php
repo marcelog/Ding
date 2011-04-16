@@ -28,6 +28,7 @@
  */
 namespace Ding\Container;
 
+use Ding\MessageSource\IMessageSource;
 use Ding\Resource\IResourceLoader;
 use Ding\Bean\Factory\IBeanFactory;
 
@@ -42,7 +43,7 @@ use Ding\Bean\Factory\IBeanFactory;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-interface IContainer extends IBeanFactory, IResourceLoader
+interface IContainer extends IBeanFactory, IResourceLoader, IMessageSource
 {
     /**
      * Register a shutdown (destroy-method) method for a bean.
