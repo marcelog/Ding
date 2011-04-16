@@ -245,6 +245,13 @@
   <error line="65" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
   <error line="68" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MessageSourceDriver.php">
+  <error line="60" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="62" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="63" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="74" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="74" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">
   <error line="83" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
   <error line="121" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
@@ -456,48 +463,57 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/IContainerAware.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Impl/ContainerImpl.php">
-  <error line="212" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="220" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="258" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="259" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="260" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="261" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="295" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="296" column="114" severity="warning" message="Line exceeds 85 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="302" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="305" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach  (...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="312" column="1" severity="error" message="Each line in a multi-line IF statement must begin with a boolean operator" source="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean"/>
-  <error line="314" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="316" column="104" severity="warning" message="Line exceeds 85 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="322" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="472" column="103" severity="warning" message="Line exceeds 85 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="482" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="516" column="5" severity="error" message="Doc comment for &quot;$location&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="516" column="5" severity="error" message="Doc comment for &quot;$context&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="518" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="519" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="568" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="572" column="112" severity="warning" message="Line exceeds 85 characters; contains 111 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="573" column="121" severity="warning" message="Line exceeds 85 characters; contains 120 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="574" column="117" severity="warning" message="Line exceeds 85 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="575" column="115" severity="warning" message="Line exceeds 85 characters; contains 114 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="576" column="121" severity="warning" message="Line exceeds 85 characters; contains 120 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="577" column="130" severity="warning" message="Line exceeds 85 characters; contains 129 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="581" column="111" severity="warning" message="Line exceeds 85 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="585" column="112" severity="warning" message="Line exceeds 85 characters; contains 111 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="589" column="107" severity="warning" message="Line exceeds 85 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="593" column="107" severity="warning" message="Line exceeds 85 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="596" column="128" severity="warning" message="Line exceeds 85 characters; contains 127 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="598" column="105" severity="warning" message="Line exceeds 85 characters; contains 104 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="607" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="613" column="113" severity="warning" message="Line exceeds 85 characters; contains 112 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="614" column="115" severity="warning" message="Line exceeds 85 characters; contains 114 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="615" column="109" severity="warning" message="Line exceeds 85 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="616" column="114" severity="warning" message="Line exceeds 85 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="617" column="112" severity="warning" message="Line exceeds 85 characters; contains 111 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="618" column="117" severity="warning" message="Line exceeds 85 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="620" column="106" severity="warning" message="Line exceeds 85 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="621" column="105" severity="warning" message="Line exceeds 85 characters; contains 104 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="220" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="228" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="266" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="267" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="268" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="269" column="1" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="303" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="304" column="114" severity="warning" message="Line exceeds 85 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="310" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="313" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach  (...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="320" column="1" severity="error" message="Each line in a multi-line IF statement must begin with a boolean operator" source="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean"/>
+  <error line="322" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="324" column="104" severity="warning" message="Line exceeds 85 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="330" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="480" column="103" severity="warning" message="Line exceeds 85 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="490" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="524" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="529" column="5" severity="error" message="Doc comment for &quot;$bundle&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="529" column="5" severity="error" message="Doc comment for &quot;$message&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="529" column="5" severity="error" message="Doc comment for &quot;$arguments&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="529" column="5" severity="error" message="Doc comment for &quot;$locale&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="531" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="532" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="537" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="538" column="15" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="541" column="5" severity="error" message="Doc comment for &quot;$location&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="541" column="5" severity="error" message="Doc comment for &quot;$context&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="543" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="544" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="593" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="597" column="112" severity="warning" message="Line exceeds 85 characters; contains 111 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="598" column="121" severity="warning" message="Line exceeds 85 characters; contains 120 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="599" column="117" severity="warning" message="Line exceeds 85 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="600" column="115" severity="warning" message="Line exceeds 85 characters; contains 114 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="601" column="121" severity="warning" message="Line exceeds 85 characters; contains 120 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="602" column="130" severity="warning" message="Line exceeds 85 characters; contains 129 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="606" column="111" severity="warning" message="Line exceeds 85 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="610" column="112" severity="warning" message="Line exceeds 85 characters; contains 111 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="614" column="107" severity="warning" message="Line exceeds 85 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="618" column="107" severity="warning" message="Line exceeds 85 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="621" column="128" severity="warning" message="Line exceeds 85 characters; contains 127 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="623" column="105" severity="warning" message="Line exceeds 85 characters; contains 104 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="632" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="638" column="113" severity="warning" message="Line exceeds 85 characters; contains 112 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="639" column="115" severity="warning" message="Line exceeds 85 characters; contains 114 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="640" column="109" severity="warning" message="Line exceeds 85 characters; contains 108 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="641" column="114" severity="warning" message="Line exceeds 85 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="642" column="112" severity="warning" message="Line exceeds 85 characters; contains 111 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="643" column="117" severity="warning" message="Line exceeds 85 characters; contains 116 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="645" column="106" severity="warning" message="Line exceeds 85 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="646" column="105" severity="warning" message="Line exceeds 85 characters; contains 104 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Exception/DingException.php">
  </file>
@@ -727,6 +743,28 @@
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/View.php">
  </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MessageSource/IMessageSource.php">
+  <error line="40" column="1" severity="warning" message="Invalid version &quot;SVN: $Id$&quot; in doc comment; consider &quot;Release: &lt;package_version&gt;&quot; instead" source="PEAR.Commenting.ClassComment.InvalidVersion"/>
+  <error line="65" column="1" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MessageSource/IMessageSourceAware.php">
+  <error line="42" column="1" severity="warning" message="Invalid version &quot;SVN: $Id$&quot; in doc comment; consider &quot;Release: &lt;package_version&gt;&quot; instead" source="PEAR.Commenting.ClassComment.InvalidVersion"/>
+  <error line="68" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+ </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MessageSource/Impl/MessageSourceImpl.php">
+  <error line="48" column="1" severity="warning" message="Invalid version &quot;SVN: $Id$&quot; in doc comment; consider &quot;Release: &lt;package_version&gt;&quot; instead" source="PEAR.Commenting.ClassComment.InvalidVersion"/>
+  <error line="80" column="5" severity="error" message="Doc comment for &quot;$bundle&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="80" column="5" severity="error" message="Doc comment for &quot;$message&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="80" column="5" severity="error" message="Doc comment for &quot;$arguments&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="80" column="5" severity="error" message="Doc comment for &quot;$locale&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="82" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="83" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="108" column="5" severity="error" message="Doc comment for &quot;$resourceLoader&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="110" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="111" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="120" column="1" severity="error" message="Missing comment for param &quot;$basenames&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="121" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+ </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/ReflectionFactory.php">
   <error line="79" column="1" severity="warning" message="Line exceeds 85 characters; contains 117 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="80" column="1" severity="warning" message="Line exceeds 85 characters; contains 104 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -736,7 +774,7 @@
   <error line="104" column="17" severity="error" message="Expected &quot;for (...) {\n&quot;; found &quot;for(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
   <error line="105" column="25" severity="warning" message="Inline control structures are discouraged" source="Generic.ControlStructures.InlineControlStructure.Discouraged"/>
   <error line="116" column="1" severity="error" message="Missing comment for param &quot;$text&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="123" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="123" column="99" severity="warning" message="Line exceeds 85 characters; contains 98 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="130" column="21" severity="warning" message="Line exceeds 85 characters; contains 112 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="132" column="1" severity="error" message="Multi-line function call not indented correctly; expected 24 spaces but found 21" source="PEAR.Functions.FunctionCallSignature.Indent"/>
   <error line="132" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
@@ -790,7 +828,5 @@
   <error line="157" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
   <error line="158" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
   <error line="168" column="1" severity="error" message="The variable names for parameters $filename (1) and $context (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="187" column="1" severity="warning" message="Line exceeds 85 characters; contains 165 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="197" column="1" severity="warning" message="Line exceeds 85 characters; contains 221 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
 </checkstyle>

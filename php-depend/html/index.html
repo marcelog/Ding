@@ -125,9 +125,9 @@
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a></td>
-<td align="right">36</td>
+<td align="right">37</td>
 <td align="right">0</td>
-<td align="right">36</td>
+<td align="right">37</td>
 <td align="right">0</td>
 <td align="right">9</td>
 <td align="right">0</td>
@@ -217,16 +217,16 @@
 <td align="right">2</td>
 <td align="right">0</td>
 <td align="right">2</td>
-<td align="right">2</td>
+<td align="right">3</td>
 <td align="right">1</td>
-<td align="right">0.5</td>
-<td align="right">0.5</td>
+<td align="right">0.6</td>
+<td align="right">0.6</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a></td>
-<td align="right">36</td>
+<td align="right">38</td>
 <td align="right">0</td>
-<td align="right">36</td>
+<td align="right">38</td>
 <td align="right">0</td>
 <td align="right">2</td>
 <td align="right">0</td>
@@ -410,6 +410,28 @@
 <td align="right">0.333333333333</td>
 </tr>
 <tr>
+<td align="left"><a href="#PKDing%5CMessageSource">Ding\MessageSource</a></td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CMessageSource%5CImpl">Ding\MessageSource\Impl</a></td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr>
 <td align="left"><a href="#PKDing%5CReflection">Ding\Reflection</a></td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -436,7 +458,7 @@
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
-<td align="right">2</td>
+<td align="right">3</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -610,7 +632,7 @@
 </tr>
 <tr>
 <td valign="top" width="25%"><i>None</i></td>
-<td valign="top" width="25%">AnnotationAspectDriver<br>AnnotationInitDestroyMethodDriver<br>AnnotationRequiredDriver<br>AnnotationResourceDriver<br>AspectManagerAwareDriver<br>BeanAnnotationDriver<br>BeanNameAwareDriver<br>BeanXmlDriver<br>BeanYamlDriver<br>ContainerAwareDriver<br>DependsOnDriver<br>ErrorHandlerDriver<br>LifecycleDriver<br>MVCAnnotationDriver<br>MethodInjectionAspect<br>MethodInjectionDriver<br>PropertiesDriver<br>ResourceLoaderAwareDriver<br>ResourcesDriver<br>SetterInjectionDriver<br>ShutdownDriver<br>SignalHandlerDriver<br>TimezoneDriver<br>
+<td valign="top" width="25%">AnnotationAspectDriver<br>AnnotationInitDestroyMethodDriver<br>AnnotationRequiredDriver<br>AnnotationResourceDriver<br>AspectManagerAwareDriver<br>BeanAnnotationDriver<br>BeanNameAwareDriver<br>BeanXmlDriver<br>BeanYamlDriver<br>ContainerAwareDriver<br>DependsOnDriver<br>ErrorHandlerDriver<br>LifecycleDriver<br>MVCAnnotationDriver<br>MessageSourceDriver<br>MethodInjectionAspect<br>MethodInjectionDriver<br>PropertiesDriver<br>ResourceLoaderAwareDriver<br>ResourcesDriver<br>SetterInjectionDriver<br>ShutdownDriver<br>SignalHandlerDriver<br>TimezoneDriver<br>
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
@@ -844,13 +866,13 @@
 <td>
 <a href="#EXafferent">Afferent Couplings</a>: 2</td>
 <td>
-<a href="#EXefferent">Efferent Couplings</a>: 2</td>
+<a href="#EXefferent">Efferent Couplings</a>: 3</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 1</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.5</td>
+<a href="#EXinstability">Instability</a>: 0.6</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.5</td>
+<a href="#EXdistance">Distance</a>: 0.6</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -867,7 +889,7 @@
 <a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br>
 </td>
 <td valign="top" width="25%">
-<a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br><a href="#PKDing%5CResource">Ding\Resource</a><br>
+<a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br><a href="#PKDing%5CMessageSource">Ding\MessageSource</a><br><a href="#PKDing%5CResource">Ding\Resource</a><br>
 </td>
 </tr>
 </table>
@@ -1382,6 +1404,66 @@
 </td>
 </tr>
 </table>
+<h3><a name="PKDing%5CMessageSource">Ding\MessageSource</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 2</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 1</td>
+<td>
+<a href="#EXinstability">Instability</a>: 0</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IMessageSource<br>IMessageSourceAware<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CMessageSource%5CImpl">Ding\MessageSource\Impl</a><br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+</tr>
+</table>
+<h3><a name="PKDing%5CMessageSource%5CImpl">Ding\MessageSource\Impl</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 2</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">MessageSourceImpl<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CMessageSource">Ding\MessageSource</a><br><a href="#PKDing%5CResource">Ding\Resource</a><br>
+</td>
+</tr>
+</table>
 <h3><a name="PKDing%5CReflection">Ding\Reflection</a></h3>
 <table width="100%"><tr>
 <td>
@@ -1449,7 +1531,7 @@
 <h3><a name="PKDing%5CResource">Ding\Resource</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 2</td>
+<a href="#EXafferent">Afferent Couplings</a>: 3</td>
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 0</td>
 <td>
@@ -1471,7 +1553,7 @@
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
-<a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CResource%5CImpl">Ding\Resource\Impl</a><br>
+<a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CMessageSource%5CImpl">Ding\MessageSource\Impl</a><br><a href="#PKDing%5CResource%5CImpl">Ding\Resource\Impl</a><br>
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 </tr>

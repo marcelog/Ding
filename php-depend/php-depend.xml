@@ -103,8 +103,8 @@
     </Package>
     <Package name="Ding\Bean\Factory\Driver">
       <Stats>
-        <TotalClasses>36</TotalClasses>
-        <ConcreteClasses>36</ConcreteClasses>
+        <TotalClasses>37</TotalClasses>
+        <ConcreteClasses>37</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
         <Ce>9</Ce>
@@ -127,6 +127,7 @@
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ErrorHandlerDriver.php">ErrorHandlerDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/LifecycleDriver.php">LifecycleDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MVCAnnotationDriver.php">MVCAnnotationDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MessageSourceDriver.php">MessageSourceDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">MethodInjectionAspect</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">MethodInjectionDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/PropertiesDriver.php">PropertiesDriver</Class>
@@ -329,10 +330,10 @@
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>2</AbstractClasses>
         <Ca>2</Ca>
-        <Ce>2</Ce>
+        <Ce>3</Ce>
         <A>1</A>
-        <I>0.5</I>
-        <D>0.5</D>
+        <I>0.6</I>
+        <D>0.6</D>
       </Stats>
       <ConcreteClasses/>
       <AbstractClasses>
@@ -341,6 +342,7 @@
       </AbstractClasses>
       <DependsUpon>
         <Package>Ding\Bean\Factory</Package>
+        <Package>Ding\MessageSource</Package>
         <Package>Ding\Resource</Package>
       </DependsUpon>
       <UsedBy>
@@ -350,8 +352,8 @@
     </Package>
     <Package name="Ding\Container\Impl">
       <Stats>
-        <TotalClasses>36</TotalClasses>
-        <ConcreteClasses>36</ConcreteClasses>
+        <TotalClasses>38</TotalClasses>
+        <ConcreteClasses>38</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
         <Ce>2</Ce>
@@ -716,6 +718,49 @@
         <Package>Ding\Bean\Factory\Driver</Package>
       </UsedBy>
     </Package>
+    <Package name="Ding\MessageSource">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>0</ConcreteClasses>
+        <AbstractClasses>2</AbstractClasses>
+        <Ca>2</Ca>
+        <Ce>0</Ce>
+        <A>1</A>
+        <I>0</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses/>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MessageSource/IMessageSource.php">IMessageSource</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MessageSource/IMessageSourceAware.php">IMessageSourceAware</Class>
+      </AbstractClasses>
+      <DependsUpon/>
+      <UsedBy>
+        <Package>Ding\Container</Package>
+        <Package>Ding\MessageSource\Impl</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Ding\MessageSource\Impl">
+      <Stats>
+        <TotalClasses>2</TotalClasses>
+        <ConcreteClasses>2</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>2</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MessageSource/Impl/MessageSourceImpl.php">MessageSourceImpl</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>Ding\MessageSource</Package>
+        <Package>Ding\Resource</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
     <Package name="Ding\Reflection">
       <Stats>
         <TotalClasses>3</TotalClasses>
@@ -765,7 +810,7 @@
         <TotalClasses>3</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>3</AbstractClasses>
-        <Ca>2</Ca>
+        <Ca>3</Ca>
         <Ce>0</Ce>
         <A>1</A>
         <I>0</I>
@@ -780,6 +825,7 @@
       <DependsUpon/>
       <UsedBy>
         <Package>Ding\Container</Package>
+        <Package>Ding\MessageSource\Impl</Package>
         <Package>Ding\Resource\Impl</Package>
       </UsedBy>
     </Package>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pmd version="0.2.8RC1" timestamp="2011-04-10T17:58:57-03:00">
+<pmd version="0.2.8RC1" timestamp="2011-04-16T17:23:01-03:00">
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/DispatcherImpl.php">
     <violation beginline="57" endline="57" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
       Avoid excessively long variable names like $_methodsExceptionIntercepted
@@ -182,6 +182,14 @@
       Avoid unused parameters such as '$options'.
     </violation>
   </file>
+  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MessageSourceDriver.php">
+    <violation beginline="70" endline="70" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$e'.
+    </violation>
+    <violation beginline="94" endline="94" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+      Avoid unused parameters such as '$options'.
+    </violation>
+  </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">
     <violation beginline="95" endline="95" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
       Avoid unused parameters such as '$invocation'.
@@ -289,16 +297,16 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Impl/ContainerImpl.php">
-    <violation beginline="88" endline="625" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ContainerImpl" priority="3">
-      This class ContainerImpl has an overall complexity of 70 which is very high. The configured complexity threshold is 50.
+    <violation beginline="90" endline="653" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ContainerImpl" priority="3">
+      This class ContainerImpl has an overall complexity of 73 which is very high. The configured complexity threshold is 50.
     </violation>
-    <violation beginline="329" endline="413" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="_createBean" priority="3">
+    <violation beginline="337" endline="421" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="_createBean" priority="3">
       The method _createBean() has a Cyclomatic Complexity of 17.
     </violation>
-    <violation beginline="329" endline="413" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="_createBean" priority="3">
+    <violation beginline="337" endline="421" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="_createBean" priority="3">
       The method _createBean() has an NPath complexity of 2688.
     </violation>
-    <violation beginline="550" endline="624" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="__construct" priority="3">
+    <violation beginline="575" endline="652" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="__construct" priority="3">
       The method __construct() has an NPath complexity of 256.
     </violation>
   </file>
@@ -384,6 +392,11 @@
     </violation>
     <violation beginline="115" endline="171" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\MVC\Http" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="HttpUrlMapper" method="map" priority="3">
       The method map() has an NPath complexity of 584.
+    </violation>
+  </file>
+  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MessageSource/Impl/MessageSourceImpl.php">
+    <violation beginline="97" endline="97" rule="ShortVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#shortvariable" priority="3">
+      Avoid variables with short names like $i
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/ReflectionFactory.php">
