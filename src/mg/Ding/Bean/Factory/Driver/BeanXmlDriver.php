@@ -164,8 +164,11 @@ class BeanXmlDriver
         libxml_use_internal_errors(true);
         if (is_array($filename)) {
             foreach ($filename as $file) {
-                foreach ($this->_loadXml($file) as $name => $xml) {
-                    $xmls[$name] = $xml;
+                $result = $this->_loadXml($file);
+                if ($result !== false) {
+                    foreach ($result as $name => $xml) {
+                        $xmls[$name] = $xml;
+                    }
                 }
             }
             return $xmls;
