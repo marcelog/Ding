@@ -166,7 +166,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 </center>	
 <H2>User properties</H2>
-Use the optional property: $properties['ding']['factory']['properties'] to
+Use the optional property: $properties['ding']['properties'] to
 specify any key/value pair that you may want search and replace via the PropertyFilter. Example:
 <pre>
 &lt;beans&gt;
@@ -182,7 +182,33 @@ $properties['ding']['factory']['properties'] = array(
     'some.value' => 'This is the final property value'
 )
 </pre>
-
+<p>
+You can also configure the <b>PropertiesHolder</b> bean to inject properties files:
+</p>
+<pre>
+&lt;beans&gt;
+   &lt;bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton"&gt;
+       &lt;property name="locations"&gt;
+         &lt;array&gt;
+           &lt;entry key="0"&gt;&lt;value&gt;resource://includepath://file.properties&lt;/value&gt;&lt;/entry&gt;
+           &lt;entry key="1"&gt;&lt;value&gt;other.properties&lt;/value&gt;&lt;/entry&gt;
+           &lt;entry key="2"&gt;&lt;value&gt;file://./user.properties&lt;/value&gt;&lt;/entry&gt;
+         &lt;/array&gt;
+       &lt;/property&gt;
+   &lt;/bean&gt;
+   &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+       &lt;property name="someProperty"&gt;
+           &lt;value&gt;${some.value}&lt;/value&gt;
+       &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Sample properties file:
+</p>
+<pre>
+some.value=value
+</pre>
 <H2>Cache Subsystems</H2>
 The cache subsystems use $properties['ding']['cache']. The subsystems are:
 

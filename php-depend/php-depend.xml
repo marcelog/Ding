@@ -204,11 +204,11 @@
         <TotalClasses>13</TotalClasses>
         <ConcreteClasses>4</ConcreteClasses>
         <AbstractClasses>9</AbstractClasses>
-        <Ca>1</Ca>
+        <Ca>2</Ca>
         <Ce>2</Ce>
         <A>0.692307692308</A>
-        <I>0.666666666667</I>
-        <D>0.358974358974</D>
+        <I>0.5</I>
+        <D>0.192307692308</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/BeanLifecycle.php">BeanLifecycle</Class>
@@ -231,6 +231,7 @@
       </DependsUpon>
       <UsedBy>
         <Package>Ding\Bean\Factory\Driver</Package>
+        <Package>Ding\Helpers\Properties</Package>
       </UsedBy>
     </Package>
     <Package name="Ding\Cache\Exception">
@@ -457,6 +458,29 @@
       <DependsUpon>
         <Package>PAMI\Listener</Package>
         <Package>PAMI\Message\Event</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Helpers\Properties">
+      <Stats>
+        <TotalClasses>5</TotalClasses>
+        <ConcreteClasses>4</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>2</Ce>
+        <A>0.2</A>
+        <I>1</I>
+        <D>0.2</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Properties/PropertiesHelper.php">PropertiesHelper</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Properties/IPropertiesHolder.php">IPropertiesHolder</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package>Ding\Bean\Lifecycle</Package>
+        <Package>Ding\Resource</Package>
       </DependsUpon>
       <UsedBy/>
     </Package>
@@ -831,7 +855,7 @@
         <TotalClasses>3</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>3</AbstractClasses>
-        <Ca>3</Ca>
+        <Ca>4</Ca>
         <Ce>0</Ce>
         <A>1</A>
         <I>0</I>
@@ -846,6 +870,7 @@
       <DependsUpon/>
       <UsedBy>
         <Package>Ding\Container</Package>
+        <Package>Ding\Helpers\Properties</Package>
         <Package>Ding\MessageSource\Impl</Package>
         <Package>Ding\Resource\Impl</Package>
       </UsedBy>

@@ -161,11 +161,11 @@
 <td align="right">13</td>
 <td align="right">9</td>
 <td align="right">4</td>
-<td align="right">1</td>
+<td align="right">2</td>
 <td align="right">2</td>
 <td align="right">0.692307692308</td>
-<td align="right">0.666666666667</td>
-<td align="right">0.358974358974</td>
+<td align="right">0.5</td>
+<td align="right">0.192307692308</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CCache%5CException">Ding\Cache\Exception</a></td>
@@ -268,6 +268,17 @@
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CHelpers%5CPAMI">Ding\Helpers\PAMI</a></td>
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0.2</td>
+<td align="right">1</td>
+<td align="right">0.2</td>
+</tr>
+<tr>
+<td align="left"><a href="#PKDing%5CHelpers%5CProperties">Ding\Helpers\Properties</a></td>
 <td align="right">5</td>
 <td align="right">1</td>
 <td align="right">4</td>
@@ -469,7 +480,7 @@
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
-<td align="right">3</td>
+<td align="right">4</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -718,15 +729,15 @@
 <h3><a name="PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<a href="#EXafferent">Afferent Couplings</a>: 2</td>
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 2</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 0.692307692308</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.666666666667</td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.358974358974</td>
+<a href="#EXdistance">Distance</a>: 0.192307692308</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -741,7 +752,7 @@
 <td valign="top" width="25%">BeanLifecycle<br>BeanLifecycleManager<br>
 </td>
 <td valign="top" width="25%">
-<a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br>
+<a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CHelpers%5CProperties">Ding\Helpers\Properties</a><br>
 </td>
 <td valign="top" width="25%">
 <a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory">Ding\Bean\Factory</a><br>
@@ -1053,6 +1064,37 @@
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
 <a href="#PKPAMI%5CListener">PAMI\Listener</a><br><a href="#PKPAMI%5CMessage%5CEvent">PAMI\Message\Event</a><br>
+</td>
+</tr>
+</table>
+<h3><a name="PKDing%5CHelpers%5CProperties">Ding\Helpers\Properties</a></h3>
+<table width="100%"><tr>
+<td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<td>
+<a href="#EXefferent">Efferent Couplings</a>: 2</td>
+<td>
+<a href="#EXabstractness">Abstractness</a>: 0.2</td>
+<td>
+<a href="#EXinstability">Instability</a>: 1</td>
+<td>
+<a href="#EXdistance">Distance</a>: 0.2</td>
+</tr></table>
+<table width="100%" class="details">
+<tr>
+<th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr>
+<td valign="top" width="25%">IPropertiesHolder<br>
+</td>
+<td valign="top" width="25%">PropertiesHelper<br>
+</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CResource">Ding\Resource</a><br>
 </td>
 </tr>
 </table>
@@ -1572,7 +1614,7 @@
 <h3><a name="PKDing%5CResource">Ding\Resource</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 3</td>
+<a href="#EXafferent">Afferent Couplings</a>: 4</td>
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 0</td>
 <td>
@@ -1594,7 +1636,7 @@
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
-<a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CMessageSource%5CImpl">Ding\MessageSource\Impl</a><br><a href="#PKDing%5CResource%5CImpl">Ding\Resource\Impl</a><br>
+<a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CHelpers%5CProperties">Ding\Helpers\Properties</a><br><a href="#PKDing%5CMessageSource%5CImpl">Ding\MessageSource\Impl</a><br><a href="#PKDing%5CResource%5CImpl">Ding\Resource\Impl</a><br>
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 </tr>

@@ -216,7 +216,7 @@
 <span class="lineNum" id="container58"><a name="58"></a><a href="#58" id="line58">      58</a> </span>                :  * limitations under the License.                                             
 <span class="lineNum" id="container59"><a name="59"></a><a href="#59" id="line59">      59</a> </span>                :  *                                                                            
 <span class="lineNum" id="container60"><a name="60"></a><a href="#60" id="line60">      60</a> </span>                :  */                                                                           
-<span class="lineNum" id="container61"><a name="61"></a><a href="#61" id="line61">      61</a> </span><span class="lineCov">              3 : class IncludePathResource extends FilesystemResource implements IResource     </span>
+<span class="lineNum" id="container61"><a name="61"></a><a href="#61" id="line61">      61</a> </span><span class="lineCov">              4 : class IncludePathResource extends FilesystemResource implements IResource     </span>
 <span class="lineNum" id="container62"><a name="62"></a><a href="#62" id="line62">      62</a> </span>                : {                                                                             
 <span class="lineNum" id="container63"><a name="63"></a><a href="#63" id="line63">      63</a> </span>                :     /**                                                                       
 <span class="lineNum" id="container64"><a name="64"></a><a href="#64" id="line64">      64</a> </span>                :      * This scheme identifies this resource.                                  
@@ -240,19 +240,19 @@
 <span class="lineNum" id="container82"><a name="82"></a><a href="#82" id="line82">      82</a> </span>                :      */                                                                       
 <span class="lineNum" id="container83"><a name="83"></a><a href="#83" id="line83">      83</a> </span>                :     public function __construct($filename, $context = false)                  
 <span class="lineNum" id="container84"><a name="84"></a><a href="#84" id="line84">      84</a> </span>                :     {                                                                         
-<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span><span class="lineCov">              3 :         $filename = str_replace(self::SCHEME, '', $filename);                 </span>
-<span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span><span class="lineCov">              3 :         $filename = str_replace(FilesystemResource::SCHEME, '', $filename);   </span>
-<span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span><span class="lineCov">              3 :         $this-&gt;filename = $filename;                                          </span>
-<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span><span class="lineCov">              3 :         foreach(explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {  </span>
-<span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span><span class="lineCov">              3 :             $path = realpath($path . DIRECTORY_SEPARATOR . $filename);        </span>
-<span class="lineNum" id="container90"><a name="90"></a><a href="#90" id="line90">      90</a> </span><span class="lineCov">              3 :             if (file_exists($path)) {                                         </span>
-<span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span><span class="lineCov">              3 :                 $this-&gt;filename = $path;                                      </span>
-<span class="lineNum" id="container92"><a name="92"></a><a href="#92" id="line92">      92</a> </span><span class="lineCov">              3 :                 break;                                                        </span>
+<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span><span class="lineCov">              4 :         $filename = str_replace(self::SCHEME, '', $filename);                 </span>
+<span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span><span class="lineCov">              4 :         $filename = str_replace(FilesystemResource::SCHEME, '', $filename);   </span>
+<span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span><span class="lineCov">              4 :         $this-&gt;filename = $filename;                                          </span>
+<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span><span class="lineCov">              4 :         foreach(explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {  </span>
+<span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span><span class="lineCov">              4 :             $path = realpath($path . DIRECTORY_SEPARATOR . $filename);        </span>
+<span class="lineNum" id="container90"><a name="90"></a><a href="#90" id="line90">      90</a> </span><span class="lineCov">              4 :             if (file_exists($path)) {                                         </span>
+<span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span><span class="lineCov">              4 :                 $this-&gt;filename = $path;                                      </span>
+<span class="lineNum" id="container92"><a name="92"></a><a href="#92" id="line92">      92</a> </span><span class="lineCov">              4 :                 break;                                                        </span>
 <span class="lineNum" id="container93"><a name="93"></a><a href="#93" id="line93">      93</a> </span><span class="lineDeadCode">                :             }                                                                 </span>
-<span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span><span class="lineCov">              3 :         }                                                                     </span>
-<span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span><span class="lineCov">              3 :         $this-&gt;fd = false;                                                    </span>
-<span class="lineNum" id="container96"><a name="96"></a><a href="#96" id="line96">      96</a> </span><span class="lineCov">              3 :         $this-&gt;context = $context;                                            </span>
-<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span><span class="lineCov">              3 :     }                                                                         </span>
+<span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span><span class="lineCov">              4 :         }                                                                     </span>
+<span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span><span class="lineCov">              4 :         $this-&gt;fd = false;                                                    </span>
+<span class="lineNum" id="container96"><a name="96"></a><a href="#96" id="line96">      96</a> </span><span class="lineCov">              4 :         $this-&gt;context = $context;                                            </span>
+<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span><span class="lineCov">              4 :     }                                                                         </span>
 
 </pre>
         </td>
@@ -261,7 +261,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Thu Apr 21 21:24:25 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Fri Apr 22 15:17:48 ART 2011.</td></tr>
     </table>
 
     <br />
@@ -272,68 +272,68 @@
       YAHOO.namespace("phpunit.container");
       YAHOO.phpunit.container.panelsData = {
         "panel61": {
-          "header": "3 tests cover line 61",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 61",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel85": {
-          "header": "3 tests cover line 85",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 85",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel86": {
-          "header": "3 tests cover line 86",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 86",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel87": {
-          "header": "3 tests cover line 87",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 87",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel88": {
-          "header": "3 tests cover line 88",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 88",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel89": {
-          "header": "3 tests cover line 89",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 89",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel90": {
-          "header": "3 tests cover line 90",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 90",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel91": {
-          "header": "3 tests cover line 91",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 91",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel92": {
-          "header": "3 tests cover line 92",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 92",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel94": {
-          "header": "3 tests cover line 94",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 94",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel95": {
-          "header": "3 tests cover line 95",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 95",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel96": {
-          "header": "3 tests cover line 96",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 96",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel97": {
-          "header": "3 tests cover line 97",
-          "body": "<ul><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "4 tests cover line 97",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
       "dummy": ""
