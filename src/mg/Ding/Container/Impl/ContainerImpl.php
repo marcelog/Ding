@@ -65,6 +65,7 @@ use Ding\Bean\Factory\Driver\AnnotationRequiredDriver;
 use Ding\Bean\Factory\Driver\AnnotationResourceDriver;
 use Ding\Bean\Factory\Driver\AnnotationInitDestroyMethodDriver;
 use Ding\Bean\Factory\Driver\ContainerAwareDriver;
+use Ding\Bean\Factory\Driver\LoggerAwareDriver;
 use Ding\Bean\Factory\Driver\ResourceLoaderAwareDriver;
 use Ding\Bean\Factory\Driver\BeanNameAwareDriver;
 use Ding\Bean\Factory\Driver\AspectManagerAwareDriver;
@@ -566,6 +567,15 @@ class ContainerImpl implements IContainer
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainer::getLogger()
+     */
+    public function getLogger($class)
+    {
+        return \Logger::getLogger(str_replace('\\', '.', $class));
+    }
+
+    /**
      * Constructor.
      *
      * @param array $options options.
@@ -638,6 +648,7 @@ class ContainerImpl implements IContainer
         $this->_lifecycleManager->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addBeforeDefinitionListener(MethodInjectionDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterCreateListener(ContainerAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterCreateListener(LoggerAwareDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterCreateListener(ResourceLoaderAwareDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterDefinitionListener(BeanNameAwareDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterDefinitionListener(AspectManagerAwareDriver::getInstance($soullessArray));

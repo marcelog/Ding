@@ -125,6 +125,11 @@ IResourceLoaderAware: Whenever ding is going to instantiate a bean whose class
 implements IResourceLoaderAware interface, it will inject the instance of the
 resource loader in use, which is usually the container itself.
 
+ILoggerAware: Whenever ding is going to instantiate a bean whose class
+implements ILoggerAware interface, it will inject the instance of the
+logger (log4php) in use by the container, so you can log there. The returned
+logger will be of class __CLASS__ (where \ are replaced with .).
+
 Extension points
 ================
 You can easily hook in the bean lifecycle by just implementing one of:

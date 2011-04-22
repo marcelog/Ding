@@ -1,11 +1,13 @@
 <?php
 /**
- * Interface for a container.
+ * Whenever the container instantiates a bean which class implements this
+ * interface, it will be injected with the logger instance used by the container
+ * (log4php).
  *
  * PHP Version 5
  *
  * @category Ding
- * @package  Container
+ * @package  Logger
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @version  SVN: $Id$
@@ -26,44 +28,29 @@
  * limitations under the License.
  *
  */
-namespace Ding\Container;
-
-use Ding\MessageSource\IMessageSource;
-use Ding\Resource\IResourceLoader;
-use Ding\Bean\Factory\IBeanFactory;
+namespace Ding\Logger;
 
 /**
- * Interface for a container.
+ * Whenever the container instantiates a bean which class implements this
+ * interface, it will be injected with the logger instance used by the container
+ * (log4php).
  *
  * PHP Version 5
  *
  * @category Ding
- * @package  Container
+ * @package  Logger
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-interface IContainer extends IBeanFactory, IResourceLoader, IMessageSource
+interface ILoggerAware
 {
     /**
-     * Register a shutdown (destroy-method) method for a bean.
+     * Called by the container to inject the logger instance.
      *
-     * @param object $bean   Bean to call.
-     * @param string $method Method to call.
-     *
-     * @see Ding\Container.IContainer::registerShutdownMethod()
+     * @param \Logger $logger A log4php instance or dummy logger.
      *
      * @return void
      */
-    public function registerShutdownMethod($bean, $method);
-
-    /**
-     * Returns logger used by the container.
-     *
-     * @param string $class Will use this parameter to return an appropiate
-     * logger.
-     *
-     * @return \Logger
-     */
-    public function getLogger($class);
+    public function setLogger(\Logger $logger);
 }
