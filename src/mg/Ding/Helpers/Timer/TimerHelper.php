@@ -1,4 +1,5 @@
 <?php
+declare(ticks=1);
 /**
  * Timer helper. Will call your handler every so milliseconds.
  *
@@ -130,6 +131,7 @@ class TimerHelper
     {
         $this->_start = $this->getMicrotime();
         $this->_running = true;
+        register_tick_function(array($this, 'tick'));
     }
 
     /**
@@ -139,7 +141,8 @@ class TimerHelper
      */
     public function stop()
     {
-        $this->_running = true;
+        $this->_running = false;
+        unregister_tick_function(array($this, 'tick'));
     }
 
     /**
@@ -149,6 +152,7 @@ class TimerHelper
      */
     public function __construct()
     {
+        $this->_running = false;
         register_tick_function(array($this, 'tick'));
     }
 }
