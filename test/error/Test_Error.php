@@ -63,8 +63,21 @@ class Test_Error extends PHPUnit_Framework_TestCase
             )
         );
         $container = ContainerImpl::getInstance($properties);
-        trigger_error("an error", E_USER_NOTICE);
+        $line = __LINE__; trigger_error("an error", E_USER_NOTICE);
         $this->assertTrue(MyErrorHandler::$handled);
+        $this->assertEquals(MyErrorHandler::$error->getType(), E_USER_NOTICE);
+        $this->assertEquals(MyErrorHandler::$error->getMessage(), "an error");
+        $this->assertEquals(MyErrorHandler::$error->getFile(), __FILE__);
+        $this->assertEquals(MyErrorHandler::$error->getLine(), $line);
+        $this->assertEquals(
+            '[ ErrorInfo:  type: '
+            . ErrorInfo::typeToString(MyErrorHandler::$error->getType())
+            . ', Message: an error'
+            . ', File: ' . __FILE__
+            . ', Line: ' . $line
+            . ']',
+            MyErrorHandler::$error->__toString()
+        );
     }
 
     /**
@@ -84,8 +97,21 @@ class Test_Error extends PHPUnit_Framework_TestCase
             )
         );
         $container = ContainerImpl::getInstance($properties);
-        trigger_error("an error", E_USER_NOTICE);
+        $line = __LINE__; trigger_error("an error", E_USER_NOTICE);
         $this->assertTrue(MyErrorHandler2::$handled);
+        $this->assertEquals(MyErrorHandler2::$error->getType(), E_USER_NOTICE);
+        $this->assertEquals(MyErrorHandler2::$error->getMessage(), "an error");
+        $this->assertEquals(MyErrorHandler2::$error->getFile(), __FILE__);
+        $this->assertEquals(MyErrorHandler2::$error->getLine(), $line);
+        $this->assertEquals(
+            '[ ErrorInfo:  type: '
+            . ErrorInfo::typeToString(MyErrorHandler2::$error->getType())
+            . ', Message: an error'
+            . ', File: ' . __FILE__
+            . ', Line: ' . $line
+            . ']',
+            MyErrorHandler2::$error->__toString()
+        );
     }
 
     /**
@@ -103,14 +129,34 @@ class Test_Error extends PHPUnit_Framework_TestCase
         );
         $container = ContainerImpl::getInstance($properties);
     }
+
+    /**
+     * @test
+     */
+    public function can_discriminate_errors()
+    {
+        $this->assertEquals(ErrorInfo::typeToString(E_USER_ERROR), "User Error");
+        $this->assertEquals(ErrorInfo::typeToString(E_USER_WARNING), "User Warning");
+        $this->assertEquals(ErrorInfo::typeToString(E_USER_NOTICE), "User Notice");
+        $this->assertEquals(ErrorInfo::typeToString(E_USER_DEPRECATED), "User deprecated");
+        $this->assertEquals(ErrorInfo::typeToString(E_DEPRECATED), "Deprecated");
+        $this->assertEquals(ErrorInfo::typeToString(E_RECOVERABLE_ERROR), "Recoverable error");
+        $this->assertEquals(ErrorInfo::typeToString(E_STRICT), "Strict");
+        $this->assertEquals(ErrorInfo::typeToString(E_WARNING), "Warning");
+        $this->assertEquals(ErrorInfo::typeToString(E_NOTICE), "Notice");
+        $this->assertEquals(ErrorInfo::typeToString(E_ERROR), "Error");
+        $this->assertEquals(ErrorInfo::typeToString(time()), "Unknown");
+    }
 }
 
 class MyErrorHandler implements IErrorHandler
 {
     public static $handled = false;
+    public static $error = false;
 
     public function handleError(ErrorInfo $error)
     {
+        self::$error = $error;
         self::$handled = true;
     }
 }
@@ -121,9 +167,11 @@ class MyErrorHandler implements IErrorHandler
 class MyErrorHandler2 implements IErrorHandler
 {
     public static $handled = false;
+    public static $error = false;
 
     public function handleError(ErrorInfo $error)
     {
+        self::$error = $error;
         self::$handled = true;
     }
 }
