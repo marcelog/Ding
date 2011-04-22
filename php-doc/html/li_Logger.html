@@ -116,14 +116,18 @@ if (document.getElementById) {
 			tree_classe.openIcon = 'media/images/class_folder.png';
 			tree_classe.icon = 'media/images/class_folder.png';
 			
-						    				
+						    				var classe = new WebFXTreeItem('ILoggerAware', 'Logger/ILoggerAware.html');
+				classe.openIcon = 'media/images/Interface.png';
+				classe.icon = 'media/images/Interface.png';
+				tree_classe.add(classe);
+										    				
 			tree.add(tree_classe);
 		
 					var tree_classe = new WebFXTreeItem('Class(es)', '');
 			tree_classe.openIcon = 'media/images/class_folder.png';
 			tree_classe.icon = 'media/images/class_folder.png';
 			
-						    				var classe = new WebFXTreeItem('Logger', 'Logger/Logger.html');
+						    						    				var classe = new WebFXTreeItem('Logger', 'Logger/Logger.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
@@ -135,6 +139,10 @@ if (document.getElementById) {
 			tree_file.openIcon = 'media/images/folder.png';
 			tree_file.icon = 'media/images/folder.png';
 	
+							var file = new WebFXTreeItem('ILoggerAware.php', 'Logger/_Logger---ILoggerAware.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
 							var file = new WebFXTreeItem('Logger.php', 'Logger/_Logger---Logger.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';

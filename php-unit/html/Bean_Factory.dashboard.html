@@ -27,7 +27,7 @@
             <h2>Class Coverage Distribution</h2>
             <canvas id="classCoverageDistribution" width="475" height="200"></canvas>
             <script>
-            var ccd = new RGraph.Bar('classCoverageDistribution', [0,0,0,0,0,1,0,1,0,1,3,19]);
+            var ccd = new RGraph.Bar('classCoverageDistribution', [0,0,0,0,0,1,0,1,0,2,3,19]);
             ccd.Set('chart.background.barcolor1', 'white');
             ccd.Set('chart.background.barcolor2', 'white');
             ccd.Set('chart.colors', ['blue']);
@@ -44,7 +44,7 @@
             <h2>Class Complexity</h2>
             <canvas id="classComplexity" width="475" height="200"></canvas>
             <script>
-            var cc = new RGraph.Scatter('classComplexity', [[100,10,"blue","AnnotationAspectDriver"],[100,8,"blue","AnnotationInitDestroyMethodDriver"],[100,10,"blue","AnnotationRequiredDriver"],[100,15,"blue","AnnotationResourceDriver"],[100,7,"blue","AspectManagerAwareDriver"],[90.6666666667,51,"blue","BeanAnnotationDriver"],[100,7,"blue","BeanNameAwareDriver"],[93.7931034483,84,"blue","BeanXmlDriver"],[97.8991596639,76,"blue","BeanYamlDriver"],[100,7,"blue","ContainerAwareDriver"],[100,5,"blue","DependsOnDriver"],[100,6,"blue","ErrorHandlerDriver"],[60,12,"blue","LifecycleDriver"],[40.9090909091,7,"blue","MVCAnnotationDriver"],[88.8888888889,9,"blue","MessageSourceDriver"],[100,3,"blue","MethodInjectionAspect"],[100,6,"blue","MethodInjectionDriver"],[100,15,"blue","PropertiesDriver"],[100,7,"blue","ResourceLoaderAwareDriver"],[100,13,"blue","ResourcesDriver"],[100,12,"blue","SetterInjectionDriver"],[100,6,"blue","ShutdownDriver"],[100,7,"blue","SignalHandlerDriver"],[100,5,"blue","TimezoneDriver"],[100,0,"blue","BeanFactoryException"]]);
+            var cc = new RGraph.Scatter('classComplexity', [[100,10,"blue","AnnotationAspectDriver"],[100,8,"blue","AnnotationInitDestroyMethodDriver"],[100,10,"blue","AnnotationRequiredDriver"],[100,15,"blue","AnnotationResourceDriver"],[100,7,"blue","AspectManagerAwareDriver"],[90.6666666667,51,"blue","BeanAnnotationDriver"],[100,7,"blue","BeanNameAwareDriver"],[93.8566552901,85,"blue","BeanXmlDriver"],[97.8991596639,76,"blue","BeanYamlDriver"],[100,7,"blue","ContainerAwareDriver"],[100,5,"blue","DependsOnDriver"],[100,6,"blue","ErrorHandlerDriver"],[60,12,"blue","LifecycleDriver"],[85.7142857143,7,"blue","LoggerAwareDriver"],[40.9090909091,7,"blue","MVCAnnotationDriver"],[88.8888888889,9,"blue","MessageSourceDriver"],[100,3,"blue","MethodInjectionAspect"],[100,6,"blue","MethodInjectionDriver"],[100,15,"blue","PropertiesDriver"],[100,7,"blue","ResourceLoaderAwareDriver"],[100,13,"blue","ResourcesDriver"],[100,12,"blue","SetterInjectionDriver"],[100,6,"blue","ShutdownDriver"],[100,7,"blue","SignalHandlerDriver"],[100,5,"blue","TimezoneDriver"],[100,0,"blue","BeanFactoryException"]]);
             cc.Set('chart.xmax', 100);
             cc.Set('chart.background.barcolor1', 'white');
             cc.Set('chart.background.barcolor2', 'white');
@@ -60,12 +60,13 @@
           <td valign="top">
             <h2>Top Project Risks</h2>
             <ul>
-              <li><a href="Bean_Factory_Driver_BeanXmlDriver.php.html#56">BeanXmlDriver</a> (85)</li>
+              <li><a href="Bean_Factory_Driver_BeanXmlDriver.php.html#56">BeanXmlDriver</a> (86)</li>
               <li><a href="Bean_Factory_Driver_BeanYamlDriver.php.html#57">BeanYamlDriver</a> (76)</li>
               <li><a href="Bean_Factory_Driver_BeanAnnotationDriver.php.html#58">BeanAnnotationDriver</a> (53)</li>
               <li><a href="Bean_Factory_Driver_LifecycleDriver.php.html#50">LifecycleDriver</a> (21)</li>
               <li><a href="Bean_Factory_Driver_MVCAnnotationDriver.php.html#50">MVCAnnotationDriver</a> (17)</li>
               <li><a href="Bean_Factory_Driver_MessageSourceDriver.php.html#52">MessageSourceDriver</a> (9)</li>
+              <li><a href="Bean_Factory_Driver_LoggerAwareDriver.php.html#52">LoggerAwareDriver</a> (7)</li>
 
             </ul>
           </td>
@@ -73,16 +74,16 @@
           <td valign="top">
             <h2>Least Tested Methods</h2>
             <ul>
-              <li><a href="Bean_Factory_Driver_BeanYamlDriver.php.html#422">BeanYamlDriver::getAspect</a> (0%)</li>
+              <li><a href="Bean_Factory_Driver_BeanXmlDriver.php.html#493">BeanXmlDriver::getAspect</a> (0%)</li>
               <li><a href="Bean_Factory_Driver_BeanXmlDriver.php.html#134">BeanXmlDriver::__sleep</a> (0%)</li>
-              <li><a href="Bean_Factory_Driver_BeanXmlDriver.php.html#490">BeanXmlDriver::getAspect</a> (0%)</li>
+              <li><a href="Bean_Factory_Driver_BeanYamlDriver.php.html#422">BeanYamlDriver::getAspect</a> (0%)</li>
               <li><a href="Bean_Factory_Driver_BeanAnnotationDriver.php.html#177">BeanAnnotationDriver::getKnownClasses</a> (0%)</li>
               <li><a href="Bean_Factory_Driver_MVCAnnotationDriver.php.html#66">MVCAnnotationDriver::afterConfig</a> (18%)</li>
               <li><a href="Bean_Factory_Driver_LifecycleDriver.php.html#58">LifecycleDriver::afterAssemble</a> (47%)</li>
               <li><a href="Bean_Factory_Driver_BeanAnnotationDriver.php.html#236">BeanAnnotationDriver::afterConfig</a> (74%)</li>
+              <li><a href="Bean_Factory_Driver_LoggerAwareDriver.php.html#64">LoggerAwareDriver::afterCreate</a> (75%)</li>
               <li><a href="Bean_Factory_Driver_MessageSourceDriver.php.html#74">MessageSourceDriver::afterCreate</a> (75%)</li>
               <li><a href="Bean_Factory_Driver_BeanYamlDriver.php.html#427">BeanYamlDriver::getPointcut</a> (83%)</li>
-              <li><a href="Bean_Factory_Driver_BeanAnnotationDriver.php.html#277">BeanAnnotationDriver::beforeDefinition</a> (86%)</li>
 
             </ul>
           </td>
@@ -94,7 +95,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sat Apr 16 17:20:33 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Thu Apr 21 21:24:25 ART 2011.</td></tr>
     </table>
 
     <br/>

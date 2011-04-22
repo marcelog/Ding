@@ -103,8 +103,8 @@
     </Package>
     <Package name="Ding\Bean\Factory\Driver">
       <Stats>
-        <TotalClasses>37</TotalClasses>
-        <ConcreteClasses>37</ConcreteClasses>
+        <TotalClasses>38</TotalClasses>
+        <ConcreteClasses>38</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
         <Ce>9</Ce>
@@ -126,6 +126,7 @@
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/DependsOnDriver.php">DependsOnDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ErrorHandlerDriver.php">ErrorHandlerDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/LifecycleDriver.php">LifecycleDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/LoggerAwareDriver.php">LoggerAwareDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MVCAnnotationDriver.php">MVCAnnotationDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MessageSourceDriver.php">MessageSourceDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">MethodInjectionAspect</Class>
@@ -352,8 +353,8 @@
     </Package>
     <Package name="Ding\Container\Impl">
       <Stats>
-        <TotalClasses>38</TotalClasses>
-        <ConcreteClasses>38</ConcreteClasses>
+        <TotalClasses>39</TotalClasses>
+        <ConcreteClasses>39</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
         <Ce>2</Ce>
@@ -619,6 +620,26 @@
       </ConcreteClasses>
       <AbstractClasses/>
       <DependsUpon/>
+      <UsedBy/>
+    </Package>
+    <Package name="Ding\Logger">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>0</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>1</Ce>
+        <A>1</A>
+        <I>1</I>
+        <D>1</D>
+      </Stats>
+      <ConcreteClasses/>
+      <AbstractClasses>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Logger/ILoggerAware.php">ILoggerAware</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
       <UsedBy/>
     </Package>
     <Package name="Logger">
