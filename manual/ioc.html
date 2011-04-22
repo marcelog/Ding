@@ -579,6 +579,7 @@ metadata associated with it (and its subparts, like properties, annotations, etc
   <li><u>Ding\Bean\IAspectManagerAware</u>: Whenever ding is going to instantiate a bean whose class implements IAspectManagerAware interface, it will inject current instance of the aspect manager (giving the ability to inject pointcuts, aspects, and general aop management).</li>
   <li><u>Ding\Bean\IMessageSourceAware</u>: Whenever ding is going to instantiate a bean whose class implements IMessageSourceAware interface, it will inject current instance of the message source (providing i18n capabilities).</li>
   <li><u>Ding\Bean\IResourceLoaderAware</u>: Whenever ding is going to instantiate a bean whose class implements IResourceLoaderAware interface, it will inject the instance of the resource loader in use, which is usually the container itself.</li>
+  <li><u>Ding\Logger\ILoggerAware</u>: Whenever ding is going to instantiate a bean whose class implements ILoggerAware interface, it will inject the instance of the logger (log4php) currently in use by the container, so you can log there. The logger will have the name of the class (where '\' are replaced by '.')</li>
 </ul>
 
 <H3><u>Extension points</u></H3>
