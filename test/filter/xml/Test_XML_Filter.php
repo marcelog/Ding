@@ -75,6 +75,63 @@ class Test_XML_Filter extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->valueArray[0], 'this is a value');
     }
 
+    /**
+     * @test
+     */
+    public function can_use_properties_from_holder()
+    {
+        ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . RESOURCES_DIR);
+        $this->_properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'xml' => array(
+                        	'filename' => 'filter-xml-simple-holder.xml', 'directories' => array(RESOURCES_DIR)
+                        )
+                    ),
+                    'properties' => array(
+                        'a.b.value' => 'this is a value'
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aBean');
+        $this->assertEquals($bean->constructor, 'indeedavaluethis is a value');
+        $this->assertEquals($bean->value, 'indeedavaluethis is a value');
+        $this->assertEquals($bean->constructorArray[0], 'indeedavaluethis is a value');
+        $this->assertEquals($bean->valueArray[0], 'indeedavaluethis is a value');
+    }
+
+    /**
+     * @test
+     */
+    public function can_use_properties_from_holder_string()
+    {
+        ini_set('include_path', ini_get('include_path') . PATH_SEPARATOR . RESOURCES_DIR);
+        $this->_properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'xml' => array(
+                        	'filename' => 'filter-xml-simple-holder-string.xml', 'directories' => array(RESOURCES_DIR)
+                        )
+                    ),
+                    'properties' => array(
+                        'a.b.value' => 'this is a value'
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aBean');
+        $this->assertEquals($bean->constructor, 'indeedavaluethis is a value');
+        $this->assertEquals($bean->value, 'indeedavaluethis is a value');
+        $this->assertEquals($bean->constructorArray[0], 'indeedavaluethis is a value');
+        $this->assertEquals($bean->valueArray[0], 'indeedavaluethis is a value');
+    }
 }
 
 class ClassSimpleXMLFilter
@@ -83,12 +140,12 @@ class ClassSimpleXMLFilter
     public $value;
     public $constructorArray;
     public $valueArray;
-    
+
     public function setValue($value)
     {
         $this->value = $value;
     }
-    
+
     public function setArray($value)
     {
         $this->valueArray = $value;

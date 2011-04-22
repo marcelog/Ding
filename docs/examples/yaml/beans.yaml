@@ -1,4 +1,11 @@
 beans: !!map
+  PropertiesHolder:
+    class: Ding\Helpers\Properties\PropertiesHelper
+    scope: singleton
+    properties: !!map
+      locations:
+        value:
+          - value: resource://includepath://file.properties
   aspectA:
     class: AspectA
     scope: singleton

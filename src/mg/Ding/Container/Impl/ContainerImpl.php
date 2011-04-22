@@ -120,6 +120,7 @@ class ContainerImpl implements IContainer
      */
     private static $_options = array(
         'bdef' => array(),
+        'properties' => array(),
         'drivers' => array()
     );
 
@@ -599,6 +600,15 @@ class ContainerImpl implements IContainer
         $this->_shutdowners = $soullessArray;
         $this->_resources = $soullessArray;
 
+        $this->_lifecycleManager->addAfterCreateListener(ContainerAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterCreateListener(LoggerAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterCreateListener(ResourceLoaderAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterDefinitionListener(BeanNameAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterDefinitionListener(AspectManagerAwareDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterAssembleListener(LifecycleDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addBeforeCreateListener(ResourcesDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addAfterConfigListener(PropertiesDriver::getInstance(self::$_options['properties']));
+
         if (isset(self::$_options['bdef']['annotation'])) {
             $anDriver = BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation']);
             $this->_lifecycleManager->addBeforeConfigListener($anDriver);
@@ -627,9 +637,6 @@ class ContainerImpl implements IContainer
         if (isset(self::$_options['drivers']['timezone'])) {
             $this->_lifecycleManager->addAfterConfigListener(TimezoneDriver::getInstance($soullessArray));
         }
-        if (isset(self::$_options['properties'])) {
-            $this->_lifecycleManager->addAfterDefinitionListener(PropertiesDriver::getInstance(self::$_options['properties']));
-        }
         $this->_lifecycleManager->addBeforeCreateListener(DependsOnDriver::getInstance($soullessArray));
 
         if (isset(self::$_options['bdef']['xml'])) {
@@ -647,14 +654,6 @@ class ContainerImpl implements IContainer
 
         $this->_lifecycleManager->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addBeforeDefinitionListener(MethodInjectionDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterCreateListener(ContainerAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterCreateListener(LoggerAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterCreateListener(ResourceLoaderAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterDefinitionListener(BeanNameAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterDefinitionListener(AspectManagerAwareDriver::getInstance($soullessArray));
-
-        $this->_lifecycleManager->addAfterAssembleListener(LifecycleDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addBeforeCreateListener(ResourcesDriver::getInstance($soullessArray));
         $messageSourceDriver = MessageSourceDriver::getInstance($soullessArray);
         $this->_lifecycleManager->addAfterConfigListener($messageSourceDriver);
         $this->_lifecycleManager->addAfterCreateListener($messageSourceDriver);

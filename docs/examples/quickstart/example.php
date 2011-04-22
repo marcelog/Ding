@@ -304,12 +304,6 @@ try
                 	'xml' => array('filename' => 'beans.xml'),
                     'annotation' => array('scanDir' => array(realpath(__DIR__)))
                 ),
-                'properties' => array(
-                    'user.name' => 'nobody',
-                    'log.dir' => '/tmp/alogdir',
-                    'log.file' => 'alog.log',
-                    'timezone' => 'America/Buenos_Aires'
-                )
             ),
     		'cache' => array(
     			'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/cache/proxy'),

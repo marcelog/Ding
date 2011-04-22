@@ -213,7 +213,7 @@ class SyslogHelper
      */
     public function open()
     {
-        openlog($this->_ident, $this->_option, $this->_facility);
+        openlog($this->_ident, intval($this->_option), intval($this->_facility));
     }
 
     /**

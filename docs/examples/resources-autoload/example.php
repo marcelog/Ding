@@ -72,7 +72,6 @@ $properties = array(
     'ding' => array(
         'log4php.properties' => './log4php.properties',
         'factory' => array(
-            'properties' => array('anUrl' => 'http://www.google.com'),
             'bdef' => array(
 				'xml' => array('filename' => 'beans.xml', 'directory' => array((__DIR__)))
             ),

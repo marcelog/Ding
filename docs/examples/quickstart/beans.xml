@@ -71,6 +71,16 @@
 	</bean>
 	
 	<!--  This is an optional bean, you can comment it out if you want -->
+   <bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton">
+       <property name="locations">
+         <array>
+           <entry key="0"><value>resource://includepath://file.properties</value></entry>
+           <entry key="1"><value>other.properties</value></entry>
+           <entry key="2"><value>file://./user.properties</value></entry>
+         </array>
+       </property>
+   </bean>
+	<!--  This is an optional bean, you can comment it out if you want -->
 	<bean id="ShutdownHandler" class="Ding\Helpers\ShutdownHandler\ShutdownHandlerHelper" scope="singleton">
 		<property name="shutdownHandler">
 			<ref bean="MyShutdownHandler"/>

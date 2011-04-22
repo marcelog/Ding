@@ -120,12 +120,7 @@ $properties = array(
     'ding' => array(
         'log4php.properties' => $log4php,
         'factory' => array(
-            'bdef' => array('xml' => array('filename' => getenv('beans_xml'))),
-            'properties' => array(
-                'log4php.properties' => $log4php,
-                'app1.num' => 1,
-                'app2.num' => 2
-            )
+            'bdef' => array('xml' => array('filename' => 'beans.xml', 'directories' => array(getenv('beans_xml_dir')))),
         ),
         'cache' => array(
             'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),

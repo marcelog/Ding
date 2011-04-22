@@ -5,7 +5,7 @@
 
 # Location for your log4php.properties
 export log4php_properties=/tmp/log4php.properties
-export beans_xml=/tmp/beans.xml
+export beans_xml_dir=/tmp
 
 # Make sure this is in the include path.
 export PAGIBootstrap=example.php
@@ -19,7 +19,7 @@ log4php=/export/users/marcelog
 
 # PHP to run and options
 php=/usr/php-5.3/bin/php
-phpoptions="-d include_path=${log4php}:${pagi}/src/mg:${ding}/src/mg:${ding}/docs/examples/pagi"
+phpoptions="-d include_path=${log4php}:${pagi}/src/mg:${ding}/src/mg:${ding}/docs/examples/PAGI"
 
 # Standard.. the idea is to have a common launcher.
 launcher=${ding}/src/mg/Ding/Helpers/PAGI/PagiHelper.php

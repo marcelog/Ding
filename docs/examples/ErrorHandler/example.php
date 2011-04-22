@@ -72,10 +72,6 @@ $properties = array(
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
                 'xml' => array('filename' => 'beans.xml'),
             ),
-            // These properties will be used by the container when instantiating the beans, see beans.xml
-            'properties' => array(
-                'user.name' => 'nobody',
-            )
         ),
         // You can configure the cache for the bean definition, the beans, and the proxy definitions.
         // Other available implementations: zend, file, dummy, and memcached.

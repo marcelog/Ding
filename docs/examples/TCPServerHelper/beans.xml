@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
+   <bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton">
+       <property name="locations">
+         <array>
+           <entry key="0"><value>resource://includepath://file.properties</value></entry>
+         </array>
+       </property>
+   </bean>
 	<bean id="Server" class="Ding\Helpers\TCP\TCPServerHelper" scope="singleton">
 		<property name="backlog">
 			<value>${tcp.backlog}</value>

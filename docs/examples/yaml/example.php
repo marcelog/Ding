@@ -188,10 +188,6 @@ $properties = array(
                 'yaml' => array('filename' => 'beans.yaml'),
                 'annotation' => array('scanDir' => array(realpath(__DIR__)))
             ),
-            // These properties will be used by the container when instantiating the beans, see beans.xml
-            'properties' => array(
-                'user.name' => 'nobody',
-            )
         ),
         // You can configure the cache for the bean definition, the beans, and the proxy definitions.
         // Other available implementations: zend, file, dummy, and memcached.

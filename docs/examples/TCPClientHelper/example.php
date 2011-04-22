@@ -139,13 +139,6 @@ $properties = array(
                 'xml' => array('filename' => 'beans.xml'),
                 'annotation' => array('scanDir' => array(realpath(__DIR__)))
              ),
-            'properties' => array(
-                'tcp.address' => '127.0.0.1',
-                'tcp.port' => 8881,
-                'tcp.cto' => 100, // in milliseconds or 0 to block
-                'tcp.rto' => 500, // in milliseconds or 0 to disable (never blocks)
-                'tcp.rlen' => 1
-            )
         ),
         'cache' => array(
             'proxy' => array('impl' => 'dummy'),

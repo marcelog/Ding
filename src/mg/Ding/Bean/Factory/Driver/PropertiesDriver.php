@@ -28,15 +28,15 @@
  *
  */
 namespace Ding\Bean\Factory\Driver;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\Factory\Filter\ResourceFilter;
 use Ding\Bean\BeanPropertyDefinition;
-use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;
-use Ding\Bean\Factory\Filter\PropertyFilter;
 use Ding\Container\IContainer;
+use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 /**
  * This driver will apply all filters to property values.
@@ -50,7 +50,7 @@ use Ding\Container\IContainer;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class PropertiesDriver implements IAfterDefinitionListener
+class PropertiesDriver implements IAfterConfigListener
 {
     /**
      * Holds current instance.
@@ -64,52 +64,26 @@ class PropertiesDriver implements IAfterDefinitionListener
      */
     private $_properties;
 
-    public function _apply($value)
-    {
-        if (is_string($value)) {
-            foreach ($this->_properties as $k => $v) {
-                if (strpos($value, $k) !== false) {
-                    $value = str_replace($k, $v, $value);
-                    break;
-                }
-            }
-        }
-        return $value;
-    }
-
-    /**
-     * Recursively, apply filter to property or constructor arguments values.
-     *
-     * @param BeanPropertyDefinition|BeanConstructoruArgumentDefinition $def
-     * @param IContainer $factory Container in use.
-     *
-     * @return void
-     */
-    private function _applyFilter($def, IContainer $factory)
-    {
-        $value = $def->getValue();
-        if (is_array($value)) {
-            foreach ($value as $def) {
-                $this->_applyFilter($def, $factory);
-            }
-        } else if (is_string($value)) {
-            $def->setValue($this->_apply($value));
-        }
-    }
-
     /**
      * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterDefinition()
+     * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
      */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function afterConfig(IBeanFactory $factory)
     {
-        foreach ($bean->getProperties() as $property) {
-            $this->_applyFilter($property, $factory);
+        try
+        {
+            $bean = $factory->getBean('PropertiesHolder');
+            $bean->loadProperties($this->_properties);
+        } catch(BeanFactoryException $e) {
+            if (!empty($this->_properties)) {
+                $bDef = new BeanDefinition('PropertiesHolder');
+                $bDef->setClass('Ding\\Helpers\\Properties\\PropertiesHelper');
+                $bDef->setScope(BeanDefinition::BEAN_SINGLETON);
+                $factory->setBeanDefinition('PropertiesHolder', $bDef);
+                $bean = $factory->getBean('PropertiesHolder');
+                $bean->loadProperties($this->_properties);
+            }
         }
-        foreach ($bean->getArguments() as $argument) {
-            $this->_applyFilter($argument, $factory);
-        }
-        return $bean;
     }
 
     /**
@@ -136,11 +110,6 @@ class PropertiesDriver implements IAfterDefinitionListener
      */
     private function __construct(array $options)
     {
-    	$this->_properties = array();
-        foreach (array_keys($options) as $key) {
-            /* Change keys. 'property' becomes ${property} */
-            $propName = '${' . $key . '}';
-            $this->_properties[$propName] = $options[$key];
-        }
+        $this->_properties = $options;
     }
 }
