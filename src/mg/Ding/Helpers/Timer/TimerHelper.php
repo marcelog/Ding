@@ -153,6 +153,5 @@ class TimerHelper
     public function __construct()
     {
         $this->_running = false;
-        register_tick_function(array($this, 'tick'));
     }
 }
