@@ -16,6 +16,9 @@
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="Syslog">
+      <directory suffix=".php">syslog</directory>
+    </testsuite>
     <testsuite name="Timer">
       <directory suffix=".php">timer</directory>
     </testsuite>
