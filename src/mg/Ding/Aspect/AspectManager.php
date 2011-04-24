@@ -108,28 +108,6 @@ class AspectManager
     }
 
     /**
-     * Returns an AspectDefinition or false if none found.
-     *
-     * @param string $aspect Aspect id or name.
-     *
-     * @return AspectDefinition
-     */
-    public function getAspect($aspect)
-    {
-        if (isset($this->_aspects[$aspect])) {
-            return $this->_aspects[$aspect];
-        } else {
-            $result = false;
-            $value = $this->_aspectCache->fetch('AspectManagerAspect' . $aspect, $result);
-            if ($result === true) {
-                $this->_aspects[$aspect] = $value;
-                return $value;
-            }
-        }
-        return false;
-    }
-
-    /**
      * Return all known aspects, indexed by name.
      *
      * @return AspectDefinition[]

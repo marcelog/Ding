@@ -85,23 +85,6 @@ class DispatcherImpl implements IDispatcher
     }
 
     /**
-     * Clone this object.
-     *
-     * @return void
-     */
-    public function __clone()
-    {
-        foreach ($this->_methodsIntercepted as $method => $interceptor)
-        {
-            $this->_methodsIntercepted[$method] = clone $interceptor;
-        }
-        foreach ($this->_methodsExceptionIntercepted as $method => $interceptor)
-        {
-            $this->_methodsExceptionIntercepted[$method] = clone $interceptor;
-        }
-    }
-
-    /**
      * Returns interceptors for a given method name or false if none was set.
      *
      * @param string $method Method to check for.

@@ -55,6 +55,9 @@
     <testsuite name="AOP Annotation">
       <directory suffix=".php">aop/annotation</directory>
     </testsuite>
+    <testsuite name="AOP Proxy">
+      <directory suffix=".php">aop/proxy</directory>
+    </testsuite>
     <testsuite name="Filter XML">
       <directory suffix=".php">filter/xml</directory>
     </testsuite>

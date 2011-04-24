@@ -215,7 +215,8 @@ TEXT;
         } else if ($method->isProtected()) {
             $visibility = ' protected';
         } else if ($method->isPrivate()) {
-            $visibility = ' private';
+            // useless really. $visibility = ' private';
+            return '';
         }
         if ($method->isStatic()) {
             $additional .= ' static ';

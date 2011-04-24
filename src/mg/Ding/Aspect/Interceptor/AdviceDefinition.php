@@ -99,16 +99,6 @@ class AdviceDefinition
     }
 
     /**
-     * Returns the trapped method.
-     *
-     * @return string
-     */
-    public function getMethod()
-    {
-        return $this->_method;
-    }
-
-    /**
      * Constructor.
      *
      * @param string $method            Method name.
