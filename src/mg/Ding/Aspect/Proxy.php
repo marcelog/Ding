@@ -190,7 +190,7 @@ TEXT;
             } else if ($parameter->getDefaultValue() === true) {
                 $parameterSrc .= 'true';
             } else {
-                $parameterSrc .= $parameter->getDefaultValue();
+                $parameterSrc .= "'" . $parameter->getDefaultValue() . "'";
             }
         }
         return $parameterSrc;
@@ -219,11 +219,13 @@ TEXT;
             return '';
         }
         if ($method->isStatic()) {
-            $additional .= ' static ';
+            // useless really. $additional .= ' static ';
+            return '';
         }
-        if ($method->isAbstract()) {
-            $additional .= ' abstract ';
-        }
+        //if ($method->isAbstract()) {
+            // useless really. $$additional .= ' abstract ';
+            //return '';
+        //}
         if ($method->isConstructor()) {
             $name = '__construct';
         } else if ($method->isDestructor()) {

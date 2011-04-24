@@ -75,6 +75,24 @@ class Test_Proxy extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->something, 'protected');
         $this->assertEquals($bean->called, 'yes');
     }
+
+    /**
+     * @test
+     */
+    public function can_honor_default_values()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('methodIntercepted');
+        $some = 'dsa';
+        $result = $bean->anotherMethodWithDefaultValues(array(), $some, new DummyClass);
+        $this->assertTrue(empty($result[0]));
+        $this->assertEquals($result[1], 'dsa');
+        $this->assertTrue($result[2] instanceof DummyClass);
+        $this->assertTrue($result[3]);
+        $this->assertFalse($result[4]);
+        $this->assertNull($result[5]);
+        $this->assertEquals($result[6], 'asd');
+    }
 }
 
 /**
@@ -90,16 +108,59 @@ class MyAspect2
         $invocation->getObject()->something = 'protected';
         $invocation->proceed();
 	}
+
+	/**
+     * @MethodInterceptor(class-expression=ClassSimpleAOPAnnotation3,expression=anotherMethodWithDefaultValues)
+     */
+	public function methodInterceptor(MethodInvocation $invocation)
+	{
+        return $invocation->proceed();
+	}
+
+	/**
+     * @MethodInterceptor(class-expression=ClassSimpleAOPAnnotation3,expression=__.+)
+     */
+	public function trapMagic(MethodInvocation $invocation)
+	{
+        return $invocation->proceed();
+	}
+
+	/**
+     * @MethodInterceptor(class-expression=ClassSimpleAOPAnnotation3,expression=toIgnore)
+     */
+	public function trapPrivate(MethodInvocation $invocation)
+	{
+        return $invocation->proceed();
+	}
 }
 
+class DummyClass
+{
+
+}
 class ClassSimpleAOPAnnotation3
 {
     public $something;
     public $called;
 
+    public function anotherMethodWithDefaultValues(array $a, &$f, DummyClass $g, $b = true, $c = false, $d = null, $e = 'asd')
+    {
+        return array($a, $f, $g, $b, $c, $d, $e);
+    }
+
     protected function someProtectedMethod()
     {
         $this->called = 'yes';
+    }
+
+    private function toIgnore()
+    {
+
+    }
+
+    public static function toIgnoreStatic()
+    {
+
     }
 
     public function doSomethingProtected()
@@ -107,5 +168,13 @@ class ClassSimpleAOPAnnotation3
         $this->someProtectedMethod();
     }
 
+    public function __construct()
+    {
+
+    }
+
+    public function __destruct()
+    {
+    }
 }
 
