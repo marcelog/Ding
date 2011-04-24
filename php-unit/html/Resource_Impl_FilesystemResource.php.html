@@ -354,7 +354,7 @@
 <span class="lineNum" id="container58"><a name="58"></a><a href="#58" id="line58">      58</a> </span>                :  * limitations under the License.                                                    
 <span class="lineNum" id="container59"><a name="59"></a><a href="#59" id="line59">      59</a> </span>                :  *                                                                                   
 <span class="lineNum" id="container60"><a name="60"></a><a href="#60" id="line60">      60</a> </span>                :  */                                                                                  
-<span class="lineNum" id="container61"><a name="61"></a><a href="#61" id="line61">      61</a> </span><span class="lineCov">             10 : class FilesystemResource implements IResource                                        </span>
+<span class="lineNum" id="container61"><a name="61"></a><a href="#61" id="line61">      61</a> </span><span class="lineCov">             12 : class FilesystemResource implements IResource                                        </span>
 <span class="lineNum" id="container62"><a name="62"></a><a href="#62" id="line62">      62</a> </span>                : {                                                                                    
 <span class="lineNum" id="container63"><a name="63"></a><a href="#63" id="line63">      63</a> </span>                :     /**                                                                              
 <span class="lineNum" id="container64"><a name="64"></a><a href="#64" id="line64">      64</a> </span>                :      * Holds true filename.                                                          
@@ -410,7 +410,7 @@
 <span class="lineNum" id="container114"><a name="114"></a><a href="#114" id="line114">     114</a> </span>                :      */                                                                              
 <span class="lineNum" id="container115"><a name="115"></a><a href="#115" id="line115">     115</a> </span>                :     public function getURL()                                                         
 <span class="lineNum" id="container116"><a name="116"></a><a href="#116" id="line116">     116</a> </span>                :     {                                                                                
-<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span><span class="lineCov">              9 :         return self::SCHEME . $this-&gt;filename;                                       </span>
+<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span><span class="lineCov">             10 :         return self::SCHEME . $this-&gt;filename;                                       </span>
 <span class="lineNum" id="container118"><a name="118"></a><a href="#118" id="line118">     118</a> </span><span class="lineDeadCode">                :     }                                                                                </span>
 <span class="lineNum" id="container119"><a name="119"></a><a href="#119" id="line119">     119</a> </span>                :                                                                                      
 <span class="lineNum" id="container120"><a name="120"></a><a href="#120" id="line120">     120</a> </span>                :     /**                                                                              
@@ -462,12 +462,12 @@
 <span class="lineNum" id="container166"><a name="166"></a><a href="#166" id="line166">     166</a> </span>                :      */                                                                              
 <span class="lineNum" id="container167"><a name="167"></a><a href="#167" id="line167">     167</a> </span>                :     public function __construct($filename, $context = false)                         
 <span class="lineNum" id="container168"><a name="168"></a><a href="#168" id="line168">     168</a> </span>                :     {                                                                                
-<span class="lineNum" id="container169"><a name="169"></a><a href="#169" id="line169">     169</a> </span><span class="lineCov">              6 :         $filename = str_replace(self::SCHEME, '', $filename);                        </span>
-<span class="lineNum" id="container170"><a name="170"></a><a href="#170" id="line170">     170</a> </span><span class="lineCov">              6 :         $realpath = realpath($filename);                                             </span>
-<span class="lineNum" id="container171"><a name="171"></a><a href="#171" id="line171">     171</a> </span><span class="lineCov">              6 :         $this-&gt;filename = $realpath ? $realpath : $filename;                         </span>
-<span class="lineNum" id="container172"><a name="172"></a><a href="#172" id="line172">     172</a> </span><span class="lineCov">              6 :         $this-&gt;fd = false;                                                           </span>
-<span class="lineNum" id="container173"><a name="173"></a><a href="#173" id="line173">     173</a> </span><span class="lineCov">              6 :         $this-&gt;context = $context;                                                   </span>
-<span class="lineNum" id="container174"><a name="174"></a><a href="#174" id="line174">     174</a> </span><span class="lineCov">              6 :     }                                                                                </span>
+<span class="lineNum" id="container169"><a name="169"></a><a href="#169" id="line169">     169</a> </span><span class="lineCov">              7 :         $filename = str_replace(self::SCHEME, '', $filename);                        </span>
+<span class="lineNum" id="container170"><a name="170"></a><a href="#170" id="line170">     170</a> </span><span class="lineCov">              7 :         $realpath = realpath($filename);                                             </span>
+<span class="lineNum" id="container171"><a name="171"></a><a href="#171" id="line171">     171</a> </span><span class="lineCov">              7 :         $this-&gt;filename = $realpath ? $realpath : $filename;                         </span>
+<span class="lineNum" id="container172"><a name="172"></a><a href="#172" id="line172">     172</a> </span><span class="lineCov">              7 :         $this-&gt;fd = false;                                                           </span>
+<span class="lineNum" id="container173"><a name="173"></a><a href="#173" id="line173">     173</a> </span><span class="lineCov">              7 :         $this-&gt;context = $context;                                                   </span>
+<span class="lineNum" id="container174"><a name="174"></a><a href="#174" id="line174">     174</a> </span><span class="lineCov">              7 :     }                                                                                </span>
 
 </pre>
         </td>
@@ -476,7 +476,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sun Apr 24 14:28:25 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.0.4</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.5.13 at Sun Apr 24 16:04:57 ART 2011.</td></tr>
     </table>
 
     <br />
@@ -487,8 +487,8 @@
       YAHOO.namespace("phpunit.container");
       YAHOO.phpunit.container.panelsData = {
         "panel61": {
-          "header": "10 tests cover line 61",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "12 tests cover line 61",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li><li class=\"testPassed\">Test_Container::can_get_url_resource</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
         "panel99": {
@@ -502,8 +502,8 @@
           "footer": ""
         },
         "panel117": {
-          "header": "9 tests cover line 117",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "10 tests cover line 117",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
         "panel126": {
@@ -572,33 +572,33 @@
           "footer": ""
         },
         "panel169": {
-          "header": "6 tests cover line 169",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li></ul>",
+          "header": "7 tests cover line 169",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
         "panel170": {
-          "header": "6 tests cover line 170",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li></ul>",
+          "header": "7 tests cover line 170",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
         "panel171": {
-          "header": "6 tests cover line 171",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li></ul>",
+          "header": "7 tests cover line 171",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
         "panel172": {
-          "header": "6 tests cover line 172",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li></ul>",
+          "header": "7 tests cover line 172",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
         "panel173": {
-          "header": "6 tests cover line 173",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li></ul>",
+          "header": "7 tests cover line 173",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
         "panel174": {
-          "header": "6 tests cover line 174",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li></ul>",
+          "header": "7 tests cover line 174",
+          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_inject</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
       "dummy": ""

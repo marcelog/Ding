@@ -381,11 +381,11 @@
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">0</td>
-<td align="right">0</td>
 <td align="right">1</td>
 <td align="right">1</td>
 <td align="right">1</td>
-<td align="right">1</td>
+<td align="right">0.5</td>
+<td align="right">0.5</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKLogger">Logger</a></td>
@@ -426,10 +426,10 @@
 <td align="right">0</td>
 <td align="right">11</td>
 <td align="right">1</td>
-<td align="right">2</td>
+<td align="right">3</td>
 <td align="right">0</td>
-<td align="right">0.666666666667</td>
-<td align="right">0.333333333333</td>
+<td align="right">0.75</td>
+<td align="right">0.25</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CMessageSource">Ding\MessageSource</a></td>
@@ -1337,15 +1337,15 @@
 <h3><a name="PKDing%5CLogger">Ding\Logger</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 0</td>
+<a href="#EXafferent">Afferent Couplings</a>: 1</td>
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 1</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 1</td>
 <td>
-<a href="#EXinstability">Instability</a>: 1</td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
 <td>
-<a href="#EXdistance">Distance</a>: 1</td>
+<a href="#EXdistance">Distance</a>: 0.5</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -1358,7 +1358,9 @@
 <td valign="top" width="25%">ILoggerAware<br>
 </td>
 <td valign="top" width="25%"><i>None</i></td>
-<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%">
+<a href="#PKDing%5CMVC%5CHttp">Ding\MVC\Http</a><br>
+</td>
 <td valign="top" width="25%">
 <a href="#PK"></a><br>
 </td>
@@ -1460,13 +1462,13 @@
 <td>
 <a href="#EXafferent">Afferent Couplings</a>: 1</td>
 <td>
-<a href="#EXefferent">Efferent Couplings</a>: 2</td>
+<a href="#EXefferent">Efferent Couplings</a>: 3</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 0</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.666666666667</td>
+<a href="#EXinstability">Instability</a>: 0.75</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.333333333333</td>
+<a href="#EXdistance">Distance</a>: 0.25</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -1483,7 +1485,7 @@
 <a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br>
 </td>
 <td valign="top" width="25%">
-<a href="#PK"></a><br><a href="#PKDing%5CMVC">Ding\MVC</a><br>
+<a href="#PK"></a><br><a href="#PKDing%5CLogger">Ding\Logger</a><br><a href="#PKDing%5CMVC">Ding\MVC</a><br>
 </td>
 </tr>
 </table>

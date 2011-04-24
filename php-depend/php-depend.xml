@@ -651,11 +651,11 @@
         <TotalClasses>1</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>1</AbstractClasses>
-        <Ca>0</Ca>
+        <Ca>1</Ca>
         <Ce>1</Ce>
         <A>1</A>
-        <I>1</I>
-        <D>1</D>
+        <I>0.5</I>
+        <D>0.5</D>
       </Stats>
       <ConcreteClasses/>
       <AbstractClasses>
@@ -664,7 +664,9 @@
       <DependsUpon>
         <Package></Package>
       </DependsUpon>
-      <UsedBy/>
+      <UsedBy>
+        <Package>Ding\MVC\Http</Package>
+      </UsedBy>
     </Package>
     <Package name="Logger">
       <Stats>
@@ -740,10 +742,10 @@
         <ConcreteClasses>11</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
-        <Ce>2</Ce>
+        <Ce>3</Ce>
         <A>0</A>
-        <I>0.666666666667</I>
-        <D>0.333333333333</D>
+        <I>0.75</I>
+        <D>0.25</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpAction.php">HttpAction</Class>
@@ -757,6 +759,7 @@
       <AbstractClasses/>
       <DependsUpon>
         <Package></Package>
+        <Package>Ding\Logger</Package>
         <Package>Ding\MVC</Package>
       </DependsUpon>
       <UsedBy>
