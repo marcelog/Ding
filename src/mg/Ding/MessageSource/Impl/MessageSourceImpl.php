@@ -6,12 +6,13 @@
  *
  * PHP Version 5
  *
- * @category Ding
- * @package  MessageSource.Impl
- * @author   Marcelo Gornstein <marcelog@gmail.com>
- * @license  http://marcelog.github.com/ Apache License 2.0
- * @version  SVN: $Id$
- * @link     http://marcelog.github.com/
+ * @category   Ding
+ * @package    MessageSource
+ * @subpackage Impl
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @version    SVN: $Id$
+ * @link       http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -41,12 +42,12 @@ use Ding\Resource\IResourceLoaderAware;
  *
  * PHP Version 5
  *
- * @category Ding
- * @package  MessageSource.Impl
- * @author   Marcelo Gornstein <marcelog@gmail.com>
- * @license  http://marcelog.github.com/ Apache License 2.0
- * @version  SVN: $Id$
- * @link     http://marcelog.github.com/
+ * @category   Ding
+ * @package    MessageSource
+ * @subpackage Impl
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
