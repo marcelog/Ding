@@ -107,5 +107,6 @@ class HttpSession
      */
     protected function __construct()
     {
+        session_start();
     }
 }

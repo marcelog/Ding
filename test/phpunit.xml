@@ -16,6 +16,9 @@
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="HttpSession">
+      <directory suffix=".php">httpsession</directory>
+    </testsuite>
     <testsuite name="IoC XML">
       <directory suffix=".php">ioc/xml</directory>
     </testsuite>

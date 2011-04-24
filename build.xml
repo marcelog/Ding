@@ -3,6 +3,7 @@
 
   <target name="prepare" depends="clean">
     <mkdir dir="${dir.output}"/>
+    <mkdir dir="${dir.tmp}"/>
   </target>
 
   <target name="clean">
@@ -112,7 +113,7 @@
   </target>
 
   <target name="all" depends="clean, prepare, package, report"/>
-  <target name="build" depends="test"/>
-  <target name="test" depends="phpunit"/>
+  <target name="build" depends="prepare, test"/>
+  <target name="test" depends="prepare, phpunit"/>
   <target name="report" depends="build, phploc, phpdoc, phpdepend, phpcs, phpmd, phpcpd"/>
 </project>
