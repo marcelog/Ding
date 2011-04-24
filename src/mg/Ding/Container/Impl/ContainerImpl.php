@@ -128,7 +128,7 @@ class ContainerImpl implements IContainer
      * Registered shutdown methods for beans (destroy-methods).
      * @var array
      */
-    private $_shutdowners;
+    private $_shutdowners = array();
 
     /**
      * Beans already instantiated.

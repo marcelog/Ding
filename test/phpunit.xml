@@ -16,6 +16,9 @@
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="Timer">
+      <directory suffix=".php">timer</directory>
+    </testsuite>
     <testsuite name="HttpViewResolver">
       <directory suffix=".php">mvc</directory>
     </testsuite>
