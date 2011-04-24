@@ -91,18 +91,6 @@ class AspectDefinition
     private $_expression;
 
     /**
-     * Sets the expression for this aspect.
-     *
-     * @param string $expression Regular expression to set.
-     *
-     * @return void
-     */
-    public function setExpression($expression)
-    {
-        $this->_expression = $expression;
-    }
-
-    /**
      * Returns the expression for this aspect.
      *
      * @return string
@@ -120,30 +108,6 @@ class AspectDefinition
     public function getPointcuts()
     {
         return $this->_pointcuts;
-    }
-
-    /**
-     * Sets the pointcuts for this aspect.
-     *
-     * @param string[] $pointcuts Pointcut definition.
-     *
-     * @return void
-     */
-    public function setPointcuts($pointcuts)
-    {
-        $this->_pointcuts = $pointcuts;
-    }
-
-    /**
-     * Sets the type for this aspect.
-     *
-     * @param integer $type Interceptor type
-     *
-     * @return void
-     */
-    public function setType($type)
-    {
-        $this->_type = $type;
     }
 
     /**
@@ -167,30 +131,6 @@ class AspectDefinition
     }
 
     /**
-     * Sets the aspect bean name.
-     *
-     * @param string $name Bean name for this aspect.
-     *
-     * @return void
-     */
-    public function setBeanName($name)
-    {
-        $this->_beanName = $name;
-    }
-
-    /**
-     * Sets aspect name.
-     *
-     * @param string $name New aspect name.
-     *
-     * @return void
-     */
-    public function setName($name)
-    {
-        $this->_name = $name;
-    }
-
-    /**
      * Returns aspect name.
      *
 	 * @return string
@@ -198,25 +138,6 @@ class AspectDefinition
     public function getName()
     {
         return $this->_name;
-    }
-
-    /**
-     * Standard function, you know the drill..
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return
-            '['
-            . __CLASS__
-            . ' Name: ' . $this->getName()
-            . ' Pointcuts: ' . $this->getPointcuts()
-            . ' Type: ' . intval($this->getType())
-            . ' Aspect: ' . $this->getBeanName()
-            . ' Expression: ' . $this->getExpression()
-            . ']'
-        ;
     }
 
     /**

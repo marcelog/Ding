@@ -126,23 +126,6 @@ class PointcutDefinition
     }
 
     /**
-     * Standard function, you know the drill..
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return
-            '['
-            . __CLASS__
-            . ' Name: ' . $this->getName()
-            . ' Expression: ' . $this->getExpression()
-            . ' Method: ' . $this->getMethod()
-            . ']'
-        ;
-    }
-
-    /**
      * Constructor.
      *
      * @param string $name       Pointcut name.

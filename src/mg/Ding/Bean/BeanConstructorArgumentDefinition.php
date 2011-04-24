@@ -134,28 +134,6 @@ class BeanConstructorArgumentDefinition
     }
 
     /**
-     * Sets the type for this constructor argument.
-     *
-     * @param integer $type Sets the type for this constructor argument.
-     *
-     * @return void
-     */
-    public function setType($type)
-    {
-        $this->_type = $type;
-    }
-
-    /**
-     * Returns type for this argument.
-     *
-     * @return integer
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    /**
      * Constructor.
      *
      * @param integer $type  Argument type.

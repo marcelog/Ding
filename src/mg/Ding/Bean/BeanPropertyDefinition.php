@@ -147,57 +147,6 @@ class BeanPropertyDefinition
     }
 
     /**
-     * Sets the name for this property.
-     *
-     * @param string $name Name for this property.
-     *
-     * @return void
-     */
-    public function setName($name)
-    {
-        $this->_name = $name;
-    }
-
-    /**
-     * Returns property type
-     *
-     * @return integer
-     */
-    public function getType()
-    {
-        return $this->_type;
-    }
-
-    /**
-     * Sets the type for this property.
-     *
-     * @param integer $type Property type.
-     *
-     * @return void
-     */
-    public function setType($type)
-    {
-        $this->_type = $type;
-    }
-
-    /**
-     * Standard function, you know the drill..
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return
-            '['
-            . __CLASS__
-            . ' Name: ' . $this->getName()
-            . ' Type: ' . intval($this->getType())
-            . ' Value: ' . (string)$this->getValue()
-            . ']'
-        ;
-    }
-
-    /**
      * Constructor.
      *
      * @param string  $name  Target property name.

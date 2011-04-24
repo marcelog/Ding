@@ -124,12 +124,6 @@ class BeanDefinition
     private $_destroyMethod;
 
     /**
-     * Annotations for this bean.
-     * @var BeanAnnotationDefinition[]
-     */
-    private $_annotations;
-
-    /**
      * Annotations for this bean methods.
      * @var BeanAnnotationDefinition[]
      */
@@ -146,81 +140,6 @@ class BeanDefinition
      * @var string[]
      */
     private $_lookupMethods;
-
-    /**
-     * This will annotated this bean with the given annotation.
-     *
-     * @param BeanAnnotationDefinition $annotation Annotation.
-     * @param string                   $method     Optional method name.
-     *
-     * @return void
-     */
-    public function annotate(BeanAnnotationDefinition $annotation, $method = false)
-    {
-        $name = $annotation->getName();
-        if ($method === false) {
-            if (!isset($this->_annotations[$name])) {
-                $this->_annotations[$name] = array();
-            }
-            $this->_annotations[$name][] = $annotation;
-        } else {
-            if (!isset($this->_methodAnnotations[$method][$name])) {
-                $this->_methodAnnotations[$method][$name] = array();
-            }
-            $this->_methodAnnotations[$method][$name][] = $annotation;
-        }
-    }
-
-    /**
-     * Returns all annotations under the given name.
-     *
-     * @param string $name   Annotation name.
-     * @param string $method Optional method name.
-     *
-     * @return BeanAnnotationDefinition[]
-     */
-    public function getAnnotation($name, $method = false)
-    {
-        if ($method === false && $this->isAnnotated($name)) {
-            return $this->_annotations[$name];
-        } else if ($this->isAnnotated($name, $method)) {
-            return $this->_methodAnnotations[$method][$name];
-        }
-        return false;
-    }
-
-    /**
-     * Returns all annotations as an array indexed by annotation value.
-     *
-     * @param string $method Optional method name.
-     *
-     * @return BeanAnnotationDefinition[string][]
-     */
-    public function getAnnotations($method = false)
-    {
-        if ($method === false) {
-            return $this->_annotations;
-        } else {
-            return isset($this->_methodAnnotations[$method]);
-        }
-    }
-
-    /**
-     * Returns true if this bean is annotated with the given annotation name.
-     *
-     * @param string $name   Annotation name to check for.
-     * @param string $method Optional method name.
-     *
-     * @return boolean
-     */
-    public function isAnnotated($name, $method = false)
-    {
-        if ($method === false) {
-            return isset($this->_annotations[$name]);
-        } else {
-            return isset($this->_methodAnnotations[$method][$name]);
-        }
-    }
 
     /**
      * Returns true if this bean has mapped aspects.
