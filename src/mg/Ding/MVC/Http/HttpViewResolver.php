@@ -29,6 +29,7 @@
  */
 namespace Ding\MVC\Http;
 
+use Ding\Logger\ILoggerAware;
 use Ding\MVC\IViewResolver;
 use Ding\MVC\ModelAndView;
 
@@ -44,7 +45,7 @@ use Ding\MVC\ModelAndView;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class HttpViewResolver implements IViewResolver
+class HttpViewResolver implements IViewResolver, ILoggerAware
 {
     /**
      * log4php logger or our own.
@@ -103,9 +104,10 @@ class HttpViewResolver implements IViewResolver
     {
         $len = strlen($path) - 1;
         if ($path[$len] == '/') {
-            $path = substr($path, 0, $len);
+            $path = substr($path, 0, -1);
         }
-        $this->_path = realpath($path);
+        $realpath = realpath($path);;
+        $this->_path = $realpath === false ? $path : $realpath;
     }
 
     /**
@@ -121,6 +123,15 @@ class HttpViewResolver implements IViewResolver
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Ding\Logger.ILoggerAware::setLogger()
+     */
+    public function setLogger(\Logger $logger)
+    {
+        $this->_logger = $logger;
+    }
+
+    /**
      * Sets the view suffix, like .html
      *
      * @param string $suffix Suffix to use for views.
@@ -129,7 +140,6 @@ class HttpViewResolver implements IViewResolver
      */
     public function setViewSuffix($suffix)
     {
-        $this->_logger = \Logger::getLogger('Ding.MVC');
         $this->_suffix = $suffix;
     }
 }

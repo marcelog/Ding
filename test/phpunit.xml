@@ -16,6 +16,9 @@
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="HttpViewResolver">
+      <directory suffix=".php">mvc</directory>
+    </testsuite>
     <testsuite name="HttpSession">
       <directory suffix=".php">httpsession</directory>
     </testsuite>
@@ -94,10 +97,8 @@
     <testsuite name="i18n">
       <directory suffix=".php">i18n</directory>
     </testsuite>
-    <!-- 
     <testsuite name="Container">
       <directory suffix=".php">container</directory>
     </testsuite>
-    -->
   </testsuites>
 </phpunit>

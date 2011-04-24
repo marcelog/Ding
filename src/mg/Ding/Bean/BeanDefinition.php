@@ -142,6 +142,26 @@ class BeanDefinition
     private $_lookupMethods;
 
     /**
+     * Returns true if this bean definition is for a bean of type singleton.
+     *
+     * @return boolean
+     */
+    public function isSingleton()
+    {
+        return $this->_scope == BeanDefinition::BEAN_SINGLETON;
+    }
+
+    /**
+     * Returns true if this bean definition is for a bean of type prototype.
+     *
+     * @return boolean
+     */
+    public function isPrototype()
+    {
+        return $this->_scope == BeanDefinition::BEAN_PROTOTYPE;
+    }
+
+    /**
      * Returns true if this bean has mapped aspects.
      *
      * @return boolean

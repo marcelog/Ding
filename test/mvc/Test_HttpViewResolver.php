@@ -1,12 +1,12 @@
 <?php
 /**
- * This class will test the ContainerImpl class.
+ * This class will test the HttpViewResolver.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Test
- * @subpackage Container
+ * @subpackage mvc
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @version    SVN: $Id$
@@ -28,22 +28,22 @@
  *
  */
 
+use Ding\MVC\ModelAndView;
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Reflection\ReflectionFactory;
 
 /**
- * This class will test the ContainerImpl class.
+ * This class will test the HttpViewResolver.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Test
- * @subpackage Container
+ * @subpackage mvc
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_Container extends PHPUnit_Framework_TestCase
+class Test_HttpViewResolver extends PHPUnit_Framework_TestCase
 {
     private $_properties = array();
 
@@ -52,12 +52,9 @@ class Test_Container extends PHPUnit_Framework_TestCase
         $this->_properties = array(
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
-                'cache' => array(),
                 'factory' => array(
                     'bdef' => array(
-                        'xml' => array(
-                        	'filename' => 'container.xml', 'directories' => array(RESOURCES_DIR)
-                        )
+                        'xml' => array('filename' => 'mvc.xml', 'directories' => array(RESOURCES_DIR))
                     )
                 )
             )
@@ -66,52 +63,29 @@ class Test_Container extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
      */
-    public function cannot_get_inexistant_pointcut()
+    public function can_resolve()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('beanWithInvalidAspect');
+        $resolver = $container->getBean('HttpViewResolver');
+        $view = $resolver->resolve(new ModelAndView('name'));
+        $ref = new ReflectionObject($view);
+        $prop = $ref->getProperty('_path');
+        $prop->setAccessible(true);
+        $this->assertEquals($prop->getValue($view), './views/view.name.html');
     }
 
     /**
      * @test
      */
-    public function can_get_url_resource()
+    public function can_resolve_with_slash_at_the_end()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $resource = $container->getResource('http://www.google.com');
-        $contents = stream_get_contents($resource->getStream());
-        $this->assertTrue(strlen($contents) > 0);
+        $resolver = $container->getBean('HttpViewResolver2');
+        $view = $resolver->resolve(new ModelAndView('name'));
+        $ref = new ReflectionObject($view);
+        $prop = $ref->getProperty('_path');
+        $prop->setAccessible(true);
+        $this->assertEquals($prop->getValue($view), './views/view.name.html');
     }
-
-    /**
-     * @test
-     */
-    public function can_get_resource_without_scheme()
-    {
-        $container = ContainerImpl::getInstance($this->_properties);
-        $resource = $container->getResource('somefile.txt');
-        $this->assertTrue($resource instanceof Ding\Resource\Impl\FileSystemResource);
-        $this->assertEquals($resource->getURL(), 'file://somefile.txt');
-    }
-
-    /**
-     * @test
-     */
-    public function can_serialize()
-    {
-        $container = ContainerImpl::getInstance($this->_properties);
-        serialize($container);
-    }
-}
-
-class SomeContainerTestBeanClass
-{
-
-}
-
-class SomeContainerTestAspectClass
-{
-
 }

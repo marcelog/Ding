@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="beanWithInvalidAspect" class="SomeContainerTestBeanClass" scope="singleton"/>
+  <bean id="someAspect" class="SomeContainerTestAspectClass" scope="singleton"/>
+  <aspect id="anAspect" ref="someAspect" type="method" expression="SomeContainerTestBeanClass">
+    <pointcut pointcut-ref="aPointcut" method="invoke"/>
+  </aspect>
+</beans>

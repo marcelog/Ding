@@ -435,21 +435,14 @@ class ContainerImpl implements IContainer
         $ret = false;
         $beanDefinition = $this->getBeanDefinition($name);
         $beanName = $name . '.bean';
-        switch ($beanDefinition->getScope())
-        {
-        case BeanDefinition::BEAN_PROTOTYPE:
-            return $this->_createBean($beanDefinition);
-            break;
-        case BeanDefinition::BEAN_SINGLETON:
+        if ($beanDefinition->isPrototype()) {
+            $ret = $this->_createBean($beanDefinition);
+        } else if ($beanDefinition->isSingleton()) {
             if (!isset($this->_beans[$name])) {
                 $result = false;
                 $ret = $this->_beanCache->fetch($beanName, $result);
                 if ($result === false) {
                     $ret = $this->_createBean($beanDefinition);
-                } else {
-                    if ($this->_logDebugEnabled) {
-                        $this->_logger->debug('Serving cached: ' . $beanName);
-                    }
                 }
                 $this->setBean($name, $ret);
             } else {
@@ -458,9 +451,6 @@ class ContainerImpl implements IContainer
                 }
                 $ret = $this->_beans[$name];
             }
-            break;
-        default:
-            throw new BeanFactoryException('Invalid bean scope');
         }
         return $ret;
     }
