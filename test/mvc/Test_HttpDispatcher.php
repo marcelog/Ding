@@ -128,6 +128,31 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $action = new HttpAction('/MyControllerInvalid/something');
         $model = $dispatcher->dispatch($action, $mapper);
     }
+
+    /**
+     * @test
+     */
+    public function can_dispatch_with_annotations()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'annotation' => array('scanDir' => array(__DIR__)),
+        				'xml' => array('filename' => 'mvc.xml', 'directories' => array(RESOURCES_DIR))
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $dispatcher = $container->getBean('HttpDispatcher');
+        $mapper = $container->getBean('HttpUrlMapper');
+        $action = new HttpAction('/MyAnnotatedController/something');
+        $model = $dispatcher->dispatch($action, $mapper);
+        $this->assertTrue($model instanceof ModelAndView);
+        $this->assertEquals($model->getName(), 'blah');
+    }
 }
 
 class AController
@@ -141,4 +166,33 @@ class AController
     {
         return new ModelAndView('blah');
     }
+}
+
+/**
+ * @Controller
+ * @RequestMapping(url=/MyAnnotatedController)
+ */
+class AnnotatedController
+{
+    public function somethingAction()
+    {
+        return new ModelAndView('blah');
+    }
+}
+
+/**
+ * @Controller
+ */
+class UnMappedAnnotatedController
+{
+
+}
+
+/**
+ * @Controller
+ * @RequestMapping
+ */
+class UnMappedURLAnnotatedController
+{
+
 }
