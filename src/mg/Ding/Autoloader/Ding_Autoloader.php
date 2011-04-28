@@ -83,6 +83,12 @@ class Ding_Autoloader
     private static $_cache = false;
 
     /**
+     * Include path.
+     * @var string[]
+     */
+    private static $_includePath;
+
+    /**
      * Sets the autoloader cache to be used.
      *
      * @param ICache $cache Autoloader cache to use.
@@ -103,15 +109,20 @@ class Ding_Autoloader
      */
     private static function _resolve($class)
     {
-        if (strpos($class, 'Ding\\') !== 0) {
-            return false;
+        //if (strpos($class, 'Ding\\') !== 0) {
+        //    return false;
+        //}
+        foreach (self::$_includePath as $path) {
+            $file
+                = $path
+                . DIRECTORY_SEPARATOR
+                . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php'
+            ;
+            if (file_exists($file)) {
+                return $file;
+            }
         }
-        $file
-            = self::$_myPath
-            . DIRECTORY_SEPARATOR
-            . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php'
-        ;
-        return $file;
+        return false;
     }
 
     /**
@@ -157,6 +168,7 @@ class Ding_Autoloader
             DIRECTORY_SEPARATOR,
             array(__DIR__, '..', '..')
         );
+        self::$_includePath = explode(PATH_SEPARATOR, ini_get('include_path'));
         return spl_autoload_register('Ding_Autoloader::load');
     }
 }
