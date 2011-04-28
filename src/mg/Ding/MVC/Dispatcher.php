@@ -57,34 +57,6 @@ abstract class Dispatcher
     private $_loggerDebugEnabled;
 
     /**
-     * Known controllers.
-     * @var Controller[]
-     */
-    private $_controllers;
-
-    /**
-     * Sets controller.
-     *
-     * @param Controller[] $controllers Controllers.
-     *
-     * @return void
-     */
-    public function setControllers($controllers)
-    {
-        $this->_controllers = $controllers;
-    }
-
-    /**
-     * Returns all controllers this dispatcher knows about.
-     *
-     * @return Controller[]
-     */
-    public function getControllers()
-    {
-        return $this->_controllers;
-    }
-
-    /**
      * Main action. Will use the action mapper to get a controller that can
      * handle the given Action, and then the viewresolver to get a View that
      * can render the returned ModelAndView from the controller.

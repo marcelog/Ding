@@ -16,14 +16,14 @@
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="MVC">
+      <directory suffix=".php">mvc</directory>
+    </testsuite>
     <testsuite name="Syslog">
       <directory suffix=".php">syslog</directory>
     </testsuite>
     <testsuite name="Timer">
       <directory suffix=".php">timer</directory>
-    </testsuite>
-    <testsuite name="HttpViewResolver">
-      <directory suffix=".php">mvc</directory>
     </testsuite>
     <testsuite name="HttpSession">
       <directory suffix=".php">httpsession</directory>

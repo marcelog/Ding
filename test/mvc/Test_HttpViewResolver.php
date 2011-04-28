@@ -73,6 +73,7 @@ class Test_HttpViewResolver extends PHPUnit_Framework_TestCase
         $prop = $ref->getProperty('_path');
         $prop->setAccessible(true);
         $this->assertEquals($prop->getValue($view), './views/view.name.html');
+        $this->assertTrue($view->getModelAndView() instanceof ModelAndView);
     }
 
     /**
@@ -87,5 +88,6 @@ class Test_HttpViewResolver extends PHPUnit_Framework_TestCase
         $prop = $ref->getProperty('_path');
         $prop->setAccessible(true);
         $this->assertEquals($prop->getValue($view), './views/view.name.html');
+        $this->assertTrue($view->getModelAndView() instanceof ModelAndView);
     }
 }
