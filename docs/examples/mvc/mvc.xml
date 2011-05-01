@@ -24,8 +24,12 @@
 	<bean id="HttpExceptionMapper" class="Ding\MVC\Http\HttpExceptionMapper" scope="singleton">
 		<property name="map">
         	<array>
-        		<entry key="0"><value>Exception</value></entry>
-        		<entry key="1"><ref bean="MyController"/></entry>
+        	   <entry key="0">
+        	       <array>
+                       <entry key="0"><value>\Exception</value></entry>
+		               <entry key="1"><ref bean="MyController"/></entry>
+        	       </array>
+        	   </entry>
         	</array>
 		</property>
 	</bean>

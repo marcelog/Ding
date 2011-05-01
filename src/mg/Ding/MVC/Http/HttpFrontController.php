@@ -29,6 +29,8 @@
  */
 namespace Ding\MVC\Http;
 
+use Ding\HttpSession\HttpSession;
+
 use Ding\MVC\IMapper;
 use Ding\MVC\Exception\MVCException;
 use Ding\MVC\ModelAndView;
@@ -94,11 +96,6 @@ class HttpFrontController
             }
             $view = $viewResolver->resolve($modelAndView);
             $view->render();
-        } else {
-            if (self::$_loggerDebugEnabled) {
-                self::$_logger->debug('Using default action Main');
-            }
-            $modelAndView = new ModelAndView('Main');
         }
     }
     /**
@@ -111,17 +108,18 @@ class HttpFrontController
      */
     public static function handle(array $properties = array(), $baseUrl = '/')
     {
+        $session = HttpSession::getSession();
         $container = ContainerImpl::getInstance($properties);
         self::$_logger = \Logger::getLogger('Ding.MVC');
         self::$_loggerDebugEnabled = self::$_logger->isDebugEnabled();
         $baseUrlLen = strlen($baseUrl);
-        session_start();
         ob_start();
         $exceptionMapper = $dispatcher = $viewResolver = false;
         try
         {
             $dispatcher = $container->getBean('HttpDispatcher');
             $viewResolver = $container->getBean('HttpViewResolver');
+            $exceptionMapper = $container->getBean('HttpExceptionMapper');
             $method = strtolower($_SERVER['REQUEST_METHOD']);
             $url = $_SERVER['REQUEST_URI'];
             $urlStart = strpos($url, $baseUrl);
@@ -153,7 +151,6 @@ class HttpFrontController
             $mapper = $container->getBean('HttpUrlMapper');
             self::dispatch($dispatcher, $viewResolver, $action, $mapper);
         } catch(\Exception $exception) {
-            $exceptionMapper = $container->getBean('HttpExceptionMapper');
             if (self::$_loggerDebugEnabled) {
                 self::$_logger->debug('Got Exception: ' . $exception);
             }
@@ -169,26 +166,5 @@ class HttpFrontController
             }
         }
         ob_end_flush();
-    }
-
-    /**
-     * Configures this frontcontroller with the container properties.
-     *
-     * @param array $properties Container properties.
-     *
-     * @return void
-     */
-    public static function configure(array $properties)
-    {
-        self::$_properties = $properties;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
-    private function __construct($baseUrl = '/')
-    {
     }
 }

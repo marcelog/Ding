@@ -60,12 +60,6 @@ class HttpExceptionMapper implements IMapper
     private $_map;
 
     /**
-     * Assigned base url.
-     * @var string
-     */
-    private $_baseUrl;
-
-    /**
      * Sets the map for this mapper.
      *
      * @param array[] $map An array containing arrays defined like this:
@@ -78,29 +72,7 @@ class HttpExceptionMapper implements IMapper
      */
     public function setMap(array $map)
     {
-        $this->_map[] = $map;
-    }
-
-    /**
-     * Sets the base url for this mapper.
-     *
-     * @param string $baseUrl Base url.
-     *
-     * @return void
-     */
-    public function setBaseUrl($baseUrl)
-    {
-        $this->_baseUrl = $baseUrl;
-    }
-
-    /**
-     * Returns the base url for this mapper.
-     *
-     * @return string
-     */
-    public function getBaseUrl()
-    {
-        return $this->_baseUrl;
+        $this->_map = $map;
     }
 
     /**
@@ -120,6 +92,7 @@ class HttpExceptionMapper implements IMapper
         if ($this->_logger->isDebugEnabled()) {
             $this->_logger->debug('Exception mapper invoked with: ' . $action->getId());
         }
+
         // Lookup a controller that can handle this url.
         foreach ($this->_map as $map) {
             $controllerException = $map[0];
@@ -127,7 +100,7 @@ class HttpExceptionMapper implements IMapper
             if (!($exception instanceof $controllerException)) {
                 continue;
             }
-            return array($controller, $controllerException . 'Exception');
+            return array($controller, str_replace('\\', '_', $controllerException) . 'Exception');
         }
         return false;
     }

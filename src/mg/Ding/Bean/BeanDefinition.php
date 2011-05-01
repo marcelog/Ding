@@ -206,16 +206,6 @@ class BeanDefinition
     }
 
     /**
-     * Returns bean type (scope). See this class constants.
-     *
-     * @return integer
-     */
-    public function getScope()
-    {
-        return $this->_scope;
-    }
-
-    /**
      * Sets new method injections.
      *
      * @param string[] $methods Methods injected.

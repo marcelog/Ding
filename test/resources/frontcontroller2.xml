@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton"/>
+  <bean id="HttpUrlMapper" class="Ding\MVC\Http\HttpUrlMapper" scope="singleton">
+    <property name="map">
+      <array>
+        <entry key="0">
+          <array>
+            <entry key="0"><value>/MyController</value></entry>
+            <entry key="1"><ref bean="myController"/></entry>
+          </array>
+        </entry>
+      </array>
+    </property>
+  </bean>
+
+  <bean id="myController" class="AController2" scope="singleton"/>
+  <bean id="HttpViewResolver" class="Ding\MVC\Http\HttpViewResolver" scope="singleton">
+    <property name="viewPrefix"><value>view.</value></property>
+    <property name="viewSuffix"><value>.html</value></property>
+    <property name="viewPath"><value>${prefix}/views</value></property>
+  </bean>
+</beans>

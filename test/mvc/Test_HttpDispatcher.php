@@ -157,12 +157,12 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
 
 class AController
 {
-    public function mainAction()
+    public function mainAction(array $arguments = array())
     {
         return new ModelAndView('main');
     }
 
-    public function somethingAction()
+    public function somethingAction(array $arguments = array())
     {
         return new ModelAndView('blah');
     }
@@ -174,7 +174,7 @@ class AController
  */
 class AnnotatedController
 {
-    public function somethingAction()
+    public function somethingAction(array $arguments = array())
     {
         return new ModelAndView('blah');
     }

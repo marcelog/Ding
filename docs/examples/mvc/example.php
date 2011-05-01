@@ -62,7 +62,7 @@ class AnException extends \Exception
 
 class MyController
 {
-    public function ExceptionException(array $arguments = array())
+    public function _ExceptionException(array $arguments = array())
     {
         $modelAndView = new ModelAndView('exception');
         $modelAndView->add(array('exception' => $arguments['exception']));
@@ -137,10 +137,10 @@ $properties = array(
             ),
         ),
         'cache' => array(
-            'proxy' => array('impl' => 'apc', 'directory' => '/tmp/Ding/proxy'),
-            'bdef' => array('impl' => 'apc', 'directory' => '/tmp/Ding/bdef'),
+            'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
+            'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
             'beans' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans'),
-        	'autoloader' => array('impl' => 'apc', 'directory' => '/tmp/Ding/beans')
+        	'autoloader' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans')
         )
     )
 );
