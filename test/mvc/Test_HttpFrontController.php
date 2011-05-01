@@ -32,6 +32,7 @@ use Ding\MVC\ForwardModelAndView;
 use Ding\MVC\Http\HttpFrontController;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\MVC\ModelAndView;
+use Ding\MVC\TwigModelAndView;
 
 if (!defined('OUTPUT_TEST')) {
     define('OUTPUT_TEST', true);
@@ -58,7 +59,16 @@ class Test_HttpFrontController extends PHPUnit_Extensions_OutputTestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-                    'properties' => array('prefix' => RESOURCES_DIR),
+                    'properties' => array(
+                        'twig.debug' => false,
+                        'twig.charset' => 'utf-8',
+                        'twig.base_template_class' => 'Twig_Template',
+                        'twig.cache' => '/tmp/Ding/twigcache',
+                        'twig.auto_reload' => true,
+                        'twig.strict_variables' => false,
+                        'twig.autoescape' => 0,
+        				'prefix' => RESOURCES_DIR
+                    ),
                     'bdef' => array(
                         'xml' => array('filename' => 'frontcontroller.xml', 'directories' => array(RESOURCES_DIR))
                     )
@@ -145,6 +155,20 @@ class Test_HttpFrontController extends PHPUnit_Extensions_OutputTestCase
             $this->expectOutputString('hi there');
         }
         $_SERVER['REQUEST_URI'] = '/MyBaseURL/MyController/something';
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        HttpFrontController::handle($this->_properties, '/MyBaseURL');
+    }
+
+    /**
+     * @test
+     */
+    public function can_dispatch_and_render_twig()
+    {
+        global $_SERVER;
+        if (OUTPUT_TEST) {
+            $this->expectOutputString('hi there, im a twig view');
+        }
+        $_SERVER['REQUEST_URI'] = '/MyBaseURL/MyController/somethingTwig';
         $_SERVER['REQUEST_METHOD'] = 'GET';
         HttpFrontController::handle($this->_properties, '/MyBaseURL');
     }
@@ -256,6 +280,10 @@ class AController2
     public function _ExceptionException(array $arguments = array())
     {
         return new ModelAndView('someException');
+    }
+    public function somethingTwigAction(array $arguments = array())
+    {
+        return new TwigModelAndView('someTwig');
     }
     public function somethingAction(array $arguments = array())
     {

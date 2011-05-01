@@ -1,0 +1,15 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+  <head>
+    <title>My Annotated controller view</title>
+  </head>
+  <body>
+{% if vars %}
+  <ul>
+    {% for var in vars|keys %}
+      <li>{{ var }} = {{ vars[var] }} </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+  </body>
+</html>
