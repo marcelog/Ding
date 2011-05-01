@@ -799,9 +799,14 @@
   <error line="88" column="1" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpViewResolver.php">
-  <error line="149" column="5" severity="error" message="Doc comment for &quot;$logger&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="151" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="152" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="170" column="5" severity="error" message="Doc comment for &quot;$logger&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="172" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="173" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+ </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/SmartyView.php">
+  <error line="75" column="9" severity="error" message="&quot;require_once&quot; is a statement not a function; no parentheses are required" source="PEAR.Files.IncludingFile.BracketsNotRequired"/>
+  <error line="75" column="9" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
+  <error line="92" column="1" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/TwigView.php">
   <error line="75" column="9" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
@@ -817,6 +822,8 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ModelAndView.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/RedirectModelAndView.php">
+ </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/SmartyModelAndView.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/TwigModelAndView.php">
  </file>

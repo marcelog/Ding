@@ -688,19 +688,20 @@
     </Package>
     <Package name="Ding\MVC">
       <Stats>
-        <TotalClasses>9</TotalClasses>
-        <ConcreteClasses>4</ConcreteClasses>
+        <TotalClasses>10</TotalClasses>
+        <ConcreteClasses>5</ConcreteClasses>
         <AbstractClasses>5</AbstractClasses>
         <Ca>1</Ca>
         <Ce>2</Ce>
-        <A>0.555555555556</A>
+        <A>0.5</A>
         <I>0.666666666667</I>
-        <D>0.222222222222</D>
+        <D>0.166666666667</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ForwardModelAndView.php">ForwardModelAndView</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ModelAndView.php">ModelAndView</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/RedirectModelAndView.php">RedirectModelAndView</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/SmartyModelAndView.php">SmartyModelAndView</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/TwigModelAndView.php">TwigModelAndView</Class>
       </ConcreteClasses>
       <AbstractClasses>
@@ -742,8 +743,8 @@
     </Package>
     <Package name="Ding\MVC\Http">
       <Stats>
-        <TotalClasses>13</TotalClasses>
-        <ConcreteClasses>13</ConcreteClasses>
+        <TotalClasses>14</TotalClasses>
+        <ConcreteClasses>14</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
         <Ce>3</Ce>
@@ -759,6 +760,7 @@
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpUrlMapper.php">HttpUrlMapper</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpView.php">HttpView</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpViewResolver.php">HttpViewResolver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/SmartyView.php">SmartyView</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/TwigView.php">TwigView</Class>
       </ConcreteClasses>
       <AbstractClasses/>
