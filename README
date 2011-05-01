@@ -193,6 +193,7 @@ You can use @Controller and @RequestMapping in your classes and not declare
 them in beans.xml file. see docs/examples/mvc/annotatedController
 
 You can also use Twig to render the views. see docs/examples/mvc-twig
+You can also use Smarty to render the views. see docs/examples/mvc-smarty
 --------------------------------------------------------------------------------
 TCPClient
 =========

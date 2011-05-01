@@ -19,7 +19,6 @@
     <testsuite name="MVC">
       <directory suffix=".php">mvc</directory>
     </testsuite>
-
     <testsuite name="Syslog">
       <directory suffix=".php">syslog</directory>
     </testsuite>

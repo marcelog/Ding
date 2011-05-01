@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton"/>
+	
+	<bean id="HttpUrlMapper" class="Ding\MVC\Http\HttpUrlMapper" scope="singleton">
+		<property name="map">
+        	<array>
+        		<entry key="0">
+	        		<array>
+	        			<entry key="0"><value>/MyController</value></entry>
+	        			<entry key="1"><ref bean="MyController"/></entry>
+	        		</array>
+        		</entry>
+        	</array>
+		</property>
+	</bean>
+
+	<bean id="HttpViewResolver" class="Ding\MVC\Http\HttpViewResolver" scope="singleton">
+	   <property name="smartyOptions">
+	       <array>
+	           <entry key="compile_dir"><value>${smarty.compile_dir}</value></entry>
+	           <entry key="config_dir"><value>${smarty.config_dir}</value></entry>
+	           <entry key="cache_dir"><value>${smarty.cache_dir}</value></entry>
+	           <entry key="debugging"><value>${smarty.debugging}</value></entry>
+	       </array>
+	   </property>
+	   <property name="viewPrefix"><value>view.</value></property>
+	   <property name="viewSuffix"><value>.tpl</value></property>
+	   <property name="viewPath"><value>./views</value></property>
+	</bean>
+
+	<bean id="HttpExceptionMapper" class="Ding\MVC\Http\HttpExceptionMapper" scope="singleton">
+		<property name="map">
+        	<array>
+        	   <entry key="0">
+        	       <array>
+                       <entry key="0"><value>\Exception</value></entry>
+		               <entry key="1"><ref bean="MyController"/></entry>
+        	       </array>
+        	   </entry>
+        	</array>
+		</property>
+	</bean>
+</beans>

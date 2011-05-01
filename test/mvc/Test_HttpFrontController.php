@@ -33,6 +33,7 @@ use Ding\MVC\Http\HttpFrontController;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\MVC\ModelAndView;
 use Ding\MVC\TwigModelAndView;
+use Ding\MVC\SmartyModelAndView;
 
 if (!defined('OUTPUT_TEST')) {
     define('OUTPUT_TEST', true);
@@ -67,7 +68,11 @@ class Test_HttpFrontController extends PHPUnit_Extensions_OutputTestCase
                         'twig.auto_reload' => true,
                         'twig.strict_variables' => false,
                         'twig.autoescape' => 0,
-        				'prefix' => RESOURCES_DIR
+                        'smarty.compile_dir' => '/tmp/Ding/smartycompile/',
+                		'smarty.config_dir' => '/tmp/Ding/',
+                    	'smarty.cache_dir' => '/tmp/Ding/smartycache/',
+                		'smarty.debugging' => false,
+                		'prefix' => RESOURCES_DIR
                     ),
                     'bdef' => array(
                         'xml' => array('filename' => 'frontcontroller.xml', 'directories' => array(RESOURCES_DIR))
@@ -171,6 +176,37 @@ class Test_HttpFrontController extends PHPUnit_Extensions_OutputTestCase
         $_SERVER['REQUEST_URI'] = '/MyBaseURL/MyController/somethingTwig';
         $_SERVER['REQUEST_METHOD'] = 'GET';
         HttpFrontController::handle($this->_properties, '/MyBaseURL');
+    }
+
+    /**
+     * @test
+     */
+    public function can_dispatch_and_render_smarty()
+    {
+        global $_SERVER;
+        if (OUTPUT_TEST) {
+            $this->expectOutputString('hi there, im a smarty view b');
+        }
+        $_SERVER['REQUEST_URI'] = '/MyBaseURL/MyController/somethingSmarty';
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'properties' => array(
+                        'smarty.compile_dir' => '/tmp/Ding/smartycompile/',
+                		'smarty.config_dir' => '/tmp/Ding/',
+                    	'smarty.cache_dir' => '/tmp/Ding/smartycache/',
+                		'smarty.debugging' => false,
+                		'prefix' => RESOURCES_DIR
+                    ),
+                    'bdef' => array(
+                        'xml' => array('filename' => 'frontcontroller3.xml', 'directories' => array(RESOURCES_DIR))
+                    )
+                )
+            )
+        );
+        HttpFrontController::handle($properties, '/MyBaseURL');
     }
 
     /**
@@ -284,6 +320,12 @@ class AController2
     public function somethingTwigAction(array $arguments = array())
     {
         return new TwigModelAndView('someTwig');
+    }
+    public function somethingSmartyAction(array $arguments = array())
+    {
+        $model = new SmartyModelAndView('someSmarty');
+        $model->add(array('a' => 'b'));
+        return $model;
     }
     public function somethingAction(array $arguments = array())
     {

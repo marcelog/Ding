@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<import resource="mvc.xml"/>
+	<import resource="controllers.xml"/>
+	
+	<bean id="ErrorHandler" class="Ding\Helpers\ErrorHandler\ErrorHandlerHelper" scope="singleton">
+		<property name="errorHandler">
+			<ref bean="MyErrorHandler"/>
+		</property>
+	</bean>
+	
+	<bean id="MyErrorHandler" class="MyErrorHandler" scope="singleton"/>
+
+	<bean id="Timezone" class="Ding\Helpers\Timezone\TimezoneHelper" scope="singleton">
+		<property name="timezone"><value>${timezone}</value></property>
+	</bean>
+</beans>
