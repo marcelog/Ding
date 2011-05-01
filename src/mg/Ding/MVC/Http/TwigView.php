@@ -72,7 +72,7 @@ class TwigView extends View
          */
         global $modelAndView;
         $modelAndView = $this->getModelAndView();
-        require_once 'Twig/Autoloader.php';
+        require_once 'Twig' . DIRECTORY_SEPARATOR . 'Autoloader.php';
         \Twig_Autoloader::register();
         $loader = new \Twig_Loader_Filesystem(dirname($this->_path));
         $twig = new \Twig_Environment($loader, array($this->_twigOptions));
