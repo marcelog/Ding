@@ -1,28 +1,28 @@
 phploc 1.5.1 by Sebastian Bergmann.
 
 Directories:                                         36
-Files:                                              119
+Files:                                              121
 
-Lines of Code (LOC):                              15468
+Lines of Code (LOC):                              15633
   Cyclomatic Complexity / Lines of Code:           0.09
-Comment Lines of Code (CLOC):                      9192
-Non-Comment Lines of Code (NCLOC):                 6276
+Comment Lines of Code (CLOC):                      9308
+Non-Comment Lines of Code (NCLOC):                 6325
 
 Namespaces:                                          36
 Interfaces:                                          34
-Classes:                                             85
-  Abstract:                                           3 (3.53%)
-  Concrete:                                          82 (96.47%)
-  Average Class Length (NCLOC):                      73
-Methods:                                            507
+Classes:                                             87
+  Abstract:                                           3 (3.45%)
+  Concrete:                                          84 (96.55%)
+  Average Class Length (NCLOC):                      72
+Methods:                                            510
   Scope:
-    Non-Static:                                     405 (79.88%)
-    Static:                                         102 (20.12%)
+    Non-Static:                                     408 (80.00%)
+    Static:                                         102 (20.00%)
   Visibility:
-    Public:                                         365 (71.99%)
-    Non-Public:                                     142 (28.01%)
+    Public:                                         367 (71.96%)
+    Non-Public:                                     143 (28.04%)
   Average Method Length (NCLOC):                     12
-  Cyclomatic Complexity / Number of Methods:       2.10
+  Cyclomatic Complexity / Number of Methods:       2.09
 
 Anonymous Functions:                                  0
 Functions:                                            0
