@@ -116,7 +116,11 @@ if (document.getElementById) {
 			tree_classe.openIcon = 'media/images/class_folder.png';
 			tree_classe.icon = 'media/images/class_folder.png';
 			
-						    						    						    						    						    				var classe = new WebFXTreeItem('IMapper', 'Mvc/IMapper.html');
+						    						    						    						    						    						    				var classe = new WebFXTreeItem('IMapper', 'Mvc/IMapper.html');
+				classe.openIcon = 'media/images/Interface.png';
+				classe.icon = 'media/images/Interface.png';
+				tree_classe.add(classe);
+										    				var classe = new WebFXTreeItem('IViewRender', 'Mvc/IViewRender.html');
 				classe.openIcon = 'media/images/Interface.png';
 				classe.icon = 'media/images/Interface.png';
 				tree_classe.add(classe);
@@ -143,11 +147,15 @@ if (document.getElementById) {
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
+										    				var classe = new WebFXTreeItem('HttpViewRender', 'Mvc/HttpViewRender.html');
+				classe.openIcon = 'media/images/Class.png';
+				classe.icon = 'media/images/Class.png';
+				tree_classe.add(classe);
 										    				var classe = new WebFXTreeItem('HttpViewResolver', 'Mvc/HttpViewResolver.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
-										    						    						    				var classe = new WebFXTreeItem('ModelAndView', 'Mvc/ModelAndView.html');
+										    						    						    						    				var classe = new WebFXTreeItem('ModelAndView', 'Mvc/ModelAndView.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
@@ -155,11 +163,11 @@ if (document.getElementById) {
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
-										    				var classe = new WebFXTreeItem('SmartyModelAndView', 'Mvc/SmartyModelAndView.html');
+										    				var classe = new WebFXTreeItem('SmartyViewRender', 'Mvc/SmartyViewRender.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
-										    				var classe = new WebFXTreeItem('TwigModelAndView', 'Mvc/TwigModelAndView.html');
+										    				var classe = new WebFXTreeItem('TwigViewRender', 'Mvc/TwigViewRender.html');
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				tree_classe.add(classe);
@@ -187,11 +195,19 @@ if (document.getElementById) {
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
+							var file = new WebFXTreeItem('HttpViewRender.php', 'Mvc/_MVC---Http---HttpViewRender.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
 							var file = new WebFXTreeItem('HttpViewResolver.php', 'Mvc/_MVC---Http---HttpViewResolver.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
 							var file = new WebFXTreeItem('IMapper.php', 'Mvc/_MVC---IMapper.php.html');
+				file.openIcon = 'media/images/Page.png';
+				file.icon = 'media/images/Page.png';
+				tree_file.add(file);
+							var file = new WebFXTreeItem('IViewRender.php', 'Mvc/_MVC---IViewRender.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
@@ -207,11 +223,11 @@ if (document.getElementById) {
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
-							var file = new WebFXTreeItem('SmartyModelAndView.php', 'Mvc/_MVC---SmartyModelAndView.php.html');
+							var file = new WebFXTreeItem('SmartyViewRender.php', 'Mvc/_MVC---Http---SmartyViewRender.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
-							var file = new WebFXTreeItem('TwigModelAndView.php', 'Mvc/_MVC---TwigModelAndView.php.html');
+							var file = new WebFXTreeItem('TwigViewRender.php', 'Mvc/_MVC---Http---TwigViewRender.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				tree_file.add(file);
@@ -290,14 +306,6 @@ if (document.getElementById) {
 				classe.openIcon = 'media/images/Class.png';
 				classe.icon = 'media/images/Class.png';
 				subpackagetree_classe.add(classe);
-							var classe = new WebFXTreeItem('SmartyView', 'Mvc/Http/SmartyView.html');
-				classe.openIcon = 'media/images/Class.png';
-				classe.icon = 'media/images/Class.png';
-				subpackagetree_classe.add(classe);
-							var classe = new WebFXTreeItem('TwigView', 'Mvc/Http/TwigView.html');
-				classe.openIcon = 'media/images/Class.png';
-				classe.icon = 'media/images/Class.png';
-				subpackagetree_classe.add(classe);
 						
 			subpackagetree.add(subpackagetree_classe);
 		
@@ -331,14 +339,6 @@ if (document.getElementById) {
 				file.icon = 'media/images/Page.png';
 				subpackagetree_file.add(file);
 							var file = new WebFXTreeItem('HttpView.php', 'Mvc/Http/_MVC---Http---HttpView.php.html');
-				file.openIcon = 'media/images/Page.png';
-				file.icon = 'media/images/Page.png';
-				subpackagetree_file.add(file);
-							var file = new WebFXTreeItem('SmartyView.php', 'Mvc/Http/_MVC---Http---SmartyView.php.html');
-				file.openIcon = 'media/images/Page.png';
-				file.icon = 'media/images/Page.png';
-				subpackagetree_file.add(file);
-							var file = new WebFXTreeItem('TwigView.php', 'Mvc/Http/_MVC---Http---TwigView.php.html');
 				file.openIcon = 'media/images/Page.png';
 				file.icon = 'media/images/Page.png';
 				subpackagetree_file.add(file);

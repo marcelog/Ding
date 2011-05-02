@@ -777,17 +777,17 @@
   <error line="103" column="99" severity="warning" message="Line exceeds 85 characters; contains 98 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpFrontController.php">
-  <error line="67" column="19" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="77" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="77" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="80" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="86" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="86" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="94" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="94" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="101" column="5" severity="error" message="Doc comment for &quot;$properties&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="101" column="5" severity="error" message="Doc comment for &quot;$baseUrl&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="165" column="87" severity="warning" message="Line exceeds 85 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="69" column="19" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="80" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="80" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="83" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="89" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="89" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="97" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="97" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="104" column="5" severity="error" message="Doc comment for &quot;$properties&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="104" column="5" severity="error" message="Doc comment for &quot;$baseUrl&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="169" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpUrlMapper.php">
   <error line="48" column="1" severity="warning" message="Invalid version &quot;SVN: $Id$&quot; in doc comment; consider &quot;Release: &lt;package_version&gt;&quot; instead" source="PEAR.Commenting.ClassComment.InvalidVersion"/>
@@ -796,25 +796,36 @@
   <error line="162" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpView.php">
-  <error line="88" column="1" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="69" column="1" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+ </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpViewRender.php">
+  <error line="47" column="5" severity="error" message="Doc comment for &quot;$view&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="49" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="50" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpViewResolver.php">
-  <error line="170" column="5" severity="error" message="Doc comment for &quot;$logger&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="172" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="173" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="126" column="5" severity="error" message="Doc comment for &quot;$logger&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="128" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="129" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
  </file>
- <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/SmartyView.php">
-  <error line="75" column="9" severity="error" message="&quot;require_once&quot; is a statement not a function; no parentheses are required" source="PEAR.Files.IncludingFile.BracketsNotRequired"/>
-  <error line="75" column="9" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
-  <error line="92" column="1" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/SmartyViewRender.php">
+  <error line="65" column="5" severity="error" message="Doc comment for &quot;$view&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="67" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="68" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="76" column="9" severity="error" message="&quot;require_once&quot; is a statement not a function; no parentheses are required" source="PEAR.Files.IncludingFile.BracketsNotRequired"/>
+  <error line="76" column="9" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
  </file>
- <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/TwigView.php">
-  <error line="75" column="9" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
-  <error line="87" column="1" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/TwigViewRender.php">
+  <error line="65" column="5" severity="error" message="Doc comment for &quot;$view&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="67" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="68" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="76" column="9" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/IMapper.php">
   <error line="46" column="1" severity="error" message="Missing comment for param &quot;$action&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
   <error line="46" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+ </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/IViewRender.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/IViewResolver.php">
   <error line="49" column="1" severity="error" message="Missing comment for param &quot;$modelAndView&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
@@ -822,10 +833,6 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ModelAndView.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/RedirectModelAndView.php">
- </file>
- <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/SmartyModelAndView.php">
- </file>
- <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/TwigModelAndView.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/View.php">
  </file>

@@ -60,6 +60,7 @@ Ding\MVC\View<br/>
 <H3>Interfaces</H3>
 Ding\MVC\IMapper<br/>
 Ding\MVC\IViewResolver<br/>
+Ding\MVC\IViewRender<br/>
 
 <H2>Description</H2>
 The MVC implementation of Ding is in the namespace Ding\MVC. The components are:
@@ -109,8 +110,9 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
   <li><u>Dispatcher</u>: The dispatcher is the responsible for calling the right controller with the right Action object.</li>
   <li><u>ModelAndView</u>: This is the result of the execution of a controller. A controller must
   return a ModelAndView object containing the name of the view to render and other optional data.</li>
-  <li><u>TwigModelAndView</u>: Just like ModelAndView, but the view is processed by <a href="http://www.twig-project.org/">Twig</a></li>
-  <li><u>SmartyModelAndView</u>: Just like ModelAndView, but the view is processed by <a href="http://www.smarty.net">Smarty</a></li>
+  <li><u>TwigViewRender</u>: The view is processed by <a href="http://www.twig-project.org/">Twig</a></li>
+  <li><u>SmartyViewRender</u>: The view is processed by <a href="http://www.smarty.net">Smarty</a></li>
+  <li><u>HttpViewRender</u>: The view is processed by php via include_once.</li>
   <li><u>ForwardModelAndView</u>: This is a special ModelAndView that has the meaning of calling again the
   dispatcher with a new given action and new or same arguments.</li>
   <li><u>RedirectModelAndView</u>: This is a special ModelAndView that has the meaning of redirecting the request 
@@ -124,9 +126,10 @@ Ding\MVC\Http\HttpAction<br/>
 Ding\MVC\Http\HttpDispatcher<br/>
 Ding\MVC\Http\HttpExceptionMapper<br/>
 Ding\MVC\Http\HttpView<br/>
-Ding\MVC\Http\TwigView<br/>
-Ding\MVC\Http\SmartyView<br/>
 Ding\MVC\Http\HttpViewResolver<br/>
+Ding\MVC\Http\HttpViewRender<br/>
+Ding\MVC\Http\TwigViewRender<br/>
+Ding\MVC\Http\SmartyViewRender<br/>
 Ding\MVC\Http\HttpUrlMapper<br/>
 Ding\MVC\Http\HttpFrontController<br/>
 <center>
@@ -171,8 +174,6 @@ In the case of http, the following components exist:
   the uri /MyController/List, will mean that the controller that handles /MyController, needs to have a method
   named ListAction.</li>
   <li><u>HttpView</u>: Render the given view (a file in the filesystem), outputing headers and data.</li>
-  <li><u>TwigView</u>: Render the given view using twig (a file in the filesystem)</li>
-  <li><u>SmartyView</u>: Render the given view using smarty (a file in the filesystem)</li>
   <li><u>HttpViewResolver</u>: Maps a view name with a file in the filesystem. The root directory, an optional prefix and suffix can be
   configured.</li>
   <li><u>HttpUrlMapper</u>: Maps an uri and its method to a controller.</li>

@@ -688,26 +688,25 @@
     </Package>
     <Package name="Ding\MVC">
       <Stats>
-        <TotalClasses>10</TotalClasses>
-        <ConcreteClasses>5</ConcreteClasses>
-        <AbstractClasses>5</AbstractClasses>
+        <TotalClasses>9</TotalClasses>
+        <ConcreteClasses>3</ConcreteClasses>
+        <AbstractClasses>6</AbstractClasses>
         <Ca>1</Ca>
         <Ce>2</Ce>
-        <A>0.5</A>
+        <A>0.666666666667</A>
         <I>0.666666666667</I>
-        <D>0.166666666667</D>
+        <D>0.333333333333</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ForwardModelAndView.php">ForwardModelAndView</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/ModelAndView.php">ModelAndView</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/RedirectModelAndView.php">RedirectModelAndView</Class>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/SmartyModelAndView.php">SmartyModelAndView</Class>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/TwigModelAndView.php">TwigModelAndView</Class>
       </ConcreteClasses>
       <AbstractClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Action.php">Action</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Dispatcher.php">Dispatcher</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/IMapper.php">IMapper</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/IViewRender.php">IViewRender</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/IViewResolver.php">IViewResolver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/View.php">View</Class>
       </AbstractClasses>
@@ -743,8 +742,8 @@
     </Package>
     <Package name="Ding\MVC\Http">
       <Stats>
-        <TotalClasses>14</TotalClasses>
-        <ConcreteClasses>14</ConcreteClasses>
+        <TotalClasses>16</TotalClasses>
+        <ConcreteClasses>16</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
         <Ce>3</Ce>
@@ -759,9 +758,10 @@
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpFrontController.php">HttpFrontController</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpUrlMapper.php">HttpUrlMapper</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpView.php">HttpView</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpViewRender.php">HttpViewRender</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpViewResolver.php">HttpViewResolver</Class>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/SmartyView.php">SmartyView</Class>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/TwigView.php">TwigView</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/SmartyViewRender.php">SmartyViewRender</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/TwigViewRender.php">TwigViewRender</Class>
       </ConcreteClasses>
       <AbstractClasses/>
       <DependsUpon>
