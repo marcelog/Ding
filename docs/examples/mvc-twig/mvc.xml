@@ -16,22 +16,25 @@
 	</bean>
 
 	<bean id="HttpViewResolver" class="Ding\MVC\Http\HttpViewResolver" scope="singleton">
-	   <property name="twigOptions">
-	       <array>
-	           <entry key="debug"><value>${twig.debug}</value></entry>
-	           <entry key="charset"><value>${twig.charset}</value></entry>
-	           <entry key="base_template_class"><value>${twig.base_template_class}</value></entry>
-	           <entry key="cache"><value>${twig.cache}</value></entry>
-	           <entry key="auto_reload"><value>${twig.auto_reload}</value></entry>
-	           <entry key="strict_variables"><value>${twig.strict_variables}</value></entry>
-	           <entry key="autoescape"><value>${twig.autoescape}</value></entry>
-	       </array>
-	   </property>
 	   <property name="viewPrefix"><value>view.</value></property>
 	   <property name="viewSuffix"><value>.html</value></property>
 	   <property name="viewPath"><value>./views</value></property>
 	</bean>
 
+    <bean id="HttpViewRender" class="Ding\MVC\Http\TwigViewRender" scope="singleton">
+       <property name="twigOptions">
+           <array>
+               <entry key="debug"><value>${twig.debug}</value></entry>
+               <entry key="charset"><value>${twig.charset}</value></entry>
+               <entry key="base_template_class"><value>${twig.base_template_class}</value></entry>
+               <entry key="cache"><value>${twig.cache}</value></entry>
+               <entry key="auto_reload"><value>${twig.auto_reload}</value></entry>
+               <entry key="strict_variables"><value>${twig.strict_variables}</value></entry>
+               <entry key="autoescape"><value>${twig.autoescape}</value></entry>
+           </array>
+       </property>
+    </bean>
+    
 	<bean id="HttpExceptionMapper" class="Ding\MVC\Http\HttpExceptionMapper" scope="singleton">
 		<property name="map">
         	<array>

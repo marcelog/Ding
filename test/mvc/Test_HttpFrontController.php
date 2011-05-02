@@ -32,8 +32,6 @@ use Ding\MVC\ForwardModelAndView;
 use Ding\MVC\Http\HttpFrontController;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\MVC\ModelAndView;
-use Ding\MVC\TwigModelAndView;
-use Ding\MVC\SmartyModelAndView;
 
 if (!defined('OUTPUT_TEST')) {
     define('OUTPUT_TEST', true);
@@ -319,11 +317,11 @@ class AController2
     }
     public function somethingTwigAction(array $arguments = array())
     {
-        return new TwigModelAndView('someTwig');
+        return new ModelAndView('someTwig');
     }
     public function somethingSmartyAction(array $arguments = array())
     {
-        $model = new SmartyModelAndView('someSmarty');
+        $model = new ModelAndView('someSmarty');
         $model->add(array('a' => 'b'));
         return $model;
     }

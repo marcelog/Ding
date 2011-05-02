@@ -133,7 +133,7 @@ $properties = array(
             ),
             'bdef' => array(
              	'xml' => array('filename' => 'beans.xml', 'directories' => array(__DIR__)),
-//                'annotation' => array('scanDir' => array(realpath(__DIR__)))
+                'annotation' => array('scanDir' => array(realpath(__DIR__)))
             ),
         ),
         'cache' => array(

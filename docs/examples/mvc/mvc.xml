@@ -21,6 +21,8 @@
 		<property name="viewPath"><value>./views</value></property>
 	</bean>
 
+    <bean id="HttpViewRender" class="Ding\MVC\Http\HttpViewRender" scope="singleton"/>
+    
 	<bean id="HttpExceptionMapper" class="Ding\MVC\Http\HttpExceptionMapper" scope="singleton">
 		<property name="map">
         	<array>

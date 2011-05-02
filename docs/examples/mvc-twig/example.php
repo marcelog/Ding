@@ -45,7 +45,6 @@ Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\HttpSession\HttpSession;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Helpers\ErrorHandler\IErrorHandler;
-use Ding\MVC\TwigModelAndView;
 use Ding\MVC\ModelAndView;
 use Ding\MVC\ForwardModelAndView;
 use Ding\MVC\RedirectModelAndView;
@@ -65,7 +64,7 @@ class MyController
 {
     public function _ExceptionException(array $arguments = array())
     {
-        $modelAndView = new TwigModelAndView('exception');
+        $modelAndView = new ModelAndView('exception');
         $modelAndView->add(array('exception' => $arguments['exception']));
         return $modelAndView;
     }
@@ -97,7 +96,7 @@ class MyController
     {
         $session = HttpSession::getSession();
         $session->setAttribute('aSessionVariable', array('user' => 'aUser'));
-        $modelAndView = new TwigModelAndView('some');
+        $modelAndView = new ModelAndView('some');
         $modelAndView->add(array(
         	'somestring' => 'Hello World',
             'arguments' => $arguments

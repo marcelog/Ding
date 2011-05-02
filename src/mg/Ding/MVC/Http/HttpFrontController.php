@@ -29,6 +29,8 @@
  */
 namespace Ding\MVC\Http;
 
+use Ding\MVC\IViewRender;
+
 use Ding\HttpSession\HttpSession;
 
 use Ding\MVC\IMapper;
@@ -68,7 +70,8 @@ class HttpFrontController
         HttpDispatcher $dispatcher,
         HttpViewResolver $viewResolver,
         HttpAction $action,
-        IMapper $mapper
+        IMapper $mapper,
+        IViewRender $render
     ) {
         $modelAndView = $dispatcher->dispatch($action, $mapper);
         if ($modelAndView instanceof ForwardModelAndView) {
@@ -79,7 +82,7 @@ class HttpFrontController
             }
             $newAction = new HttpAction($modelAndView->getName(), $modelAndView->getModel());
             $newAction->getMethod($action->getMethod());
-            self::dispatch($dispatcher, $viewResolver, $newAction, $mapper);
+            self::dispatch($dispatcher, $viewResolver, $newAction, $mapper, $render);
         } else if ($modelAndView instanceof RedirectModelAndView) {
             if (self::$_loggerDebugEnabled) {
                 self::$_logger->debug(
@@ -95,7 +98,7 @@ class HttpFrontController
                 );
             }
             $view = $viewResolver->resolve($modelAndView);
-            $view->render();
+            $render->render($view);
         }
     }
     /**
@@ -114,12 +117,13 @@ class HttpFrontController
         self::$_loggerDebugEnabled = self::$_logger->isDebugEnabled();
         $baseUrlLen = strlen($baseUrl);
         ob_start();
-        $exceptionMapper = $dispatcher = $viewResolver = false;
+        $exceptionMapper = $render = $dispatcher = $viewResolver = false;
         try
         {
             $dispatcher = $container->getBean('HttpDispatcher');
             $viewResolver = $container->getBean('HttpViewResolver');
             $exceptionMapper = $container->getBean('HttpExceptionMapper');
+            $render = $container->getBean('HttpViewRender');
             $method = strtolower($_SERVER['REQUEST_METHOD']);
             $url = $_SERVER['REQUEST_URI'];
             $urlStart = strpos($url, $baseUrl);
@@ -149,7 +153,7 @@ class HttpFrontController
             $action = new HttpAction($url, $variables);
             $action->setMethod($method);
             $mapper = $container->getBean('HttpUrlMapper');
-            self::dispatch($dispatcher, $viewResolver, $action, $mapper);
+            self::dispatch($dispatcher, $viewResolver, $action, $mapper, $render);
         } catch(\Exception $exception) {
             if (self::$_loggerDebugEnabled) {
                 self::$_logger->debug('Got Exception: ' . $exception);
@@ -162,7 +166,7 @@ class HttpFrontController
                 $action = new HttpAction(
                     get_class($exception), array('exception' => $exception)
                 );
-                self::dispatch($dispatcher, $viewResolver, $action, $exceptionMapper);
+                self::dispatch($dispatcher, $viewResolver, $action, $exceptionMapper, $render);
             }
         }
         ob_end_flush();

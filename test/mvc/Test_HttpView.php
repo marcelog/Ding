@@ -72,6 +72,7 @@ class Test_HttpView extends PHPUnit_Extensions_OutputTestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $resolver = $container->getBean('HttpViewResolver3');
         $view = $resolver->resolve($mav);
-        $view->render();
+        $render = $container->getBean('HttpViewRender');
+        $render->render($view);
     }
 }

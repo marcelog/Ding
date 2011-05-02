@@ -53,32 +53,13 @@ class HttpView extends View
     private $_path;
 
     /**
-     * Renders this view.
+     * Returns path for this view.
      *
-     * @see Ding\MVC.View::render()
-     *
-     * @return void
+     * @return string
      */
-    public function render()
+    public function getPath()
     {
-        /**
-         * @todo is there a better way to do this?
-         */
-        global $modelAndView;
-        $modelAndView = $this->getModelAndView();
-        /**
-         * @todo render headers: does this belong here?
-         */
-        $objects = $modelAndView->getModel();
-        if (isset($objects['headers'])) {
-            foreach ($objects['headers'] as $header) {
-                header($header);
-            }
-        }
-        // Now render everything else.
-        if (file_exists($this->_path)) {
-            include_once $this->_path;
-        }
+        return $this->_path;
     }
 
     /**

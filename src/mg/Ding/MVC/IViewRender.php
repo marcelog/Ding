@@ -1,6 +1,6 @@
 <?php
 /**
- * This class is a twig view.
+ * Interface for the object in charge of setting up the render of the view.
  *
  * PHP Version 5
  *
@@ -29,7 +29,7 @@
 namespace Ding\MVC;
 
 /**
- * This class is a twig view.
+ * Interface for the object in charge of setting up the render of the view.
  *
  * PHP Version 5
  *
@@ -39,6 +39,15 @@ namespace Ding\MVC;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class TwigModelAndView extends ModelAndView
+interface IViewRender
 {
+    /**
+     * Renders the given view.
+     *
+     * @param View $view View to render.
+     *
+     * @throws MVCException
+     * @return View
+     */
+    public function render(View $view);
 }

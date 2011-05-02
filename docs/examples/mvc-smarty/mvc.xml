@@ -15,15 +15,17 @@
 		</property>
 	</bean>
 
+    <bean id="HttpViewRender" class="Ding\MVC\Http\SmartyViewRender" scope="singleton">
+       <property name="smartyOptions">
+           <array>
+               <entry key="compile_dir"><value>${smarty.compile_dir}</value></entry>
+               <entry key="config_dir"><value>${smarty.config_dir}</value></entry>
+               <entry key="cache_dir"><value>${smarty.cache_dir}</value></entry>
+               <entry key="debugging"><value>${smarty.debugging}</value></entry>
+           </array>
+       </property>
+    </bean>
 	<bean id="HttpViewResolver" class="Ding\MVC\Http\HttpViewResolver" scope="singleton">
-	   <property name="smartyOptions">
-	       <array>
-	           <entry key="compile_dir"><value>${smarty.compile_dir}</value></entry>
-	           <entry key="config_dir"><value>${smarty.config_dir}</value></entry>
-	           <entry key="cache_dir"><value>${smarty.cache_dir}</value></entry>
-	           <entry key="debugging"><value>${smarty.debugging}</value></entry>
-	       </array>
-	   </property>
 	   <property name="viewPrefix"><value>view.</value></property>
 	   <property name="viewSuffix"><value>.tpl</value></property>
 	   <property name="viewPath"><value>./views</value></property>

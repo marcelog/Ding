@@ -1,6 +1,6 @@
 <?php
 /**
- * This class is a smarty model and view.
+ * Http view render.
  *
  * PHP Version 5
  *
@@ -26,10 +26,13 @@
  * limitations under the License.
  *
  */
-namespace Ding\MVC;
+namespace Ding\MVC\Http;
+
+use Ding\MVC\IViewRender;
+use Ding\MVC\View;
 
 /**
- * This class is a smarty model and view.
+ * Http view render.
  *
  * PHP Version 5
  *
@@ -39,6 +42,31 @@ namespace Ding\MVC;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class SmartyModelAndView extends ModelAndView
+class HttpViewRender implements IViewRender
 {
+    /**
+     * (non-PHPdoc)
+     * @see Ding\MVC.IViewRender::render()
+     */
+    public function render(View $view)
+    {
+        /**
+         * @todo is there a better way to do this?
+         */
+        global $modelAndView;
+        $modelAndView = $view->getModelAndView();
+        /**
+         * @todo render headers: does this belong here?
+         */
+        $objects = $modelAndView->getModel();
+        if (isset($objects['headers'])) {
+            foreach ($objects['headers'] as $header) {
+                header($header);
+            }
+        }
+        // Now render everything else.
+        if (file_exists($view->getPath())) {
+            include_once $view->getPath();
+        }
+    }
 }

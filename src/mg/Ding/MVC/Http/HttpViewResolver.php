@@ -30,8 +30,6 @@
 namespace Ding\MVC\Http;
 use Ding\MVC\TwigModelAndView;
 use Ding\MVC\SmartyModelAndView;
-use Ding\MVC\Http\SmartyView;
-use Ding\MVC\Http\TwigView;
 use Ding\Logger\ILoggerAware;
 use Ding\MVC\IViewResolver;
 use Ding\MVC\ModelAndView;
@@ -75,18 +73,6 @@ class HttpViewResolver implements IViewResolver, ILoggerAware
     private $_suffix;
 
     /**
-     * TWIG options.
-     * @var string[]
-     */
-    private $_twigOptions = array();
-
-    /**
-     * Smarty options.
-     * @var string[]
-     */
-    private $_smartyOptions = array();
-
-    /**
      * This will resolve the given ModelAndView to a view in the filesystem
      * (an absolute path to a file).
      *
@@ -105,37 +91,7 @@ class HttpViewResolver implements IViewResolver, ILoggerAware
         if ($this->_logger->isDebugEnabled()) {
             $this->_logger->debug('Using viewpath: ' . $path);
         }
-        if ($modelAndView instanceof TwigModelAndView) {
-            return new TwigView($modelAndView, $path, $this->_twigOptions);
-        } else if ($modelAndView instanceof SmartyModelAndView) {
-            return new SmartyView($modelAndView, $path, $this->_smartyOptions);
-        } else {
-            return new HttpView($modelAndView, $path);
-        }
-    }
-
-    /**
-     * Sets TWIG options.
-     *
-     * @param string[] $options TWIG options.
-     *
-     * @return void
-     */
-    public function setTwigOptions(array $options)
-    {
-        $this->_twigOptions = $options;
-    }
-
-    /**
-     * Sets Smarty options.
-     *
-     * @param string[] $options Smarty options.
-     *
-     * @return void
-     */
-    public function setSmartyOptions(array $options)
-    {
-        $this->_smartyOptions = $options;
+        return new HttpView($modelAndView, $path);
     }
 
     /**

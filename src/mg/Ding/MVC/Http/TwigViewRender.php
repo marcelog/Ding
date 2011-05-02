@@ -1,6 +1,6 @@
 <?php
 /**
- * A generic view.
+ * Twig view render.
  *
  * PHP Version 5
  *
@@ -26,10 +26,13 @@
  * limitations under the License.
  *
  */
-namespace Ding\MVC;
+namespace Ding\MVC\Http;
+
+use Ding\MVC\IViewRender;
+use Ding\MVC\View;
 
 /**
- * A generic view.
+ * Twig view render.
  *
  * PHP Version 5
  *
@@ -39,33 +42,42 @@ namespace Ding\MVC;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-abstract class View
+class TwigViewRender implements IViewRender
 {
     /**
-     * View name.
-     * @var ModelAndView
+     * TWIG options.
+     * @var string[]
      */
-    private $_modelAndView;
+    private $_twigOptions = array();
 
     /**
-     * Returns this view name.
+     * Sets TWIG options.
      *
-     * @return string
-     */
-    public function getModelAndView()
-    {
-        return $this->_modelAndView;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param ModelAndView $modelAndView Model to render.
+     * @param string[] $options TWIG options.
      *
      * @return void
      */
-    protected function __construct(ModelAndView $modelAndView)
+    public function setTwigOptions(array $options)
     {
-        $this->_modelAndView = $modelAndView;
+        $this->_twigOptions = $options;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\MVC.IViewRender::render()
+     */
+    public function render(View $view)
+    {
+        /**
+         * @todo is there a better way to do this?
+         */
+        global $modelAndView;
+        $modelAndView = $view->getModelAndView();
+        require_once 'Twig' . DIRECTORY_SEPARATOR . 'Autoloader.php';
+        \Twig_Autoloader::register();
+        $loader = new \Twig_Loader_Filesystem(dirname($view->getPath()));
+        $twig = new \Twig_Environment($loader, array($this->_twigOptions));
+        $template = $twig->loadTemplate(basename($view->getPath()));
+        echo $template->render(array('vars' => $modelAndView->getModel()));
     }
 }
