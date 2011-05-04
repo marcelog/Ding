@@ -346,6 +346,8 @@ use it). This *will* create a difference in performance.
 Performance tips
 ================
 * Do not include log4php in your include path.
+* Try to have small include paths. Ding will use the include path for finding
+resources and autoload your own classes.
 * If you use it, or need logging, put log4php into your include path
 (i.e: /usr/share/php/log4php) and configure the rootLogger and ding logger
 in ERROR level.
