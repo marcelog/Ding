@@ -28,8 +28,6 @@
  *
  */
 namespace Ding\MVC\Http;
-use Ding\MVC\TwigModelAndView;
-use Ding\MVC\SmartyModelAndView;
 use Ding\Logger\ILoggerAware;
 use Ding\MVC\IViewResolver;
 use Ding\MVC\ModelAndView;
