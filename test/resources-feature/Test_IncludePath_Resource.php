@@ -51,7 +51,7 @@ class Test_IncludePath_Resource extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->_resourceName = 'Ding_Autoloader.php';
+        $this->_resourceName = 'Autoloader.php';
         $this->_filename = 'Ding' . DIRECTORY_SEPARATOR . 'Autoloader' . DIRECTORY_SEPARATOR . $this->_resourceName;
         $this->_url = 'includepath://' . $this->_filename;
     }

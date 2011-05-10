@@ -52,7 +52,7 @@ class Test_Autoloader extends PHPUnit_Framework_TestCase
      */
     public function can_register()
     {
-        Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
+        \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
         spl_autoload_register(array($this, 'dummyAutoloader'));
         $this->assertFalse(class_exists('A\B\C', true));
     }

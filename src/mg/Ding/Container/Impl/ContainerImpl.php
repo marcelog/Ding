@@ -472,7 +472,7 @@ class ContainerImpl implements IContainer
             if (isset($properties['ding']['cache'])) {
                 CacheLocator::configure($properties['ding']['cache']);
             }
-            \Ding_Autoloader::setCache(CacheLocator::getAutoloaderCacheInstance());
+            \Ding\Autoloader\Autoloader::setCache(CacheLocator::getAutoloaderCacheInstance());
             if (isset($properties['ding']['log4php.properties'])) {
                 \Logger::configure($properties['ding']['log4php.properties']);
             }

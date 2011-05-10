@@ -20,8 +20,8 @@ if (!defined('RESOURCES_DIR')) {
     define('RESOURCES_DIR', __DIR__ . DIRECTORY_SEPARATOR . 'resources');
 }
 
-require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
-Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
+require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
+\Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 
 require_once 'Zend/Loader/Autoloader.php';
 Zend_Loader_Autoloader::getInstance();

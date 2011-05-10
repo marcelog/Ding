@@ -1,9 +1,9 @@
  <?php
-$stub = 
+$stub =
 '<?php
 Phar::mapPhar();
-include "phar://ding.phar/Ding/Autoloader/Ding_Autoloader.php";
-Ding_Autoloader::register();
+include "phar://ding.phar/Ding/Autoloader/Autoloader.php";
+\Ding\Autoloader\Autoloader::register();
 __HALT_COMPILER();
 ?>';
 $phar = new Phar($argv[1]);

@@ -58,9 +58,10 @@ class MyBean
 
     }
 }
-require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
-Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
-use Ding\Container\Impl\ContainerImpl;
+require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
+\Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
+use \Ding\Container\Impl\ContainerImpl;
+
 
 // Here you configure the container, its subcomponents, drivers, etc.
 $properties = array(

@@ -26,6 +26,7 @@
  * limitations under the License.
  *
  */
+namespace Ding\Autoloader;
 
 // Check for log4php.
 use Ding\Cache\Impl\DummyCacheImpl;
@@ -62,7 +63,7 @@ if (!class_exists('Logger')) {
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class Ding_Autoloader
+class Autoloader
 {
     /**
      * log4php logger or own dummy instance.
@@ -169,6 +170,6 @@ class Ding_Autoloader
             array(__DIR__, '..', '..')
         );
         self::$_includePath = explode(PATH_SEPARATOR, ini_get('include_path'));
-        return spl_autoload_register('Ding_Autoloader::load');
+        return spl_autoload_register('\Ding\Autoloader\Autoloader::load');
     }
 }

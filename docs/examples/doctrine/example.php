@@ -59,8 +59,8 @@ $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', DOCTRINE_LIB_PATH);
 $classLoader->register();
 
 // register Ding autoloader
-require_once 'Ding/Autoloader/Ding_Autoloader.php'; // Include ding autoloader.
-Ding_Autoloader::register(); // Call autoloader register for ding autoloader.
+require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
+\Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 
 // Uncomment these two lines if you want to try zend_cache instead of
 // the default available cache backends. Also, modify one of the 'impl' options

@@ -28,10 +28,10 @@ declare(ticks=1);
  * limitations under the License.
  *
  */
-require_once 'Ding/Autoloader/Ding_Autoloader.php';
-require_once 'PAMI/Autoloader/PAMI_Autoloader.php';
+require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
+\Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 
-Ding_Autoloader::register();
+require_once 'PAMI/Autoloader/PAMI_Autoloader.php';
 PAMI_Autoloader::register();
 
 use Ding\Container\Impl\ContainerImpl;
