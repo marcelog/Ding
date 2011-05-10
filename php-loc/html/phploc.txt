@@ -8,7 +8,7 @@ Lines of Code (LOC):                              15739
 Comment Lines of Code (CLOC):                      9385
 Non-Comment Lines of Code (NCLOC):                 6354
 
-Namespaces:                                          36
+Namespaces:                                          37
 Interfaces:                                          35
 Classes:                                             88
   Abstract:                                           3 (3.41%)

@@ -53,11 +53,11 @@
   <error line="245" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
   <error line="254" column="1" severity="error" message="Expected 1 space after the longest variable name" source="PEAR.Commenting.FunctionComment.SpacingAfterLongName"/>
  </file>
- <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Autoloader/Ding_Autoloader.php">
-  <error line="41" column="13" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
-  <error line="51" column="5" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
-  <error line="128" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="150" column="16" severity="error" message="Line indented incorrectly; expected at least 16 spaces, found 15" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Autoloader/Autoloader.php">
+  <error line="42" column="13" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
+  <error line="52" column="5" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
+  <error line="129" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="151" column="16" severity="error" message="Line indented incorrectly; expected at least 16 spaces, found 15" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/BeanAnnotationDefinition.php">
   <error line="58" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
@@ -475,6 +475,7 @@
   <error line="326" column="104" severity="warning" message="Line exceeds 85 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="332" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
   <error line="469" column="103" severity="warning" message="Line exceeds 85 characters; contains 102 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="475" column="95" severity="warning" message="Line exceeds 85 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="479" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="513" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
   <error line="518" column="5" severity="error" message="Doc comment for &quot;$bundle&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
@@ -804,9 +805,9 @@
   <error line="50" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/HttpViewResolver.php">
-  <error line="126" column="5" severity="error" message="Doc comment for &quot;$logger&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="128" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="129" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="124" column="5" severity="error" message="Doc comment for &quot;$logger&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="126" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="127" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/MVC/Http/SmartyViewRender.php">
   <error line="65" column="5" severity="error" message="Doc comment for &quot;$view&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
