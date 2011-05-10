@@ -38,10 +38,9 @@
   <error line="136" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="146" column="1" severity="error" message="Doc comment for var $value does not match actual variable name $exception at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
   <error line="146" column="1" severity="error" message="Missing comment for param &quot;$value&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="158" column="1" severity="error" message="Missing comment for param &quot;$value&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="242" column="1" severity="error" message="Doc comment for var $result does not match actual variable name $object at position 4" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="244" column="1" severity="error" message="Doc comment for var $object does not match actual variable name &amp;$invoke at position 5" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="245" column="1" severity="error" message="Superfluous doc comment at position 6" source="PEAR.Commenting.FunctionComment.ExtraParamComment"/>
+  <error line="202" column="1" severity="error" message="Doc comment for var $result does not match actual variable name $object at position 4" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="204" column="1" severity="error" message="Doc comment for var $object does not match actual variable name &amp;$invoke at position 5" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="205" column="1" severity="error" message="Superfluous doc comment at position 6" source="PEAR.Commenting.FunctionComment.ExtraParamComment"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/PointcutDefinition.php">
   <error line="96" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
