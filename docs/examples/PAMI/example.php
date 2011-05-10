@@ -31,8 +31,8 @@ declare(ticks=1);
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 
-require_once 'PAMI/Autoloader/PAMI_Autoloader.php';
-PAMI_Autoloader::register();
+require_once 'PAMI/Autoloader/Autoloader.php';
+\PAMI\Autoloader\Autoloader::register();
 
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Helpers\PAMI\IPamiEventHandler;

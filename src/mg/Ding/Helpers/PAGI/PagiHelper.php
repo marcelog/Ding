@@ -34,10 +34,11 @@
  * limitations under the License.
  *
  */
-require_once 'Ding/Autoloader/Ding_Autoloader.php';
-require_once 'PAGI/Autoloader/PAGI_Autoloader.php';
-PAGI_Autoloader::register();
-Ding_Autoloader::register();
+require_once 'Ding/Autoloader/Autoloader.php';
+require_once 'PAGI/Autoloader/Autoloader.php';
+\Ding\Autoloader\Autoloader::register();
+\PAGI\Autoloader\Autoloader::register();
+
 
 use PAGI\Application\Exception\InvalidApplicationException;
 use Ding\Container\Impl\ContainerImpl;
