@@ -2,9 +2,19 @@
 <beans>
   <pointcut id="aPointcut" expression="^.+" method="invoke"/>
   <bean id="aspectBean" class="ClassSimpleAOPDispatcherAspect" scope="singleton"/>
+  <bean id="aspectBean2" class="ClassSimpleAOPDispatcherAspect2" scope="singleton"/>
+  <bean id="aspectBean3" class="ClassSimpleAOPDispatcherAspect3" scope="singleton"/>
   <bean id="throwsUnaspectedException" class="ClassSimpleAOPDispatcher" scope="singleton">
     <aspect ref="aspectBean" type="method">
       <pointcut pointcut-ref="aPointcut" method="invoke"/>
+    </aspect>
+  </bean>
+  <bean id="methodInvocationTest" class="ClassSimpleAOPMethodInvocationTest" scope="singleton">
+    <aspect ref="aspectBean2" type="method">
+      <pointcut expression="methodInvocation" method="invoke"/>
+    </aspect>
+    <aspect ref="aspectBean3" type="method">
+      <pointcut expression="methodInvocation" method="invoke"/>
     </aspect>
   </bean>
 </beans>

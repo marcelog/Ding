@@ -60,7 +60,7 @@ class AspectA
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before1: " . $invocation->getOriginalInvocation() . "\n";
+        echo "Before1: " . print_r($invocation->getOriginalInvocation(), true) . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After\n";
     }
@@ -74,7 +74,7 @@ class AspectB extends AspectA
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before2: " . $invocation->getOriginalInvocation() . "\n";
+        echo "Before2: " . print_r($invocation->getOriginalInvocation(), true) . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After\n";
     }

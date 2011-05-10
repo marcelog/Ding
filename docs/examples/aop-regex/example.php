@@ -86,7 +86,7 @@ class AspectA
     {
         try
         {
-            echo "Before: " . $invocation->getOriginalInvocation() . "\n";
+            echo "Before: " . print_r($invocation->getOriginalInvocation(), true) . "\n";
             $invocation->proceed(array('b', 'c', 'd'));
             echo "After\n";
         } catch(Exception $e) {
@@ -103,7 +103,7 @@ class AspectB
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "With exception: " . $invocation->getException() . "\n";
+        echo "With exception: " . print_r($invocation->getException(), true) . "\n";
         echo "After with exception\n";
         $invocation->proceed();
     }

@@ -153,28 +153,6 @@ class MethodInvocation
     }
 
     /**
-     * Changes (updates) the result for the execution of the aspected method.
-     *
-     * @param mixed $value
-     *
-     * @return void
-     */
-    public function setResult($value)
-    {
-        $this->_result = $value;
-    }
-
-    /**
-     * Returns the result from executing the aspected method.
-     *
-     * @return mixed
-     */
-    public function getResult()
-    {
-        return $this->_result;
-    }
-
-    /**
      * Returns class name for the executed method.
      *
      * @return string
@@ -212,24 +190,6 @@ class MethodInvocation
     public function getArguments()
     {
         return $this->_args;
-    }
-
-    /**
-     * Standard function, you know the drill..
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return
-            '['
-            . __CLASS__
-            . ' Class: ' . $this->_class
-            . ' Method: ' . $this->_method
-            . ' Args: ' . print_r($this->_args, true)
-            . ' result: ' . print_r($this->_result, true)
-            . ']'
-        ;
     }
 
     /**

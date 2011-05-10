@@ -74,7 +74,7 @@ class AspectA
     {
         try
         {
-            echo "Before: " . $invocation->getOriginalInvocation() . "\n";
+            echo "Before: " . print_r($invocation->getOriginalInvocation()) . "\n";
             $invocation->proceed(array('b', 'c', 'd'));
             echo "After\n";
         } catch(Exception $e) {

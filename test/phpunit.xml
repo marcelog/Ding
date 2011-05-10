@@ -16,6 +16,24 @@
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="AOP Cache">
+      <directory suffix=".php">aop/cache</directory>
+    </testsuite>
+    <testsuite name="AOP Dispatcher">
+      <directory suffix=".php">aop/dispatcher</directory>
+    </testsuite>
+    <testsuite name="AOP XML">
+      <directory suffix=".php">aop/xml</directory>
+    </testsuite>
+    <testsuite name="AOP YAML">
+      <directory suffix=".php">aop/yaml</directory>
+    </testsuite>
+    <testsuite name="AOP Annotation">
+      <directory suffix=".php">aop/annotation</directory>
+    </testsuite>
+    <testsuite name="AOP Proxy">
+      <directory suffix=".php">aop/proxy</directory>
+    </testsuite>
     <testsuite name="MVC">
       <directory suffix=".php">mvc</directory>
     </testsuite>
@@ -54,21 +72,6 @@
     </testsuite>
     <testsuite name="Cache Locator">
       <directory suffix=".php">cache/locator</directory>
-    </testsuite>
-    <testsuite name="AOP Dispatcher">
-      <directory suffix=".php">aop/dispatcher</directory>
-    </testsuite>
-    <testsuite name="AOP XML">
-      <directory suffix=".php">aop/xml</directory>
-    </testsuite>
-    <testsuite name="AOP YAML">
-      <directory suffix=".php">aop/yaml</directory>
-    </testsuite>
-    <testsuite name="AOP Annotation">
-      <directory suffix=".php">aop/annotation</directory>
-    </testsuite>
-    <testsuite name="AOP Proxy">
-      <directory suffix=".php">aop/proxy</directory>
     </testsuite>
     <testsuite name="Filter XML">
       <directory suffix=".php">filter/xml</directory>

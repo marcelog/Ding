@@ -165,7 +165,7 @@ class AspectA
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before1: " . $invocation->getOriginalInvocation() . "\n";
+        echo "Before1: " . print_r($invocation->getOriginalInvocation(), true) . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After\n";
     }
@@ -179,7 +179,7 @@ class AspectB
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before2: " . $invocation->getOriginalInvocation() . "\n";
+        echo "Before2: " . print_r($invocation->getOriginalInvocation(), true) . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After2\n";
     }
@@ -192,7 +192,7 @@ class AspectC
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before9: " . $invocation->getOriginalInvocation() . "\n";
+        echo "Before9: " . print_r($invocation->getOriginalInvocation(), true) . "\n";
         $invocation->proceed(func_get_args());
         echo "After9\n";
     }
@@ -205,7 +205,7 @@ class AspectD
 {
     public function invoke(MethodInvocation $invocation)
     {
-        echo "Before4: " . $invocation->getOriginalInvocation() . "\n";
+        echo "Before4: " . print_r($invocation->getOriginalInvocation(), true) . "\n";
         $invocation->proceed(array('b', 'c', 'd'));
         echo "After4\n";
     }
@@ -223,7 +223,7 @@ class AspectE
     {
         try
         {
-            echo "Before3: " . $invocation->getOriginalInvocation() . "\n";
+            echo "Before3: " . print_r($invocation->getOriginalInvocation(), true) . "\n";
             $invocation->proceed(array('b', 'c', 'd'));
             echo "After3\n";
         } catch(Exception $e) {
