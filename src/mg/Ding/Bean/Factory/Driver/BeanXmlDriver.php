@@ -354,9 +354,12 @@ class BeanXmlDriver
      */
     private function _loadBean($beanName, BeanDefinition $bean = null)
     {
-        if (!$this->_simpleXml) {
-            $this->_load();
-        }
+        // This should not be necessary because this driver is also an aspect
+        // provider and as such, the AspectManager would already called
+        // getAspects() which already has this kind of lazy loading.
+        //if (!$this->_simpleXml) {
+        //    $this->_load();
+        //}
         foreach($this->_simpleXml as $name => $xml) {
             $simpleXmlBean = $xml->xpath("//bean[@id='$beanName']");
             if (!empty($simpleXmlBean)) {
@@ -488,24 +491,6 @@ class BeanXmlDriver
             }
         }
         return $aspects;
-    }
-
-    public function getAspect($name)
-    {
-        if (!$this->_simpleXml) {
-            $this->_load();
-        }
-        foreach($this->_simpleXml as $xmlName => $xml) {
-            $simpleXmlAspect = $xml->xpath("//aspect[@id='$name']");
-            if (!empty($simpleXmlAspect)) {
-                if ($this->_logger->isDebugEnabled()) {
-                    $this->_logger->debug('Found aspect ' . $name . ' in ' . $xmlName);
-                }
-                $simpleXmlAspect = $simpleXmlAspect[0];
-                return $this->_loadAspect($simpleXmlAspect);
-            }
-        }
-        return false;
     }
 
     public function getPointcut($name)

@@ -124,6 +124,16 @@ class BeanYamlDriver
     private $_directories = false;
 
     /**
+     * Serialization.
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array();
+    }
+
+    /**
      * Initializes yaml contents.
      *
      * @param string $filename
@@ -305,9 +315,12 @@ class BeanYamlDriver
      */
     private function _loadBean($beanName, BeanDefinition $bean = null)
     {
-        if (!$this->_yamlFiles) {
-            $this->_load();
-        }
+        // This should not be necessary because this driver is also an aspect
+        // provider and as such, the AspectManager would already called
+        // getAspects() which already has this kind of lazy loading.
+        //if (!$this->_yamlFiles) {
+        //    $this->_load();
+        //}
         $beanDef = false;
         foreach($this->_yamlFiles as $yamlFilename => $yaml) {
             if (isset($yaml['beans'][$beanName])) {
@@ -417,11 +430,6 @@ class BeanYamlDriver
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
         return $this->_loadBean($beanName, $bean);
-    }
-
-    public function getAspect($name)
-    {
-
     }
 
     public function getPointcut($name)

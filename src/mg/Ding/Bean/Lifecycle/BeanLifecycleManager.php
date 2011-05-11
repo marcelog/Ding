@@ -66,6 +66,16 @@ class BeanLifecycleManager
     private $_lifecyclers;
 
     /**
+     * Serialization
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array('_lifecyclers');
+    }
+
+    /**
      * Adds a lifecycler to the BeforeConfig point.
      *
      * @param IBeforeConfigListener $listener Listener to add

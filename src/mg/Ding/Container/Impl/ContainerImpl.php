@@ -185,7 +185,7 @@ class ContainerImpl implements IContainer
      */
     public function __sleep()
     {
-        return array();
+        return array('_aspectManager', '_lifecycleManager');
     }
 
     /**

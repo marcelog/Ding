@@ -57,6 +57,9 @@ class Test_Container extends PHPUnit_Framework_TestCase
                     'bdef' => array(
                         'xml' => array(
                         	'filename' => 'container.xml', 'directories' => array(RESOURCES_DIR)
+                        ),
+                        'yaml' => array(
+                        	'filename' => 'container.yaml', 'directories' => array(RESOURCES_DIR)
                         )
                     )
                 )

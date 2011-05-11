@@ -157,9 +157,6 @@ class BeanAnnotationDriver
                 include_once $dirEntry;
                 foreach ($classes as $aNewClass) {
                     self::$_knownClasses[$aNewClass] = ReflectionFactory::getClassAnnotations($aNewClass);
-                    if (empty(self::$_knownClasses[$aNewClass])) {
-                        continue;
-                    }
                     $classes = array_combine($classes, $classes);
                     $include_files[$aNewClass] = $dirEntry;
                     $this->_cache->store(str_replace('\\', '_', $aNewClass) . '.include_file', $dirEntry);
@@ -167,16 +164,6 @@ class BeanAnnotationDriver
                 $this->_cache->store($cacheKey, $classes);
             }
         }
-    }
-
-    /**
-     * Returns known classes.
-     *
-	 * @return string[]
-     */
-    public static function getKnownClasses()
-    {
-        return self::$_knownClasses;
     }
 
     /**
@@ -249,6 +236,7 @@ class BeanAnnotationDriver
                 $def->setScope(BeanDefinition::BEAN_SINGLETON);
                 $properties = array();
                 $annotations = ReflectionFactory::getClassAnnotations($configClass);
+                /*
                 if (isset($annotations['class']['properties'])) {
                     foreach ($annotations['class']['properties'] as $property => $propAnnotations) {
                         foreach ($propAnnotations as $propAnnotation) {
@@ -261,6 +249,7 @@ class BeanAnnotationDriver
                     }
                     $def->setAutowiredProperties($properties);
                 }
+                */
                 $factory->setBeanDefinition($configBeanName, $def);
             }
         }
@@ -276,14 +265,19 @@ class BeanAnnotationDriver
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
-        if ($bean != null) {
-            return $bean;
-        }
+        // This should not be necessary because this driver is the first one
+        // loaded by the container.
+        //if ($bean != null) {
+        //    return $bean;
+        //}
         foreach ($this->_configClasses as $configClass => $configBeanName) {
-            if (isset($this->_configBeans[$configBeanName][$beanName])) {
-                $bean = $this->_configBeans[$configBeanName][$beanName];
-                return $bean;
-            }
+            // This should not be necessary because the container and the lifecycle
+            // impose no more than one beforeDefinition() call once the bean is
+            // gone out of the afterDefinition() phase.
+            //if (isset($this->_configBeans[$configBeanName][$beanName])) {
+            //    $bean = $this->_configBeans[$configBeanName][$beanName];
+            //    return $bean;
+            //}
             if (empty($this->_configBeans[$configBeanName])) {
                 $this->_configBeans[$configBeanName] = array();
             }
@@ -305,10 +299,15 @@ class BeanAnnotationDriver
                         if (isset($annotations['Bean'])) {
                             $bean = $this->_loadBean($name, $configBeanName, $method, $annotations);
                             $this->_configBeans[$configBeanName][$name] = $bean;
-                            return $bean;
                         }
                     }
+                    if ($bean !== null) {
+                        break;
+                    }
                 }
+            }
+            if ($bean !== null) {
+                break;
             }
         }
         return $bean;

@@ -80,6 +80,16 @@ class AspectManager
     private $_pointcutProviders;
 
     /**
+     * Serialization.
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array();
+    }
+
+    /**
      * Adds or overwrites the given aspect.
      *
      * @param AspectDefinition $aspect Aspect.
