@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pmd version="0.2.8RC1" timestamp="2011-05-10T17:55:35-03:00">
+<pmd version="0.2.8RC1" timestamp="2011-05-11T14:43:32-03:00">
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/DispatcherImpl.php">
     <violation beginline="57" endline="57" rule="LongVariable" ruleset="Naming Rules" externalInfoUrl="http://phpmd.org/rules/naming.html#longvariable" priority="3">
       Avoid excessively long variable names like $_methodsExceptionIntercepted
@@ -62,34 +62,37 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanAnnotationDriver.php">
-    <violation beginline="58" endline="348" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="BeanAnnotationDriver" priority="3">
-      This class BeanAnnotationDriver has an overall complexity of 51 which is very high. The configured complexity threshold is 50.
-    </violation>
     <violation beginline="101" endline="101" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
       Avoid unused parameters such as '$factory'.
     </violation>
-    <violation beginline="132" endline="170" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanAnnotationDriver" method="_scan" priority="3">
-      The method _scan() has a Cyclomatic Complexity of 12.
+    <violation beginline="132" endline="167" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanAnnotationDriver" method="_scan" priority="3">
+      The method _scan() has a Cyclomatic Complexity of 11.
     </violation>
     <violation beginline="139" endline="139" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$v'.
     </violation>
-    <violation beginline="164" endline="164" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="161" endline="161" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$include_files'.
     </violation>
-    <violation beginline="192" endline="230" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanAnnotationDriver" method="_loadBean" priority="3">
+    <violation beginline="179" endline="217" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanAnnotationDriver" method="_loadBean" priority="3">
       The method _loadBean() has a Cyclomatic Complexity of 12.
     </violation>
-    <violation beginline="192" endline="230" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanAnnotationDriver" method="_loadBean" priority="3">
+    <violation beginline="179" endline="217" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanAnnotationDriver" method="_loadBean" priority="3">
       The method _loadBean() has an NPath complexity of 225.
     </violation>
-    <violation beginline="246" endline="246" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="233" endline="233" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$exception'.
     </violation>
-    <violation beginline="277" endline="315" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanAnnotationDriver" method="beforeDefinition" priority="3">
+    <violation beginline="237" endline="237" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$properties'.
+    </violation>
+    <violation beginline="238" endline="238" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+      Avoid unused local variables such as '$annotations'.
+    </violation>
+    <violation beginline="266" endline="314" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanAnnotationDriver" method="beforeDefinition" priority="3">
       The method beforeDefinition() has a Cyclomatic Complexity of 11.
     </violation>
-    <violation beginline="277" endline="277" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+    <violation beginline="266" endline="266" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
       Avoid unused parameters such as '$factory'.
     </violation>
   </file>
@@ -102,8 +105,8 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanXmlDriver.php">
-    <violation beginline="56" endline="571" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="BeanXmlDriver" priority="3">
-      This class BeanXmlDriver has an overall complexity of 85 which is very high. The configured complexity threshold is 50.
+    <violation beginline="56" endline="556" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="BeanXmlDriver" priority="3">
+      This class BeanXmlDriver has an overall complexity of 79 which is very high. The configured complexity threshold is 50.
     </violation>
     <violation beginline="161" endline="202" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanXmlDriver" method="_loadXml" priority="3">
       The method _loadXml() has a Cyclomatic Complexity of 12.
@@ -114,45 +117,42 @@
     <violation beginline="214" endline="214" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$aspects'.
     </violation>
-    <violation beginline="355" endline="444" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanXmlDriver" method="_loadBean" priority="3">
-      The method _loadBean() has a Cyclomatic Complexity of 22.
+    <violation beginline="355" endline="447" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanXmlDriver" method="_loadBean" priority="3">
+      The method _loadBean() has a Cyclomatic Complexity of 21.
     </violation>
-    <violation beginline="355" endline="444" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanXmlDriver" method="_loadBean" priority="3">
-      The method _loadBean() has an NPath complexity of 786432.
+    <violation beginline="355" endline="447" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanXmlDriver" method="_loadBean" priority="3">
+      The method _loadBean() has an NPath complexity of 393216.
     </violation>
-    <violation beginline="471" endline="471" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+    <violation beginline="474" endline="474" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
       Avoid unused parameters such as '$factory'.
     </violation>
-    <violation beginline="482" endline="482" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="485" endline="485" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$xmlName'.
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanYamlDriver.php">
-    <violation beginline="57" endline="499" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="BeanYamlDriver" priority="3">
-      This class BeanYamlDriver has an overall complexity of 76 which is very high. The configured complexity threshold is 50.
+    <violation beginline="57" endline="507" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="BeanYamlDriver" priority="3">
+      This class BeanYamlDriver has an overall complexity of 75 which is very high. The configured complexity threshold is 50.
     </violation>
-    <violation beginline="134" endline="172" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanYamlDriver" method="_loadYaml" priority="3">
+    <violation beginline="144" endline="182" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanYamlDriver" method="_loadYaml" priority="3">
       The method _loadYaml() has a Cyclomatic Complexity of 12.
     </violation>
-    <violation beginline="134" endline="172" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanYamlDriver" method="_loadYaml" priority="3">
+    <violation beginline="144" endline="182" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanYamlDriver" method="_loadYaml" priority="3">
       The method _loadYaml() has an NPath complexity of 320.
     </violation>
-    <violation beginline="184" endline="184" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="194" endline="194" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$aspects'.
     </violation>
-    <violation beginline="306" endline="393" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanYamlDriver" method="_loadBean" priority="3">
-      The method _loadBean() has a Cyclomatic Complexity of 26.
+    <violation beginline="316" endline="406" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="BeanYamlDriver" method="_loadBean" priority="3">
+      The method _loadBean() has a Cyclomatic Complexity of 25.
     </violation>
-    <violation beginline="306" endline="393" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanYamlDriver" method="_loadBean" priority="3">
-      The method _loadBean() has an NPath complexity of 3981312.
+    <violation beginline="316" endline="406" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Bean\Factory\Driver" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="BeanYamlDriver" method="_loadBean" priority="3">
+      The method _loadBean() has an NPath complexity of 1990656.
     </violation>
-    <violation beginline="417" endline="417" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+    <violation beginline="430" endline="430" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
       Avoid unused parameters such as '$factory'.
     </violation>
-    <violation beginline="422" endline="422" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
-      Avoid unused parameters such as '$name'.
-    </violation>
-    <violation beginline="450" endline="450" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="458" endline="458" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$yamlFilename'.
     </violation>
   </file>
@@ -277,10 +277,10 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/BeanLifecycleManager.php">
-    <violation beginline="54" endline="322" rule="TooManyMethods" ruleset="Code Size Rules" package="Ding\Bean\Lifecycle" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="BeanLifecycleManager" priority="3">
+    <violation beginline="54" endline="332" rule="TooManyMethods" ruleset="Code Size Rules" package="Ding\Bean\Lifecycle" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="BeanLifecycleManager" priority="3">
       This class has too many methods, consider refactoring it.
     </violation>
-    <violation beginline="296" endline="296" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
+    <violation beginline="306" endline="306" rule="UnusedFormalParameter" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedformalparameter" priority="3">
       Avoid unused parameters such as '$properties'.
     </violation>
   </file>

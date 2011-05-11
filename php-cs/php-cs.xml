@@ -4,7 +4,7 @@
   <error line="136" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/AspectManager.php">
-  <error line="133" column="95" severity="warning" message="Line exceeds 85 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="143" column="95" severity="warning" message="Line exceeds 85 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/IAspectManagerAware.php">
  </file>
@@ -118,19 +118,18 @@
   <error line="155" column="20" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
   <error line="156" column="97" severity="warning" message="Line exceeds 85 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="159" column="107" severity="warning" message="Line exceeds 85 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="165" column="107" severity="warning" message="Line exceeds 85 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="175" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="232" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="234" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="235" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="253" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="257" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="269" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="269" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="269" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="277" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="291" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="306" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="162" column="107" severity="warning" message="Line exceeds 85 characters; contains 106 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="219" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="221" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="222" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="241" column="1" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="245" column="1" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="258" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="258" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="258" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="266" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="285" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="300" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanNameAwareDriver.php">
   <error line="60" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
@@ -145,61 +144,57 @@
   <error line="254" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="350" column="1" severity="error" message="Missing comment for param &quot;$beanName&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
   <error line="350" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="360" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="395" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="396" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="396" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="398" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="465" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="465" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="466" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="466" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanName at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="466" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="467" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="363" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="398" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="399" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="399" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="401" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
   <error line="468" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="468" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
   <error line="469" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="471" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="476" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="482" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="493" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="469" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanName at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="469" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="470" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="471" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="472" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="474" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="479" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="485" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="496" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
   <error line="498" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="502" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="511" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="513" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="517" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="550" column="1" severity="error" message="Doc comment for var $filename does not match actual variable name $options at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="502" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="535" column="1" severity="error" message="Doc comment for var $filename does not match actual variable name $options at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanYamlDriver.php">
-  <error line="129" column="1" severity="error" message="Missing comment for param &quot;$filename&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="157" column="111" severity="warning" message="Line exceeds 85 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="222" column="89" severity="warning" message="Line exceeds 85 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="252" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="265" column="1" severity="error" message="The comments for parameters $value (1) and $yamlFilename (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="282" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="288" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="301" column="1" severity="error" message="Missing comment for param &quot;$beanName&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="301" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="312" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="315" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="411" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="411" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="412" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="412" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanName at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="412" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="413" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="414" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="415" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="417" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="422" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="427" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="429" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="444" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="450" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="478" column="1" severity="error" message="Expected 1 space before variable type" source="PEAR.Commenting.FunctionComment.SpacingBeforeParamType"/>
-  <error line="478" column="1" severity="error" message="Doc comment for var [ UNKNOWN ] does not match actual variable name $options at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="478" column="1" severity="error" message="Missing parameter name at position 1" source="PEAR.Commenting.FunctionComment.MissingParamName"/>
-  <error line="478" column="1" severity="error" message="Missing type at position 1" source="PEAR.Commenting.FunctionComment.MissingParamType"/>
-  <error line="478" column="1" severity="error" message="Missing comment for param &quot;[ UNKNOWN ]&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="139" column="1" severity="error" message="Missing comment for param &quot;$filename&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="167" column="111" severity="warning" message="Line exceeds 85 characters; contains 110 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="232" column="89" severity="warning" message="Line exceeds 85 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="262" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="275" column="1" severity="error" message="The comments for parameters $value (1) and $yamlFilename (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="292" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="298" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="311" column="1" severity="error" message="Missing comment for param &quot;$beanName&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="311" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="325" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="328" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="424" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="424" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="425" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="425" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanName at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="425" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="426" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="427" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="428" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="430" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="435" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="437" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="452" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="458" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="486" column="1" severity="error" message="Expected 1 space before variable type" source="PEAR.Commenting.FunctionComment.SpacingBeforeParamType"/>
+  <error line="486" column="1" severity="error" message="Doc comment for var [ UNKNOWN ] does not match actual variable name $options at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="486" column="1" severity="error" message="Missing parameter name at position 1" source="PEAR.Commenting.FunctionComment.MissingParamName"/>
+  <error line="486" column="1" severity="error" message="Missing type at position 1" source="PEAR.Commenting.FunctionComment.MissingParamType"/>
+  <error line="486" column="1" severity="error" message="Missing comment for param &quot;[ UNKNOWN ]&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ContainerAwareDriver.php">
   <error line="60" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
@@ -335,51 +330,51 @@
   <error line="94" column="11" severity="error" message="Class constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ClassConstantNotUpperCase"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/BeanLifecycleManager.php">
-  <error line="77" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="89" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="101" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="113" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="125" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="137" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="149" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="161" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="173" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="176" column="53" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="176" column="95" severity="warning" message="Line exceeds 85 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="177" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="186" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="187" column="1" severity="error" message="Superfluous doc comment at position 3" source="PEAR.Commenting.FunctionComment.ExtraParamComment"/>
-  <error line="194" column="53" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="194" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="208" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="210" column="53" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="210" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="219" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="220" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanDefinition at position 3" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="224" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="226" column="53" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="226" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="235" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="236" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanDefinition at position 3" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="240" column="97" severity="warning" message="Line exceeds 85 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="242" column="53" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="242" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="256" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="258" column="53" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="258" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="272" column="53" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="272" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="286" column="53" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="286" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="291" column="5" severity="error" message="Doc comment for &quot;$properties&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="313" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="314" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="315" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="316" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="317" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="318" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="319" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
-  <error line="320" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="87" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="99" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="111" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="123" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="135" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="147" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="159" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="171" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="183" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="186" column="53" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="186" column="95" severity="warning" message="Line exceeds 85 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="187" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="196" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="197" column="1" severity="error" message="Superfluous doc comment at position 3" source="PEAR.Commenting.FunctionComment.ExtraParamComment"/>
+  <error line="204" column="53" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="204" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="218" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="220" column="53" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="220" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="229" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="230" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanDefinition at position 3" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="234" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="236" column="53" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="236" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="245" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="246" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanDefinition at position 3" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
+  <error line="250" column="97" severity="warning" message="Line exceeds 85 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="252" column="53" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="252" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="266" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="268" column="53" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="268" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="282" column="53" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="282" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="296" column="53" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="296" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="301" column="5" severity="error" message="Doc comment for &quot;$properties&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="323" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="324" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="325" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="326" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="327" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="328" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="329" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
+  <error line="330" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantName.ConstantNotUpperCase"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IAfterAssembleListener.php">
   <error line="49" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
