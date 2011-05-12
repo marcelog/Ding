@@ -553,6 +553,7 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/ShutdownHandler/IShutdownHandler.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/ShutdownHandler/ShutdownHandlerHelper.php">
+  <error line="78" column="12" severity="error" message="You must use &quot;/**&quot; style comments for a function comment" source="PEAR.Commenting.FunctionComment.WrongStyle"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/SignalHandler/ISignalHandler.php">
  </file>
