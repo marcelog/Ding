@@ -74,10 +74,15 @@ class ShutdownHandlerHelper
      *
      * @return void
      */
+    // @codeCoverageIgnoreStart
     public function handle()
     {
+        // This is excluded from coverage BUT IT IS TESTED!! it is excluded
+        // because phpunit will not mark it as covered because its a
+        // register_shutdown_function.
         $this->_handler->handleShutdown();
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * Constructor.
