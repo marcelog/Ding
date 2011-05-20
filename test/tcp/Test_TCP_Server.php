@@ -107,6 +107,22 @@ class Test_TCP_Server extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_accept_connection_and_send_data()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $server = $container->getBean('Server');
+        $server->open();
+        MyServerHandler::doClient($container->getBean('Client'));
+        while (strlen(MyServerHandler::$data) < 1) {
+            usleep(1000);
+        }
+        $this->assertEquals(MyClientHandler2::$data, "Hi!\n");
+        $server->close();
+    }
+
+    /**
+     * @test
+     */
     public function can_timeout_on_starving_reading()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -145,6 +161,7 @@ class MyServerHandler implements ITCPServerHandler
 
     public function handleConnection($remoteAddress, $remotePort)
     {
+        $this->server->write($remoteAddress, $remotePort, "Hi!\n");
     }
 
     public function readTimeout($remoteAddress, $remotePort)
@@ -204,5 +221,10 @@ class MyClientHandler2 implements ITCPClientHandler
 
     public function data()
     {
+        $buffer = '';
+        $len = 4096;
+        $this->client->read($buffer, $len);
+        self::$data = $buffer;
+        $this->client->close();
     }
 }
