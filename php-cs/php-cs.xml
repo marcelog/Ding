@@ -567,35 +567,38 @@
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/ITCPClientHandler.php">
   <error line="42" column="1" severity="warning" message="Invalid version &quot;SVN: $Id$&quot; in doc comment; consider &quot;Release: &lt;package_version&gt;&quot; instead" source="PEAR.Commenting.ClassComment.InvalidVersion"/>
-  <error line="85" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="49" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="94" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/ITCPServerHandler.php">
-  <error line="70" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="71" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="72" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="48" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="79" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="80" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="81" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="82" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="89" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="90" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="91" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="92" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="98" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="99" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="100" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="101" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="102" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="103" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="107" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="108" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="109" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="110" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="111" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="112" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPClientHelper.php">
   <error line="126" column="1" severity="error" message="Doc comment for var $buffer does not match actual variable name &amp;$buffer at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
   <error line="134" column="87" severity="warning" message="Line exceeds 85 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="167" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
   <error line="167" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="173" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="173" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="186" column="9" severity="error" message="Expected &quot;for (...) {\n&quot;; found &quot;for(...)\n        {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="251" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="251" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="171" column="13" severity="error" message="Space before opening parenthesis of function call prohibited" source="PEAR.Functions.FunctionCallSignature.SpaceBeforeOpenBracket"/>
+  <error line="176" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="176" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="189" column="9" severity="error" message="Expected &quot;for (...) {\n&quot;; found &quot;for(...)\n        {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="254" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="254" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPServerHelper.php">
   <error line="132" column="1" severity="error" message="Doc comment for var $buffer does not match actual variable name $host at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>

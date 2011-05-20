@@ -884,22 +884,6 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getReuse</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodgetReuse">TCPServerHelper::getReuse()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Returns true if the socket binding is to be reused.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getReuse</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodgetReuse">TCPClientHelper::getReuse()</a> in TCPClientHelper.php</div>
-							<div class="index-item-description">Returns true if the socket binding is to be reused.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getMicrotime</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1551,7 +1535,7 @@
 			<span class="method-title">setAddress</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetAddress">TCPServerHelper::setAddress()</a> in TCPServerHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetAddress">TCPClientHelper::setAddress()</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Sets server host or ip address.</div>
 					</dd>
 			<dt class="field">
@@ -1559,7 +1543,7 @@
 			<span class="method-title">setAddress</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetAddress">TCPClientHelper::setAddress()</a> in TCPClientHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetAddress">TCPServerHelper::setAddress()</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Sets server host or ip address.</div>
 					</dd>
 			<dt class="field">
@@ -1569,6 +1553,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetBacklog">TCPServerHelper::setBacklog()</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Sets maximum number of connections.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setClient</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/ITCPClientHandler.html#methodsetClient">ITCPClientHandler::setClient()</a> in ITCPClientHandler.php</div>
+							<div class="index-item-description">Called by the helper to inject itself into this handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1583,24 +1575,16 @@
 			<span class="method-title">setHandler</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetHandler">TCPClientHelper::setHandler()</a> in TCPClientHelper.php</div>
-							<div class="index-item-description">Sets the tcp client handler.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetHandler">TCPServerHelper::setHandler()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Sets the tcp server handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">setHandler</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetHandler">TCPServerHelper::setHandler()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Sets the tcp server handler.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">setPort</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetPort">TCPServerHelper::setPort()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Sets server port.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetHandler">TCPClientHelper::setHandler()</a> in TCPClientHelper.php</div>
+							<div class="index-item-description">Sets the tcp client handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1612,11 +1596,11 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">setReadMinLength</span>
+			<span class="method-title">setPort</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReadMinLength">TCPServerHelper::setReadMinLength()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Minimum needed bytes available in the socket before calling data() on the  server handler.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetPort">TCPServerHelper::setPort()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Sets server port.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1625,6 +1609,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReadMinLength">TCPClientHelper::setReadMinLength()</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Minimum needed bytes available in the socket before calling data() on the  client handler.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setReadMinLength</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReadMinLength">TCPServerHelper::setReadMinLength()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Minimum needed bytes available in the socket before calling data() on the  server handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1647,7 +1639,7 @@
 			<span class="method-title">setReuse</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReuse">TCPServerHelper::setReuse()</a> in TCPServerHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReuse">TCPClientHelper::setReuse()</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Sets wether to reuse or not the socket bind.</div>
 					</dd>
 			<dt class="field">
@@ -1655,8 +1647,16 @@
 			<span class="method-title">setReuse</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReuse">TCPClientHelper::setReuse()</a> in TCPClientHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReuse">TCPServerHelper::setReuse()</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Sets wether to reuse or not the socket bind.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setServer</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/ITCPServerHandler.html#methodsetServer">ITCPServerHandler::setServer()</a> in ITCPServerHandler.php</div>
+							<div class="index-item-description">Called by the helper to inject itself into this handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
