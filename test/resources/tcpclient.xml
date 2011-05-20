@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="Client" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+        <property name="connectTimeout">
+            <value>10000</value>
+        </property>
+        <property name="readTimeout">
+            <value>10000</value>
+        </property>
+        <property name="readMinLength">
+            <value>10000</value>
+        </property>
+        <property name="address">
+            <value>2.2.2.2</value>
+        </property>
+        <property name="port">
+            <value>666</value>
+        </property>
+        <property name="handler">
+            <ref bean="MyClientHandler"/>
+        </property>
+        <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
+    </bean>
+    <bean id="Client2" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+        <property name="connectTimeout">
+            <value>10000</value>
+        </property>
+        <property name="readTimeout">
+            <value>10000</value>
+        </property>
+        <property name="readMinLength">
+            <value>1</value>
+        </property>
+        <property name="address">
+            <value>209.85.195.104</value>
+        </property>
+        <property name="port">
+            <value>80</value>
+        </property>
+        <property name="handler">
+            <ref bean="MyClientHandler"/>
+        </property>
+        <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
+    </bean>
+    <bean id="Client3" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+        <property name="connectTimeout">
+            <value>10000</value>
+        </property>
+        <property name="readTimeout">
+            <value>10000</value>
+        </property>
+        <property name="readMinLength">
+            <value>1</value>
+        </property>
+        <property name="address">
+            <value>127.0.0.1</value>
+        </property>
+        <property name="port">
+            <value>1</value>
+        </property>
+        <property name="handler">
+            <ref bean="MyClientHandler"/>
+        </property>
+        <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
+    </bean>
+    <bean id="Client4" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+        <property name="connectTimeout">
+            <value>0</value>
+        </property>
+        <property name="readTimeout">
+            <value>10000</value>
+        </property>
+        <property name="readMinLength">
+            <value>1</value>
+        </property>
+        <property name="address">
+            <value>209.85.195.104</value>
+        </property>
+        <property name="port">
+            <value>80</value>
+        </property>
+        <property name="handler">
+            <ref bean="MyClientHandler"/>
+        </property>
+        <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
+    </bean>
+
+    <bean id="Client5" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+        <property name="connectTimeout">
+            <value>0</value>
+        </property>
+        <property name="readTimeout">
+            <value>10000</value>
+        </property>
+        <property name="readMinLength">
+            <value>1000000</value>
+        </property>
+        <property name="address">
+            <value>209.85.195.104</value>
+        </property>
+        <property name="port">
+            <value>80</value>
+        </property>
+        <property name="handler">
+            <ref bean="MyClientHandler"/>
+        </property>
+        <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
+    </bean>
+    <bean id="MyClientHandler" class="MyClientHandler" scope="prototype"/>
+</beans>

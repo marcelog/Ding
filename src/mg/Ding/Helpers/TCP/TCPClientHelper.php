@@ -167,8 +167,11 @@ class TCPClientHelper
             	'Error opening socket: ' . socket_strerror(socket_last_error())
             );
         }
+        if ($this->_reuse) {
+            socket_set_option ($this->_socket, SOL_SOCKET, SO_REUSEADDR, 1);
+        }
         if ($address !== false) {
-            if (!socket_bind($this->_socket, $address, $port)) {
+            if (!@socket_bind($this->_socket, $address, $port)) {
                 throw new TCPException(
                 	'Error binding socket: ' . socket_strerror(socket_last_error())
                 );
@@ -202,7 +205,7 @@ class TCPClientHelper
             $read = array($this->_socket);
             $write = null;
             $ex = null;
-            $result = @socket_select($read, $write, $ex, 0, 1000);
+            $result = @socket_select($read, $write, $ex, 0, 700);
         }
         if (!$result) {
             $this->_handler->connectTimeout();
@@ -325,6 +328,7 @@ class TCPClientHelper
     public function setHandler(ITCPClientHandler $handler)
     {
         $this->_handler = $handler;
+        $handler->setClient($this);
     }
 
     /**
@@ -361,16 +365,6 @@ class TCPClientHelper
     public function setReuse($reuse)
     {
         $this->_reuse = $reuse;
-    }
-
-    /**
-     * Returns true if the socket binding is to be reused.
-     *
-     * @return boolean
-     */
-    public function getReuse()
-    {
-        return $this->_reuse;
     }
 
     /**

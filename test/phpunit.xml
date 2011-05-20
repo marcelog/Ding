@@ -16,6 +16,9 @@
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="TCP">
+      <directory suffix=".php">tcp</directory>
+    </testsuite>
     <testsuite name="AOP Cache">
       <directory suffix=".php">aop/cache</directory>
     </testsuite>

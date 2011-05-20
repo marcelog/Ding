@@ -77,7 +77,7 @@ class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
 
 class MyClientHandler implements ITCPClientHandler
 {
-
+    protected $client;
     public function connectTimeout()
     {
         echo "connection timeout\n";
@@ -85,9 +85,8 @@ class MyClientHandler implements ITCPClientHandler
 
     public function readTimeout()
     {
-        global $client;
         echo "read timeout\n";
-        $client->close();
+        $this->client->close();
     }
     public function beforeConnect()
     {
@@ -97,10 +96,9 @@ class MyClientHandler implements ITCPClientHandler
     public function connect()
     {
         global $connected;
-        global $client;
         $connected = true;
         echo "connected\n";
-        $client->write("GET / HTTP/1.0\n\n");
+        $this->client->write("GET / HTTP/1.0\n\n");
     }
 
     public function disconnect()
@@ -114,13 +112,17 @@ class MyClientHandler implements ITCPClientHandler
 
     public function data()
     {
-        global $client;
         $buffer = '';
         $len = 4096;
-        $len = $client->read($buffer, $len);
+        $len = $this->client->read($buffer, $len);
         echo "got data (" . $len . "): \n";
         echo $buffer . "\n";
-        $client->close();
+        $this->client->close();
+    }
+
+    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
+    {
+        $this->client = $client;
     }
 }
 
@@ -149,7 +151,7 @@ $properties = array(
 );
 $a = ContainerImpl::getInstance($properties);
 $client = $a->getBean('Client');
-$client->open('192.168.0.10', 9998);
+$client->open('192.168.0.10', 9991);
 while(!$connected && $run) {
     usleep(1000);
 }

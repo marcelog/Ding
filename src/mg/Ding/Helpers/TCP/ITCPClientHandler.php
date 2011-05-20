@@ -45,6 +45,15 @@ namespace Ding\Helpers\TCP;
 interface ITCPClientHandler
 {
     /**
+     * Called by the helper to inject itself into this handler.
+	 *
+     * @param \Ding\Helpers\TCP\TCPClientHelper $client TCP Client helper.
+     *
+     * @return void
+     */
+    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client);
+
+    /**
      * Called just before trying to connect to the server.
      *
      * @return void
