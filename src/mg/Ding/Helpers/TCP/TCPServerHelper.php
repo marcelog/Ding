@@ -210,7 +210,7 @@ class TCPServerHelper
         if ($this->_reuse) {
             socket_set_option ($this->_socket, SOL_SOCKET, SO_REUSEADDR, 1);
         }
-        if (!socket_bind($this->_socket, $this->_address, $this->_port)) {
+        if (!@socket_bind($this->_socket, $this->_address, $this->_port)) {
             $error = socket_strerror(socket_last_error($this->_socket));
             socket_close($this->_socket);
             $this->_socket = false;
@@ -365,6 +365,7 @@ class TCPServerHelper
     public function setHandler(ITCPServerHandler $handler)
     {
         $this->_handler = $handler;
+        $handler->setServer($this);
     }
 
     /**
@@ -401,16 +402,6 @@ class TCPServerHelper
     public function setReuse($reuse)
     {
         $this->_reuse = $reuse;
-    }
-
-    /**
-     * Returns true if the socket binding is to be reused.
-     *
-     * @return boolean
-     */
-    public function getReuse()
-    {
-        return $this->_reuse;
     }
 
     /**

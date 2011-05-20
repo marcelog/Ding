@@ -75,6 +75,13 @@ class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
 }
 class MyServerHandler implements ITCPServerHandler
 {
+    protected $server;
+
+    public function setServer(\Ding\Helpers\TCP\TCPServerHelper $server)
+    {
+        $this->server = $server;
+    }
+
     public function beforeOpen()
     {
         echo "before open\n";
@@ -92,26 +99,23 @@ class MyServerHandler implements ITCPServerHandler
 
     public function handleConnection($remoteAddress, $remotePort)
     {
-        global $server;
         echo "new connection from: $remoteAddress:$remotePort\n";
     }
 
     public function readTimeout($remoteAddress, $remotePort)
     {
-        global $server;
         echo "read timeout for $remoteAddress:$remotePort\n";
         $server->disconnect($remoteAddress, $remotePort);
     }
 
     public function handleData($remoteAddress, $remotePort)
     {
-        global $server;
         $buffer = '';
         $len = 4096;
         echo "data from: $remoteAddress:$remotePort\n";
-        $server->read($remoteAddress, $remotePort, $buffer, $len);
+        $this->server->read($remoteAddress, $remotePort, $buffer, $len);
         echo $buffer . "\n";
-        $server->write($remoteAddress, $remotePort, 'You said: ' . $buffer);
+        $this->server->write($remoteAddress, $remotePort, 'You said: ' . $buffer);
     }
 
     public function disconnect($remoteAddress, $remotePort)

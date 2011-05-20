@@ -44,6 +44,15 @@ namespace Ding\Helpers\TCP;
 interface ITCPServerHandler
 {
     /**
+     * Called by the helper to inject itself into this handler.
+	 *
+     * @param \Ding\Helpers\TCP\TCPServerHelper $server TCP Server helper.
+     *
+     * @return void
+     */
+    public function setServer(\Ding\Helpers\TCP\TCPServerHelper $server);
+
+    /**
      * Called before opening and binding the server socket.
      *
      * @return void

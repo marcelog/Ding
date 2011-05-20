@@ -30,7 +30,7 @@ declare(ticks=1);
  */
 
 use Ding\Container\Impl\ContainerImpl;
-
+use Ding\Helpers\TCP\ITCPServerHandler;
 /**
  * This class will test the TCP Server.
  *
@@ -67,8 +67,70 @@ class Test_TCP_Server extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function dummy()
+    public function can_open()
     {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $server = $container->getBean('Server');
+        $server->open();
+        $server->close();
+    }
 
+    /**
+     * @test
+     * @expectedException Ding\Helpers\TCP\Exception\TCPException
+     */
+    public function cannot_bind()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $server = $container->getBean('Server2');
+        $server->open();
+        $server->close();
+    }
+
+    /**
+     * @test
+     * expectedException Ding\Helpers\TCP\Exception\TCPException
+     */
+    public function cannot_bind_with_invalid_backlog()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $server = $container->getBean('Server3');
+        $server->open();
+        $server->close();
+    }
+}
+class MyServerHandler implements ITCPServerHandler
+{
+    public function setServer(\Ding\Helpers\TCP\TCPServerHelper $server)
+    {
+        $this->server = $server;
+    }
+
+    public function beforeOpen()
+    {
+    }
+
+    public function beforeListen()
+    {
+    }
+
+    public function close()
+    {
+    }
+
+    public function handleConnection($remoteAddress, $remotePort)
+    {
+    }
+
+    public function readTimeout($remoteAddress, $remotePort)
+    {
+    }
+
+    public function handleData($remoteAddress, $remotePort)
+    {
+    }
+
+    public function disconnect($remoteAddress, $remotePort)
+    {
     }
 }
