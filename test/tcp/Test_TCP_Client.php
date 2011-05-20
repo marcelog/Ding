@@ -28,9 +28,9 @@ declare(ticks=1);
  * limitations under the License.
  *
  */
-
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Helpers\TCP\ITCPClientHandler;
+
 /**
  * This class will test the TCP Client.
  *

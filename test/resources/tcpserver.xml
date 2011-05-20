@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
+    <bean id="Client" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+        <property name="connectTimeout">
+            <value>0</value>
+        </property>
+        <property name="readTimeout">
+            <value>0</value>
+        </property>
+        <property name="readMinLength">
+            <value>1</value>
+        </property>
+        <property name="address">
+            <value>127.0.0.1</value>
+        </property>
+        <property name="port">
+            <value>9898</value>
+        </property>
+        <property name="handler">
+            <ref bean="MyClientHandler"/>
+        </property>
+        <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
+    </bean>
     <bean id="Server" class="Ding\Helpers\TCP\TCPServerHelper" scope="singleton">
         <property name="backlog">
             <value>5</value>
         </property>
         <property name="readTimeout">
-            <value>5000</value>
+            <value>50000</value>
         </property>
         <property name="readMinLength">
             <value>1</value>
@@ -64,4 +85,26 @@
         <property name="reuse"><false/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
     </bean>
     <bean id="MyServerHandler" class="MyServerHandler" scope="singleton"/>
+    <bean id="MyClientHandler" class="MyClientHandler2" scope="prototype"/>
+    <bean id="Server4" class="Ding\Helpers\TCP\TCPServerHelper" scope="singleton">
+        <property name="backlog">
+            <value>5</value>
+        </property>
+        <property name="readTimeout">
+            <value>50000</value>
+        </property>
+        <property name="readMinLength">
+            <value>1000000</value>
+        </property>
+        <property name="address">
+            <value>127.0.0.1</value>
+        </property>
+        <property name="port">
+            <value>9898</value>
+        </property>
+        <property name="handler">
+            <ref bean="MyServerHandler"/>
+        </property>
+        <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
+    </bean>
 </beans>

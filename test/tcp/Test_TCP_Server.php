@@ -28,9 +28,10 @@ declare(ticks=1);
  * limitations under the License.
  *
  */
-
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Helpers\TCP\ITCPServerHandler;
+use Ding\Helpers\TCP\ITCPClientHandler;
+
 /**
  * This class will test the TCP Server.
  *
@@ -89,18 +90,42 @@ class Test_TCP_Server extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * expectedException Ding\Helpers\TCP\Exception\TCPException
      */
-    public function cannot_bind_with_invalid_backlog()
+    public function can_accept_connection_and_receive_data()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $server = $container->getBean('Server3');
+        $server = $container->getBean('Server');
         $server->open();
+        MyServerHandler::doClient($container->getBean('Client'));
+        while (strlen(MyServerHandler::$data) < 1) {
+            usleep(1000);
+        }
+        $this->assertEquals(MyServerHandler::$data, "Hi!\n");
+        $server->close();
+    }
+
+    /**
+     * @test
+     */
+    public function can_timeout_on_starving_reading()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $server = $container->getBean('Server4');
+        $server->open();
+        MyServerHandler::doClient($container->getBean('Client'));
+        while (strlen(MyServerHandler::$data) < 1) {
+            usleep(1000);
+        }
+        $this->assertEquals(MyServerHandler::$data, "timeout");
         $server->close();
     }
 }
+
 class MyServerHandler implements ITCPServerHandler
 {
+    public static $data;
+    protected $server;
+
     public function setServer(\Ding\Helpers\TCP\TCPServerHelper $server)
     {
         $this->server = $server;
@@ -124,13 +149,60 @@ class MyServerHandler implements ITCPServerHandler
 
     public function readTimeout($remoteAddress, $remotePort)
     {
+        self::$data = 'timeout';
     }
 
     public function handleData($remoteAddress, $remotePort)
     {
+        $buffer = '';
+        $len = 1024;
+        $this->server->read($remoteAddress, $remotePort, $buffer, $len);
+        self::$data = $buffer;
+    }
+
+    public static function doClient($client)
+    {
+        $client->open();
+        sleep(5);
     }
 
     public function disconnect($remoteAddress, $remotePort)
+    {
+    }
+}
+
+class MyClientHandler2 implements ITCPClientHandler
+{
+    public static $time;
+    protected $client;
+    public static $data;
+
+    public function connectTimeout()
+    {
+    }
+
+    public function readTimeout()
+    {
+    }
+    public function beforeConnect()
+    {
+    }
+
+    public function connect()
+    {
+        $this->client->write("Hi!\n");
+    }
+
+    public function disconnect()
+    {
+    }
+
+    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
+    {
+        $this->client = $client;
+    }
+
+    public function data()
     {
     }
 }
