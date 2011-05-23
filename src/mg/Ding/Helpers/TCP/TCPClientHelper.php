@@ -248,7 +248,7 @@ class TCPClientHelper
         $read = array($this->_socket);
         $write = null;
         $ex = null;
-        $result = socket_select($read, $write, $ex, 0, 1);
+        $result = @socket_select($read, $write, $ex, 0, 1);
         if ($result === false) {
             throw new TCPException(
             	'Error selecting from socket: '

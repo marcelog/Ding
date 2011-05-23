@@ -139,7 +139,7 @@ class TCPServerHelper
     {
         $peerName = $this->getPeerName($host, $port);
         $socket = $this->_peers[$peerName];
-        $length = socket_recv($socket, $buffer, $length, $peek ? MSG_PEEK : 0);
+        $length = @socket_recv($socket, $buffer, $length, $peek ? MSG_PEEK : 0);
         return $length;
     }
 
@@ -155,7 +155,7 @@ class TCPServerHelper
     {
         $peerName = $this->getPeerName($host, $port);
         $socket = $this->_peers[$peerName];
-        return socket_send($socket, $what, strlen($what), 0);
+        return @socket_send($socket, $what, strlen($what), 0);
     }
 
     /**

@@ -1,10 +1,30 @@
 <?php
 declare(ticks=1);
-$mockSocketCreate = false;
-$mockSocketSelect = false;
 
+namespace {
+    $mockSocketCreate = false;
+    $mockSocketSelect = false;
+    $mockSocketListen = false;
+}
+namespace Ding\Helpers\TCP {
+    function socket_create() {
+        global $mockSocketCreate;
+        if (isset($mockSocketCreate) && $mockSocketCreate === true) {
+            return false;
+        } else {
+            return call_user_func_array('\socket_create', func_get_args());
+        }
+    }
+    function socket_listen() {
+        global $mockSocketListen;
+        if (isset($mockSocketListen) && $mockSocketListen === true) {
+            return false;
+        } else {
+            return call_user_func_array('\socket_listen', func_get_args());
+        }
+    }
 /**
- * This class will test the TCP Client.
+ * This class will test the TCP Client errors.
  *
  * PHP Version 5
  *
@@ -33,10 +53,9 @@ $mockSocketSelect = false;
  */
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Helpers\TCP\ITCPClientHandler;
-use Ding\Helpers\TCP\ITCPServerHandler;
 
 /**
- * This class will test the TCP Client.
+ * This class will test the TCP Client errors.
  *
  * PHP Version 5
  *
@@ -47,7 +66,7 @@ use Ding\Helpers\TCP\ITCPServerHandler;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_TCP_Client extends PHPUnit_Framework_TestCase
+class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
 {
     private $_properties = array();
 
@@ -55,8 +74,10 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
     {
         global $mockSocketCreate;
         global $mockSocketSelect;
+        global $mockSocketListen;
         $mockSocketCreate = false;
         $mockSocketSelect = false;
+        $mockSocketListen = false;
         $this->_properties = array(
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
@@ -64,7 +85,7 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
                 'factory' => array(
                     'bdef' => array(
                         'xml' => array(
-                        	'filename' => 'tcpclient.xml', 'directories' => array(RESOURCES_DIR)
+                        	'filename' => 'tcpclientmock.xml', 'directories' => array(RESOURCES_DIR)
                         )
                     )
                 )
@@ -74,96 +95,60 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
      */
-    public function cannot_bind()
+    public function cannot_socket_create()
     {
-        $container = ContainerImpl::getInstance($this->_properties);
-        $client = $container->getBean('Client');
-        $client->open('1.1.1.1', 1);
-    }
-
-    /**
-     * @test
-     * @expectedException Ding\Helpers\TCP\Exception\TCPException
-     */
-    public function cannot_connect()
-    {
-        $container = ContainerImpl::getInstance($this->_properties);
-        $client = $container->getBean('Client3');
-        $client->open('127.0.0.1', rand(2000, 65535));
-    }
-
-    /**
-     * @test
-     */
-    public function can_timeout_on_connect()
-    {
-        $container = ContainerImpl::getInstance($this->_properties);
-        $client = $container->getBean('Client');
-        $start = time();
-        $client->open();
-        while (MyClientHandler::$time < 1) {
-            usleep(1000);
-        }
-        $this->assertEquals(MyClientHandler::$time - $start, 10);
-    }
-
-    /**
-     * @test
-     */
-    public function can_connect_and_receive_nonblocking()
-    {
+        global $mockSocketCreate;
+        global $mockSocketSelect;
+        global $mockSocketListen;
+        $mockSocketCreate = true;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
         $container = ContainerImpl::getInstance($this->_properties);
         $client = $container->getBean('Client2');
         $client->open();
-        while (strlen(MyClientHandler::$data) < 1) {
-            usleep(1000);
-        }
-        $this->assertContains('Set-Cookie', MyClientHandler::$data);
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
     }
     /**
      * @test
+     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
      */
-    public function can_connect_and_receive_blocking()
+    public function cannot_socket_create_on_server()
     {
+        global $mockSocketCreate;
+        global $mockSocketSelect;
+        global $mockSocketListen;
+        $mockSocketCreate = true;
+        $mockSocketListen = false;
+        $mockSocketSelect = false;
         $container = ContainerImpl::getInstance($this->_properties);
-        $client = $container->getBean('Client4');
+        $client = $container->getBean('Server');
         $client->open();
-        while (strlen(MyClientHandler::$data) < 1) {
-            usleep(1000);
-        }
-        $this->assertContains('Set-Cookie', MyClientHandler::$data);
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
     }
-
     /**
      * @test
+     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
      */
-    public function can_timeout_on_starving_reading()
+    public function cannot_socket_listen_on_server()
     {
+        global $mockSocketCreate;
+        global $mockSocketSelect;
+        global $mockSocketListen;
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = true;
         $container = ContainerImpl::getInstance($this->_properties);
-        $client = $container->getBean('Client5');
-        $start = time();
+        $client = $container->getBean('Server');
         $client->open();
-        while (MyClientHandler::$time < 1) {
-            usleep(1000);
-        }
-        $this->assertEquals(MyClientHandler::$time - $start, 10);
-    }
-    /**
-     * @test
-     */
-    public function can_close_on_server_disconnect()
-    {
-        $container = ContainerImpl::getInstance($this->_properties);
-        $server = $container->getBean('Server');
-        $server->open();
-        MyServerHandler::doClient($container->getBean('Client6'));
-        while (strlen(MyServerHandler666::$data) < 1) {
-            usleep(1000);
-        }
-        $this->assertEquals(MyServerHandler666::$data, "disconnect");
-        $server->close();
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
     }
 }
 
@@ -209,48 +194,7 @@ class MyClientHandler implements ITCPClientHandler
         $this->client->close();
     }
 }
-class MyClientHandler666 implements ITCPClientHandler
-{
-    public static $time;
-    protected $client;
-    public static $data;
-
-    public function connectTimeout()
-    {
-        self::$time = time();
-    }
-
-    public function readTimeout()
-    {
-        self::$time = time();
-    }
-    public function beforeConnect()
-    {
-    }
-
-    public function connect()
-    {
-    }
-
-    public function disconnect()
-    {
-    }
-
-    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
-    {
-        $this->client = $client;
-    }
-
-    public function data()
-    {
-        $buffer = '';
-        $len = 4096;
-        $this->client->read($buffer, $len);
-        self::$data = $buffer;
-        $this->client->close();
-    }
-}
-class MyServerHandler666 implements ITCPServerHandler
+class MyServerHandler implements ITCPServerHandler
 {
     public static $data;
     protected $server;
@@ -274,8 +218,7 @@ class MyServerHandler666 implements ITCPServerHandler
 
     public function handleConnection($remoteAddress, $remotePort)
     {
-        //$this->server->write($remoteAddress, $remotePort, "Hi!\n");
-        $this->server->disconnect($remoteAddress, $remotePort);
+        $this->server->write($remoteAddress, $remotePort, "Hi!\n");
     }
 
     public function readTimeout($remoteAddress, $remotePort)
@@ -287,7 +230,7 @@ class MyServerHandler666 implements ITCPServerHandler
     {
         $buffer = '';
         $len = 1024;
-        //$this->server->read($remoteAddress, $remotePort, $buffer, $len);
+        $this->server->read($remoteAddress, $remotePort, $buffer, $len);
         self::$data = $buffer;
     }
 
@@ -299,6 +242,6 @@ class MyServerHandler666 implements ITCPServerHandler
 
     public function disconnect($remoteAddress, $remotePort)
     {
-        self::$data = 'disconnect';
     }
+}
 }
