@@ -239,44 +239,8 @@ class TCPServerHelper
         return ((float)$usec + (float)$sec);
     }
 
-    /**
-     * Main reading loop. Call this in your own infinite loop or declare(ticks)
-     * in your software. This routine will call your server handler when there
-     * is data available to read, new connections, or timeouts. Will always
-     * detect when the other side closed the connection.
-     *
-     * @return void
-     */
-    public function process()
+    public function processPeers()
     {
-        if ($this->_socket === false || !$this->_open) {
-            return;
-        }
-        // Control server.
-        $read = array($this->_socket);
-        $write = null;
-        $ex = null;
-        $result = @socket_select($read, $write, $ex, 0, 1);
-        if ($result === false) {
-            throw new TCPException(
-            	'Error selecting from socket: '
-                . socket_strerror(socket_last_error($this->_socket))
-            );
-        }
-        if ($result > 0) {
-            if (in_array($this->_socket, $read)) {
-                $newSocket = socket_accept($this->_socket);
-                if ($newSocket !== false) {
-                    $address = '';
-                    $port = 0;
-                    socket_getpeername($newSocket, $address, $port);
-                    $peername = $this->getPeerName($address, $port);
-                    $this->_peers[$peername] = $newSocket;
-                    $this->_peersLastDataReceived[$peername] = $this->getMicrotime();
-                    $this->_handler->handleConnection($address, $port);
-                }
-            }
-        }
         // Control peers.
         if (count($this->_peers) < 1) {
             return;
@@ -316,6 +280,46 @@ class TCPServerHelper
                 $this->_peersLastDataReceived[$peerName] = $now;
             }
         }
+    }
+    /**
+     * Main reading loop. Call this in your own infinite loop or declare(ticks)
+     * in your software. This routine will call your server handler when there
+     * is data available to read, new connections, or timeouts. Will always
+     * detect when the other side closed the connection.
+     *
+     * @return void
+     */
+    public function process()
+    {
+        if ($this->_socket === false || !$this->_open) {
+            return;
+        }
+        // Control server.
+        $read = array($this->_socket);
+        $write = null;
+        $ex = null;
+        $result = @socket_select($read, $write, $ex, 0, 1);
+        if ($result === false) {
+            throw new TCPException(
+            	'Error selecting from socket: '
+                . socket_strerror(socket_last_error($this->_socket))
+            );
+        }
+        if ($result > 0) {
+            if (in_array($this->_socket, $read)) {
+                $newSocket = socket_accept($this->_socket);
+                if ($newSocket !== false) {
+                    $address = '';
+                    $port = 0;
+                    socket_getpeername($newSocket, $address, $port);
+                    $peername = $this->getPeerName($address, $port);
+                    $this->_peers[$peername] = $newSocket;
+                    $this->_peersLastDataReceived[$peername] = $this->getMicrotime();
+                    $this->_handler->handleConnection($address, $port);
+                }
+            }
+        }
+        $this->processPeers();
     }
 
     /**

@@ -23,6 +23,21 @@ namespace Ding\Helpers\TCP {
             return call_user_func_array('\socket_listen', func_get_args());
         }
     }
+    function socket_select(&$read1, &$write1, &$except1, $tv_sec, $tv_usec = 0) {
+        global $mockSocketListen;
+        if (isset($mockSocketListen) && $mockSocketListen === true) {
+            return false;
+        } else {
+            $read2 = $read1;
+            $write2 = $write1;
+            $except2 = $except1;
+            $r = \socket_select($read2, $write2, $except2, $tv_sec, $tv_usec);
+            $read1 = $read2;
+            $write1 = $write2;
+            $except1 = $except2;
+            return $r;
+        }
+    }
 /**
  * This class will test the TCP Client errors.
  *
@@ -112,6 +127,85 @@ class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
         $mockSocketSelect = false;
         $mockSocketListen = false;
     }
+
+    /**
+     * @test
+     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     */
+    public function cannot_socket_select()
+    {
+        global $mockSocketCreate;
+        global $mockSocketSelect;
+        global $mockSocketListen;
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
+        $container = ContainerImpl::getInstance($this->_properties);
+        $client = $container->getBean('Client2');
+        $client->open();
+        while (MyClientHandler::$time < 1) {
+            usleep(1000);
+        }
+        unregister_tick_function(array($client, 'process'));
+        $mockSocketListen = true;
+        $client->process();
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
+    }
+
+    /**
+     * @test
+     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     */
+    public function cannot_socket_select_on_server()
+    {
+        global $mockSocketCreate;
+        global $mockSocketSelect;
+        global $mockSocketListen;
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
+        $container = ContainerImpl::getInstance($this->_properties);
+        $server = $container->getBean('Server');
+        $server->open();
+        unregister_tick_function(array($server, 'process'));
+        $mockSocketListen = true;
+        $server->process();
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
+    }
+
+    /**
+     * @test
+     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     */
+    public function cannot_socket_select_on_server_peers()
+    {
+        global $mockSocketCreate;
+        global $mockSocketSelect;
+        global $mockSocketListen;
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
+        $container = ContainerImpl::getInstance($this->_properties);
+        $server = $container->getBean('Server');
+        $server->open();
+        $client = $container->getBean('Client6');
+        $client->open();
+        while (MyClientHandler::$time < 1) {
+            usleep(1000);
+        }
+        unregister_tick_function(array($server, 'process'));
+        unregister_tick_function(array($client, 'process'));
+        $mockSocketListen = true;
+        $server->processPeers();
+        $mockSocketCreate = false;
+        $mockSocketSelect = false;
+        $mockSocketListen = false;
+    }
+
     /**
      * @test
      * @expectedException \Ding\Helpers\TCP\Exception\TCPException
@@ -173,7 +267,7 @@ class MyClientHandler implements ITCPClientHandler
 
     public function connect()
     {
-        $this->client->write("GET / HTTP/1.1\nhost:www.google.com\n\n");
+        self::$time = time();
     }
 
     public function disconnect()

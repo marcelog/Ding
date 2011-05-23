@@ -205,7 +205,7 @@ class TCPClientHelper
             $read = array($this->_socket);
             $write = null;
             $ex = null;
-            $result = @socket_select($read, $write, $ex, 0, 700);
+            $result = @socket_select($read, $write, $ex, 0, 650);
         }
         if (!$result) {
             $this->_handler->connectTimeout();
