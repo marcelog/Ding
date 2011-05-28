@@ -3,11 +3,8 @@
    <bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton">
        <property name="locations">
          <array>
-           <entry key="0"><value>resource://includepath://file.properties</value></entry>
+           <entry key="0"><value>file://file.properties</value></entry>
          </array>
        </property>
    </bean>
-	<bean id="Timezone" class="Ding\Helpers\Timezone\TimezoneHelper" scope="singleton">
-		<property name="timezone"><value>${timezone}</value></property>
-	</bean>
 </beans>

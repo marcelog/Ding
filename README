@@ -101,7 +101,9 @@ can deliver prototypes scoped beans.
 * A bean can be: singleton or prototype (multiple instances).
 * Can create beans by specifying a static method of the bean class itself.
 * Can create beans by specifying another bean (and its method) as a factory.
-* Properties for your beans.xml, like: ${log.dir}/alog.log
+* Properties for your beans.xml, like: ${log.dir}/alog.log. You can also have
+the container setup any php options by specifying a property with the name 
+"php." (i.e: php.date.timezone).
 * Optional init-method will be called right after assembling a bean. (Can also
 be specified via the @InitMethod(method=xxx) annotation).
 * Optional destroy-method will be called when the container is shutting down.
@@ -357,7 +359,7 @@ all the cache subsytems. Otherwise, use memcached or file.
 * If you are using annotations (good for you! just dont abuse ;)) use the
 annotations cache with apc or memcached or file (in that order).
 * Do not include the driver you wont be using (like SignalHandler, ErrorHandler,
-Timezone, Shutdown, etc).
+Shutdown, etc).
 * Do not abuse the aop feature.
 --------------------------------------------------------------------------------
 

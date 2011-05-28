@@ -1,0 +1,4 @@
+The Timezone Helper has been deprecated in favor of using "php." kind of 
+properties. So you should remove the use of TimezoneHelper and add a user
+property "php.date.timezone" to the user properties used by the container. This
+replaces the use of the Timezone helper (see docs/examples/PhpProperties).

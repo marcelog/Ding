@@ -1,7 +1,7 @@
 <?php
 /**
- * This driver will look up an optional bean called Timezone and if it
- * finds it, will set up the php default timezone.
+ * This driver will inject the MessageSource to the beans that implement
+ * IMessageSourceAware
  *
  * PHP Version 5
  *
@@ -37,8 +37,8 @@ use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\Factory\IBeanFactory;
 
 /**
- * This driver will look up an optional bean called Timezone and if it
- * finds it, will set up the php default timezone.
+ * This driver will inject the MessageSource to the beans that implement
+ * IMessageSourceAware
  *
  * PHP Version 5
  *

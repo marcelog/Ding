@@ -81,7 +81,8 @@ try
         'doctrine.db.path' => __DIR__ ."/db.sqlite3",
         'user.name' => 'nobody',
         'log.dir' => '/tmp/alogdir',
-        'log.file' => 'alog.log'
+        'log.file' => 'alog.log',
+        'php.date.timezone' => 'America/Buenos_Aires'
 	 );
     $dingProperties = array(
         'ding' => array(

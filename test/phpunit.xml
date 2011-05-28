@@ -10,6 +10,8 @@
     <whitelist>
       <directory suffix=".php">../src/mg/Ding</directory>
       <exclude>
+        <directory suffix=".php">../src/mg/Ding/Bin</directory>
+        <directory suffix=".php">../src/mg/Ding/Application</directory>
         <directory suffix=".php">../src/mg/Ding/Helpers/PAGI</directory>
         <directory suffix=".php">../src/mg/Ding/Helpers/PAMI</directory>
       </exclude>
@@ -78,9 +80,6 @@
     </testsuite>
     <testsuite name="Filter XML">
       <directory suffix=".php">filter/xml</directory>
-    </testsuite>
-    <testsuite name="Driver Timezone">
-      <directory suffix=".php">timezone</directory>
     </testsuite>
     <testsuite name="Driver SignalHandler">
       <directory suffix=".php">signal</directory>

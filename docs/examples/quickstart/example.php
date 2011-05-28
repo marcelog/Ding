@@ -297,7 +297,6 @@ try
                 'drivers' => array(
                     'signalhandler' => array(),
 		    		'shutdown' => array(),
-                    'timezone' => array(),
 			    	'errorhandler' => array()
                 ),
                'bdef' => array(

@@ -131,6 +131,7 @@ class Test_XML_Filter extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->value, 'indeedavaluethis is a value');
         $this->assertEquals($bean->constructorArray[0], 'indeedavaluethis is a value');
         $this->assertEquals($bean->valueArray[0], 'indeedavaluethis is a value');
+        $this->assertEquals(ini_get('date.timezone'), 'Navajo');
     }
 }
 

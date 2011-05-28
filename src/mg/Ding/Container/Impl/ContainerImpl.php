@@ -52,7 +52,6 @@ use Ding\Bean\Factory\Driver\MVCAnnotationDriver;
 use Ding\Bean\Factory\Driver\DependsOnDriver;
 use Ding\Bean\Factory\Driver\MessageSourceDriver;
 use Ding\Bean\Factory\Driver\MethodInjectionDriver;
-use Ding\Bean\Factory\Driver\TimezoneDriver;
 use Ding\Bean\Factory\Driver\ShutdownDriver;
 use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
 use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
@@ -621,9 +620,6 @@ class ContainerImpl implements IContainer
             $this->_lifecycleManager->addAfterConfigListener(ShutdownDriver::getInstance($soullessArray));
         }
 
-        if (isset(self::$_options['drivers']['timezone'])) {
-            $this->_lifecycleManager->addAfterConfigListener(TimezoneDriver::getInstance($soullessArray));
-        }
         $this->_lifecycleManager->addBeforeCreateListener(DependsOnDriver::getInstance($soullessArray));
 
         if (isset(self::$_options['bdef']['xml'])) {

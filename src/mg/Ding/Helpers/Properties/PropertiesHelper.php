@@ -122,6 +122,9 @@ class PropertiesHelper
     public function loadProperties(array $properties)
     {
         foreach (array_keys($properties) as $key) {
+            if (strncmp($key, 'php.', 4) === 0) {
+                ini_set(substr($key, 4), $properties[$key]);
+            }
             /* Change keys. 'property' becomes ${property} */
             $propName = '${' . $key . '}';
             $this->_propertiesNames[$propName] = $properties[$key];
