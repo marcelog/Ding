@@ -183,6 +183,10 @@ $properties['ding']['factory']['properties'] = array(
 )
 </pre>
 <p>
+<b>NOTE:</b> If a property starts with "php.", like "php.date.timezone", ding will automatically
+call ini_set() for that property, like: ini_set('date.timezone', value). See docs/examples/PhpProperties.
+</p>
+<p>
 You can also configure the <b>PropertiesHolder</b> bean to inject properties files:
 </p>
 <pre>
@@ -193,6 +197,7 @@ You can also configure the <b>PropertiesHolder</b> bean to inject properties fil
            &lt;entry key="0"&gt;&lt;value&gt;resource://includepath://file.properties&lt;/value&gt;&lt;/entry&gt;
            &lt;entry key="1"&gt;&lt;value&gt;other.properties&lt;/value&gt;&lt;/entry&gt;
            &lt;entry key="2"&gt;&lt;value&gt;file://./user.properties&lt;/value&gt;&lt;/entry&gt;
+           &lt;entry key="3"&gt;&lt;value&gt;file://./php.properties&lt;/value&gt;&lt;/entry&gt;
          &lt;/array&gt;
        &lt;/property&gt;
    &lt;/bean&gt;
@@ -204,10 +209,15 @@ You can also configure the <b>PropertiesHolder</b> bean to inject properties fil
 &lt;/beans&gt;
 </pre>
 <p>
+So you can have your own properties and the ones that affect php behavior (i.e: "php." properties) in your
+own separate config files.
+</p>
+<p>
 Sample properties file:
 </p>
 <pre>
 some.value=value
+php.some.php.property=value
 </pre>
 <H2>Cache Subsystems</H2>
 The cache subsystems use $properties['ding']['cache']. The subsystems are:
