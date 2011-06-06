@@ -70,13 +70,16 @@ class ResourcesDriver implements IBeforeCreateListener
     /**
      * Recursively, apply filter to property or constructor arguments values.
      *
-     * @param BeanPropertyDefinition|BeanConstructoruArgumentDefinition $def
+     * @param BeanPropertyDefinition|BeanConstructorArgumentDefinition $def
      * @param IContainer $factory Container in use.
      *
      * @return void
      */
     private function _applyFilter($def, IContainer $factory)
     {
+        if (!is_object($def)) { // can be an array (native of php) instead of a bean property definition array
+            return;
+        }
         $value = $def->getValue();
         if (is_array($value)) {
             foreach ($value as $def) {

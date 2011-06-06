@@ -62,7 +62,8 @@ class Test_XML_Filter extends PHPUnit_Framework_TestCase
                         )
                     ),
                     'properties' => array(
-                        'a.b.value' => 'this is a value'
+                        'a.b.value' => 'this is a value',
+                        'an.array.value' => array('a', 'b', 'c')
                     )
                 )
             )
@@ -73,6 +74,7 @@ class Test_XML_Filter extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->value, 'this is a value');
         $this->assertEquals($bean->constructorArray[0], 'this is a value');
         $this->assertEquals($bean->valueArray[0], 'this is a value');
+        $this->assertEquals($bean->phparray, array('a', 'b', 'c'));
     }
 
     /**
@@ -120,7 +122,7 @@ class Test_XML_Filter extends PHPUnit_Framework_TestCase
                         )
                     ),
                     'properties' => array(
-                        'a.b.value' => 'this is a value'
+                        'a.b.value' => 'this is a value',
                     )
                 )
             )
@@ -141,6 +143,7 @@ class ClassSimpleXMLFilter
     public $value;
     public $constructorArray;
     public $valueArray;
+    public $phparray;
 
     public function setValue($value)
     {
@@ -152,6 +155,10 @@ class ClassSimpleXMLFilter
         $this->valueArray = $value;
     }
 
+    public function setPhparray($value)
+    {
+        $this->phparray = $value;
+    }
     public function __construct($a, $b)
     {
         $this->constructor = $a;
