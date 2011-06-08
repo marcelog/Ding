@@ -331,14 +331,6 @@ This one will call A\B\C::getInstance() (static method) in order to get a bean:<
 </pre>
 </p>
 <hr/>
-<p>
-This one will call AnotherClass::getInstance() (static method) in order to get a bean:<br/>
-<pre>
-&lt;beans&gt;
-    &lt;bean id="beanName" class="A\B\C" scope="prototype" factory-class="AnotherClass" factory-method="getInstance"/&gt;
-&lt;/beans&gt;
-</pre>
-</p>
 <hr/>
 <p>
 This one will first create "anotherBean" and then call anotherBean->getInstance() (instance method) in order to get the other bean:<br/>
