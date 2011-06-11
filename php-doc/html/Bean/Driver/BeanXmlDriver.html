@@ -103,7 +103,7 @@
                 <p class="implements">
             Implements interfaces:
             <ul>
-                <li><a href="../../Bean/Lifecycle/IBeforeDefinitionListener.html">IBeforeDefinitionListener</a></li><li><a href="../../Aspect/IAspectProvider.html">IAspectProvider</a></li><li><a href="../../Aspect/IPointcutProvider.html">IPointcutProvider</a></li>            </ul>
+                <li><a href="../../Bean/Lifecycle/IAfterConfigListener.html">IAfterConfigListener</a></li><li><a href="../../Bean/Lifecycle/IBeforeDefinitionListener.html">IBeforeDefinitionListener</a></li><li><a href="../../Aspect/IAspectProvider.html">IAspectProvider</a></li><li><a href="../../Aspect/IPointcutProvider.html">IPointcutProvider</a></li>            </ul>
         </p>
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">XML bean factory.</p>
@@ -114,7 +114,7 @@
 				<li><span class="field">license:</span> <a href="http://marcelog.github.com/">Apache License 2.0</a></li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_Bean---Factory---Driver---BeanXmlDriver.php.html">/Bean/Factory/Driver/BeanXmlDriver.php</a> (line <span class="field">56</span>)
+			Located in <a class="field" href="_Bean---Factory---Driver---BeanXmlDriver.php.html">/Bean/Factory/Driver/BeanXmlDriver.php</a> (line <span class="field">59</span>)
 		</p>
 		
 				
@@ -208,7 +208,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																			
+																																											
 				<div class="method-definition">
 					<img src="../../media/images/StaticMethod.png" alt=" "/>
 					static 						<span class="method-result"><a href="../../Bean/Driver/BeanXmlDriver.html">BeanXmlDriver</a></span>
@@ -221,6 +221,13 @@
 											<span class="method-result">void</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$options</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$filename</span>)
+									</div>
+															
+				<div class="method-definition">
+					<img src="../../media/images/Method.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#afterConfig" title="details" class="method-name">afterConfig</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$factory</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -324,7 +331,7 @@
 		<span class="var-title">
 			static <span class="var-type">BeanFactoryXmlImpl</span>
 			<span class="var-name">$_instance</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">111</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">115</span>)
 		</span>
 	</div>
 
@@ -348,7 +355,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Aspect/AspectManager.html">AspectManager</a></span>
 			<span class="var-name">$_aspectManager</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">117</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">121</span>)
 		</span>
 	</div>
 
@@ -371,7 +378,7 @@
 		<span class="var-title">
 			<span class="var-type">string[]</span>
 			<span class="var-name">$_directories</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">123</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">127</span>)
 		</span>
 	</div>
 
@@ -394,7 +401,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$_filename</span>
-						(line <span class="line-number">69</span>)
+						(line <span class="line-number">73</span>)
 		</span>
 	</div>
 
@@ -417,7 +424,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Logger/Logger.html">Logger</a></span>
 			<span class="var-name">$_logger</span>
-						(line <span class="line-number">63</span>)
+						(line <span class="line-number">67</span>)
 		</span>
 	</div>
 
@@ -440,7 +447,7 @@
 		<span class="var-title">
 			<span class="var-type">SimpleXML[]</span>
 			<span class="var-name">$_simpleXml</span>
-						(line <span class="line-number">75</span>)
+						(line <span class="line-number">79</span>)
 		</span>
 	</div>
 
@@ -463,7 +470,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Bean/BeanConstructorArgumentDefinition.html">BeanConstructorArgumentDefinition</a></span>
 			<span class="var-name">$_templateArgDef</span>
-						(line <span class="line-number">93</span>)
+						(line <span class="line-number">97</span>)
 		</span>
 	</div>
 
@@ -486,7 +493,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Aspect/AspectDefinition.html">AspectDefinition</a></span>
 			<span class="var-name">$_templateAspectDef</span>
-						(line <span class="line-number">99</span>)
+						(line <span class="line-number">103</span>)
 		</span>
 	</div>
 
@@ -509,7 +516,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Bean/BeanDefinition.html">BeanDefinition</a></span>
 			<span class="var-name">$_templateBeanDef</span>
-						(line <span class="line-number">81</span>)
+						(line <span class="line-number">85</span>)
 		</span>
 	</div>
 
@@ -532,7 +539,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Aspect/PointcutDefinition.html">PointcutDefinition</a></span>
 			<span class="var-name">$_templatePointcutDef</span>
-						(line <span class="line-number">105</span>)
+						(line <span class="line-number">109</span>)
 		</span>
 	</div>
 
@@ -555,7 +562,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Bean/BeanPropertyDefinition.html">BeanPropertyDefinition</a></span>
 			<span class="var-name">$_templatePropDef</span>
-						(line <span class="line-number">87</span>)
+						(line <span class="line-number">91</span>)
 		</span>
 	</div>
 
@@ -590,7 +597,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/StaticMethod.png" />
-		<span class="method-title">static getInstance</span> (line <span class="line-number">524</span>)
+		<span class="method-title">static getInstance</span> (line <span class="line-number">547</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -620,7 +627,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">539</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">562</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -648,12 +655,46 @@
 		
 			
 	</div>
-<a name="methodbeforeDefinition" id="beforeDefinition"><!-- --></a>
+<a name="methodafterConfig" id="afterConfig"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">beforeDefinition</span> (line <span class="line-number">474</span>)
+		<span class="method-title">afterConfig</span> (line <span class="line-number">483</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			afterConfig
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$factory</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../Container/IContainer.html">IContainer</a></span>
+				<span class="var-name">$factory</span>			</li>
+				</ul>
+		
+				<hr class="separator" />
+		<div class="notes">Implementation of:</div>
+			<dl>
+			<dt><a href="../../Bean/Lifecycle/IAfterConfigListener.html#methodafterConfig">IAfterConfigListener::afterConfig()</a></dt>
+					</dl>
+			
+	</div>
+<a name="methodbeforeDefinition" id="beforeDefinition"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<img src="../../media/images/Method.png" />
+		<span class="method-title">beforeDefinition</span> (line <span class="line-number">478</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -691,11 +732,11 @@
 			
 	</div>
 <a name="methodgetAspects" id="getAspects"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getAspects</span> (line <span class="line-number">479</span>)
+		<span class="method-title">getAspects</span> (line <span class="line-number">502</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -715,11 +756,11 @@
 			
 	</div>
 <a name="methodgetPointcut" id="getPointcut"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getPointcut</span> (line <span class="line-number">496</span>)
+		<span class="method-title">getPointcut</span> (line <span class="line-number">519</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -744,11 +785,11 @@
 			
 	</div>
 <a name="method_getXmlErrors" id="_getXmlErrors"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_getXmlErrors</span> (line <span class="line-number">144</span>)
+		<span class="method-title">_getXmlErrors</span> (line <span class="line-number">148</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -769,11 +810,11 @@
 			
 	</div>
 <a name="method_load" id="_load"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_load</span> (line <span class="line-number">455</span>)
+		<span class="method-title">_load</span> (line <span class="line-number">459</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -795,11 +836,11 @@
 			
 	</div>
 <a name="method_loadAspect" id="_loadAspect"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadAspect</span> (line <span class="line-number">212</span>)
+		<span class="method-title">_loadAspect</span> (line <span class="line-number">216</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -826,11 +867,11 @@
 			
 	</div>
 <a name="method_loadBean" id="_loadBean"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadBean</span> (line <span class="line-number">355</span>)
+		<span class="method-title">_loadBean</span> (line <span class="line-number">359</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -860,11 +901,11 @@
 			
 	</div>
 <a name="method_loadConstructorArg" id="_loadConstructorArg"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadConstructorArg</span> (line <span class="line-number">311</span>)
+		<span class="method-title">_loadConstructorArg</span> (line <span class="line-number">315</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -891,11 +932,11 @@
 			
 	</div>
 <a name="method_loadProperty" id="_loadProperty"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadProperty</span> (line <span class="line-number">266</span>)
+		<span class="method-title">_loadProperty</span> (line <span class="line-number">270</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -922,11 +963,11 @@
 			
 	</div>
 <a name="method_loadXml" id="_loadXml"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/PrivateMethod.png" />
-		<span class="method-title">_loadXml</span> (line <span class="line-number">161</span>)
+		<span class="method-title">_loadXml</span> (line <span class="line-number">165</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -953,11 +994,11 @@
 			
 	</div>
 <a name="method__sleep" id="__sleep"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">__sleep</span> (line <span class="line-number">134</span>)
+		<span class="method-title">__sleep</span> (line <span class="line-number">138</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -984,7 +1025,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 20 May 2011 16:51:41 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Sat, 11 Jun 2011 16:20:14 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>

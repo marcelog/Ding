@@ -105,8 +105,8 @@
     </Package>
     <Package name="Ding\Bean\Factory\Driver">
       <Stats>
-        <TotalClasses>38</TotalClasses>
-        <ConcreteClasses>38</ConcreteClasses>
+        <TotalClasses>37</TotalClasses>
+        <ConcreteClasses>37</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
         <Ce>9</Ce>
@@ -139,7 +139,6 @@
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SetterInjectionDriver.php">SetterInjectionDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ShutdownDriver.php">ShutdownDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SignalHandlerDriver.php">SignalHandlerDriver</Class>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/TimezoneDriver.php">TimezoneDriver</Class>
       </ConcreteClasses>
       <AbstractClasses/>
       <DependsUpon>
@@ -207,10 +206,10 @@
         <ConcreteClasses>4</ConcreteClasses>
         <AbstractClasses>9</AbstractClasses>
         <Ca>2</Ca>
-        <Ce>2</Ce>
+        <Ce>3</Ce>
         <A>0.692307692308</A>
-        <I>0.5</I>
-        <D>0.192307692308</D>
+        <I>0.6</I>
+        <D>0.292307692308</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/BeanLifecycle.php">BeanLifecycle</Class>
@@ -230,6 +229,7 @@
       <DependsUpon>
         <Package>Ding\Bean</Package>
         <Package>Ding\Bean\Factory</Package>
+        <Package>Ding\Container</Package>
       </DependsUpon>
       <UsedBy>
         <Package>Ding\Bean\Factory\Driver</Package>
@@ -333,11 +333,11 @@
         <TotalClasses>2</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>2</AbstractClasses>
-        <Ca>2</Ca>
+        <Ca>3</Ca>
         <Ce>3</Ce>
         <A>1</A>
-        <I>0.6</I>
-        <D>0.6</D>
+        <I>0.5</I>
+        <D>0.5</D>
       </Stats>
       <ConcreteClasses/>
       <AbstractClasses>
@@ -351,13 +351,14 @@
       </DependsUpon>
       <UsedBy>
         <Package>Ding\Bean\Factory\Driver</Package>
+        <Package>Ding\Bean\Lifecycle</Package>
         <Package>Ding\Container\Impl</Package>
       </UsedBy>
     </Package>
     <Package name="Ding\Container\Impl">
       <Stats>
-        <TotalClasses>39</TotalClasses>
-        <ConcreteClasses>39</ConcreteClasses>
+        <TotalClasses>38</TotalClasses>
+        <ConcreteClasses>38</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
         <Ce>3</Ce>
@@ -609,26 +610,6 @@
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timer/ITimerHandler.php">ITimerHandler</Class>
       </AbstractClasses>
       <DependsUpon/>
-      <UsedBy/>
-    </Package>
-    <Package name="Ding\Helpers\Timezone">
-      <Stats>
-        <TotalClasses>1</TotalClasses>
-        <ConcreteClasses>1</ConcreteClasses>
-        <AbstractClasses>0</AbstractClasses>
-        <Ca>0</Ca>
-        <Ce>1</Ce>
-        <A>0</A>
-        <I>1</I>
-        <D>0</D>
-      </Stats>
-      <ConcreteClasses>
-        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timezone/TimezoneHelper.php">TimezoneHelper</Class>
-      </ConcreteClasses>
-      <AbstractClasses/>
-      <DependsUpon>
-        <Package></Package>
-      </DependsUpon>
       <UsedBy/>
     </Package>
     <Package name="Ding\HttpSession">

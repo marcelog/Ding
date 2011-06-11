@@ -564,30 +564,6 @@
 			<div class="index-item-details"><a href="Helpers/Timer/TimerHelper.html#method__construct">TimerHelper::__construct()</a> in TimerHelper.php</div>
 							<div class="index-item-description">Constructor.</div>
 					</dd>
-			<dt class="field">
-						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
-			<span class="var-title">$_logger</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Timezone/TimezoneHelper.html#var$_logger">TimezoneHelper::$_logger</a> in TimezoneHelper.php</div>
-							<div class="index-item-description">log4php logger or our own.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
-			<span class="var-title">$_timezone</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Timezone/TimezoneHelper.html#var$_timezone">TimezoneHelper::$_timezone</a> in TimezoneHelper.php</div>
-							<div class="index-item-description">Configured timezone.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Constructor.png" alt="Method" title="Method" />
-			<span class="method-title">__construct</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Timezone/TimezoneHelper.html#method__construct">TimezoneHelper::__construct()</a> in TimezoneHelper.php</div>
-							<div class="index-item-description">Constructor.</div>
-					</dd>
 		</dl>
 	<a name="a"></a>
 	<div class="index-letter-section">
@@ -889,14 +865,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Timer/TimerHelper.html#methodgetMicrotime">TimerHelper::getMicrotime()</a> in TimerHelper.php</div>
 							<div class="index-item-description">From php examples. Returns time including millseconds.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getTimezone</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Timezone/TimezoneHelper.html#methodgetTimezone">TimezoneHelper::getTimezone()</a> in TimezoneHelper.php</div>
-							<div class="index-item-description">Returns configured timezone.</div>
 					</dd>
 		</dl>
 	<a name="h"></a>
@@ -1290,16 +1258,23 @@
 			<span class="method-title">process</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodprocess">TCPServerHelper::process()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Main reading loop. Call this in your own infinite loop or declare(ticks)  in your software. This routine will call your server handler when there  is data available to read, new connections, or timeouts. Will always  detect when the other side closed the connection.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodprocess">TCPClientHelper::process()</a> in TCPClientHelper.php</div>
+							<div class="index-item-description">Main reading loop. Call this in your own infinite loop or declare(ticks)  in your software. This routine will call your client handler when there  is data available to read. Will always detect when the other side closed  the connection.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">process</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodprocess">TCPClientHelper::process()</a> in TCPClientHelper.php</div>
-							<div class="index-item-description">Main reading loop. Call this in your own infinite loop or declare(ticks)  in your software. This routine will call your client handler when there  is data available to read. Will always detect when the other side closed  the connection.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodprocess">TCPServerHelper::process()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Main reading loop. Call this in your own infinite loop or declare(ticks)  in your software. This routine will call your server handler when there  is data available to read, new connections, or timeouts. Will always  detect when the other side closed the connection.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">processPeers</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodprocessPeers">TCPServerHelper::processPeers()</a> in TCPServerHelper.php</div>
 					</dd>
 		</dl>
 	<a name="r"></a>
@@ -1690,14 +1665,6 @@
 			<div class="index-item-details"><a href="Helpers/Timer/TimerHelper.html#methodstop">TimerHelper::stop()</a> in TimerHelper.php</div>
 							<div class="index-item-description">Stops the timer.</div>
 					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">setTimezone</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Timezone/TimezoneHelper.html#methodsetTimezone">TimezoneHelper::setTimezone()</a> in TimezoneHelper.php</div>
-							<div class="index-item-description">Sets php default timezone.</div>
-					</dd>
 		</dl>
 	<a name="t"></a>
 	<div class="index-letter-section">
@@ -1781,21 +1748,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Timer/TimerHelper.html">TimerHelper</a> in TimerHelper.php</div>
 							<div class="index-item-description">Timer helper. Will call your handler every so milliseconds.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Page.png" alt="Page" title="Page" />
-			<span class="include-title">TimezoneHelper.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Timezone/_Helpers---Timezone---TimezoneHelper.php.html">TimezoneHelper.php</a> in TimezoneHelper.php</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Class.png" alt="Class" title="Class" />
-			TimezoneHelper
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Timezone/TimezoneHelper.html">TimezoneHelper</a> in TimezoneHelper.php</div>
-							<div class="index-item-description">This is a bean that will setup php default timezone.</div>
 					</dd>
 		</dl>
 	<a name="w"></a>
