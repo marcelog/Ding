@@ -72,7 +72,8 @@ $container->eventDispatch('someEvent', $entity);
 </pre>
 The event is a string (as you can see), and also the handler is passed with a 
 bean name (also a string). These handlers will only be instantiated when needed (i.e:
-the event has been triggered).
+the event has been triggered). The convention is that the container will look for a
+method name "onSomeEvent()" and call it with $entity.
 <center>
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-6947936742546167";
@@ -105,8 +106,10 @@ container configuration.
 &lt;beans&gt;
   &lt;bean id="bean" class="Bean" scope="singleton" listens-on="bean2Created"/&gt;
 &lt;/beans&gt;
-
 </pre>
+<p>
+The "listens-on" value is a csv string of events, lower camel cased.
+</p>
 <H2>Using the yaml driver</H2>
 <pre>
 beans: !!map
@@ -116,6 +119,9 @@ beans: !!map
     listens-on: bean2Created
 
 </pre>
+<p>
+The "listens-on" value is a csv string of events, lower camel cased.
+</p>
 <H2>Using the annotations driver</H2>
 <pre>
 /**
@@ -134,6 +140,9 @@ class Config
     }
 }
 </pre>
+<p>
+The "@ListensOn" value is a csv string of events, lower camel cased.
+</p>
 <center>
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-6947936742546167";
