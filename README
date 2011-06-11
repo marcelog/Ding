@@ -150,6 +150,13 @@ You can easily hook in the bean lifecycle by just implementing one of:
  * Ding\Bean\Lifecycle\IAfterAssemble
 This will allow you to extend the container functionality as much as you like :)
 --------------------------------------------------------------------------------
+Events
+======
+The container natively supports events. This means that you can register beans
+(either programatically or via the xml, yaml, or annotations drivers) and then
+asynchronously trigger (dispatch) these events along some data object. The container
+will then instantiate the needed beans (the listeners) and notify them. Please
+see docs/examples/events for an example using xml, yaml, and annotations.
 --------------------------------------------------------------------------------
 AOP
 ===
