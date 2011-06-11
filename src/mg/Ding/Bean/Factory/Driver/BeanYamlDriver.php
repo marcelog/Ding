@@ -29,8 +29,9 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Aspect\PointcutDefinition;
-
+use Ding\Container\IContainer;
 use Ding\Aspect\AspectManager;
 use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Factory\IBeanFactory;
@@ -54,8 +55,9 @@ use Ding\Aspect\IPointcutProvider;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class BeanYamlDriver
-    implements IBeforeDefinitionListener, IAspectProvider, IPointcutProvider
+class BeanYamlDriver implements
+    IAfterConfigListener, IBeforeDefinitionListener,
+    IAspectProvider, IPointcutProvider
 {
     /**
      * log4php logger or our own.
@@ -413,6 +415,9 @@ class BeanYamlDriver
      */
     private function _load()
     {
+        if ($this->_yamlFiles !== false) {
+            return;
+        }
         $this->_yamlFiles = $this->_loadYaml($this->_filename);
         if (empty($this->_yamlFiles)) {
             throw new BeanFactoryException('Could not parse: ' . $this->_filename);
@@ -448,13 +453,27 @@ class BeanYamlDriver
         }
         return false;
     }
-
+    public function afterConfig(IContainer $factory)
+    {
+        $this->_load();
+        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
+            if (isset($yaml['beans'])) {
+                foreach ($yaml['beans'] as $beanName => $beanDef) {
+                    if (isset($beanDef['listens-on'])) {
+                        $events = $beanDef['listens-on'];
+                        foreach (explode(',', $events) as $eventName) {
+                            $eventName = trim($eventName);
+                            $factory->eventListen($eventName, $beanName);
+                        }
+                    }
+                }
+            }
+        }
+    }
     public function getAspects()
     {
         $aspects = array();
-        if (!$this->_yamlFiles) {
-            $this->_load();
-        }
+        $this->_load();
         foreach($this->_yamlFiles as $yamlFilename => $yaml) {
             if (isset($yaml['aspects'])) {
                 foreach ($yaml['aspects'] as $aspect) {

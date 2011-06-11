@@ -32,6 +32,7 @@ use Ding\MVC\Http\HttpUrlMapper;
 
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\BeanDefinition;
+use Ding\Container\IContainer;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Factory\IBeanFactory;
@@ -63,7 +64,7 @@ class MVCAnnotationDriver implements IAfterConfigListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
-    public function afterConfig(IBeanFactory $factory)
+    public function afterConfig(IContainer $factory)
     {
         foreach (ReflectionFactory::getClassesByAnnotation('Controller') as $controller) {
             $name = 'Controller' . microtime(true);

@@ -34,6 +34,7 @@ use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\Factory\IBeanFactory;
+use Ding\Container\IContainer;
 use Ding\Reflection\ReflectionFactory;
 
 /**
@@ -67,7 +68,7 @@ class SignalHandlerDriver implements IAfterConfigListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
-    public function afterConfig(IBeanFactory $factory)
+    public function afterConfig(IContainer $factory)
     {
         try
         {

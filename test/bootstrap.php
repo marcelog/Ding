@@ -4,10 +4,10 @@ ini_set(
     implode(
         PATH_SEPARATOR,
         array(
-            ini_get('include_path'),
             realpath(implode(
                 DIRECTORY_SEPARATOR, array(__DIR__, '..', 'src', 'mg')
-            ))
+            )),
+            ini_get('include_path'),
         )
     )
 );

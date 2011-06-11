@@ -1,0 +1,6 @@
+beans: !!map
+  bean3:
+    class: Bean3
+    scope: singleton
+    listens-on: bean2Created
+

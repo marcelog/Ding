@@ -68,7 +68,7 @@ class PropertiesDriver implements IAfterConfigListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
      */
-    public function afterConfig(IBeanFactory $factory)
+    public function afterConfig(IContainer $factory)
     {
         try
         {

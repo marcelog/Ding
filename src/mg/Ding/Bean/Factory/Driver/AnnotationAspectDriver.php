@@ -33,6 +33,7 @@ use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
+use Ding\Container\IContainer;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Aspect\AspectManager;
 use Ding\Aspect\AspectDefinition;
@@ -93,7 +94,7 @@ class AnnotationAspectDriver implements IAfterConfigListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
      */
-    public function afterConfig(IBeanFactory $factory)
+    public function afterConfig(IContainer $factory)
     {
         // Create aspects and pointcuts.
         $aspects = ReflectionFactory::getClassesByAnnotation('Aspect');

@@ -29,7 +29,10 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+use Ding\Container\IContainer;
 use Ding\Aspect\PointcutDefinition;
+use Ding\Bean\Lifecycle\AfterConfigListener;
 use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
@@ -53,8 +56,9 @@ use Ding\Aspect\IPointcutProvider;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class BeanXmlDriver
-    implements IBeforeDefinitionListener, IAspectProvider, IPointcutProvider
+class BeanXmlDriver implements
+    IAfterConfigListener, IBeforeDefinitionListener,
+    IAspectProvider, IPointcutProvider
 {
     /**
      * log4php logger or our own.
@@ -454,6 +458,9 @@ class BeanXmlDriver
      */
     private function _load()
     {
+        if ($this->_simpleXml !== false) {
+            return;
+        }
         $this->_simpleXml = $this->_loadXml($this->_filename);
         if (empty($this->_simpleXml)) {
             throw new BeanFactoryException(
@@ -476,12 +483,27 @@ class BeanXmlDriver
         return $this->_loadBean($beanName, $bean);
     }
 
+    public function afterConfig(IContainer $factory)
+    {
+        $this->_load();
+        foreach($this->_simpleXml as $xmlName => $xml) {
+            $simpleXmlBeans = $xml->xpath("/beans/bean[@listens-on]");
+            if (!empty($simpleXmlBeans)) {
+                foreach ($simpleXmlBeans as $bean) {
+                    $events = (string)$bean->attributes()->{'listens-on'};
+                    $beanName = (string)$bean->attributes()->id;
+                    foreach (explode(',', $events) as $eventName) {
+                        $eventName = trim($eventName);
+                        $factory->eventListen($eventName, $beanName);
+                    }
+                }
+            }
+        }
+    }
     public function getAspects()
     {
         $aspects = array();
-        if (!$this->_simpleXml) {
-            $this->_load();
-        }
+        $this->_load();
         foreach($this->_simpleXml as $xmlName => $xml) {
             $simpleXmlAspect = $xml->xpath("/beans/aspect");
             if (!empty($simpleXmlAspect)) {

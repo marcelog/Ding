@@ -58,6 +58,26 @@ interface IContainer extends IBeanFactory, IResourceLoader, IMessageSource
     public function registerShutdownMethod($bean, $method);
 
     /**
+     * Dispatch an event to all listeners.
+     *
+     * @param string $eventName The event name.
+     * @param mixed  $data      The associated data to the event.
+     * @return void
+     */
+    public function eventDispatch($eventName, $data = null);
+
+    /**
+     * Register a new listener to an event. The callback must implement a
+     * method named "onEventName($data)".
+     *
+     * @param string $eventName The event name.
+     * @param string $beanName  The event handler.
+     *
+     * @return void
+     */
+    public function eventListen($eventName, $beanName);
+
+    /**
      * Returns logger used by the container.
      *
      * @param string $class Will use this parameter to return an appropiate

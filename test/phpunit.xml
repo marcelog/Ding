@@ -18,6 +18,9 @@
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="Events">
+      <directory suffix=".php">event</directory>
+    </testsuite>
     <testsuite name="TCP">
       <directory suffix=".php">tcp</directory>
     </testsuite>

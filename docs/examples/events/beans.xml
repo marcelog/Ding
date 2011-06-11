@@ -1,0 +1,5 @@
+<beans>
+  <bean id="bean" class="Bean" scope="singleton" listens-on="bean2Created">
+  </bean>
+  <bean id="bean2" class="Bean2" scope="singleton" init-method="initMethod"/>
+</beans>

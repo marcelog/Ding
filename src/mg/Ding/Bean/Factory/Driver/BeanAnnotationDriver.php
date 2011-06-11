@@ -34,7 +34,7 @@ use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\Lifecycle\IBeforeConfigListener;
 use Ding\Cache\Locator\CacheLocator;
-
+use Ding\Container\IContainer;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
@@ -220,7 +220,7 @@ class BeanAnnotationDriver
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
-    public function afterConfig(IBeanFactory $factory)
+    public function afterConfig(IContainer $factory)
     {
         $configClasses = ReflectionFactory::getClassesByAnnotation('Configuration');
         foreach ($configClasses as $configClass) {
@@ -236,21 +236,25 @@ class BeanAnnotationDriver
                 $def->setScope(BeanDefinition::BEAN_SINGLETON);
                 $properties = array();
                 $annotations = ReflectionFactory::getClassAnnotations($configClass);
-                /*
-                if (isset($annotations['class']['properties'])) {
-                    foreach ($annotations['class']['properties'] as $property => $propAnnotations) {
-                        foreach ($propAnnotations as $propAnnotation) {
-                            if ($propAnnotation->getName() == 'Resource') {
-                                $properties[] = new BeanPropertyDefinition(
-                                    $property, BeanPropertyDefinition::PROPERTY_BEAN, $property
-                                );
-                            }
+                $factory->setBeanDefinition($configBeanName, $def);
+            }
+            foreach (
+                ReflectionFactory::getClassAnnotations($configClass) as $method => $annotations
+            ) {
+                if ($method == 'class') {
+                    continue;
+                }
+                if (isset($annotations['ListensOn'])) {
+                    $beanAnnotation = $annotations['ListensOn'];
+                    $args = $beanAnnotation->getArguments();
+                    if (isset($args['value'])) {
+                        $events = $args['value'];
+                        foreach (explode(',', $events) as $eventName) {
+                            $eventName = trim($eventName);
+                            $factory->eventListen($eventName, $method);
                         }
                     }
-                    $def->setAutowiredProperties($properties);
                 }
-                */
-                $factory->setBeanDefinition($configBeanName, $def);
             }
         }
     }

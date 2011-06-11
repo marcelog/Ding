@@ -32,6 +32,7 @@ namespace Ding\Bean\Factory\Driver;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IBeforeAssembleListener;
 use Ding\Bean\BeanDefinition;
+use Ding\Container\IContainer;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
 use Ding\Reflection\ReflectionFactory;

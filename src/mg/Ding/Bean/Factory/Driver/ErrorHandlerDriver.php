@@ -35,6 +35,7 @@ use Ding\Bean\BeanDefinition;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\Factory\IBeanFactory;
+use Ding\Container\IContainer;
 
 /**
  * This driver will look up an optional bean called ErrorHandler and if it
@@ -60,7 +61,7 @@ class ErrorHandlerDriver implements IAfterConfigListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
-    public function afterConfig(IBeanFactory $factory)
+    public function afterConfig(IContainer $factory)
     {
         try
         {

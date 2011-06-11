@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="eventBean" class="EventBean" scope="singleton" listens-on="beanCreated">
+  </bean>
+  <bean id="eventBean2" class="EventBean2" scope="singleton" init-method="initMethod"/>
+</beans>

@@ -35,6 +35,7 @@ use Ding\Bean\BeanDefinition;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\Factory\IBeanFactory;
+use Ding\Container\IContainer;
 
 /**
  * This driver will inject the MessageSource to the beans that implement
@@ -61,7 +62,7 @@ class MessageSourceDriver implements IAfterConfigListener, IAfterCreateListener
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
-    public function afterConfig(IBeanFactory $factory)
+    public function afterConfig(IContainer $factory)
     {
         try
         {

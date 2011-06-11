@@ -178,6 +178,12 @@ class ContainerImpl implements IContainer
     private $_resources = false;
 
     /**
+     * The event listeners
+     * @var string[]
+     */
+    private $_eventListeners = false;
+
+    /**
      * Prevent serialization.
      *
      * @return array
@@ -563,6 +569,34 @@ class ContainerImpl implements IContainer
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainer::eventDispatch()
+     */
+    public function eventDispatch($eventName, $data = null)
+    {
+        $eventName = 'on' . ucfirst($eventName);
+        if (isset($this->_eventListeners[$eventName])) {
+            foreach ($this->_eventListeners[$eventName] as $beanName) {
+                $bean = $this->getBean($beanName);
+                $bean->$eventName($data);
+            }
+        }
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainer::eventListen()
+     */
+    public function eventListen($eventName, $beanName)
+    {
+        if (!isset($this->_eventListeners[$eventName])) {
+            $this->_eventListeners[$eventName] = array();
+        }
+        $eventName = 'on' . ucfirst($eventName);
+        $this->_eventListeners[$eventName][] = $beanName;
+    }
+
+    /**
      * Constructor.
      *
      * @param array $options options.
@@ -585,6 +619,7 @@ class ContainerImpl implements IContainer
         $this->_beanCache = CacheLocator::getBeansCacheInstance();
         $this->_shutdowners = $soullessArray;
         $this->_resources = $soullessArray;
+        $this->_eventListeners = $soullessArray;
 
         $this->_lifecycleManager->addAfterCreateListener(ContainerAwareDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterCreateListener(LoggerAwareDriver::getInstance($soullessArray));
@@ -624,12 +659,14 @@ class ContainerImpl implements IContainer
 
         if (isset(self::$_options['bdef']['xml'])) {
             $xmlDriver = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);
+            $this->_lifecycleManager->addAfterConfigListener($xmlDriver);
             $this->_lifecycleManager->addBeforeDefinitionListener($xmlDriver);
             $this->_aspectManager->registerAspectProvider($xmlDriver);
             $this->_aspectManager->registerPointcutProvider($xmlDriver);
         }
         if (isset(self::$_options['bdef']['yaml'])) {
             $yamlDriver = BeanYamlDriver::getInstance(self::$_options['bdef']['yaml']);
+            $this->_lifecycleManager->addAfterConfigListener($yamlDriver);
             $this->_lifecycleManager->addBeforeDefinitionListener($yamlDriver);
             $this->_aspectManager->registerAspectProvider($yamlDriver);
             $this->_aspectManager->registerPointcutProvider($yamlDriver);
