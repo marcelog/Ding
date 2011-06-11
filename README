@@ -37,6 +37,13 @@ Notes about the source:
 it's because they're actually 2 different comments: one for the file, and one
 for the class.
 --------------------------------------------------------------------------------
+Available via PEAR
+------------------
+You can now easily install Ding by issuing:
+# pear channel-discover pearhub.org
+# pear install pearhub/Ding-0.95.0
+just replace 0.95.0 by the release version you'd like to install :)
+--------------------------------------------------------------------------------
 PHAR File
 =========
 Ding can also be used as a phar file. See docs/examples/basic-with-phar. To 
