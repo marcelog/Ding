@@ -91,7 +91,7 @@ class PropertiesHelper
     {
         if (is_string($value)) {
             foreach ($this->_propertiesNames as $k => $v) {
-                if (strpos($value, $k) !== false) {
+                if (is_string($value) && strpos($value, $k) !== false) {
                     if (is_string($v)) {
                         $value = str_replace($k, $v, $value);
                     } else {
