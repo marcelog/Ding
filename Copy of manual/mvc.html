@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+
+	<title>Ding: The MVC Implementation</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #f49648;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #0b69b7; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #0b69b7; }
+    h3 { color: #0b69b7; }
+    a { color: #0b69b7; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+
+</head>
+
+<body>
+
+<H1><u>The MVC Implementation</u></H1>
+<g:plusone></g:plusone>
+<H3>Classes</H3>
+Ding\MVC\Action<br/>
+Ding\MVC\Dispatcher<br/>
+Ding\MVC\ModelAndView<br/>
+Ding\MVC\RedirectModelAndView<br/>
+Ding\MVC\ForwardModelAndView<br/>
+Ding\MVC\View<br/>
+
+<H3>Interfaces</H3>
+Ding\MVC\IMapper<br/>
+Ding\MVC\IViewResolver<br/>
+Ding\MVC\IViewRender<br/>
+
+<H2>Description</H2>
+The MVC implementation of Ding is in the namespace Ding\MVC. The components are:
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-6947936742546167";
+/* links1 */
+google_ad_slot = "7432160740";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>	
+<center>
+  <script type="text/javascript"><!--
+google_ad_client = "ca-pub-6947936742546167";
+/* 6 */
+google_ad_slot = "1974587443";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></center>
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-6947936742546167";
+/* links1 */
+google_ad_slot = "7432160740";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>
+<ul>
+  <li><u>Actions</u>: Actions are strings, that uniquely identifies an action (usually triggered with a request) in 
+  your software. Actions can have arguments, which are nothing more than key/value
+  pairs.</li>
+  <li><u>Mapper</u>: The mapper knows and returns the controller that can handle the given Action name.</li>
+  <li><u>Dispatcher</u>: The dispatcher is the responsible for calling the right controller with the right Action object.</li>
+  <li><u>ModelAndView</u>: This is the result of the execution of a controller. A controller must
+  return a ModelAndView object containing the name of the view to render and other optional data.</li>
+  <li><u>TwigViewRender</u>: The view is processed by <a href="http://www.twig-project.org/">Twig</a></li>
+  <li><u>SmartyViewRender</u>: The view is processed by <a href="http://www.smarty.net">Smarty</a></li>
+  <li><u>HttpViewRender</u>: The view is processed by php via include_once.</li>
+  <li><u>ForwardModelAndView</u>: This is a special ModelAndView that has the meaning of calling again the
+  dispatcher with a new given action and new or same arguments.</li>
+  <li><u>RedirectModelAndView</u>: This is a special ModelAndView that has the meaning of redirecting the request 
+  to somewhere else (i.e: http 302 header).</li>
+  <li><u>ViewResolver</u>: The ViewResolver knows how to get a ViewResolver based on the given View name from the ModelAndView object.</li>
+  <li><u>View</u>: Views are in charge of rendering the ModelAndView in a proper way for the actor that triggered the request.</li>
+</ul>
+<H2>HTTP implementation</H2>
+<H2>Classes</H3>
+Ding\MVC\Http\HttpAction<br/>
+Ding\MVC\Http\HttpDispatcher<br/>
+Ding\MVC\Http\HttpExceptionMapper<br/>
+Ding\MVC\Http\HttpView<br/>
+Ding\MVC\Http\HttpViewResolver<br/>
+Ding\MVC\Http\HttpViewRender<br/>
+Ding\MVC\Http\TwigViewRender<br/>
+Ding\MVC\Http\SmartyViewRender<br/>
+Ding\MVC\Http\HttpUrlMapper<br/>
+Ding\MVC\Http\HttpFrontController<br/>
+<center>
+  <script type="text/javascript"><!--
+google_ad_client = "ca-pub-6947936742546167";
+/* 6 */
+google_ad_slot = "1974587443";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></center>
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-6947936742546167";
+/* links1 */
+google_ad_slot = "7432160740";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</center>	
+<H2>Annotations</H3>
+@Controller<br/>
+@RequestMapping(url=xxx)<br/>
+<br/>
+Both of these annotations need to be present in a controller defined by annotations.<br/>
+@Controller will tell the mvc driver to map the class with the content of the url param in the
+@RequestMapping annotation. This is equivalent to configure the class as a bean in beans.xml and
+mapping there the url to that bean.
+<p>
+In the case of http, the following components exist:
+<ul>
+  <li><u>HttpAction</u>: The HttpAction encapsulated the uri, the method used, and the arguments.</li>
+  <li><u>HttpDispatcher</u>: Dispatches the request, using the mapper and the view resolver to render the view.
+  The controller are mapped with both method and uri's. The action names, however, are invoked by convention. Suppose
+  the uri /MyController/List, will mean that the controller that handles /MyController, needs to have a method
+  named ListAction.</li>
+  <li><u>HttpView</u>: Render the given view (a file in the filesystem), outputing headers and data.</li>
+  <li><u>HttpViewResolver</u>: Maps a view name with a file in the filesystem. The root directory, an optional prefix and suffix can be
+  configured.</li>
+  <li><u>HttpUrlMapper</u>: Maps an uri and its method to a controller.</li>
+  <li><u>HttpFrontController</u>: This is intended to be instantiated and called from your own entry point, will load the
+  container and also, invoke the dispatcher and completely handle the request.</li>
+</ul>
+</p>
+<center>
+  <script type="text/javascript"><!--
+google_ad_client = "ca-pub-6947936742546167";
+/* 6 */
+google_ad_slot = "1974587443";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></center>
+<p>
+A special setup is required in the web server. You need to forward ALL uri's (at least the ones you're interested
+in manage with Ding) to your entry point, let's say index.php. In lighttpd you would do:<br/><br/>
+url.rewrite-once = ( "^/(.*)" => "/index.php" )
+<p>
+And you're index.php would be something like this:
+</p>
+<p>
+HttpFrontController::handle($properties, '/Some/Mapped/Path');<br/>
+</p>
+<p>
+And that's it. Take a look at the example below to know how to actually configure the HttpViewResolver and HttpUrlMapper
+in the container.
+</p>
+<H3>Http Example</H3>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc">docs/examples/mvc</a>: Using the xml and annotation driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-twig">docs/examples/mvc-twig</a>: Using the xml and annotation drivers, with twig as the template engine.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-smarty">docs/examples/mvc-twig</a>: Using the xml and annotation drivers, with smarty as the template engine.</li>
+  </ul>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21070993-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>   
+</body>
+</html>

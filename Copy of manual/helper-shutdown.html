@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+
+	<title>Ding: Shutdown Handler Helper</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #f49648;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #0b69b7; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #0b69b7; }
+    h3 { color: #0b69b7; }
+    a { color: #0b69b7; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+</head>
+
+<body>
+
+<H1><u>The ShutdownHandlerHelper</u></H1>
+<g:plusone></g:plusone>
+This helper is used as a shutdown handler by using register_shutdown_function(). 
+
+<H3>Class</H3>
+Ding\Helpers\ShutdownHandler\ShutdownHandlerHelper
+
+<H3>Driver</H3>
+Ding\Bean\Factory\Driver\ShutdownHandlerDriver
+
+<H3>Annotations</H3>
+Class level annotation @ShutdownHandler
+
+<H3>Description</H3>
+<p>
+PHP will call the callback registered with register_shutdown_function().
+The property "shutdownHandler" of the bean, is a reference to your
+own bean (whose class definition must implement Ding\Helpers\ShutdownHandler\IShutdownHandlerDriver).
+</p>
+<p>
+The driver is the one responsible for getting an
+optional bean from the container, named "ShutdownHandler", that should be of class
+"Ding\Helpers\ShutdownHandlerHelper". If this bean exists, it will be set as the
+shutdown handler. The helper will in turn, call the handler set via the "shutdownHandler"
+property. This driver registers at AfterConfig in the Container lifecycle.
+
+<p>
+You need to add an option when instantiating the container: <br/>
+$options['drivers'] => array('shutdown' => array())
+</p>
+
+<H3>Example</H3>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ShutdownHandler">docs/examples/ShutdownHandler</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ShutdownHandler/annotated">docs/examples/ShutdownHandler/annotated</a>: Using the annotation driver.</li>
+</ul>
+</p>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21070993-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>   
+</body>
+</html>

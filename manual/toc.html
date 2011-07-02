@@ -1,0 +1,1768 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>Ding: User Manual</title>
+<meta name="Author" content="Marcelo Gornstein"/>
+<meta name="Keywords" content="Ding is a free, open source, lightweight, php framework with several capabilities from the java enterprise world, like bean container, jsr 250 and jsr 330 annotations, inversion of control (IoC), dependency injection (di), aspect oriented programming (), mvc, and several other tools. Much like like symfony, bucket, pico, yadif, phemto, lion, and pimple."/>
+<meta name="description" content="Ding is a free, open source, lightweight, php framework with several capabilities from the java enterprise world, like bean container, jsr 250 and jsr 330 annotations, inversion of control (IoC), dependency injection (di), aspect oriented programming (), mvc, and several other tools. Much like like symfony, bucket, pico, yadif, phemto, lion, and pimple."/>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="shortcut icon" href="../images/favicon.ico" title="favicon" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="all" />
+<link href='../dphighlighter/SyntaxHighlighter.css' rel='stylesheet' type='text/css' />
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" media="screen" href="../css/fix-ie.css" />
+<![endif]-->
+<!--[if IE 6]>
+<script type="text/javascript" src="../js/fix-png.js"></script>
+<![endif]-->
+<script type="text/javascript" src="../js/lib/jquery-core.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
+</head>
+<body>
+<div id="wrapper">
+  <div id="top">
+    <!-- <a class="logo" href="index.html">Marcelo G</a> -->
+    <ul id="nav">
+      <li><a href="../index.html"><span>Home</span></a></li>
+      <!-- <li><a href="../about.html"><span>About</span></a></li> -->
+      <li><a href="/articles/articles.html"><span>Articles</span></a></li>
+      <li class="active"><a href="/software.html"><span>Software</span></a></li>
+      <li><a href="mailto:marcelog@gmail.com"><span>Contact</span></a></li>
+    </ul>
+  </div>
+  <div class="header">
+    <div class="line">
+      <h1>Software</h1>
+      <div class="social-network">
+       <a href="mailto:marcelog@gmail.com" class="icon-email" title="Email">Email</a>
+       <g:plusone></g:plusone>
+      </div>
+    </div>
+    <div class="breadcrumb">You are here &nbsp;&raquo;&nbsp; <a href="index.html">Home Page</a>  &nbsp;&raquo;&nbsp;  <a href="software.html">Software</a>  &nbsp;&raquo;&nbsp;  Ding</div>
+  </div>
+  <div class="main-outer">
+    <div class="main-inner">
+        <div class="main">
+        <div class="line">
+          <div id="content">
+            <div class="mod simple">
+              <span class="top"><span class="tl"></span><span class="tr"></span></span>
+              <div class="inner set-height-1">
+                <h2>Ding</h2>
+                <ul class="tab-title">
+                    <li><a href="../index.html">About</a></li>
+                    <li><a href="install.html">Installation</a></li>
+                    <li><a href="api.html">API</a></li>
+                    <li class="active"><a href="toc.html">Manual</a></li>
+                    <li><a href="metrics.html">Metrics</a></li>
+                    <li><a href="examples.html">Examples</a></li>
+                </ul>
+                <div id="tab-content-4" class="tab-content tab-content-extra">
+                    <ol class="number-list">
+    <li><a href="#about">About this manual</a></li> 
+    <li><a href="#ioc">The beans, the container, Inversion Of Control, and Dependency Injection</a></li> 
+    <li><a href="#events">Events and event driven programming support</a></li> 
+    <li><a href="#resources">Using Resources</a></li>
+    <li><a href="#i18n">Internationalization (i18n) support</a></li> 
+    <li><a href="#aop">Aspect Oriented Programming</a></li> 
+    <li><a href="#config">Configuring the container</a></li> 
+    <li><a href="#mvc">The MVC Implementation</a></li>
+    <li><a href="#helper-error">The ErrorHandler helper</a></li>
+    <li><a href="#helper-shutdown">The ShutdownHandler helper</a></li> 
+    <li><a href="#helper-signal">The SignalHandler helper</a></li> 
+    <li><a href="#helper-timer">The Timer helper</a></li>
+    <li><a href="#helper-syslog">The Syslog helper</a></li> 
+    <li><a href="#helper-pami">The PAMI helper</a></li> 
+    <li><a href="#helper-pagi">The PAGI helper</a></li>
+    <li><a href="#helper-tcpclient">The TCP Client helper</a></li> 
+    <li><a href="#helper-tcpserver">The TCP Server helper</a></li> 
+                  </ol>
+                    <a name="about" id="about"></a>
+                  <div class="line">
+                        <h3>1. About this manual</h3>
+                  </div>
+                  <div class="hr-1"><hr /></div>
+<p>
+This manual, its samples, and Ding itself are not inteded to be an introduction or
+tutorial about dependency injection, inversion of control, aspect oriented programming,
+php, or anything that is not Ding itself. If you are not familiar with these concepts,
+you may still use Ding (since its really easy to do so).
+</p>
+<p>
+However, you are encouraged to
+read about these subjects, just search the web and you will find a lot of good articles,
+books, and tutorials. Also, having some knowledge or experience using the Spring framework,
+Seasar, or Sean is not required, but useful when using Ding.
+</p>
+                    <a href="#" class="next-link"><strong>Back</strong></a>
+                    <a name="ioc" id="ioc"></a>
+                  <div class="line">
+                        <h3>2. The beans, the container, Inversion Of Control, and Dependency Injection</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+<H4>Beans</H4>
+<p>
+A Bean is just an object. We call it bean because this particular object obeys some
+rules and this rules and the bean's lifecycle are managed entirely by what is called
+a container.
+</p>
+<p> 
+In the java world, a bean is a POJO (Plan Old Java Object), meaning that
+virtually any concrete class definition is a bean. Since the latter also
+applies in the php world, we should say that a bean is a "POPO"
+(Plain Old PHP Object).
+</p>
+<H4>Scopes</H4>
+<p>
+The scope of the bean defines its lifecycle (when it is created and when should
+be destroyed). The container provides the following options as scopes:
+</p>
+<p>
+<ul>
+  <li><u>Singleton:</u>The container will have a single instance for the bean
+  (lazy created), and will return this instance every time this bean is
+  asked for.
+  </li>
+  <li><u>Prototype:</u>The container will return a new instance every time
+  this bean is asked for.
+  </li>
+</ul>
+</p>
+<H4>Bean metadata</H4>
+<p>
+For each managed bean by the container, exists a bean definition, which 
+composes all the metadata needed by the container and its extensions to
+actually create and modify the bean's behavior.
+</p>
+<p>
+This data is generated, and
+modified by "Drivers". Drivers are listeners of one or more events in the lifecycle
+of the container and the lifecycle of each bean. Currently, Ding supports 3 
+different drivers: "xml", "yaml", and "annotations".
+</p>
+<p>
+The first two read and parse a xml/yaml
+file (normally called beans.xml/beans.yaml) and the latter generates metadata from the annotations
+found in each of the classes of the project and their methods.
+</p>
+<p>
+ Any number of drivers can be used at any
+given time, they are supposed to complement each one's metadata. So for example you may
+use an annotation in your class at the same time that is declared (with the same or
+different features or properties) in the beans.xml/beans.yaml file.
+</p>
+<p>
+This metadata includes:
+
+<ul>
+  <li><u>Properties:</u>Optional. Properties have also its own metadata (see below).</li>
+  <li><u>Constructor arguments:</u>Optional. They almost identical to properties, and have
+  their own metadata (see below).</li>
+  <li><u>Aspects:</u>Optional. All aspects applied to this bean. Aspects have their own
+  metadata (see below).</li>
+  <li><u>Name:</u>Mandatory. The bean's name.</li>
+  <li><u>Class:</u>Mandatory. The bean's full class name (including namespace, like A\B\Foo.</li>
+  <li><u>Scope:</u>Mandatory. The bean's scope. This informs the container how to handle
+  the lifecycle of this bean.</li>
+  <li><u>Annotations:</u>Optional. All class-level annotations. Annotations have their
+  own metadata. (see below).</li>
+  <li><u>Init method:</u>Optional. You may declare an optional method to call right after the bean
+  is constructed and its properties injected so you can initialize internal stuff.</li>
+  <li><u>Shutdown method</u>Optional. You may declare an optional method to call when the container
+  is destroyed, so you can cleanup internal stuff.</li>
+  <li><u>Method annotations:</u>Optional. All method-level annotations.</li>
+  <li><u>Method injections:</u>Optional. All methods that must return a prototype scoped bean (dependency).</li>
+  <li><u>Bean dependencies:</u>Optional. Which beans need to be created before creating
+  this bean. This has nothing to do with properties that reference other beans
+  (those are resolved when creating each property), but with indirect
+  dependencies (for instance, bean A depends on bean B which in turns depends
+  on bean C, so in order to create bean A, we need to create C and B).</li>
+  <li><u>Factory Method:</u>Optional. If specified, will call a static method of Factory
+  Class, a method of Factory Method, or a static method of the bean class in
+  order to create the bean (instead of using the constructor).</li>
+  <li><u>Factory Class:</u>Optional. If specified, informs the container to call
+  a static method (see Factory Method) of the given class to create the bean
+  instead of using the constructor.</li>
+  <li><u>Factory Bean:</u>Optional. Same as factory class, but will use a method for 
+  the given bean.</li> 
+</ul>
+</p>
+<H4>Examples:</H4>
+<p>
+<u>Generic bean definition (annotations driver)</u>
+</p>
+<p>
+This is pretty much the same as Java Configuration. You can define a class and
+annotate it with @Configuration. All methods of this class (or classes) annotated
+themselves with @Bean will became a source for bean definitions.
+</p>
+<p>
+@Configuration classes become factory beans. So, a class annotated with
+@Configuration, having a method called "someBean" which is in turn annotated
+with @Bean, will become the factory bean and factory method for the bean named
+"someBean". See docs/examples/ConfigurationAnnotation. (JSR-330)
+</p>
+<p>
+This behavior can be overriden if you use the argument name= in the @Bean
+annotation, like:<br/>
+<br/>
+@Bean(name=someOtherName)<br/><br/>
+The string "someOtherName" is now the final name of the bean (although the method
+is still used as the factory method). (JSR-330)
+</p>
+<p>
+For every of the @Bean annotated methods, you should also specify:
+</p>
+<p>
+@Scope(value=xxx) Where xxx is one of prototype or singleton.
+</p>
+<p>
+@InitMethod(method=xxx) Where xxx is the method to call to initialize the bean.
+</p>
+<p>
+@DestroyMethod(method=xxx) Where xxx is the method to call to destroy the bean on
+container shutdown.
+</p>
+<p>
+@Required Use this one in your setter methods (i.e: setSomething()) and this
+will tell the container to throw an exception if this property isnt configured
+when instantiating the bean. (JSR-330)
+</p>
+<p>
+@Resource Use it in setters AND/OR properties to resolve the injected dependency by name. So
+for example, the method setDependency() will resolve to a bean named "dependency".
+(JSR-250). 
+</p>
+<pre name="code" class="php">
+/**
+ * @Configuration
+ */
+class SomeBeanProviderClass
+{
+    /**
+     * @Bean
+     * @Scope(value='singleton')
+     * @InitMethod(method=aMethod)
+     * @DestroyMethod(method=bMethod)
+     */
+    public function someBean()
+    {
+        $ret = new MyBean();
+        $ret->setSomeProperty('hello world');
+        return $ret;
+    }
+    /**
+     * @Bean(name=anOverridenName)
+     * @Scope(value='singleton')
+     * @InitMethod(method=aMethod)
+     * @DestroyMethod(method=bMethod)
+     */
+    public function aNormalMethod()
+    {
+        $ret = new MyBean();
+        $ret->setSomeProperty('hello world');
+        return $ret;
+    }
+}
+</pre>
+
+<p>
+DI between configuration classes can also be achieved. I.e: annotate a property
+of a configuration class with @Resource. This will tell the container to look for
+a bean that is named like the annotated property. This bean can be provided in another
+@Configuration annotated class. See docs/examples/PropertiesAnnotations.
+</p>
+<u>Generic bean definition (xml and yaml drivers)</u>
+<p>
+The examples here are based on the xml driver. If you want to take a look at the
+yaml syntax (fully compatible and almost equal to the xml syntax), please take a look at
+<a href="https://github.com/marcelog/Ding/tree/master/docs/examples/yaml">the yaml example</a>
+</p>
+<p>
+For a prototype bean (multiple instances allowed):
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"/&gt;
+&lt;/beans&gt;
+</pre>
+
+<p>
+For a singleton bean (only one instance allowed):
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="singleton"/&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+All options in the above examples are *MANDATORY*. What follows are examples with
+optional arguments:
+</p>
+
+<p>
+This one will first create aBean, bBean, cBean before creating "beanName":
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype" depends-on="aBean, bBean, cBean"/&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+This one will call A\B\C::getInstance() (static method) in order to get a bean:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype" factory-method="getInstance"/&gt;
+&lt;/beans&gt;
+</pre>
+
+<p>
+This one will first create "anotherBean" and then call anotherBean->getInstance() (instance method) in order to get the other bean:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype" factory-bean="anotherBean" factory-method="getInstance"/&gt;
+&lt;/beans&gt;
+</pre>
+
+<p>
+This one will call init() as soon as the bean is created and all its properties are injected but before returning the instance to the caller:
+</p>
+<pre name="code" class="php">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype" init-method="init"/&gt;
+&lt;/beans&gt;
+</pre>
+
+
+<p>
+This one will call destroy() when the container is destroyed:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype" destroy-method="destroy"/&gt;
+&lt;/beans&gt;
+</pre>
+
+<H4>Constructor arguments types and metadata</H4>
+<p>
+The constructor arguments for a bean behave exactly like properties. See the
+sections below.
+ </p>
+<H4>Properties types</H4>
+<ul>
+  <li><u>Array:</u>An array has a key (mandatory) and 1 value per key (which in
+  turn can be of any type, so you can have arrays inside arrays, etc).</li>
+  <li><u>Scalar value:</u>A final value, like a string, an integer, etc.</li>
+  <li><u>Bean reference:</u>A string containing the name of another bean defined
+  in the container.</li>
+  <li><u>Code:</u>PHP code to be eval()'uated by the container.</li>
+</ul>
+
+<H4>Properties metadata</H4>
+<ul>
+  <li><u>Name:</u>The name of the property. The name is important for setter
+injection, i.e: a property called 'name' will be injected calling setName()</li>
+  <li><u>Type:</u>See above for properties types</li>
+  <li><u>Value:</u>The actual value, whatever the type. The value can also be
+  a string like ${some.value}, which resembles java properties. The container will
+  notice this and will put the correct value (assuming you passed the right value
+  when instantiating the container). Special values like false, true, and null
+  are specified explicitely (see below).</li>
+</ul>
+<p>
+The PropertyDriver, is responsible for replacing the ${property} kind of values.<br/>
+Please read <a href="#config">this</a> for the details.
+</p>
+<H4>Examples:</H4>
+<p>
+Define a scalar property:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;value&gt;aValue&lt;/value&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Define a scalar property with special values like false, true, and null:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty1"&gt;
+            &lt;null/&gt;
+        &lt;/property&gt;
+        &lt;property name="someProperty2"&gt;
+            &lt;true/&gt;
+        &lt;/property&gt;
+        &lt;property name="someProperty3"&gt;
+            &lt;false/&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Define a scalar constructor argument:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;constructor-arg&gt;
+            &lt;value&gt;aValue&lt;/value&gt;
+        &lt;/constructor-arg&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Mixing both:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;constructor-arg&gt;
+            &lt;value&gt;aValue&lt;/value&gt;
+        &lt;/constructor-arg&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;value&gt;aValue&lt;/value&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+The following examples also apply to constructor arguments
+</p>
+<p>
+Define a scalar property with a container property:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;value&gt;${some.value}&lt;/value&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Define a reference to another bean as a property:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;ref bean="otherBean"/&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Define a property as code to be evaluated:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;eval&gt;&lt;![CDATA[ return "Some evaluated code"; ]]>&lt;/eval&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Define an array as a property:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;array&gt;
+                &lt;entry key="0"&gt;&lt;ref bean="otherBean"/&gt;&lt;/entry&gt;
+                &lt;entry key="1"&gt;&lt;value&gt;aValue&lt;/value&gt;&lt;/entry&gt;
+                &lt;entry key="2"&gt;&lt;eval&gt;&lt;![CDATA[ return "Some evaluated code"; ]]>&lt;/eval&gt;&lt;/entry&gt;
+                &lt;entry key="3"&gt;&lt;array&gt;&lt;entry key="other"&gt;&lt;value&gt;${aValue}&lt;/value&gt;&lt;/entry&gt;&lt;/array&gt;&lt;/entry&gt;
+            &lt;/array&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<H4>Inner beans</H4>
+<p>
+You can define beans inside properties and constructor arguments, like this:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="D\E\F" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;bean class="A\B\C" scope="prototype"/&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Ding will automatically choose a name for this inner bean. The same syntax applies to
+constructor arguments as well.
+</p>
+<H4>Method injection</H4>
+<p>
+Suppose you have a singleton bean, and you need to have one of its methods to return an instance
+of one of its dependencies, but this dependency has the scope 'prototype'. The problem here
+is that when the container created the singleton, it injected its dependencies right in the
+beginning of its lifecycle, meaning that every access to the prototype dependency bean will always
+be to the same instance. If this dependency is a prototype scoped bean, this is not what you want.
+</p>
+<p>
+To help you resolve these kind of issues, the controller offers method injection. Take a look:
+</p>
+
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="dependencyName" class="AClass" scope="prototype"/&gt;
+    &lt;bean id="singletonBean" class="SingletonClass" scope="singleton"&gt;
+        &lt;lookup-method name="createDependency" bean="dependencyName"/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+
+<p>
+In this example, the singleton just uses createDependency() to get instances of the bean named "dependencyName".
+The container will (via AOP) take care of the rest ;)
+</p>
+<H4>Annotations metadata</H4>
+<ul>
+  <li><u>Name:</u>The name of the annotation (i.e: @InitMethod).
+  <li><u>Arguments:</u>The annotations arguments. For example @InitMethod(method=xxx)
+  will result in an annotation named InitMethod with an argument 'method' having the
+  value 'xxx'.</li>
+</ul>
+
+<H4>Container</H4>
+<p>
+The container is a factory of beans. It constructs an instance of a bean using the
+metadata associated with it (and its subparts, like properties, annotations, etc).
+</p>
+<H4>Container managed annotations</H4>
+<ul>
+  <li><u>@InitMethod</u>: Has the same effect as declaring a bean with init-method in the beans.xml file.</li>
+  <li><u>@DestroyMethod</u>: Has the same effect as declaring a bean with destroy-method in the beans.xml file.</li>
+</ul>
+
+
+<H4>Aware Interfaces</H4>
+<ul>
+  <li><u>Ding\Container\IContainerAware</u>: Whenever ding is going to instantiate a bean whose class implements IContainerAware interface, it will inject the container instace to this bean</li>
+  <li><u>Ding\Bean\IBeanNameAware</u>: Whenever ding is going to instantiate a bean whose class implements IBeanNameAware interface, it will inject the name of the bean</li>
+  <li><u>Ding\Bean\IAspectManagerAware</u>: Whenever ding is going to instantiate a bean whose class implements IAspectManagerAware interface, it will inject current instance of the aspect manager (giving the ability to inject pointcuts, aspects, and general aop management).</li>
+  <li><u>Ding\Bean\IMessageSourceAware</u>: Whenever ding is going to instantiate a bean whose class implements IMessageSourceAware interface, it will inject current instance of the message source (providing i18n capabilities).</li>
+  <li><u>Ding\Bean\IResourceLoaderAware</u>: Whenever ding is going to instantiate a bean whose class implements IResourceLoaderAware interface, it will inject the instance of the resource loader in use, which is usually the container itself.</li>
+  <li><u>Ding\Logger\ILoggerAware</u>: Whenever ding is going to instantiate a bean whose class implements ILoggerAware interface, it will inject the instance of the logger (log4php) currently in use by the container, so you can log there. The logger will have the name of the class (where '\' are replaced by '.')</li>
+</ul>
+
+<H4>Extension points</H4>
+<p>
+If you're wondering about how to extend Ding with different or new features,
+there are some predefined "kind" of extension points:
+
+<ul>
+  <li>Drivers</li>
+  <li>Helpers</li>
+</ul>
+</p>
+<H4><u>Drivers</u></H4>
+<p>
+Drivers are normal "lifecyclers". These can be any object that implements
+ILifecycleListener and listens on one or more of the container lifecycle events:
+These classes usually reside in the namespace Ding\Bean\Factory\Driver.
+</p>
+<ul>
+  <li><u>BeforeConfig</u></li>
+  <li><u>AfterConfig</u></li> 
+  <li><u>BeforeDefinition:</u></li>
+  <li><u>AfterDefinition</u></li>
+  <li><u>BeforeCreate</u></li>
+  <li><u>AfterCreate</u></li>
+  <li><u>BeforeAssemble</u></li>
+  <li><u>AfterAssemble</u></li>
+</ul>
+<p>
+Each lifecycle event triggers a chain of the lifecyclers for that particular
+event, so the order is important.
+</p> 
+<p>
+Just like an aware interface, whenever ding instantiates a bean of a class that implements any of: 
+the bean will be registered in the given lifecycle points. See docs/examples/lifecycle.
+This will allow you to extend the container functionality as much as you like.
+</p>
+<ul>
+  <li>Ding\Bean\Lifecycle\IBeforeConfigListener</li>
+  <li>Ding\Bean\Lifecycle\IAfterConfigListener</li> 
+  <li>Ding\Bean\Lifecycle\IBeforeDefinitionListener</li>
+  <li>Ding\Bean\Lifecycle\IAfterDefinitionListener</li>
+  <li>Ding\Bean\Lifecycle\IBeforeCreateListener</li>
+  <li>Ding\Bean\Lifecycle\IAfterCreateListener</li>
+  <li>Ding\Bean\Lifecycle\IBeforeAssembleListener</li>
+  <li>Ding\Bean\Lifecycle\IAfterAssembleListener</li>
+</ul>
+</p>
+<H4>Helpers</H4>
+<p>
+Helpers reside in the namespace Ding\Helpers. The helpers are usually normal
+beans, lets call them "user space" code (meaning that they
+are not part of Ding's architecture per se, unlike Drivers that are
+active players in the bean creation process).
+</p>
+<H4>ReflectionFactory</H4>
+<p>
+The namespace Ding\Reflection contains ReflectionFactory. This factory is
+used throughout the container and its extension points. 
+</p>
+<a href="#" class="next-link"><strong>Back</strong></a>
+
+                  <a name="events" id="events"></a>
+                  <div class="line">
+                        <h3>3. Events and event driven programming support</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+<p>
+Events are supported by the container itself. This means that you can register
+as many events and as many listeners per events as you need. This is useful so you can
+decouple your code a little more (i.e: updating some entity would trigger accounting
+events, that are listened to by some other beans that may be responsible to propagate
+this events to other systems). 
+</p>
+<p>
+The container supports triggering and listening for events, via 2 methods:
+</p>
+<pre name="code" class="php">
+    public function eventListen($eventName, $beanName);
+    public function eventDispatch($eventName, $data = null);
+</pre>
+<p>
+So you may programatically register a new listener by issuing:
+</p>
+<pre name="code" class="php">
+$container->eventListen('someEvent', 'myService');
+</pre>
+<p>
+And then you can trigger it (also programatically) with:
+</p>
+<pre name="code" class="php">
+$container->eventDispatch('someEvent', $entity);
+</pre>
+<p>
+The event is a string (as you can see), and also the handler is passed with a 
+bean name (also a string). These handlers will only be instantiated when needed (i.e:
+the event has been triggered). The convention is that the container will look for a
+method name "onSomeEvent()" and call it with $entity.
+</p>
+<p>
+You can also declare the beans that listen for particular events right in the
+container configuration.
+</p>
+<H4>Using the xml driver</H4>
+<pre name="code" class="php">
+&lt;beans&gt;
+  &lt;bean id="bean" class="Bean" scope="singleton" listens-on="bean2Created"/&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+The "listens-on" value is a csv string of events, lower camel cased.
+</p>
+<H4>Using the yaml driver</H4>
+<pre name="code" class="php">
+beans: !!map
+  bean3:
+    class: Bean3
+    scope: singleton
+    listens-on: bean2Created
+
+</pre>
+<p>
+The "listens-on" value is a csv string of events, lower camel cased.
+</p>
+<H4>Using the annotations driver</H4>
+<pre name="code" class="php">
+/**
+ * @Configuration
+ */
+class Config
+{
+    /**
+     * @Bean(class=Bean4)
+     * @Scope(value=singleton)
+     * @ListensOn(value=bean2Created)
+     */
+    public function someBean()
+    {
+        return new Bean4;
+    }
+}
+</pre>
+<p>
+The "@ListensOn" value is a csv string of events, lower camel cased.
+</p>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="resources" id="resources"></a>
+                  <div class="line">
+                        <h3>4. Using Resources</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+<p>
+Resources are just a small abstraction level above the native stream implementation of php. For examples see
+docs/examples/resources.
+</p>
+<p>
+ You can get resources directly from the container. Since the container implements <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/Resource/IResourceLoader.php">Ding\Resource\IResourceLoader</a>,
+ you can call getStream($path) on it. You can also use resources by yourself, without involving the container.
+</p>
+<p>
+A resource implements <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/Resource/IResource.php">Ding\Resource\IResource</a>.
+</p>
+<H4>Available implementations</H4>
+<ul>
+  <li><u>FilesystemResource</u>: Can be used to get resources for either relative or absolute paths. Can be used with or without the scheme <b>file://</b></li>
+  <li><u>IncludePathResource</u>: Can be used to get resources inside the include_path. Can be used with or without the scheme <b>file://</b> and <b>includepath://</b></li>
+  <li><u>URLResource</u>: Directly access php supported scheme's. See: <a href="http://www.php.net/manual/en/wrappers.php">http://www.php.net/manual/en/wrappers.php</a>
+</ul>
+<pre name="code" class="php">
+$resource = $container->getResource('includepath://somefile.php');
+</pre>
+<p>
+Or:
+</p>
+<pre name="code" class="php">
+$resource = new IncludePathResource('somefile.php');
+</pre>
+<p>
+Some other examples:
+</p>
+<pre name="code" class="php">
+$resource = $container->getResource('zip://file.zip#README.txt');
+</pre>
+<pre name="code" class="php">
+$resource = new URLResource('zip://file.zip#README.txt');
+</pre>
+<pre name="code" class="php">
+$resource = $container->getResource('file:///some/file/here.txt');
+</pre>
+<pre name="code" class="php">
+$resource = new FilesystemResource('file:///some/file/here.txt');
+</pre>
+<H4>IResourceLoaderAware interface</H4>
+<p>
+Implement <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/Resource/IResourceLoaderAware.php">Ding\Resource\IResourceLoaderAware</a> interface in your own beans and they will be automatically injected with the resource loader (the container)
+in use.
+</p>
+<H4>Resources as dependencies</H4>
+<p>
+You can also declare resources in your bean properties and constructor arguments, like:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="aBean" class="MyBeanClass" scope="singleton"&gt;
+        &lt;property name="aResource"&gt;&lt;value&gt;resource://${anUrl}&lt;/value&gt;&lt;/property&gt;
+        &lt;property name="aResource2"&gt;&lt;value&gt;resource://includepath://config.php&lt;/value&gt;&lt;/property&gt;
+        &lt;constructor-arg&gt;&lt;value&gt;resource://http://www.something.com&lt;/value&gt;&lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+Ding will autodetect the <b>resource://</b> prefix and return a property of type IResource instead of the string.
+</p>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="i18n" id="i18n"></a>
+                  <div class="line">
+                        <h3>5. Internationalization (i18n) support</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+<p>
+Ding provides i18n functionality, so you can support multiple languages in your application.<br/>
+see docs/examples/i18n for a quick example.
+</p>
+<p>
+Suppose you want to ship your application in en_US and es_AR languages. Also, suppose your application
+can be divided into 3 big modules:
+</p>
+<ul>
+<li>Customers</li>
+<li>Products</li>
+<li>Billing</li>
+</ul>
+<p>
+You would need 3 files named like this somewhere in your <b>include_path</b>:
+</p>
+<ul>
+<li>customers_es_AR.properties / customers_en_US.properties</li>
+<li>products_es_AR.properties / products_en_US.properties</li>
+<li>billing_es_AR.properties / billing_en_US.properties</li>
+</ul>
+<p>
+Sample contents for the files:
+</p>
+<p>
+customers_es_AR.properties:
+</p>
+<pre name="code" class="php">
+message.example = "Hola! esto es un argumento {1}"
+</pre>
+<p>
+customers_en_US.properties:
+</p>
+<pre name="code" class="php">
+message.example = "Hello! this is an argument {1}"
+</pre>
+<h4>Configuring the container</h4>
+<p>
+Whenever ding finds a bean named "messageSource", it will create it and use it to
+resolve messages:
+</p>
+<pre name="code" class="xml">
+    &lt;bean id="messageSource" class="Ding\MessageSource\Impl\MessageSourceImpl" scope="singleton"&gt;
+       &lt;property name="basenames"&gt;
+           &lt;array&gt;
+               &lt;entry key="0"&gt;&lt;value&gt;customers&lt;/value&gt;&lt;/entry&gt;
+               &lt;entry key="1"&gt;&lt;value&gt;products&lt;/value&gt;&lt;/entry&gt;
+               &lt;entry key="2"&gt;&lt;value&gt;billing&lt;/value&gt;&lt;/entry&gt;
+           &lt;/array&gt;
+       &lt;/property&gt;
+    &lt;/bean&gt;
+</pre>
+
+<p>
+A <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/MessageSource/Impl/MessageSourceImpl.php">MessageSourceImpl</a> implements the interface <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/MessageSource/IMessageSource.php">IMessageSource</a>:
+</p>
+<pre name="code" class="php">
+interface IMessageSource
+{
+    public function getMessage($bundle, $message, array $arguments, $locale);
+}
+</pre>
+<p>
+The container implements this interface, so you can call
+</p>
+<pre name="code" class="php">
+echo $container->getMessage('products', 'message.example', array('anArgument'), 'en_US');
+</pre> 
+
+<H4>IMessageSourceAware</H4>
+<p>
+Each bean that implements the <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/MessageSource/IMessageSourceAware.php">IMessageSourceAware</a> interface, will be autoinjected with 
+the message source in use (the container).
+</p>
+<pre name="code" class="php">
+interface IMessageSourceAware
+{
+    public function setMessageSource(IMessageSource $messageSource);
+}
+</pre> 
+<a href="#" class="next-link"><strong>Back</strong></a>
+
+                  <a name="aop" id="aop"></a>
+                  <div class="line">
+                        <h3>6. Aspect Oriented Programming</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+Ding has an implementation of the interceptor pattern, which is used to bring
+aop in the framework. Currently, there are 2 available kind of interceptors, both
+of them will call all aspects in a chained fashion. Either of those chained aspects
+can break or continue the chain by choosing to (or not to) call the proceed() method.
+</p>
+<ul>
+  <li><u>Method</u>: Called when the method is called.</li>
+  <li><u>Exception</u>: Called when the called method has thrown an exception not catched.</li>
+</ul>
+<p>
+The aspects are declared in the xml driver like this (yaml is supported, please see: docs/examples/yaml for an example):
+</p>
+
+<pre name="code" class="xml">
+&lt;bean id="some" class="AClass" scope="prototype"&gt;
+    &lt;aspect ref="AnAspectBean" type="method"&gt;
+        &lt;pointcut expression="targetMethod" method="invoke"/&gt;
+    &lt;/aspect&gt;
+&lt;/bean&gt;<br/>
+</pre>
+<p>
+The above example defines a bean named "some". When the container is requested to return an
+instance of this bean, it will notice that is has an aspect attached, so the bean's class is
+automatically proxied and the instance of that proxy is what is really returned.<br/><br/>
+In this case, the aspect references another bean that should also be known to the container. That
+bean must have a method named like in the method attribute, which is to be called.
+</p>
+<p>
+Notice the "type" attribute in the aspect tag. The other possible value for this attribute is "exception", this will attach an
+ExceptionInterceptor instead of a MethodInterceptor.
+</p>
+<p>
+Whenever a call is made to the method defined in the pointcut tag (in this case the method is called
+targetMethod), the method on your bean will be called. The same applies to exception interceptors.
+</p>
+<p>
+You can also use regular expressions to define a pointcut for more than one method. The syntax
+for the regular expression is the same as preg_match(), please see the php manual page for
+this function for details. Example:
+</p>
+<pre name="code" class="xml">
+&lt;bean id="some" class="AClass" scope="prototype"&gt;
+    &lt;aspect ref="AnAspectBean" type="method"&gt;
+        &lt;pointcut expression="^get$" method="invoke"/&gt;
+    &lt;/aspect&gt;
+&lt;/bean&gt;
+</pre>
+
+<H4>Sharing pointcuts (aka global pointcuts)</H4>
+<p>
+You can define global pointcuts and use them in your aspect definitions:
+</p>
+
+<pre name="code" class="xml">
+&lt;pointcut id="aPointcut" expression="^get$"/&gt;
+&lt;bean id="some" class="AClass" scope="prototype"&gt;
+    &lt;aspect ref="AnAspectBean" type="method"&gt;
+        &lt;pointcut pointcut-ref="aPointcut" method="invoke"/&gt;
+    &lt;/aspect&gt;
+&lt;/bean&gt;
+</pre>
+
+<H4>Global aspects</H4>
+<p>
+You can define global aspects using regular expressions for classes and references
+to global pointcuts (which can also use regular expressions):
+</p>
+
+<pre name="code" class="xml">
+&lt;pointcut id="aPointcut" expression="^get$"/&gt;
+&lt;aspect id="anAspect" expression="Service$" ref="AnAspectBean" type="method"&gt;
+  &lt;pointcut pointcut-ref="aPointcut"/&gt;
+&lt;/aspect&gt;
+</pre>
+
+<hr/>
+<p>
+In the above example, the expression attribute of the aspect declaration is applied
+to the class names for the beans. If the name of the class is matched, then the pointcuts
+expressions are tried.
+</p>
+<p>
+So you can define pointcuts inside aspects or globally. You can also define aspects in beans
+or globally. The aspects can have references to global pointcuts or the pointcut definitions
+themselves.
+</p>
+<H4>Using annotations</H4>
+<p>
+You may annotate any of your classes with @Aspect, this will tell Ding to scan
+the methods of this class and look for @ExceptionInterceptor and @MethodInterceptor:
+</p>
+<pre name="code" class="php">
+/**
+ * @Aspect
+ */
+class AspectA
+{
+    /**
+     * @MethodInterceptor(class-expression=C.+,expression=g.+)
+     * @ExceptionInterceptor(class-expression=C.+,expression=getB)
+     */
+    public function invoke(MethodInvocation $invocation)
+    {
+        try
+        {
+            echo "Before: " . $invocation->getOriginalInvocation() . "\n";
+            $invocation->proceed(array('b', 'c', 'd'));
+            echo "After\n";
+        } catch(Exception $e) {
+            echo "Move along, nothing happened here.. \n";
+        }
+    }
+
+    public function __construct()
+    {
+    }
+}
+</pre>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop">docs/examples/aop</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-regex">docs/examples/aop-regex</a>: Using the xml driver and regular expressions.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-global">docs/examples/aop-global</a>: Using the xml driver, regular expressions, and global (shared) pointcuts.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-annotation">docs/examples/aop-annotation</a>: Using the annotations driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/yaml">docs/examples/yaml</a>: Using the yaml driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="config" id="config"></a>
+                  <div class="line">
+                        <h3>7. Configuring the container</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+The container::getInstance() method accepts an array that is used configure the
+framework.
+</p>
+<pre name="code" class="php">
+$a = ContainerImpl::getInstance($properties);
+</pre>
+<H4>Logging</H4>
+<p>
+Use the optional property:
+</p>
+<pre name="code" class="php">
+$properties['ding']['log4php.properties'] => './log4php.properties'
+</pre>
+
+<H4>Bean Factory Drivers</H4>
+<p>
+You may configure any of the bean definition drivers available:
+</p>
+<ul>
+  <li>xml: Parses the given XML file(s), usually beans.xml and get bean definitions from there. Requires the property 'filename'.</li>
+  <li>yaml: Parses the given YAML file(s), usually beans.yaml and get bean definitions from there. Requires the property 'filename'.</li>
+  <li>annotation: Extracts bean definitions and other information right from the annotated code. Requires the property 'scanDir'.</li>
+</ul>
+<p>
+These drivers are configured with their own properties:
+</p>
+<ul>
+  <li>$properties['ding']['factory']['bdef']['xml']</li>
+  <li>$properties['ding']['factory']['bdef']['yaml']</li>
+  <li>$properties['ding']['factory']['bdef']['annotation']</li>
+</ul>
+
+<p>
+Example:
+</p>
+<pre name="code" class="php">
+$properties['ding']['factory']['bdef']['xml'] = array(
+    'filename' => 'beans.xml'
+)
+
+$properties['ding']['factory']['bdef']['annotation'] = array(
+    'scanDir' => array(realpath(__DIR__))
+)
+</pre>
+
+<p>
+You can also specify multiple files, for either xml or yaml drivers, like:
+</p>
+<pre name="code" class="php">
+$properties['ding']['factory']['bdef']['xml'] = array(
+    'filename' => array('beans.xml', 'otherBeans.xml')
+)
+
+$properties['ding']['factory']['bdef']['yaml'] = array(
+    'filename' => array('beans.yaml', 'otherBeans.yaml')
+)
+</pre>
+
+<p>
+You can also specify multiple search directories (paths), for either xml or yaml drivers, like:<br/>
+</p>
+<pre name="code" class="php">
+$properties['ding']['factory']['bdef']['yaml'] = array(
+    'filename' => array('beans.yaml', 'otherBeans.yaml'), 'directories' => array('/etc/Ding', '/usr/local/etc/Ding')
+)
+</pre>
+<p>
+This will tell the yaml driver (you can also use it with the xml driver) to look for the bean
+files beans.yaml and otherBeans.yaml in the directories specified. The order of the
+directories is important, so the file used will be the first available one.
+</p>
+<H4>User properties</H4>
+<p>
+Use the optional property: $properties['ding']['properties'] to
+specify any key/value pair that you may want search and replace via the PropertyFilter. Example:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;value&gt;${some.value}&lt;/value&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<pre name="code" class="php">
+$properties['ding']['factory']['properties'] = array(
+    'some.value' => 'This is the final property value'
+)
+</pre>
+<p>
+<b>NOTE:</b> If a property starts with "php.", like "php.date.timezone", ding will automatically
+call ini_set() for that property, like: ini_set('date.timezone', value). See docs/examples/PhpProperties.
+</p>
+<p>
+You can also configure the <b>PropertiesHolder</b> bean to inject properties files:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+   &lt;bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton"&gt;
+       &lt;property name="locations"&gt;
+         &lt;array&gt;
+           &lt;entry key="0"&gt;&lt;value&gt;resource://includepath://file.properties&lt;/value&gt;&lt;/entry&gt;
+           &lt;entry key="1"&gt;&lt;value&gt;other.properties&lt;/value&gt;&lt;/entry&gt;
+           &lt;entry key="2"&gt;&lt;value&gt;file://./user.properties&lt;/value&gt;&lt;/entry&gt;
+           &lt;entry key="3"&gt;&lt;value&gt;file://./php.properties&lt;/value&gt;&lt;/entry&gt;
+         &lt;/array&gt;
+       &lt;/property&gt;
+   &lt;/bean&gt;
+   &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+       &lt;property name="someProperty"&gt;
+           &lt;value&gt;${some.value}&lt;/value&gt;
+       &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+So you can have your own properties and the ones that affect php behavior (i.e: "php." properties) in your
+own separate config files.
+</p>
+<p>
+Sample properties file:
+</p>
+<pre name="code" class="php">
+some.value=value
+php.some.php.property=value
+</pre>
+<H4>Cache Subsystems</H4>
+<p>
+The cache subsystems use $properties['ding']['cache']. The subsystems are:
+</p>
+<ul>
+  <li><u>autoloader</u>: In order to avoid resolving the ding's class names to
+  a filesystem entry every time, a cache is used.</li>
+  <li><u>proxy</u>: To cache proxy definitions: its expensive to create proxies
+  because php lacks this hability, so we have to actually generate code. This code
+  can be cached.</li>
+  <li><u>annotations</u>: To cache annotations, its *really* expensive if you have
+  a large source tree or use them a lot. So we cache the annotations for each class and
+  the files and directories scanned (along with all autodiscovered classes there).</li>
+  <li><u>bdef</u>: To cache BeanDefinitions so no xml's or annotations have to be
+  reparsed per every request.</li>
+  <li><u>beans</u>: To cache the beans themselves. This is actually not so easy as it
+  sounds, so dont expect it to work as intended. Note: this is not a flaw of Ding itself but
+  inherent to the architecture used generally in php, the lack of the concept of an
+  application server, etc. It is recomended to use the dummy implementation for this cache.</li>
+  <li><u>aspect</u>: To cache aspect and pointcut definitions (i.e: AspectManager).</li>
+</ul>
+<p>
+The resulting properties needed to configure each one of the cache subsystems:
+</p>
+
+<ul>
+  <li>$properties['ding']['cache']['autoloader']</li>
+  <li>$properties['ding']['cache']['proxy']</li>
+  <li>$properties['ding']['cache']['bdef']</li>
+  <li>$properties['ding']['cache']['beans']</li>
+  <li>$properties['ding']['cache']['aspect']</li>
+  <li>$properties['ding']['cache']['annotations']</li>
+</ul>
+
+<p>
+In turn, each one of these entries, require the 'impl' key to point to one
+of the possible cache implementations:
+</p>
+<ul>
+  <li><u>dummy</u>: Does not cache at all.</li>
+  <li><u>file</u>: Uses the filesystem. Requires the additional option 'directory'.</li>
+  <li><u>apc</u>: Uses apc.</li>
+  <li><u>memcached</u>: Uses memcached php extension. Requires additional option 'memcached', an array with: 'host' and 'port'.</li>
+  <li><u>zend</u>: Uses Zend_Cache. Requires additional option: 'zend' with an array of options of your choice according to Zend_Cache documentation.</li>
+</ul>
+<p>
+Then, you can configure any of the cache subsystems with any of the cache implementations:
+</p>
+
+<pre name="code" class="php">
+$properties['ding']['cache']['proxy'] = array(
+    'impl' => 'file', 'directory' => '/tmp/Ding/cache'
+)
+
+$properties['ding']['cache']['bdef'] = array(
+    'impl' => 'memcached', 'memcached' => array('host' => '127.0.0.1', 'port' => 11211)
+)
+
+$properties['ding']['cache']['proxy'] = array(
+    'impl' => 'apc'
+)
+
+$properties['ding']['cache']['autoloader'] = array(
+    'impl' => 'apc'
+)
+
+$properties['ding']['cache']['aspect'] = array(
+    'impl' => 'apc'
+)
+
+$properties['ding']['cache']['annotations'] = array(
+    'impl' => 'apc'
+)
+
+$properties['ding']['cache']['bdef'] = array(
+    'impl' => 'dummy'
+)
+</pre>
+<pre name="code" class="php">
+$zendCacheOptions = array(
+    'frontend' => 'Core',
+    'backend' => 'File',
+    'backendoptions' => array('cache_dir' => '/tmp/Ding/zend/cache'),
+    'frontendoptions' => array('lifetime' => 10000, 'automatic_serialization' => true)
+);
+
+$properties['ding']['cache']['bdef'] = array(
+    'impl' => 'zend', 'zend' => $zendCacheOptions
+)
+</pre>
+<H4>Driver properties</H4>
+<p>
+Some drivers are optional:
+</p>
+<ul>
+  <li>SignalHandler</li>
+  <li>ErrorHandler</li>
+  <li>Shutdown</li>
+  <li>Timezone</li>
+</ul>
+<p>
+You can explicitely tell the container to use them with the following options:
+</p>
+<pre name="code" class="php">
+$options['drivers'] => array('signalhandler' => array())
+$options['drivers'] => array('errorhandler' => array())
+$options['drivers'] => array('shutdown' => array())
+$options['drivers'] => array('timezone' => array())
+</pre>
+<a href="#" class="next-link"><strong>Back</strong></a>
+
+                  <a name="mvc" id="mvc"></a>
+                  <div class="line">
+                        <h3>8. The MVC Implementation</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+<H4>Classes</H4>
+<ul>
+<li>Ding\MVC\Action</li>
+<li>Ding\MVC\Dispatcher</li>
+<li>Ding\MVC\ModelAndView</li>
+<li>Ding\MVC\RedirectModelAndView</li>
+<li>Ding\MVC\ForwardModelAndView</li>
+<li>Ding\MVC\View</li>
+</ul>
+<H4>Interfaces</H4>
+<ul>
+<li>Ding\MVC\IMapper</li>
+<li>Ding\MVC\IViewResolver</li>
+<li>Ding\MVC\IViewRender</li>
+</ul>
+<H4>Description</H4>
+<p>
+The MVC implementation of Ding is in the namespace Ding\MVC. The components are:
+</p>
+<ul>
+  <li><u>Actions</u>: Actions are strings, that uniquely identifies an action (usually triggered with a request) in 
+  your software. Actions can have arguments, which are nothing more than key/value
+  pairs.</li>
+  <li><u>Mapper</u>: The mapper knows and returns the controller that can handle the given Action name.</li>
+  <li><u>Dispatcher</u>: The dispatcher is the responsible for calling the right controller with the right Action object.</li>
+  <li><u>ModelAndView</u>: This is the result of the execution of a controller. A controller must
+  return a ModelAndView object containing the name of the view to render and other optional data.</li>
+  <li><u>TwigViewRender</u>: The view is processed by <a href="http://www.twig-project.org/">Twig</a></li>
+  <li><u>SmartyViewRender</u>: The view is processed by <a href="http://www.smarty.net">Smarty</a></li>
+  <li><u>HttpViewRender</u>: The view is processed by php via include_once.</li>
+  <li><u>ForwardModelAndView</u>: This is a special ModelAndView that has the meaning of calling again the
+  dispatcher with a new given action and new or same arguments.</li>
+  <li><u>RedirectModelAndView</u>: This is a special ModelAndView that has the meaning of redirecting the request 
+  to somewhere else (i.e: http 302 header).</li>
+  <li><u>ViewResolver</u>: The ViewResolver knows how to get a ViewResolver based on the given View name from the ModelAndView object.</li>
+  <li><u>View</u>: Views are in charge of rendering the ModelAndView in a proper way for the actor that triggered the request.</li>
+</ul>
+<H4>HTTP implementation Classes</H4>
+<ul>
+<li>Ding\MVC\Http\HttpAction</li>
+<li>Ding\MVC\Http\HttpDispatcher</li>
+<li>Ding\MVC\Http\HttpExceptionMapper</li>
+<li>Ding\MVC\Http\HttpView</li>
+<li>Ding\MVC\Http\HttpViewResolver</li>
+<li>Ding\MVC\Http\HttpViewRender</li>
+<li>Ding\MVC\Http\TwigViewRender</li>
+<li>Ding\MVC\Http\SmartyViewRender</li>
+<li>Ding\MVC\Http\HttpUrlMapper</li>
+<li>Ding\MVC\Http\HttpFrontController</li>
+</ul>
+<H4>Annotations</H4>
+<ul>
+<li>@Controller</li>
+<li>@RequestMapping(url=xxx)</li>
+</ul>
+<p>
+Both of these annotations need to be present in a controller defined by annotations.<br/>
+@Controller will tell the mvc driver to map the class with the content of the url param in the
+@RequestMapping annotation. This is equivalent to configure the class as a bean in beans.xml and
+mapping there the url to that bean.
+</p>
+<p>
+In the case of http, the following components exist:
+</p>
+<ul>
+  <li><u>HttpAction</u>: The HttpAction encapsulated the uri, the method used, and the arguments.</li>
+  <li><u>HttpDispatcher</u>: Dispatches the request, using the mapper and the view resolver to render the view.
+  The controller are mapped with both method and uri's. The action names, however, are invoked by convention. Suppose
+  the uri /MyController/List, will mean that the controller that handles /MyController, needs to have a method
+  named ListAction.</li>
+  <li><u>HttpView</u>: Render the given view (a file in the filesystem), outputing headers and data.</li>
+  <li><u>HttpViewResolver</u>: Maps a view name with a file in the filesystem. The root directory, an optional prefix and suffix can be
+  configured.</li>
+  <li><u>HttpUrlMapper</u>: Maps an uri and its method to a controller.</li>
+  <li><u>HttpFrontController</u>: This is intended to be instantiated and called from your own entry point, will load the
+  container and also, invoke the dispatcher and completely handle the request.</li>
+</ul>
+<p>
+A special setup is required in the web server. You need to forward ALL uri's (at least the ones you're interested
+in manage with Ding) to your entry point, let's say index.php. In lighttpd you would do:<br/><br/>
+url.rewrite-once = ( "^/(.*)" => "/index.php" )
+</p>
+<p>
+And you're index.php would be something like this:
+</p>
+<p>
+HttpFrontController::handle($properties, '/Some/Mapped/Path');<br/>
+</p>
+<p>
+And that's it. Take a look at the example below to know how to actually configure the HttpViewResolver and HttpUrlMapper
+in the container.
+</p>
+<H4>Http Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc">docs/examples/mvc</a>: Using the xml and annotation driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-twig">docs/examples/mvc-twig</a>: Using the xml and annotation drivers, with twig as the template engine.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-smarty">docs/examples/mvc-twig</a>: Using the xml and annotation drivers, with smarty as the template engine.</li>
+  </ul>
+  <a href="#" class="next-link"><strong>Back</strong></a>
+
+                  <a name="helper-error" id="helper-error"></a>
+                  <div class="line">
+                        <h3>9. The ErrorHandler helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+This helper is used as an error handler by using set_error_handler(). 
+</p>
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\ErrorHandler\ErrorHandlerHelper</li>
+</ul>
+<H4>Driver</H4>
+<ul>
+<li>Ding\Bean\Factory\Driver\ErrorHandlerDriver</li>
+</ul>
+
+<H4>Annotations</H4>
+<ul>
+<li>Class level annotation @ErrorHandler</li>
+</ul>
+<H4>Description</H4>
+<p>
+PHP will call the callback registered with set_error_handler().
+The property "errorHandler" of the bean, is a reference to your
+own bean (whose class definition must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/ErrorHandler/IErrorHandler.php">Ding\Helpers\ErrorHandler\IErrorHandler</a>).
+</p>
+<p>
+The driver is the one responsible for getting an
+optional bean from the container, named "ErrorHandler", that should be of class
+"Ding\Helpers\ErrorHandlerHelper". If this bean exists, it will be set as the
+error handler. The helper will in turn, call the handler set via the "errorHandler"
+property. This driver registers at AfterConfig in the Container lifecycle.
+</p>
+<p>
+You need to add an option when instantiating the container:
+</p>
+<pre name="code" class="php">
+$options['drivers'] => array('errorhandler' => array())
+</pre>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ErrorHandler">docs/examples/ErrorHandler</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ErrorHandler/annotated">docs/examples/ErrorHandler/annotated</a>: Using the annotation driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="helper-shutdown" id="helper-error"></a>
+                  <div class="line">
+                        <h3>10. The ShutdownHandler helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+This helper is used as a shutdown handler by using register_shutdown_function(). 
+</p>
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\ShutdownHandler\ShutdownHandlerHelper</li>
+</ul>
+
+<H4>Driver</H4>
+<ul>
+<li>Ding\Bean\Factory\Driver\ShutdownHandlerDriver</li>
+</ul>
+
+<H4>Annotations</H4>
+<ul>
+<li>Class level annotation @ShutdownHandler</li>
+</ul>
+
+<H4>Description</H4>
+<p>
+PHP will call the callback registered with register_shutdown_function().
+The property "shutdownHandler" of the bean, is a reference to your
+own bean (whose class definition must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/ShutdownHandler/IShutdownHandler.php">Ding\Helpers\ShutdownHandler\IShutdownHandler</a>).
+</p>
+<p>
+The driver is the one responsible for getting an
+optional bean from the container, named "ShutdownHandler", that should be of class
+"Ding\Helpers\ShutdownHandlerHelper". If this bean exists, it will be set as the
+shutdown handler. The helper will in turn, call the handler set via the "shutdownHandler"
+property. This driver registers at AfterConfig in the Container lifecycle.
+</p>
+<p>
+You need to add an option when instantiating the container:
+</p>
+<pre name="code" class="php">
+$options['drivers'] => array('shutdown' => array())
+</pre>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ShutdownHandler">docs/examples/ShutdownHandler</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ShutdownHandler/annotated">docs/examples/ShutdownHandler/annotated</a>: Using the annotation driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="helper-signal" id="helper-error"></a>
+                  <div class="line">
+                        <h3>11. The SignalHandler helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+This helper is used as a signal handler for the signals:
+</p> 
+<ul>
+  <li>SIGQUIT</li>
+  <li>SIGHUP</li>
+  <li>SIGINT</li>
+  <li>SIGCHLD</li>
+  <li>SIGTERM</li>
+  <li>SIGUSR1</li>
+  <li>SIGUSR2</li>
+</ul>
+
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\SignalHandler\SignalHandlerHelper</li>
+</ul>
+
+<H4>Driver</H4>
+<ul>
+<li>Ding\Bean\Factory\Driver\SignalHandlerDriver</li>
+</ul>
+<H4>Annotations</H4>
+<ul>
+<li>Class level annotation @SignalHandler</li>
+</ul>
+<H4>Description</H4>
+<p>
+For every signal received, it will invoke a (literally, a) signal handler
+of your choice. You cannot choose which signals to receive, so you must be ready
+to catch any of those. The property "signalHandler" of this bean, is a reference to your
+own bean (whose class definition must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/SignalHandler/ISignalHandler.php">Ding\Helpers\SignalHandler\ISignalHandler</a>).
+</p>
+<p>
+For this handler to work, you need to "declare(ticks=1)" in your php entry point.
+</p>
+<p>
+The driver is the one responsible for getting an
+optional bean from the container, named "SignalHandler", that should be of class
+"Ding\Helpers\SignalHandlerHelper". If this bean exists, it will be set as the
+signal handler. The helper will in turn, call the handler set via the "signalHandler"
+property. This driver registers at AfterConfig in the Container lifecycle.
+</p>
+<p>
+You need to add an option when instantiating the container:
+</p>
+<pre name="code" class="php">
+$options['drivers'] => array('signalhandler' => array())
+</pre>
+
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SignalHandler">docs/examples/SignalHandler</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SignalHandler/annotated">docs/examples/SignalHandler/annotated</a>: Using the annotation driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="helper-timer" id="helper-error"></a>
+                  <div class="line">
+                        <h3>12. The Timer helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+This helper is designed to be a bean of scope prototype, and act as a timer,
+calling your callback every some milliseconds.
+ </p>
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\Timer\TimerHelper</li>
+</ul>
+<H4>Description</H4>
+<p>
+This bean has the properties "handler", and "milliseconds". Handler is a reference
+to another bean that must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/Timer/ITimerHandler.php">Ding\Helpers\Timer\ITimerHandler</a>. The timer
+can be start()'ed and stop()'ed as needed (see the php-doc api for more details).
+</p>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TimerHelper">docs/examples/TimerHelper</a>: Using the xml driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="helper-syslog" id="helper-error"></a>
+                  <div class="line">
+                        <h3>13. The Syslog helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+This helper is designed to be a bean of scope singleton, and a facade for
+using the syslog in unix environments.
+ </p>
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\Syslog\SyslogHelper</li>
+</ul>
+<H4>Description</H4>
+<p>
+See the api and example for more details. You have to configure the known
+syslog properties "ident", "options", and "facility".
+</p>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SyslogHelper">docs/examples/SyslogHelper</a>: Using the xml driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="helper-pami" id="helper-error"></a>
+                  <div class="line">
+                        <h3>14. The PAMI helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+This helper is designed to be a bean of scope singleton that uses the
+<a href="https://marcelog.github.com/PAMI">PAMI framework</a> to let a listener of your 
+choice be called with any asterisk manager events.
+ </p>
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\PAMI\PamiHelper</li>
+</ul>
+<H4>Description</H4>
+<p>
+This bean has the properties "handler", "host", "port", "username", and "password". Handler is a reference
+to another bean that must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/PAMI/IPamiEventHandler.php">Ding\Helpers\PAMI\IPamiEventHandler. 
+</p>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/PAMI">docs/examples/PAMI</a>: Using the xml driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="helper-pagi" id="helper-error"></a>
+                  <div class="line">
+                        <h3>15. The PAGI helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+                  <p>
+This helper is designed to be a bean of scope singleton that uses the
+<a href="https://marcelog.github.com/PAGI">PAGI framework</a>, so you can construct
+telephony applications.
+ </p>
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\PAGI\PagiHelper</li>
+</ul>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/PAGI">docs/examples/PAGI</a>: Using the xml driver.</li>
+</ul>
+</p>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="helper-tcpclient" id="helper-error"></a>
+                  <div class="line">
+                        <h3>16. The TCP Client helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\TCP\TCPClientHelper</li>
+</ul>
+<H4>Description</H4>
+<p>
+This helper is intended to help you write tcp clients by just implementing
+the <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/TCP/ITCPClientHandler.php">Ding\Helpers\TCP\ITCPClientHandler</a> interface. You will need to implement the
+following methods:
+</p>
+<ul>
+  <li>connectTimeout(): Called when the connection has not been established in less
+  than the configured milliseconds.</li>
+  <li>readTimeout(): Called when the configured maximum read timeout has been
+  reached with less than the configured minimum bytes to read.</li>
+  <li>beforeConnect(): Called just before trying to connect to the server.</li>
+  <li>connect(): Called when the connection has been established successfully.</li>
+  <li>disconnect(): Called when either of the peers (you or the server) closes the connection.</li>
+  <li>data(): Called when data is ready to be consumed from the server.</li>
+</ul>
+<p>
+The helper itself has some useful method to control its behavior:
+</p>
+<ul>
+  <li>open(): Opens the connection. You may optionally pass the ip address and port number to use to make the connection
+  from. (i.e: 1.1.1.1:80 will try to make the connection FROM that address).</li>
+  <li>read(): Reads data from the server (usually used from the data() method above).</li>
+  <li>write(): Sends data to the server.</li>
+  <li>close(): Closes the connection.</li>
+  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper 
+  uses register_tick_function() to achieve this. If you dont want to declare(ticks=1), you need
+  to call this method from your own main loop. It will select() the socket, check for data
+  available, control timeouts, etc.</li>
+</ul>
+
+<p>
+See the php doc API for more details.
+</p>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPClientHelper">docs/examples/TCPClientHelper</a>: Using the xml driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+                  <a name="helper-tcpserver" id="helper-error"></a>
+                  <div class="line">
+                        <h3>17. The TCP Server helper</h3>
+                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
+                  </div>
+                  <div class="hr-1"><hr /></div>
+<H4>Class</H4>
+<ul>
+<li>Ding\Helpers\TCP\TCPServerHelper</li>
+</ul>
+<H4>Description</H4>
+<p>
+Use this helper to create one or more tcp server by just implementing the interface
+<a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/TCP/ITCPServerHandler.php">Ding\Helpers\TCP\ITCPServerHandler</a>. You will need to implement the
+following methods:
+</p>
+<ul>
+  <li>beforeOpen(): Called right before opening the socket.</li>
+  <li>beforeListen(): Called right before start listening in the socket for new connections.</li>
+  <li>close(): Called right after the server socket has ben closed.</li>
+  <li>handleConnection(): Called when a new connection has been established, will receive the ip:port of the client.</li>
+  <li>handleData(): Called when a client has sent data, will receive the ip:port of the client.</li>
+  <li>disconnect(): Called when a client disconnects, will receive the ip:port of the client.</li>
+  <li>readTimeout(): Called when the read timeout has expired on a client, will receive the ip:port of the client.</li>
+</ul>
+
+<p>
+The helper itself has some useful method to control its behavior:
+</p>
+<ul>
+  <li>disconnect(): Disconnects the given client.</li>
+  <li>open(): Opens the server socket.</li>
+  <li>read(): Reads data from the given client (usually used from the handleData() method above).</li>
+  <li>write(): Sends data to the given client.</li>
+  <li>close(): Closes the server socket.</li>
+  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper 
+  uses register_tick_function() to achieve this. If you dont want to declare(ticks=1), you need
+  to call this method from your own main loop. It will select() the socket, check for data
+  available, control timeouts, etc.</li>
+</ul>
+<H4>Example</H4>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPServerHelper">docs/examples/TCPServerHelper</a>: Using the xml driver.</li>
+</ul>
+<a href="#" class="next-link"><strong>Back</strong></a>
+</div>
+              </div>
+              <span class="bottom"><span class="bl"></span><span class="br"></span></span>
+            </div>
+          </div>
+          <div id="sidebar" class="highlight software-style">
+            <div class="mod simple">
+              <span class="top"><span class="tl"></span><span class="tr"></span></span>
+              <div class="inner set-height-1">
+                <h2>Software</h2>
+                <div class="hr-1"><hr /></div>
+                <ul class="simple-list">
+                  <li><a href="/PAMI">PAMI</a></li>
+                  <li><a href="/PAGI">PAGI</a></li>
+                  <li><a href="https://github.com/marcelog/MDM">MDM</a></li>
+                  <li><a href="https://github.com/marcelog/Pakman">Pakman</a></li>
+                  <li><a href="https://github.com/marcelog/AnoForPHP">AnoForPHP</a></li>
+                </ul>
+                <div class="google-ads">
+                                        <script type="text/javascript">
+                    google_ad_client = "ca-pub-6947936742546167";
+                    /* 9 */
+                    google_ad_slot = "8617829895";
+                    google_ad_width = 250;
+                    google_ad_height = 250;
+                    //-->
+                    </script>
+                    <script type="text/javascript"
+                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                    </script>
+                </div>
+              </div>
+              <span class="bottom"><span class="bl"></span><span class="br"></span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <!-- <p>&copy; 2010 Marcelo G. All Rights Reserved. Website design by <a href="http://Digitallabs.tv" target="_blank">Digitallabs.tv</a></p> -->
+    <address>Email: <a href="mailto:marcelog@gmail.com">marcelog@gmail.com</a></address>
+  </div>
+</div>
+
+<!-- config SyntaxHighlighter -->
+<script src='../dphighlighter/shCore.js' type='text/javascript'></script>
+<script src='../dphighlighter/shBrushPhp.js' type='text/javascript'></script>
+<script src='../dphighlighter/shBrushXml.js' type='text/javascript'></script>
+<script src='../dphighlighter/shBrushJScript.js' type='text/javascript'></script>
+<script src='../dphighlighter/shBrushCss.js' type='text/javascript'></script>
+<script language="javascript">
+    dp.SyntaxHighlighter.ClipboardSwf = '../dphighlighter/clipboard.swf';
+    dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21070993-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

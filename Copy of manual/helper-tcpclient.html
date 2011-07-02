@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+
+	<title>Ding: TCP Client Helper</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #f49648;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 700px;
+    }
+		h1 { font-size: 3.8em; color: #0b69b7; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #0b69b7; }
+    h3 { color: #0b69b7; }
+    a { color: #0b69b7; }
+    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+	</style>
+	
+</head>
+
+<body>
+
+<H1><u>The TCPClientHelper</u></H1>
+<g:plusone></g:plusone> 
+<H3>Class</H3>
+Ding\Helpers\TCP\TCPClientHelper
+
+<H3>Description</H3>
+<p>
+This helper is intended to help you write tcp clients by just implementing
+the Ding\Helpers\TCP\ITCPClientHandler interface. You will need to implement the
+following methods:
+<ul>
+  <li>connectTimeout(): Called when the connection has not been established in less
+  than the configured milliseconds.</li>
+  <li>readTimeout(): Called when the configured maximum read timeout has been
+  reached with less than the configured minimum bytes to read.</li>
+  <li>beforeConnect(): Called just before trying to connect to the server.</li>
+  <li>connect(): Called when the connection has been established successfully.</li>
+  <li>disconnect(): Called when either of the peers (you or the server) closes the connection.</li>
+  <li>data(): Called when data is ready to be consumed from the server.</li>
+</ul>
+<p>
+The helper itself has some useful method to control its behavior:
+<ul>
+  <li>open(): Opens the connection. You may optionally pass the ip address and port number to use to make the connection
+  from. (i.e: 1.1.1.1:80 will try to make the connection FROM that address).</li>
+  <li>read(): Reads data from the server (usually used from the data() method above).</li>
+  <li>write(): Sends data to the server.</li>
+  <li>close(): Closes the connection.</li>
+  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper 
+  uses register_tick_function() to achieve this. If you dont want to declare(ticks=1), you need
+  to call this method from your own main loop. It will select() the socket, check for data
+  available, control timeouts, etc.</li>
+</ul>
+</p>
+<p>
+See the php doc API for more details.
+</p>
+</p>
+<H3>Example</H3>
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPClientHelper">docs/examples/TCPClientHelper</a>: Using the xml driver.</li>
+</ul>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21070993-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
