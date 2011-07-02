@@ -6,8 +6,9 @@ window.onload = function () {
 }
 
 $(document).ready(function(){
+	
 	// Setup Tabs
-	if($(".tab-title").length > 0) {
+	/*if($(".tab-title").length > 0) {
 		var tab_active; // 0 is the first tab
 		var the_url = window.location.hash.split("#tab-");
 		if(the_url.length > 1) {
@@ -34,7 +35,7 @@ $(document).ready(function(){
 				return false;
 			});
 		});
-	}
+	}*/
 });
 
 //Auto hide label
