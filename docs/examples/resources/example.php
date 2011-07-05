@@ -102,7 +102,7 @@ $properties = array(
 $container = ContainerImpl::getInstance($properties);
 $bean = $container->getBean('aBean');
 var_dump($bean->loadSomething('/bin/login'));
-var_dump($bean->loadSomething('includepath:///Ding/Autoloader/Ding_Autoloader.php'));
+var_dump($bean->loadSomething('includepath:///Ding/Autoloader/Autoloader.php'));
 var_dump($bean->loadSomething('http://www.google.com'));
 echo "Now type something, since we've opened the resource php://stdin\n";
 var_dump($bean->loadSomething('php://stdin'));
