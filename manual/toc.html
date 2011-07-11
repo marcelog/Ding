@@ -1133,6 +1133,33 @@ Sample properties file:
 some.value=value
 php.some.php.property=value
 </pre>
+<p>
+You can even use properties inside the properties holder definition, like:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+   &lt;bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton"&gt;
+       &lt;property name="locations"&gt;
+         &lt;array&gt;
+           &lt;entry key="0"&gt;&lt;value&gt;resource://file://${config.dir}/file.properties&lt;/value&gt;&lt;/entry&gt;
+         &lt;/array&gt;
+       &lt;/property&gt;
+   &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+The property <b>config.dir</b> must now be defined when instantiating the container:
+</p>
+<pre name="code" class="php">
+$options = array('ding' => array(
+    'factory' => array(
+        'properties' => array('config.dir' => '/etc/config')
+    )
+));
+</pre>
+<p>
+When the properties holder is loaded, the property will complete the path for the file "file.properties".
+</p>
 <H4>Cache Subsystems</H4>
 <p>
 The cache subsystems use $properties['ding']['cache']. The subsystems are:
