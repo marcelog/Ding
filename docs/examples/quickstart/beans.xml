@@ -76,7 +76,7 @@
          <array>
            <entry key="0"><value>resource://includepath://file.properties</value></entry>
            <entry key="1"><value>other.properties</value></entry>
-           <entry key="2"><value>file://./user.properties</value></entry>
+           <entry key="2"><value>file://${configDir}/user.properties</value></entry>
          </array>
        </property>
    </bean>

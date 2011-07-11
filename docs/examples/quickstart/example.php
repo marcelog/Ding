@@ -36,8 +36,8 @@ ini_set(
     implode(
         PATH_SEPARATOR,
         array(
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
             ini_get('include_path'),
-            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg'))
         )
     )
 );
@@ -294,6 +294,7 @@ try
         'ding' => array(
             'log4php.properties' => './log4php.properties',
             'factory' => array(
+                'properties' => array('configDir' => __DIR__),
                 'drivers' => array(
                     'signalhandler' => array(),
 		    		'shutdown' => array(),

@@ -28,6 +28,8 @@
  *
  */
 namespace Ding\Bean\Factory\Driver;
+use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\Factory\Filter\ResourceFilter;
 use Ding\Bean\BeanPropertyDefinition;
@@ -50,7 +52,7 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class PropertiesDriver implements IAfterConfigListener
+class PropertiesDriver implements IAfterConfigListener, IAfterDefinitionListener
 {
     /**
      * Holds current instance.
@@ -59,10 +61,65 @@ class PropertiesDriver implements IAfterConfigListener
     private static $_instance = false;
 
     /**
+     * Setup flag.
+     * @var boolean
+     */
+    private $_setup = false;
+
+    /**
      * Properties.
      * @var array
      */
     private $_properties;
+
+    /**
+     * Already resolved property names
+     * @var string[]
+     */
+    private $_propertiesNames;
+
+   /**
+     * Apply (search and replace).
+     *
+     * @param mixed $value Value to replace.
+     *
+     * @return mixed
+     */
+    private function _apply($value)
+    {
+        if (is_string($value)) {
+            foreach ($this->_propertiesNames as $k => $v) {
+                if (is_string($value) && strpos($value, $k) !== false) {
+                    if (is_string($v)) {
+                        $value = str_replace($k, $v, $value);
+                    } else {
+                        $value = $v;
+                    }
+                }
+            }
+        }
+        return $value;
+    }
+
+    /**
+     * Recursively, apply filter to property or constructor arguments values.
+     *
+     * @param BeanPropertyDefinition|BeanConstructoruArgumentDefinition $def
+     * @param IContainer $factory Container in use.
+     *
+     * @return void
+     */
+    private function _applyFilter($def, IBeanFactory $factory)
+    {
+        $value = $def->getValue();
+        if (is_array($value)) {
+            foreach ($value as $subDef) {
+                $this->_applyFilter($subDef, $factory);
+            }
+        } else if (is_string($value)) {
+            $def->setValue($this->_apply($value));
+        }
+    }
 
     /**
      * (non-PHPdoc)
@@ -84,6 +141,24 @@ class PropertiesDriver implements IAfterConfigListener
                 $bean->loadProperties($this->_properties);
             }
         }
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
+     */
+    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    {
+        if ($this->_setup) {
+            return $bean;
+        }
+        foreach ($bean->getProperties() as $property) {
+            $this->_applyFilter($property, $factory);
+        }
+        foreach ($bean->getArguments() as $argument) {
+            $this->_applyFilter($argument, $factory);
+        }
+        $this->_setup = true;
+        return $bean;
     }
 
     /**
@@ -111,5 +186,12 @@ class PropertiesDriver implements IAfterConfigListener
     private function __construct(array $options)
     {
         $this->_properties = $options;
-    }
+        $this->_propertiesNames = array();
+        foreach (array_keys($options) as $key) {
+            /* Change keys. 'property' becomes ${property} */
+            $propName = '${' . $key . '}';
+            $this->_propertiesNames[$propName] = $options[$key];
+            $this->_properties[$key] = $options[$key];
+        }
+   }
 }

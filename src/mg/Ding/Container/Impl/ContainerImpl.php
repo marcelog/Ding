@@ -629,6 +629,7 @@ class ContainerImpl implements IContainer
         $this->_lifecycleManager->addAfterAssembleListener(LifecycleDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addBeforeCreateListener(ResourcesDriver::getInstance($soullessArray));
         $this->_lifecycleManager->addAfterConfigListener(PropertiesDriver::getInstance(self::$_options['properties']));
+        $this->_lifecycleManager->addAfterDefinitionListener(PropertiesDriver::getInstance(self::$_options['properties']));
 
         if (isset(self::$_options['bdef']['annotation'])) {
             $anDriver = BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation']);

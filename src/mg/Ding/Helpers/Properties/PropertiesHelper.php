@@ -113,6 +113,9 @@ class PropertiesHelper
      */
     private function _applyFilter($def, IBeanFactory $factory)
     {
+        if (!is_object($def)) {
+            return;
+        }
         $value = $def->getValue();
         if (is_array($value)) {
             foreach ($value as $subDef) {

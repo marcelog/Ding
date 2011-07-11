@@ -93,7 +93,8 @@ class Test_XML_Filter extends PHPUnit_Framework_TestCase
                         )
                     ),
                     'properties' => array(
-                        'a.b.value' => 'this is a value'
+                        'a.b.value' => 'this is a value',
+                        'file' => 'filter.properties'
                     )
                 )
             )
@@ -122,7 +123,8 @@ class Test_XML_Filter extends PHPUnit_Framework_TestCase
                         )
                     ),
                     'properties' => array(
-                        'a.b.value' => 'this is a value',
+                        'file' => 'filter.properties',
+                    	'a.b.value' => 'this is a value',
                     )
                 )
             )

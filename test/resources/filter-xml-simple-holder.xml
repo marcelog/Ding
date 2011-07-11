@@ -3,7 +3,7 @@
   <bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton">
     <property name="locations">
       <array>
-        <entry key="0"><value>resource://includepath://filter.properties</value></entry>
+        <entry key="0"><value>resource://includepath://${file}</value></entry>
       </array>
     </property>
   </bean>
