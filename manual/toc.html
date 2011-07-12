@@ -331,7 +331,7 @@ This one will first create "anotherBean" and then call anotherBean->getInstance(
 <p>
 This one will call init() as soon as the bean is created and all its properties are injected but before returning the instance to the caller:
 </p>
-<pre name="code" class="php">
+<pre name="code" class="xml">
 &lt;beans&gt;
     &lt;bean id="beanName" class="A\B\C" scope="prototype" init-method="init"/&gt;
 &lt;/beans&gt;
