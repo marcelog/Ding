@@ -73,6 +73,18 @@ class PamiHelper implements IEventListener
     private $_pass;
 
     /**
+     * AMI Connect timeout
+     * @var integer
+     */
+    private $_connect_timeout;
+
+    /**
+     * AMI Read timeout
+     * @var integer
+     */
+    private $_read_timeout;
+
+    /**
      * Handler.
      * @var IPamiEventHandler
      */
@@ -139,6 +151,30 @@ class PamiHelper implements IEventListener
     }
 
     /**
+     * Sets ami connect timeout.
+     *
+     * @param integer $time AMI Connect timeout in milliseconds.
+     *
+     * @return void
+     */
+    public function setConnectTimeout($time)
+    {
+        $this->_connect_timeout = $time;
+    }
+
+    /**
+     * Sets ami read timeout.
+     *
+     * @param integer $time AMI Read timeout in milliseconds.
+     *
+     * @return void
+     */
+    public function setReadTimeout($time)
+    {
+        $this->_read_timeout = $time;
+    }
+
+    /**
      * Sets handler.
      *
      * @param IPamiEventHandler $handler Handler to call.
@@ -174,8 +210,8 @@ class PamiHelper implements IEventListener
             'port' => $this->_port,
             'username' => $this->_user,
             'secret' => $this->_pass,
-            'connect_timeout' => 0,
-            'read_timeout' => 0
+            'connect_timeout' => $this->_connect_timeout,
+            'read_timeout' => $this->_read_timeout
         );
         $this->_ami = new ClientImpl($options);
         $this->_init = true;
@@ -235,5 +271,7 @@ class PamiHelper implements IEventListener
     public function __construct()
     {
         $this->_init = false;
+        $this->_connect_timeout = 0;
+        $this->_read_timeout = 0;
     }
 }

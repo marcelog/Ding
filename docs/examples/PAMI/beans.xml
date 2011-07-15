@@ -5,6 +5,8 @@
 		<property name="password"><value>${ami.pass}</value></property>
 		<property name="host"><value>${ami.host}</value></property>
 		<property name="port"><value>${ami.port}</value></property>
+		<property name="connectTimeout"><value>${ami.connect_timeout}</value></property>
+		<property name="readTimeout"><value>${ami.read_timeout}</value></property>
 		<property name="handler"><ref bean="MyPamiHandler"/></property>
 	</bean>
 	<bean id="MyPamiHandler" class="MyPamiHandler" scope="singleton"/>

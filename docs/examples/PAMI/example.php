@@ -39,8 +39,8 @@ use Ding\Helpers\PAMI\IPamiEventHandler;
 use PAMI\Message\Event\EventMessage;
 use PAMI\Message\Action\ListCommandsAction;
 
-if ($argc != 5) {
-    echo "Use: $argv[0] <host> <port> <user> <pass>\n";
+if ($argc != 7) {
+    echo "Use: $argv[0] <host> <port> <user> <pass> <connect_timeout> <read_timeout>\n";
     exit (254);
 }
 
@@ -62,6 +62,8 @@ $properties = array(
                 'ami.port' => $argv[2],
 				'ami.user' => $argv[3],
                 'ami.pass' => $argv[4],
+                'ami.connect_timeout' => $argv[5],
+                'ami.read_timeout' => $argv[6]
             )
         ),
         'cache' => array(
