@@ -13,6 +13,9 @@ Checkout the api (phpdoc) at: http://marcelog.github.com/Ding/php-doc/html/index
 In the homepage, you can find the user manual: http://marcelog.github.com/Ding
 
 Ding is also the winner of the 2011 Binpress programming contest :)
+
+See this article for a complete application example: http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html.
+
 --------------------------------------------------------------------------------
 Ding supports some of JSR-330 and JSR-250 annotations, like @Configuration,
 @Bean, @Required, @Resource, etc.
