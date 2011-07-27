@@ -446,6 +446,14 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_peersSockets</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_peersSockets">TCPServerHelper::$_peersSockets</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Holds peers sockets.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
 			<span class="var-title">$_port</span>
 					</dt>
 		<dd class="index-item-body">
@@ -465,7 +473,7 @@
 			<span class="var-title">$_readLen</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#var$_readLen">TCPClientHelper::$_readLen</a> in TCPClientHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_readLen">TCPServerHelper::$_readLen</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Minimum needed bytes in the socket before calling data() on the handler.</div>
 					</dd>
 			<dt class="field">
@@ -473,7 +481,7 @@
 			<span class="var-title">$_readLen</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_readLen">TCPServerHelper::$_readLen</a> in TCPServerHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#var$_readLen">TCPClientHelper::$_readLen</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Minimum needed bytes in the socket before calling data() on the handler.</div>
 					</dd>
 			<dt class="field">
@@ -497,7 +505,7 @@
 			<span class="var-title">$_rTo</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_rTo">TCPServerHelper::$_rTo</a> in TCPServerHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#var$_rTo">TCPClientHelper::$_rTo</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Read timeout in milliseconds.</div>
 					</dd>
 			<dt class="field">
@@ -505,16 +513,8 @@
 			<span class="var-title">$_rTo</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#var$_rTo">TCPClientHelper::$_rTo</a> in TCPClientHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_rTo">TCPServerHelper::$_rTo</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Read timeout in milliseconds.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
-			<span class="var-title">$_socket</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_socket">TCPServerHelper::$_socket</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Socket resource.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
@@ -525,12 +525,36 @@
 							<div class="index-item-description">Socket resource.</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/PrivateVariable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$_socket</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#var$_socket">TCPServerHelper::$_socket</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Socket resource.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/PrivateMethod.png" alt="Method" title="Method" />
+			<span class="method-title">_freePeer</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#method_freePeer">TCPServerHelper::_freePeer()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">After disconnecting a peer, this will release all the associated  information.</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Constructor.png" alt="Method" title="Method" />
 			<span class="method-title">__construct</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#method__construct">TCPServerHelper::__construct()</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Constructor. Not much to see here. Will register a tick function(),  process().</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Constructor.png" alt="Method" title="Method" />
+			<span class="method-title">__construct</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#method__construct">TCPPeer::__construct()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Constructor.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Constructor.png" alt="Method" title="Method" />
@@ -603,6 +627,13 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Syslog/SyslogHelper.html#methodalert">SyslogHelper::alert()</a> in SyslogHelper.php</div>
 							<div class="index-item-description">Logs a LOG_ALERT message.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Variable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$address</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#var$address">TCPPeer::$address</a> in TCPPeer.php</div>
 					</dd>
 		</dl>
 	<a name="b"></a>
@@ -737,8 +768,8 @@
 			<span class="method-title">disconnect</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methoddisconnect">TCPServerHelper::disconnect()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Call this to disconnect the given peer.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methoddisconnect">TCPPeer::disconnect()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Call this to disconnect the peer.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -852,6 +883,14 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getAddress</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methodgetAddress">TCPPeer::getAddress()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Returns the ip address for this peer.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">getMicrotime</span>
 					</dt>
 		<dd class="index-item-body">
@@ -868,11 +907,27 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">getPeerName</span>
+			<span class="method-title">getName</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodgetPeerName">TCPServerHelper::getPeerName()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Returns the peer name as a key for our internal arrays.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methodgetName">TCPPeer::getName()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Returns ip:port</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getPort</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methodgetPort">TCPPeer::getPort()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Returns the port number for this peer.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">getSocket</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methodgetSocket">TCPPeer::getSocket()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Returns open socket for this peer.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -969,6 +1024,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/ITCPServerHandler.html#methodhandleData">ITCPServerHandler::handleData()</a> in ITCPServerHandler.php</div>
 							<div class="index-item-description">Called when a client has sent data and is ready to be read.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">hasActivity</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methodhasActivity">TCPPeer::hasActivity()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Call this one to see if this peer has any activity in the socket.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1082,6 +1145,14 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/_Helpers---TCP---ITCPServerHandler.php.html">ITCPServerHandler.php</a> in ITCPServerHandler.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">isConnected</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methodisConnected">TCPPeer::isConnected()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Returns true if this peer is still connected.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -1270,6 +1341,13 @@
 							<div class="index-item-description">This bean will search and replace the properties found in constructor  arguments and properties.</div>
 					</dd>
 			<dt class="field">
+						<img src="media/images/Variable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$port</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#var$port">TCPPeer::$port</a> in TCPPeer.php</div>
+					</dd>
+			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
 			<span class="method-title">process</span>
 					</dt>
@@ -1291,6 +1369,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodprocessPeers">TCPServerHelper::processPeers()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">This will process activity in all peers. Called from process().</div>
 					</dd>
 		</dl>
 	<a name="r"></a>
@@ -1313,8 +1392,8 @@
 			<span class="method-title">read</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodread">TCPServerHelper::read()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Call this to read data from the server. Returns the number of bytes read.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methodread">TCPPeer::read()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Writes to this peer.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1538,12 +1617,11 @@
 							<div class="index-item-description">Syslog helper.</div>
 					</dd>
 			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">setAddress</span>
+						<img src="media/images/Variable.png" alt="Variable" title="Variable" />
+			<span class="var-title">$socket</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetAddress">TCPClientHelper::setAddress()</a> in TCPClientHelper.php</div>
-							<div class="index-item-description">Sets server host or ip address.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#var$socket">TCPPeer::$socket</a> in TCPPeer.php</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1551,6 +1629,14 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetAddress">TCPServerHelper::setAddress()</a> in TCPServerHelper.php</div>
+							<div class="index-item-description">Sets server host or ip address.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Method.png" alt="Method" title="Method" />
+			<span class="method-title">setAddress</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetAddress">TCPClientHelper::setAddress()</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Sets server host or ip address.</div>
 					</dd>
 			<dt class="field">
@@ -1598,7 +1684,7 @@
 			<span class="method-title">setPort</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetPort">TCPClientHelper::setPort()</a> in TCPClientHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetPort">TCPServerHelper::setPort()</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Sets server port.</div>
 					</dd>
 			<dt class="field">
@@ -1606,7 +1692,7 @@
 			<span class="method-title">setPort</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetPort">TCPServerHelper::setPort()</a> in TCPServerHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetPort">TCPClientHelper::setPort()</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Sets server port.</div>
 					</dd>
 			<dt class="field">
@@ -1646,7 +1732,7 @@
 			<span class="method-title">setReuse</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReuse">TCPClientHelper::setReuse()</a> in TCPClientHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReuse">TCPServerHelper::setReuse()</a> in TCPServerHelper.php</div>
 							<div class="index-item-description">Sets wether to reuse or not the socket bind.</div>
 					</dd>
 			<dt class="field">
@@ -1654,16 +1740,8 @@
 			<span class="method-title">setReuse</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodsetReuse">TCPServerHelper::setReuse()</a> in TCPServerHelper.php</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html#methodsetReuse">TCPClientHelper::setReuse()</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">Sets wether to reuse or not the socket bind.</div>
-					</dd>
-			<dt class="field">
-						<img src="media/images/Method.png" alt="Method" title="Method" />
-			<span class="method-title">setServer</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/ITCPServerHandler.html#methodsetServer">ITCPServerHandler::setServer()</a> in ITCPServerHandler.php</div>
-							<div class="index-item-description">Called by the helper to inject itself into this handler.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />
@@ -1722,6 +1800,13 @@
 					</dd>
 			<dt class="field">
 						<img src="media/images/Page.png" alt="Page" title="Page" />
+			<span class="include-title">TCPPeer.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/_Helpers---TCP---TCPPeer.php.html">TCPPeer.php</a> in TCPPeer.php</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Page.png" alt="Page" title="Page" />
 			<span class="include-title">TCPServerHelper.php</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1734,6 +1819,14 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Helpers/Tcp/TCPClientHelper.html">TCPClientHelper</a> in TCPClientHelper.php</div>
 							<div class="index-item-description">TCP Client helper. You need to declare(ticks) in your own source code or  manually call process() in an infinite loop from your software.</div>
+					</dd>
+			<dt class="field">
+						<img src="media/images/Class.png" alt="Class" title="Class" />
+			TCPPeer
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html">TCPPeer</a> in TCPPeer.php</div>
+							<div class="index-item-description">TCP Peer: encapsulated data and operations for each peer conected to the  TCP Server helper.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Class.png" alt="Class" title="Class" />
@@ -1802,8 +1895,8 @@
 			<span class="method-title">write</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Helpers/Tcp/TCPServerHelper.html#methodwrite">TCPServerHelper::write()</a> in TCPServerHelper.php</div>
-							<div class="index-item-description">Call this to send data to the server. Returns the number of bytes  sent.</div>
+			<div class="index-item-details"><a href="Helpers/Tcp/TCPPeer.html#methodwrite">TCPPeer::write()</a> in TCPPeer.php</div>
+							<div class="index-item-description">Writes to this peer.</div>
 					</dd>
 			<dt class="field">
 						<img src="media/images/Method.png" alt="Method" title="Method" />

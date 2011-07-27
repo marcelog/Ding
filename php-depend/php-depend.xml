@@ -572,17 +572,18 @@
     </Package>
     <Package name="Ding\Helpers\TCP">
       <Stats>
-        <TotalClasses>5</TotalClasses>
-        <ConcreteClasses>3</ConcreteClasses>
+        <TotalClasses>6</TotalClasses>
+        <ConcreteClasses>4</ConcreteClasses>
         <AbstractClasses>2</AbstractClasses>
         <Ca>0</Ca>
         <Ce>0</Ce>
-        <A>0.4</A>
+        <A>0.333333333333</A>
         <I>0</I>
-        <D>0.6</D>
+        <D>0.666666666667</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPClientHelper.php">TCPClientHelper</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPPeer.php">TCPPeer</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPServerHelper.php">TCPServerHelper</Class>
       </ConcreteClasses>
       <AbstractClasses>

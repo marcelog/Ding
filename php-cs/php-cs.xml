@@ -1948,24 +1948,25 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/ITCPServerHandler.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="30" column="16" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="48" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="53" column="32" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="53" column="37" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="70" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="71" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="74" column="39" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="74" column="44" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="79" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
   <error line="80" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="81" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="83" column="33" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="83" column="38" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="88" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
   <error line="89" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="90" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="91" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="92" column="33" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="92" column="38" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="95" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="96" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="97" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="98" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
   <error line="99" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="100" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="101" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="107" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="108" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="109" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="110" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="111" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="112" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="101" column="34" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="101" column="39" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPClientHelper.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -1982,6 +1983,17 @@
   <error line="189" column="9" severity="error" message="Expected &quot;for (...) {\n&quot;; found &quot;for(...)\n        {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
   <error line="254" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
  </file>
+ <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPPeer.php">
+  <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="31" column="16" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="33" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="33" column="10" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="33" column="22" severity="error" message="Constants must be uppercase; expected EXCEPTION but found Exception" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="33" column="32" severity="error" message="Constants must be uppercase; expected TCPEXCEPTION but found TCPException" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="91" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="134" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
+  <error line="185" column="1" severity="error" message="The comments for parameters $port (2) and $socket (3) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+ </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/TCP/TCPServerHelper.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="31" column="16" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -1989,20 +2001,16 @@
   <error line="33" column="10" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="33" column="22" severity="error" message="Constants must be uppercase; expected EXCEPTION but found Exception" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="33" column="32" severity="error" message="Constants must be uppercase; expected TCPEXCEPTION but found TCPException" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="132" column="1" severity="error" message="Doc comment for var $buffer does not match actual variable name $host at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="133" column="1" severity="error" message="Doc comment for var $length does not match actual variable name $port at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="134" column="1" severity="error" message="Doc comment for var $peek does not match actual variable name &amp;$buffer at position 3" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="134" column="1" severity="error" message="Doc comment for &quot;$length&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="134" column="1" severity="error" message="Doc comment for &quot;$peek&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="150" column="1" severity="error" message="Doc comment for var $what does not match actual variable name $host at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="150" column="1" severity="error" message="Doc comment for &quot;$port&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="150" column="1" severity="error" message="Doc comment for &quot;$what&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="207" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
-  <error line="211" column="13" severity="error" message="Space before opening parenthesis of function call prohibited" source="PEAR.Functions.FunctionCallSignatureSniff"/>
-  <error line="242" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="254" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
-  <error line="304" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
-  <error line="317" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="152" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
+  <error line="156" column="13" severity="error" message="Space before opening parenthesis of function call prohibited" source="PEAR.Functions.FunctionCallSignatureSniff"/>
+  <error line="187" column="5" severity="error" message="Doc comment for &quot;$peer&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="193" column="33" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="193" column="38" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="262" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
+  <error line="273" column="40" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="273" column="45" severity="error" message="Constants must be uppercase; expected HELPERS but found Helpers" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="273" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="277" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Helpers/Timer/ITimerHandler.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>

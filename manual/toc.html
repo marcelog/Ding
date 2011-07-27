@@ -1695,6 +1695,7 @@ See the php doc API for more details.
 <H4>Class</H4>
 <ul>
 <li>Ding\Helpers\TCP\TCPServerHelper</li>
+<li>Ding\Helpers\TCP\TCPPeer</li>
 </ul>
 <H4>Description</H4>
 <p>
@@ -1706,26 +1707,32 @@ following methods:
   <li>beforeOpen(): Called right before opening the socket.</li>
   <li>beforeListen(): Called right before start listening in the socket for new connections.</li>
   <li>close(): Called right after the server socket has ben closed.</li>
-  <li>handleConnection(): Called when a new connection has been established, will receive the ip:port of the client.</li>
-  <li>handleData(): Called when a client has sent data, will receive the ip:port of the client.</li>
-  <li>disconnect(): Called when a client disconnects, will receive the ip:port of the client.</li>
-  <li>readTimeout(): Called when the read timeout has expired on a client, will receive the ip:port of the client.</li>
+  <li>handleConnection(): Called when a new connection has been established, will receive a TCPPeer as a client.</li>
+  <li>handleData(): Called when a client has sent data, will receive a TCPPeer as the client.</li>
+  <li>disconnect(): Called when a client disconnects, will receive a TCPPeer as the client.</li>
+  <li>readTimeout(): Called when the read timeout has expired on a client, will receive a TCPPeer as a client.</li>
 </ul>
 
 <p>
 The helper itself has some useful method to control its behavior:
 </p>
 <ul>
-  <li>disconnect(): Disconnects the given client.</li>
   <li>open(): Opens the server socket.</li>
-  <li>read(): Reads data from the given client (usually used from the handleData() method above).</li>
-  <li>write(): Sends data to the given client.</li>
   <li>close(): Closes the server socket.</li>
   <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper 
   uses register_tick_function() to achieve this. If you dont want to declare(ticks=1), you need
   to call this method from your own main loop. It will select() the socket, check for data
   available, control timeouts, etc.</li>
 </ul>
+<p>
+To control a peer, you can call these methods on the TCPPeer:
+</p>
+<ul>
+<li>disconnect(): Disconnects the peer.</li>
+<li>read(): Reads data from the peer.</li>
+<li>write(): Writes data to the peer.</li>
+</ul>
+
 <H4>Example</H4>
 <ul>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPServerHelper">docs/examples/TCPServerHelper</a>: Using the xml driver.</li>

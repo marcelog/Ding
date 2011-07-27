@@ -132,7 +132,7 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																																																								<div class="var-title">
+																																																																																																																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">string</span>
 					<a href="#$_address" title="details" class="var-name">$_address</a>
@@ -154,13 +154,18 @@
 				</div>
 																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
-					<span class="var-type">socket[]</span>
+					<span class="var-type">\Ding\Helpers\TCP\TCPPeer[]</span>
 					<a href="#$_peers" title="details" class="var-name">$_peers</a>
 				</div>
 																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
 					<span class="var-type">float[]</span>
 					<a href="#$_peersLastDataReceived" title="details" class="var-name">$_peersLastDataReceived</a>
+				</div>
+																<div class="var-title">
+					<img src="../../media/images/PrivateVariable.png" alt=" " />
+					<span class="var-type">socket[]</span>
+					<a href="#$_peersSockets" title="details" class="var-name">$_peersSockets</a>
 				</div>
 																<div class="var-title">
 					<img src="../../media/images/PrivateVariable.png" alt=" " />
@@ -203,7 +208,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																							
+																																																																																																																															
 				<div class="method-definition">
 					<img src="../../media/images/Constructor.png" alt=" "/>
 											<span class="method-result">void</span>
@@ -220,23 +225,9 @@
 															
 				<div class="method-definition">
 					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">void</span>
-										<a href="#disconnect" title="details" class="method-name">disconnect</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$port</span>)
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
 											<span class="method-result">float</span>
 										<a href="#getMicrotime" title="details" class="method-name">getMicrotime</a>
 										()
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">string</span>
-										<a href="#getPeerName" title="details" class="method-name">getPeerName</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$port</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -258,13 +249,6 @@
 											<span class="method-result">void</span>
 										<a href="#processPeers" title="details" class="method-name">processPeers</a>
 										()
-									</div>
-															
-				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">integer</span>
-										<a href="#read" title="details" class="method-name">read</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$host</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$port</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$buffer</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$length</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$peek</span> = <span class="var-default">false</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$buffer</span>)
 									</div>
 															
 				<div class="method-definition">
@@ -317,10 +301,10 @@
 									</div>
 															
 				<div class="method-definition">
-					<img src="../../media/images/Method.png" alt=" "/>
-											<span class="method-result">integer</span>
-										<a href="#write" title="details" class="method-name">write</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$host</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$port</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$what</span>)
+					<img src="../../media/images/PrivateMethod.png" alt=" "/>
+											<span class="method-result">void</span>
+										<a href="#_freePeer" title="details" class="method-name">_freePeer</a>
+											(<span class="var-type"><a href="../../Helpers/Tcp/TCPPeer.html">TCPPeer</a></span>&nbsp;<span class="var-name">\\\\$peer</span>)
 									</div>
 											</div>
 		</div>
@@ -438,9 +422,9 @@
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
 		<span class="var-title">
-			<span class="var-type">socket[]</span>
+			<span class="var-type">\Ding\Helpers\TCP\TCPPeer[]</span>
 			<span class="var-name">$_peers</span>
-						(line <span class="line-number">102</span>)
+						(line <span class="line-number">107</span>)
 		</span>
 	</div>
 
@@ -463,7 +447,7 @@
 		<span class="var-title">
 			<span class="var-type">float[]</span>
 			<span class="var-name">$_peersLastDataReceived</span>
-						(line <span class="line-number">108</span>)
+						(line <span class="line-number">113</span>)
 		</span>
 	</div>
 
@@ -478,8 +462,31 @@
 		
 
 </div>
-<a name="var$_port" id="$_port"><!-- --></A>
+<a name="var$_peersSockets" id="$_peersSockets"><!-- --></A>
 <div class="oddrow">
+
+	<div class="var-header">
+		<img src="../../media/images/PrivateVariable.png" />
+		<span class="var-title">
+			<span class="var-type">socket[]</span>
+			<span class="var-name">$_peersSockets</span>
+						(line <span class="line-number">102</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Holds peers sockets.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> private</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_port" id="$_port"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -502,7 +509,7 @@
 
 </div>
 <a name="var$_readLen" id="$_readLen"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -525,14 +532,14 @@
 
 </div>
 <a name="var$_reuse" id="$_reuse"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
 		<span class="var-title">
 			<span class="var-type">boolean</span>
 			<span class="var-name">$_reuse</span>
-						(line <span class="line-number">114</span>)
+						(line <span class="line-number">119</span>)
 		</span>
 	</div>
 
@@ -548,7 +555,7 @@
 
 </div>
 <a name="var$_rTo" id="$_rTo"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -571,7 +578,7 @@
 
 </div>
 <a name="var$_socket" id="$_socket"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<img src="../../media/images/PrivateVariable.png" />
@@ -609,11 +616,11 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Constructor.png" />
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">417</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">376</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -634,11 +641,11 @@
 			
 	</div>
 <a name="methodclose" id="close"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">close</span> (line <span class="line-number">121</span>)
+		<span class="method-title">close</span> (line <span class="line-number">126</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -658,45 +665,12 @@
 		
 			
 	</div>
-<a name="methoddisconnect" id="disconnect"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">disconnect</span> (line <span class="line-number">182</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Call this to disconnect the given peer.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			disconnect
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$port</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$host</span><span class="var-description">: Client ip address.</span>			</li>
-					<li>
-				<span class="var-type">integer</span>
-				<span class="var-name">$port</span><span class="var-description">: Client port.</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methodgetMicrotime" id="getMicrotime"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getMicrotime</span> (line <span class="line-number">236</span>)
+		<span class="method-title">getMicrotime</span> (line <span class="line-number">181</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -717,45 +691,12 @@
 		
 			
 	</div>
-<a name="methodgetPeerName" id="getPeerName"><!-- --></a>
+<a name="methodopen" id="open"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">getPeerName</span> (line <span class="line-number">169</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Returns the peer name as a key for our internal arrays.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> protected</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">string</span>
-		<span class="method-name">
-			getPeerName
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$port</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$host</span><span class="var-description">: Client ip address.</span>			</li>
-					<li>
-				<span class="var-type">integer</span>
-				<span class="var-name">$port</span><span class="var-description">: Client port.</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodopen" id="open"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">open</span> (line <span class="line-number">200</span>)
+		<span class="method-title">open</span> (line <span class="line-number">145</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -778,11 +719,11 @@
 			
 	</div>
 <a name="methodprocess" id="process"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">process</span> (line <span class="line-number">292</span>)
+		<span class="method-title">process</span> (line <span class="line-number">250</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -803,14 +744,15 @@
 			
 	</div>
 <a name="methodprocessPeers" id="processPeers"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">processPeers</span> (line <span class="line-number">242</span>)
+		<span class="method-title">processPeers</span> (line <span class="line-number">205</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This will process activity in all peers. Called from process().</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -826,57 +768,12 @@
 		
 			
 	</div>
-<a name="methodread" id="read"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">read</span> (line <span class="line-number">138</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Call this to read data from the server. Returns the number of bytes read.</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">integer</span>
-		<span class="method-name">
-			read
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$host</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$port</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$buffer</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$length</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$peek</span> = <span class="var-default">false</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$buffer</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$buffer</span><span class="var-description">: Where to store the read data.</span>			</li>
-					<li>
-				<span class="var-type">integer</span>
-				<span class="var-name">$length</span><span class="var-description">: Maximum length of data to read.</span>			</li>
-					<li>
-				<span class="var-type">boolean</span>
-				<span class="var-name">$peek</span><span class="var-description">: If true, will not remove the data from the socket.</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$host</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$port</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$buffer</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methodsetAddress" id="setAddress"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setAddress</span> (line <span class="line-number">394</span>)
+		<span class="method-title">setAddress</span> (line <span class="line-number">353</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -906,7 +803,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setBacklog</span> (line <span class="line-number">357</span>)
+		<span class="method-title">setBacklog</span> (line <span class="line-number">317</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -936,7 +833,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setHandler</span> (line <span class="line-number">369</span>)
+		<span class="method-title">setHandler</span> (line <span class="line-number">329</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -966,7 +863,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setPort</span> (line <span class="line-number">382</span>)
+		<span class="method-title">setPort</span> (line <span class="line-number">341</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -996,7 +893,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setReadMinLength</span> (line <span class="line-number">333</span>)
+		<span class="method-title">setReadMinLength</span> (line <span class="line-number">293</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1026,7 +923,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setReadTimeout</span> (line <span class="line-number">345</span>)
+		<span class="method-title">setReadTimeout</span> (line <span class="line-number">305</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1056,7 +953,7 @@
 	
 	<div class="method-header">
 		<img src="../../media/images/Method.png" />
-		<span class="method-title">setReuse</span> (line <span class="line-number">406</span>)
+		<span class="method-title">setReuse</span> (line <span class="line-number">365</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1081,38 +978,32 @@
 		
 			
 	</div>
-<a name="methodwrite" id="write"><!-- --></a>
+<a name="method_freePeer" id="_freePeer"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<img src="../../media/images/Method.png" />
-		<span class="method-title">write</span> (line <span class="line-number">154</span>)
+		<img src="../../media/images/PrivateMethod.png" />
+		<span class="method-title">_freePeer</span> (line <span class="line-number">193</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Call this to send data to the server. Returns the number of bytes  sent.</p>
+<p class="short-description">After disconnecting a peer, this will release all the associated  information.</p>
 	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
+				<li><span class="field">access:</span> private</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">integer</span>
+		<span class="method-result">void</span>
 		<span class="method-name">
-			write
+			_freePeer
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$host</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$port</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$what</span>)
+					(<span class="var-type"><a href="../../Helpers/Tcp/TCPPeer.html">TCPPeer</a></span>&nbsp;<span class="var-name">\\\\$peer</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$what</span><span class="var-description">: What to send.</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$host</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$port</span>			</li>
+				<span class="var-type"><a href="../../Helpers/Tcp/TCPPeer.html">TCPPeer</a></span>
+				<span class="var-name">\\\\$peer</span>			</li>
 				</ul>
 		
 			
@@ -1123,7 +1014,7 @@
 
 	
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 15 Jul 2011 12:24:47 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+		Documentation generated on Wed, 27 Jul 2011 11:49:52 -0300 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
 	</p>
 	</div></body>
 </html>
