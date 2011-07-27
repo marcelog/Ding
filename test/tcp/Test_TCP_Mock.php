@@ -291,12 +291,6 @@ class MyClientHandler implements ITCPClientHandler
 class MyServerHandler implements ITCPServerHandler
 {
     public static $data;
-    protected $server;
-
-    public function setServer(\Ding\Helpers\TCP\TCPServerHelper $server)
-    {
-        $this->server = $server;
-    }
 
     public function beforeOpen()
     {
@@ -310,21 +304,21 @@ class MyServerHandler implements ITCPServerHandler
     {
     }
 
-    public function handleConnection($remoteAddress, $remotePort)
+    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer)
     {
-        $this->server->write($remoteAddress, $remotePort, "Hi!\n");
+        $peer->write("Hi!\n");
     }
 
-    public function readTimeout($remoteAddress, $remotePort)
+    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer)
     {
         self::$data = 'timeout';
     }
 
-    public function handleData($remoteAddress, $remotePort)
+    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer)
     {
         $buffer = '';
         $len = 1024;
-        $this->server->read($remoteAddress, $remotePort, $buffer, $len);
+        $peer->read($buffer, $len);
         self::$data = $buffer;
     }
 
@@ -334,7 +328,7 @@ class MyServerHandler implements ITCPServerHandler
         sleep(2);
     }
 
-    public function disconnect($remoteAddress, $remotePort)
+    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer)
     {
     }
 }

@@ -96,8 +96,13 @@ class TCPServerHelper
     private $_open;
 
     /**
-     * Holds peers.
+     * Holds peers sockets.
      * @var socket[]
+     */
+    private $_peersSockets;
+    /**
+     * Holds peers.
+     * @var \Ding\Helpers\TCP\TCPPeer[]
      */
     private $_peers;
 
@@ -121,74 +126,14 @@ class TCPServerHelper
     public function close()
     {
         $this->_open = false;
+        $this->_peers = array();
+        $this->_peersSockets = array();
+        $this->_peersLastDataReceived = array();
         $this->_handler->close();
         socket_close($this->_socket);
         $this->_socket = false;
     }
 
-    /**
-     * Call this to read data from the server. Returns the number of bytes read.
-     *
-     * @param string  $buffer Where to store the read data.
-     * @param integer $length Maximum length of data to read.
-     * @param boolean $peek   If true, will not remove the data from the socket.
-     *
-     * @return integer
-     */
-    public function read($host, $port, &$buffer, $length, $peek = false)
-    {
-        $peerName = $this->getPeerName($host, $port);
-        $socket = $this->_peers[$peerName];
-        $length = @socket_recv($socket, $buffer, $length, $peek ? MSG_PEEK : 0);
-        return $length;
-    }
-
-    /**
-     * Call this to send data to the server. Returns the number of bytes
-     * sent.
-     *
-     * @param string $what What to send.
-     *
-     * @return integer
-     */
-    public function write($host, $port, $what)
-    {
-        $peerName = $this->getPeerName($host, $port);
-        $socket = $this->_peers[$peerName];
-        return @socket_send($socket, $what, strlen($what), 0);
-    }
-
-    /**
-     * Returns the peer name as a key for our internal arrays.
-     *
-     * @param string  $host Client ip address.
-     * @param integer $port Client port.
-     *
-     * @return string
-     */
-    protected function getPeerName($host, $port)
-    {
-        return $host . ':' . $port;
-    }
-
-    /**
-     * Call this to disconnect the given peer.
-     *
-     * @param string  $host Client ip address.
-     * @param integer $port Client port.
-     *
-     * @return void
-     */
-    public function disconnect($host, $port)
-    {
-        $peername = $this->getPeerName($host, $port);
-        if (isset($this->_peers[$peername])) {
-            socket_close($this->_peers[$peername]);
-            unset($this->_peers[$peername]);
-            unset($this->_peersLastDataReceived[$peername]);
-        }
-        $this->_handler->disconnect($host, $port);
-    }
 
     /**
      * Call this to bind the socket and start listening for connections.
@@ -239,43 +184,56 @@ class TCPServerHelper
         return ((float)$usec + (float)$sec);
     }
 
+    /**
+     * After disconnecting a peer, this will release all the associated
+     * information.
+     *
+     * @return void
+     */
+    private function _freePeer(\Ding\Helpers\TCP\TCPPeer $peer)
+    {
+        $peerName = $peer->getName();
+        unset($this->_peers[$peerName]);
+        unset($this->_peersSockets[$peerName]);
+        unset($this->_peersLastDataReceived[$peerName]);
+    }
+    /**
+     * This will process activity in all peers. Called from process().
+     *
+     * @return void
+     */
     public function processPeers()
     {
         // Control peers.
         if (count($this->_peers) < 1) {
             return;
         }
-        $read = $this->_peers;
-        $write = null;
-        $ex = null;
-        $result = socket_select($read, $write, $ex, 0, 1);
-        if ($result === false) {
-            throw new TCPException(
-            	'Error selecting from socket: '
-                . socket_strerror(socket_last_error($this->_socket))
-            );
-        }
         $now = $this->getMicrotime();
-        foreach ($read as $peerName => $socket) {
+        foreach ($this->_peers as $peerName => $peer) {
+            if (!$peer->hasActivity()) {
+                continue;
+            }
             $buffer = '';
             $len = 1;
-            $data = explode(':', $peerName);
-            $len = $this->read($data[0], $data[1], $buffer, $len, true);
+            $len = $peer->read($buffer, $len, true);
             if ($len > 0) {
                 if ($len >= $this->_readLen) {
-                    $this->_handler->handleData($data[0], $data[1]);
+                    $this->_handler->handleData($peer);
                     $this->_peersLastDataReceived[$peerName] = $now;
                 }
             } else {
-                $this->disconnect($data[0], $data[1]);
+                $peer->disconnect();
+                $this->_freePeer($peer);
+                $this->_handler->disconnect($peer);
             }
         }
-        foreach ($this->_peers as $peerName => $socket) {
+        foreach ($this->_peers as $peerName => $peer) {
             $peerTime = $this->_peersLastDataReceived[$peerName];
-            $data = explode(':', $peerName);
             if (($now - $peerTime) > $this->_rTo) {
                 if ($this->_rTo > 0) {
-                    $this->_handler->readTimeout($data[0], $data[1]);
+                    $peer->disconnect();
+                    $this->_freePeer($peer);
+                    $this->_handler->readTimeout($peer);
                 }
                 $this->_peersLastDataReceived[$peerName] = $now;
             }
@@ -312,10 +270,12 @@ class TCPServerHelper
                     $address = '';
                     $port = 0;
                     socket_getpeername($newSocket, $address, $port);
-                    $peername = $this->getPeerName($address, $port);
-                    $this->_peers[$peername] = $newSocket;
+                    $peerObject = new \Ding\Helpers\TCP\TCPPeer($address, $port, $newSocket);
+                    $peername = $peerObject->getName();
+                    $this->_peers[$peername] = $peerObject;
+                    $this->_peersSockets[$peername] = $newSocket;
                     $this->_peersLastDataReceived[$peername] = $this->getMicrotime();
-                    $this->_handler->handleConnection($address, $port);
+                    $this->_handler->handleConnection($peerObject);
                 }
             }
         }
@@ -369,7 +329,6 @@ class TCPServerHelper
     public function setHandler(ITCPServerHandler $handler)
     {
         $this->_handler = $handler;
-        $handler->setServer($this);
     }
 
     /**
@@ -425,6 +384,7 @@ class TCPServerHelper
         $this->_rLen = 1;
         $this->_connected = false;
         $this->_peers = array();
+        $this->_peersSockets = array();
         $this->_peersLastDataReceived = array();
         $this->_reuse = false;
         register_tick_function(array($this, 'process'));

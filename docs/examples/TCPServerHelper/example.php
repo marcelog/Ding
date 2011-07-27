@@ -39,8 +39,8 @@ ini_set(
     implode(
         PATH_SEPARATOR,
         array(
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
             ini_get('include_path'),
-            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg'))
         )
     )
 );
@@ -75,13 +75,6 @@ class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
 }
 class MyServerHandler implements ITCPServerHandler
 {
-    protected $server;
-
-    public function setServer(\Ding\Helpers\TCP\TCPServerHelper $server)
-    {
-        $this->server = $server;
-    }
-
     public function beforeOpen()
     {
         echo "before open\n";
@@ -97,30 +90,30 @@ class MyServerHandler implements ITCPServerHandler
         echo "close\n";
     }
 
-    public function handleConnection($remoteAddress, $remotePort)
+    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer)
     {
-        echo "new connection from: $remoteAddress:$remotePort\n";
+        echo "new connection from: " . $peer->getName() . "\n";
     }
 
-    public function readTimeout($remoteAddress, $remotePort)
+    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer)
     {
-        echo "read timeout for $remoteAddress:$remotePort\n";
-        $server->disconnect($remoteAddress, $remotePort);
+        echo "read timeout for " . $peer->getName() . "\n";
+        $peer->disconnect();
     }
 
-    public function handleData($remoteAddress, $remotePort)
+    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer)
     {
         $buffer = '';
         $len = 4096;
-        echo "data from: $remoteAddress:$remotePort\n";
-        $this->server->read($remoteAddress, $remotePort, $buffer, $len);
+        echo "data from: " . $peer->getName() . "\n";
+        $peer->read($buffer, $len);
         echo $buffer . "\n";
-        $this->server->write($remoteAddress, $remotePort, 'You said: ' . $buffer);
+        $peer->write('You said: ' . $buffer);
     }
 
-    public function disconnect($remoteAddress, $remotePort)
+    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer)
     {
-        echo "disconnect: $remoteAddress:$remotePort\n";
+        echo "disconnect: " . $peer->getName() . "\n";
     }
 }
 $run = true;

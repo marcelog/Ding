@@ -159,11 +159,8 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
         $server = $container->getBean('Server');
         $server->open();
         MyServerHandler::doClient($container->getBean('Client6'));
-        while (strlen(MyServerHandler666::$data) < 1) {
-            usleep(1000);
-        }
-        $this->assertEquals(MyServerHandler666::$data, "disconnect");
         $server->close();
+        $this->assertEquals(MyClientHandler666::$data, "disconnect");
     }
 }
 
@@ -234,6 +231,7 @@ class MyClientHandler666 implements ITCPClientHandler
 
     public function disconnect()
     {
+        self::$data = 'disconnect';
     }
 
     public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
@@ -253,12 +251,6 @@ class MyClientHandler666 implements ITCPClientHandler
 class MyServerHandler666 implements ITCPServerHandler
 {
     public static $data;
-    protected $server;
-
-    public function setServer(\Ding\Helpers\TCP\TCPServerHelper $server)
-    {
-        $this->server = $server;
-    }
 
     public function beforeOpen()
     {
@@ -272,22 +264,20 @@ class MyServerHandler666 implements ITCPServerHandler
     {
     }
 
-    public function handleConnection($remoteAddress, $remotePort)
+    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer)
     {
-        //$this->server->write($remoteAddress, $remotePort, "Hi!\n");
-        $this->server->disconnect($remoteAddress, $remotePort);
+        $peer->disconnect();
     }
 
-    public function readTimeout($remoteAddress, $remotePort)
+    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer)
     {
         self::$data = 'timeout';
     }
 
-    public function handleData($remoteAddress, $remotePort)
+    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer)
     {
         $buffer = '';
         $len = 1024;
-        //$this->server->read($remoteAddress, $remotePort, $buffer, $len);
         self::$data = $buffer;
     }
 
@@ -297,7 +287,7 @@ class MyServerHandler666 implements ITCPServerHandler
         sleep(2);
     }
 
-    public function disconnect($remoteAddress, $remotePort)
+    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer)
     {
         self::$data = 'disconnect';
     }

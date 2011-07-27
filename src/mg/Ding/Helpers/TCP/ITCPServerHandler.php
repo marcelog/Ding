@@ -44,15 +44,6 @@ namespace Ding\Helpers\TCP;
 interface ITCPServerHandler
 {
     /**
-     * Called by the helper to inject itself into this handler.
-	 *
-     * @param \Ding\Helpers\TCP\TCPServerHelper $server TCP Server helper.
-     *
-     * @return void
-     */
-    public function setServer(\Ding\Helpers\TCP\TCPServerHelper $server);
-
-    /**
      * Called before opening and binding the server socket.
      *
      * @return void
@@ -76,40 +67,36 @@ interface ITCPServerHandler
     /**
      * Called when a new client connects.
      *
-	 * @param string  $remoteAddress Client ip address.
-	 * @param integer $remotePort    Client port.
+	 * @param \Ding\Helpers\TCP\TCPPeer $peer Peer triggering the event.
 	 *
      * @return void
      */
-    public function handleConnection($remoteAddress, $remotePort);
+    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer);
 
     /**
      * Called when a client has sent data and is ready to be read.
      *
-	 * @param string  $remoteAddress Client ip address.
-	 * @param integer $remotePort    Client port.
+	 * @param \Ding\Helpers\TCP\TCPPeer $peer Peer triggering the event.
 	 *
      * @return void
      */
-    public function handleData($remoteAddress, $remotePort);
+    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer);
 
     /**
      * Called when a client disconnects.
      *
-	 * @param string  $remoteAddress Client ip address.
-	 * @param integer $remotePort    Client port.
+	 * @param \Ding\Helpers\TCP\TCPPeer $peer Peer triggering the event.
 	 *
      * @return void
      */
-    public function disconnect($remoteAddress, $remotePort);
+    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer);
 
     /**
 	 * Called when a client timeouts on reading data.
 	 *
-	 * @param string  $remoteAddress Client ip address.
-	 * @param integer $remotePort    Client port.
+	 * @param \Ding\Helpers\TCP\TCPPeer $peer Peer triggering the event.
 	 *
 	 * @return void
      */
-    public function readTimeout($remoteAddress, $remotePort);
+    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer);
 }

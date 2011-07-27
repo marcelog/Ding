@@ -26,7 +26,7 @@
 		<property name="handler">
 			<ref bean="MyServerHandler"/>
 		</property>
-		<property name="reuse"><false/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
+		<property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
 	</bean>
 	<bean id="MyServerHandler" class="MyServerHandler" scope="singleton"/>
 </beans>
