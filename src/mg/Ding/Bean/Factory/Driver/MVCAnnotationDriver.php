@@ -51,12 +51,6 @@ use Ding\Bean\Factory\IBeanFactory;
 class MVCAnnotationDriver implements IAfterConfigListener
 {
     /**
-     * Holds current instance.
-     * @var MVCAnnotationDriver
-     */
-    private static $_instance = false;
-
-    /**
      * Will call HttpUrlMapper::addAnnotatedController to add new mappings
      * from the @Controller annotated classes. Also, creates a new bean
      * definition for every one of them.
@@ -86,26 +80,11 @@ class MVCAnnotationDriver implements IAfterConfigListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return MVCAnnotationDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new MVCAnnotationDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
 
     }

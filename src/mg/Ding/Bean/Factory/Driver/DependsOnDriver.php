@@ -49,11 +49,6 @@ use Ding\Reflection\ReflectionFactory;
  */
 class DependsOnDriver implements IBeforeCreateListener
 {
-    /**
-     * Holds current instance.
-     * @var DependsOnDriver
-     */
-    private static $_instance = false;
 
     /**
      * (non-PHPdoc)
@@ -76,26 +71,11 @@ class DependsOnDriver implements IBeforeCreateListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return DependsOnDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new DependsOnDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

@@ -53,12 +53,6 @@ use Ding\Container\IContainer;
 class MessageSourceDriver implements IAfterConfigListener, IAfterCreateListener
 {
     /**
-     * Holds current instance.
-     * @var MessageSourceDriver
-     */
-    private static $_instance = false;
-
-    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
@@ -86,26 +80,11 @@ class MessageSourceDriver implements IAfterConfigListener, IAfterCreateListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return MessageSourceDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new MessageSourceDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

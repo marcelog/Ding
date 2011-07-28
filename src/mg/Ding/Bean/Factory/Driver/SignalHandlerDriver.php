@@ -53,16 +53,10 @@ use Ding\Reflection\ReflectionFactory;
 class SignalHandlerDriver implements IAfterConfigListener
 {
     /**
-     * Holds current instance.
-     * @var SignalHandlerDriver
-     */
-    private static $_instance = false;
-
-    /**
      * Signals to handle.
      * @var array
      */
-    private static $_signals = false;
+    private $_signals = false;
 
     /**
      * (non-PHPdoc)
@@ -93,25 +87,10 @@ class SignalHandlerDriver implements IAfterConfigListener
             $bean = $factory->getBean('SignalHandler');
         }
         $handler = array($bean, 'handle');
-        foreach (self::$_signals as $signal) {
+        foreach ($this->_signals as $signal) {
             pcntl_signal($signal, $handler);
         }
-        pcntl_sigprocmask(SIG_UNBLOCK, self::$_signals);
-    }
-
-    /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return SignalHandlerDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new SignalHandlerDriver;
-        }
-        return self::$_instance;
+        pcntl_sigprocmask(SIG_UNBLOCK, $this->_signals);
     }
 
     /**
@@ -119,9 +98,9 @@ class SignalHandlerDriver implements IAfterConfigListener
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
-        self::$_signals = array(
+        $this->_signals = array(
             SIGQUIT, SIGHUP, SIGINT, SIGCHLD, SIGTERM, SIGUSR1, SIGUSR2
         );
     }

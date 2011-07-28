@@ -113,12 +113,6 @@ class MethodInjectionAspect implements IContainerAware
 class MethodInjectionDriver implements IBeforeDefinitionListener
 {
     /**
-     * Holds current instance.
-     * @var MethodInjectionDriver
-     */
-    private static $_instance = false;
-
-    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
      */
@@ -153,27 +147,14 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return MethodInjectionDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new MethodInjectionDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
+     *
+     * @param \Ding\Aspect\AspectManager $aspectManager
      *
      * @return void
      */
-    private function __construct()
+    public function __construct(\Ding\Aspect\AspectManager $aspectManager)
     {
-        $this->_aspectManager = AspectManager::getInstance();
+        $this->_aspectManager = $aspectManager;
     }
 }

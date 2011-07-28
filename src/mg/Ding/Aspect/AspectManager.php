@@ -44,12 +44,6 @@ use Ding\Cache\Locator\CacheLocator;
 class AspectManager
 {
     /**
-     * Holds instance.
-     * @var AspectManager
-     */
-    private static $_instance;
-
-    /**
      * Holds known aspects. Indexed by name.
      * @var AspectDefinition[]
      */
@@ -158,19 +152,6 @@ class AspectManager
     }
 
     /**
-     * Returns an instance for this aspect manager.
-     *
-     * @return AspectManager
-     */
-    public static function getInstance()
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new AspectManager();
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Will register an aspect definition provider in this manager.
      *
      * @param IAspectProvider $provider Aspect definition provider.
@@ -202,7 +183,7 @@ class AspectManager
      *
      * @return void
      */
-    protected function __construct()
+    public function __construct()
     {
         $this->_aspectCache = CacheLocator::getAspectCacheInstance();
         $this->_pointcuts = array();

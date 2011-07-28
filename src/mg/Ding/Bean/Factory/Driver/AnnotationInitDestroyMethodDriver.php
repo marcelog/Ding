@@ -53,12 +53,6 @@ use Ding\Reflection\ReflectionFactory;
 class AnnotationInitDestroyMethodDriver implements IAfterDefinitionListener
 {
     /**
-     * Holds current instance.
-     * @var AnnotationInitDestroyDriver
-     */
-    private static $_instance = false;
-
-    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
      */
@@ -81,26 +75,11 @@ class AnnotationInitDestroyMethodDriver implements IAfterDefinitionListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return AnnotationInitDestroyDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new AnnotationInitDestroyMethodDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

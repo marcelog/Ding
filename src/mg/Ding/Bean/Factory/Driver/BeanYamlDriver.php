@@ -108,12 +108,6 @@ class BeanYamlDriver implements
     private $_templatePointcutDef;
 
     /**
-     * Current instance.
-     * @var BeanFactoryYamlImpl
-     */
-    private static $_instance = false;
-
-    /**
      * The aspect manager.
      * @var AspectManager
      */
@@ -485,28 +479,14 @@ class BeanYamlDriver implements
     }
 
     /**
-     * Returns a instance for this driver.
-     *
-     * @param array $options Optional options ;)
-     *
-     * @return BeanYamlDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new BeanYamlDriver($options);
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
-     * @param
+     * @param array                      $options
+     * @param \Ding\Aspect\AspectManager $aspectManager
      *
      * @return void
      */
-    protected function __construct(array $options)
+    public function __construct(array $options, \Ding\Aspect\AspectManager $aspectManager)
     {
         $this->_logger = \Logger::getLogger('Ding.Factory.Driver.BeanYamlDriver');
         $this->_beanDefs = array();
@@ -521,6 +501,6 @@ class BeanYamlDriver implements
         $this->_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
         $this->_templateAspectDef = new AspectDefinition('', '', 0, '', '');
         $this->_templatePointcutDef = new PointcutDefinition('', '', '');
-        $this->_aspectManager = AspectManager::getInstance();
+        $this->_aspectManager = $aspectManager;
     }
 }

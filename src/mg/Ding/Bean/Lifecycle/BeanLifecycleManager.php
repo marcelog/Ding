@@ -54,12 +54,6 @@ use Ding\Bean\BeanDefinition;
 class BeanLifecycleManager
 {
     /**
-     * Holds current instance.
-     * @var BeanLifecycleManager
-     */
-    private static $_instance = false;
-
-    /**
      * Lifecycle handlers for beans.
      * @var ILifecycleListener
      */
@@ -299,24 +293,11 @@ class BeanLifecycleManager
     }
 
     /**
-     * This will return a lifecycle manager.
-     *
-     * @return BeanLifecycle
-     */
-    public static function getInstance(array $properties = array())
-    {
-        if (self::$_instance === false) {
-            self::$_instance = new BeanLifecycleManager;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    protected function __construct()
+    public function __construct()
     {
         $soullessArray = array();
         $this->_lifecyclers = $soullessArray;

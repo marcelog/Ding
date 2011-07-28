@@ -53,11 +53,15 @@ use Ding\Reflection\ReflectionFactory;
 class AspectManagerAwareDriver implements IAfterDefinitionListener
 {
     /**
-     * Holds current instance.
-     * @var AspectManagerAwareDriver
+     * Aspect manager instance.
+     * @var AspectManager
      */
-    private static $_instance = false;
+    private $_aspectManager = false;
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
+     */
     public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
     {
         $class = $bean->getClass();
@@ -66,7 +70,7 @@ class AspectManagerAwareDriver implements IAfterDefinitionListener
         }
         $rClass = ReflectionFactory::getClass($class);
         if ($rClass->implementsInterface('Ding\Aspect\IAspectManagerAware')) {
-            $property = new BeanPropertyDefinition('aspectManager', BeanPropertyDefinition::PROPERTY_SIMPLE, AspectManager::getInstance());
+            $property = new BeanPropertyDefinition('aspectManager', BeanPropertyDefinition::PROPERTY_SIMPLE, $this->_aspectManager);
             $properties = $bean->getProperties();
             $properties['aspectManager'] = $property;
             $bean->setProperties($properties);
@@ -75,26 +79,14 @@ class AspectManagerAwareDriver implements IAfterDefinitionListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return AspectManagerAwareDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new AspectManagerAwareDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
+     *
+     * @param \Ding\Aspect\AspectManager $aspectManager
      *
      * @return void
      */
-    private function __construct()
+    public function __construct(\Ding\Aspect\AspectManager $aspectManager)
     {
+        $this->_aspectManager = $aspectManager;
     }
 }

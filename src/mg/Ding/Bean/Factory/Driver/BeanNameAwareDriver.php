@@ -51,12 +51,6 @@ use Ding\Reflection\ReflectionFactory;
  */
 class BeanNameAwareDriver implements IAfterDefinitionListener
 {
-    /**
-     * Holds current instance.
-     * @var BeanNameAwareDriver
-     */
-    private static $_instance = false;
-
     public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
     {
         $class = $bean->getClass();
@@ -74,26 +68,11 @@ class BeanNameAwareDriver implements IAfterDefinitionListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return BeanNameAwareDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new BeanNameAwareDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

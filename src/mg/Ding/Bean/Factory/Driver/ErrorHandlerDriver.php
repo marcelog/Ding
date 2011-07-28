@@ -53,11 +53,6 @@ use Ding\Container\IContainer;
 class ErrorHandlerDriver implements IAfterConfigListener
 {
     /**
-     * Holds current instance.
-     * @var ErrorHandlerDriver
-     */
-    private static $_instance = false;
-    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
@@ -87,27 +82,13 @@ class ErrorHandlerDriver implements IAfterConfigListener
         }
         set_error_handler(array($bean, 'handle'));
     }
-    /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return ErrorHandlerDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new ErrorHandlerDriver;
-        }
-        return self::$_instance;
-    }
 
     /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

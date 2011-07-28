@@ -75,7 +75,7 @@ class Test_XML_Cache extends PHPUnit_Framework_TestCase
     public function can_cache_pointcut()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $aManager = AspectManager::getInstance();
+        $aManager = new AspectManager;
         $pointcut = new PointcutDefinition('a', 'b', 'c');
         $aManager->setPointcut($pointcut);
         $p = $aManager->getPointcut('a');
@@ -89,7 +89,7 @@ class Test_XML_Cache extends PHPUnit_Framework_TestCase
     public function can_return_cached_pointcut()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $aManager = AspectManager::getInstance();
+        $aManager = new AspectManager;
         $p = $aManager->getPointcut('a');
         $this->assertEquals($p->getExpression(), 'b');
         $this->assertEquals($p->getMethod(), 'c');

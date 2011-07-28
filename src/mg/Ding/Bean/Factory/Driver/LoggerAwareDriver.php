@@ -52,12 +52,6 @@ use Ding\Reflection\ReflectionFactory;
 class LoggerAwareDriver implements IAfterCreateListener
 {
     /**
-     * Holds current instance.
-     * @var ContainerAwareDriver
-     */
-    private static $_instance = false;
-
-    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterCreateListener::afterCreate()
      */
@@ -75,26 +69,11 @@ class LoggerAwareDriver implements IAfterCreateListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return LoggerAwareDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new LoggerAwareDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

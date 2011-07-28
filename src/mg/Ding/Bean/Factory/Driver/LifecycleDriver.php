@@ -49,12 +49,6 @@ use Ding\Reflection\ReflectionFactory;
  */
 class LifecycleDriver implements IAfterAssembleListener
 {
-    /**
-     * Holds current instance.
-     * @var LifecycleDriver
-     */
-    private static $_instance = false;
-
     public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
     {
         $class = $beanDefinition->getClass();
@@ -84,27 +78,13 @@ class LifecycleDriver implements IAfterAssembleListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return LifecycleDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new LifecycleDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
+     * @param \Ding\Bean\Lifecycle\BeanLifecycleManager $lifecycleManager
      * @return void
      */
-    private function __construct()
+    public function __construct(BeanLifecycleManager $lifecycleManager)
     {
-        $this->_lifecycleManager = BeanLifecycleManager::getInstance();
+        $this->_lifecycleManager = $lifecycleManager;
     }
 }

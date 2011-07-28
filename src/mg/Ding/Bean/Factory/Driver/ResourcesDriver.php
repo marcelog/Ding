@@ -52,12 +52,6 @@ use Ding\Container\IContainer;
  */
 class ResourcesDriver implements IBeforeCreateListener
 {
-    /**
-     * Holds current instance.
-     * @var ResourcesDriver
-     */
-    private static $_instance = false;
-
     public function _apply($value, $factory)
     {
         if (is_string($value) && (strpos($value, 'resource://') === 0)) {
@@ -106,26 +100,11 @@ class ResourcesDriver implements IBeforeCreateListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return ResourcesDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new ResourcesDriver($options);
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

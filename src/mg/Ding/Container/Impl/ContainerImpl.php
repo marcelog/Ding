@@ -606,13 +606,13 @@ class ContainerImpl implements IContainer
     protected function __construct(array $options)
     {
         $this->_logger = \Logger::getLogger('Ding.Container');
-        $this->_lifecycleManager = BeanLifecycleManager::getInstance();
+        $this->_lifecycleManager = new BeanLifecycleManager;
         $this->_dispatcherTemplate = new DispatcherImpl;
         $this->_logDebugEnabled = $this->_logger->isDebugEnabled();
         $soullessArray = array();
         self::$_options = array_replace_recursive(self::$_options, $options);
 
-        $this->_aspectManager = AspectManager::getInstance();
+        $this->_aspectManager = new AspectManager;
         $this->_beanDefs = $soullessArray;
         $this->_beanDefCache = CacheLocator::getDefinitionsCacheInstance();
         $this->_beans = $soullessArray;
@@ -621,61 +621,63 @@ class ContainerImpl implements IContainer
         $this->_resources = $soullessArray;
         $this->_eventListeners = $soullessArray;
 
-        $this->_lifecycleManager->addAfterCreateListener(ContainerAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterCreateListener(LoggerAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterCreateListener(ResourceLoaderAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterDefinitionListener(BeanNameAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterDefinitionListener(AspectManagerAwareDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterAssembleListener(LifecycleDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addBeforeCreateListener(ResourcesDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addAfterConfigListener(PropertiesDriver::getInstance(self::$_options['properties']));
-        $this->_lifecycleManager->addAfterDefinitionListener(PropertiesDriver::getInstance(self::$_options['properties']));
+        $this->_lifecycleManager->addAfterCreateListener(new ContainerAwareDriver);
+        $this->_lifecycleManager->addAfterCreateListener(new LoggerAwareDriver);
+        $this->_lifecycleManager->addAfterCreateListener(new ResourceLoaderAwareDriver);
+        $this->_lifecycleManager->addAfterDefinitionListener(new BeanNameAwareDriver);
+        $this->_lifecycleManager->addAfterDefinitionListener(new AspectManagerAwareDriver($this->_aspectManager));
+        $this->_lifecycleManager->addAfterAssembleListener(new LifecycleDriver($this->_lifecycleManager));
+        $this->_lifecycleManager->addBeforeCreateListener(new ResourcesDriver);
+        $propsDriver = new PropertiesDriver(self::$_options['properties']);
+        $this->_lifecycleManager->addAfterConfigListener($propsDriver);
+        $this->_lifecycleManager->addAfterDefinitionListener($propsDriver);
 
         if (isset(self::$_options['bdef']['annotation'])) {
-            $anDriver = BeanAnnotationDriver::getInstance(self::$_options['bdef']['annotation']);
+            $anDriver = new BeanAnnotationDriver(self::$_options['bdef']['annotation']);
             $this->_lifecycleManager->addBeforeConfigListener($anDriver);
             $this->_lifecycleManager->addAfterConfigListener($anDriver);
             $this->_lifecycleManager->addBeforeDefinitionListener($anDriver);
-            $this->_lifecycleManager->addAfterConfigListener(MVCAnnotationDriver::getInstance($soullessArray));
-            $this->_lifecycleManager->addAfterDefinitionListener(AnnotationResourceDriver::getInstance($soullessArray));
-            $this->_lifecycleManager->addAfterCreateListener(AnnotationResourceDriver::getInstance($soullessArray));
-            $this->_lifecycleManager->addAfterConfigListener(AnnotationAspectDriver::getInstance($soullessArray));
-            $this->_lifecycleManager->addAfterDefinitionListener(AnnotationRequiredDriver::getInstance($soullessArray));
-            $this->_lifecycleManager->addAfterDefinitionListener(AnnotationInitDestroyMethodDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(new MVCAnnotationDriver);
+            $annotationResourceDriver = new AnnotationResourceDriver;
+            $this->_lifecycleManager->addAfterDefinitionListener($annotationResourceDriver);
+            $this->_lifecycleManager->addAfterCreateListener($annotationResourceDriver);
+            $this->_lifecycleManager->addAfterConfigListener(new AnnotationAspectDriver($this->_aspectManager));
+            $this->_lifecycleManager->addAfterDefinitionListener(new AnnotationRequiredDriver);
+            $this->_lifecycleManager->addAfterDefinitionListener(new AnnotationInitDestroyMethodDriver);
         }
 
         if (isset(self::$_options['drivers']['errorhandler'])) {
-            $this->_lifecycleManager->addAfterConfigListener(ErrorHandlerDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(new ErrorHandlerDriver);
         }
 
         if (isset(self::$_options['drivers']['signalhandler'])) {
-            $this->_lifecycleManager->addAfterConfigListener(SignalHandlerDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(new SignalHandlerDriver);
         }
 
         if (isset(self::$_options['drivers']['shutdown'])) {
-            $this->_lifecycleManager->addAfterConfigListener(ShutdownDriver::getInstance($soullessArray));
+            $this->_lifecycleManager->addAfterConfigListener(new ShutdownDriver);
         }
 
-        $this->_lifecycleManager->addBeforeCreateListener(DependsOnDriver::getInstance($soullessArray));
+        $this->_lifecycleManager->addBeforeCreateListener(new DependsOnDriver);
 
         if (isset(self::$_options['bdef']['xml'])) {
-            $xmlDriver = BeanXmlDriver::getInstance(self::$_options['bdef']['xml']);
+            $xmlDriver = new BeanXmlDriver(self::$_options['bdef']['xml'], $this->_aspectManager);
             $this->_lifecycleManager->addAfterConfigListener($xmlDriver);
             $this->_lifecycleManager->addBeforeDefinitionListener($xmlDriver);
             $this->_aspectManager->registerAspectProvider($xmlDriver);
             $this->_aspectManager->registerPointcutProvider($xmlDriver);
         }
         if (isset(self::$_options['bdef']['yaml'])) {
-            $yamlDriver = BeanYamlDriver::getInstance(self::$_options['bdef']['yaml']);
+            $yamlDriver = new BeanYamlDriver(self::$_options['bdef']['yaml'], $this->_aspectManager);
             $this->_lifecycleManager->addAfterConfigListener($yamlDriver);
             $this->_lifecycleManager->addBeforeDefinitionListener($yamlDriver);
             $this->_aspectManager->registerAspectProvider($yamlDriver);
             $this->_aspectManager->registerPointcutProvider($yamlDriver);
         }
 
-        $this->_lifecycleManager->addBeforeAssembleListener(SetterInjectionDriver::getInstance($soullessArray));
-        $this->_lifecycleManager->addBeforeDefinitionListener(MethodInjectionDriver::getInstance($soullessArray));
-        $messageSourceDriver = MessageSourceDriver::getInstance($soullessArray);
+        $this->_lifecycleManager->addBeforeAssembleListener(new SetterInjectionDriver);
+        $this->_lifecycleManager->addBeforeDefinitionListener(new MethodInjectionDriver($this->_aspectManager));
+        $messageSourceDriver = new MessageSourceDriver;
         $this->_lifecycleManager->addAfterConfigListener($messageSourceDriver);
         $this->_lifecycleManager->addAfterCreateListener($messageSourceDriver);
         $this->_lifecycleManager->beforeConfig($this);

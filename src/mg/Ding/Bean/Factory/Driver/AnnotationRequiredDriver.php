@@ -53,12 +53,6 @@ use Ding\Reflection\ReflectionFactory;
 class AnnotationRequiredDriver implements IAfterDefinitionListener
 {
     /**
-     * Holds current instance.
-     * @var AnnotationRequiredDriver
-     */
-    private static $_instance = false;
-
-    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
      */
@@ -86,26 +80,11 @@ class AnnotationRequiredDriver implements IAfterDefinitionListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return AnnotationRequiredDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new AnnotationRequiredDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

@@ -59,12 +59,6 @@ class SetterInjectionDriver implements IBeforeAssembleListener
     private $_propertiesNameCache;
 
     /**
-     * Holds current instance.
-     * @var SetterInjectionDriver
-     */
-    private static $_instance = false;
-
-    /**
      * This will return the property value from a definition.
      *
      * @param BeanPropertyDefinition $property Property definition.
@@ -107,26 +101,11 @@ class SetterInjectionDriver implements IBeforeAssembleListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return SetterInjectionDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new SetterInjectionDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
         $this->_propertiesNameCache = array();
     }

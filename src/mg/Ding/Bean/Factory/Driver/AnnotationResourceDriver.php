@@ -53,12 +53,6 @@ use Ding\Reflection\ReflectionFactory;
  */
 class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreateListener
 {
-    /**
-     * Holds current instance.
-     * @var AnnotationResourceDriver
-     */
-    private static $_instance = false;
-
     public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
     {
         $rClass = ReflectionFactory::getClass($beanDefinition->getClass());
@@ -118,26 +112,11 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return AnnotationResourceDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new AnnotationResourceDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @return void
      */
-    private function __construct()
+    public function __construct()
     {
     }
 }

@@ -59,12 +59,6 @@ class BeanAnnotationDriver
     implements IBeforeConfigListener, IAfterConfigListener, IBeforeDefinitionListener
 {
     /**
-     * Holds current instance.
-     * @var BeanAnnotationDriver
-     */
-    private static $_instance = false;
-
-    /**
      * Target directories to scan for annotated classes.
      * @var string[]
      */
@@ -318,28 +312,13 @@ class BeanAnnotationDriver
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return BeanAnnotationDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new BeanAnnotationDriver($options);
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @param array $options Optional options.
      *
      * @return void
      */
-    private function __construct(array $options)
+    public function __construct(array $options)
     {
         $this->_scanDirs = $options['scanDir'];
         $this->_configClasses = array();

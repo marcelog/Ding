@@ -54,12 +54,6 @@ use Ding\Aspect\PointcutDefinition;
 class AnnotationAspectDriver implements IAfterConfigListener
 {
     /**
-     * Holds current instance.
-     * @var AnnotationAspectDriver
-     */
-    private static $_instance = false;
-
-    /**
      * Aspect manager instance.
      * @var AspectManager
      */
@@ -127,27 +121,14 @@ class AnnotationAspectDriver implements IAfterConfigListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $options Optional options.
-     *
-     * @return AnnotationAspectDriver
-     */
-    public static function getInstance(array $options)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new AnnotationAspectDriver;
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
+     *
+     * @param \Ding\Aspect\AspectManager $aspectManager
      *
      * @return void
      */
-    private function __construct()
+    public function __construct(\Ding\Aspect\AspectManager $aspectManager)
     {
-        $this->_aspectManager = AspectManager::getInstance();
+        $this->_aspectManager = $aspectManager;
     }
 }

@@ -55,12 +55,6 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
 class PropertiesDriver implements IAfterConfigListener, IAfterDefinitionListener
 {
     /**
-     * Holds current instance.
-     * @var PropertiesDriver
-     */
-    private static $_instance = false;
-
-    /**
      * Setup flag.
      * @var boolean
      */
@@ -162,28 +156,13 @@ class PropertiesDriver implements IAfterConfigListener, IAfterDefinitionListener
     }
 
     /**
-     * Returns an instance.
-     *
-     * @param array $properties Properties to use.
-     *
-     * @return PropertiesDriver
-     */
-    public static function getInstance(array $properties)
-    {
-        if (self::$_instance == false) {
-            self::$_instance = new PropertiesDriver($properties);
-        }
-        return self::$_instance;
-    }
-
-    /**
      * Constructor.
      *
      * @param array $options Optional options.
      *
      * @return void
      */
-    private function __construct(array $options)
+    public function __construct(array $options)
     {
         $this->_properties = $options;
         $this->_propertiesNames = array();
