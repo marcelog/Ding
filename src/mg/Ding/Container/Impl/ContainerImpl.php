@@ -612,7 +612,7 @@ class ContainerImpl implements IContainer
         $soullessArray = array();
         self::$_options = array_replace_recursive(self::$_options, $options);
 
-        $this->_aspectManager = new AspectManager;
+        $this->_aspectManager = new AspectManager(CacheLocator::getAspectCacheInstance());
         $this->_beanDefs = $soullessArray;
         $this->_beanDefCache = CacheLocator::getDefinitionsCacheInstance();
         $this->_beans = $soullessArray;
@@ -633,7 +633,8 @@ class ContainerImpl implements IContainer
         $this->_lifecycleManager->addAfterDefinitionListener($propsDriver);
 
         if (isset(self::$_options['bdef']['annotation'])) {
-            $anDriver = new BeanAnnotationDriver(self::$_options['bdef']['annotation']);
+            $anCache = CacheLocator::getAnnotationsCacheInstance();
+            $anDriver = new BeanAnnotationDriver(self::$_options['bdef']['annotation'], $anCache);
             $this->_lifecycleManager->addBeforeConfigListener($anDriver);
             $this->_lifecycleManager->addAfterConfigListener($anDriver);
             $this->_lifecycleManager->addBeforeDefinitionListener($anDriver);

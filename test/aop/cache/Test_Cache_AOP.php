@@ -28,6 +28,7 @@
  *
  */
 
+use Ding\Cache\Locator\CacheLocator;
 use Ding\Aspect\PointcutDefinition;
 use Ding\Aspect\AspectManager;
 use Ding\Container\Impl\ContainerImpl;
@@ -75,7 +76,7 @@ class Test_XML_Cache extends PHPUnit_Framework_TestCase
     public function can_cache_pointcut()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $aManager = new AspectManager;
+        $aManager = new AspectManager(CacheLocator::getAspectCacheInstance());
         $pointcut = new PointcutDefinition('a', 'b', 'c');
         $aManager->setPointcut($pointcut);
         $p = $aManager->getPointcut('a');
@@ -89,7 +90,7 @@ class Test_XML_Cache extends PHPUnit_Framework_TestCase
     public function can_return_cached_pointcut()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $aManager = new AspectManager;
+        $aManager = new AspectManager(CacheLocator::getAspectCacheInstance());
         $p = $aManager->getPointcut('a');
         $this->assertEquals($p->getExpression(), 'b');
         $this->assertEquals($p->getMethod(), 'c');

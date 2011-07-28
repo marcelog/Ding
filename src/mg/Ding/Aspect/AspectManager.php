@@ -28,8 +28,6 @@
  */
 namespace Ding\Aspect;
 
-use Ding\Cache\Locator\CacheLocator;
-
 /**
  * Aspect Manager.
  *
@@ -181,11 +179,13 @@ class AspectManager
     /**
      * Constructor.
      *
+     * @param Ding\Cache\ICache $cache
+     *
      * @return void
      */
-    public function __construct()
+    public function __construct(\Ding\Cache\ICache $cache)
     {
-        $this->_aspectCache = CacheLocator::getAspectCacheInstance();
+        $this->_aspectCache = $cache;
         $this->_pointcuts = array();
         $this->_aspects = array();
     }

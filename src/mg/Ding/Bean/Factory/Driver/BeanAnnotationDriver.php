@@ -33,7 +33,6 @@ namespace Ding\Bean\Factory\Driver;
 use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\Lifecycle\IBeforeConfigListener;
-use Ding\Cache\Locator\CacheLocator;
 use Ding\Container\IContainer;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
@@ -314,17 +313,18 @@ class BeanAnnotationDriver
     /**
      * Constructor.
      *
-     * @param array $options Optional options.
+     * @param array              $options Optional options.
+     * @param \Ding\Cache\ICache $cache   Annotations cache.
      *
      * @return void
      */
-    public function __construct(array $options)
+    public function __construct(array $options, \Ding\Cache\ICache $cache)
     {
         $this->_scanDirs = $options['scanDir'];
         $this->_configClasses = array();
         $this->_configBeans = array();
         $classes = get_declared_classes();
         self::$_knownClasses = array_combine($classes, $classes);
-        $this->_cache = CacheLocator::getAnnotationsCacheInstance();
+        $this->_cache = $cache;
     }
 }
