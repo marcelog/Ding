@@ -3,14 +3,14 @@
   <Packages>
     <Package name="Ding\Aspect">
       <Stats>
-        <TotalClasses>9</TotalClasses>
-        <ConcreteClasses>6</ConcreteClasses>
+        <TotalClasses>8</TotalClasses>
+        <ConcreteClasses>5</ConcreteClasses>
         <AbstractClasses>3</AbstractClasses>
         <Ca>2</Ca>
-        <Ce>1</Ce>
-        <A>0.333333333333</A>
-        <I>0.333333333333</I>
-        <D>0.333333333333</D>
+        <Ce>2</Ce>
+        <A>0.375</A>
+        <I>0.5</I>
+        <D>0.125</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/AspectDefinition.php">AspectDefinition</Class>
@@ -25,6 +25,7 @@
       </AbstractClasses>
       <DependsUpon>
         <Package></Package>
+        <Package>Ding\Cache</Package>
       </DependsUpon>
       <UsedBy>
         <Package>Ding\Aspect\Interceptor</Package>
@@ -105,11 +106,11 @@
     </Package>
     <Package name="Ding\Bean\Factory\Driver">
       <Stats>
-        <TotalClasses>37</TotalClasses>
-        <ConcreteClasses>37</ConcreteClasses>
+        <TotalClasses>35</TotalClasses>
+        <ConcreteClasses>35</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
-        <Ce>9</Ce>
+        <Ce>10</Ce>
         <A>0</A>
         <I>1</I>
         <D>0</D>
@@ -148,6 +149,7 @@
         <Package>Ding\Bean\Factory</Package>
         <Package>Ding\Bean\Factory\Exception</Package>
         <Package>Ding\Bean\Lifecycle</Package>
+        <Package>Ding\Cache</Package>
         <Package>Ding\Container</Package>
         <Package>Ding\MVC\Http</Package>
         <Package>Ding\Reflection</Package>
@@ -264,7 +266,7 @@
         <TotalClasses>1</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>1</AbstractClasses>
-        <Ca>2</Ca>
+        <Ca>4</Ca>
         <Ce>0</Ce>
         <A>1</A>
         <I>0</I>
@@ -276,7 +278,9 @@
       </AbstractClasses>
       <DependsUpon/>
       <UsedBy>
+        <Package>Ding\Aspect</Package>
         <Package>Ding\Autoloader</Package>
+        <Package>Ding\Bean\Factory\Driver</Package>
         <Package>Ding\Cache\Impl</Package>
       </UsedBy>
     </Package>

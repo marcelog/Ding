@@ -9,11 +9,10 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/AspectManager.php">
   <error line="29" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="29" column="16" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="31" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="31" column="10" severity="error" message="Constants must be uppercase; expected CACHE but found Cache" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="31" column="16" severity="error" message="Constants must be uppercase; expected LOCATOR but found Locator" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="31" column="24" severity="error" message="Constants must be uppercase; expected CACHELOCATOR but found CacheLocator" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="143" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="135" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="182" column="1" severity="error" message="Missing comment for param &quot;$cache&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="186" column="34" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="186" column="39" severity="error" message="Constants must be uppercase; expected CACHE but found Cache" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/IAspectManagerAware.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -176,17 +175,20 @@
   <error line="40" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="40" column="10" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="40" column="17" severity="error" message="Constants must be uppercase; expected POINTCUTDEFINITION but found PointcutDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="74" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="74" column="103" severity="warning" message="Line exceeds 80 characters; contains 102 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="82" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="83" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="93" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="95" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="96" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="108" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="113" column="113" severity="warning" message="Line exceeds 80 characters; contains 112 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="117" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="122" column="116" severity="warning" message="Line exceeds 80 characters; contains 115 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="68" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="68" column="103" severity="warning" message="Line exceeds 80 characters; contains 102 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="76" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="77" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="87" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="89" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="90" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="102" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="107" column="113" severity="warning" message="Line exceeds 80 characters; contains 112 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="111" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="116" column="116" severity="warning" message="Line exceeds 80 characters; contains 115 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="126" column="1" severity="error" message="Missing comment for param &quot;$aspectManager&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="130" column="34" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="130" column="39" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationInitDestroyMethodDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -218,11 +220,11 @@
   <error line="39" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="61" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="61" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="63" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="64" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="67" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="55" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="55" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="58" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="61" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationRequiredDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -254,12 +256,12 @@
   <error line="39" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="61" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="61" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="63" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="64" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="67" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="80" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="55" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="55" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="58" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="61" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="74" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationResourceDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -296,15 +298,15 @@
   <error line="40" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="40" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="54" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="62" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="62" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="80" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="80" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="82" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="83" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="100" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="107" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="111" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="56" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="56" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="74" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="74" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="76" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="77" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="94" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="101" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="105" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AspectManagerAwareDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -334,8 +336,14 @@
   <error line="39" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="61" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="69" column="140" severity="warning" message="Line exceeds 80 characters; contains 139 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="61" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="61" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="63" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="64" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="73" column="133" severity="warning" message="Line exceeds 80 characters; contains 132 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="84" column="1" severity="error" message="Missing comment for param &quot;$aspectManager&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="88" column="34" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="88" column="39" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanAnnotationDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -355,60 +363,58 @@
   <error line="35" column="15" severity="error" message="Constants must be uppercase; expected LIFECYCLE but found Lifecycle" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="35" column="25" severity="error" message="Constants must be uppercase; expected IBEFORECONFIGLISTENER but found IBeforeConfigListener" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="36" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="36" column="10" severity="error" message="Constants must be uppercase; expected CACHE but found Cache" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="36" column="16" severity="error" message="Constants must be uppercase; expected LOCATOR but found Locator" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="36" column="24" severity="error" message="Constants must be uppercase; expected CACHELOCATOR but found CacheLocator" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="36" column="10" severity="error" message="Constants must be uppercase; expected CONTAINER but found Container" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="36" column="20" severity="error" message="Constants must be uppercase; expected ICONTAINER but found IContainer" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="37" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="37" column="10" severity="error" message="Constants must be uppercase; expected CONTAINER but found Container" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="37" column="20" severity="error" message="Constants must be uppercase; expected ICONTAINER but found IContainer" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="37" column="10" severity="error" message="Constants must be uppercase; expected BEAN but found Bean" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="37" column="15" severity="error" message="Constants must be uppercase; expected BEANDEFINITION but found BeanDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected BEAN but found Bean" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="38" column="15" severity="error" message="Constants must be uppercase; expected BEANDEFINITION but found BeanDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="38" column="15" severity="error" message="Constants must be uppercase; expected BEANPROPERTYDEFINITION but found BeanPropertyDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="10" severity="error" message="Constants must be uppercase; expected BEAN but found Bean" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="39" column="15" severity="error" message="Constants must be uppercase; expected BEANPROPERTYDEFINITION but found BeanPropertyDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="39" column="15" severity="error" message="Constants must be uppercase; expected BEANANNOTATIONDEFINITION but found BeanAnnotationDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="40" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="40" column="10" severity="error" message="Constants must be uppercase; expected BEAN but found Bean" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="40" column="15" severity="error" message="Constants must be uppercase; expected BEANANNOTATIONDEFINITION but found BeanAnnotationDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="40" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="40" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="41" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="41" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="41" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="41" column="10" severity="error" message="Constants must be uppercase; expected BEAN but found Bean" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="41" column="15" severity="error" message="Constants must be uppercase; expected FACTORY but found Factory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="41" column="23" severity="error" message="Constants must be uppercase; expected IBEANFACTORY but found IBeanFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="42" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="42" column="10" severity="error" message="Constants must be uppercase; expected BEAN but found Bean" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="42" column="15" severity="error" message="Constants must be uppercase; expected FACTORY but found Factory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="42" column="23" severity="error" message="Constants must be uppercase; expected IBEANFACTORY but found IBeanFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="43" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="43" column="10" severity="error" message="Constants must be uppercase; expected BEAN but found Bean" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="43" column="15" severity="error" message="Constants must be uppercase; expected FACTORY but found Factory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="43" column="23" severity="error" message="Constants must be uppercase; expected EXCEPTION but found Exception" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="43" column="33" severity="error" message="Constants must be uppercase; expected BEANFACTORYEXCEPTION but found BeanFactoryException" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="59" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="97" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="99" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="100" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="112" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="135" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="138" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="141" column="105" severity="warning" message="Line exceeds 80 characters; contains 104 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="155" column="15" severity="error" message="Expected &quot;} else if (...) {\n&quot;; found &quot;} else if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="155" column="20" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="156" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="159" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="162" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="179" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="219" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="221" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="222" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="225" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="238" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="242" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="262" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="262" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="262" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="270" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="278" column="13" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="289" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="304" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="42" column="23" severity="error" message="Constants must be uppercase; expected EXCEPTION but found Exception" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="42" column="33" severity="error" message="Constants must be uppercase; expected BEANFACTORYEXCEPTION but found BeanFactoryException" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="58" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="90" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="92" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="93" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="105" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="128" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="131" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="134" column="105" severity="warning" message="Line exceeds 80 characters; contains 104 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="148" column="15" severity="error" message="Expected &quot;} else if (...) {\n&quot;; found &quot;} else if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="148" column="20" severity="error" message="Expected &quot;if (...) {\n&quot;; found &quot;if(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="149" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="152" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="155" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="172" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="212" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="214" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="215" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="218" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="231" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="235" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="255" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="255" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="255" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="263" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="271" column="13" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="282" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="297" column="101" severity="warning" message="Line exceeds 80 characters; contains 100 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="321" column="50" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="321" column="55" severity="error" message="Constants must be uppercase; expected CACHE but found Cache" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanNameAwareDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -435,8 +441,8 @@
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="60" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="68" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="54" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="62" column="123" severity="warning" message="Line exceeds 80 characters; contains 122 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanXmlDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -491,43 +497,48 @@
   <error line="45" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="45" column="10" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="45" column="17" severity="error" message="Constants must be uppercase; expected IPOINTCUTPROVIDER but found IPointcutProvider" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="131" column="1" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="132" column="1" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="133" column="1" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="160" column="1" severity="error" message="Missing comment for param &quot;$filename&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="192" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="258" column="92" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="125" column="1" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="126" column="1" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="127" column="1" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="154" column="1" severity="error" message="Missing comment for param &quot;$filename&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="186" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="252" column="92" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="320" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="323" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
   <error line="326" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
   <error line="329" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="332" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="335" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="345" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="354" column="1" severity="error" message="Missing comment for param &quot;$beanName&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="354" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="367" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="371" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="402" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignatureSniff"/>
-  <error line="403" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignatureSniff"/>
-  <error line="403" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
-  <error line="405" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignatureSniff"/>
-  <error line="475" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="475" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="476" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="476" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanName at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="476" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="477" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="478" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="479" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="481" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="486" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="489" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="503" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="507" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="518" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="520" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="524" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="557" column="1" severity="error" message="Doc comment for var $filename does not match actual variable name $options at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="563" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="339" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="348" column="1" severity="error" message="Missing comment for param &quot;$beanName&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="348" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="361" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="365" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="396" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignatureSniff"/>
+  <error line="397" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignatureSniff"/>
+  <error line="397" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndentSniff"/>
+  <error line="399" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignatureSniff"/>
+  <error line="469" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="469" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="470" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="470" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanName at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="470" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="471" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="472" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="473" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="475" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="480" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="483" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="497" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="501" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="512" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="514" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="518" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="536" column="1" severity="error" message="Missing comment for param &quot;$options&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="537" column="1" severity="error" message="The comments for parameters $options (1) and $aspectManager (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="537" column="1" severity="error" message="Missing comment for param &quot;$aspectManager&quot; at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="541" column="50" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="541" column="55" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="541" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="543" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/BeanYamlDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -578,48 +589,49 @@
   <error line="44" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="44" column="10" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="44" column="17" severity="error" message="Constants must be uppercase; expected IPOINTCUTPROVIDER but found IPointcutProvider" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="141" column="1" severity="error" message="Missing comment for param &quot;$filename&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="169" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="234" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="258" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="264" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="277" column="1" severity="error" message="The comments for parameters $value (1) and $yamlFilename (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="135" column="1" severity="error" message="Missing comment for param &quot;$filename&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="163" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="228" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="252" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="258" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="271" column="1" severity="error" message="The comments for parameters $value (1) and $yamlFilename (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="280" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="283" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
   <error line="286" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="289" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="292" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="294" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="297" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="300" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="304" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="313" column="1" severity="error" message="Missing comment for param &quot;$beanName&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="313" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="327" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="330" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="378" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="423" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="429" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="429" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="430" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="430" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanName at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="430" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="431" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="432" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="433" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="435" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="440" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="442" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="445" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="449" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="456" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="459" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="473" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="477" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
-  <error line="505" column="1" severity="error" message="Expected 1 space before variable type" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="505" column="1" severity="error" message="Doc comment for var [ UNKNOWN ] does not match actual variable name $options at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="505" column="1" severity="error" message="Missing parameter name at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="505" column="1" severity="error" message="Missing type at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="505" column="1" severity="error" message="Missing comment for param &quot;[ UNKNOWN ]&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="511" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="288" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="291" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="294" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="298" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="307" column="1" severity="error" message="Missing comment for param &quot;$beanName&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="307" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="321" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="324" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="372" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="417" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="423" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="423" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="424" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="424" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanName at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="424" column="1" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="425" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="426" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="427" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="429" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="434" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="436" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="439" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="443" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="450" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="453" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="467" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="471" column="9" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignatureSniff"/>
+  <error line="484" column="1" severity="error" message="Missing comment for param &quot;$options&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="485" column="1" severity="error" message="The comments for parameters $options (1) and $aspectManager (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="485" column="1" severity="error" message="Missing comment for param &quot;$aspectManager&quot; at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="489" column="50" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="489" column="55" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="489" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="491" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ContainerAwareDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -646,12 +658,12 @@
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="62" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="63" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="64" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="56" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="58" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/DependsOnDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -675,11 +687,11 @@
   <error line="36" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="36" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="36" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="58" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="58" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="60" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="61" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="62" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="53" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="53" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="55" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="56" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ErrorHandlerDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -706,12 +718,12 @@
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected CONTAINER but found Container" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="20" severity="error" message="Constants must be uppercase; expected ICONTAINER but found IContainer" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="62" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="63" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="70" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="80" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="82" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="55" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="58" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="65" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="75" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="77" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/LifecycleDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -739,14 +751,16 @@
   <error line="36" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="36" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="36" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="58" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="58" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="65" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="68" column="92" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="71" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="74" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="77" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="80" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="52" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="52" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="59" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="62" column="92" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="65" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="68" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="71" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="74" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="83" column="1" severity="error" message="Last parameter comment requires a blank newline after it" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="83" column="1" severity="error" message="Missing comment for param &quot;$lifecycleManager&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/LoggerAwareDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -773,12 +787,12 @@
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="62" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="63" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="64" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="56" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="58" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MVCAnnotationDriver.php">
   <error line="3" column="1" severity="error" message="Extra newline found before file comment short description" source="PEAR.Commenting.FileCommentSniff"/>
@@ -811,10 +825,10 @@
   <error line="38" column="15" severity="error" message="Constants must be uppercase; expected FACTORY but found Factory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="23" severity="error" message="Constants must be uppercase; expected IBEANFACTORY but found IBeanFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="41" column="1" severity="error" message="Extra newline found before class comment short description" source="PEAR.Commenting.ClassCommentSniff"/>
-  <error line="59" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="65" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="66" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="69" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="53" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="59" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="60" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="63" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MessageSourceDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -842,12 +856,12 @@
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected CONTAINER but found Container" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="20" severity="error" message="Constants must be uppercase; expected ICONTAINER but found IContainer" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="61" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="63" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="64" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="75" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="75" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="82" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="55" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="58" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="69" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="69" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="76" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/MethodInjectionDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -893,19 +907,22 @@
   <error line="42" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="42" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="83" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="121" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="121" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="121" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="123" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="124" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="125" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="131" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="134" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="135" column="26" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignatureSniff"/>
-  <error line="136" column="108" severity="warning" message="Line exceeds 80 characters; contains 107 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="137" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignatureSniff"/>
-  <error line="140" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="141" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="115" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="115" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="115" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="117" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="118" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="119" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="125" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="128" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="129" column="26" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignatureSniff"/>
+  <error line="130" column="108" severity="warning" message="Line exceeds 80 characters; contains 107 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="131" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignatureSniff"/>
+  <error line="134" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="135" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="152" column="1" severity="error" message="Missing comment for param &quot;$aspectManager&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="156" column="34" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="156" column="39" severity="error" message="Constants must be uppercase; expected ASPECT but found Aspect" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/PropertiesDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -949,18 +966,18 @@
   <error line="41" column="15" severity="error" message="Constants must be uppercase; expected FACTORY but found Factory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="41" column="23" severity="error" message="Constants must be uppercase; expected EXCEPTION but found Exception" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="41" column="33" severity="error" message="Constants must be uppercase; expected BEANFACTORYEXCEPTION but found BeanFactoryException" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="81" column="4" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
-  <error line="107" column="1" severity="error" message="Missing comment for param &quot;$def&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="108" column="1" severity="error" message="The variable names for parameters $def (1) and $factory (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="108" column="1" severity="error" message="The comments for parameters $def (1) and $factory (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="124" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="126" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="127" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="145" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="145" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="147" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="148" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="196" column="4" severity="error" message="Closing brace indented incorrectly; expected 4 spaces, found 3" source="PEAR.WhiteSpace.ScopeClosingBraceSniff"/>
+  <error line="75" column="4" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndentSniff"/>
+  <error line="101" column="1" severity="error" message="Missing comment for param &quot;$def&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="102" column="1" severity="error" message="The variable names for parameters $def (1) and $factory (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="102" column="1" severity="error" message="The comments for parameters $def (1) and $factory (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="118" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="120" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="121" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="139" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="139" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="141" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="142" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="175" column="4" severity="error" message="Closing brace indented incorrectly; expected 4 spaces, found 3" source="PEAR.WhiteSpace.ScopeClosingBraceSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ResourceLoaderAwareDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -987,13 +1004,13 @@
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="60" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="62" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="63" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="64" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="71" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="54" column="5" severity="error" message="Doc comment for &quot;$beanDefinition&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="56" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="58" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="65" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ResourcesDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -1033,16 +1050,16 @@
   <error line="39" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="10" severity="error" message="Constants must be uppercase; expected CONTAINER but found Container" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="20" severity="error" message="Constants must be uppercase; expected ICONTAINER but found IContainer" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="61" column="12" severity="error" message="Public method name &quot;ResourcesDriver::_apply&quot; must not be prefixed with an underscore" source="PEAR.NamingConventions.ValidFunctionNameSniff"/>
-  <error line="61" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="73" column="1" severity="error" message="Missing comment for param &quot;$def&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="74" column="1" severity="error" message="The variable names for parameters $def (1) and $factory (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="74" column="1" severity="error" message="The comments for parameters $def (1) and $factory (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="80" column="33" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="93" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="93" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="95" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="96" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="55" column="12" severity="error" message="Public method name &quot;ResourcesDriver::_apply&quot; must not be prefixed with an underscore" source="PEAR.NamingConventions.ValidFunctionNameSniff"/>
+  <error line="55" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="67" column="1" severity="error" message="Missing comment for param &quot;$def&quot; at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="68" column="1" severity="error" message="The variable names for parameters $def (1) and $factory (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="68" column="1" severity="error" message="The comments for parameters $def (1) and $factory (2) do not align" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="74" column="33" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="87" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="87" column="5" severity="error" message="Doc comment for &quot;$bean&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="89" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="90" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SetterInjectionDriver.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -1077,11 +1094,11 @@
   <error line="39" column="15" severity="error" message="Constants must be uppercase; expected FACTORY but found Factory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="23" severity="error" message="Constants must be uppercase; expected EXCEPTION but found Exception" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="39" column="33" severity="error" message="Constants must be uppercase; expected BEANFACTORYEXCEPTION but found BeanFactoryException" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="70" column="1" severity="error" message="Doc comment for var $property does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="70" column="1" severity="error" message="Doc comment for &quot;$property&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="74" column="92" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="92" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="92" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="64" column="1" severity="error" message="Doc comment for var $property does not match actual variable name $factory at position 1" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="64" column="1" severity="error" message="Doc comment for &quot;$property&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="68" column="92" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="86" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="86" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/ShutdownDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -1108,12 +1125,12 @@
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="61" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="63" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="64" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="71" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="81" column="117" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="83" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="55" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="57" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="58" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="65" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="75" column="117" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="77" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/SignalHandlerDriver.php">
   <error line="31" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -1140,12 +1157,12 @@
   <error line="38" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="10" severity="error" message="Constants must be uppercase; expected REFLECTION but found Reflection" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="38" column="21" severity="error" message="Constants must be uppercase; expected REFLECTIONFACTORY but found ReflectionFactory" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="67" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="69" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="70" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="77" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="87" column="115" severity="warning" message="Line exceeds 80 characters; contains 114 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="89" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="61" column="5" severity="error" message="Doc comment for &quot;$factory&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="63" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="64" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="71" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="81" column="115" severity="warning" message="Line exceeds 80 characters; contains 114 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="83" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Exception/BeanFactoryException.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -1224,54 +1241,53 @@
   <error line="40" column="5" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="40" column="10" severity="error" message="Constants must be uppercase; expected BEAN but found Bean" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
   <error line="40" column="15" severity="error" message="Constants must be uppercase; expected BEANDEFINITION but found BeanDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="87" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="99" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="109" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="111" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="121" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="123" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="135" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="147" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="159" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="171" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="183" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="186" column="53" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="186" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="187" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="196" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="197" column="1" severity="error" message="Superfluous doc comment at position 3" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="204" column="53" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="204" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="218" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="220" column="53" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="220" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="229" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="230" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanDefinition at position 3" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="234" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="236" column="53" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="236" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="245" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="246" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanDefinition at position 3" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="250" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="252" column="53" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="252" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="253" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="266" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="268" column="53" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="268" column="92" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="282" column="53" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="282" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="296" column="53" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="296" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="301" column="5" severity="error" message="Doc comment for &quot;$properties&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="323" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="324" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="325" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="326" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="327" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="328" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="329" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
-  <error line="330" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="81" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="93" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="103" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="105" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="115" column="83" severity="warning" message="Line exceeds 80 characters; contains 82 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="117" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="129" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="141" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="153" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="165" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="177" column="100" severity="warning" message="Line exceeds 80 characters; contains 99 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="180" column="53" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="180" column="95" severity="warning" message="Line exceeds 80 characters; contains 94 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="181" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="190" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="191" column="1" severity="error" message="Superfluous doc comment at position 3" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="198" column="53" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="198" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="212" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="214" column="53" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="214" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="223" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="224" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanDefinition at position 3" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="228" column="94" severity="warning" message="Line exceeds 80 characters; contains 93 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="230" column="53" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="230" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="239" column="1" severity="error" message="Doc comment for var $beanName does not match actual variable name $bean at position 2" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="240" column="1" severity="error" message="Doc comment for var $bean does not match actual variable name $beanDefinition at position 3" source="PEAR.Commenting.FunctionCommentSniff"/>
+  <error line="244" column="97" severity="warning" message="Line exceeds 80 characters; contains 96 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="246" column="53" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="246" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="247" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="260" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="262" column="53" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="262" column="92" severity="warning" message="Line exceeds 80 characters; contains 91 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="276" column="53" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="276" column="90" severity="warning" message="Line exceeds 80 characters; contains 89 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="290" column="53" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="290" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="304" column="44" severity="error" message="Constants must be uppercase; expected BEFORECONFIG but found BeforeConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="305" column="44" severity="error" message="Constants must be uppercase; expected AFTERCONFIG but found AfterConfig" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="306" column="44" severity="error" message="Constants must be uppercase; expected BEFOREDEFINITION but found BeforeDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="307" column="44" severity="error" message="Constants must be uppercase; expected AFTERDEFINITION but found AfterDefinition" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="308" column="44" severity="error" message="Constants must be uppercase; expected BEFORECREATE but found BeforeCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="309" column="44" severity="error" message="Constants must be uppercase; expected AFTERCREATE but found AfterCreate" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="310" column="44" severity="error" message="Constants must be uppercase; expected BEFOREASSEMBLE but found BeforeAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
+  <error line="311" column="44" severity="error" message="Constants must be uppercase; expected AFTERASSEMBLE but found AfterAssemble" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/IAfterAssembleListener.php">
   <error line="30" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
@@ -1762,30 +1778,26 @@
   <error line="586" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionCommentSniff"/>
   <error line="588" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
   <error line="589" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionCommentSniff"/>
-  <error line="624" column="109" severity="warning" message="Line exceeds 80 characters; contains 108 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="625" column="106" severity="warning" message="Line exceeds 80 characters; contains 105 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="626" column="114" severity="warning" message="Line exceeds 80 characters; contains 113 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="627" column="112" severity="warning" message="Line exceeds 80 characters; contains 111 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="628" column="117" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="629" column="106" severity="warning" message="Line exceeds 80 characters; contains 105 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="630" column="105" severity="warning" message="Line exceeds 80 characters; contains 104 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="631" column="120" severity="warning" message="Line exceeds 80 characters; contains 119 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="632" column="124" severity="warning" message="Line exceeds 80 characters; contains 123 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="635" column="98" severity="warning" message="Line exceeds 80 characters; contains 97 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="639" column="112" severity="warning" message="Line exceeds 80 characters; contains 111 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="640" column="121" severity="warning" message="Line exceeds 80 characters; contains 120 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="641" column="117" severity="warning" message="Line exceeds 80 characters; contains 116 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="642" column="115" severity="warning" message="Line exceeds 80 characters; contains 114 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="643" column="121" severity="warning" message="Line exceeds 80 characters; contains 120 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="644" column="130" severity="warning" message="Line exceeds 80 characters; contains 129 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="648" column="111" severity="warning" message="Line exceeds 80 characters; contains 110 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="652" column="112" severity="warning" message="Line exceeds 80 characters; contains 111 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="656" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="659" column="105" severity="warning" message="Line exceeds 80 characters; contains 104 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="662" column="85" severity="warning" message="Line exceeds 80 characters; contains 84 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="669" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="676" column="113" severity="warning" message="Line exceeds 80 characters; contains 112 characters" source="PEAR.Files.LineLengthSniff"/>
-  <error line="677" column="115" severity="warning" message="Line exceeds 80 characters; contains 114 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="615" column="91" severity="warning" message="Line exceeds 80 characters; contains 90 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="624" column="84" severity="warning" message="Line exceeds 80 characters; contains 83 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="626" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="627" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="628" column="115" severity="warning" message="Line exceeds 80 characters; contains 114 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="629" column="107" severity="warning" message="Line exceeds 80 characters; contains 106 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="637" column="99" severity="warning" message="Line exceeds 80 characters; contains 98 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="641" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="643" column="93" severity="warning" message="Line exceeds 80 characters; contains 92 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="644" column="89" severity="warning" message="Line exceeds 80 characters; contains 88 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="645" column="113" severity="warning" message="Line exceeds 80 characters; contains 112 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="646" column="96" severity="warning" message="Line exceeds 80 characters; contains 95 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="647" column="105" severity="warning" message="Line exceeds 80 characters; contains 104 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="651" column="86" severity="warning" message="Line exceeds 80 characters; contains 85 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="655" column="87" severity="warning" message="Line exceeds 80 characters; contains 86 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="659" column="82" severity="warning" message="Line exceeds 80 characters; contains 81 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="665" column="99" severity="warning" message="Line exceeds 80 characters; contains 98 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="672" column="102" severity="warning" message="Line exceeds 80 characters; contains 101 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="679" column="88" severity="warning" message="Line exceeds 80 characters; contains 87 characters" source="PEAR.Files.LineLengthSniff"/>
+  <error line="680" column="113" severity="warning" message="Line exceeds 80 characters; contains 112 characters" source="PEAR.Files.LineLengthSniff"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Exception/DingException.php">
   <error line="29" column="11" severity="error" message="Constants must be uppercase; expected DING but found Ding" source="Generic.NamingConventions.UpperCaseConstantNameSniff"/>
