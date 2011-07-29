@@ -32,26 +32,6 @@ namespace Ding\Autoloader;
 use Ding\Cache\Impl\DummyCacheImpl;
 use Ding\Cache\ICache;
 
-if (!class_exists('Logger')) {
-    foreach (explode(PATH_SEPARATOR, ini_get('include_path')) as $path) {
-        $truePath = implode(
-            DIRECTORY_SEPARATOR,
-            array($path, 'log4php', 'Logger.php')
-        );
-        if (file_exists($truePath)) {
-            require_once $truePath;
-        }
-    }
-}
-// If not found, include our own dummy logger.
-if (!class_exists('Logger')) {
-    $truePath = implode(
-        DIRECTORY_SEPARATOR,
-        array('Ding', 'Logger', 'Logger.php')
-    );
-    require_once $truePath;
-}
-
 /**
  * Ding autoloader, you will surely need this.
  *

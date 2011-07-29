@@ -102,9 +102,6 @@
     <testsuite name="Autoloader">
       <directory suffix=".php">autoloader</directory>
     </testsuite>
-    <testsuite name="Dummy Logger">
-      <directory suffix=".php">logger</directory>
-    </testsuite>
     <testsuite name="Resources">
       <directory suffix=".php">resources-feature</directory>
     </testsuite>

@@ -350,14 +350,10 @@ Developers
 Debugging, logging
 ==================
 
-You need log4php (http://logging.apache.org/log4php/) if you want debugging
-output from the container. Just make sure you copy it to the include_path and
-Ding will pick it up from there.
+NOTE: log4php is NOW A REQUIREMENT. The dummy logger is gone.
 
-This means that this is NOT A REQUIREMENT FOR A DEPLOY. It's not even a
-requirement at develop time (except when you really want debug output).
-You can use the included example of a log4php.properties file in
-docs/examples/quickstart.
+You need log4php (http://logging.apache.org/log4php/).
+Just make sure you copy it to the include_path and Ding will pick it up from there.
 
 Of course it is recommended that you do not set DEBUG output in your log4php
 configuration (or remove it from the include path so Ding will notice and not
@@ -365,12 +361,9 @@ use it). This *will* create a difference in performance.
 --------------------------------------------------------------------------------
 Performance tips
 ================
-* Do not include log4php in your include path.
 * Try to have small include paths. Ding will use the include path for finding
 resources and autoload your own classes.
-* If you use it, or need logging, put log4php into your include path
-(i.e: /usr/share/php/log4php) and configure the rootLogger and ding logger
-in ERROR level.
+* Configure the rootLogger and ding logger in ERROR level.
 * If your code is running on the php module for apache or iis, use apc for
 all the cache subsytems. Otherwise, use memcached or file.
 * Do not use annotations at all. Only use the XML or even better, YAML.

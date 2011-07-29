@@ -42,6 +42,7 @@ ini_set(
         )
     )
 );
+require_once 'Logger.php'; // log4php
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
