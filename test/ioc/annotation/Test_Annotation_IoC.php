@@ -206,6 +206,16 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container->__destruct();
         $this->assertNull($bean->something);
     }
+    /**
+     * @test
+     */
+    public function can_get_component()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('myComponentBean');
+        $this->assertTrue($bean instanceof MyComponentBean);
+        $this->assertTrue($bean->myComponentDependency instanceof MyComponentDependency);
+    }
 }
 
 /**
@@ -442,3 +452,37 @@ class ClassSimpleAnnotation5
     }
 }
 
+/**
+ * This is our bean.
+ * @Component(name=myComponentBean)
+ * @InitMethod(method=init)
+ * @DestroyMethod(method=destroy)
+ * @Scope(value=singleton)
+ */
+class MyComponentBean
+{
+    /**
+     * @Resource
+     */
+    public $myComponentDependency;
+
+    public function init()
+    {
+    }
+    public function destroy()
+    {
+    }
+    public function __construct()
+    {
+
+    }
+}
+
+/**
+ * @Component(name=myComponentDependency)
+ * @Scope(value=singleton)
+ */
+class MyComponentDependency
+{
+
+}

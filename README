@@ -72,6 +72,7 @@ any of the implementations below ;)
 * @Configuration and @Bean just like Java Configuration. So you dont even need
 a beans.xml (@Scope, @InitMethod, @DestroyMethod) for this annotated bean
 definitions.
+* @Component (used in classes, supports same annotations as @Bean)
 * @Required
 * @Resource
 * @Controller (When using the MVC through http).

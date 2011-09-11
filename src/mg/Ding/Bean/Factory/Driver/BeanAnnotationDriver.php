@@ -171,19 +171,40 @@ class BeanAnnotationDriver
      */
     private function _loadBean($name, $factoryBean, $factoryMethod, $annotations)
     {
-        $def = new BeanDefinition($name);
+        $def = $this->_getBeanDefinition($name, '', $annotations);
         $def->setFactoryBean($factoryBean);
-        $beanAnnotation = $annotations['Bean'];
-        $overrideName = $beanAnnotation->getArguments();
-        if (!empty($overrideName)) {
-            if (isset($overrideName['name'])) {
-                $name = $overrideName['name'];
-            }
-            if (isset($overrideName['class'])) {
-                $def->setClass($overrideName['class']);
+        $def->setFactoryMethod($factoryMethod);
+        return $def;
+    }
+
+    /**
+     * Creates a bean definition from the given annotations.
+     *
+     * @param string                     $name          Bean name.
+     * @param string                     $class         Bean class.
+     * @param BeanAnnotationDefinition[] $annotations   Annotations with data.
+     *
+     * @return BeanDefinition
+     */
+    private function _getBeanDefinition($name, $class, $annotations)
+    {
+        $def = new BeanDefinition($name);
+        $def->setClass($class);
+        if (isset($annotations['Component'])) {
+            $beanAnnotation = $annotations['Component'];
+        } else {
+            // Only @Bean can override name and class arguments
+            $beanAnnotation = $annotations['Bean'];
+            $overrideName = $beanAnnotation->getArguments();
+            if (!empty($overrideName)) {
+                if (isset($overrideName['name'])) {
+                    $name = $overrideName['name'];
+                }
+                if (isset($overrideName['class'])) {
+                    $def->setClass($overrideName['class']);
+                }
             }
         }
-        $def->setFactoryMethod($factoryMethod);
         if (isset($annotations['Scope'])) {
             $args = $annotations['Scope']->getArguments();
             if (isset($args['value'])) {
@@ -208,7 +229,6 @@ class BeanAnnotationDriver
         }
         return $def;
     }
-
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
@@ -305,6 +325,19 @@ class BeanAnnotationDriver
             }
             if ($bean !== null) {
                 break;
+            }
+        }
+        // The bean might not be defined in a @Configuration, but with
+        // @Component
+        if ($bean === null) {
+            $components = ReflectionFactory::getClassesByAnnotation('Component');
+            foreach ($components as $component) {
+                $annotations = \Ding\Reflection\ReflectionFactory::getClassAnnotations($component);
+                $args = $annotations['class']['Component']->getArguments();
+                if (isset($args['name']) && ($args['name'] == $beanName)) {
+                    $bean = $this->_getBeanDefinition($name, $component, $annotations['class']);
+                    break;
+                }
             }
         }
         return $bean;
