@@ -226,6 +226,52 @@ For every of the @Bean annotated methods, you should also specify:
 container shutdown.
 </p>
 <p>
+@Component: Ding also supports @Component annotation. If you annotate a class with this
+annotation, it will become a bean without needing to specify a @Configuration class. Example:
+</p>
+<pre name="code" class="php"
+/**
+ * This is our bean.
+ * @Component(name=myBean)
+ * @InitMethod(method=init)
+ * @DestroyMethod(method=destroy)
+ * @Scope(value=singleton)
+ */
+class MyBean
+{
+    /**
+     * @Resource
+     */
+    private $myDependency;
+
+    public function init()
+    {
+        echo "init\n";
+    }
+    public function destroy()
+    {
+        echo "destroy\n";
+    }
+    public function __construct()
+    {
+
+    }
+}
+
+/**
+ * @Component(name=myDependency)
+ * @Scope(value=singleton)
+ */
+class MyDependency
+{
+
+}
+</pre>
+</p>
+<p>
+The full example is available <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ComponentAnnotation">here</a>.
+</p>
+<p>
 @Required Use this one in your setter methods (i.e: setSomething()) and this
 will tell the container to throw an exception if this property isnt configured
 when instantiating the bean. (JSR-330)
