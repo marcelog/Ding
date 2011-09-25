@@ -459,7 +459,7 @@ class BeanDefinition
         $soullessString = '';
         $soullessArray = array();
         $this->_class = $soullessString;
-        $this->_scope = 0;
+        $this->_scope = BeanDefinition::BEAN_SINGLETON;
         $this->_factoryMethod = $soullessString;
         $this->_factoryBean = $soullessString;
         $this->_initMethod = $soullessString;

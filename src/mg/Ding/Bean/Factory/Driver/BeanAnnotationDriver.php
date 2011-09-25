@@ -212,6 +212,8 @@ class BeanAnnotationDriver
                     $def->setScope(BeanDefinition::BEAN_SINGLETON);
                 } else if ($args['value'] == 'prototype') {
                     $def->setScope(BeanDefinition::BEAN_PROTOTYPE);
+                } else {
+                    throw new BeanFactoryException('Invalid bean scope: ' . $args['value']);
                 }
             }
         }

@@ -335,15 +335,16 @@ class BeanYamlDriver implements
         }
         $bean->setName($beanName);
         $bean->setClass($beanDef['class']);
-        $bScope = $beanDef['scope'];
-        if ($bScope == 'prototype') {
-            $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
-        } else if ($bScope == 'singleton') {
-            $bean->setScope(BeanDefinition::BEAN_SINGLETON);
-        } else {
-            throw new BeanFactoryException('Invalid bean scope: ' . $bScope);
-        }
 
+        if (isset($beanDef['scope'])) {
+            if ($beanDef['scope'] == 'prototype') {
+                $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
+            } else if ($beanDef['scope'] == 'singleton') {
+                $bean->setScope(BeanDefinition::BEAN_SINGLETON);
+            } else {
+                throw new BeanFactoryException('Invalid bean scope: ' . $beanDef['scope']);
+            }
+        }
         if (isset($beanDef['factory-method'])) {
             $bean->setFactoryMethod($beanDef['factory-method']);
         }

@@ -216,6 +216,16 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof MyComponentBean);
         $this->assertTrue($bean->myComponentDependency instanceof MyComponentDependency);
     }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_invalid_scope()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $container->getBean('invalidScopeBean');
+    }
 }
 
 /**
@@ -350,6 +360,14 @@ class ClassSimpleAnnotationConfiguration
         return new ClassSimpleAnnotation();
     }
 
+    /**
+     * @Bean(class=ClassSimpleAnnotation)
+     * @Scope(value=invalid)
+     */
+    public function invalidScopeBean()
+    {
+        return new ClassSimpleAnnotation();
+    }
     public function __construct()
     {
     }

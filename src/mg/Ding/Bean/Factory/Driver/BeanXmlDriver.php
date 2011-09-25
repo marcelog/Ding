@@ -377,15 +377,16 @@ class BeanXmlDriver implements
         }
         $bean->setName($beanName);
         $bean->setClass((string)$simpleXmlBean->attributes()->class);
-        $bScope = (string)$simpleXmlBean->attributes()->scope;
-        if ($bScope == 'prototype') {
-            $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
-        } else if ($bScope == 'singleton') {
-            $bean->setScope(BeanDefinition::BEAN_SINGLETON);
-        } else {
-            throw new BeanFactoryException('Invalid bean scope: ' . $bScope);
+        if (isset($simpleXmlBean->attributes()->scope)) {
+            $bScope = (string)$simpleXmlBean->attributes()->scope;
+            if ($bScope == 'prototype') {
+                $bean->setScope(BeanDefinition::BEAN_PROTOTYPE);
+            } else if ($bScope == 'singleton') {
+                $bean->setScope(BeanDefinition::BEAN_SINGLETON);
+            } else {
+                throw new BeanFactoryException('Invalid bean scope: ' . $bScope);
+            }
         }
-
         if (isset($simpleXmlBean->attributes()->{'factory-method'})) {
             $bean->setFactoryMethod(
                 (string)$simpleXmlBean->attributes()->{'factory-method'}
