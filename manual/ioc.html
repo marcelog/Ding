@@ -118,7 +118,7 @@ This metadata includes:
   metadata (see below).</li>
   <li><u>Name:</u>Mandatory. The bean's name.</li>
   <li><u>Class:</u>Mandatory. The bean's full class name (including namespace, like A\B\Foo.</li>
-  <li><u>Scope:</u>Mandatory. The bean's scope. This informs the container how to handle
+  <li><u>Scope:</u>Mandatory (Defaults to singleton). The bean's scope. This informs the container how to handle
   the lifecycle of this bean.</li>
   <li><u>Annotations:</u>Optional. All class-level annotations. Annotations have their
   own metadata. (see below).</li>
@@ -300,8 +300,19 @@ For a singleton bean (only one instance allowed):<br/>
 &lt;/beans&gt;
 </pre>
 </p>
-All options in the above examples are *MANDATORY*. What follows are examples with
-optional arguments:
+<p>
+If you don't specify a scope for a bean, the default is to create a singleton
+bean, so the above is equivalent to (in all drivers):
+</p>
+<pre>
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C"/&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+All options in the above examples are *MANDATORY* (except for the scope, which
+defaults to singleton). What follows are examples with optional arguments:
+</p>
 <hr/>
 <p>
 This one will first create aBean, bBean, cBean before creating "beanName":<br/>
