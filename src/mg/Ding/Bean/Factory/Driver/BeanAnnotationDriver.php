@@ -337,7 +337,7 @@ class BeanAnnotationDriver
                 $annotations = \Ding\Reflection\ReflectionFactory::getClassAnnotations($component);
                 $args = $annotations['class']['Component']->getArguments();
                 if (isset($args['name']) && ($args['name'] == $beanName)) {
-                    $bean = $this->_getBeanDefinition($name, $component, $annotations['class']);
+                    $bean = $this->_getBeanDefinition($args['name'], $component, $annotations['class']);
                     break;
                 }
             }
