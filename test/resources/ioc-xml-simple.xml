@@ -53,14 +53,14 @@
       <property name="ref"><ref bean="aSimpleSingletonBean"/></property>
       <property name="innerBean"><bean class="ClassSimpleXML" scope="singleton"/></property>
       <property name="array"><array>
-        <entry key="key1"><value>1a$</value></entry>
-        <entry key="key2"><true/></entry>
-        <entry key="key3"><false/></entry>
-        <entry key="key4"><null/></entry>
-        <entry key="key5"><eval><![CDATA[ return 'evaled code'; ]]></eval></entry>
-        <entry key="key6"><ref bean="aSimpleSingletonBean"/></entry>
-        <entry key="key7"><bean class="ClassSimpleXML" scope="singleton"/></entry>
-        <entry key="key8"><array><entry key="0"><true/></entry></array></entry>
+        <entry><value>1a$</value></entry>
+        <entry><true/></entry>
+        <entry><false/></entry>
+        <entry><null/></entry>
+        <entry><eval><![CDATA[ return 'evaled code'; ]]></eval></entry>
+        <entry><ref bean="aSimpleSingletonBean"/></entry>
+        <entry><bean class="ClassSimpleXML" scope="singleton"/></entry>
+        <entry><array><entry key="0"><true/></entry></array></entry>
       </array></property>
     </bean>
 

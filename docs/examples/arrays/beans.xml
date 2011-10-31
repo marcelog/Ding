@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="myBeanName" class="MyBean" scope="singleton">
+    <property name="someProperty">
+        <array>
+            <entry><value>1</value></entry>
+            <entry><value>2</value></entry>
+            <entry><value>3</value></entry>
+            <entry><value>4</value></entry>
+        </array>
+    </property>
+    <property name="someOtherProperty">
+        <array>
+            <entry key="0"><value>1</value></entry>
+            <entry key="1"><value>2</value></entry>
+            <entry key="2"><value>3</value></entry>
+            <entry key="3"><value>4</value></entry>
+        </array>
+    </property>
+  </bean>
+</beans>

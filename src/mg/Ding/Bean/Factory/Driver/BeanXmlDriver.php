@@ -285,8 +285,12 @@ class BeanXmlDriver implements
             $propType = BeanPropertyDefinition::PROPERTY_ARRAY;
             $propValue = array();
             foreach ($simpleXmlProperty->array->entry as $arrayEntry) {
-                $key = (string)$arrayEntry->attributes()->key;
-                $propValue[$key] = $this->_loadProperty($arrayEntry);
+                if (isset($arrayEntry->attributes()->key)) {
+                    $key = (string)$arrayEntry->attributes()->key;
+                    $propValue[$key] = $this->_loadProperty($arrayEntry);
+                } else {
+                    $propValue[] = $this->_loadProperty($arrayEntry);
+                }
             }
         } else if (isset($simpleXmlProperty->eval)) {
             $propType = BeanPropertyDefinition::PROPERTY_CODE;
