@@ -536,6 +536,23 @@ Define an array as a property:
     &lt;/bean&gt;
 &lt;/beans&gt;
 </pre>
+<p>
+Array keys are optional, so you can also do this:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" scope="prototype"&gt;
+        &lt;property name="someProperty"&gt;
+            &lt;array&gt;
+                &lt;entry&lt;ref bean="otherBean"/&gt;&lt;/entry&gt;
+                &lt;entry&lt;value&gt;aValue&lt;/value&gt;&lt;/entry&gt;
+                &lt;entry&lt;eval&gt;&lt;![CDATA[ return "Some evaluated code"; ]]>&lt;/eval&gt;&lt;/entry&gt;
+                &lt;entry&lt;array&gt;&lt;entry key="other"&gt;&lt;value&gt;${aValue}&lt;/value&gt;&lt;/entry&gt;&lt;/array&gt;&lt;/entry&gt;
+            &lt;/array&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</pre>
 <H4>Inner beans</H4>
 <p>
 You can define beans inside properties and constructor arguments, like this:
