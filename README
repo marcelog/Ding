@@ -43,10 +43,15 @@ for the class.
 Available via PEAR
 ------------------
 You can now easily install Ding by issuing:
-# pear channel-discover pearhub.org
-# pear install pearhub/Ding-0.95.0
-just replace 0.95.0 by the release version you'd like to install :)
-See: http://www.pearhub.com/projects/Ding
+# pear channel-discover pear.marcelog.name
+# pear install marcelog/Ding
+
+or
+
+
+# pear install marcelog/Ding-1.0.0
+just replace 1.0.0 by the release version you'd like to install :)
+See: http://pear.marcelog.name/
 --------------------------------------------------------------------------------
 PHAR File
 =========
