@@ -187,6 +187,8 @@ This metadata includes:
   instead of using the constructor.</li>
   <li><u>Factory Bean:</u>Optional. Same as factory class, but will use a method for 
   the given bean.</li> 
+  <li><u>Abstract:</u>Since 1.1.0. False by default. Specifies a bean as concrete or abstract. Abstract beans cant be instantiated.</li>
+  <li><u>Parent:</u>Since 1.1.0. Optional. The name of parent bean, if any.</li>
 </ul>
 </p>
 <H4>Examples:</H4>
@@ -595,6 +597,92 @@ To help you resolve these kind of issues, the controller offers method injection
 In this example, the singleton just uses createDependency() to get instances of the bean named "dependencyName".
 The container will (via AOP) take care of the rest ;)
 </p>
+<H4>Bean inheritance</H4>
+<p>
+Since version 1.1.0, Ding accepts bean inheritance via the 3 drivers, xml, yaml, and annotations.
+</p>
+<pre name="code" class="xml">
+  &lt;bean id="parentBean" abstract="true"&gt;
+    &lt;property name="someProperty">&lt;ref bean="aDependencyBean"/&gt;&lt;/property&gt;
+    &lt;aspect ref="aspectBean" type="method"&gt;
+        &lt;pointcut expression="^get.*" method="invoke"/&gt;>
+    &lt;/aspect&gt;
+  &lt;/bean&gt;
+  &lt;bean id="childBean" parent="parentBean" class="MyBean" scope="singleton"&gt;
+    &lt;property name="someOtherProperty"&gt;&lt;value&gt;blah&lt;/value>&lt;/property&gt;
+  &lt;/bean&gt;
+</pre>
+<p>
+This code uses the "abstract" attribute to indicate that "parentBean" cant be instantiated, and it's just
+a template bean (this is not required, but recommended). The bean "childBean" is declared by using the
+attribute "parent" to specify the name of a bean that is used to inherit stuff from. Currently, you
+can inherit everything, and override the desired things explicitely.
+</p>
+<p>
+Also, since 1.1.0, OOP inheritance is also supported, like so:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+abstract class AParentClass
+{
+    /** @Resource */
+    protected $someProperty;
+    public function setSomeProperty($value)
+    {
+        $this->someProperty = $value;
+    }
+
+    public function getSomeProperty()
+    {
+        return $this->someProperty;
+    }
+}
+
+/**
+ * @Component
+ */
+class AParentClass2 extends AParentClass
+{
+    /** @Resource */
+    protected $someOtherProperty;
+    public function setSomeOtherProperty($value)
+    {
+        $this->someOtherProperty = $value;
+    }
+
+    public function getSomeOtherProperty()
+    {
+        return $this->someOtherProperty;
+    }
+}
+
+/**
+ * This is our bean.
+ * @Component(name=childBean)
+ * @Scope(value=singleton)
+ */
+class MyBean extends AParentClass2
+{
+    public function __construct()
+    {
+
+    }
+}
+</pre>
+<p>
+When creating the bean "childBean", it will have injected all the properties specified in the
+parent classes ("someProperty" and "someOtherProperty").
+</p>
+<p>
+Full examples:
+<ul>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/inheritance-xml">Xml</a></li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/inheritance-yaml">Yaml</a></li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/inheritance-annotations">Annotations</a></li>
+</ul>
+</p>
 <H4>Annotations metadata</H4>
 <ul>
   <li><u>Name:</u>The name of the annotation (i.e: @InitMethod).
@@ -962,6 +1050,10 @@ In this case, the aspect references another bean that should also be known to th
 bean must have a method named like in the method attribute, which is to be called.
 </p>
 <p>
+NOTE: Since 1.1.0, when using bean inheritance, aspects specified on parent beans will also be
+applied to children beans that inherit from this parent.
+</p>
+<p>
 Notice the "type" attribute in the aspect tag. The other possible value for this attribute is "exception", this will attach an
 ExceptionInterceptor instead of a MethodInterceptor.
 </p>
@@ -1014,6 +1106,11 @@ to global pointcuts (which can also use regular expressions):
 In the above example, the expression attribute of the aspect declaration is applied
 to the class names for the beans. If the name of the class is matched, then the pointcuts
 expressions are tried.
+</p>
+<p>
+NOTE: Since 1.1.0, Ding will apply global aspects applied to parent classes as well, so if you apply
+a global aspect to a class-expression that matches with a parent class of a bean, the bean
+will have that aspect applied.
 </p>
 <p>
 So you can define pointcuts inside aspects or globally. You can also define aspects in beans
