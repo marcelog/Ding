@@ -309,7 +309,7 @@ class BeanYamlDriver implements
      * @throws BeanFactoryException
      * @return BeanDefinition
      */
-    private function _loadBean($beanName, BeanDefinition $bean = null)
+    private function _loadBean($beanName, BeanDefinition $bean = null, $factory)
     {
         // This should not be necessary because this driver is also an aspect
         // provider and as such, the AspectManager would already called
@@ -330,11 +330,21 @@ class BeanYamlDriver implements
         if (false == $beanDef) {
             return $bean;
         }
-        if ($bean === null) {
+        $bMethods = $bProps = $bAspects = $constructorArgs = array();
+        if (isset($beanDef['parent'])) {
+            $bean = $factory->getBeanDefinition($beanDef['parent']);
+            $bean = $bean->makeChildBean($beanName);
+            $bProps = $bean->getProperties();
+            $constructorArgs = $bean->getArguments();
+            $bAspects = $bean->getAspects();
+            $bMethods = $bean->getMethodInjections();
+        } else {
             $bean = clone $this->_templateBeanDef;
         }
         $bean->setName($beanName);
-        $bean->setClass($beanDef['class']);
+        if (isset($beanDef['class'])) {
+            $bean->setClass($beanDef['class']);
+        }
 
         if (isset($beanDef['scope'])) {
             if ($beanDef['scope'] == 'prototype') {
@@ -352,6 +362,11 @@ class BeanYamlDriver implements
         if (isset($beanDef['depends-on'])) {
             $bean->setDependsOn(explode(',', $beanDef['depends-on']));
         }
+        if (isset($beanDef['abstract'])) {
+            if ($beanDef['abstract'] == 'true') {
+                $bean->makeAbstract();
+            }
+        }
         if (isset($beanDef['factory-bean'])) {
             $bean->setFactoryBean($beanDef['factory-bean']);
         }
@@ -361,7 +376,6 @@ class BeanYamlDriver implements
         if (isset($beanDef['destroy-method'])) {
             $bean->setDestroyMethod($beanDef['destroy-method']);
         }
-        $bMethods = $bProps = $bAspects = $constructorArgs = array();
         if (isset($beanDef['properties'])) {
             foreach ($beanDef['properties'] as $name => $value) {
                 $bProp = $this->_loadProperty($name, $value, $yamlFilename);
@@ -429,7 +443,7 @@ class BeanYamlDriver implements
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
-        return $this->_loadBean($beanName, $bean);
+        return $this->_loadBean($beanName, $bean, $factory);
     }
 
     public function getPointcut($name)

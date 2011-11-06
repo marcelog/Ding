@@ -55,17 +55,20 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
 {
     public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
     {
-        $rClass = ReflectionFactory::getClass($beanDefinition->getClass());
-        foreach ($beanDefinition->getAutowiredProperties() as $property) {
-            $name = $property->getName();
-            $value = $factory->getBean($name);
-            $rProperty = $rClass->getProperty($name);
-            if (!$rProperty->isPublic()) {
-                $rProperty->setAccessible(true);
-                $rProperty->setValue($bean, $value);
-                $rProperty->setAccessible(false);
-            } else {
-                $rProperty->setValue($bean, $value);
+        $class = $beanDefinition->getClass();
+        if (!empty($class)) {
+            $rClass = ReflectionFactory::getClass($class);
+            foreach ($beanDefinition->getAutowiredProperties() as $property) {
+                $name = $property->getName();
+                $value = $factory->getBean($name);
+                $rProperty = $rClass->getProperty($name);
+                if (!$rProperty->isPublic()) {
+                    $rProperty->setAccessible(true);
+                    $rProperty->setValue($bean, $value);
+                    $rProperty->setAccessible(false);
+                } else {
+                    $rProperty->setValue($bean, $value);
+                }
             }
         }
         return $bean;
@@ -78,6 +81,9 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
     public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
     {
         $beanClass = $bean->getClass();
+        if (empty($beanClass)) {
+            return $bean;
+        }
         $annotations = ReflectionFactory::getClassAnnotations($beanClass);
         $properties = $bean->getProperties();
         foreach ($annotations as $method => $methodAnnotations) {

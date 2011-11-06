@@ -181,7 +181,21 @@ beans: !!map
   invalidScopeBean:
     scope: blah
     class: ClassSimpleYAML
-
+  aDependencyBean:
+    class: DependencyBean
+    scope: singleton
+  aspectBean:
+    class: AspectBean
+    scope: singleton
+  parentBean:
+    abstract: true
+    properties: !!map
+      someProperty:
+        value: inheritedValue
+  childBean:
+    parent: parentBean
+    class: ChildBeanYaml
+    scope: singleton
 import:
   - someOtherFile.yaml
 

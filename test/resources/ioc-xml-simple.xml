@@ -88,4 +88,9 @@
 
     <bean id="aSimpleBeanFactoryNoArgs" class="ClassSimpleXML11" scope="singleton" factory-method="getInstanceNoArgs"/>
     <bean id="aSimpleBeanFactoryFromOtherBeanNoArgs" scope="singleton" factory-bean="aSimpleBeanFactory" factory-method="factoryMethodNoArgs"/>
+    
+    <bean id="parentBean" abstract="true">
+      <property name="someProperty"><value>inheritedValue</value></property>
+    </bean>
+    <bean id="childBean" class="ChildBean" parent="parentBean"/>
 </beans>

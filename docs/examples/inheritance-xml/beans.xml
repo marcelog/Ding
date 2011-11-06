@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="aDependencyBean" class="DependencyBean" scope="singleton"/>
+  <bean id="aspectBean" class="AspectBean" scope="singleton"/>
+
+  <bean id="parentBean" abstract="true">
+    <property name="someProperty"><ref bean="aDependencyBean"/></property>
+    <aspect ref="aspectBean" type="method">
+        <pointcut expression="^get.*" method="invoke"/>
+    </aspect>
+  </bean>
+  <bean id="childBean" parent="parentBean" class="MyBean" scope="singleton">
+    <property name="someOtherProperty"><value>blah</value></property>
+  </bean>
+</beans>

@@ -1,0 +1,27 @@
+beans: !!map
+  aDependencyBean:
+    class: DependencyBean
+    scope: singleton
+  aspectBean:
+    class: AspectBean
+    scope: singleton
+  parentBean:
+    abstract: true
+    properties: !!map
+      someProperty:
+        ref: aDependencyBean
+    aspects:
+      aspectA:
+        pointcuts:
+          pointcutA:
+            method: invoke
+            expression: ^get.*
+        type: method
+        ref: aspectBean
+  childBean:
+    parent: parentBean
+    class: MyBean
+    scope: singleton
+    properties: !!map
+      someOtherProperty:
+        value: blah

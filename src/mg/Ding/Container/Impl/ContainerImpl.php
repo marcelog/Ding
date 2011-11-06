@@ -368,6 +368,14 @@ class ContainerImpl implements IContainer
             foreach ($this->_aspectManager->getAspects() as $aspect) {
                 $expression = $aspect->getExpression();
                 if (preg_match('/' . $expression . '/', $beanClass) === 0) {
+                    $parentClass = $rClass->getParentClass();
+                    while($parentClass !== false) {
+                        if (preg_match('/' . $expression . '/', $parentClass->getName()) > 0) {
+                            $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
+                            break;
+                        }
+                        $parentClass = $parentClass->getParentClass();
+                    }
                     continue;
                 }
                 $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
@@ -440,6 +448,11 @@ class ContainerImpl implements IContainer
         $ret = false;
         $beanDefinition = $this->getBeanDefinition($name);
         $beanName = $name . '.bean';
+        if ($beanDefinition->isAbstract()) {
+            throw new BeanFactoryException(
+            	"Cant instantiate abstract bean: $name"
+            );
+        }
         if ($beanDefinition->isPrototype()) {
             $ret = $this->_createBean($beanDefinition);
         } else if ($beanDefinition->isSingleton()) {

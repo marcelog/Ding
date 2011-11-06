@@ -354,7 +354,7 @@ class BeanXmlDriver implements
      * @throws BeanFactoryException
      * @return BeanDefinition
      */
-    private function _loadBean($beanName, BeanDefinition $bean = null)
+    private function _loadBean($beanName, BeanDefinition $bean = null, $factory)
     {
         // This should not be necessary because this driver is also an aspect
         // provider and as such, the AspectManager would already called
@@ -376,7 +376,16 @@ class BeanXmlDriver implements
         }
         // asume valid xml (only one bean with that id)
         $simpleXmlBean = $simpleXmlBean[0];
-        if ($bean === null) {
+        $bMethods = $bProps = $bAspects = $constructorArgs = array();
+        if (isset($simpleXmlBean->attributes()->parent)) {
+            $value = (string)$simpleXmlBean->attributes()->parent;
+            $bean = $factory->getBeanDefinition($value);
+            $bean = $bean->makeChildBean($beanName);
+            $bProps = $bean->getProperties();
+            $constructorArgs = $bean->getArguments();
+            $bAspects = $bean->getAspects();
+            $bMethods = $bean->getMethodInjections();
+        } else {
             $bean = clone $this->_templateBeanDef;
         }
         $bean->setName($beanName);
@@ -403,6 +412,12 @@ class BeanXmlDriver implements
                 (string)$simpleXmlBean->attributes()->{'depends-on'}
             ));
         }
+        if (isset($simpleXmlBean->attributes()->abstract)) {
+            $value = (string)$simpleXmlBean->attributes()->abstract;
+            if ($value == 'true') {
+                $bean->makeAbstract();
+            }
+        }
         if (isset($simpleXmlBean->attributes()->{'factory-bean'})) {
             $bean->setFactoryBean(
                 (string)$simpleXmlBean->attributes()->{'factory-bean'}
@@ -418,7 +433,6 @@ class BeanXmlDriver implements
                 (string)$simpleXmlBean->attributes()->{'destroy-method'}
             );
         }
-        $bMethods = $bProps = $bAspects = $constructorArgs = array();
         foreach ($simpleXmlBean->property as $property) {
             $bProp = $this->_loadProperty($property);
             $bProps[$bProp->getName()] = $bProp;
@@ -479,7 +493,10 @@ class BeanXmlDriver implements
      */
     public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
     {
-        return $this->_loadBean($beanName, $bean);
+        if ($bean === null) {
+            return $this->_loadBean($beanName, $bean, $factory);
+        }
+        return $bean;
     }
 
     public function afterConfig(IContainer $factory)

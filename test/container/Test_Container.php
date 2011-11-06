@@ -107,6 +107,16 @@ class Test_Container extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         serialize($container);
     }
+
+    /**
+     * @test
+     * @expectedException \Exception
+     */
+    public function canott_instantiate_abstract_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $container->getBean('abstractBean');
+    }
 }
 
 class SomeContainerTestBeanClass

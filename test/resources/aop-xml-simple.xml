@@ -4,12 +4,16 @@
     <pointcut expression="^.+" method="invoke"/>
   </aspect>
   <pointcut id="aPointcut" expression="^.+" method="invoke"/>
+  <aspect id="anAspectForParentClass" ref="aspectBean" type="method" expression="AspectedParent">
+    <pointcut expression="targetMethod" method="invoke"/>
+  </aspect>
   
   <bean id="methodIntercepted" class="ClassSimpleAOPXML" scope="singleton">
     <aspect ref="aspectBean" type="method">
       <pointcut expression="targetMethod" method="invoke"/>
     </aspect>
   </bean>
+  <bean id="methodInterceptedSubClass" class="AChildOfAnAspectedClass" scope="singleton"/>
   <bean id="invalidAspectType" class="ClassSimpleAOPXML2" scope="singleton">
     <aspect ref="asdasd" type="asdasd"/>
   </bean>

@@ -56,6 +56,9 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         		'bdef' => array(
                         'yaml' => array(
                         	'filename' => 'ioc-yaml-simple.yaml', 'directories' => array(RESOURCES_DIR)
+                        ),
+                        'annotation' => array(
+                        	'scanDir' => array(realpath(__DIR__))
                         )
                     )
                 )
@@ -343,6 +346,16 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof ClassSimpleYAML3);
         $this->assertTrue($bean2 instanceof ClassSimpleYAML12);
     }
+
+    /**
+     * @test
+     */
+    public function can_inherit_from_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('childBean');
+        $this->assertEquals($bean->someProperty, 'inheritedValue');
+    }
 }
 
 class ClassSimpleYAML
@@ -607,5 +620,15 @@ class ClassSimpleYAML12
     public function setArray($value)
     {
         $this->array = $value;
+    }
+}
+
+class ChildBeanYaml
+{
+    public $someProperty;
+
+    public function setSomeProperty($value)
+    {
+        $this->someProperty = $value;
     }
 }

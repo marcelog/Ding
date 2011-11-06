@@ -56,6 +56,9 @@ class Test_XML_AOP extends PHPUnit_Framework_TestCase
                     'bdef' => array(
                         'xml' => array(
                         	'filename' => 'aop-xml-simple.xml', 'directories' => array(RESOURCES_DIR)
+                        ),
+                        'annotation' => array(
+                        	'scanDir' => array(realpath(__DIR__))
                         )
                     )
                 )
@@ -104,6 +107,15 @@ class Test_XML_AOP extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->targetMethod('aSd'), 'BEFOREmethodReturnForaSdAFTER');
     }
 
+    /**
+     * @test
+     */
+    public function can_intercept_method_from_parent_class()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('methodInterceptedSubClass');
+        $this->assertEquals($bean->targetMethod('aSd'), 'BEFOREmethodReturnForaSdAFTER');
+    }
     /**
      * @test
      */
@@ -235,4 +247,13 @@ class ClassSimpleAOPExceptionAndProceedXMLAspect
     {
         return $invocation->proceed();
     }
+}
+
+class AspectedParent extends ClassSimpleAOPXML
+{
+
+}
+class AChildOfAnAspectedClass extends AspectedParent
+{
+
 }

@@ -226,6 +226,16 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $container->getBean('invalidScopeBean');
     }
+
+    /**
+     * @test
+     */
+    public function can_inherit_from_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('childBean');
+        $this->assertTrue($bean->someProperty instanceof MyComponentDependency);
+    }
 }
 
 /**
@@ -501,6 +511,40 @@ class MyComponentBean
  * @Scope(value=singleton)
  */
 class MyComponentDependency
+{
+
+}
+
+/**
+ * @Component
+ */
+abstract class AParentBean
+{
+    public $someProperty;
+
+    /** @Resource */
+    public function setMyComponentDependency($value)
+    {
+        $this->someProperty = $value;
+    }
+}
+/**
+ * @Component(name=aParentBeanWithName)
+ */
+abstract class AnotherParentWithName extends AParentBean
+{
+
+}
+
+abstract class AnotherParent extends AnotherParentWithName
+{
+
+}
+
+/**
+ * @Component(name=childBean)
+ */
+class ChildBeanAnnotated extends AnotherParent
 {
 
 }

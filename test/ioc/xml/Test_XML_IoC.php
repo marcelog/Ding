@@ -77,6 +77,9 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
                     'bdef' => array(
                         'xml' => array(
                         	'filename' => 'ioc-xml-inexistant.xml', 'directories' => array('neverland')
+                        ),
+                        'annotation' => array(
+                        	'scanDir' => array(realpath(__DIR__))
                         )
                     )
                 )
@@ -347,6 +350,16 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof ClassSimpleXML3);
         $this->assertTrue($bean2 instanceof ClassSimpleXML12);
     }
+
+    /**
+     * @test
+     */
+    public function can_inherit_from_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('childBean');
+        $this->assertEquals($bean->someProperty, 'inheritedValue');
+    }
 }
 
 class ClassSimpleXML
@@ -612,5 +625,15 @@ class ClassSimpleXML12
     public function setArray($value)
     {
         $this->array = $value;
+    }
+}
+
+class ChildBean
+{
+    public $someProperty;
+
+    public function setSomeProperty($value)
+    {
+        $this->someProperty = $value;
     }
 }

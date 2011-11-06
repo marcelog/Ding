@@ -58,7 +58,11 @@ class AnnotationInitDestroyMethodDriver implements IAfterDefinitionListener
      */
     public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
     {
-        $annotations = ReflectionFactory::getClassAnnotations($bean->getClass());
+        $beanClass = $bean->getClass();
+        if (empty($beanClass)) {
+            return $bean;
+        }
+        $annotations = ReflectionFactory::getClassAnnotations($beanClass);
         if (isset($annotations['class']['InitMethod'])) {
             $arguments = $annotations['class']['InitMethod']->getArguments();
             if (isset($arguments['method'])) {

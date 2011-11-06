@@ -142,6 +142,48 @@ class BeanDefinition
     private $_lookupMethods;
 
     /**
+     * True if this bean cant be instantiated.
+     * @var boolean
+     */
+    private $_isAbstract;
+
+    /**
+     * Parent bean, if any.
+     * @var string
+     */
+    private $_parent;
+
+    /**
+     * Returns true if this bean definition is abstract and cant be instantiated.
+     *
+     * @return boolean
+     */
+    public function isAbstract()
+    {
+        return $this->_isAbstract;
+    }
+
+    /**
+     * Makes this bean an abstract bean definition.
+     *
+     * @return void
+     */
+    public function makeAbstract()
+    {
+        $this->_isAbstract = true;
+    }
+
+    /**
+     * Makes this bean concrete, that is, not abstract.
+     *
+     * @return void
+     */
+    public function makeConcrete()
+    {
+        $this->_isAbstract = false;
+    }
+
+    /**
      * Returns true if this bean definition is for a bean of type singleton.
      *
      * @return boolean
@@ -447,6 +489,22 @@ class BeanDefinition
     }
 
     /**
+     * Returns a new bean definition, a copy of this one.
+     *
+     * @param string $childName The name for the new bean
+     *
+     * @return BeanDefinition
+     */
+    public function makeChildBean($childName)
+    {
+        $bean = serialize($this);
+        $bean = unserialize($bean);
+        $bean->setName($childName);
+        $bean->makeConcrete();
+        return $bean;
+    }
+
+    /**
      * Constructor.
      *
      * @param string $name Bean name.
@@ -470,5 +528,7 @@ class BeanDefinition
         $this->_autowiredProperties = $soullessArray;
         $this->_aspects = false;
         $this->_constructorArgs = $soullessArray;
+        $this->_isAbstract = false;
+        $this->_parent = null;
     }
 }

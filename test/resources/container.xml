@@ -5,4 +5,5 @@
   <aspect id="anAspect" ref="someAspect" type="method" expression="SomeContainerTestBeanClass">
     <pointcut pointcut-ref="aPointcut" method="invoke"/>
   </aspect>
+  <bean id="abstractBean" abstract="true"/>
 </beans>

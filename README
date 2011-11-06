@@ -125,6 +125,7 @@ the container setup any php options by specifying a property with the name
 be specified via the @InitMethod(method=xxx) annotation).
 * Optional destroy-method will be called when the container is shutting down.
 (Can also be specified via the @DestroyMethod(method=xxx) annotation).
+* Supports bean inheritance, via OOP and via xml and yaml definitions.
 
 Aware Interfaces
 ================
@@ -180,6 +181,8 @@ drivers.
 
 * Exception: Use this one to be called when an aspected
  method throws an exception.
+
+* Can apply aspects to parent classes
 
 --------------------------------------------------------------------------------
 MVC
