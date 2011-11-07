@@ -30,6 +30,7 @@
 namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\Lifecycle\IAfterConfigListener;
+use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Bean\Factory\IBeanFactory;
@@ -51,7 +52,7 @@ use Ding\Aspect\PointcutDefinition;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationAspectDriver implements IAfterConfigListener
+class AnnotationAspectDriver implements IAfterConfigListener, IBeforeDefinitionListener
 {
     /**
      * Aspect manager instance.
@@ -65,6 +66,17 @@ class AnnotationAspectDriver implements IAfterConfigListener
      */
     private $_cache;
 
+    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
+    {
+        if (!empty($bean)) {
+            return $bean;
+        }
+        if (isset($this->_cache[$beanName])) {
+            return $this->_cache[$beanName];
+        }
+        return $bean;
+    }
+
     private function _newAspect($aspectClass, $factory, $classExpression, $expression, $method, $type)
     {
         // Create bean.
@@ -72,7 +84,7 @@ class AnnotationAspectDriver implements IAfterConfigListener
         $aspectBean = new BeanDefinition($aspectBeanName);
         $aspectBean->setScope(BeanDefinition::BEAN_SINGLETON);
         $aspectBean->setClass($aspectClass);
-        $factory->setBeanDefinition($aspectBeanName, $aspectBean);
+        $this->_cache[$aspectBeanName] = $aspectBean;
         $pointcutName = 'PointcutAnnotationAspectDriver' . rand(1, microtime(true));
         $pointcutDef = new PointcutDefinition($pointcutName, $expression, $method);
         $aspectName = 'AnnotationAspected' . rand(1, microtime(true));

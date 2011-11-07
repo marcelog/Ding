@@ -651,11 +651,13 @@ class ContainerImpl implements IContainer
             $this->_lifecycleManager->addBeforeConfigListener($anDriver);
             $this->_lifecycleManager->addAfterConfigListener($anDriver);
             $this->_lifecycleManager->addBeforeDefinitionListener($anDriver);
+            $anAspectDriver = new AnnotationAspectDriver($this->_aspectManager);
+            $this->_lifecycleManager->addBeforeDefinitionListener($anAspectDriver);
             $this->_lifecycleManager->addAfterConfigListener(new MVCAnnotationDriver);
             $annotationResourceDriver = new AnnotationResourceDriver;
             $this->_lifecycleManager->addAfterDefinitionListener($annotationResourceDriver);
             $this->_lifecycleManager->addAfterCreateListener($annotationResourceDriver);
-            $this->_lifecycleManager->addAfterConfigListener(new AnnotationAspectDriver($this->_aspectManager));
+            $this->_lifecycleManager->addAfterConfigListener($anAspectDriver);
             $this->_lifecycleManager->addAfterDefinitionListener(new AnnotationRequiredDriver);
             $this->_lifecycleManager->addAfterDefinitionListener(new AnnotationInitDestroyMethodDriver);
         }
