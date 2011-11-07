@@ -92,6 +92,7 @@ class Test_Proxy extends PHPUnit_Framework_TestCase
         $this->assertFalse($result[4]);
         $this->assertNull($result[5]);
         $this->assertEquals($result[6], 'asd');
+        $this->assertTrue(is_array($result[7]));
     }
 }
 
@@ -143,9 +144,9 @@ class ClassSimpleAOPAnnotation3
     public $something;
     public $called;
 
-    public function anotherMethodWithDefaultValues(array $a, &$f, DummyClass $g, $b = true, $c = false, $d = null, $e = 'asd')
+    public function anotherMethodWithDefaultValues(array $a, &$f, DummyClass $g, $b = true, $c = false, $d = null, $e = 'asd', array $h = array())
     {
-        return array($a, $f, $g, $b, $c, $d, $e);
+        return array($a, $f, $g, $b, $c, $d, $e, $h);
     }
 
     protected function someProtectedMethod()
