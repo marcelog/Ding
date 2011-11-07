@@ -189,6 +189,8 @@ TEXT;
                 $parameterSrc .= 'false';
             } else if ($parameter->getDefaultValue() === true) {
                 $parameterSrc .= 'true';
+            } else if (is_array($parameter->getDefaultValue())) {
+                $parameterSrc .= 'array()';
             } else {
                 $parameterSrc .= "'" . $parameter->getDefaultValue() . "'";
             }
