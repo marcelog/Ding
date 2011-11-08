@@ -88,6 +88,12 @@ class BeanAnnotationDriver
     private $_cache = false;
 
     /**
+     * Definitions for config beans.
+     * @var BeanDefinition[]
+     */
+    private $_configBeansDefinitions = array();
+
+    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeConfig()
      */
@@ -273,7 +279,7 @@ class BeanAnnotationDriver
                 $def->setScope(BeanDefinition::BEAN_SINGLETON);
                 $properties = array();
                 $annotations = ReflectionFactory::getClassAnnotations($configClass);
-                $factory->setBeanDefinition($configBeanName, $def);
+                $this->_configBeansDefinitions[$configBeanName] = $def;
             }
             foreach (
                 ReflectionFactory::getClassAnnotations($configClass) as $method => $annotations
@@ -311,6 +317,9 @@ class BeanAnnotationDriver
         //if ($bean != null) {
         //    return $bean;
         //}
+        if (isset($this->_configBeansDefinitions[$beanName])) {
+            return $this->_configBeansDefinitions[$beanName];
+        }
         foreach ($this->_configClasses as $configClass => $configBeanName) {
             // This should not be necessary because the container and the lifecycle
             // impose no more than one beforeDefinition() call once the bean is
