@@ -189,6 +189,7 @@ This metadata includes:
   the given bean.</li> 
   <li><u>Abstract:</u>Since 1.1.0. False by default. Specifies a bean as concrete or abstract. Abstract beans cant be instantiated.</li>
   <li><u>Parent:</u>Since 1.1.0. Optional. The name of parent bean, if any.</li>
+  <li><u>Aliases:</u>Since 1.1.2. Optional. An array of strings, with the aliases known for this bean.</li>
 </ul>
 </p>
 <H4>Examples:</H4>
@@ -273,6 +274,21 @@ class MyDependency
 The full example is available <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ComponentAnnotation">here</a>.
 </p>
 <p>
+Since version 1.1.2, Ding supports bean aliasing, so you can give multiple names for a @Component, like so:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component(name={name1, name2, name3})
+ */
+class MyBean
+{
+...
+}
+</pre>
+<p>
+The full example is available <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-annotations">here</a>.
+</p>
+<p>
 @Required Use this one in your setter methods (i.e: setSomething()) and this
 will tell the container to throw an exception if this property isnt configured
 when instantiating the bean. (JSR-330)
@@ -321,7 +337,30 @@ of a configuration class with @Resource. This will tell the container to look fo
 a bean that is named like the annotated property. This bean can be provided in another
 @Configuration annotated class. See docs/examples/PropertiesAnnotations.
 </p>
+<p>
+Since version 1.1.2, you can use bean aliasing with @Bean. Example:
+</p>
+<pre name="code" class="php">
+/**
+ * @Configuration
+ */
+class SomeBeanProviderClass
+{
+    /**
+     * @Bean(name={name1, name2, name3})
+     */
+    public function someBean()
+    {
+    ...
+    }
+}
+</pre>
+<p>
+The full example is available <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-annotations">here</a>.
+</p>
+<p>
 <u>Generic bean definition (xml and yaml drivers)</u>
+</p>
 <p>
 The examples here are based on the xml driver. If you want to take a look at the
 yaml syntax (fully compatible and almost equal to the xml syntax), please take a look at
@@ -393,7 +432,20 @@ This one will call destroy() when the container is destroyed:
     &lt;bean id="beanName" class="A\B\C" scope="prototype" destroy-method="destroy"/&gt;
 &lt;/beans&gt;
 </pre>
-
+<p>
+Since version 1.1.2, Ding supports bean aliasing, so you can give multiple names for a bean. The id
+property specifies *the* name of the bean, while the name property specifies the aliases. Example:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="A\B\C" name="alias1, alias2, alias3"/&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+<ul>
+<li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-xml">XML</a> driver example</li>
+<li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-yaml">YAML</a> driver example</li>
+</ul>
 <H4>Constructor arguments types and metadata</H4>
 <p>
 The constructor arguments for a bean behave exactly like properties. See the
