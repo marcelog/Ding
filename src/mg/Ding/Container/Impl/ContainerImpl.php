@@ -148,6 +148,12 @@ class ContainerImpl implements IContainer
     private $_beanDefs;
 
     /**
+     * Beans aliases.
+     * @var string[]
+     */
+    private $_beanAliases;
+
+    /**
      * Holds our bean definitions cache.
      * @var ICache
      */
@@ -204,6 +210,9 @@ class ContainerImpl implements IContainer
     public function getBeanDefinition($name)
     {
         $beanName = $name . '.beandef';
+        if (isset($this->_beanAliases[$name])) {
+            $name = $this->_beanAliases[$name];
+        }
         if (isset($this->_beanDefs[$name])) {
             if ($this->_logDebugEnabled) {
                 $this->_logger->debug('Serving already known: ' . $beanName);
@@ -234,6 +243,9 @@ class ContainerImpl implements IContainer
         }
         $beanDefinition = $this->_lifecycleManager->afterDefinition($this, $beanDefinition);
         $this->setBeanDefinition($name, $beanDefinition);
+        foreach ($beanDefinition->getAliases() as $alias) {
+            $this->_beanAliases[$alias] = $name;
+        }
         return $beanDefinition;
     }
 
@@ -632,6 +644,7 @@ class ContainerImpl implements IContainer
         $this->_beanCache = CacheLocator::getBeansCacheInstance();
         $this->_shutdowners = $soullessArray;
         $this->_resources = $soullessArray;
+        $this->_beanAliases = $soullessArray;
         $this->_eventListeners = $soullessArray;
 
         $this->_lifecycleManager->addAfterCreateListener(new ContainerAwareDriver);

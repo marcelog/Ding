@@ -112,10 +112,20 @@ class Test_Container extends PHPUnit_Framework_TestCase
      * @test
      * @expectedException \Exception
      */
-    public function canott_instantiate_abstract_bean()
+    public function cannot_instantiate_abstract_bean()
     {
         $container = ContainerImpl::getInstance($this->_properties);
         $container->getBean('abstractBean');
+    }
+
+    /**
+     * @test
+     */
+    public function can_get_cached_aliased_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aliasedBean');
+        $bean = $container->getBean('alias1');
     }
 }
 

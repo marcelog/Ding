@@ -205,17 +205,20 @@ class BeanAnnotationDriver
                     if (!isset($args['name'])) {
                         $parentNameBean = $parent->getName();
                     } else {
-                        $parentNameBean = $args['name'];
+                        if (is_array($args['name'])) {
+                            $parentNameBean = array_shift($args['name']);
+                        } else {
+                            $parentNameBean = $args['name'];
+                        }
                     }
                     $def = $this->_getBeanDefinition($parentNameBean, $parent->getName(), $parentAnnotations['class'], $factory);
                     break;
                 }
                 $parent = ReflectionFactory::getClass($parent->getName())->getParentClass();
-
             };
         }
         if ($def === null) {
-            $def = new BeanDefinition($name);
+            $def = new BeanDefinition('dummy');
         }
         $def->setClass($class);
         if (isset($annotations['Component'])) {
@@ -233,6 +236,17 @@ class BeanAnnotationDriver
                 }
             }
         }
+        $alias = array();
+        if (is_array($name)) {
+            $realName = array_shift($name);
+            $alias = $name;
+        } else {
+            $realName = $name;
+        }
+        foreach ($alias as $newAlias) {
+            $def->addAlias($newAlias);
+        }
+        $def->setName($realName);
         if (isset($annotations['Scope'])) {
             $args = $annotations['Scope']->getArguments();
             if (isset($args['value'])) {
@@ -340,16 +354,15 @@ class BeanAnnotationDriver
                 if (isset($annotations['Bean'])) {
                     $beanAnnotation = $annotations['Bean'];
                     $args = $beanAnnotation->getArguments();
-                    if (isset($args['name'])) {
-                        $name = $args['name'];
-                    } else {
-                        $name = $method;
+                    if (!isset($args['name'])) {
+                        $args['name'] = $method;
                     }
-                    if ($name == $beanName) {
-                        if (isset($annotations['Bean'])) {
-                            $bean = $this->_loadBean($name, $configBeanName, $method, $annotations, $factory);
-                            $this->_configBeans[$configBeanName][$name] = $bean;
-                        }
+                    if (
+                        (is_array($args['name']) && in_array($beanName, $args['name']))
+                        || $args['name'] == $beanName
+                    ) {
+                        $bean = $this->_loadBean($args['name'], $configBeanName, $method, $annotations, $factory);
+                        $this->_configBeans[$configBeanName][$beanName] = $bean;
                     }
                     if ($bean !== null) {
                         break;
@@ -367,9 +380,14 @@ class BeanAnnotationDriver
             foreach ($components as $component) {
                 $annotations = \Ding\Reflection\ReflectionFactory::getClassAnnotations($component);
                 $args = $annotations['class']['Component']->getArguments();
-                if (isset($args['name']) && ($args['name'] == $beanName)) {
-                    $bean = $this->_getBeanDefinition($args['name'], $component, $annotations['class'], $factory);
-                    break;
+                if (isset($args['name'])) {
+                    if (
+                        (is_array($args['name']) && in_array($beanName, $args['name']))
+                        || $args['name'] == $beanName
+                    ) {
+                        $bean = $this->_getBeanDefinition($args['name'], $component, $annotations['class'], $factory);
+                        break;
+                    }
                 }
             }
         }

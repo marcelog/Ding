@@ -356,6 +356,24 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $bean = $container->getBean('childBean');
         $this->assertEquals($bean->someProperty, 'inheritedValue');
     }
+    /**
+     * @test
+     */
+    public function can_get_globally_aliased_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('globalAliasedBean');
+        $this->assertTrue($bean instanceof ChildBeanYaml);
+    }
+    /**
+     * @test
+     */
+    public function can_get_aliased_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('someAliasedName');
+        $this->assertTrue($bean instanceof ClassSimpleYAML12);
+    }
 }
 
 class ClassSimpleYAML

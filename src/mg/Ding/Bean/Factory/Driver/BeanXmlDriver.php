@@ -369,6 +369,17 @@ class BeanXmlDriver implements
                     $this->_logger->debug('Found ' . $beanName . ' in ' . $name);
                 }
                 break;
+            } else {
+                $simpleXmlBean = $xml->xpath("//bean[contains(@name, '$beanName')]");
+                if (!empty($simpleXmlBean)) {
+                    $name = (string)$simpleXmlBean[0]->attributes()->id;
+                    return $this->_loadBean($name, $bean, $factory);
+                }
+                $simpleXmlBean = $xml->xpath("//alias[@alias='$beanName']");
+                if (!empty($simpleXmlBean)) {
+                    $name = (string)$simpleXmlBean[0]->attributes()->name;
+                    return $this->_loadBean($name, $bean, $factory);
+                }
             }
         }
         if (false == $simpleXmlBean) {
@@ -404,6 +415,14 @@ class BeanXmlDriver implements
             $bean->setFactoryMethod(
                 (string)$simpleXmlBean->attributes()->{'factory-method'}
             );
+        }
+
+        if (isset($simpleXmlBean->attributes()->name)) {
+            $aliases = (string)$simpleXmlBean->attributes()->name;
+            $aliases = explode(',', $aliases);
+            foreach ($aliases as $alias) {
+                $bean->addAlias(trim($alias));
+            }
         }
 
         if (isset($simpleXmlBean->attributes()->{'depends-on'})) {

@@ -1,0 +1,8 @@
+beans: !!map
+  componentA:
+    class: ComponentA
+    name: componentB, componentC
+
+alias: !!map
+  componentA: componentD, componentE
+

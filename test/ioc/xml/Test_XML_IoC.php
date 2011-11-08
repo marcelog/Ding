@@ -360,6 +360,26 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $bean = $container->getBean('childBean');
         $this->assertEquals($bean->someProperty, 'inheritedValue');
     }
+
+    /**
+     * @test
+     */
+    public function can_get_globally_aliased_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('globalAliasedBean');
+        $this->assertTrue($bean instanceof ClassSimpleXML2);
+    }
+
+    /**
+     * @test
+     */
+    public function can_get_aliased_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aliasedBean');
+        $this->assertTrue($bean instanceof ClassSimpleXML);
+    }
 }
 
 class ClassSimpleXML

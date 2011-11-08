@@ -236,6 +236,25 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $bean = $container->getBean('childBean');
         $this->assertTrue($bean->someProperty instanceof MyComponentDependency);
     }
+
+    /**
+     * @test
+     */
+    public function can_get_component_aliased()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('anAliasForABean');
+        $this->assertTrue($bean instanceof MyComponentDependency);
+    }
+    /**
+     * @test
+     */
+    public function can_get_bean_aliased()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aliasedBean');
+        $this->assertTrue($bean instanceof ClassSimpleAnnotation);
+    }
 }
 
 /**
@@ -326,7 +345,7 @@ class ClassSimpleAnnotationConfiguration
     }
 
     /**
-     * @Bean(name=renamedBean,class=ClassSimpleAnnotation)
+     * @Bean(name={renamedBean,aliasedBean},class=ClassSimpleAnnotation)
      * @Scope(value=singleton)
      */
     public function whateverHere()
@@ -507,7 +526,7 @@ class MyComponentBean
 }
 
 /**
- * @Component(name=myComponentDependency)
+ * @Component(name={myComponentDependency,anAliasForABean})
  * @Scope(value=singleton)
  */
 class MyComponentDependency
@@ -529,22 +548,29 @@ abstract class AParentBean
     }
 }
 /**
- * @Component(name=aParentBeanWithName)
+ * @Component(name={aParentBeanWithName,anAliasForTheParent})
  */
 abstract class AnotherParentWithName extends AParentBean
 {
 
 }
 
+/**
+ * @Component(name=someUnneededParentNameBecauseThisIsAbstractButHelpsCoverage)
+ */
 abstract class AnotherParent extends AnotherParentWithName
 {
 
 }
 
+abstract class UnnamedParent extends AnotherParent
+{
+
+}
 /**
  * @Component(name=childBean)
  */
-class ChildBeanAnnotated extends AnotherParent
+class ChildBeanAnnotated extends UnnamedParent
 {
 
 }

@@ -120,6 +120,12 @@ class BeanYamlDriver implements
     private $_directories = false;
 
     /**
+     * Bean aliases, pre-scanned
+     * @var string[]
+     */
+    private $_beanAliases = array();
+
+    /**
      * Serialization.
      *
      * @return array
@@ -318,6 +324,9 @@ class BeanYamlDriver implements
         //    $this->_load();
         //}
         $beanDef = false;
+        if (isset($this->_beanAliases[$beanName])) {
+            return $this->_loadBean($this->_beanAliases[$beanName], $bean, $factory);
+        }
         foreach($this->_yamlFiles as $yamlFilename => $yaml) {
             if (isset($yaml['beans'][$beanName])) {
                 if ($this->_logger->isDebugEnabled()) {
@@ -466,8 +475,24 @@ class BeanYamlDriver implements
     {
         $this->_load();
         foreach($this->_yamlFiles as $yamlFilename => $yaml) {
+            if (isset($yaml['alias'])) {
+                foreach ($yaml['alias'] as $beanName => $aliases) {
+                    $aliases = explode(',', $aliases);
+                    foreach ($aliases as $alias) {
+                        $alias = trim($alias);
+                        $this->_beanAliases[$alias] = $beanName;
+                    }
+                }
+            }
             if (isset($yaml['beans'])) {
                 foreach ($yaml['beans'] as $beanName => $beanDef) {
+                    if (isset($beanDef['name'])) {
+                        $aliases = explode(',', $beanDef['name']);
+                        foreach ($aliases as $alias) {
+                            $alias = trim($alias);
+                            $this->_beanAliases[$alias] = $beanName;
+                        }
+                    }
                     if (isset($beanDef['listens-on'])) {
                         $events = $beanDef['listens-on'];
                         foreach (explode(',', $events) as $eventName) {

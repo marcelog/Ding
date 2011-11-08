@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="componentA" class="ComponentA" name="componentB, componentC"/>
+	<alias name="componentA" alias="componentD"/>
+	<alias name="componentA" alias="componentE"/>
+</beans>

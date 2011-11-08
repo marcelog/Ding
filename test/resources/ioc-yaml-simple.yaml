@@ -139,6 +139,7 @@ beans: !!map
   aSimpleSetArgBean2:
     class: ClassSimpleYAML12
     scope: singleton
+    name: someAliasedName
     properties: !!map
       value:
         value: 1a$
@@ -199,3 +200,5 @@ beans: !!map
 import:
   - someOtherFile.yaml
 
+alias: !!map
+  childBean: globalAliasedBean

@@ -154,6 +154,34 @@ class BeanDefinition
     private $_parent;
 
     /**
+     * Bean aliases.
+     * @var string[]
+     */
+    private $_aliases;
+
+    /**
+     * Aliases for this bean.
+     *
+     * @return string[]
+     */
+    public function getAliases()
+    {
+        return $this->_aliases;
+    }
+
+    /**
+     * Add an alias to this bean.
+     *
+     * @param string $name New alias for this bean.
+     *
+     * @return void
+     */
+    public function addAlias($name)
+    {
+        $this->_aliases[$name] = $name;
+    }
+
+    /**
      * Returns true if this bean definition is abstract and cant be instantiated.
      *
      * @return boolean
@@ -517,6 +545,7 @@ class BeanDefinition
         $soullessString = '';
         $soullessArray = array();
         $this->_class = $soullessString;
+        $this->_aliases = $soullessArray;
         $this->_scope = BeanDefinition::BEAN_SINGLETON;
         $this->_factoryMethod = $soullessString;
         $this->_factoryBean = $soullessString;

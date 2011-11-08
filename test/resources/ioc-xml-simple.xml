@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
+    <alias name="aSimpleConstArgBean" alias="globalAliasedBean"/>
     <bean id="invalidScopeBean" scope="aa" class="ClassSimpleXML"/>
     <bean id="aSimpleSingletonBean" scope="singleton" class="ClassSimpleXML"/>
     <bean id="beanWithNoClass" scope="singleton"/>
-    <bean id="aSimplePrototypeBean" scope="prototype" class="ClassSimpleXML"/>
+    <bean id="aSimplePrototypeBean" scope="prototype" class="ClassSimpleXML" name="aliasedBean"/>
     
     <bean id="aSimpleConstArgBean" scope="singleton" class="ClassSimpleXML2">
       <constructor-arg><value>1a$</value></constructor-arg>
