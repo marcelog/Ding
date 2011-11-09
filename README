@@ -126,6 +126,7 @@ be specified via the @InitMethod(method=xxx) annotation).
 * Optional destroy-method will be called when the container is shutting down.
 (Can also be specified via the @DestroyMethod(method=xxx) annotation).
 * Supports bean inheritance, via OOP and via xml and yaml definitions.
+* Supports bean aliasing, via xml, yaml, and annotations.
 
 Aware Interfaces
 ================
