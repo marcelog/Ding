@@ -907,8 +907,36 @@ class Config
 }
 </pre>
 <p>
-The "@ListensOn" value is a csv string of events, lower camel cased.
+Since 1.1.3, events are supported in @Component and @Bean. If you want to specify
+multiple events, you can do so in this way:
 </p>
+<pre name="code" class="php">
+/**
+ * @Component
+ * @ListensOn(value={bean2Created, anotherEvent})
+ */
+class SomeComponent
+{
+...
+}
+
+/**
+ * @Configuration
+ */
+class Config
+{
+    /**
+     * @Bean(class=Bean4)
+     * @Scope(value=singleton)
+     * @ListensOn(value={bean2Created, anotherEvent})
+     */
+    public function someBean()
+    {
+        return new Bean4;
+    }
+}
+</pre>
+
 <a href="#" class="next-link"><strong>Back</strong></a>
                   <a name="resources" id="resources"></a>
                   <div class="line">
