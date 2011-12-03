@@ -66,6 +66,82 @@ class Test_Reflection extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     * Included because of #116
+     */
+    public function can_parse_annotations()
+    {
+        $text = <<<TEXT
+/**
+ * A Comment
+ * @Bean(name=blah)
+ * @Annotation1 @Annotation2(a=b, d=e)
+ * @Annotation3(q=e)@Annotation4(g=h)
+ * @Component   ( name = myBean )
+ * @InitMethod ( qqq=sss,method=init , asd=dsa )
+ * @DestroyMethod   (   method   =  destroy  )
+ * @Scope ( value = singleton )
+ */
+TEXT;
+        $text2 = <<<TEXT
+/** @Some1 */
+TEXT;
+        $text2 = <<<TEXT
+/** @Some1 (a=b,c=d)@Some2 ( a=b)*/
+TEXT;
+        $annotations = ReflectionFactory::getAnnotations($text);
+        $beanA = array_shift($annotations);
+        $an1A = array_shift($annotations);
+        $an2A = array_shift($annotations);
+        $an3A = array_shift($annotations);
+        $an4A = array_shift($annotations);
+        $componentA = array_shift($annotations);
+        $initMethodA = array_shift($annotations);
+        $destroyMethodA = array_shift($annotations);
+        $scopeA = array_shift($annotations);
+        $this->assertEquals($componentA->getName(), 'Component');
+        $this->assertEquals($beanA->getName(), 'Bean');
+        $this->assertEquals($initMethodA->getName(), 'InitMethod');
+        $this->assertEquals($destroyMethodA->getName(), 'DestroyMethod');
+        $this->assertEquals($scopeA->getName(), 'Scope');
+        $this->assertEquals($an1A->getName(), 'Annotation1');
+        $this->assertEquals($an2A->getName(), 'Annotation2');
+        $this->assertEquals($an3A->getName(), 'Annotation3');
+        $this->assertEquals($an4A->getName(), 'Annotation4');
+
+        $args = $beanA->getArguments();
+        $this->assertEquals($args['name'], 'blah');
+
+        $args = $componentA->getArguments();
+        $this->assertEquals($args['name'], 'myBean');
+
+        $args = $initMethodA->getArguments();
+        $this->assertEquals($args['qqq'], 'sss');
+        $this->assertEquals($args['method'], 'init');
+        $this->assertEquals($args['asd'], 'dsa');
+
+        $args = $scopeA->getArguments();
+        $this->assertEquals($args['value'], 'singleton');
+
+        $args = $destroyMethodA->getArguments();
+        $this->assertEquals($args['method'], 'destroy');
+
+        $annotations = ReflectionFactory::getAnnotations($text2);
+        $some1A = array_shift($annotations);
+        $this->assertEquals($some1A->getName(), 'Some1');
+
+        $annotations = ReflectionFactory::getAnnotations($text2);
+        $some1A = array_shift($annotations);
+        $some2A = array_shift($annotations);
+        $this->assertEquals($some1A->getName(), 'Some1');
+        $this->assertEquals($some2A->getName(), 'Some2');
+        $args = $some1A->getArguments();
+        $this->assertEquals($args['a'], 'b');
+        $this->assertEquals($args['c'], 'd');
+        $args = $some2A->getArguments();
+        $this->assertEquals($args['a'], 'b');
+    }
+    /**
+     * @test
      */
     public function can_return_nothing_if_no_annotations_driver()
     {

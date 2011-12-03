@@ -120,14 +120,15 @@ class ReflectionFactory
     public static function getAnnotations($text)
     {
         $ret = array();
-        if (preg_match_all('/@[\{\}\-\/a-zA-Z0-9=_\?,\\\\\(\+\.\$\^\*\)\ ]+/', $text, $matches) > 0) {
-            foreach ($matches[0] as $annotation) {
+        if (preg_match_all('/@([^@\n\r\t]*)/', $text, $matches) > 0) {
+            foreach ($matches[1] as $annotation) {
                 $argsStart = strpos($annotation, '(');
                 $arguments = array();
                 if ($argsStart !== false) {
-                    $name = trim(substr($annotation, 1, $argsStart - 1));
-                    $args = substr($annotation, $argsStart + 1, -1);
-                    // http://stackoverflow.com/questions/168171/regular-expression-for-parsing-name-value-pairs
+                    $argsEnd = strrpos($annotation, ')');
+                    $argsLength = $argsEnd - $argsStart - 1;
+                    $name = trim(substr($annotation, 0, $argsStart));
+                    $args = trim(substr($annotation, $argsStart + 1, $argsLength));
                     $argsN = preg_match_all(
                     	'/([^=,]*)=("[^"]*"|\{[^\{\}]*\}|[^,"]*)/', $args, $matches
                     );
@@ -147,9 +148,8 @@ class ReflectionFactory
                         }
                     }
                 } else {
-                    $stuff = explode(' ', $annotation);
-                    $name = substr($stuff[0], 1);
-                    $arguments[] = $stuff;
+                    preg_match('/([a-zA-Z0-9]+)/', $annotation, $matches);
+                    $name = $matches[1];
                 }
                 $ret[] = new BeanAnnotationDefinition($name, $arguments);
             }
