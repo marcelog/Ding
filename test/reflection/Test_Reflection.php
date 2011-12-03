@@ -80,6 +80,10 @@ class Test_Reflection extends PHPUnit_Framework_TestCase
  * @InitMethod ( qqq=sss,method=init , asd=dsa )
  * @DestroyMethod   (   method   =  destroy  )
  * @Scope ( value = singleton )
+ * @Array ( a = { b, c , d } )
+ * @Array2(a={b,c,d})
+ * @Quoted( a = "b" , c = "d" )
+ * @QuotedArray ( a = { "b" , "c","d"})
  */
 TEXT;
         $text2 = <<<TEXT
@@ -98,6 +102,10 @@ TEXT;
         $initMethodA = array_shift($annotations);
         $destroyMethodA = array_shift($annotations);
         $scopeA = array_shift($annotations);
+        $arrayA = array_shift($annotations);
+        $array2A = array_shift($annotations);
+        $quotedA = array_shift($annotations);
+        $quotedArrayA = array_shift($annotations);
         $this->assertEquals($componentA->getName(), 'Component');
         $this->assertEquals($beanA->getName(), 'Bean');
         $this->assertEquals($initMethodA->getName(), 'InitMethod');
@@ -107,6 +115,10 @@ TEXT;
         $this->assertEquals($an2A->getName(), 'Annotation2');
         $this->assertEquals($an3A->getName(), 'Annotation3');
         $this->assertEquals($an4A->getName(), 'Annotation4');
+        $this->assertEquals($arrayA->getName(), 'Array');
+        $this->assertEquals($array2A->getName(), 'Array2');
+        $this->assertEquals($quotedA->getName(), 'Quoted');
+        $this->assertEquals($quotedArrayA->getName(), 'QuotedArray');
 
         $args = $beanA->getArguments();
         $this->assertEquals($args['name'], 'blah');
@@ -125,6 +137,18 @@ TEXT;
         $args = $destroyMethodA->getArguments();
         $this->assertEquals($args['method'], 'destroy');
 
+        $args = $arrayA->getArguments();
+        $this->assertEquals($args['a'], array('b', 'c', 'd'));
+
+        $args = $array2A->getArguments();
+        $this->assertEquals($args['a'], array('b', 'c', 'd'));
+
+        $args = $quotedA->getArguments();
+        $this->assertEquals($args['a'], 'b');
+        $this->assertEquals($args['c'], 'd');
+        $args = $quotedArrayA->getArguments();
+        $this->assertEquals($args['a'], array('b', 'c', 'd'));
+
         $annotations = ReflectionFactory::getAnnotations($text2);
         $some1A = array_shift($annotations);
         $this->assertEquals($some1A->getName(), 'Some1');
@@ -139,6 +163,7 @@ TEXT;
         $this->assertEquals($args['c'], 'd');
         $args = $some2A->getArguments();
         $this->assertEquals($args['a'], 'b');
+
     }
     /**
      * @test

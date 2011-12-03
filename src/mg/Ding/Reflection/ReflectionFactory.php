@@ -130,13 +130,13 @@ class ReflectionFactory
                     $name = trim(substr($annotation, 0, $argsStart));
                     $args = trim(substr($annotation, $argsStart + 1, $argsLength));
                     $argsN = preg_match_all(
-                    	'/([^=,]*)=("[^"]*"|\{[^\{\}]*\}|[^,"]*)/', $args, $matches
+                    	'/([^=,]*)=[\s]*([\s]*"[^"]+"|\{[^\{\}]+\}|[^,"]*[\s]*)/', $args, $matches
                     );
                     if ($argsN > 0)
                     {
                         for ($i = 0; $i < $argsN; $i++) {
                             $key = trim($matches[1][$i]);
-                            $value = trim($matches[2][$i]);
+                            $value = str_replace('"', '', trim($matches[2][$i]));
                             if (strpos($value, '{') === 0) {
                                 $value = substr($value, 1, -1);
                                 $value = explode(',', $value);
