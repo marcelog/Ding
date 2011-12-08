@@ -18,7 +18,7 @@ use Ding\MVC\ModelAndView;
 
 /**
  * @Controller
- * @RequestMapping(url=/MyAnnotatedController)
+ * @RequestMapping(url={/MyAnnotatedController, /MyAliasAnnotatedController})
  */
 class AnnotatedController
 {

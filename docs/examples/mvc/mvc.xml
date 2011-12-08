@@ -7,7 +7,7 @@
         	<array>
         		<entry key="0">
 	        		<array>
-	        			<entry key="0"><value>/MyController</value></entry>
+	        			<entry key="0"><array><entry><value>/MyController</value></entry></array></entry>
 	        			<entry key="1"><ref bean="MyController"/></entry>
 	        		</array>
         		</entry>

@@ -153,6 +153,34 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $this->assertTrue($model instanceof ModelAndView);
         $this->assertEquals($model->getName(), 'blah');
     }
+    /**
+     * @test
+     */
+    public function can_dispatch_multiple_with_annotations()
+    {
+        $properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'annotation' => array('scanDir' => array(__DIR__)),
+        				'xml' => array('filename' => 'mvc.xml', 'directories' => array(RESOURCES_DIR))
+                    )
+                )
+            )
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $dispatcher = $container->getBean('HttpDispatcher');
+        $mapper = $container->getBean('HttpUrlMapper');
+        $action = new HttpAction('/MyAnnotatedController1/something');
+        $model = $dispatcher->dispatch($action, $mapper);
+        $this->assertTrue($model instanceof ModelAndView);
+        $this->assertEquals($model->getName(), 'blah');
+        $action = new HttpAction('/MyAnnotatedController2/something');
+        $model = $dispatcher->dispatch($action, $mapper);
+        $this->assertTrue($model instanceof ModelAndView);
+        $this->assertEquals($model->getName(), 'blah');
+    }
 }
 
 class AController
@@ -173,6 +201,18 @@ class AController
  * @RequestMapping(url=/MyAnnotatedController)
  */
 class AnnotatedController
+{
+    public function somethingAction(array $arguments = array())
+    {
+        return new ModelAndView('blah');
+    }
+}
+
+/**
+ * @Controller
+ * @RequestMapping(url={/MyAnnotatedController1, /MyAnnotatedController2})
+ */
+class MultipleAnnotatedController
 {
     public function somethingAction(array $arguments = array())
     {
