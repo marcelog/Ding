@@ -53,7 +53,7 @@
             <value>100000</value>
         </property>
         <property name="address">
-            <value>209.85.195.104</value>
+            <value>127.0.0.1</value>
         </property>
         <property name="port">
             <value>80</value>
@@ -95,7 +95,7 @@
             <value>1</value>
         </property>
         <property name="address">
-            <value>209.85.195.104</value>
+            <value>127.0.0.1</value>
         </property>
         <property name="port">
             <value>80</value>
@@ -117,7 +117,7 @@
             <value>1000000</value>
         </property>
         <property name="address">
-            <value>209.85.195.104</value>
+            <value>127.0.0.1</value>
         </property>
         <property name="port">
             <value>80</value>

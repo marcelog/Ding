@@ -120,7 +120,7 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
         while (strlen(MyClientHandler::$data) < 1) {
             usleep(1000);
         }
-        $this->assertContains('Set-Cookie', MyClientHandler::$data);
+        $this->assertContains('Content-Type', MyClientHandler::$data);
     }
     /**
      * @test
@@ -133,7 +133,7 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
         while (strlen(MyClientHandler::$data) < 1) {
             usleep(1000);
         }
-        $this->assertContains('Set-Cookie', MyClientHandler::$data);
+        $this->assertContains('Content-Type', MyClientHandler::$data);
     }
 
     /**
