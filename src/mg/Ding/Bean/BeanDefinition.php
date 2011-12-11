@@ -532,6 +532,11 @@ class BeanDefinition
         return $bean;
     }
 
+    public static function generateName($prefix)
+    {
+        return $prefix . mt_rand(1, microtime(true));
+    }
+
     /**
      * Constructor.
      *
