@@ -532,6 +532,13 @@ class BeanDefinition
         return $bean;
     }
 
+    /**
+     * Creates a new unique bean name.
+     *
+     * @param string $prefix A name prefix
+     *
+     * @return string
+     */
     public static function generateName($prefix)
     {
         return $prefix . mt_rand(1, microtime(true));
