@@ -122,7 +122,7 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
             return $bean;
         }
         foreach ($bean->getMethodInjections() as $method) {
-            $aspectBeanName = 'MethodInjectionAspect' . rand(1, microtime(true));
+            $aspectBeanName = BeanDefinition::generateName('MethodInjectionAspect');
             $aspectBean = new BeanDefinition($aspectBeanName);
             $aspectBean->setScope(BeanDefinition::BEAN_SINGLETON);
             $aspectBean->setClass('\\Ding\\Bean\\Factory\\Driver\\MethodInjectionAspect');
@@ -130,8 +130,8 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
                 new BeanPropertyDefinition('beanName', BeanPropertyDefinition::PROPERTY_SIMPLE, $method[1])
             ));
             $factory->setBeanDefinition($aspectBeanName, $aspectBean);
-            $aspectName = 'MethodInjectionAspect' . rand(1, microtime(true));
-            $pointcutName = 'MethodInjectionPointcut' . rand(1, microtime(true));
+            $aspectName = BeanDefinition::generateName('MethodInjectionAspect');
+            $pointcutName = BeanDefinition::generateName('MethodInjectionPointcut');
             $pointcut = new PointcutDefinition($pointcutName, $method[0], 'invoke');
             $this->_aspectManager->setPointcut($pointcut);
             $aspect = new AspectDefinition(

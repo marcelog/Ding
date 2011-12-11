@@ -328,7 +328,7 @@ class BeanAnnotationDriver
     protected function getName(array $annotatedBean)
     {
         if (!isset($annotatedBean['name'])) {
-            $beanName = 'Bean' . rand(1, microtime(true));
+            $beanName = BeanDefinition::generateName('Bean');
         } else if (is_array($annotatedBean['name'])) {
             $beanName = array_shift($annotatedBean['name']);
         } else {

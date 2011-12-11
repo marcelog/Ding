@@ -197,7 +197,7 @@ class BeanYamlDriver implements
         if (isset($aspect['id'])) {
             $name = $aspect['id'];
         } else {
-            $name = 'AspectYAML' . rand(1, microtime(true));
+            $name = BeanDefinition::generateName('AspectYAML');
         }
         if (isset($aspect['expression'])) {
             $expression = $aspect['expression'];
@@ -218,7 +218,7 @@ class BeanYamlDriver implements
             if (isset($pointcut['id'])) {
                 $pointcutName = $pointcut['id'];
             } else {
-                $pointcutName = 'PointcutYAML' . rand(1, microtime(true));
+                $pointcutName = BeanDefinition::generateName('PointcutYAML');
             }
             if (isset($pointcut['expression'])) {
                 $pointcutDef = clone $this->_templatePointcutDef;
@@ -254,7 +254,7 @@ class BeanYamlDriver implements
             $propValue = $value['eval'];
         } else if (isset($value['bean'])) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
-            $innerBean = 'Bean' . rand(1, microtime(true));
+            $innerBean = BeanDefinition::generateName('Bean');
             $this->_yamlFiles[$yamlFilename]['beans'][$innerBean] = $value['bean'];
             $propValue = $innerBean;
         } else if (is_array($value['value'])) {
@@ -290,7 +290,7 @@ class BeanYamlDriver implements
                 $argValue = $value['eval'];
             } else if (isset($value['bean'])) {
                 $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
-                $innerBean = 'Bean' . microtime(true);
+                $innerBean = BeanDefinition::generateName('Bean');
                 $this->_yamlFiles[$yamlFilename]['beans'][$innerBean] = $value['bean'];
                 $argValue = $innerBean;
             } else {

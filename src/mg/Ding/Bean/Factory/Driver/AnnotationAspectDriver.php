@@ -80,14 +80,14 @@ class AnnotationAspectDriver implements IAfterConfigListener, IBeforeDefinitionL
     private function _newAspect($aspectClass, $factory, $classExpression, $expression, $method, $type)
     {
         // Create bean.
-        $aspectBeanName = 'AnnotationAspectedBean' . rand(1, microtime(true));
+        $aspectBeanName = BeanDefinition::generateName('AnnotationAspectedBean');
         $aspectBean = new BeanDefinition($aspectBeanName);
         $aspectBean->setScope(BeanDefinition::BEAN_SINGLETON);
         $aspectBean->setClass($aspectClass);
         $this->_cache[$aspectBeanName] = $aspectBean;
-        $pointcutName = 'PointcutAnnotationAspectDriver' . rand(1, microtime(true));
+        $pointcutName = BeanDefinition::generateName('PointcutAnnotationAspectDriver');
         $pointcutDef = new PointcutDefinition($pointcutName, $expression, $method);
-        $aspectName = 'AnnotationAspected' . rand(1, microtime(true));
+        $aspectName = BeanDefinition::generateName('AnnotationAspected');
         $aspectDef = new AspectDefinition(
             $aspectName, array($pointcutName), $type,
             $aspectBeanName, $classExpression

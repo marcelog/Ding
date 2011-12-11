@@ -61,7 +61,7 @@ class MVCAnnotationDriver implements IAfterConfigListener
     public function afterConfig(IContainer $factory)
     {
         foreach (ReflectionFactory::getClassesByAnnotation('Controller') as $controller) {
-            $name = 'Controller' . microtime(true);
+            $name = BeanDefinition::generateName('Controller');
             $beanDef = new BeanDefinition($name);
             $beanDef->setClass($controller);
             $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);

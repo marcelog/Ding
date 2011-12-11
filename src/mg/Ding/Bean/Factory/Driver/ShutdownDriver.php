@@ -67,7 +67,7 @@ class ShutdownDriver implements IAfterConfigListener
                 return;
             }
             $handler = array_pop($handler);
-            $name = 'ShutdownHandler' . microtime(true);
+            $name = BeanDefinition::generateName('ShutdownHandler');
             $beanDef = new BeanDefinition($name);
             $beanDef->setClass($handler);
             $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);

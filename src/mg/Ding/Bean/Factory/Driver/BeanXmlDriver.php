@@ -214,7 +214,7 @@ class BeanXmlDriver implements
         if (isset($atts->id)) {
             $name = (string)$atts->id;
         } else {
-            $name = 'AspectXML' . rand(1, microtime(true));
+            $name = BeanDefinition::generateName('AspectXML');
         }
         if (isset($atts->expression)) {
             $expression = (string)$atts->expression;
@@ -236,7 +236,7 @@ class BeanXmlDriver implements
             if (isset($pointcutAtts->id)) {
                 $pointcutName = (string)$pointcutAtts->id;
             } else {
-                $pointcutName = 'PointcutXML' . rand(1, microtime(true));
+                $pointcutName = BeanDefinition::generateName('PointcutXML');
             }
             if (isset($pointcutAtts->expression)) {
                 $pointcut = clone $this->_templatePointcutDef;
@@ -278,7 +278,7 @@ class BeanXmlDriver implements
             $propValue = true;
         } else if (isset($simpleXmlProperty->bean)) {
             $propType = BeanPropertyDefinition::PROPERTY_BEAN;
-            $name = 'Bean' . microtime(true);
+            $name = BeanDefinition::generateName('Bean');
             $simpleXmlProperty->bean->addAttribute('id', $name);
             $propValue = $name;
         } else if (isset($simpleXmlProperty->array)) {
@@ -317,7 +317,7 @@ class BeanXmlDriver implements
             $argValue = (string)$simpleXmlArg->ref->attributes()->bean;
         } else if (isset($simpleXmlArg->bean)) {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
-            $name = 'Bean' . rand(1, microtime(true));
+            $name = BeanDefinition::generateName('Bean');
             $argValue = $name;
             $simpleXmlArg->bean->addAttribute('id', $name);
         } else if (isset($simpleXmlArg->null)) {

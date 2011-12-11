@@ -73,7 +73,7 @@ class SignalHandlerDriver implements IAfterConfigListener
                 return;
             }
             $handler = array_pop($handler);
-            $name = 'SignalHandler' . microtime(true);
+            $name = BeanDefinition::generateName('SignalHandler');
             $beanDef = new BeanDefinition($name);
             $beanDef->setClass($handler);
             $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);

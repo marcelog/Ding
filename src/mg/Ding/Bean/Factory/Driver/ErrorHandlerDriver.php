@@ -67,7 +67,7 @@ class ErrorHandlerDriver implements IAfterConfigListener
                 return;
             }
             $handler = array_pop($handler);
-            $name = 'ErrorHandler' . microtime(true);
+            $name = BeanDefinition::generateName('ErrorHandler');
             $beanDef = new BeanDefinition($name);
             $beanDef->setClass($handler);
             $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
