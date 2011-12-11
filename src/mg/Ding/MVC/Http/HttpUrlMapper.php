@@ -29,8 +29,9 @@
  */
 namespace Ding\MVC\Http;
 
+use Ding\Container\IContainer;
+use Ding\Container\IContainerAware;
 use Ding\Container\Impl\ContainerImpl;
-
 use Ding\MVC\Exception\MVCException;
 use Ding\MVC\IMapper;
 use Ding\MVC\Action;
@@ -48,7 +49,7 @@ use Ding\MVC\Action;
  * @version    SVN: $Id$
  * @link       http://marcelog.github.com/
  */
-class HttpUrlMapper implements IMapper
+class HttpUrlMapper implements IMapper, IContainerAware
 {
     /**
      * Cache for isDebugEnabled()
@@ -102,6 +103,11 @@ class HttpUrlMapper implements IMapper
         $this->_map = $map;
     }
 
+    public function setContainer(IContainer $container)
+    {
+        $this->container = $container;
+    }
+
     /**
      * This will map a full url, like /A/B/C to an HttpAction and will try to
      * find a controller that can handle it. This will isolate the baseUrl.
@@ -135,6 +141,7 @@ class HttpUrlMapper implements IMapper
         }
         // Lookup a controller that can handle this url.
         $try = array_merge($this->_map, self::$_annotatedControllers);
+        $candidates = array();
         foreach ($try as $map) {
             $urls = $map[0];
             if (!is_array($urls)) {
@@ -166,13 +173,19 @@ class HttpUrlMapper implements IMapper
                         	'Found as annotated controller: ' . $controller
                         );
                     }
-                    $container = ContainerImpl::getInstance();
-                    $controller = $container->getBean($controller);
+                    $controller = $this->container->getBean($controller);
                 }
-                return array($controller, $action . 'Action');
+                if (!isset($candidates[$len])) {
+                    $candidates[$len] = array();
+                }
+                $candidates[$len][] = array($controller, $action . 'Action');
             }
         }
-        return false;
+        if (empty($candidates)) {
+            return false;
+        }
+        $controllers = array_shift($candidates);
+        return array_shift($controllers);
     }
 
     /**
