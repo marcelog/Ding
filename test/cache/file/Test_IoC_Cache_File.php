@@ -58,7 +58,7 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
                 'cache' => array(
     				'proxy' => array('impl' => 'file', 'directory' => $cachedir),
                 	'aspect' => array('impl' => 'file', 'directory' => $cachedir),
-                    'autoloader' => array('impl' => 'file', 'directory' => $cachedir),
+                    'autoloader' => array('impl' => 'dummy', 'directory' => $cachedir),
             		'bdef' => array('impl' => 'file', 'directory' => $cachedir),
         			'annotations' => array('impl' => 'file', 'directory' => $cachedir),
               		'beans' => array('impl' => 'dummy')
@@ -76,17 +76,18 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $cache = CacheLocator::getProxyCacheInstance();
+        $container = ContainerImpl::getInstance($this->_properties);
+        $cache = $container->getBean('dingProxyCache');
         $cache->flush();
-        $cache = CacheLocator::getDefinitionsCacheInstance();
+        $cache = $container->getBean('dingDefinitionsCache');
         $cache->flush();
-        $cache = CacheLocator::getAnnotationsCacheInstance();
+        $cache = $container->getBean('dingAnnotationsCache');
         $cache->flush();
-        $cache = CacheLocator::getAutoloaderCacheInstance();
+        $cache = $container->getBean('dingAutoloaderCache');
         $cache->flush();
-        $cache = CacheLocator::getBeansCacheInstance();
+        $cache = $container->getBean('dingBeanCache');
         $cache->flush();
-        $cache = CacheLocator::getAspectCacheInstance();
+        $cache = $container->getBean('dingAspectCache');
         $cache->flush();
     }
 
@@ -96,7 +97,7 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
     public function can_remove()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $cache = CacheLocator::getProxyCacheInstance();
+        $cache = $container->getBean('dingProxyCache');
 
         $result = false;
         $cache->fetch('a', $result);
@@ -112,6 +113,17 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
         $result = false;
         $cache->fetch('a', $result);
         $this->assertFalse($result);
+    }
+
+    /**
+     * @test
+     */
+    public function can_method_lookup()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aSimpleMethodLookupBean');
+        $this->assertTrue($bean instanceof ClassSimpleXML10);
+        $this->assertTrue($bean->createAnotherBean() instanceof ClassSimpleXML);
     }
 
     /**
@@ -192,7 +204,6 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean->array['key7'] instanceof ClassSimpleXML);
         $this->assertTrue(is_array($bean->array['key8']));
     }
-
 
     /**
      * @test
@@ -303,17 +314,6 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof ClassSimpleXML6);
         $this->assertTrue(ClassSimpleXML7::$value);
         $this->assertTrue(ClassSimpleXML8::$value);
-    }
-
-    /**
-     * @test
-     */
-    public function can_method_lookup()
-    {
-        $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('aSimpleMethodLookupBean');
-        $this->assertTrue($bean instanceof ClassSimpleXML10);
-        $this->assertTrue($bean->createAnotherBean() instanceof ClassSimpleXML);
     }
 
     /**

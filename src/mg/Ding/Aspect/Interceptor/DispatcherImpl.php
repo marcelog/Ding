@@ -28,6 +28,8 @@
  *
  */
 namespace Ding\Aspect\Interceptor;
+use Ding\Reflection\IReflectionFactoryAware;
+use Ding\Reflection\IReflectionFactory;
 use Ding\Aspect\MethodInvocation;
 
 /**
@@ -42,8 +44,14 @@ use Ding\Aspect\MethodInvocation;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class DispatcherImpl implements IDispatcher
+class DispatcherImpl implements IDispatcher, IReflectionFactoryAware
 {
+    /**
+     * A ReflectionFactory implementation
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
+
     /**
      * Associated array for methods intercepted.
      * @var object[]
@@ -61,6 +69,15 @@ class DispatcherImpl implements IDispatcher
      * @var string[]
      */
     private $_interceptorClasses;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->reflectionFactory = $reflectionFactory;
+    }
 
     /**
      * (non-PHPdoc)
@@ -133,7 +150,9 @@ class DispatcherImpl implements IDispatcher
                 get_class($interceptors[$i]->getInterceptor()),
                 $interceptors[$i]->getInterceptorMethod(),
                 array($invocationChain),
-                $interceptors[$i]->getInterceptor(), $invocation
+                $interceptors[$i]->getInterceptor(),
+                $this->reflectionFactory,
+                $invocation
             );
             $invocationChain = $newInvocation;
         }

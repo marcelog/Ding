@@ -100,7 +100,9 @@ class FileCacheImpl implements ICache
      */
     public function flush()
     {
-        return false;
+        foreach (glob($this->_directory . '/[^.]*') as $file) {
+            @unlink($file);
+        }
     }
 
     /**

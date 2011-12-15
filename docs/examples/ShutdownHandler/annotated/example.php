@@ -26,17 +26,28 @@
  * limitations under the License.
  *
  */
+ini_set(
+    'include_path',
+    implode(
+        PATH_SEPARATOR,
+        array(
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', '..', 'src', 'mg')),
+            ini_get('include_path')
+        )
+    )
+);
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\ShutdownHandler\IShutdownHandler;
+
 
 /**
- * @ShutdownHandler
+ * @Component
+ * @ListensOn(value=dingShutdown)
  */
-class MyShutdownHandler implements IShutdownHandler
+class MyShutdownHandler
 {
-    public function handleShutdown()
+    public function onDingShutdown()
     {
         echo "This is your custom shutdown handler\n";
     }
@@ -54,11 +65,8 @@ $properties = array(
     'ding' => array(
         'log4php.properties' => './log4php.properties',
         'factory' => array(
-            'drivers' => array(
-				'shutdown' => array(),
-            ),
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
-                'annotation' => array('scanDir' => array(realpath(__DIR__)))
+                'annotation' => array('scanDir' => array(__DIR__))
             ),
             // These properties will be used by the container when instantiating the beans, see beans.xml
             'properties' => array(

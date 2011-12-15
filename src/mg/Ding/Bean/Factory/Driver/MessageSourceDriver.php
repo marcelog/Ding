@@ -30,11 +30,12 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
-use Ding\Reflection\ReflectionFactory;
+use Ding\Reflection\IReflectionFactoryAware;
+use Ding\Reflection\IReflectionFactory;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
-use Ding\Bean\Factory\IBeanFactory;
+use Ding\Container\IContainerAware;
 use Ding\Container\IContainer;
 
 /**
@@ -50,41 +51,57 @@ use Ding\Container\IContainer;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class MessageSourceDriver implements IAfterConfigListener, IAfterCreateListener
+class MessageSourceDriver
+    implements IAfterConfigListener, IAfterCreateListener,
+    IContainerAware, IReflectionFactoryAware
 {
+    /**
+     * Container.
+     * @var IContainer
+     */
+    private $_container;
+    /**
+     * A ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->reflectionFactory = $reflectionFactory;
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainerAware::setContainer()
+     */
+    public function setContainer(IContainer $container)
+    {
+        $this->_container = $container;
+    }
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
      */
-    public function afterConfig(IContainer $factory)
+    public function afterConfig()
     {
         try
         {
-            $bean = $factory->getBean('messageSource');
-            $factory->setMessageSource($bean);
+            $bean = $this->_container->getBean('messageSource');
+            $this->_container->setMessageSource($bean);
         } catch(\Exception $e) {
         }
     }
 
-    public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function afterCreate($bean, BeanDefinition $beanDefinition)
     {
-        $class = $beanDefinition->getClass();
-        if ($class === false || empty($class)) {
-            return $bean;
-        }
-        $rClass = ReflectionFactory::getClass($class);
+        $rClass = $this->reflectionFactory->getClass(get_class($bean));
         if ($rClass->implementsInterface('Ding\MessageSource\IMessageSourceAware')) {
-            $bean->setMessageSource($factory);
+            $bean->setMessageSource($this->_container);
         }
         return $bean;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
     }
 }

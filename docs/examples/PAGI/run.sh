@@ -22,7 +22,7 @@ php=/usr/php-5.3/bin/php
 phpoptions="-d include_path=${log4php}:${pagi}/src/mg:${ding}/src/mg:${ding}/docs/examples/PAGI"
 
 # Standard.. the idea is to have a common launcher.
-launcher=${ding}/src/mg/Ding/Helpers/PAGI/PagiHelper.php
+launcher=${ding}/src/mg/Ding/Helpers/Pagi/PagiHelper.php
 
 # Go!
 ${php} ${phpoptions} ${launcher}

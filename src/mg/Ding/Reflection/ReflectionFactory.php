@@ -28,7 +28,7 @@
  */
 namespace Ding\Reflection;
 
-use Ding\Cache\Locator\CacheLocator;
+use Ding\Cache\ICache;
 use Ding\Bean\BeanAnnotationDefinition;
 
 /**
@@ -42,49 +42,52 @@ use Ding\Bean\BeanAnnotationDefinition;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class ReflectionFactory
+class ReflectionFactory implements IReflectionFactory
 {
     /**
      * Cache reflection classes instantiated so far.
      * @var ReflectionClass[]
      */
-    private static $_reflectionClasses = array();
+    private $_reflectionClasses = array();
     /**
      * A map where the key is the class, and the value is an array with the
      * 'class annotations and its annotated methods.
      * @var string[]
      */
-    private static $_annotatedClasses = array();
+    private $_annotatedClasses = array();
 
     /**
      * A map where the key is the annotations, and the value is an array with
      * all the classes (not their methods) with this annotation.
      * @var string[]
      */
-    private static $_classesAnnotated = array();
+    private $_classesAnnotated = array();
 
     /**
      * Reflection methods, indexed by class.
      * @var string[]
      */
-    private static $_reflectionMethods = array();
+    private $_reflectionMethods = array();
 
     /**
      * Wether to use annotations or not.
      * @var boolean
      */
-    private static $_withAnnotations = false;
+    private $_withAnnotations = false;
 
     /**
-     * Taken from: http://stackoverflow.com/questions/928928/determining-what-classes-are-defined-in-a-php-class-file
-     * Returns all php classes found in a code block. Multiple namespaces in one file are not supported.
-     *
-     * @param string $code PHP Code.
-     *
-     * @return string[]
+     * Annotations cache.
+     * @var ICache
      */
-    public static function getClassesFromCode($code)
+    private $_cache = false;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getClassesFromCode()
+     */
+    public function getClassesFromCode($code)
     {
+        // Taken from: http://stackoverflow.com/questions/928928/determining-what-classes-are-defined-in-a-php-class-file
         $classes = array();
         $tokens = token_get_all($code);
         $count = count($tokens);
@@ -111,13 +114,10 @@ class ReflectionFactory
     }
 
     /**
-     * Parses all annotations in the given text.
-     *
-     * @param string $text
-     *
-     * @return BeanAnnotationDefinition[]
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getAnnotations()
      */
-    public static function getAnnotations($text)
+    public function getAnnotations($text)
     {
         $ret = array();
         if (preg_match_all('/@([^@\n\r\t]*)/', $text, $matches) > 0) {
@@ -158,74 +158,66 @@ class ReflectionFactory
     }
 
     /**
-     * Returns all classes annotated with the given annotation.
-     *
-     * @param string $annotation Annotation name.
-     *
-     * @return string[]
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getClassesByAnnotation()
      */
-    public static function getClassesByAnnotation($annotation)
+    public function getClassesByAnnotation($annotation)
     {
-        if (!self::$_withAnnotations) {
+        if (!$this->_withAnnotations) {
             return array();
         }
-        if (isset(self::$_classesAnnotated[$annotation])) {
-            return self::$_classesAnnotated[$annotation];
+        if (isset($this->_classesAnnotated[$annotation])) {
+            return $this->_classesAnnotated[$annotation];
         }
-        $cache = CacheLocator::getAnnotationsCacheInstance();
         $cacheKey = $annotation . '.classbyannotations';
         $result = false;
-        $classes = $cache->fetch($cacheKey, $result);
+        $classes = $this->_cache->fetch($cacheKey, $result);
         if ($result === true) {
-            self::$_classesAnnotated[$annotation] = $classes;
+            $this->_classesAnnotated[$annotation] = $classes;
             return $classes;
         }
         return array();
     }
 
     /**
-     * Returns all annotations for the given class.
-     *
-     * @param string $class Class name.
-     *
-     * @return string[]
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getClassAnnotations()
      */
-    public static function getClassAnnotations($class)
+    public function getClassAnnotations($class)
     {
-        if (!self::$_withAnnotations) {
+        if (!$this->_withAnnotations) {
             return array();
         }
-        if (isset(self::$_annotatedClasses[$class])) {
-            return self::$_annotatedClasses[$class];
+        if (isset($this->_annotatedClasses[$class])) {
+            return $this->_annotatedClasses[$class];
         }
-        $cache = CacheLocator::getAnnotationsCacheInstance();
         $cacheKeyPfx = str_replace('\\', '_', $class);
         $cacheKey = $cacheKeyPfx . '.classannotations';
         $result = false;
-        $annotations = $cache->fetch($cacheKey, $result);
+        $annotations = $this->_cache->fetch($cacheKey, $result);
         if ($result === true) {
-            self::$_annotatedClasses[$class] = $annotations;
+            $this->_annotatedClasses[$class] = $annotations;
             return $annotations;
         }
-        self::$_annotatedClasses[$class] = array();
-        $rClass = ReflectionFactory::getClass($class);
+        $this->_annotatedClasses[$class] = array();
+        $rClass = $this->getClass($class);
         $ret = array();
         $ret['class'] = array();
         $ret['class']['properties'] = array();
-        foreach (self::getAnnotations($rClass->getDocComment()) as $annotation) {
+        foreach ($this->getAnnotations($rClass->getDocComment()) as $annotation) {
             $name = $annotation->getName();
             $ret['class'][$name] = $annotation;
-            if (!isset(self::$_classesAnnotated[$name])) {
-                self::$_classesAnnotated[$name] = array();
+            if (!isset($this->_classesAnnotated[$name])) {
+                $this->_classesAnnotated[$name] = array();
             }
-            self::$_classesAnnotated[$name][$class] = $class;
+            $this->_classesAnnotated[$name][$class] = $class;
             $cacheKeyA = $name . '.classbyannotations';
-            $cache->store($cacheKeyA, self::$_classesAnnotated[$name]);
+            $this->_cache->store($cacheKeyA, $this->_classesAnnotated[$name]);
         }
         foreach ($rClass->getProperties() as $property) {
             $propertyName = $property->getName();
             $ret['class']['properties'][$propertyName] = array();
-            foreach (self::getAnnotations($property->getDocComment()) as $annotation) {
+            foreach ($this->getAnnotations($property->getDocComment()) as $annotation) {
                 $name = $annotation->getName();
                 $ret['class']['properties'][$propertyName][$name] = $annotation;
             }
@@ -233,56 +225,52 @@ class ReflectionFactory
         foreach ($rClass->getMethods() as $method) {
             $methodName = $method->getName();
             $ret[$methodName] = array();
-            foreach (self::getAnnotations($method->getDocComment()) as $annotation) {
+            foreach ($this->getAnnotations($method->getDocComment()) as $annotation) {
                 $name = $annotation->getName();
                 $ret[$methodName][$name] = $annotation;
             }
         }
-        self::$_annotatedClasses[$class] = $ret;
-        $cache->store($cacheKey, $ret);
+        $this->_annotatedClasses[$class] = $ret;
+        $this->_cache->store($cacheKey, $ret);
         return $ret;
     }
 
     /**
-     * Returns a (cached) reflection class.
-     *
-     * @param string $class Class name
-     *
-     * @throws ReflectionException
-     * @return ReflectionClass
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getClass()
      */
-    public static function getClass($class)
+    public function getClass($class)
     {
-        if (isset(self::$_reflectionClasses[$class])) {
-            return self::$_reflectionClasses[$class];
+        if (isset($this->_reflectionClasses[$class])) {
+            return $this->_reflectionClasses[$class];
         }
-        self::$_reflectionClasses[$class] = new \ReflectionClass($class);
-        return self::$_reflectionClasses[$class];
+        $this->_reflectionClasses[$class] = new \ReflectionClass($class);
+        return $this->_reflectionClasses[$class];
     }
 
-    public static function configure($withAnnotations)
+    public function __construct($withAnnotations)
     {
-        self::$_withAnnotations = $withAnnotations;
+        $this->_withAnnotations = $withAnnotations;
+    }
+
+    public function setCache(ICache $cache)
+    {
+        $this->_cache = $cache;
     }
 
     /**
-     * Returns a (cached) reflection class method.
-     *
-     * @param string $class  Class name.
-     * @param string $method Method name.
-     *
-     * @throws ReflectionException
-     * @return ReflectionClass
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getMethod()
      */
-    public static function getMethod($class, $method)
+    public function getMethod($class, $method)
     {
-        if (isset(self::$_reflectionMethods[$class][$method])) {
-            return self::$_reflectionMethods[$class][$method];
+        if (isset($this->_reflectionMethods[$class][$method])) {
+            return $this->_reflectionMethods[$class][$method];
         }
-        if (!isset(self::$_reflectionMethods[$class])) {
-            self::$_reflectionMethods[$class] = array();
+        if (!isset($this->_reflectionMethods[$class])) {
+            $this->_reflectionMethods[$class] = array();
         }
-        self::$_reflectionMethods[$class][$method] = new \ReflectionMethod($class, $method);
-        return self::$_reflectionMethods[$class][$method];
+        $this->_reflectionMethods[$class][$method] = new \ReflectionMethod($class, $method);
+        return $this->_reflectionMethods[$class][$method];
     }
 }

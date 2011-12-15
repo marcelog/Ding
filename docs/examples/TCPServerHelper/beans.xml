@@ -7,7 +7,7 @@
          </array>
        </property>
    </bean>
-	<bean id="Server" class="Ding\Helpers\TCP\TCPServerHelper" scope="singleton">
+	<bean id="Server" class="Ding\Helpers\Tcp\TcpServerHelper" scope="singleton">
 		<property name="backlog">
 			<value>${tcp.backlog}</value>
 		</property>

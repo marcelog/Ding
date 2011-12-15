@@ -1,12 +1,12 @@
 <?php
 /**
- * TCP Client example.
+ * Tcp Client example.
  *
  * PHP Version 5
  *
  * @category   Ding
  * @package    Examples
- * @subpackage TCPServerHelper
+ * @subpackage TcpServerHelper
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @version    SVN: $Id$
@@ -32,7 +32,7 @@ use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\Helpers\SignalHandler\ISignalHandler;
 use Ding\Helpers\ShutdownHandler\IShutdownHandler;
-use Ding\Helpers\TCP\ITCPServerHandler;
+use Ding\Helpers\Tcp\ITcpServerHandler;
 
 ini_set(
     'include_path',
@@ -73,7 +73,7 @@ class MyErrorHandler implements IErrorHandler, ISignalHandler, IShutdownHandler
         $run = false;
     }
 }
-class MyServerHandler implements ITCPServerHandler
+class MyServerHandler implements ITcpServerHandler
 {
     public function beforeOpen()
     {
@@ -90,18 +90,18 @@ class MyServerHandler implements ITCPServerHandler
         echo "close\n";
     }
 
-    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleConnection(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         echo "new connection from: " . $peer->getName() . "\n";
     }
 
-    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function readTimeout(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         echo "read timeout for " . $peer->getName() . "\n";
         $peer->disconnect();
     }
 
-    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleData(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         $buffer = '';
         $len = 4096;
@@ -111,7 +111,7 @@ class MyServerHandler implements ITCPServerHandler
         $peer->write('You said: ' . $buffer);
     }
 
-    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function disconnect(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         echo "disconnect: " . $peer->getName() . "\n";
     }
@@ -121,11 +121,6 @@ $properties = array(
     'ding' => array(
         'log4php.properties' => './log4php.properties',
         'factory' => array(
-            'drivers' => array(
-                'signalhandler' => array(),
-				'shutdown' => array(),
-				'errorhandler' => array()
-            ),
 			'bdef' => array(
                 'xml' => array('filename' => 'beans.xml'),
                 'annotation' => array('scanDir' => array(realpath(__DIR__)))

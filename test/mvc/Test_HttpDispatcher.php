@@ -27,9 +27,9 @@
  * limitations under the License.
  *
  */
-use Ding\MVC\Http\HttpAction;
+use Ding\Mvc\Http\HttpAction;
 use Ding\Container\Impl\ContainerImpl;
-use Ding\MVC\ModelAndView;
+use Ding\Mvc\ModelAndView;
 
 /**
  * This class will test the base dispatcher.
@@ -92,6 +92,22 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_fill_args()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $dispatcher = $container->getBean('HttpDispatcher');
+        $mapper = $container->getBean('HttpUrlMapper');
+        $action = new HttpAction('/MyController/someOptionalArguments', array('arg1' => 'value'));
+        $model = $dispatcher->dispatch($action, $mapper);
+        $this->assertTrue($model instanceof ModelAndView);
+        $this->assertEquals($model->getName(), 'main');
+        $this->assertEquals(AController::$optionalValue, 'optionalValue');
+        $this->assertEquals(AController::$nonOptionalValue, 'value');
+    }
+
+    /**
+     * @test
+     */
     public function can_dispatch_without_begin_slash()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -105,7 +121,7 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Ding\MVC\Exception\MVCException
+     * @expectedException Ding\Mvc\Exception\MvcException
      */
     public function cannot_dispatch_to_invalid_action()
     {
@@ -118,7 +134,7 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Ding\MVC\Exception\MVCException
+     * @expectedException Ding\Mvc\Exception\MvcException
      */
     public function cannot_dispatch_to_invalid_controller()
     {
@@ -155,6 +171,19 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
     }
     /**
      * @test
+     * @expectedException Ding\Mvc\Exception\MvcException
+     */
+    public function cannot_dispatch_with_missing_argument()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $dispatcher = $container->getBean('HttpDispatcher');
+        $mapper = $container->getBean('HttpUrlMapper');
+        $action = new HttpAction('/MyController/withRequiredArgument');
+        $model = $dispatcher->dispatch($action, $mapper);
+    }
+
+    /**
+     * @test
      */
     public function can_dispatch_multiple_with_annotations()
     {
@@ -185,12 +214,25 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
 
 class AController
 {
-    public function mainAction(array $arguments = array())
+    public static $optionalValue;
+    public static $nonOptionalValue;
+
+    public function mainAction()
     {
         return new ModelAndView('main');
     }
 
-    public function somethingAction(array $arguments = array())
+    public function withRequiredArgumentAction($someArgument)
+    {
+
+    }
+    public function someOptionalArgumentsAction($arg1, $arg2 = 'optionalValue')
+    {
+        self::$optionalValue = $arg2;
+        self::$nonOptionalValue = $arg1;
+        return new ModelAndView('main');
+    }
+    public function somethingAction()
     {
         return new ModelAndView('blah');
     }
@@ -202,7 +244,7 @@ class AController
  */
 class AnnotatedController
 {
-    public function somethingAction(array $arguments = array())
+    public function somethingAction()
     {
         return new ModelAndView('blah');
     }
@@ -214,7 +256,7 @@ class AnnotatedController
  */
 class MultipleAnnotatedController
 {
-    public function somethingAction(array $arguments = array())
+    public function somethingAction()
     {
         return new ModelAndView('blah');
     }

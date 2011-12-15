@@ -43,7 +43,7 @@ namespace Ding\Aspect;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-use Ding\Reflection\ReflectionFactory;
+use Ding\Reflection\IReflectionFactory;
 
 class MethodInvocation
 {
@@ -76,6 +76,11 @@ class MethodInvocation
      */
     private $_exception;
 
+    /**
+     * ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    private $_reflectionFactory;
 
     /**
      * Original invocation.
@@ -122,7 +127,7 @@ class MethodInvocation
      */
     public function proceed()
     {
-        $target = ReflectionFactory::getMethod($this->_class, $this->_method);
+        $target = $this->_reflectionFactory->getMethod($this->_class, $this->_method);
         if (!$target->isPublic()) {
             $target->setAccessible(true);
         }
@@ -202,6 +207,7 @@ class MethodInvocation
      * @param mixed            $result  Result from the execution of the
      * aspected method.
      * @param object           $object  Target invocation object for method.
+     * @param IReflectionFactory $reflectionFactory Reflection Factory to use.
      * @param MethodInvocation &$invoke In a chained aspect call, this will
      * be the access to the original (aspected) method call.
      *
@@ -209,7 +215,7 @@ class MethodInvocation
      * @return void
      */
     public function __construct(
-        $class, $method, $args, $object,
+        $class, $method, $args, $object, IReflectionFactory $reflectionFactory,
         MethodInvocation &$invoke = null
     ) {
         $this->_class = $class;
@@ -217,5 +223,6 @@ class MethodInvocation
         $this->_args = $args;
         $this->_object = $object;
         $this->_originalInvocation = $invoke;
+        $this->_reflectionFactory = $reflectionFactory;
     }
 }

@@ -28,9 +28,9 @@
  *
  */
 
-use Ding\MVC\ModelAndView;
-use Ding\MVC\RedirectModelAndView;
-use Ding\MVC\ForwardModelAndView;
+use Ding\Mvc\ModelAndView;
+use Ding\Mvc\RedirectModelAndView;
+use Ding\Mvc\ForwardModelAndView;
 use Ding\Container\Impl\ContainerImpl;
 
 /**

@@ -29,7 +29,6 @@
  */
 
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 
 /**
@@ -55,7 +54,6 @@ class Test_Error extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('errorhandler' => array()),
                     'bdef' => array(
                         'xml' => array('filename' => 'errorBeans.xml', 'directories' => array(RESOURCES_DIR))
                     )
@@ -89,7 +87,6 @@ class Test_Error extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('errorhandler' => array()),
                     'bdef' => array(
                         'annotation' => array('scanDir' => array(__DIR__))
                     )
@@ -123,7 +120,6 @@ class Test_Error extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('errorhandler' => array()),
                 )
             )
         );
@@ -149,12 +145,12 @@ class Test_Error extends PHPUnit_Framework_TestCase
     }
 }
 
-class MyErrorHandler implements IErrorHandler
+class MyErrorHandler
 {
     public static $handled = false;
     public static $error = false;
 
-    public function handleError(ErrorInfo $error)
+    public function onDingError(ErrorInfo $error)
     {
         self::$error = $error;
         self::$handled = true;
@@ -162,14 +158,15 @@ class MyErrorHandler implements IErrorHandler
 }
 
 /**
- * @ErrorHandler
+ * @Component
+ * @ListensOn(value=dingError)
  */
-class MyErrorHandler2 implements IErrorHandler
+class MyErrorHandler2
 {
     public static $handled = false;
     public static $error = false;
 
-    public function handleError(ErrorInfo $error)
+    public function onDingError(ErrorInfo $error)
     {
         self::$error = $error;
         self::$handled = true;

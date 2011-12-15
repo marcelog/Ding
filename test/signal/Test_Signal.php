@@ -30,7 +30,6 @@ declare(ticks=1);
  */
 
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\SignalHandler\ISignalHandler;
 
 /**
  * This class will test the signal handler driver.
@@ -55,7 +54,6 @@ class Test_Signal extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('signalhandler' => array()),
                     'bdef' => array(
                         'xml' => array('filename' => 'signalBeans.xml', 'directories' => array(RESOURCES_DIR))
                     )
@@ -76,7 +74,6 @@ class Test_Signal extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('signalhandler' => array()),
                     'bdef' => array(
                         'annotation' => array('scanDir' => array(__DIR__))
                     )
@@ -97,7 +94,6 @@ class Test_Signal extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('signalhandler' => array()),
                 )
             )
         );
@@ -105,24 +101,25 @@ class Test_Signal extends PHPUnit_Framework_TestCase
     }
 }
 
-class MySignalHandler implements ISignalHandler
+class MySignalHandler
 {
     public static $something = null;
 
-    public function handleSignal($signal)
+    public function onDingSignal($signal)
     {
         self::$something = true;
     }
 }
 
 /**
- * @SignalHandler
+ * @Component
+ * @ListensOn(value=dingSignal)
  */
-class MySignalHandler2 implements ISignalHandler
+class MySignalHandler2
 {
     public static $something = null;
 
-    public function handleSignal($signal)
+    public function onDingSignal($signal)
     {
         self::$something = true;
     }

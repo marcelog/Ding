@@ -29,15 +29,16 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Reflection\IReflectionFactory;
+use Ding\Reflection\IReflectionFactoryAware;
+use Ding\Container\IContainerAware;
+use Ding\Container\IContainer;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
-
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
-use Ding\Bean\Factory\IBeanFactory;
-use Ding\Reflection\ReflectionFactory;
 
 /**
  * This driver will search for @Resource setter methods.
@@ -51,16 +52,47 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreateListener
+class AnnotationResourceDriver
+    implements IAfterDefinitionListener, IAfterCreateListener,
+    IContainerAware, IReflectionFactoryAware
 {
-    public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    /**
+     * Container.
+     * @var IContainer
+     */
+    private $_container;
+
+    /**
+     * A ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->reflectionFactory = $reflectionFactory;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainerAware::setContainer()
+     */
+    public function setContainer(IContainer $container)
+    {
+        $this->_container = $container;
+    }
+    public function afterCreate($bean, BeanDefinition $beanDefinition)
     {
         $class = $beanDefinition->getClass();
         if (!empty($class)) {
-            $rClass = ReflectionFactory::getClass($class);
+            $rClass = $this->reflectionFactory->getClass($class);
             foreach ($beanDefinition->getAutowiredProperties() as $property) {
                 $name = $property->getName();
-                $value = $factory->getBean($name);
+                $value = $this->_container->getBean($name);
                 $rProperty = $rClass->getProperty($name);
                 if (!$rProperty->isPublic()) {
                     $rProperty->setAccessible(true);
@@ -78,13 +110,13 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
      */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function afterDefinition(BeanDefinition $bean)
     {
         $beanClass = $bean->getClass();
         if (empty($beanClass)) {
             return $bean;
         }
-        $annotations = ReflectionFactory::getClassAnnotations($beanClass);
+        $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
         $properties = $bean->getProperties();
         foreach ($annotations as $method => $methodAnnotations) {
             if ($method == 'class') {
@@ -115,14 +147,5 @@ class AnnotationResourceDriver implements IAfterDefinitionListener, IAfterCreate
         }
         $bean->setAutowiredProperties($properties);
         return $bean;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
     }
 }

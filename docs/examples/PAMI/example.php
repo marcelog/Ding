@@ -35,7 +35,7 @@ require_once 'PAMI/Autoloader/Autoloader.php';
 \PAMI\Autoloader\Autoloader::register();
 
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\PAMI\IPamiEventHandler;
+use Ding\Helpers\Pami\IPamiEventHandler;
 use PAMI\Message\Event\EventMessage;
 use PAMI\Message\Action\ListCommandsAction;
 

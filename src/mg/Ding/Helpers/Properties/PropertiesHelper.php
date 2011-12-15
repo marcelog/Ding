@@ -30,13 +30,6 @@
  */
 namespace Ding\Helpers\Properties;
 
-use Ding\Resource\IResource;
-use Ding\Bean\BeanDefinition;
-use Ding\Bean\Factory\IBeanFactory;
-use Ding\Bean\Lifecycle\IAfterDefinitionListener;
-use Ding\Resource\IResourceLoader;
-use Ding\Resource\IResourceLoaderAware;
-
 /**
  * This bean will search and replace the properties found in constructor
  * arguments and properties.
@@ -50,94 +43,13 @@ use Ding\Resource\IResourceLoaderAware;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class PropertiesHelper
-    implements IResourceLoaderAware, IAfterDefinitionListener, IPropertiesHolder
+class PropertiesHelper implements IPropertiesHolder
 {
     /**
      * Properties.
-     * @var array
-     */
-    private $_properties;
-
-    /**
-     * Injected resource loader.
-     * @var IResourceLoader
-     */
-    private $_resourceLoader;
-
-    /**
-     * Already resolved property names
      * @var string[]
      */
-    private $_propertiesNames;
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Resource.IResourceLoaderAware::setResourceLoader()
-     */
-    public function setResourceLoader(IResourceLoader $resourceLoader)
-    {
-        $this->_resourceLoader = $resourceLoader;
-    }
-
-    /**
-     * Apply (search and replace).
-     *
-     * @param mixed $value Value to replace.
-     *
-     * @return mixed
-     */
-    private function _apply($value)
-    {
-        if (is_string($value)) {
-            foreach ($this->_propertiesNames as $k => $v) {
-                if (is_string($value) && strpos($value, $k) !== false) {
-                    if (is_string($v)) {
-                        $value = str_replace($k, $v, $value);
-                    } else {
-                        $value = $v;
-                    }
-                }
-            }
-        }
-        return $value;
-    }
-
-    /**
-     * Recursively, apply filter to property or constructor arguments values.
-     *
-     * @param BeanPropertyDefinition|BeanConstructoruArgumentDefinition $def
-     * @param IContainer $factory Container in use.
-     *
-     * @return void
-     */
-    private function _applyFilter($def, IBeanFactory $factory)
-    {
-        if (!is_object($def)) {
-            return;
-        }
-        $value = $def->getValue();
-        if (is_array($value)) {
-            foreach ($value as $subDef) {
-                $this->_applyFilter($subDef, $factory);
-            }
-        } else if (is_string($value)) {
-            $def->setValue($this->_apply($value));
-        }
-    }
-
-    public function loadProperties(array $properties)
-    {
-        foreach (array_keys($properties) as $key) {
-            if (strncmp($key, 'php.', 4) === 0) {
-                ini_set(substr($key, 4), $properties[$key]);
-            }
-            /* Change keys. 'property' becomes ${property} */
-            $propName = '${' . $key . '}';
-            $this->_propertiesNames[$propName] = $properties[$key];
-            $this->_properties[$key] = $properties[$key];
-        }
-    }
+    protected $locations = array();
 
     /**
      * Set properties files locations.
@@ -148,41 +60,11 @@ class PropertiesHelper
      */
     public function setLocations($locations)
     {
-        foreach ($locations as $location) {
-            if ($location instanceof IResource) {
-                $resource = $location;
-            } else {
-                $resource = $this->_resourceLoader->getResource(trim($location));
-            }
-            $contents = stream_get_contents($resource->getStream());
-            $properties = parse_ini_string($contents, false);
-            $this->loadProperties($properties);
-        }
+        $this->locations = $locations;
     }
 
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
-     */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function getLocations()
     {
-        foreach ($bean->getProperties() as $property) {
-            $this->_applyFilter($property, $factory);
-        }
-        foreach ($bean->getArguments() as $argument) {
-            $this->_applyFilter($argument, $factory);
-        }
-        return $bean;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->_properties = array();
-        $this->_propertiesNames = array();
+        return $this->locations;
     }
 }

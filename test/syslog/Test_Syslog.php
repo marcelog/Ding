@@ -29,7 +29,6 @@
  */
 
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\Timer\ITimerHandler;
 
 /**
  * This class will test the syslog feature.
@@ -54,7 +53,6 @@ class Test_Syslog extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('timer' => array()),
                     'bdef' => array(
                         'xml' => array('filename' => 'syslog.xml', 'directories' => array(RESOURCES_DIR))
                     )

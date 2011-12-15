@@ -44,52 +44,39 @@ namespace Ding\Bean\Lifecycle;
 class BeanLifecycle
 {
     /**
-     * The bean is in the process of being defined. Typically by a final
-     * backend, like xml or mysql, etc.
-     * @var integer
-     */
-    const BeforeDefinition = 0;
-
-    /**
      * The bean has just been defined and is about to be created. The definition
      * will not change after this step.
      * @var integer
      */
-    const AfterDefinition = 1;
+    const AfterDefinition = 'afterDefinition';
 
     /**
      * Before calling factory::createBean()
      * @var integer
      */
-    const BeforeCreate = 2;
+    const BeforeCreate = 'beforeCreate';
 
     /**
      * After calling factory::createBean()
      * @var integer
      */
-    const AfterCreate = 3;
+    const AfterCreate = 'afterCreate';
 
     /**
      * Before calling factory::assemble()
      * @var integer
      */
-    const BeforeAssemble = 4;
+    const BeforeAssemble = 'beforeAssemble';
 
     /**
      * After calling factory::assemble()
      * @var integer
      */
-    const AfterAssemble = 5;
-
-    /**
-     * When the container is about to configure itself and its subsytems.
-     * @var integer
-     */
-    const BeforeConfig = 7;
+    const AfterAssemble = 'afterAssemble';
 
     /**
      * Right after configuring everything, ready to be used by the user.
      * @var integer
      */
-    const AfterConfig = 8;
+    const AfterConfig = 'afterConfig';
 }

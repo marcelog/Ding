@@ -28,6 +28,11 @@
  *
  */
 namespace Ding\Bean\Factory\Driver;
+
+use Ding\Bean\IBeanDefinitionProvider;
+
+use Ding\Aspect\IAspectManagerAware;
+use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Container\IContainerAware;
 use Ding\Container\IContainer;
 use Ding\Aspect\PointcutDefinition;
@@ -35,11 +40,8 @@ use Ding\Bean\BeanPropertyDefinition;
 use Ding\Aspect\AspectManager;
 use Ding\Aspect\MethodInvocation;
 use Ding\Aspect\AspectDefinition;
-use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
-use Ding\Bean\Factory\IBeanFactory;
-use Ding\Reflection\ReflectionFactory;
 
 /**
  * An "inner" class. This is the aspect that runs when the method is called.
@@ -57,8 +59,8 @@ use Ding\Reflection\ReflectionFactory;
 class MethodInjectionAspect implements IContainerAware
 {
     /**
-     * Factory to use.
-     * @var IBeanFactory
+     * Container.
+     * @var IContainer
      */
     private $_container;
 
@@ -80,6 +82,10 @@ class MethodInjectionAspect implements IContainerAware
         $this->_beanName = $beanName;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainerAware::setContainer()
+     */
     public function setContainer(IContainer $container)
     {
         $this->_container = $container;
@@ -110,17 +116,52 @@ class MethodInjectionAspect implements IContainerAware
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class MethodInjectionDriver implements IBeforeDefinitionListener
+class MethodInjectionDriver
+    implements IAfterDefinitionListener, IAspectManagerAware,
+    IContainerAware, IBeanDefinitionProvider
 {
+    private $_aspectManager;
+    private $_beans = array();
+    /**
+     * Container.
+     * @var IContainer
+     */
+    private $_container;
+
     /**
      * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::beforeDefinition()
+     * @see Ding\Container.IContainerAware::setContainer()
      */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
+    public function setContainer(IContainer $container)
     {
-        if ($bean === null) {
-            return $bean;
+        $this->_container = $container;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinition()
+     */
+    public function getBeanDefinition($name)
+    {
+        if (isset($this->_beans[$name])) {
+            return $this->_beans[$name];
         }
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinitionByClass()
+     */
+    public function getBeanDefinitionByClass($class)
+    {
+        return null;
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
+     */
+    public function afterDefinition(BeanDefinition $bean)
+    {
         foreach ($bean->getMethodInjections() as $method) {
             $aspectBeanName = BeanDefinition::generateName('MethodInjectionAspect');
             $aspectBean = new BeanDefinition($aspectBeanName);
@@ -129,7 +170,7 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
             $aspectBean->setProperties(array(
                 new BeanPropertyDefinition('beanName', BeanPropertyDefinition::PROPERTY_SIMPLE, $method[1])
             ));
-            $factory->setBeanDefinition($aspectBeanName, $aspectBean);
+            $this->_beans[$aspectBeanName] = $aspectBean;
             $aspectName = BeanDefinition::generateName('MethodInjectionAspect');
             $pointcutName = BeanDefinition::generateName('MethodInjectionPointcut');
             $pointcut = new PointcutDefinition($pointcutName, $method[0], 'invoke');
@@ -138,7 +179,6 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
                 $aspectName, array($pointcutName),
                 AspectDefinition::ASPECT_METHOD, $aspectBeanName, ''
             );
-            //$this->_aspectManager->setAspect($aspect);
             $aspects = $bean->getAspects();
             $aspects[] = $aspect;
             $bean->setAspects($aspects);
@@ -146,14 +186,7 @@ class MethodInjectionDriver implements IBeforeDefinitionListener
         return $bean;
     }
 
-    /**
-     * Constructor.
-     *
-     * @param \Ding\Aspect\AspectManager $aspectManager
-     *
-     * @return void
-     */
-    public function __construct(\Ding\Aspect\AspectManager $aspectManager)
+    public function setAspectManager(AspectManager $aspectManager)
     {
         $this->_aspectManager = $aspectManager;
     }

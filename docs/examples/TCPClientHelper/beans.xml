@@ -7,7 +7,7 @@
          </array>
        </property>
    </bean>
-	<bean id="Client" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+	<bean id="Client" class="Ding\Helpers\Tcp\TcpClientHelper" scope="prototype">
 		<property name="connectTimeout">
 			<value>${tcp.cto}</value>
 		</property>

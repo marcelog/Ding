@@ -1,7 +1,7 @@
 <?php
 declare(ticks=1);
 /**
- * This class will test the TCP Peer.
+ * This class will test the Tcp Peer.
  *
  * PHP Version 5
  *
@@ -31,7 +31,7 @@ declare(ticks=1);
 use Ding\Container\Impl\ContainerImpl;
 
 /**
- * This class will test the TCP Peer.
+ * This class will test the Tcp Peer.
  *
  * PHP Version 5
  *
@@ -42,14 +42,14 @@ use Ding\Container\Impl\ContainerImpl;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_TCP_Peer extends PHPUnit_Framework_TestCase
+class Test_Tcp_Peer extends PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
     public function can_use_peer()
     {
-        $peer = new \Ding\Helpers\TCP\TCPPeer('address', 'port', null);
+        $peer = new \Ding\Helpers\Tcp\TcpPeer('address', 'port', null);
         $this->assertEquals('address', $peer->getAddress());
         $this->assertEquals('port', $peer->getPort());
         $this->assertEquals('address:port', $peer->getName());

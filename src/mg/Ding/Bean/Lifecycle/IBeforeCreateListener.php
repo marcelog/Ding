@@ -30,7 +30,6 @@
 namespace Ding\Bean\Lifecycle;
 
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\Factory\IBeanFactory;
 
 /**
  * Interface for a BeforeCreate lifecycle event.
@@ -46,5 +45,5 @@ use Ding\Bean\Factory\IBeanFactory;
  */
 interface IBeforeCreateListener extends ILifecycleListener
 {
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition);
+    public function beforeCreate(BeanDefinition $beanDefinition);
 }

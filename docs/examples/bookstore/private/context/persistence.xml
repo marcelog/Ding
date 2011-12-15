@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="entityManager" class="Doctrine\ORM\EntityManager"
+    factory-method="create">
+    <constructor-arg>
+      <value>${doctrine.db}</value>
+    </constructor-arg>
+    <constructor-arg>
+      <ref bean="doctrine-config" />
+    </constructor-arg>
+    <constructor-arg>
+      <bean class="Doctrine\Common\EventManager"/>
+    </constructor-arg>
+  </bean>
+
+  <bean id="doctrine-config" class="\Doctrine\ORM\Configuration">
+    <property name="metaDataCacheImpl">
+      <bean class="Doctrine\Common\Cache\ArrayCache"/>
+    </property>
+    <property name="metadataDriverImpl">
+      <ref bean="doctrine-metadata-driver"/>
+    </property>
+    <property name="queryCacheImpl">
+      <bean class="Doctrine\Common\Cache\ArrayCache"/>
+    </property>
+    <property name="proxyDir">
+      <value>${doctrine.proxy.dir}</value>
+    </property>
+    <property name="proxyNamespace">
+      <value>${doctrine.proxy.namespace}</value>
+    </property>
+  </bean>
+  <bean id="doctrine-config-dummy" class="\Doctrine\ORM\Configuration"/>
+  <bean id="doctrine-metadata-driver"
+    factory-bean="doctrine-config-dummy"
+    factory-method="newDefaultAnnotationDriver">
+    <constructor-arg>
+      <array>
+        <entry><value>${doctrine.entity.path}</value></entry>
+      </array>
+    </constructor-arg>
+  </bean>
+</beans>

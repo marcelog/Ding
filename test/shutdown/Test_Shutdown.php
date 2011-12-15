@@ -29,7 +29,6 @@
  */
 
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\ShutdownHandler\IShutdownHandler;
 
 /**
  * This class will test the shutdown handler driver.
@@ -59,7 +58,6 @@ class Test_Shutdown extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('shutdown' => array()),
                     'bdef' => array(
                         'xml' => array('filename' => 'shutdownBeans.xml', 'directories' => array(RESOURCES_DIR))
                     )
@@ -89,7 +87,6 @@ class Test_Shutdown extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('shutdown' => array()),
                     'bdef' => array(
                         'annotation' => array('scanDir' => array(__DIR__))
                     )
@@ -116,7 +113,6 @@ class Test_Shutdown extends PHPUnit_Framework_TestCase
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
-        			'drivers' => array('shutdown' => array()),
                 )
             )
         );
@@ -124,20 +120,21 @@ class Test_Shutdown extends PHPUnit_Framework_TestCase
     }
 }
 
-class MyShutdownHandler implements IShutdownHandler
+class MyShutdownHandler
 {
-    public function handleShutdown()
+    public function onDingShutdown()
     {
         unlink(Test_Shutdown::$tempFile);
     }
 }
 
 /**
- * @ShutdownHandler
+ * @Component
+ * @ListensOn(value=dingShutdown)
  */
-class MyShutdownHandler2 implements IShutdownHandler
+class MyShutdownHandler2
 {
-    public function handleShutdown()
+    public function onDingShutdown()
     {
         unlink(Test_Shutdown::$tempFile);
     }

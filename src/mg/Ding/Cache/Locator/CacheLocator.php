@@ -31,7 +31,7 @@
 namespace Ding\Cache\Locator;
 
 use Ding\Cache\Exception\CacheException;
-use Ding\Cache\Impl\APCCacheImpl;
+use Ding\Cache\Impl\ApcCacheImpl;
 use Ding\Cache\Impl\ZendCacheImpl;
 use Ding\Cache\Impl\FileCacheImpl;
 use Ding\Cache\Impl\MemcachedCacheImpl;
@@ -80,7 +80,7 @@ class CacheLocator
         case 'file':
             return FileCacheImpl::getInstance($options);
         case 'apc':
-            return APCCacheImpl::getInstance($options);
+            return ApcCacheImpl::getInstance($options);
         case 'dummy':
             return DummyCacheImpl::getInstance($options);
         case 'zend':

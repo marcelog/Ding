@@ -1,0 +1,20 @@
+<?php
+$model = $modelAndView->getModel();
+?>
+<form method="POST" action="/Book/doCreate" id="createBookForm">
+  <table>
+    <tr>
+      <td>Name:</td>
+      <td><input type="text" name="name" value="<?php echo isset($model['name']) ? $model['name'] : ''?>"/></td>
+      <td><?php echo isset($model['errors']['name']) ? $this->translate('books', $model['errors']['name'], array()) : ''?></td>
+    </tr>
+    <tr>
+      <td>ISBN:</td>
+      <td><input type="text" name="isbn"value="<?php echo isset($model['isbn']) ? $model['isbn'] : ''?>"/></td>
+      <td><?php echo isset($model['errors']['isbn']) ? $this->translate('books', $model['errors']['isbn'], array()) : ''?></td>
+    </tr>
+    <tr>
+      <td><input type="submit" name="createBook" value="Create"/></td>
+    </tr>
+  </table>
+</form>

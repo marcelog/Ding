@@ -29,14 +29,13 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
-
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
-use Ding\Bean\Factory\IBeanFactory;
-use Ding\Reflection\ReflectionFactory;
+use Ding\Reflection\IReflectionFactory;
 
 /**
  * This driver will search for @Required setter methods.
@@ -50,17 +49,31 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationRequiredDriver implements IAfterDefinitionListener
+class AnnotationRequiredDriver implements IAfterDefinitionListener, IReflectionFactoryAware
 {
+    /**
+     * A ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->reflectionFactory = $reflectionFactory;
+    }
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
      */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function afterDefinition(BeanDefinition $bean)
     {
         $beanClass = $bean->getClass();
         if (!empty($beanClass)) {
-            $annotations = ReflectionFactory::getClassAnnotations($beanClass);
+            $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
             $props = $bean->getProperties();
             foreach ($annotations as $method => $annotations) {
                 if ($method == 'class') {
@@ -80,14 +93,5 @@ class AnnotationRequiredDriver implements IAfterDefinitionListener
             }
         }
         return $bean;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
     }
 }

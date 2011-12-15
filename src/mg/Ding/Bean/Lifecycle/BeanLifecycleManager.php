@@ -28,15 +28,12 @@
  *
  */
 namespace Ding\Bean\Lifecycle;
-use Ding\Bean\Lifecycle\IBeforeConfigListener;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
-use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\Lifecycle\IBeforeCreateListener;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\Lifecycle\IBeforeAssembleListener;
 use Ding\Bean\Lifecycle\IAfterAssembleListener;
-use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\BeanDefinition;
 
 /**
@@ -70,18 +67,6 @@ class BeanLifecycleManager
     }
 
     /**
-     * Adds a lifecycler to the BeforeConfig point.
-     *
-     * @param IBeforeConfigListener $listener Listener to add
-     *
-     * @return void
-     */
-    public function addBeforeConfigListener(IBeforeConfigListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::BeforeConfig][] = $listener;
-    }
-
-    /**
      * Adds a lifecycler to the AfterConfig point.
      *
      * @param IAfterConfigListener $listener Listener to add
@@ -91,18 +76,6 @@ class BeanLifecycleManager
     public function addAfterConfigListener(IAfterConfigListener $listener)
     {
         $this->_lifecyclers[BeanLifecycle::AfterConfig][] = $listener;
-    }
-
-    /**
-     * Adds a lifecycler to the BeforeDefinition point.
-     *
-     * @param IBeforeDefinitionListener $listener Listener to add
-     *
-     * @return void
-     */
-    public function addBeforeDefinitionListener(IBeforeDefinitionListener $listener)
-    {
-        $this->_lifecyclers[BeanLifecycle::BeforeDefinition][] = $listener;
     }
 
     /**
@@ -166,37 +139,18 @@ class BeanLifecycleManager
     }
 
     /**
-     * Runs the BeforeDefinition point of the lifecycle.
+     * Runs the AfterDefinition point of the lifecycle.
      *
-     * @param IBeanFactory   $factory  Container instance.
      * @param string         $beanName Bean name.
      * @param BeanDefinition $bean     Actual definition.
      *
      * @return BeanDefinition
      */
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
-    {
-        $return = $bean;
-        foreach ($this->_lifecyclers[BeanLifecycle::BeforeDefinition] as $lifecycleListener) {
-            $return = $lifecycleListener->beforeDefinition($factory, $beanName, $return);
-        }
-        return $return;
-    }
-
-    /**
-     * Runs the BeforeDefinition point of the lifecycle.
-     *
-     * @param IBeanFactory   $factory  Container instance.
-     * @param string         $beanName Bean name.
-     * @param BeanDefinition $bean     Actual definition.
-     *
-     * @return BeanDefinition
-     */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function afterDefinition(BeanDefinition $bean)
     {
         $return = $bean;
         foreach ($this->_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
-            $return = $lifecycleListener->afterDefinition($factory, $return);
+            $return = $lifecycleListener->afterDefinition($return);
         }
         return $return;
     }
@@ -204,94 +158,86 @@ class BeanLifecycleManager
     /**
      * Runs the BeforeCreate point of the lifecycle.
      *
-     * @param IBeanFactory   $factory        Container instance.
      * @param BeanDefinition $beanDefinition Actual definition.
      *
      * @return void
      */
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
+    public function beforeCreate(BeanDefinition $beanDefinition)
     {
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeCreate] as $lifecycleListener) {
-            $lifecycleListener->beforeCreate($factory, $beanDefinition);
+            $lifecycleListener->beforeCreate($beanDefinition);
         }
     }
 
     /**
      * Runs the AfterCreate point of the lifecycle.
      *
-     * @param IBeanFactory   $factory  Container instance.
      * @param string         $beanName Bean name.
      * @param BeanDefinition $bean     Actual definition.
      *
      * @return void
      */
-    public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function afterCreate($bean, BeanDefinition $beanDefinition)
     {
         foreach ($this->_lifecyclers[BeanLifecycle::AfterCreate] as $lifecycleListener) {
-            $lifecycleListener->afterCreate($factory, $bean, $beanDefinition);
+            $lifecycleListener->afterCreate($bean, $beanDefinition);
         }
     }
 
     /**
      * Runs the BeforeAssemble point of the lifecycle.
      *
-     * @param IBeanFactory   $factory  Container instance.
      * @param string         $beanName Bean name.
      * @param BeanDefinition $bean     Actual definition.
      *
      * @return BeanDefinition
      */
-    public function beforeAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble($bean, BeanDefinition $beanDefinition)
     {
         foreach ($this->_lifecyclers[BeanLifecycle::BeforeAssemble] as $lifecycleListener) {
-            $lifecycleListener->beforeAssemble($factory, $bean, $beanDefinition);
+            $lifecycleListener->beforeAssemble($bean, $beanDefinition);
         }
     }
 
     /**
      * Runs the AfterAssemble point of the lifecycle.
      *
-     * @param IBeanFactory   $factory        Container instance.
      * @param object         $bean           Bean.
      * @param BeanDefinition $beanDefinition Actual definition.
      *
      * @return void
      */
-    public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function afterAssemble($bean, BeanDefinition $beanDefinition)
     {
         foreach ($this->_lifecyclers[BeanLifecycle::AfterAssemble] as $lifecycleListener) {
-            $lifecycleListener->afterAssemble($factory, $bean, $beanDefinition);
+            $lifecycleListener->afterAssemble($bean, $beanDefinition);
         }
     }
 
     /**
      * Runs the AfterConfig point of the lifecycle.
      *
-     * @param IBeanFactory $factory Container instance.
-     *
      * @return void
      */
-    public function afterConfig(IBeanFactory $factory)
+    public function afterConfig()
     {
         foreach ($this->_lifecyclers[BeanLifecycle::AfterConfig] as $lifecycleListener) {
-            $lifecycleListener->afterConfig($factory);
+            $lifecycleListener->afterConfig();
         }
     }
 
-    /**
-     * Runs the BeforeConfig point of the lifecycle.
-     *
-     * @param IBeanFactory $factory Container instance.
-     *
-     * @return void
-     */
-    public function beforeConfig(IBeanFactory $factory)
+/*
+    public function setListeners(array $listeners = array())
     {
-        foreach ($this->_lifecyclers[BeanLifecycle::BeforeConfig] as $lifecycleListener) {
-            $lifecycleListener->beforeConfig($factory);
-        }
+        $this->_lifecyclers[BeanLifecycle::BeforeConfig] = $listeners[BeanLifecycle::BeforeConfig];
+        $this->_lifecyclers[BeanLifecycle::AfterConfig] = $listeners[BeanLifecycle::AfterConfig];
+        $this->_lifecyclers[BeanLifecycle::AfterDefinition] = $listeners[BeanLifecycle::AfterDefinition];
+        $this->_lifecyclers[BeanLifecycle::BeforeCreate] = $listeners[BeanLifecycle::BeforeCreate];
+        $this->_lifecyclers[BeanLifecycle::AfterCreate] = $listeners[BeanLifecycle::AfterCreate];
+        $this->_lifecyclers[BeanLifecycle::BeforeAssemble] = $listeners[BeanLifecycle::BeforeAssemble];
+        $this->_lifecyclers[BeanLifecycle::AfterAssemble] = $listeners[BeanLifecycle::AfterAssemble];
     }
-
+*/
     /**
      * Constructor.
      *
@@ -301,9 +247,7 @@ class BeanLifecycleManager
     {
         $soullessArray = array();
         $this->_lifecyclers = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::BeforeConfig] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::AfterConfig] = $soullessArray;
-        $this->_lifecyclers[BeanLifecycle::BeforeDefinition] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::AfterDefinition] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::BeforeCreate] = $soullessArray;
         $this->_lifecyclers[BeanLifecycle::AfterCreate] = $soullessArray;

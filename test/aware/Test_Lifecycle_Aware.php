@@ -28,9 +28,9 @@
  *
  */
 
+use Ding\Bean\IBeanDefinitionProvider;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\Lifecycle\IBeforeCreateListener;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
@@ -129,25 +129,38 @@ class ClassLifecycleAware2
 }
 
 class ClassLifecycleAware implements
-    IBeforeDefinitionListener, IAfterDefinitionListener, IBeforeCreateListener,
-    IAfterCreateListener, IBeforeAssembleListener, IAfterAssembleListener
+    IAfterDefinitionListener, IBeforeCreateListener,
+    IAfterCreateListener, IBeforeAssembleListener,
+    IAfterAssembleListener, IBeanDefinitionProvider
 {
-    public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function afterAssemble($bean, BeanDefinition $beanDefinition)
     {
-        $bean->setAa('yeah');
+        if (get_class($bean) != get_class($this)) {
+            $bean->setAa('yeah');
+        }
         return $bean;
     }
 
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
+    public function getBeanDefinition($name)
     {
-        $def = new BeanDefinition('aSimpleLifecycleAwareBean2');
-        $def->setScope(BeanDefinition::BEAN_SINGLETON);
-        $def->setClass('ClassLifecycleAware2');
-        return $def;
+        if ($name == 'aSimpleLifecycleAwareBean2') {
+            $def = new BeanDefinition('aSimpleLifecycleAwareBean2');
+            $def->setScope(BeanDefinition::BEAN_SINGLETON);
+            $def->setClass('ClassLifecycleAware2');
+            return $def;
+        }
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getByClass()
+     */
+    public function getBeanDefinitionByClass($class)
+    {
 
     }
 
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function afterDefinition(BeanDefinition $bean)
     {
         $props = $bean->getProperties();
         $props[] = new BeanPropertyDefinition('ad', BeanPropertyDefinition::PROPERTY_SIMPLE, 'yeah');
@@ -155,19 +168,23 @@ class ClassLifecycleAware implements
         return $bean;
     }
 
-    public function beforeAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble($bean, BeanDefinition $beanDefinition)
     {
-        $bean->setBa('yeah');
+        if (get_class($bean) != get_class($this)) {
+            $bean->setBa('yeah');
+        }
         return $bean;
     }
 
-    public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function afterCreate($bean, BeanDefinition $beanDefinition)
     {
-        $bean->setAc('yeah');
+        if (get_class($bean) != get_class($this)) {
+            $bean->setAc('yeah');
+        }
         return $bean;
     }
 
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
+    public function beforeCreate(BeanDefinition $beanDefinition)
     {
         $props = $beanDefinition->getProperties();
         $props[] = new BeanPropertyDefinition('bc', BeanPropertyDefinition::PROPERTY_SIMPLE, 'yeah');

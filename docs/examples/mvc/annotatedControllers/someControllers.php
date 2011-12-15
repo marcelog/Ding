@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-use Ding\MVC\ModelAndView;
+use Ding\Mvc\ModelAndView;
 
 /**
  * @Controller
@@ -22,6 +22,14 @@ use Ding\MVC\ModelAndView;
  */
 class AnnotatedController
 {
+    public function jsonAction($item1, $item2)
+    {
+        $options = array(
+            'json' => json_encode(func_get_args())
+        );
+        $modelAndView = new ModelAndView('json', $options);
+        return $modelAndView;
+    }
     public function anAction()
     {
         $modelAndView = new ModelAndView('annotated');

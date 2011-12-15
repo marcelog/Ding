@@ -374,6 +374,14 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $bean = $container->getBean('someAliasedName');
         $this->assertTrue($bean instanceof ClassSimpleYAML12);
     }
+    /**
+     * @test
+     */
+    public function can_get_by_class()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBeanDefinitionByClass('aliasedBean');
+    }
 }
 
 class ClassSimpleYAML

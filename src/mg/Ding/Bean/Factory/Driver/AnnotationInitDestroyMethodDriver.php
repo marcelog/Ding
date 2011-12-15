@@ -29,14 +29,13 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Reflection\IReflectionFactory;
+use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
-
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
-use Ding\Bean\Factory\IBeanFactory;
-use Ding\Reflection\ReflectionFactory;
 
 /**
  * This driver will search for @InitMethod and @DestroyMethod.
@@ -50,19 +49,33 @@ use Ding\Reflection\ReflectionFactory;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationInitDestroyMethodDriver implements IAfterDefinitionListener
+class AnnotationInitDestroyMethodDriver implements IAfterDefinitionListener, IReflectionFactoryAware
 {
+    /**
+     * A ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->reflectionFactory = $reflectionFactory;
+    }
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
      */
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function afterDefinition(BeanDefinition $bean)
     {
         $beanClass = $bean->getClass();
         if (empty($beanClass)) {
             return $bean;
         }
-        $annotations = ReflectionFactory::getClassAnnotations($beanClass);
+        $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
         if (isset($annotations['class']['InitMethod'])) {
             $arguments = $annotations['class']['InitMethod']->getArguments();
             if (isset($arguments['method'])) {
@@ -76,14 +89,5 @@ class AnnotationInitDestroyMethodDriver implements IAfterDefinitionListener
             }
         }
         return $bean;
-    }
-
-    /**
-     * Constructor.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
     }
 }

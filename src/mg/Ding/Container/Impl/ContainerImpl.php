@@ -29,14 +29,16 @@
  */
 namespace Ding\Container\Impl;
 
-use Ding\Bean\Factory\Driver\PropertiesDriver;
-use Ding\Bean\Factory\Driver\ResourcesDriver;
+use Ding\Helpers\ErrorHandler\ErrorInfo;
+
+use Ding\Bean\IBeanDefinitionProvider;
+use Ding\Cache\Impl\DummyCacheImpl;
+use Ding\Bean\Provider\Core;
 use Ding\Resource\Impl\IncludePathResource;
 use Ding\Resource\Impl\FilesystemResource;
 use Ding\Resource\Impl\URLResource;
 use Ding\Cache\Locator\CacheLocator;
 use Ding\Container\IContainer;
-use Ding\Aspect\Proxy;
 use Ding\Aspect\AspectManager;
 use Ding\Aspect\InterceptorDefinition;
 use Ding\Aspect\AspectDefinition;
@@ -45,30 +47,6 @@ use Ding\Aspect\Interceptor\DispatcherImpl;
 use Ding\Reflection\ReflectionFactory;
 use Ding\Bean\Lifecycle\BeanLifecycle;
 use Ding\Bean\Lifecycle\BeanLifecycleManager;
-use Ding\Bean\Factory\IBeanFactory;
-use Ding\Bean\Factory\Driver\BeanXmlDriver;
-use Ding\Bean\Factory\Driver\BeanYamlDriver;
-use Ding\Bean\Factory\Driver\MVCAnnotationDriver;
-use Ding\Bean\Factory\Driver\DependsOnDriver;
-use Ding\Bean\Factory\Driver\MessageSourceDriver;
-use Ding\Bean\Factory\Driver\MethodInjectionDriver;
-use Ding\Bean\Factory\Driver\ShutdownDriver;
-use Ding\Bean\Factory\Driver\BeanAnnotationDriver;
-use Ding\Bean\Factory\Driver\BeanCacheDefinitionDriver;
-use Ding\Bean\Factory\Driver\BeanAspectDriver;
-use Ding\Bean\Factory\Driver\ErrorHandlerDriver;
-use Ding\Bean\Factory\Driver\SignalHandlerDriver;
-use Ding\Bean\Factory\Driver\SetterInjectionDriver;
-use Ding\Bean\Factory\Driver\AnnotationAspectDriver;
-use Ding\Bean\Factory\Driver\AnnotationRequiredDriver;
-use Ding\Bean\Factory\Driver\AnnotationResourceDriver;
-use Ding\Bean\Factory\Driver\AnnotationInitDestroyMethodDriver;
-use Ding\Bean\Factory\Driver\ContainerAwareDriver;
-use Ding\Bean\Factory\Driver\LoggerAwareDriver;
-use Ding\Bean\Factory\Driver\ResourceLoaderAwareDriver;
-use Ding\Bean\Factory\Driver\BeanNameAwareDriver;
-use Ding\Bean\Factory\Driver\AspectManagerAwareDriver;
-use Ding\Bean\Factory\Driver\LifecycleDriver;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Bean\BeanDefinition;
@@ -90,7 +68,14 @@ use Ding\MessageSource\IMessageSource;
 class ContainerImpl implements IContainer
 {
     /**
-     * log4php logger or our own.
+     * Signals to handle.
+     * @var array
+     */
+    private $_signals = array(
+        SIGQUIT, SIGHUP, SIGINT, SIGCHLD, SIGTERM, SIGUSR1, SIGUSR2
+    );
+    /**
+     * Logger.
      * @var Logger
      */
     private $_logger;
@@ -105,14 +90,13 @@ class ContainerImpl implements IContainer
      * Dispatcher to be cloned for proxy.
      * @var DispatcherImpl
      */
-    private $_dispatcherTemplate = false;
+    private $_dispatcherTemplate = null;
 
     /**
      * MessageSource implementation.
      * @var IMessageSource
      */
     private $_messageSource = false;
-
     /**
      * Default options.
      * @var array
@@ -169,13 +153,13 @@ class ContainerImpl implements IContainer
      * The aspect manager.
      * @var AspectManager
      */
-    private $_aspectManager = false;
+    private $_aspectManager = null;
 
     /**
      * The lifecycle manager.
      * @var BeanLifecycleManager
      */
-    private $_lifecycleManager = false;
+    private $_lifecycleManager = null;
 
     /**
      * Resources multiton.
@@ -190,6 +174,30 @@ class ContainerImpl implements IContainer
     private $_eventListeners = false;
 
     /**
+     * Bean Definition providers.
+     * @var IBeanDefinitionProvider[]
+     */
+    private $_beanDefinitionProviders = array();
+
+    /**
+     * The last error message is saved, just to avoid logging repeated messages.
+     * @var string
+     */
+    private $_lastErrorMessage;
+
+    /**
+     * A ReflectionFactory implementation
+     * @var IReflectionFactory
+     */
+    private $_reflectionFactory;
+
+    /**
+     * A Proxy factory implementation.
+     * @var Proxy
+     */
+    private $_proxyFactory;
+
+    /**
      * Prevent serialization.
      *
      * @return array
@@ -199,6 +207,16 @@ class ContainerImpl implements IContainer
         return array('_aspectManager', '_lifecycleManager');
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinitionByClass()
+     */
+    public function getBeanDefinitionByClass($class)
+    {
+        foreach ($this->_beanDefinitionProviders as $provider) {
+            $beanDefinition = $provider->getBeanDefinitionByClass($class);
+        }
+    }
     /**
      * Returns a bean definition.
      *
@@ -214,35 +232,29 @@ class ContainerImpl implements IContainer
             $name = $this->_beanAliases[$name];
         }
         if (isset($this->_beanDefs[$name])) {
-            if ($this->_logDebugEnabled) {
-                $this->_logger->debug('Serving already known: ' . $beanName);
-            }
             return $this->_beanDefs[$name];
         }
 
-        $result = false;
-        $beanDefinition = $this->_beanDefCache->fetch($beanName, $result);
-        if ($result !== false) {
+        $beanDefinition = null;
+        if ($this->_beanDefCache !== null) {
+            $beanDefinition = $this->_beanDefCache->fetch($beanName, $result);
+        }
+        if ($beanDefinition) {
             $this->_beanDefs[$name] = $beanDefinition;
-            if ($this->_logDebugEnabled) {
-                $this->_logger->debug('Serving cached: ' . $beanName);
-            }
             return $beanDefinition;
         }
-        $beanDefinition = null;
-        if ($this->_logDebugEnabled) {
-            $this->_logger->debug('Running BeforeDefinition: ' . $beanName);
+        foreach ($this->_beanDefinitionProviders as $provider) {
+            $beanDefinition = $provider->getBeanDefinition($name);
+            if ($beanDefinition) {
+                break;
+            }
         }
-        $beanDefinition = $this->_lifecycleManager->beforeDefinition($this, $name, $beanDefinition);
-
-        if ($beanDefinition === null) {
+        if (!$beanDefinition) {
             throw new BeanFactoryException('Unknown bean: ' . $name);
         }
-        if ($this->_logDebugEnabled) {
-            $this->_logger->debug('Running AfterDefinition: ' . $beanName);
-        }
-        $beanDefinition = $this->_lifecycleManager->afterDefinition($this, $beanDefinition);
-        $this->setBeanDefinition($name, $beanDefinition);
+        $beanDefinition = $this->_lifecycleManager->afterDefinition($beanDefinition);
+        $this->_beanDefs[$beanName] = $beanDefinition;
+        $this->_beanDefCache->store($beanName, $beanDefinition);
         foreach ($beanDefinition->getAliases() as $alias) {
             $this->_beanAliases[$alias] = $name;
         }
@@ -250,75 +262,64 @@ class ContainerImpl implements IContainer
     }
 
     /**
-     * Sets a bean definition (adds or overwrites).
+     * Takes care of transforming a scalar value for a property or constructor
+     * argument, into a an actual value (i.e: if its a resource://, loading it
+     * first).
      *
-     * @param string         $name       Bean name.
-     * @param BeanDefinition $definition New bean definition.
-     *
-     * @return void
-     */
-    public function setBeanDefinition($name, BeanDefinition $definition)
-    {
-        $beanName = $name . '.beandef';
-        $this->_beanDefs[$name] = $definition;
-        $this->_beanDefCache->store($beanName, $definition);
-        if ($this->_logDebugEnabled) {
-            $this->_logger->debug('New: ' . $beanName);
-        }
-    }
-
-    /**
-     * Sets a bean (adds or overwrites).
-     *
-     * @param string $name Bean name.
-     * @param object $bean New object.
-     *
-     * @return void
-     */
-    public function setBean($name, $bean)
-    {
-        $beanName = $name . '.bean';
-        $this->_beans[$name] = $bean;
-
-        /**
-         * @todo This is not suppose to exist. We need to refactor the proxy so it
-		 * can be correctly serialized. This check is used internally by the
-		 * container to know that this bean cant be cached (although it can cache
-		 * its definition).
-		 */
-        //if (!isset($bean::$iAmADingProxy)) {
-        //    $this->_beanCache->store($beanName, $bean);
-        //}
-        if ($this->_logDebugEnabled) {
-            $this->_logger->debug('New: ' . $beanName);
-        }
-    }
-
-    /**
-     * This will return an argument value, from a definition.
-     *
-     * @param BeanConstructorArgumentDefinition $arg Constructor definition.
+     * @param mixed $value The value
      *
      * @return mixed
      */
-    private function _loadArgument(BeanConstructorArgumentDefinition $arg)
+    private function _loadValue($value)
     {
-        $value = null;
-        if ($arg->isBean()) {
-            $value = $this->getBean($arg->getValue());
-        } else if ($arg->isArray()) {
-            $value = array();
-            foreach ($arg->getValue() as $k => $v) {
-                $value[$k] = $this->_loadArgument($v);
+        if (is_string($value)) {
+            if (strpos($value, 'resource://') === 0) {
+                $value = substr($value, 11);
+                return $this->getResource($value);
             }
-        } else if ($arg->isCode()) {
-            $value = eval($arg->getValue());
-        } else {
-            $value = $arg->getValue();
         }
         return $value;
     }
 
+    /**
+     * This will resolve a property (or constructor arg) definition to a final
+     * value, being a bean reference, array of other properties (or
+     * constructor args), etc.
+	 *
+     * @param BeanPropertyDefinition|BeanConstructorArgumentDefinition $what
+     *
+     * @return void
+     */
+    private function _loadArgOrProperty($what)
+    {
+        $value = null;
+        if ($what->isBean()) {
+            $value = $this->getBean($what->getValue());
+        } else if ($what->isArray()) {
+            $value = array();
+            foreach ($what->getValue() as $k => $v) {
+                $value[$k] = $this->_loadArgOrProperty($v);
+            }
+        } else if ($what->isCode()) {
+            $value = eval($what->getValue());
+        } else {
+            $value = $this->_loadValue($what->getValue());
+        }
+        return $value;
+    }
+
+    /**
+     * Will inject into the given dispatcher the necessary information to
+     * aspects will be run correctly.
+     *
+     * @param AspectDefinition $aspectDefinition
+     * @param DispatcherImpl $dispatcher
+     * @param \ReflectionClass $rClass
+     * @param array $methods
+     *
+     * @throws BeanFactoryException
+     * @return void
+     */
     private function _applyAspect(
         AspectDefinition $aspectDefinition, DispatcherImpl $dispatcher, \ReflectionClass $rClass, array &$methods
     ) {
@@ -355,20 +356,23 @@ class ContainerImpl implements IContainer
      */
     private function _createBean(BeanDefinition $beanDefinition)
     {
-        $this->_lifecycleManager->beforeCreate($this, $beanDefinition);
+        foreach ($beanDefinition->getDependsOn() as $depBean) {
+            $this->getBean(trim($depBean));
+        }
+        $this->_lifecycleManager->beforeCreate($beanDefinition);
 
         $beanClass = $beanDefinition->getClass();
         $args = array();
         foreach ($beanDefinition->getArguments() as $argument) {
-            $args[] = $this->_loadArgument($argument);
+            $args[] = $this->_loadArgOrProperty($argument);
         }
         $rClass = false;
         if (!empty($beanClass)) {
-            $rClass = ReflectionFactory::getClass($beanClass);
+            $rClass = $this->_reflectionFactory->getClass($beanClass);
         }
-        $dispatcher = clone $this->_dispatcherTemplate;
         $methods = array();
-        if ($beanDefinition->hasAspects()) {
+        $dispatcher = $this->_dispatcherTemplate !== null ? clone $this->_dispatcherTemplate : null;
+        if ($beanDefinition->hasAspects() && $dispatcher !== null) {
             /**
              * @todo the operation of applying an aspect is really expensive!
              */
@@ -376,7 +380,7 @@ class ContainerImpl implements IContainer
                 $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
             }
         }
-        if ($rClass !== false) {
+        if ($rClass !== false && $this->_aspectManager !== null) {
             foreach ($this->_aspectManager->getAspects() as $aspect) {
                 $expression = $aspect->getExpression();
                 if (preg_match('/' . $expression . '/', $beanClass) === 0) {
@@ -392,14 +396,14 @@ class ContainerImpl implements IContainer
                 }
                 $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
             }
-        }
-        if (!empty($methods)) {
-            $beanClass = Proxy::create($beanClass, $methods, $dispatcher);
+            if (!empty($methods)) {
+                $beanClass = $this->_proxyFactory->create($beanClass, $methods, $dispatcher);
+            }
         }
         /* @todo change this to a clone */
         $factoryMethod = $beanDefinition->getFactoryMethod();
         if ($factoryMethod == false || empty($factoryMethod)) {
-            $constructor = ReflectionFactory::getClass($beanClass);
+            $constructor = $this->_reflectionFactory->getClass($beanClass);
             if (empty($args)) {
                 $bean = $constructor->newInstanceArgs();
             } else {
@@ -432,9 +436,7 @@ class ContainerImpl implements IContainer
                 }
             }
         }
-        $this->_lifecycleManager->afterCreate($this, $bean, $beanDefinition);
-        $this->_lifecycleManager->beforeAssemble($this, $bean, $beanDefinition);
-
+        $this->assemble($bean, $beanDefinition);
         $initMethod = $beanDefinition->getInitMethod();
         if ($initMethod) {
             $bean->$initMethod();
@@ -443,10 +445,32 @@ class ContainerImpl implements IContainer
         if ($destroyMethod) {
             $this->registerShutdownMethod($bean, $destroyMethod);
         }
-        $this->_lifecycleManager->afterAssemble($this, $bean, $beanDefinition);
+        $this->_lifecycleManager->afterCreate($bean, $beanDefinition);
         return $bean;
     }
 
+    /**
+     * Assembles a bean (setter injection)
+     *
+     * @param mixed $bean
+     * @param BeanDefinition $beanDefinition
+     *
+     * @return void
+     */
+    protected function assemble($bean, BeanDefinition $beanDefinition)
+    {
+        $this->_lifecycleManager->beforeAssemble($bean, $beanDefinition);
+        foreach ($beanDefinition->getProperties() as $property) {
+            $propertyName = $property->getName();
+            $methodName = 'set' . ucfirst($propertyName);
+            $rClass = $this->_reflectionFactory->getClass($beanDefinition->getClass());
+            if ($rClass->hasMethod($methodName)) {
+                $bean->$methodName($this->_loadArgOrProperty($property));
+            }
+        }
+        $this->fillAware($beanDefinition, $bean);
+        $this->_lifecycleManager->afterAssemble($bean, $beanDefinition);
+    }
     /**
      * Returns a bean.
      *
@@ -468,18 +492,14 @@ class ContainerImpl implements IContainer
         if ($beanDefinition->isPrototype()) {
             $ret = $this->_createBean($beanDefinition);
         } else if ($beanDefinition->isSingleton()) {
-            if (!isset($this->_beans[$name])) {
-                $result = false;
+            if (isset($this->_beans[$beanName])) {
+                $ret = $this->_beans[$beanName];
+            } else {
                 $ret = $this->_beanCache->fetch($beanName, $result);
-                if ($result === false) {
+                if (!$ret) {
                     $ret = $this->_createBean($beanDefinition);
                 }
-                $this->setBean($name, $ret);
-            } else {
-                if ($this->_logDebugEnabled) {
-                    $this->_logger->debug('Serving already known: ' . $beanName);
-                }
-                $ret = $this->_beans[$name];
+                $this->_beans[$beanName] = $ret;
             }
         }
         return $ret;
@@ -495,9 +515,6 @@ class ContainerImpl implements IContainer
     public static function getInstance(array $properties = array())
     {
         if (self::$_containerInstance === false) {
-            // Init ReflectionFactory
-            ReflectionFactory::configure(isset($properties['ding']['factory']['bdef']['annotation']));
-
             // Init cache subsystems.
             if (isset($properties['ding']['cache'])) {
                 CacheLocator::configure($properties['ding']['cache']);
@@ -540,6 +557,11 @@ class ContainerImpl implements IContainer
         }
     }
 
+    /**
+     *
+     * Enter description here ...
+     * @param unknown_type $messageSource
+     */
     public function setMessageSource(IMessageSource $messageSource)
     {
         $this->_messageSource = $messageSource;
@@ -586,15 +608,6 @@ class ContainerImpl implements IContainer
 
     /**
      * (non-PHPdoc)
-     * @see Ding\Container.IContainer::getLogger()
-     */
-    public function getLogger($class)
-    {
-        return \Logger::getLogger(str_replace('\\', '.', $class));
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Ding\Container.IContainer::eventDispatch()
      */
     public function eventDispatch($eventName, $data = null)
@@ -622,6 +635,138 @@ class ContainerImpl implements IContainer
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainer::registerBeanDefinitionProvider()
+     */
+    public function registerBeanDefinitionProvider(IBeanDefinitionProvider $provider)
+    {
+        $this->_beanDefinitionProviders[] = $provider;
+    }
+
+    /**
+     * If we dont have a ReflectionFactory yet (i.e: didnt make the call to
+     * getBean() yet), replace it with this one.
+     *
+     * @param string $class The name of a class.
+     *
+     * @return ReflectionClass
+     */
+    protected function getClass($class)
+    {
+        return new \ReflectionClass($class);
+    }
+
+    /**
+     * Will look for "aware" kind of interfaces and inject whatever necessary.
+     *
+     * @param BeanDefinition $def The Bean Definition
+     * @param object $bean The bean
+     *
+     * @return void
+     */
+    public function fillAware(BeanDefinition $def, $bean)
+    {
+        $class = get_class($bean);
+        $rClass = $this->_reflectionFactory->getClass($class);
+        if ($rClass->implementsInterface('Ding\Reflection\IReflectionFactoryAware')) {
+            $bean->setReflectionFactory($this->_reflectionFactory);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\IBeanNameAware')) {
+            $bean->setBeanName($def->getName());
+        }
+        if ($rClass->implementsInterface('Ding\Logger\ILoggerAware')) {
+            $bean->setLogger(\Logger::getLogger($class));
+        }
+        if ($rClass->implementsInterface('Ding\Container\IContainerAware')) {
+            $bean->setContainer($this);
+        }
+        if ($rClass->implementsInterface('Ding\Resource\IResourceLoaderAware')) {
+            $bean->setResourceLoader($this);
+        }
+        if ($rClass->implementsInterface('Ding\Aspect\IAspectManagerAware')) {
+            $bean->setAspectManager($this->_aspectManager);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\IBeanDefinitionProvider')) {
+            $this->registerBeanDefinitionProvider($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IAfterConfigListener')) {
+            $this->_lifecycleManager->addAfterConfigListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IAfterDefinitionListener')) {
+            $this->_lifecycleManager->addAfterDefinitionListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IBeforeCreateListener')) {
+            $this->_lifecycleManager->addBeforeCreateListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IAfterCreateListener')) {
+            $this->_lifecycleManager->addAfterCreateListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IBeforeAssembleListener')) {
+            $this->_lifecycleManager->addBeforeAssembleListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Bean\Lifecycle\IAfterAssembleListener')) {
+            $this->_lifecycleManager->addAfterAssembleListener($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Aspect\IAspectProvider')) {
+            $this->_aspectManager->registerAspectProvider($bean);
+        }
+        if ($rClass->implementsInterface('Ding\Aspect\IPointcutProvider')) {
+            $this->_aspectManager->registerPointcutProvider($bean);
+        }
+    }
+
+    /**
+     * Called when a signal is caught.
+     *
+     * @param integer $signo
+     *
+     * @return void
+     */
+    public function signalHandler($signo)
+    {
+        $msg = "Caught Signal: $signo";
+        $this->_logger->warn($msg);
+        $this->eventDispatch('dingSignal', $signo);
+    }
+
+    /**
+     * Called by php after set_error_handler()
+     *
+     * @param integer $type
+     * @param string $message
+     * @param string $file
+     * @param integer $line
+     *
+     * @return true
+     */
+    public function errorHandler($type, $message, $file, $line)
+    {
+        $msg = "$message in $file:$line";
+        if ($msg == $this->_lastErrorMessage) {
+            return;
+        }
+        $this->_lastErrorMessage = $msg;
+        $this->_logger->error($msg);
+        $this->eventDispatch(
+            'dingError', new ErrorInfo($type, $message, $file, $line)
+        );
+        return true;
+    }
+
+    // @codeCoverageIgnoreStart
+    /**
+     * Called by the vm after register_shutdown_function()
+     *
+     * @return void
+     */
+    public function shutdownHandler()
+    {
+        $msg = "Shutting down";
+        $this->eventDispatch('dingShutdown');
+    }
+    // @codeCoverageIgnoreEnd
+
+    /**
      * Constructor.
      *
      * @param array $options options.
@@ -630,86 +775,65 @@ class ContainerImpl implements IContainer
      */
     protected function __construct(array $options)
     {
-        $this->_logger = \Logger::getLogger('Ding.Container');
-        $this->_lifecycleManager = new BeanLifecycleManager;
-        $this->_dispatcherTemplate = new DispatcherImpl;
+        // Setup logger.
+        $this->_logger = \Logger::getLogger(get_class($this));
         $this->_logDebugEnabled = $this->_logger->isDebugEnabled();
-        $soullessArray = array();
-        self::$_options = array_replace_recursive(self::$_options, $options);
 
-        $this->_aspectManager = new AspectManager(CacheLocator::getAspectCacheInstance());
+        $soullessArray = array();
+        $this->_beanAliases = $soullessArray;
         $this->_beanDefs = $soullessArray;
-        $this->_beanDefCache = CacheLocator::getDefinitionsCacheInstance();
         $this->_beans = $soullessArray;
-        $this->_beanCache = CacheLocator::getBeansCacheInstance();
         $this->_shutdowners = $soullessArray;
         $this->_resources = $soullessArray;
-        $this->_beanAliases = $soullessArray;
         $this->_eventListeners = $soullessArray;
 
-        $this->_lifecycleManager->addAfterCreateListener(new ContainerAwareDriver);
-        $this->_lifecycleManager->addAfterCreateListener(new LoggerAwareDriver);
-        $this->_lifecycleManager->addAfterCreateListener(new ResourceLoaderAwareDriver);
-        $this->_lifecycleManager->addAfterDefinitionListener(new BeanNameAwareDriver);
-        $this->_lifecycleManager->addAfterDefinitionListener(new AspectManagerAwareDriver($this->_aspectManager));
-        $this->_lifecycleManager->addAfterAssembleListener(new LifecycleDriver($this->_lifecycleManager));
-        $this->_lifecycleManager->addBeforeCreateListener(new ResourcesDriver);
-        $propsDriver = new PropertiesDriver(self::$_options['properties']);
-        $this->_lifecycleManager->addAfterConfigListener($propsDriver);
-        $this->_lifecycleManager->addAfterDefinitionListener($propsDriver);
-
-        if (isset(self::$_options['bdef']['annotation'])) {
-            $anCache = CacheLocator::getAnnotationsCacheInstance();
-            $anDriver = new BeanAnnotationDriver(self::$_options['bdef']['annotation'], $anCache);
-            $this->_lifecycleManager->addBeforeConfigListener($anDriver);
-            $this->_lifecycleManager->addAfterConfigListener($anDriver);
-            $this->_lifecycleManager->addBeforeDefinitionListener($anDriver);
-            $anAspectDriver = new AnnotationAspectDriver($this->_aspectManager);
-            $this->_lifecycleManager->addBeforeDefinitionListener($anAspectDriver);
-            $this->_lifecycleManager->addAfterConfigListener(new MVCAnnotationDriver);
-            $annotationResourceDriver = new AnnotationResourceDriver;
-            $this->_lifecycleManager->addAfterDefinitionListener($annotationResourceDriver);
-            $this->_lifecycleManager->addAfterCreateListener($annotationResourceDriver);
-            $this->_lifecycleManager->addAfterConfigListener($anAspectDriver);
-            $this->_lifecycleManager->addAfterDefinitionListener(new AnnotationRequiredDriver);
-            $this->_lifecycleManager->addAfterDefinitionListener(new AnnotationInitDestroyMethodDriver);
+        // Merge options with our defaults.
+        self::$_options = array_replace_recursive(self::$_options, $options);
+        $sapi = php_sapi_name();
+        if ($sapi == 'cgi' || $sapi == 'cli') {
+            $handler = array($this, 'signalHandler');
+            foreach ($this->_signals as $signal) {
+                pcntl_signal($signal, $handler);
+            }
+            pcntl_sigprocmask(SIG_UNBLOCK, $this->_signals);
         }
+        set_error_handler(array($this, 'errorHandler'));
+        register_shutdown_function(array($this, 'shutdownHandler'));
 
-        if (isset(self::$_options['drivers']['errorhandler'])) {
-            $this->_lifecycleManager->addAfterConfigListener(new ErrorHandlerDriver);
-        }
+        // We need a lifecycle manager.
+        $this->_lifecycleManager = new BeanLifecycleManager;
+        $this->_beanDefCache = DummyCacheImpl::getInstance();
+        $this->_beanCache = DummyCacheImpl::getInstance();
+        $this->registerBeanDefinitionProvider(new Core(self::$_options));
+        $this->_reflectionFactory = $this;
+        $this->_reflectionFactory = $this->getBean('dingReflectionFactory');
+        $this->_proxyFactory = $this->getBean('dingProxyFactory');
+        $this->_beanDefCache = $this->getBean('dingDefinitionsCache');
+        $this->_beanCache = $this->getBean('dingBeanCache');
+        $this->_lifecycleManager = $this->getBean('dingLifecycleManager');
+        $this->_aspectManager = $this->getBean('dingAspectManager');
+        $this->_dispatcherTemplate = $this->getBean('dingAspectCallDispatcher');
 
-        if (isset(self::$_options['drivers']['signalhandler'])) {
-            $this->_lifecycleManager->addAfterConfigListener(new SignalHandlerDriver);
-        }
-
-        if (isset(self::$_options['drivers']['shutdown'])) {
-            $this->_lifecycleManager->addAfterConfigListener(new ShutdownDriver);
-        }
-
-        $this->_lifecycleManager->addBeforeCreateListener(new DependsOnDriver);
-
+        // Set drivers
         if (isset(self::$_options['bdef']['xml'])) {
-            $xmlDriver = new BeanXmlDriver(self::$_options['bdef']['xml'], $this->_aspectManager);
-            $this->_lifecycleManager->addAfterConfigListener($xmlDriver);
-            $this->_lifecycleManager->addBeforeDefinitionListener($xmlDriver);
-            $this->_aspectManager->registerAspectProvider($xmlDriver);
-            $this->_aspectManager->registerPointcutProvider($xmlDriver);
+            $xmlDriver = $this->getBean('dingXmlBeanDefinitionProvider');
         }
         if (isset(self::$_options['bdef']['yaml'])) {
-            $yamlDriver = new BeanYamlDriver(self::$_options['bdef']['yaml'], $this->_aspectManager);
-            $this->_lifecycleManager->addAfterConfigListener($yamlDriver);
-            $this->_lifecycleManager->addBeforeDefinitionListener($yamlDriver);
-            $this->_aspectManager->registerAspectProvider($yamlDriver);
-            $this->_aspectManager->registerPointcutProvider($yamlDriver);
+            $yamlDriver = $this->getBean('dingYamlBeanDefinitionProvider');
         }
+        $this->getBean('dingPropertiesDriver');
+        $this->getBean('dingMessageSourceDriver');
+        $this->getBean('dingMethodInjectionDriver');
 
-        $this->_lifecycleManager->addBeforeAssembleListener(new SetterInjectionDriver);
-        $this->_lifecycleManager->addBeforeDefinitionListener(new MethodInjectionDriver($this->_aspectManager));
-        $messageSourceDriver = new MessageSourceDriver;
-        $this->_lifecycleManager->addAfterConfigListener($messageSourceDriver);
-        $this->_lifecycleManager->addAfterCreateListener($messageSourceDriver);
-        $this->_lifecycleManager->beforeConfig($this);
-        $this->_lifecycleManager->afterConfig($this);
+        // All set, continue.
+        if (isset(self::$_options['bdef']['annotation'])) {
+            $anDriver = $this->getBean('dingAnnotationBeanDefinitionProvider');
+            $this->getBean('dingAnnotationAspectDriver');
+            $this->getBean('dingAnnotationResourceDriver');
+            $this->getBean('dingAnnotationInitDestroyMethodDriver');
+            $this->getBean('dingAnnotationRequiredDriver');
+            $this->getBean('dingMvcAnnotationDriver');
+        }
+        $this->_lifecycleManager->afterConfig();
     }
 }

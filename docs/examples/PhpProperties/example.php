@@ -62,12 +62,6 @@ try
         'ding' => array(
             'log4php.properties' => './log4php.properties',
             'factory' => array(
-                'drivers' => array(
-                    'signalhandler' => array(),
-		    		'shutdown' => array(),
-                    'timezone' => array(),
-			    	'errorhandler' => array()
-                ),
                'bdef' => array(
                 	'xml' => array('filename' => 'beans.xml'),
                     'annotation' => array('scanDir' => array(realpath(__DIR__)))

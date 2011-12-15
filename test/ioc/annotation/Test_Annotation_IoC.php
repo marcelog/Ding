@@ -255,6 +255,14 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $bean = $container->getBean('aliasedBean');
         $this->assertTrue($bean instanceof ClassSimpleAnnotation);
     }
+    /**
+     * @test
+     */
+    public function can_get_by_class()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBeanDefinitionByClass('aliasedBean');
+    }
 }
 
 /**

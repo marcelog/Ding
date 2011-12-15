@@ -17,6 +17,11 @@ Ding is also the winner of the 2011 Binpress programming contest :)
 See this article for a complete application example: http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html.
 
 --------------------------------------------------------------------------------
+Upgrading note
+--------------------------------------------------------------------------------
+If you are upgrading from <= 1.1 to 1.3, please see README.1.3.x.
+
+--------------------------------------------------------------------------------
 Ding supports some of JSR-330 and JSR-250 annotations, like @Configuration,
 @Bean, @Required, @Resource, etc.
 --------------------------------------------------------------------------------
@@ -49,9 +54,15 @@ You can now easily install Ding by issuing:
 or
 
 
-# pear install marcelog/Ding-1.0.0
-just replace 1.0.0 by the release version you'd like to install :)
+# pear install marcelog/Ding-1.3.0
+just replace 1.3.0 by the release version you'd like to install :)
 See: http://pear.marcelog.name/
+
+Note: A version 1.2.x was erroneously released because of a misconfiguration of
+the pear channel. To avoid more confusions about the correct versions, 1.2.x 
+will not have any releases. So versions jump from 1.1.x to 1.3.0. If you happen
+to have a 1.2.0 version installed, please update the pear channel and download
+the latest version.
 --------------------------------------------------------------------------------
 PHAR File
 =========
@@ -82,9 +93,6 @@ definitions.
 * @Resource
 * @Controller (When using the MVC through http).
 * @RequestMapping (When using the MVC through http).
-* @SignalHandler
-* @ErrorHandler
-* @ShutdownHandler
 * @InitMethod(method=xxx)
 * @DestroyMethod(method=xxx)
 * @Aspect for classes and @ExceptionInterceptor/@MethodInterceptor for methods.
@@ -151,16 +159,31 @@ implements ILoggerAware interface, it will inject the instance of the
 logger (log4php) in use by the container, so you can log there. The returned
 logger will be of class __CLASS__ (where \ are replaced with .).
 
+IReflectionFactoryAware: Whenever ding is going to instantiate a bean whose class
+implements IReflectionFactoryAware interface, it will inject the instance of the
+reflection factory in use.
+
 Extension points
 ================
 You can easily hook in the bean lifecycle by just implementing one of:
- * Ding\Bean\Lifecycle\IBeforeDefinition
  * Ding\Bean\Lifecycle\IAfterDefinition
  * Ding\Bean\Lifecycle\IBeforeCreate
  * Ding\Bean\Lifecycle\IAfterCreate
  * Ding\Bean\Lifecycle\IBeforeAssemble
  * Ding\Bean\Lifecycle\IAfterAssemble
+ * Ding\Bean\Lifecycle\IAfterConfig
 This will allow you to extend the container functionality as much as you like :)
+
+If you want to provider beans yourself, just have a bean implement the
+Ding\Bean\IBeanDefinitionProvider interface, it will automatically be registered
+in the container and will be called whenever a new bean definition is demanded.
+
+If you want to provide aspects and pointcuts, just implement one or all of:
+ * Ding\Aspect\IAspectProvider
+ * Ding\Aspect\IPointcutProvider
+
+The container will automatically register your bean in the aspect manager and
+will be called to get any new aspects/pointcuts when needed.
 --------------------------------------------------------------------------------
 Events
 ======
@@ -265,40 +288,24 @@ data to be read.
 
 see docs/examples/tcp for an example of use.
 --------------------------------------------------------------------------------
-ErrorHandling
-=============
-You can configure the optional bean ErrorHandler using the class
-Ding\Helpers\ErrorHandler\ErrorHandlerHelper to quickly implement an error
-handler for your app, see the examples.
-
-@ErrorHandler
-=============
-Annotate a class with this annotation will have the same result has declaring
-a bean in beans.xml.
-
---------------------------------------------------------------------------------
-SignalHandling
+Error Handling
 ==============
-You can configure the optional bean SignalHandler using the class
-Ding\Helpers\SignalHandler\SignalHandlerHelper to quickly implement a signal
-handler for your app, see the examples. You will need declare(ticks=1) as the
-first line of your script.
-
-@SignalHandler
-=============
-Annotate a class with this annotation will have the same result has declaring
-a bean in beans.xml.
+If you declare a bean to listen for event "dingError", it will be called
+when the container receives an error (same effect as using set_error_handler()
+by yourself, only much easier!)
 --------------------------------------------------------------------------------
-ShutdownHandling
-================
-You can configure the optional bean ShutdownHandler using the class
-Ding\Helpers\ShutdownHandler\ShutdownHandlerHelper to quickly implement a 
-shutdown handler for your script via register_shutdown_function().
-
-@ShutdownHandler
-================
-Annotate a class with this annotation will have the same result has declaring
-a bean in beans.xml.
+Signal Handling
+===============
+If you declare a bean to listen for event "dingSignal", it will be called
+when the container receives a signal, the signal number will be passed as
+the argument. Only available for SAPI's cli and cgi. Requires the pcntl
+extension.
+--------------------------------------------------------------------------------
+Shutdown Handling
+=================
+If you declare a bean to listen for event "dingShutdown", it will be called
+when the container shutdowns (same effect as using
+register_shutdown_function()).
 --------------------------------------------------------------------------------
 HttpSession
 ===========
@@ -334,12 +341,6 @@ Syslog
 ======
 Try the SyslogHelper to easily add syslogging to your own application.
 See docs/examples/syslog.
---------------------------------------------------------------------------------
-Timers
-======
-You can setup TimerHelper's and configure any timers you'd like to have in
-your application, giving the interval in milliseconds and using your own
-handlers.
 --------------------------------------------------------------------------------
 Integration with other frameworks
 =================================

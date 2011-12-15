@@ -28,7 +28,7 @@
  *
  */
 use Ding\Container\Impl\ContainerImpl;
-use Ding\MVC\ModelAndView;
+use Ding\Mvc\ModelAndView;
 
 /**
  * This class will test the rendered view.

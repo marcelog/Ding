@@ -45,10 +45,10 @@ require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 use Ding\HttpSession\HttpSession;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Helpers\ErrorHandler\IErrorHandler;
-use Ding\MVC\ModelAndView;
-use Ding\MVC\ForwardModelAndView;
-use Ding\MVC\RedirectModelAndView;
-use Ding\MVC\Http\HttpFrontController;
+use Ding\Mvc\ModelAndView;
+use Ding\Mvc\ForwardModelAndView;
+use Ding\Mvc\RedirectModelAndView;
+use Ding\Mvc\Http\HttpFrontController;
 ////////////////////////////////////////////////////////////////////////////////
 // Normal operation follows...
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,44 +62,45 @@ class AnException extends \Exception
 
 class MyController
 {
-    public function _ExceptionException(array $arguments = array())
+    public function _ExceptionException()
     {
+        $arguments = func_get_args();
         $modelAndView = new ModelAndView('exception');
         $modelAndView->add(array('exception' => $arguments['exception']));
         return $modelAndView;
     }
 
-    public function MainAction(array $arguments = array())
+    public function MainAction()
     {
         return new ForwardModelAndView('/MyController/some');
     }
-    public function formAction(array $arguments = array())
+    public function formAction()
     {
         $session = HttpSession::getSession();
         $arguments['sessionStuff'] = $session->getAttribute('aSessionVariable');
-        return $this->someAction($arguments);
+        return $this->someAction(func_get_args());
     }
 
-    public function redirectAction(array $arguments = array())
+    public function redirectAction()
     {
         $modelAndView = new RedirectModelAndView('http://github.com/marcelog/Ding');
         return $modelAndView;
     }
 
-    public function forwardAction(array $arguments = array())
+    public function forwardAction()
     {
         $arguments['Forwarded-From'] = 'forwardAction';
-        return new ForwardModelAndView('/MyController/some', $arguments);
+        return new ForwardModelAndView('/MyController/some', func_get_args());
     }
 
-    public function someAction(array $arguments = array())
+    public function someAction()
     {
         $session = HttpSession::getSession();
         $session->setAttribute('aSessionVariable', array('user' => 'aUser'));
         $modelAndView = new ModelAndView('some');
         $modelAndView->add(array(
         	'somestring' => 'Hello World',
-            'arguments' => $arguments
+            'arguments' => func_get_args()
         ));
         $modelAndView->add(
             array(
@@ -112,7 +113,7 @@ class MyController
         return $modelAndView;
     }
 
-    public function someExceptionAction(array $arguments = array())
+    public function someExceptionAction()
     {
         throw new AnException('Woooooow!');
     }
@@ -135,11 +136,6 @@ $properties = array(
                 'smarty.config_dir' => '/tmp/Ding/',
                 'smarty.cache_dir' => '/tmp/Ding/smartycache/',
                 'smarty.debugging' => false
-            ),
-            'drivers' => array(
-//                'signalhandler' => array(),
-//				'shutdown' => array(),
-				'errorhandler' => array()
             ),
             'bdef' => array(
              	'xml' => array('filename' => 'beans.xml', 'directories' => array(__DIR__)),

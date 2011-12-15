@@ -40,7 +40,6 @@ ini_set(
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 
 error_reporting(E_ALL);
@@ -49,9 +48,9 @@ ini_set('display_errorrs', 1);
 /**
  * This is our bean.
  */
-class MyErrorHandler implements IErrorHandler
+class MyErrorHandler
 {
-    public function handleError(ErrorInfo $error)
+    public function onDingError(ErrorInfo $error)
     {
         echo "This is your custom error handler: $error\n";
     }
@@ -66,9 +65,6 @@ $properties = array(
     'ding' => array(
         'log4php.properties' => './log4php.properties',
         'factory' => array(
-            'drivers' => array(
-				'errorhandler' => array()
-            ),
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
                 'xml' => array('filename' => 'beans.xml'),
             ),

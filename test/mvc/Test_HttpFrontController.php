@@ -27,11 +27,11 @@
  * limitations under the License.
  *
  */
-use Ding\MVC\RedirectModelAndView;
-use Ding\MVC\ForwardModelAndView;
-use Ding\MVC\Http\HttpFrontController;
+use Ding\Mvc\RedirectModelAndView;
+use Ding\Mvc\ForwardModelAndView;
+use Ding\Mvc\Http\HttpFrontController;
 use Ding\Container\Impl\ContainerImpl;
-use Ding\MVC\ModelAndView;
+use Ding\Mvc\ModelAndView;
 
 if (!defined('OUTPUT_TEST')) {
     define('OUTPUT_TEST', true);
@@ -86,11 +86,14 @@ class Test_HttpFrontController extends PHPUnit_Extensions_OutputTestCase
     public function can_accept_get_arguments()
     {
         global $_SERVER;
+        global $_GET;
+        $_GET['arg1'] = 'value1';
+        $_GET['arg2'] = 'value2';
         $_SERVER['REQUEST_URI'] = '/MyBaseURL/MyController/withArguments?arg1=value1&arg2=value2';
         $_SERVER['REQUEST_METHOD'] = 'GET';
         HttpFrontController::handle($this->_properties, '/MyBaseURL');
-        $this->assertEquals(AController2::$args['arg1'], 'value1');
-        $this->assertEquals(AController2::$args['arg2'], 'value2');
+        $this->assertEquals(AController2::$arg1, 'value1');
+        $this->assertEquals(AController2::$arg2, 'value2');
     }
 
     /**
@@ -105,8 +108,8 @@ class Test_HttpFrontController extends PHPUnit_Extensions_OutputTestCase
         $_SERVER['REQUEST_URI'] = '/MyBaseURL/MyController/withArguments';
         $_SERVER['REQUEST_METHOD'] = 'POST';
         HttpFrontController::handle($this->_properties, '/MyBaseURL');
-        $this->assertEquals(AController2::$args['arg1'], 'value1');
-        $this->assertEquals(AController2::$args['arg2'], 'value2');
+        $this->assertEquals(AController2::$arg1, 'value1');
+        $this->assertEquals(AController2::$arg2, 'value2');
     }
 
     /**
@@ -223,7 +226,7 @@ class Test_HttpFrontController extends PHPUnit_Extensions_OutputTestCase
 
     /**
      * @test
-     * @expectedException Ding\MVC\Exception\MVCException
+     * @expectedException Ding\Mvc\Exception\MvcException
      */
     public function cannot_handle_uncatched_exceptions()
     {
@@ -235,7 +238,7 @@ class Test_HttpFrontController extends PHPUnit_Extensions_OutputTestCase
 
     /**
      * @test
-     * @expectedException Ding\MVC\Exception\MVCException
+     * @expectedException Ding\Mvc\Exception\MvcException
      */
     public function cannot_handle_invalid_base_url()
     {
@@ -275,57 +278,60 @@ class OtherException extends \Exception
 class AController2
 {
     public static $args;
+    public static $arg1;
+    public static $arg2;
 
-    public function MainAction(array $arguments = array())
+    public function MainAction()
     {
         return new ModelAndView('index');
     }
 
-    public function someOtherAction(array $arguments = array())
+    public function someOtherAction()
     {
         return new ModelAndView('fwd');
     }
 
-    public function withArgumentsAction(array $arguments = array())
+    public function withArgumentsAction($arg1, $arg2)
     {
-        self::$args = $arguments;
+        self::$arg1 = $arg1;
+        self::$arg2 = $arg2;
         return new ModelAndView('fwd');
     }
 
-    public function forwardAction(array $arguments = array())
+    public function forwardAction()
     {
         return new ForwardModelAndView('/MyController/someOther');
     }
 
-    public function redirectAction(array $arguments = array())
+    public function redirectAction()
     {
      return new RedirectModelAndView('http://www.google.com');
     }
 
-    public function somethingOtherExceptionAction(array $arguments = array())
+    public function somethingOtherExceptionAction()
     {
         throw new OtherException();
     }
 
-    public function _OtherExceptionException(array $arguments = array())
+    public function _OtherExceptionException()
     {
         return new ModelAndView('someOtherException');
     }
-    public function _ExceptionException(array $arguments = array())
+    public function _ExceptionException()
     {
         return new ModelAndView('someException');
     }
-    public function somethingTwigAction(array $arguments = array())
+    public function somethingTwigAction()
     {
         return new ModelAndView('someTwig');
     }
-    public function somethingSmartyAction(array $arguments = array())
+    public function somethingSmartyAction()
     {
         $model = new ModelAndView('someSmarty');
         $model->add(array('a' => 'b'));
         return $model;
     }
-    public function somethingAction(array $arguments = array())
+    public function somethingAction()
     {
         return new ModelAndView('some');
     }

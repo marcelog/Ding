@@ -185,6 +185,9 @@ beans: !!map
   aDependencyBean:
     class: DependencyBean
     scope: singleton
+  globalAliasedBean:
+    scope: singleton
+    class: ChildBeanYaml
   aspectBean:
     class: AspectBean
     scope: singleton

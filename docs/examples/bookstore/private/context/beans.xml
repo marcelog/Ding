@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton">  
+    <property name="locations">  
+      <array>
+        <entry key="0"><value>file://${application.config}/doctrine.properties</value></entry>
+        <entry key="1"><value>file://${application.config}/php.properties</value></entry>
+        <entry key="2"><value>file://${application.config}/application.properties</value></entry>
+      </array>
+    </property>
+  </bean>
+  <import resource="persistence.xml"/>
+  <import resource="i18n.xml"/>
+  <import resource="mvc.xml"/>
+
+  <bean id="ErrorHandler" class="Ding\Helpers\ErrorHandler\ErrorHandlerHelper" scope="singleton">
+    <property name="errorHandler">
+      <ref bean="errorHandler"/>
+    </property>
+  </bean>
+  <bean id="errorHandler" class="\BookStore\ErrorHandler\ErrorHandler" scope="singleton"/>
+</beans>

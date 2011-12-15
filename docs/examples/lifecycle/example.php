@@ -45,13 +45,11 @@ ini_set(
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\Lifecycle\IBeforeCreateListener;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\Lifecycle\IBeforeAssembleListener;
 use Ding\Bean\Lifecycle\IAfterAssembleListener;
-use Ding\Bean\Factory\IBeanFactory;
 use Ding\Bean\BeanDefinition;
 
 error_reporting(E_ALL);
@@ -66,38 +64,32 @@ class ComponentA
 
 
 class MyLifecycler implements
-    IBeforeDefinitionListener, IAfterDefinitionListener,
+    IAfterDefinitionListener,
     IBeforeCreateListener, IAfterCreateListener,
     IBeforeAssembleListener, IAfterAssembleListener
 {
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
-    {
-        echo "beforeDefinition called\n";
-        return $bean; // mandatory
-    }
-
-    public function afterDefinition(IBeanFactory $factory, BeanDefinition $bean)
+    public function afterDefinition(BeanDefinition $bean)
     {
         echo "afterDefinition called\n";
         return $bean; // mandatory
     }
 
-    public function beforeCreate(IBeanFactory $factory, BeanDefinition $beanDefinition)
+    public function beforeCreate(BeanDefinition $beanDefinition)
     {
         echo "beforeCreate called\n";
     }
 
-    public function afterCreate(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function afterCreate($bean, BeanDefinition $beanDefinition)
     {
         echo "afterCreate called\n";
     }
 
-    public function beforeAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function beforeAssemble($bean, BeanDefinition $beanDefinition)
     {
         echo "beforeAssemble called\n";
     }
 
-    public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition)
+    public function afterAssemble($bean, BeanDefinition $beanDefinition)
     {
         echo "afterAssemble called\n";
     }

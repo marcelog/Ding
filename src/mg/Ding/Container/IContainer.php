@@ -28,9 +28,10 @@
  */
 namespace Ding\Container;
 
+use Ding\Bean\BeanDefinition;
+use Ding\Bean\IBeanDefinitionProvider;
 use Ding\MessageSource\IMessageSource;
 use Ding\Resource\IResourceLoader;
-use Ding\Bean\Factory\IBeanFactory;
 
 /**
  * Interface for a container.
@@ -43,7 +44,7 @@ use Ding\Bean\Factory\IBeanFactory;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-interface IContainer extends IBeanFactory, IResourceLoader, IMessageSource
+interface IContainer extends IResourceLoader, IMessageSource, IBeanDefinitionProvider
 {
     /**
      * Register a shutdown (destroy-method) method for a bean.
@@ -78,12 +79,21 @@ interface IContainer extends IBeanFactory, IResourceLoader, IMessageSource
     public function eventListen($eventName, $beanName);
 
     /**
-     * Returns logger used by the container.
+     * Registers a new bean definition provider in the container.
      *
-     * @param string $class Will use this parameter to return an appropiate
-     * logger.
+     * @param IBeanDefinitionProvider $provider New bean definition provider.
      *
-     * @return \Logger
+     * @return void
      */
-    public function getLogger($class);
+    public function registerBeanDefinitionProvider(IBeanDefinitionProvider $provider);
+
+    /**
+     * Returns a bean.
+     *
+     * @param string $name Bean name.
+     *
+     * @throws BeanFactoryException
+     * @return object
+     */
+    public function getBean($name);
 }

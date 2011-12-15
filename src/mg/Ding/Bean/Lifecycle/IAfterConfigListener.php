@@ -29,8 +29,6 @@
  */
 namespace Ding\Bean\Lifecycle;
 
-use Ding\Container\IContainer;
-
 /**
  * Interface for a AfterConfig lifecycle event.
  *
@@ -45,5 +43,5 @@ use Ding\Container\IContainer;
  */
 interface IAfterConfigListener extends ILifecycleListener
 {
-    public function afterConfig(IContainer $factory);
+    public function afterConfig();
 }

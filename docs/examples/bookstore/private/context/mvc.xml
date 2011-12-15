@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="HttpDispatcher" class="Ding\Mvc\Http\HttpDispatcher"/>
+    <bean id="HttpUrlMapper" class="Ding\Mvc\Http\HttpUrlMapper"/>
+
+	<bean id="HttpViewResolver" class="Ding\Mvc\Http\HttpViewResolver">
+		<property name="viewPrefix"><value></value></property>
+		<property name="viewSuffix"><value>.phtml</value></property>
+		<property name="viewPath"><value>${application.views}</value></property>
+	</bean>
+    <bean id="HttpViewRender" class="Ding\Mvc\Http\HttpViewRender"/>
+    
+	<bean id="HttpExceptionMapper" class="Ding\Mvc\Http\HttpExceptionMapper">
+		<property name="map">
+        	<array>
+        	   <entry>
+        	       <array>
+                       <entry><value>\Exception</value></entry>
+		               <entry><ref bean="exceptionController"/></entry>
+        	       </array>
+        	   </entry>
+        	</array>
+		</property>
+	</bean>
+</beans>

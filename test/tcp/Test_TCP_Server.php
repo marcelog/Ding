@@ -1,7 +1,7 @@
 <?php
 declare(ticks=1);
 /**
- * This class will test the TCP Server.
+ * This class will test the Tcp Server.
  *
  * PHP Version 5
  *
@@ -29,11 +29,11 @@ declare(ticks=1);
  *
  */
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\TCP\ITCPServerHandler;
-use Ding\Helpers\TCP\ITCPClientHandler;
+use Ding\Helpers\Tcp\ITcpServerHandler;
+use Ding\Helpers\Tcp\ITcpClientHandler;
 
 /**
- * This class will test the TCP Server.
+ * This class will test the Tcp Server.
  *
  * PHP Version 5
  *
@@ -44,7 +44,7 @@ use Ding\Helpers\TCP\ITCPClientHandler;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_TCP_Server extends PHPUnit_Framework_TestCase
+class Test_Tcp_Server extends PHPUnit_Framework_TestCase
 {
     private $_properties = array();
 
@@ -82,7 +82,7 @@ class Test_TCP_Server extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_bind()
     {
@@ -157,7 +157,7 @@ class Test_TCP_Server extends PHPUnit_Framework_TestCase
     }
 }
 
-class MyServerHandler implements ITCPServerHandler
+class MyServerHandler implements ITcpServerHandler
 {
     public static $data;
 
@@ -173,17 +173,17 @@ class MyServerHandler implements ITCPServerHandler
     {
     }
 
-    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleConnection(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         $peer->write("Hi!\n");
     }
 
-    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function readTimeout(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         self::$data = 'timeout';
     }
 
-    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleData(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         $buffer = '';
         $len = 1024;
@@ -197,12 +197,12 @@ class MyServerHandler implements ITCPServerHandler
         sleep(2);
     }
 
-    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function disconnect(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
     }
 }
 
-class MyServerHandler2 implements ITCPServerHandler
+class MyServerHandler2 implements ITcpServerHandler
 {
     public static $data;
 
@@ -218,16 +218,16 @@ class MyServerHandler2 implements ITCPServerHandler
     {
     }
 
-    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleConnection(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
     }
 
-    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function readTimeout(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         self::$data = 'timeout';
     }
 
-    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleData(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         $buffer = '';
         $len = 1024;
@@ -240,12 +240,12 @@ class MyServerHandler2 implements ITCPServerHandler
         sleep(2);
     }
 
-    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function disconnect(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         self::$data = 'disconnect';
     }
 }
-class MyClientHandler2 implements ITCPClientHandler
+class MyClientHandler2 implements ITcpClientHandler
 {
     public static $time;
     protected $client;
@@ -271,7 +271,7 @@ class MyClientHandler2 implements ITCPClientHandler
     {
     }
 
-    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
+    public function setClient(\Ding\Helpers\Tcp\TcpClientHelper $client)
     {
         $this->client = $client;
     }
@@ -285,7 +285,7 @@ class MyClientHandler2 implements ITCPClientHandler
         $this->client->close();
     }
 }
-class MyClientHandler3 implements ITCPClientHandler
+class MyClientHandler3 implements ITcpClientHandler
 {
     public static $time;
     protected $client;
@@ -311,7 +311,7 @@ class MyClientHandler3 implements ITCPClientHandler
     {
     }
 
-    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
+    public function setClient(\Ding\Helpers\Tcp\TcpClientHelper $client)
     {
         $this->client = $client;
     }

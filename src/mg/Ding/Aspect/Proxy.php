@@ -29,10 +29,10 @@
  */
 namespace Ding\Aspect;
 
-use Ding\Cache\Locator\CacheLocator;
-
+use Ding\Reflection\IReflectionFactoryAware;
+use Ding\Cache\ICache;
 use Ding\Aspect\Interceptor\IDispatcher;
-use Ding\Reflection\ReflectionFactory;
+use Ding\Reflection\IReflectionFactory;
 
 /**
  * So... php does not have such a thing.. and here's what it needs to be done
@@ -48,28 +48,29 @@ use Ding\Reflection\ReflectionFactory;
  *
  * @todo Performance: Remove new MethodInvocation in proxied invocation.
  */
-class Proxy
+class Proxy implements IReflectionFactoryAware
 {
     /**
-     * Number of proxy classes.
-     * @var integer
+     * A ReflectionFactory implementation
+     * @var IReflectionFactory
      */
-    private static $_proxyCount = 1;
+    protected $reflectionFactory;
 
     /**
      * Proxy cache implementation.
      * @var ICache
      */
-    private static $_cache = false;
+    protected $cache = false;
 
     /**
      * Proxy class template (i.e: the dynamic class)
      * @var string
      */
-    private static $_proxyTemplate = <<<TEXT
+    protected $proxyTemplate = <<<TEXT
 
 use Ding\Aspect\Interceptor\IDispatcher;
 use Ding\Aspect\MethodInvocation;
+use Ding\Reflection\IReflectionFactory;
 
 final class NEW_NAME extends CLASS_NAME {
     /**
@@ -77,6 +78,7 @@ final class NEW_NAME extends CLASS_NAME {
      * @var Dispatcher
      */
     private static \$_dispatcher = false;
+	private static \$_reflectionFactory = false;
 
     /**
      * This is not suppose to exist. We need to refactor the proxy so it
@@ -109,6 +111,10 @@ final class NEW_NAME extends CLASS_NAME {
         self::\$_dispatcher = \$dispatcher;
     }
 
+    public static function setReflectionFactory(IReflectionFactory \$reflectionFactory)
+    {
+    	self::\$_reflectionFactory = \$reflectionFactory;
+    }
     METHODS
 }
 TEXT;
@@ -117,11 +123,12 @@ TEXT;
      * Method template (i.e: effetively, the proxy methods).
      * @var string
      */
-    private static $_methodTemplate = <<<TEXT
+    protected $methodTemplate = <<<TEXT
     VISIBILITY ADDITIONAL function METHOD_NAME(METHOD_ARGS)
     {
         \$invocation = new MethodInvocation(
-            'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this
+            'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this,
+            self::\$_reflectionFactory
         );
         try
         {
@@ -139,20 +146,19 @@ TEXT;
      * @param string          $newName     Name for the proxy class.
      * @param ReflectionClass $targetClass Class to be proxied.
      *
-     * @see Proxy::$_proxyTemplate
+     * @see Proxy::$proxyTemplate
      *
      * @return string
      */
-    private static function _createClass(
-        $newName, array $proxyMethods, \ReflectionClass $class
-    ) {
-        $src = self::$_proxyTemplate;
+    protected function createClass($newName, array $proxyMethods, \ReflectionClass $class)
+    {
+        $src = $this->proxyTemplate;
         $src = str_replace('NEW_NAME', $newName, $src);
         $src = str_replace('CLASS_NAME', $class->getName(), $src);
         $methods = array();
         foreach ($class->getMethods() as $method) {
             if (isset($proxyMethods[$method->getName()])) {
-                $methods[] = self::_createMethod($method);
+                $methods[] = $this->createMethod($method);
             }
         }
         $src = str_replace('METHODS', implode("\n", $methods), $src);
@@ -164,11 +170,11 @@ TEXT;
      *
      * @param \ReflectionParameter $parameter The method parameter.
      *
-     * @see Proxy::$_methodTemplate
+     * @see Proxy::$methodTemplate
      *
      * @return string
      */
-    private static function _createParameter(\ReflectionParameter $parameter)
+    protected function createParameter(\ReflectionParameter $parameter)
     {
         $parameterSrc = '';
         $paramClass = $parameter->getClass();
@@ -203,11 +209,11 @@ TEXT;
      *
      * @param \ReflectionMethod $method The method to be proxied.
      *
-     * @see Proxy::$_methodTemplate
+     * @see Proxy::$methodTemplate
      *
      * @return string
      */
-    private static function _createMethod(\ReflectionMethod $method)
+    protected function createMethod(\ReflectionMethod $method)
     {
         $visibility = '';
         $additional = '';
@@ -235,10 +241,10 @@ TEXT;
         }
         $args = array();
         foreach ($method->getParameters() as $parameter) {
-            $args[] = self::_createParameter($parameter);
+            $args[] = $this->createParameter($parameter);
         }
 
-        $src = self::$_methodTemplate;
+        $src = $this->methodTemplate;
         $src = str_replace('VISIBILITY', $visibility, $src);
         $src = str_replace('ADDITIONAL', $additional, $src);
         $src = str_replace('METHOD_NAME', $name, $src);
@@ -249,38 +255,46 @@ TEXT;
         return $src;
     }
 
+    public function setCache(ICache $cache)
+    {
+        $this->cache = $cache;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->reflectionFactory = $reflectionFactory;
+    }
     /**
      * This will give you a string for a new proxy class.
      *
      * @param string      $class                Class to be proxied.
      * @param array       $proxyMethods         Methods to be proxied.
-     * @param IDispatcher $dispatcher           Dispatcher to invoke aspects.
      *
      * @todo Currently, final classes can't be proxied because the proxy class
      * extends it (this may change in the near future).
      *
      * @return string
      */
-    public static function create(
-        $class, array $proxyMethods = array(), IDispatcher $dispatcher = null
-    ) {
-        if (self::$_cache === false) {
-            self::$_cache = CacheLocator::getProxyCacheInstance();
-        }
-        $subject = ReflectionFactory::getClass($class);
+    public function create($class, array $proxyMethods = array(), IDispatcher $dispatcher)
+    {
+        $subject = $this->reflectionFactory->getClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
         $cacheKey = $proxyClassName . '.proxy';
         $result = false;
-        $src = self::$_cache->fetch($cacheKey, $result);
+        $src = $this->cache->fetch($cacheKey, $result);
         if (!$result) {
-            $src = self::_createClass($proxyClassName, $proxyMethods, $subject);
-            self::$_cache->store($cacheKey, $src);
+            $src = $this->createClass($proxyClassName, $proxyMethods, $subject);
+            $this->cache->store($cacheKey, $src);
         }
         eval($src);
         if ($dispatcher != null) {
             $proxyClassName::setDispatcher($dispatcher);
         }
-        self::$_proxyCount++;
+        $proxyClassName::setReflectionFactory($this->reflectionFactory);
         return $proxyClassName;
     }
 }

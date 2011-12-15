@@ -61,15 +61,6 @@ namespace Ding\Helpers\Properties;
 interface IPropertiesHolder
 {
     /**
-     * Load properties to the holder.
-     *
-     * @param string[] $properties New properties.
-     *
-     * @return void
-     */
-    public function loadProperties(array $properties);
-
-    /**
      * Set the locations of the properties files.
      *
      * @param mixed[] $locations Can be strings, or IResources.
@@ -77,4 +68,5 @@ interface IPropertiesHolder
      * @return void
      */
     public function setLocations($locations);
+    public function getLocations();
 }

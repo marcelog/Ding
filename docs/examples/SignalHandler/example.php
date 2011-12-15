@@ -33,8 +33,8 @@ ini_set(
     implode(
         PATH_SEPARATOR,
         array(
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
             ini_get('include_path'),
-            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg'))
         )
     )
 );
@@ -42,7 +42,6 @@ ini_set(
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\SignalHandler\ISignalHandler;
 
 error_reporting(E_ALL);
 ini_set('display_errorrs', 1);
@@ -50,9 +49,9 @@ ini_set('display_errorrs', 1);
 /**
  * This is our bean.
  */
-class MySignalHandler implements ISignalHandler
+class MySignalHandler 
 {
-    public function handleSignal($signal)
+    public function onDingSignal($signal)
     {
         echo "This is your custom signal handler: " . $signal . "\n";
     }
@@ -67,9 +66,6 @@ $properties = array(
     'ding' => array(
         'log4php.properties' => './log4php.properties',
         'factory' => array(
-            'drivers' => array(
-                'signalhandler' => array(),
-            ),
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
                 'xml' => array('filename' => 'beans.xml'),
             ),

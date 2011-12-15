@@ -4,7 +4,7 @@ $mockSocketCreate = false;
 $mockSocketSelect = false;
 
 /**
- * This class will test the TCP Client.
+ * This class will test the Tcp Client.
  *
  * PHP Version 5
  *
@@ -32,11 +32,11 @@ $mockSocketSelect = false;
  *
  */
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\TCP\ITCPClientHandler;
-use Ding\Helpers\TCP\ITCPServerHandler;
+use Ding\Helpers\Tcp\ITcpClientHandler;
+use Ding\Helpers\Tcp\ITcpServerHandler;
 
 /**
- * This class will test the TCP Client.
+ * This class will test the Tcp Client.
  *
  * PHP Version 5
  *
@@ -47,7 +47,7 @@ use Ding\Helpers\TCP\ITCPServerHandler;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_TCP_Client extends PHPUnit_Framework_TestCase
+class Test_Tcp_Client extends PHPUnit_Framework_TestCase
 {
     private $_properties = array();
 
@@ -74,7 +74,7 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_bind()
     {
@@ -85,7 +85,7 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_connect()
     {
@@ -164,7 +164,7 @@ class Test_TCP_Client extends PHPUnit_Framework_TestCase
     }
 }
 
-class MyClientHandler implements ITCPClientHandler
+class MyClientHandler implements ITcpClientHandler
 {
     public static $time;
     protected $client;
@@ -192,7 +192,7 @@ class MyClientHandler implements ITCPClientHandler
     {
     }
 
-    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
+    public function setClient(\Ding\Helpers\Tcp\TcpClientHelper $client)
     {
         $this->client = $client;
     }
@@ -206,7 +206,7 @@ class MyClientHandler implements ITCPClientHandler
         $this->client->close();
     }
 }
-class MyClientHandler666 implements ITCPClientHandler
+class MyClientHandler666 implements ITcpClientHandler
 {
     public static $time;
     protected $client;
@@ -234,7 +234,7 @@ class MyClientHandler666 implements ITCPClientHandler
         self::$data = 'disconnect';
     }
 
-    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
+    public function setClient(\Ding\Helpers\Tcp\TcpClientHelper $client)
     {
         $this->client = $client;
     }
@@ -248,7 +248,7 @@ class MyClientHandler666 implements ITCPClientHandler
         $this->client->close();
     }
 }
-class MyServerHandler666 implements ITCPServerHandler
+class MyServerHandler666 implements ITcpServerHandler
 {
     public static $data;
 
@@ -264,17 +264,17 @@ class MyServerHandler666 implements ITCPServerHandler
     {
     }
 
-    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleConnection(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         $peer->disconnect();
     }
 
-    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function readTimeout(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         self::$data = 'timeout';
     }
 
-    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleData(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         $buffer = '';
         $len = 1024;
@@ -287,7 +287,7 @@ class MyServerHandler666 implements ITCPServerHandler
         sleep(2);
     }
 
-    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function disconnect(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         self::$data = 'disconnect';
     }

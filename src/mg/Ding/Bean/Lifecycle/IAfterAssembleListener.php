@@ -30,7 +30,6 @@
 namespace Ding\Bean\Lifecycle;
 
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\Factory\IBeanFactory;
 
 /**
  * Interface for a AfterAssemble lifecycle event.
@@ -46,5 +45,5 @@ use Ding\Bean\Factory\IBeanFactory;
  */
 interface IAfterAssembleListener extends ILifecycleListener
 {
-    public function afterAssemble(IBeanFactory $factory, $bean, BeanDefinition $beanDefinition);
+    public function afterAssemble($bean, BeanDefinition $beanDefinition);
 }

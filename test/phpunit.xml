@@ -12,70 +12,67 @@
       <exclude>
         <directory suffix=".php">../src/mg/Ding/Bin</directory>
         <directory suffix=".php">../src/mg/Ding/Application</directory>
-        <directory suffix=".php">../src/mg/Ding/Helpers/PAGI</directory>
-        <directory suffix=".php">../src/mg/Ding/Helpers/PAMI</directory>
+        <directory suffix=".php">../src/mg/Ding/Helpers/Pagi</directory>
+        <directory suffix=".php">../src/mg/Ding/Helpers/Pami</directory>
       </exclude>
     </whitelist>
   </filter>
   <testsuites>
+    <testsuite name="Tcp">
+      <directory suffix=".php">tcp</directory>
+    </testsuite>
     <testsuite name="Events">
       <directory suffix=".php">event</directory>
     </testsuite>
-    <testsuite name="TCP">
-      <directory suffix=".php">tcp</directory>
-    </testsuite>
-    <testsuite name="AOP Cache">
+    <testsuite name="Aop Cache">
       <directory suffix=".php">aop/cache</directory>
     </testsuite>
-    <testsuite name="AOP Dispatcher">
+    <testsuite name="Aop Dispatcher">
       <directory suffix=".php">aop/dispatcher</directory>
     </testsuite>
-    <testsuite name="AOP XML">
+    <testsuite name="Aop XML">
       <directory suffix=".php">aop/xml</directory>
     </testsuite>
-    <testsuite name="AOP YAML">
+    <testsuite name="Aop YAML">
       <directory suffix=".php">aop/yaml</directory>
     </testsuite>
-    <testsuite name="AOP Annotation">
+    <testsuite name="Aop Annotation">
       <directory suffix=".php">aop/annotation</directory>
     </testsuite>
-    <testsuite name="AOP Proxy">
+    <testsuite name="Aop Proxy">
       <directory suffix=".php">aop/proxy</directory>
     </testsuite>
-    <testsuite name="MVC">
+    <testsuite name="Mvc">
       <directory suffix=".php">mvc</directory>
     </testsuite>
     <testsuite name="Syslog">
       <directory suffix=".php">syslog</directory>
     </testsuite>
-    <testsuite name="Timer">
-      <directory suffix=".php">timer</directory>
-    </testsuite>
     <testsuite name="HttpSession">
       <directory suffix=".php">httpsession</directory>
     </testsuite>
-    <testsuite name="IoC XML">
+    <testsuite name="Ioc XML">
       <directory suffix=".php">ioc/xml</directory>
     </testsuite>
-    <testsuite name="IoC YAML">
+    <testsuite name="Ioc YAML">
       <directory suffix=".php">ioc/yaml</directory>
     </testsuite>
-    <testsuite name="IoC Annotation">
+    <testsuite name="Ioc Annotation">
       <directory suffix=".php">ioc/annotation</directory>
     </testsuite>
     <testsuite name="Cache Dummy">
       <directory suffix=".php">cache/dummy</directory>
     </testsuite>
-    <testsuite name="IoC ZF Cache">
+    <testsuite name="Ioc ZF Cache">
       <directory suffix=".php">cache/zfcache</directory>
     </testsuite>
-    <testsuite name="IoC File Cache">
+    <testsuite name="Ioc File Cache">
       <directory suffix=".php">cache/file</directory>
     </testsuite>
-    <testsuite name="IoC APC Cache">
+    <testsuite name="Ioc APC Cache">
       <directory suffix=".php">cache/apc</directory>
     </testsuite>
-    <testsuite name="IoC Memcached Cache">
+    <testsuite name="Ioc Memcached Cache">
       <directory suffix=".php">cache/memcached</directory>
     </testsuite>
     <testsuite name="Cache Locator">
@@ -84,13 +81,13 @@
     <testsuite name="Filter XML">
       <directory suffix=".php">filter/xml</directory>
     </testsuite>
-    <testsuite name="Driver SignalHandler">
+    <testsuite name="Signal handler">
       <directory suffix=".php">signal</directory>
     </testsuite>
-    <testsuite name="Driver ShutdownHandler">
+    <testsuite name="Shutdown handler">
       <directory suffix=".php">shutdown</directory>
     </testsuite>
-    <testsuite name="Driver ErrorHandler">
+    <testsuite name="Error handler">
       <directory suffix=".php">error</directory>
     </testsuite>
     <testsuite name="Aware">

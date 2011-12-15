@@ -90,9 +90,6 @@ class Autoloader
      */
     private static function _resolve($class)
     {
-        //if (strpos($class, 'Ding\\') !== 0) {
-        //    return false;
-        //}
         foreach (self::$_includePath as $path) {
             $file
                 = $path

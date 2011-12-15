@@ -28,7 +28,7 @@
  *
  */
 
-use Ding\MVC\ModelAndView;
+use Ding\Mvc\ModelAndView;
 use Ding\Container\Impl\ContainerImpl;
 
 /**

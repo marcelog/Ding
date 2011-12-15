@@ -71,6 +71,7 @@ class Test_Annotation_AOP extends PHPUnit_Framework_TestCase
     {
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('methodIntercepted');
+        var_dump($bean->targetMethod('aSd'));
         $this->assertEquals($bean->targetMethod('aSd'), 'BEFOREmethodReturnForaSdAFTER');
     }
 

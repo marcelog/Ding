@@ -45,19 +45,19 @@ class AspectManager
      * Holds known aspects. Indexed by name.
      * @var AspectDefinition[]
      */
-    private $_aspects;
+    private $_aspects = array();
 
     /**
      * Holds known pointcuts. Indexed by name.
      * @var PointcutDefinition[]
      */
-    private $_pointcuts;
+    private $_pointcuts = array();
 
     /**
      * Aspect cache to cache aspects and pointcuts.
      * @var ICache
      */
-    private $_aspectCache;
+    private $_cache;
 
     /**
      * Aspect definition providers.
@@ -92,7 +92,7 @@ class AspectManager
     {
         $name = $aspect->getName();
         $this->_aspects[$name] = $aspect;
-        $this->_aspectCache->store('AspectManagerAspect' . $name, $aspect);
+        $this->_cache->store('AspectManagerAspect' . $name, $aspect);
     }
 
     /**
@@ -106,7 +106,7 @@ class AspectManager
     {
         $name = $pointcut->getName();
         $this->_pointcuts[$name] = $pointcut;
-        $this->_aspectCache->store('AspectManagerPointcut' . $name, $pointcut);
+        $this->_cache->store('AspectManagerPointcut' . $name, $pointcut);
     }
 
     /**
@@ -132,7 +132,7 @@ class AspectManager
             return $this->_pointcuts[$pointcut];
         } else {
             $result = false;
-            $value = $this->_aspectCache->fetch('AspectManagerPointcut' . $pointcut, $result);
+            $value = $this->_cache->fetch('AspectManagerPointcut' . $pointcut, $result);
             if ($result === true) {
                 $this->_pointcuts[$pointcut] = $value;
                 return $value;
@@ -177,16 +177,15 @@ class AspectManager
     }
 
     /**
-     * Constructor.
+     * Sets aspects cache.
      *
      * @param Ding\Cache\ICache $cache
      *
      * @return void
      */
-    public function __construct(\Ding\Cache\ICache $cache)
+    public function setCache(\Ding\Cache\ICache $cache)
     {
-        $this->_aspectCache = $cache;
-        $this->_pointcuts = array();
-        $this->_aspects = array();
+        $this->_cache = $cache;
     }
+
 }

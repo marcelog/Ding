@@ -7,7 +7,7 @@
       </array>
     </property>
   </bean>
-	<bean id="PagiExtensionMapper" class="Ding\Helpers\PAGI\PagiExtensionMapper" scope="singleton">
+	<bean id="PagiExtensionMapper" class="Ding\Helpers\Pagi\PagiExtensionMapper" scope="singleton">
 		<property name="map">
         	<array>
         		<entry key="0">

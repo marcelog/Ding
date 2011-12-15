@@ -92,7 +92,9 @@ TEXT;
         $text2 = <<<TEXT
 /** @Some1 (a=b,c=d)@Some2 ( a=b)*/
 TEXT;
-        $annotations = ReflectionFactory::getAnnotations($text);
+        $container = ContainerImpl::getInstance($this->_properties);
+        $reflectionFactory = $container->getBean('dingReflectionFactory');
+        $annotations = $reflectionFactory->getAnnotations($text);
         $beanA = array_shift($annotations);
         $an1A = array_shift($annotations);
         $an2A = array_shift($annotations);
@@ -149,11 +151,11 @@ TEXT;
         $args = $quotedArrayA->getArguments();
         $this->assertEquals($args['a'], array('b', 'c', 'd'));
 
-        $annotations = ReflectionFactory::getAnnotations($text2);
+        $annotations = $reflectionFactory->getAnnotations($text2);
         $some1A = array_shift($annotations);
         $this->assertEquals($some1A->getName(), 'Some1');
 
-        $annotations = ReflectionFactory::getAnnotations($text2);
+        $annotations = $reflectionFactory->getAnnotations($text2);
         $some1A = array_shift($annotations);
         $some2A = array_shift($annotations);
         $this->assertEquals($some1A->getName(), 'Some1');
@@ -171,7 +173,10 @@ TEXT;
     public function can_return_nothing_if_no_annotations_driver()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $result = ReflectionFactory::getClassAnnotations('Test_Reflection');
+        $reflectionFactory = $container->getBean('dingReflectionFactory');
+        $result = $reflectionFactory->getClassAnnotations('Test_Reflection');
+        $this->assertTrue(empty($result));
+        $result = $reflectionFactory->getClassesByAnnotation('link');
         $this->assertTrue(empty($result));
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-    <bean id="Server" class="Ding\Helpers\TCP\TCPServerHelper" scope="singleton">
+    <bean id="Server" class="Ding\Helpers\Tcp\TcpServerHelper" scope="singleton">
         <property name="backlog">
             <value>5</value>
         </property>
@@ -21,7 +21,7 @@
         </property>
         <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
     </bean>
-    <bean id="Client" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+    <bean id="Client" class="Ding\Helpers\Tcp\TcpClientHelper" scope="prototype">
         <property name="connectTimeout">
             <value>10000</value>
         </property>
@@ -42,7 +42,7 @@
         </property>
         <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
     </bean>
-    <bean id="Client2" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+    <bean id="Client2" class="Ding\Helpers\Tcp\TcpClientHelper" scope="prototype">
         <property name="connectTimeout">
             <value>10000</value>
         </property>
@@ -63,7 +63,7 @@
         </property>
         <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
     </bean>
-    <bean id="Client3" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+    <bean id="Client3" class="Ding\Helpers\Tcp\TcpClientHelper" scope="prototype">
         <property name="connectTimeout">
             <value>10000</value>
         </property>
@@ -84,7 +84,7 @@
         </property>
         <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
     </bean>
-    <bean id="Client4" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+    <bean id="Client4" class="Ding\Helpers\Tcp\TcpClientHelper" scope="prototype">
         <property name="connectTimeout">
             <value>0</value>
         </property>
@@ -106,7 +106,7 @@
         <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
     </bean>
 
-    <bean id="Client5" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+    <bean id="Client5" class="Ding\Helpers\Tcp\TcpClientHelper" scope="prototype">
         <property name="connectTimeout">
             <value>0</value>
         </property>
@@ -127,7 +127,7 @@
         </property>
         <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
     </bean>
-    <bean id="Client6" class="Ding\Helpers\TCP\TCPClientHelper" scope="prototype">
+    <bean id="Client6" class="Ding\Helpers\Tcp\TcpClientHelper" scope="prototype">
         <property name="connectTimeout">
             <value>0</value>
         </property>
@@ -148,6 +148,6 @@
         </property>
         <property name="reuse"><true/></property> <!-- Optional. You can set it to true, false, or dont set it at all. false by default. -->
     </bean>
-    <bean id="MyClientHandler" class="\Ding\Helpers\TCP\MyClientHandler" scope="prototype"/>
-    <bean id="MyServerHandler" class="\Ding\Helpers\TCP\MyServerHandler" scope="singleton"/>
+    <bean id="MyClientHandler" class="\Ding\Helpers\Tcp\MyClientHandler" scope="prototype"/>
+    <bean id="MyServerHandler" class="\Ding\Helpers\Tcp\MyServerHandler" scope="singleton"/>
 </beans>

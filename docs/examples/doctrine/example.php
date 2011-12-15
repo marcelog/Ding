@@ -44,11 +44,10 @@ ini_set(
         array(
             DOCTRINE_LIB_PATH,
             __DIR__ .'/entities',
-            ini_get('include_path'),
             __DIR__ .DIRECTORY_SEPARATOR
             .implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
-                )
-            )
+            ini_get('include_path'),
+            ))
         );
 
 require_once 'entities/Person.php';

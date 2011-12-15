@@ -27,17 +27,28 @@ declare(ticks=1);
  * limitations under the License.
  *
  */
+ini_set(
+    'include_path',
+    implode(
+        PATH_SEPARATOR,
+        array(
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', '..', 'src', 'mg')),
+            ini_get('include_path'),
+        )
+    )
+);
+
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\SignalHandler\ISignalHandler;
 
 /**
- * @SignalHandler
+ * @Component
+ * @ListensOn(value=dingSignal)
  */
-class MySignalHandler implements ISignalHandler
+class MySignalHandler
 {
-    public function handleSignal($signal)
+    public function onDingSignal($signal)
     {
         echo "This is your custom signal handler: " . $signal . "\n";
     }
@@ -55,11 +66,8 @@ $properties = array(
     'ding' => array(
         'log4php.properties' => './log4php.properties',
         'factory' => array(
-            'drivers' => array(
-                'signalhandler' => array()
-            ),
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
-                'annotation' => array('scanDir' => array(realpath(__DIR__)))
+                'annotation' => array('scanDir' => array(__DIR__))
             ),
             // These properties will be used by the container when instantiating the beans, see beans.xml
             'properties' => array(

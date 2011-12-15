@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-	<bean id="Pami" class="Ding\Helpers\PAMI\PamiHelper" scope="singleton" init-method="open" destroy-method="close">
+	<bean id="Pami" class="Ding\Helpers\Pami\PamiHelper" scope="singleton" init-method="open" destroy-method="close">
 		<property name="username"><value>${ami.user}</value></property>
 		<property name="password"><value>${ami.pass}</value></property>
 		<property name="host"><value>${ami.host}</value></property>

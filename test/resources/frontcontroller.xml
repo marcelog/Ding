@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-  <bean id="HttpDispatcher" class="Ding\MVC\Http\HttpDispatcher" scope="singleton"/>
-  <bean id="HttpUrlMapper" class="Ding\MVC\Http\HttpUrlMapper" scope="singleton">
+  <bean id="HttpDispatcher" class="Ding\Mvc\Http\HttpDispatcher" scope="singleton"/>
+  <bean id="HttpUrlMapper" class="Ding\Mvc\Http\HttpUrlMapper" scope="singleton">
     <property name="map">
       <array>
         <entry key="0">
@@ -15,7 +15,7 @@
   </bean>
 
   <bean id="myController" class="AController2" scope="singleton"/>
-  <bean id="HttpExceptionMapper" class="Ding\MVC\Http\HttpExceptionMapper" scope="singleton">
+  <bean id="HttpExceptionMapper" class="Ding\Mvc\Http\HttpExceptionMapper" scope="singleton">
     <property name="map">
       <array>
         <entry key="0">
@@ -33,7 +33,7 @@
       </array>
     </property>
   </bean>
-  <bean id="HttpViewRender" class="Ding\MVC\Http\TwigViewRender" scope="singleton">
+  <bean id="HttpViewRender" class="Ding\Mvc\Http\TwigViewRender" scope="singleton">
        <property name="twigOptions">
            <array>
                <entry key="debug"><value>${twig.debug}</value></entry>
@@ -46,7 +46,7 @@
            </array>
        </property>
   </bean>
-  <bean id="HttpViewResolver" class="Ding\MVC\Http\HttpViewResolver" scope="singleton">
+  <bean id="HttpViewResolver" class="Ding\Mvc\Http\HttpViewResolver" scope="singleton">
     <property name="viewPrefix"><value>view.</value></property>
     <property name="viewSuffix"><value>.html</value></property>
     <property name="viewPath"><value>${prefix}/views</value></property>

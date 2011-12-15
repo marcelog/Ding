@@ -6,7 +6,7 @@ namespace {
     $mockSocketSelect = false;
     $mockSocketListen = false;
 }
-namespace Ding\Helpers\TCP {
+namespace Ding\Helpers\Tcp {
     function socket_create() {
         global $mockSocketCreate;
         if (isset($mockSocketCreate) && $mockSocketCreate === true) {
@@ -39,7 +39,7 @@ namespace Ding\Helpers\TCP {
         }
     }
 /**
- * This class will test the TCP Client errors.
+ * This class will test the Tcp Client errors.
  *
  * PHP Version 5
  *
@@ -67,10 +67,10 @@ namespace Ding\Helpers\TCP {
  *
  */
 use Ding\Container\Impl\ContainerImpl;
-use Ding\Helpers\TCP\ITCPClientHandler;
+use Ding\Helpers\Tcp\ITcpClientHandler;
 
 /**
- * This class will test the TCP Client errors.
+ * This class will test the Tcp Client errors.
  *
  * PHP Version 5
  *
@@ -81,7 +81,7 @@ use Ding\Helpers\TCP\ITCPClientHandler;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
+class Test_Tcp_Mock extends \PHPUnit_Framework_TestCase
 {
     private $_properties = array();
 
@@ -110,7 +110,7 @@ class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException \Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_socket_create()
     {
@@ -130,7 +130,7 @@ class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException \Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_socket_select()
     {
@@ -156,7 +156,7 @@ class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException \Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_socket_select_on_server()
     {
@@ -179,7 +179,7 @@ class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException \Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_socket_select_on_server_peers()
     {
@@ -208,7 +208,7 @@ class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException \Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_socket_create_on_server()
     {
@@ -227,7 +227,7 @@ class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
     }
     /**
      * @test
-     * @expectedException \Ding\Helpers\TCP\Exception\TCPException
+     * @expectedException \Ding\Helpers\Tcp\Exception\TcpException
      */
     public function cannot_socket_listen_on_server()
     {
@@ -246,7 +246,7 @@ class Test_TCP_Mock extends \PHPUnit_Framework_TestCase
     }
 }
 
-class MyClientHandler implements ITCPClientHandler
+class MyClientHandler implements ITcpClientHandler
 {
     public static $time;
     protected $client;
@@ -274,7 +274,7 @@ class MyClientHandler implements ITCPClientHandler
     {
     }
 
-    public function setClient(\Ding\Helpers\TCP\TCPClientHelper $client)
+    public function setClient(\Ding\Helpers\Tcp\TcpClientHelper $client)
     {
         $this->client = $client;
     }
@@ -288,7 +288,7 @@ class MyClientHandler implements ITCPClientHandler
         $this->client->close();
     }
 }
-class MyServerHandler implements ITCPServerHandler
+class MyServerHandler implements ITcpServerHandler
 {
     public static $data;
 
@@ -304,17 +304,17 @@ class MyServerHandler implements ITCPServerHandler
     {
     }
 
-    public function handleConnection(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleConnection(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         $peer->write("Hi!\n");
     }
 
-    public function readTimeout(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function readTimeout(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         self::$data = 'timeout';
     }
 
-    public function handleData(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function handleData(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
         $buffer = '';
         $len = 1024;
@@ -328,7 +328,7 @@ class MyServerHandler implements ITCPServerHandler
         sleep(2);
     }
 
-    public function disconnect(\Ding\Helpers\TCP\TCPPeer $peer)
+    public function disconnect(\Ding\Helpers\Tcp\TcpPeer $peer)
     {
     }
 }

@@ -29,13 +29,15 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Reflection\IReflectionFactoryAware;
+use Ding\Reflection\IReflectionFactory;
+use Ding\Container\IContainerAware;
+use Ding\Aspect\IAspectManagerAware;
+use Ding\Bean\IBeanDefinitionProvider;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
-use Ding\Bean\Lifecycle\IBeforeDefinitionListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanAnnotationDefinition;
-use Ding\Bean\Factory\IBeanFactory;
 use Ding\Container\IContainer;
-use Ding\Reflection\ReflectionFactory;
 use Ding\Aspect\AspectManager;
 use Ding\Aspect\AspectDefinition;
 use Ding\Aspect\PointcutDefinition;
@@ -52,7 +54,9 @@ use Ding\Aspect\PointcutDefinition;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationAspectDriver implements IAfterConfigListener, IBeforeDefinitionListener
+class AnnotationAspectDriver
+    implements IAfterConfigListener, IBeanDefinitionProvider,
+    IAspectManagerAware, IContainerAware, IReflectionFactoryAware
 {
     /**
      * Aspect manager instance.
@@ -65,19 +69,55 @@ class AnnotationAspectDriver implements IAfterConfigListener, IBeforeDefinitionL
      * @var ICache
      */
     private $_cache;
+    /**
+     * Container.
+     * @var IContainer
+     */
+    private $_container;
+    /**
+     * A ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
 
-    public function beforeDefinition(IBeanFactory $factory, $beanName, BeanDefinition $bean = null)
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
     {
-        if (!empty($bean)) {
-            return $bean;
-        }
-        if (isset($this->_cache[$beanName])) {
-            return $this->_cache[$beanName];
-        }
-        return $bean;
+        $this->reflectionFactory = $reflectionFactory;
     }
 
-    private function _newAspect($aspectClass, $factory, $classExpression, $expression, $method, $type)
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainerAware::setContainer()
+     */
+    public function setContainer(IContainer $container)
+    {
+        $this->_container = $container;
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinition()
+     */
+    public function getBeanDefinition($name)
+    {
+        if (isset($this->_cache[$name])) {
+            return $this->_cache[$name];
+        }
+        return null;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinitionByClass()
+     */
+    public function getBeanDefinitionByClass($class)
+    {
+
+    }
+    private function _newAspect($aspectClass, $classExpression, $expression, $method, $type)
     {
         // Create bean.
         $aspectBeanName = BeanDefinition::generateName('AnnotationAspectedBean');
@@ -96,16 +136,21 @@ class AnnotationAspectDriver implements IAfterConfigListener, IBeforeDefinitionL
         $this->_aspectManager->setAspect($aspectDef);
     }
 
+    public function setAspectManager(AspectManager $aspectManager)
+    {
+        $this->_aspectManager = $aspectManager;
+    }
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
      */
-    public function afterConfig(IContainer $factory)
+    public function afterConfig()
     {
         // Create aspects and pointcuts.
-        $aspects = ReflectionFactory::getClassesByAnnotation('Aspect');
+        $aspects = $this->reflectionFactory->getClassesByAnnotation('Aspect');
         foreach ($aspects as $name) {
-            $annotations = ReflectionFactory::getClassAnnotations($name);
+            $annotations = $this->reflectionFactory->getClassAnnotations($name);
             foreach ($annotations as $key => $annotation) {
                 if ($key == 'class') {
                     continue;
@@ -116,7 +161,7 @@ class AnnotationAspectDriver implements IAfterConfigListener, IBeforeDefinitionL
                     $expression = $arguments['expression'];
                     $method = $key;
                     $this->_newAspect(
-                        $name, $factory, $classExpression, $expression, $method, AspectDefinition::ASPECT_METHOD
+                        $name, $classExpression, $expression, $method, AspectDefinition::ASPECT_METHOD
                     );
                 }
                 if (isset($annotation['ExceptionInterceptor'])) {
@@ -125,22 +170,11 @@ class AnnotationAspectDriver implements IAfterConfigListener, IBeforeDefinitionL
                     $expression = $arguments['expression'];
                     $method = $key;
                     $this->_newAspect(
-                        $name, $factory, $classExpression, $expression, $method, AspectDefinition::ASPECT_EXCEPTION
+                        $name, $classExpression, $expression, $method, AspectDefinition::ASPECT_EXCEPTION
                     );
                 }
             }
         }
     }
 
-    /**
-     * Constructor.
-     *
-     * @param \Ding\Aspect\AspectManager $aspectManager
-     *
-     * @return void
-     */
-    public function __construct(\Ding\Aspect\AspectManager $aspectManager)
-    {
-        $this->_aspectManager = $aspectManager;
-    }
 }
