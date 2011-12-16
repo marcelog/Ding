@@ -34,6 +34,19 @@ use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\IBeanDefinitionProvider;
 
+/**
+ * This is a bean definition provider used by the container when it's
+ * bootstrapping. Will provide all the basic needed beans.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Provider
+ * @author     Marcelo Gornstein <marcelog@gmail.com>
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
 class Core implements IBeanDefinitionProvider
 {
     /**

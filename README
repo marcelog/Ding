@@ -357,6 +357,10 @@ Developers
 * It's very possible that you may need to edit build.properties.
 * Available main targets: all, build, test, report.
 * Tools run: phpdoc, phploc, phpcs, phpmd, phpcpd, phpdepend, phpunit.
+* Setup your installation by editing pear and php paths in build.properties
+* Run phing install-dependencies this will install pear and everything needed
+to run ding tests and metrics.
+* Run phing all
 --------------------------------------------------------------------------------
 Debugging, logging
 ==================
