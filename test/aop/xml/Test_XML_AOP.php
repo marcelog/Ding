@@ -77,7 +77,7 @@ class Test_XML_AOP extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Exception
+     * @expectedException InvalidArgumentException
      */
     public function can_intercept_and_proceed_exception_from_bean_aop()
     {
@@ -236,7 +236,7 @@ class ClassSimpleAOPExceptionAndProceedXML
 {
     public function thisWillThrowAnException()
     {
-        throw new Exception('too bad!');
+        throw new InvalidArgumentException('too bad!');
     }
 }
 

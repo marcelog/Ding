@@ -41,7 +41,7 @@ use Ding\Mvc\ModelAndView;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class Test_HttpView extends PHPUnit_Extensions_OutputTestCase
+class Test_HttpView extends PHPUnit_Framework_TestCase
 {
     private $_properties = array();
 

@@ -109,7 +109,7 @@ class Test_Container extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Exception
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
      */
     public function cannot_instantiate_abstract_bean()
     {

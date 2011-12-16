@@ -80,7 +80,7 @@ class Test_Dispatcher extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException Exception
+     * @expectedException InvalidArgumentException
      */
     public function can_throw_exception_when_no_exception_interceptors()
     {
@@ -103,7 +103,7 @@ class ClassSimpleAOPDispatcher
 {
     public function thisWillThrowAnException()
     {
-        throw new Exception('too bad!');
+        throw new InvalidArgumentException('blah');
     }
 }
 
