@@ -9,7 +9,6 @@
  * @package  MessageSource
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://marcelog.github.com/ Apache License 2.0
- * @version  SVN: $Id$
  * @link     http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
@@ -39,7 +38,6 @@ namespace Ding\MessageSource;
  * @package  MessageSource
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://marcelog.github.com/ Apache License 2.0
- * @version  SVN: $Id$
  * @link     http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>

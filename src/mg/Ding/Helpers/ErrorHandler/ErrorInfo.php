@@ -10,7 +10,6 @@
  * @subpackage ErrorHandler
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
- * @version    SVN: $Id$
  * @link       http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
@@ -41,7 +40,6 @@ namespace Ding\Helpers\ErrorHandler;
  * @subpackage ErrorHandler
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
- * @version    SVN: $Id$
  * @link       http://marcelog.github.com/
  */
 class ErrorInfo

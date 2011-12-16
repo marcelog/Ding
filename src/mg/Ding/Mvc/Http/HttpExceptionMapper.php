@@ -9,7 +9,6 @@
  * @subpackage Http
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
- * @version    SVN: $Id$
  * @link       http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
@@ -43,7 +42,6 @@ use Ding\Mvc\Action;
  * @subpackage Http
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
- * @version    SVN: $Id$
  * @link       http://marcelog.github.com/
  */
 class HttpExceptionMapper implements IMapper, ILoggerAware

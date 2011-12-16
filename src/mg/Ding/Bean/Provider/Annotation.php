@@ -7,10 +7,9 @@
  *
  * @category   Ding
  * @package    Bean
- * @subpackage Factory.Driver
+ * @subpackage Provider
  * @author     Marcelo Gornstein <marcelog@gmail.com>
  * @license    http://marcelog.github.com/ Apache License 2.0
- * @version    SVN: $Id$
  * @link       http://marcelog.github.com/
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
@@ -31,7 +30,6 @@
 namespace Ding\Bean\Provider;
 
 use Ding\Reflection\IReflectionFactoryAware;
-
 use Ding\Container\IContainerAware;
 use Ding\Bean\IBeanDefinitionProvider;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
