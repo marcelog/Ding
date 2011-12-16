@@ -116,7 +116,6 @@ class MvcAnnotationDriver
             $name = BeanDefinition::generateName('Controller');
             $beanDef = new BeanDefinition($name);
             $beanDef->setClass($controller);
-            $beanDef->setScope(BeanDefinition::BEAN_SINGLETON);
             $url = $this->reflectionFactory->getClassAnnotations($controller);
             if (!isset($url['class']['RequestMapping'])) {
                 continue;

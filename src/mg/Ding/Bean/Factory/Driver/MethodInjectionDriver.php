@@ -164,7 +164,6 @@ class MethodInjectionDriver
         foreach ($bean->getMethodInjections() as $method) {
             $aspectBeanName = BeanDefinition::generateName('MethodInjectionAspect');
             $aspectBean = new BeanDefinition($aspectBeanName);
-            $aspectBean->setScope(BeanDefinition::BEAN_SINGLETON);
             $aspectBean->setClass('\\Ding\\Bean\\Factory\\Driver\\MethodInjectionAspect');
             $aspectBean->setProperties(array(
                 new BeanPropertyDefinition('beanName', BeanPropertyDefinition::PROPERTY_SIMPLE, $method[1])

@@ -121,7 +121,6 @@ class AnnotationAspectDriver
         // Create bean.
         $aspectBeanName = BeanDefinition::generateName('AnnotationAspectedBean');
         $aspectBean = new BeanDefinition($aspectBeanName);
-        $aspectBean->setScope(BeanDefinition::BEAN_SINGLETON);
         $aspectBean->setClass($aspectClass);
         $this->_cache[$aspectBeanName] = $aspectBean;
         $pointcutName = BeanDefinition::generateName('PointcutAnnotationAspectDriver');

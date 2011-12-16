@@ -206,7 +206,6 @@ class PropertiesDriver
         if ($name == 'PropertiesHolder') {
             $bDef = new BeanDefinition('PropertiesHolder');
             $bDef->setClass('Ding\\Helpers\\Properties\\PropertiesHelper');
-            $bDef->setScope(BeanDefinition::BEAN_SINGLETON);
             return $bDef;
         }
         return null;
