@@ -115,7 +115,7 @@
   <target name="install-dependencies">
   	<mkdir dir="${dir.vendor}"/>
   	<exec
-  	  command="${defaultpear.bin} config-create ${dir.vendor} .pearrc"
+  	  command="${defaultpear.bin} config-create ${dir.vendor} ${dir.vendor}/.pearrc"
       passthru="true"
     />
     <exec
