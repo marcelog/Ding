@@ -289,7 +289,7 @@ class ContainerImpl implements IContainer
      *
      * @return void
      */
-    private function _loadArgOrProperty($what)
+    private function _getValueFromDefinition($what)
     {
         $value = null;
         if ($what->isBean()) {
@@ -297,7 +297,7 @@ class ContainerImpl implements IContainer
         } else if ($what->isArray()) {
             $value = array();
             foreach ($what->getValue() as $k => $v) {
-                $value[$k] = $this->_loadArgOrProperty($v);
+                $value[$k] = $this->_getValueFromDefinition($v);
             }
         } else if ($what->isCode()) {
             $value = eval($what->getValue());
@@ -346,6 +346,63 @@ class ContainerImpl implements IContainer
         }
     }
 
+    private function _findRealBeanClass(BeanDefinition $definition)
+    {
+        if ($definition->hasProxyClass()) {
+            $class = $definition->getProxyClassName();
+        } else {
+            $class = $definition->getClass();
+        }
+        return $this->_reflectionFactory->getClass($class);
+    }
+
+    private function _getConstructorValuesForDefinition($definition)
+    {
+        $args = array();
+        foreach ($definition->getArguments() as $argument) {
+            $args[] = $this->_getValueFromDefinition($argument);
+        }
+        return $args;
+    }
+    private function _instantiateByConstructor(BeanDefinition $definition)
+    {
+        $args = $this->_getConstructorValuesForDefinition($definition);
+        $class = $this->_findRealBeanClass($definition);
+        if (empty($args)) {
+            return $class->newInstanceArgs();
+        } else {
+            return $class->newInstanceArgs($args);
+        }
+    }
+
+    private function _instantiateByFactoryClass(BeanDefinition $definition)
+    {
+        $args = $this->_getConstructorValuesForDefinition($definition);
+        $class = $this->_findRealBeanClass($definition)->getName();
+        $factoryMethod = $definition->getFactoryMethod();
+        return forward_static_call_array(array($class, $factoryMethod), $args);
+    }
+
+    private function _instantiateByFactoryBean(BeanDefinition $definition)
+    {
+        $args = $this->_getConstructorValuesForDefinition($definition);
+        $factoryBean = $this->getBean($definition->getFactoryBean());
+        $refObject = new \ReflectionObject($factoryBean);
+        $factoryMethod = $refObject->getMethod($definition->getFactoryMethod());
+        return $factoryMethod->invokeArgs($factoryBean, $args);
+    }
+
+    private function _instantiate(BeanDefinition $definition)
+    {
+        if ($definition->isCreatedByConstructor()) {
+            return $this->_instantiateByConstructor($definition);
+        } else if ($definition->isCreatedWithFactoryBean()) {
+            return $this->_instantiateByFactoryBean($definition);
+        } else {
+            return $this->_instantiateByFactoryClass($definition);
+        }
+    }
+
     /**
      * This will create a new bean, injecting all properties and applying all
      * aspects.
@@ -361,10 +418,6 @@ class ContainerImpl implements IContainer
         $this->_lifecycleManager->beforeCreate($beanDefinition);
 
         $beanClass = $beanDefinition->getClass();
-        $args = array();
-        foreach ($beanDefinition->getArguments() as $argument) {
-            $args[] = $this->_loadArgOrProperty($argument);
-        }
         $rClass = false;
         if (!empty($beanClass)) {
             $rClass = $this->_reflectionFactory->getClass($beanClass);
@@ -396,58 +449,29 @@ class ContainerImpl implements IContainer
                 $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
             }
             if (!empty($methods)) {
-                $beanClass = $this->_proxyFactory->create($beanClass, $methods, $dispatcher);
+                $beanDefinition->setProxyClassName(
+                    $this->_proxyFactory->create($beanClass, $methods, $dispatcher)
+                );
             }
         }
-        /* @todo change this to a clone */
-        $factoryMethod = $beanDefinition->getFactoryMethod();
-        if ($factoryMethod == false || empty($factoryMethod)) {
-            $constructor = $this->_reflectionFactory->getClass($beanClass);
-            if (empty($args)) {
-                $bean = $constructor->newInstanceArgs();
-            } else {
-                $bean = $constructor->newInstanceArgs($args);
-            }
-        } else {
-            if ($beanDefinition->getFactoryBean() == false) {
-                $beanFactoryMethod = $beanDefinition->getFactoryMethod();
-                if (empty($args)) {
-                    $bean = $beanClass::$beanFactoryMethod();
-                } else {
-                    /* @todo yikes! */
-                    $bean = forward_static_call_array(
-                        array($beanClass, $beanFactoryMethod),
-                        $args
-                    );
-                }
-            } else {
-                $beanFactory = $this->getBean(
-                    $beanDefinition->getFactoryBean()
-                );
-                $refObject = new \ReflectionObject($beanFactory);
-                $method = $refObject->getMethod(
-                    $beanDefinition->getFactoryMethod()
-                );
-                if (empty($args)) {
-                    $bean = $method->invoke($beanFactory);
-                } else {
-                    $bean = $method->invokeArgs($beanFactory, $args);
-                }
-            }
-        }
+        $bean = $this->_instantiate($beanDefinition);
         $this->assemble($bean, $beanDefinition);
-        $initMethod = $beanDefinition->getInitMethod();
-        if ($initMethod) {
-            $bean->$initMethod();
-        }
-        $destroyMethod = $beanDefinition->getDestroyMethod();
-        if ($destroyMethod) {
-            $this->registerShutdownMethod($bean, $destroyMethod);
-        }
+        $this->_setupInitAndShutdown($bean, $beanDefinition);
         $this->_lifecycleManager->afterCreate($bean, $beanDefinition);
         return $bean;
     }
 
+    private function _setupInitAndShutdown($bean, BeanDefinition $definition)
+    {
+        if ($definition->hasInitMethod()) {
+            $initMethod = $definition->getInitMethod();
+            $bean->$initMethod();
+        }
+        if ($definition->hasDestroyMethod()) {
+            $destroyMethod = $definition->getDestroyMethod();
+            $this->registerShutdownMethod($bean, $destroyMethod);
+        }
+    }
     /**
      * Assembles a bean (setter injection)
      *
@@ -464,7 +488,7 @@ class ContainerImpl implements IContainer
             $methodName = 'set' . ucfirst($propertyName);
             $rClass = $this->_reflectionFactory->getClass($beanDefinition->getClass());
             if ($rClass->hasMethod($methodName)) {
-                $bean->$methodName($this->_loadArgOrProperty($property));
+                $bean->$methodName($this->_getValueFromDefinition($property));
             }
         }
         $this->fillAware($beanDefinition, $bean);

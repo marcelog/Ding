@@ -159,6 +159,13 @@ class BeanDefinition
     private $_aliases;
 
     /**
+     * Holds the name of the proxy class that was generated for this bean, only
+     * valid for those who actually have aspects applied.
+     * @var string
+     */
+    private $_proxyClassName;
+
+    /**
      * Aliases for this bean.
      *
      * @return string[]
@@ -544,6 +551,51 @@ class BeanDefinition
     }
 
     /**
+     * Returns true if this bean is created by calling the constructor.
+     *
+     * @return boolean
+     */
+    public function isCreatedByConstructor()
+    {
+        return empty($this->_factoryMethod);
+    }
+
+    /**
+     * Returns true if this bean is created by calling a factory bean (as
+     * opposed to a factory class)
+     *
+     * @return boolean
+     */
+    public function isCreatedWithFactoryBean()
+    {
+        return !empty($this->_factoryBean);
+    }
+
+    public function setProxyClassName($name)
+    {
+        $this->_proxyClassName = $name;
+    }
+
+    public function getProxyClassName()
+    {
+        return $this->_proxyClassName;
+    }
+
+    public function hasProxyClass()
+    {
+        return !is_null($this->_proxyClassName);
+    }
+
+    public function hasInitMethod()
+    {
+        return !is_null($this->_initMethod);
+    }
+    public function hasDestroyMethod()
+    {
+        return !is_null($this->_destroyMethod);
+    }
+
+    /**
      * Constructor.
      *
      * @param string $name Bean name.
@@ -560,9 +612,9 @@ class BeanDefinition
         $this->_scope = BeanDefinition::BEAN_SINGLETON;
         $this->_factoryMethod = $soullessString;
         $this->_factoryBean = $soullessString;
-        $this->_initMethod = $soullessString;
+        $this->_initMethod = null;
         $this->_lookupMethods = $soullessArray;
-        $this->_destroyMethod = $soullessString;
+        $this->_destroyMethod = null;
         $this->_dependsOn = $soullessArray;
         $this->_properties = $soullessArray;
         $this->_autowiredProperties = $soullessArray;
@@ -570,5 +622,6 @@ class BeanDefinition
         $this->_constructorArgs = $soullessArray;
         $this->_isAbstract = false;
         $this->_parent = null;
+        $this->_proxyClassName = null;
     }
 }
