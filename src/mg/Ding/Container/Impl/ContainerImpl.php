@@ -307,16 +307,14 @@ class ContainerImpl implements IContainer
         return $value;
     }
 
-    private function _findRealBeanClass(BeanDefinition $definition)
-    {
-        if ($definition->hasProxyClass()) {
-            $class = $definition->getProxyClassName();
-        } else {
-            $class = $definition->getClass();
-        }
-        return $this->_reflectionFactory->getClass($class);
-    }
-
+    /**
+     * Resolves all values for constructor arguments definitions in a
+     * bean definition.
+     *
+     * @param BeanDefinition $definition
+     *
+     * @return object
+     */
     private function _getConstructorValuesForDefinition($definition)
     {
         $args = array();
@@ -325,25 +323,52 @@ class ContainerImpl implements IContainer
         }
         return $args;
     }
+
+    /**
+     * Instantiates a bean using the constructor.
+     *
+     * @param BeanDefinition $definition
+     *
+     * @return object
+     */
     private function _instantiateByConstructor(BeanDefinition $definition)
     {
         $args = $this->_getConstructorValuesForDefinition($definition);
-        $class = $this->_findRealBeanClass($definition);
+        $class = $definition->getClass();
+        if ($definition->hasProxyClass()) {
+            $class = $definition->getProxyClassName();
+        }
+        $rClass = $this->_reflectionFactory->getClass($class);
         if (empty($args)) {
-            return $class->newInstanceArgs();
+            return $rClass->newInstanceArgs();
         } else {
-            return $class->newInstanceArgs($args);
+            return $rClass->newInstanceArgs($args);
         }
     }
 
+    /**
+     * Instantiates a bean using a factory class.
+     *
+     * @param BeanDefinition $definition
+     *
+     * @return object
+     */
     private function _instantiateByFactoryClass(BeanDefinition $definition)
     {
         $args = $this->_getConstructorValuesForDefinition($definition);
-        $class = $this->_findRealBeanClass($definition)->getName();
-        $factoryMethod = $definition->getFactoryMethod();
-        return forward_static_call_array(array($class, $factoryMethod), $args);
+        return forward_static_call_array(
+            array($definition->getClass(), $definition->getFactoryMethod()),
+            $args
+        );
     }
 
+    /**
+     * Instantiates a bean using a factory bean.
+     *
+     * @param BeanDefinition $definition
+     *
+     * @return object
+     */
     private function _instantiateByFactoryBean(BeanDefinition $definition)
     {
         $args = $this->_getConstructorValuesForDefinition($definition);
@@ -353,6 +378,13 @@ class ContainerImpl implements IContainer
         return $factoryMethod->invokeArgs($factoryBean, $args);
     }
 
+    /**
+     * Instantiates a bean.
+     *
+     * @param BeanDefinition $definition
+     *
+     * @return object
+     */
     private function _instantiate(BeanDefinition $definition)
     {
         if ($definition->isCreatedByConstructor()) {
@@ -364,6 +396,11 @@ class ContainerImpl implements IContainer
         }
     }
 
+    /**
+     * Creates whatever beans this definition depends on.
+     *
+     * @return void
+     */
     private function _createBeanDependencies(BeanDefinition $definition)
     {
         foreach ($definition->getDependsOn() as $depBean) {
@@ -405,6 +442,14 @@ class ContainerImpl implements IContainer
         }
     }
 
+    /**
+     * Applies all aspects specifically defined for this bean definition.
+     *
+     * @param BeanDefinition $definition
+     * @param IDispatcher $dispatcher
+     *
+     * @return void
+     */
     private function _applySpecificAspects(BeanDefinition $definition, IDispatcher $dispatcher)
     {
         if ($definition->hasAspects()) {
@@ -414,6 +459,14 @@ class ContainerImpl implements IContainer
         }
     }
 
+    /**
+     * Looks for any global aspects that may apply to this bean and applies them.
+     *
+     * @param BeanDefinition $definition
+     * @param IDispatcher $dispatcher
+     *
+     * @return void
+     */
     private function _applyGlobalAspects(BeanDefinition $definition, IDispatcher $dispatcher)
     {
         $class = $definition->getClass();
@@ -433,6 +486,14 @@ class ContainerImpl implements IContainer
             }
         }
     }
+
+    /**
+     * Applies specific bean aspects and global defined aspects.
+     *
+     * @param BeanDefinition $definition
+     *
+     * @return void
+     */
     private function _applyAspects(BeanDefinition $definition)
     {
         $class = $definition->getClass();
@@ -467,6 +528,14 @@ class ContainerImpl implements IContainer
         return $bean;
     }
 
+    /**
+     * Calls init method and register shutdown method.
+     *
+     * @param object $bean
+     * @param BeanDefinition $definition
+     *
+     * @return void
+     */
     private function _setupInitAndShutdown($bean, BeanDefinition $definition)
     {
         if ($definition->hasInitMethod()) {

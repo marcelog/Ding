@@ -251,6 +251,13 @@ TEXT;
         return $src;
     }
 
+    /**
+     * Sets Proxy cache to use.
+     *
+     * @param ICache $cache
+     *
+     * @return void
+     */
     public function setCache(ICache $cache)
     {
         $this->cache = $cache;

@@ -69,6 +69,10 @@ class DispatcherImpl implements IDispatcher, IReflectionFactoryAware
      */
     private $_interceptorClasses;
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect\Interceptor.IDispatcher::hasMethodsIntercepted()
+     */
     public function hasMethodsIntercepted()
     {
         return
@@ -77,6 +81,10 @@ class DispatcherImpl implements IDispatcher, IReflectionFactoryAware
         ;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect\Interceptor.IDispatcher::getMethodsIntercepted()
+     */
     public function getMethodsIntercepted()
     {
         return array_keys(array_merge(
