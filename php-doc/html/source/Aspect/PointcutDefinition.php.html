@@ -1,0 +1,186 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * A pointcut definition.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Aspect
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Aspect;
+
+/**
+ * A pointcut definition.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Aspect
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ */
+class PointcutDefinition
+{
+    /**
+     * Pointcut name/id.
+     * @var string
+     */
+    private $_name;
+
+    /**
+     * Pointcut regular expression.
+     * @var string
+     */
+    private $_expression;
+
+    /**
+     * Target method to execute.
+     * @var string
+     */
+    private $_method;
+
+    /**
+     * Returns pointcut name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this-&gt;_name;
+    }
+
+    /**
+     * Sets the pointcut name.
+     *
+     * @param string $name Pointcut name.
+     *
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this-&gt;_name = $name;
+    }
+
+    /**
+     * Returns the target method.
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this-&gt;_method;
+    }
+
+    /**
+     * Sets the target method.
+	 *
+     * @param string $method Sets the target method to execute.
+     *
+     * @return void
+     */
+    public function setMethod($method)
+    {
+        return $this-&gt;_method = $method;
+    }
+
+    /**
+     * Returns pointcut expression.
+     *
+     * @return string
+     */
+    public function getExpression()
+    {
+        return $this-&gt;_expression;
+    }
+
+    /**
+     * Sets the pointcut expression.
+     *
+     * @param string $expression Pointcut expression.
+     *
+     * @return void
+     */
+    public function setExpression($expression)
+    {
+        $this-&gt;_expression= $expression;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param string $name       Pointcut name.
+     * @param string $expression Pointcut expression.
+     * @param string $method     Target method to execute.
+     *
+     * @return void
+     */
+    public function __construct($name, $expression, $method)
+    {
+        $this-&gt;_name = $name;
+        $this-&gt;_expression = $expression;
+        $this-&gt;_method = $method;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

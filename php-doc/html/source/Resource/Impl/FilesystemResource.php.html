@@ -1,0 +1,219 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * A filesystem resource (file:// ... ). Can be absolute or relative.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Resource
+ * @subpackage Impl
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Resource\Impl;
+
+use Ding\Resource\Exception\ResourceException;
+use Ding\Resource\IResource;
+
+/**
+ * A filesystem resource (file:// ... ). Can be absolute or relative.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Resource
+ * @subpackage Impl
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+class FilesystemResource implements IResource
+{
+    /**
+     * Holds true filename.
+     * @var string
+     */
+    protected $filename;
+
+    /**
+     * Holds file resource.
+     * @var stream
+     */
+    protected $fd;
+
+    /**
+     * Holds context, created with stream_context_create()
+     * @var resource
+     */
+    protected $context;
+
+    /**
+     * This scheme identifies this resource.
+     * @var string
+     */
+    const SCHEME = 'file://';
+
+    /**
+     * Length for self::SCHEME
+     * @var integer
+     */
+    const SCHEMELEN = 7;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::exists()
+     */
+    public function exists()
+    {
+        return $this-&gt;filename !== false &amp;&amp; file_exists($this-&gt;filename);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::isOpen()
+     */
+    public function isOpen()
+    {
+        return $this-&gt;fd !== false;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::getURL()
+     */
+    public function getURL()
+    {
+        return self::SCHEME . $this-&gt;filename;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::getStream()
+     */
+    public function getStream()
+    {
+        if ($this-&gt;fd === false) {
+            $this-&gt;fd
+                = $this-&gt;context === false
+                ? @fopen($this-&gt;getURL(), 'r', false)
+                : @fopen($this-&gt;getURL(), 'r', false, $this-&gt;context);
+            if ($this-&gt;fd === false) {
+                throw new ResourceException('Could not open: ' . $this-&gt;filename);
+            }
+        }
+        return $this-&gt;fd;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::createRelative()
+     */
+    public function createRelative($relativePath)
+    {
+        return new FilesystemResource(
+            self::SCHEME . $this-&gt;getFilename() . DIRECTORY_SEPARATOR . $relativePath
+        );
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::getFilename()
+     */
+    public function getFilename()
+    {
+        return $this-&gt;filename;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param string   $filename Filename with or without file://.
+     * @param resource $context  Context created with stream_context_create().
+     *
+     * @throws ResourceException
+     * @return void
+     */
+    public function __construct($filename, $context = false)
+    {
+        $filename = str_replace(self::SCHEME, '', $filename);
+        $realpath = realpath($filename);
+        $this-&gt;filename = $realpath ? $realpath : $filename;
+        $this-&gt;fd = false;
+        $this-&gt;context = $context;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

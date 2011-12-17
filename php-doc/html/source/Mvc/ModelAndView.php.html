@@ -1,0 +1,147 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * This class handles the mapping between the view and model.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Mvc
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Mvc;
+
+/**
+ * This class handles the mapping between the view and model.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Mvc
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ */
+class ModelAndView
+{
+    /**
+     * Objects from the model.
+     * @var mixed[]
+     */
+    private $_objects;
+
+    /**
+     * Model-View name. This will get used to find the view name.
+     * @var string
+     */
+    private $_name;
+
+    /**
+     * Add model objects.
+     *
+     * @param array $objects Key = object name (string), value is mixed.
+     *
+     * @return void
+     */
+    public function add(array $objects)
+    {
+        foreach ($objects as $name =&gt; $value) {
+            $this-&gt;_objects[$name] = $value;
+        }
+    }
+
+    /**
+     * Returns the model. Intended to be used from the view.
+     * Key = object name (string), value is mixed.
+     *
+     * @return array
+     */
+    public function getModel()
+    {
+        return $this-&gt;_objects;
+    }
+
+    /**
+     * Returns the corresponding view name for this model-view.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this-&gt;_name;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param string $name    Model-View name.
+     * @param array  $options Model-View objects.
+     *
+     * @return void
+     */
+    public function __construct($name, array $options = array())
+    {
+        $this-&gt;_objects = $options;
+        $this-&gt;_name = $name;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

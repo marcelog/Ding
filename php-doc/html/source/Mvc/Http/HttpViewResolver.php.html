@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Http view resolver. It will try to map the given action name to a full path
+ * in the filesystem, accoding to the path, prefix, and suffix configured.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Mvc
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Mvc\Http;
+use Ding\Logger\ILoggerAware;
+use Ding\Mvc\IViewResolver;
+use Ding\Mvc\ModelAndView;
+
+/**
+ * Http view resolver. It will try to map the given action name to a full path
+ * in the filesystem, accoding to the path, prefix, and suffix configured.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Mvc
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ */
+class HttpViewResolver implements IViewResolver, ILoggerAware
+{
+    /**
+     * log4php logger or our own.
+     * @var Logger
+     */
+    private $_logger;
+
+    /**
+     * Path where views are stored.
+     * @var string
+     */
+    private $_path;
+
+    /**
+     * Views prefix.
+     * @var string
+     */
+    private $_prefix;
+
+    /**
+     * Views suffix.
+     * @var string
+     */
+    private $_suffix;
+
+    /**
+     * This will resolve the given ModelAndView to a view in the filesystem
+     * (an absolute path to a file).
+     *
+     * @param ModelAndView $modelAndView What to render.
+     *
+     * @see Ding\Mvc.IViewResolver::resolve()
+     * @return HttpView
+     */
+    public function resolve(ModelAndView $modelAndView)
+    {
+        $name = $modelAndView-&gt;getName();
+        $path = $this-&gt;_path .
+            DIRECTORY_SEPARATOR .
+            $this-&gt;_prefix . $name . $this-&gt;_suffix
+        ;
+        if ($this-&gt;_logger-&gt;isDebugEnabled()) {
+            $this-&gt;_logger-&gt;debug('Using viewpath: ' . $path);
+        }
+        return new HttpView($modelAndView, $path);
+    }
+
+    /**
+     * Sets the path where views are located.
+     *
+     * @param string $path Path to the views directory.
+     *
+     * @return void
+     */
+    public function setViewPath($path)
+    {
+        $len = strlen($path) - 1;
+        if ($path[$len] == '/') {
+            $path = substr($path, 0, -1);
+        }
+        $realpath = realpath($path);;
+        $this-&gt;_path = $realpath === false ? $path : $realpath;
+    }
+
+    /**
+     * Sets the view prefix, like view.
+     *
+     * @param string $prefix Prefix to use for views.
+     *
+     * @return void
+     */
+    public function setViewPrefix($prefix)
+    {
+        $this-&gt;_prefix = $prefix;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Logger.ILoggerAware::setLogger()
+     */
+    public function setLogger(\Logger $logger)
+    {
+        $this-&gt;_logger = $logger;
+    }
+
+    /**
+     * Sets the view suffix, like .html
+     *
+     * @param string $suffix Suffix to use for views.
+     *
+     * @return void
+     */
+    public function setViewSuffix($suffix)
+    {
+        $this-&gt;_suffix = $suffix;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,190 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * This driver will apply all filters to property values.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Bean\Factory\Driver;
+
+use Ding\Resource\IResourceLoader;
+use Ding\Resource\IResourceLoaderAware;
+use Ding\Bean\BeanConstructorArgumentDefinition;
+use Ding\Bean\IBeanDefinitionProvider;
+use Ding\Container\IContainerAware;
+use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+use Ding\Bean\Factory\Filter\ResourceFilter;
+use Ding\Bean\BeanPropertyDefinition;
+use Ding\Bean\BeanDefinition;
+use Ding\Bean\BeanAnnotationDefinition;
+use Ding\Container\IContainer;
+use Ding\Bean\Factory\Exception\BeanFactoryException;
+
+/**
+ * This driver will apply all filters to property values.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class PropertiesDriver
+    implements IContainerAware,
+    IBeanDefinitionProvider, IResourceLoaderAware, IAfterConfigListener
+{
+    /**
+     * Setup flag.
+     * @var boolean
+     */
+    private $_setup = false;
+
+    /**
+     * Properties.
+     * @var string[]
+     */
+    private $_properties = array();
+
+    /**
+     * Already resolved property names
+     * @var string[]
+     */
+    private $_propertiesNames = array();
+    /**
+     * Container.
+     * @var IContainer
+     */
+    private $_container;
+
+    /**
+     * Injected resource loader.
+     * @var IResourceLoader
+     */
+    private $_resourceLoader;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainerAware::setContainer()
+     */
+    public function setContainer(IContainer $container)
+    {
+        $this-&gt;_container = $container;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResourceLoaderAware::setResourceLoader()
+     */
+    public function setResourceLoader(IResourceLoader $resourceLoader)
+    {
+        $this-&gt;_resourceLoader = $resourceLoader;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
+     */
+    public function afterConfig()
+    {
+        $holder = $this-&gt;_container-&gt;getBean('PropertiesHolder');
+        foreach ($holder-&gt;getLocations() as $location) {
+            if (is_string($location)) {
+                $resource = $this-&gt;_resourceLoader-&gt;getResource(trim($location));
+            } else {
+                $resource = $location;
+            }
+            $contents = stream_get_contents($resource-&gt;getStream());
+            $this-&gt;_container-&gt;registerProperties(parse_ini_string($contents, false));
+        }
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinition()
+     */
+    public function getBeanDefinition($name)
+    {
+        if ($name == 'PropertiesHolder') {
+            $bDef = new BeanDefinition('PropertiesHolder');
+            $bDef-&gt;setClass('Ding\\Helpers\\Properties\\PropertiesHelper');
+            return $bDef;
+        }
+        return null;
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinitionByClass()
+     */
+    public function getBeanDefinitionByClass($class)
+    {
+        return null;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

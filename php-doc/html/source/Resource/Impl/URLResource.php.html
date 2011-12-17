@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * A generic url resource. All php scheme's are supported.
+ * See http://www.php.net/manual/en/wrappers.php
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Resource
+ * @subpackage Impl
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Resource\Impl;
+
+use Ding\Resource\Exception\ResourceException;
+use Ding\Resource\IResource;
+
+/**
+ * A generic url resource. All php scheme's are supported.
+ * See http://www.php.net/manual/en/wrappers.php
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Resource
+ * @subpackage Impl
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+class URLResource implements IResource
+{
+    /**
+     * Holds true filename.
+     * @var string
+     */
+    private $_filename;
+
+    /**
+     * Holds file resource.
+     * @var stream
+     */
+    private $_fd;
+
+    /**
+     * Holds scheme.
+     * @var string
+     */
+    private $_scheme;
+
+    /**
+     * Holds context, created with stream_context_create()
+     * @var resource
+     */
+    private $_context;
+
+    /**
+     * URL data from parse_url
+     * @var string[]
+     */
+    private $_urlData;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::exists()
+     */
+    public function exists()
+    {
+        try
+        {
+            $stream = $this-&gt;getStream();
+            return $stream !== false;
+        } catch(ResourceException $exception) {
+        }
+        return false;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::isOpen()
+     */
+    public function isOpen()
+    {
+        return $this-&gt;_fd !== false;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::getURL()
+     */
+    public function getURL()
+    {
+        return $this-&gt;_filename;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::getStream()
+     */
+    public function getStream()
+    {
+        if ($this-&gt;_fd === false) {
+            $this-&gt;_fd
+                = $this-&gt;_context === false
+                ? @fopen($this-&gt;_filename, 'r', false)
+                : @fopen($this-&gt;_filename, 'r', false, $this-&gt;_context);
+            if ($this-&gt;_fd === false) {
+                throw new ResourceException('Could not open: ' . $this-&gt;_filename);
+            }
+        }
+        return $this-&gt;_fd;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::createRelative()
+     */
+    public function createRelative($relativePath)
+    {
+       return new URLResource($this-&gt;_filename . DIRECTORY_SEPARATOR . $relativePath);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Resource.IResource::getFilename()
+     */
+    public function getFilename()
+    {
+        return $this-&gt;_urlData['path'];
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param string $filename Filename with or without includepath://.
+     * @param resource $context  Context created with stream_context_create().
+     *
+     * @return void
+     */
+    public function __construct($filename, $context = false)
+    {
+        $this-&gt;_urlData = parse_url($filename);
+        if ($this-&gt;_urlData === false) {
+            throw new ResourceException('Invalid url: ' . $filename);
+        }
+        if (!isset($this-&gt;_urlData['scheme'])) {
+            throw new ResourceException('Invalid url: ' . $filename);
+        }
+        $this-&gt;_filename = $filename;
+        $this-&gt;_scheme = $this-&gt;_urlData['scheme'];
+        $this-&gt;_fd = false;
+        $this-&gt;_context = $context;
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

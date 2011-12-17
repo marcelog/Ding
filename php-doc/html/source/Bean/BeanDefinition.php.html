@@ -1,0 +1,672 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Bean Definition.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Bean
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Bean;
+
+use Ding\Bean\BeanAnnotationDefinition;
+
+/**
+ * Bean Definition.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Bean
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ */
+class BeanDefinition
+{
+    /**
+     * Specifies scope prototype for beans, meaning that a new instance will
+     * be returned every time.
+     * @var integer
+     */
+    const BEAN_PROTOTYPE = 0;
+
+    /**
+     * Specifies scope singleton for beans, meaning that the same instance will
+     * be returned every time.
+     * @var integer
+     */
+    const BEAN_SINGLETON = 1;
+
+    /**
+     * Bean name
+     * @var string
+     */
+    private $_name;
+
+    /**
+     * Bean class name.
+     * @var string
+     */
+    private $_class;
+
+    /**
+     * Bean type (scope). See this class constants.
+     * @var integer
+     */
+    private $_scope;
+
+    /**
+     * Properties to be di'ed to this bean.
+     * @var BeanPropertyDefinition[]
+     */
+    private $_properties;
+
+    /**
+     * Properties to be autowired (no setters).
+     * @var BeanPropertyDefinition[]
+     */
+    private $_autowiredProperties;
+
+    /**
+     * Aspects mapped to this bean.
+     * @var string[]
+     */
+    private $_aspects;
+
+    /**
+     * Constructor arguments.
+     * @var BeanConstructorArgumentDefinition[]
+     */
+    private $_constructorArgs;
+
+    /**
+     * Factory method name (if any).
+     * @var string
+     */
+    private $_factoryMethod;
+
+    /**
+     * Factory bean name (if any).
+     * @var string
+     */
+    private $_factoryBean;
+
+    /**
+     * Init method (if any).
+     * @var string
+     */
+    private $_initMethod;
+
+    /**
+     * Destroy method (called when container is destroyed).
+     * @var string
+     */
+    private $_destroyMethod;
+
+    /**
+     * Annotations for this bean methods.
+     * @var BeanAnnotationDefinition[]
+     */
+    private $_methodAnnotations;
+
+    /**
+     * Dependency beans literally specified in the configuration.
+     * @var string[]
+     */
+    private $_dependsOn;
+
+    /**
+     * Methods injection.
+     * @var string[]
+     */
+    private $_lookupMethods;
+
+    /**
+     * True if this bean cant be instantiated.
+     * @var boolean
+     */
+    private $_isAbstract;
+
+    /**
+     * Parent bean, if any.
+     * @var string
+     */
+    private $_parent;
+
+    /**
+     * Bean aliases.
+     * @var string[]
+     */
+    private $_aliases;
+
+    /**
+     * Holds the name of the proxy class that was generated for this bean, only
+     * valid for those who actually have aspects applied.
+     * @var string
+     */
+    private $_proxyClassName;
+
+    /**
+     * Aliases for this bean.
+     *
+     * @return string[]
+     */
+    public function getAliases()
+    {
+        return $this-&gt;_aliases;
+    }
+
+    /**
+     * Add an alias to this bean.
+     *
+     * @param string $name New alias for this bean.
+     *
+     * @return void
+     */
+    public function addAlias($name)
+    {
+        $this-&gt;_aliases[$name] = $name;
+    }
+
+    /**
+     * Returns true if this bean definition is abstract and cant be instantiated.
+     *
+     * @return boolean
+     */
+    public function isAbstract()
+    {
+        return $this-&gt;_isAbstract;
+    }
+
+    /**
+     * Makes this bean an abstract bean definition.
+     *
+     * @return void
+     */
+    public function makeAbstract()
+    {
+        $this-&gt;_isAbstract = true;
+    }
+
+    /**
+     * Makes this bean concrete, that is, not abstract.
+     *
+     * @return void
+     */
+    public function makeConcrete()
+    {
+        $this-&gt;_isAbstract = false;
+    }
+
+    /**
+     * Returns true if this bean definition is for a bean of type singleton.
+     *
+     * @return boolean
+     */
+    public function isSingleton()
+    {
+        return $this-&gt;_scope == BeanDefinition::BEAN_SINGLETON;
+    }
+
+    /**
+     * Returns true if this bean definition is for a bean of type prototype.
+     *
+     * @return boolean
+     */
+    public function isPrototype()
+    {
+        return $this-&gt;_scope == BeanDefinition::BEAN_PROTOTYPE;
+    }
+
+    /**
+     * Returns true if this bean has mapped aspects.
+     *
+     * @return boolean
+     */
+    public function hasAspects()
+    {
+        return $this-&gt;_aspects !== false;
+    }
+
+    /**
+     * Sets new aspects for this bean.
+     *
+     * @param string[] $aspects New aspects.
+     *
+     * @return void
+     */
+    public function setAspects(array $aspects)
+    {
+        $this-&gt;_aspects = $aspects;
+    }
+
+    /**
+     * Returns aspects for this bean.
+     *
+     * @return string[]
+     */
+    public function getAspects()
+    {
+        return $this-&gt;_aspects;
+    }
+
+    /**
+     * Changes the scope for this bean.
+     *
+     * @param string $scope New scope.
+     *
+     * @return void
+     */
+    public function setScope($scope)
+    {
+        $this-&gt;_scope = $scope;
+    }
+
+    /**
+     * Sets new method injections.
+     *
+     * @param string[] $methods Methods injected.
+     *
+     * @return void
+     */
+    public function setMethodInjections($methods)
+    {
+        $this-&gt;_lookupMethods = $methods;
+    }
+
+    /**
+     * Returns the method injections.
+     *
+     * @return string[]
+     */
+    public function getMethodInjections()
+    {
+        return $this-&gt;_lookupMethods;
+    }
+
+    /**
+     * Sets a new name for this bean.
+     *
+     * @param string $name New name.
+     *
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this-&gt;_name = $name;
+    }
+
+    /**
+     * Returns bean name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this-&gt;_name;
+    }
+
+    /**
+     * Sets a new class name for this bean.
+     *
+     * @param string $class New class name.
+     *
+     * @return void
+     */
+    public function setClass($class)
+    {
+        $this-&gt;_class = $class;
+    }
+
+    /**
+     * Returns bean class.
+     *
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this-&gt;_class;
+    }
+
+    /**
+     * Sets new properties for this bean.
+     *
+     * @param BeanPropertyDefinition[] $properties New properties.
+     *
+     * @return void
+     */
+    public function setProperties(array $properties)
+    {
+        $this-&gt;_properties = $properties;
+    }
+
+    /**
+     * Returns properties for this bean.
+     *
+     * @return BeanPropertyDefinition[]
+     */
+    public function getProperties()
+    {
+        return $this-&gt;_properties;
+    }
+
+    /**
+     * Sets new autowired properties for this bean.
+     *
+     * @param BeanPropertyDefinition[] $properties New autowired properties.
+     *
+     * @return void
+     */
+    public function setAutowiredProperties(array $autowiredProperties)
+    {
+        $this-&gt;_autowiredProperties = $autowiredProperties;
+    }
+
+    /**
+     * Returns autowired properties for this bean.
+     *
+     * @return BeanPropertyDefinition[]
+     */
+    public function getAutowiredProperties()
+    {
+        return $this-&gt;_autowiredProperties;
+    }
+
+    /**
+     * Sets new arguments for this bean.
+     *
+     * @param BeanConstructorDefinition[] $arguments New arguments.
+     *
+     * @return void
+     */
+    public function setArguments(array $arguments)
+    {
+        $this-&gt;_constructorArgs = $arguments;
+    }
+
+    /**
+     * Returns arguments for this bean.
+     *
+     * @return BeanConstructorArgumentDefinition[]
+     */
+    public function getArguments()
+    {
+        return $this-&gt;_constructorArgs;
+    }
+
+    /**
+     * Sets a new factory method for this bean.
+     *
+     * @param string $factoryMethod New factory method.
+     *
+     * @return void
+     */
+    public function setFactoryMethod($factoryMethod)
+    {
+        $this-&gt;_factoryMethod = $factoryMethod;
+    }
+    /**
+     * Factory method, false if none was set.
+     *
+     * @return string
+     */
+    public function getFactoryMethod()
+    {
+        return $this-&gt;_factoryMethod;
+    }
+
+    /**
+     * Sets a new factory bean for this bean.
+     *
+     * @param string $factoryBean New factory bean.
+     *
+     * @return void
+     */
+    public function setFactoryBean($factoryBean)
+    {
+        $this-&gt;_factoryBean = $factoryBean;
+    }
+
+    /**
+     * Factory bean, false if none was set.
+     *
+     * @return string
+     */
+    public function getFactoryBean()
+    {
+        return $this-&gt;_factoryBean;
+    }
+
+    /**
+     * Sets a new init method for this bean.
+     *
+     * @param string $initMethod New init method.
+     *
+     * @return void
+     */
+    public function setInitMethod($initMethod)
+    {
+        $this-&gt;_initMethod = $initMethod;
+    }
+
+    /**
+     * Init method, false if none was set.
+     *
+     * @return string
+     */
+    public function getInitMethod()
+    {
+        return $this-&gt;_initMethod;
+    }
+
+    /**
+     * Sets a new destroy method for this bean.
+     *
+     * @param string $destroyMethod New destroy method.
+     *
+     * @return void
+     */
+    public function setDestroyMethod($destroyMethod)
+    {
+        $this-&gt;_destroyMethod = $destroyMethod;
+    }
+
+    /**
+     * Destroy method, false if none was set.
+     *
+     * @return string
+     */
+    public function getDestroyMethod()
+    {
+        return $this-&gt;_destroyMethod;
+    }
+
+    /**
+     * Returns all beans marked as dependencies for this bean.
+     *
+     * @return string[]
+     */
+    public function getDependsOn()
+    {
+        return $this-&gt;_dependsOn;
+    }
+
+    /**
+     * Set bean dependencies.
+	 *
+     * @param string[] $dependsOn Dependencies (bean names).
+     *
+     * @return void
+     */
+    public function setDependsOn(array $dependsOn)
+    {
+        $this-&gt;_dependsOn = $dependsOn;
+    }
+
+    /**
+     * Returns a new bean definition, a copy of this one.
+     *
+     * @param string $childName The name for the new bean
+     *
+     * @return BeanDefinition
+     */
+    public function makeChildBean($childName)
+    {
+        $bean = serialize($this);
+        $bean = unserialize($bean);
+        $bean-&gt;setName($childName);
+        $bean-&gt;makeConcrete();
+        return $bean;
+    }
+
+    /**
+     * Creates a new unique bean name.
+     *
+     * @param string $prefix A name prefix
+     *
+     * @return string
+     */
+    public static function generateName($prefix)
+    {
+        return $prefix . mt_rand(1, microtime(true));
+    }
+
+    /**
+     * Returns true if this bean is created by calling the constructor.
+     *
+     * @return boolean
+     */
+    public function isCreatedByConstructor()
+    {
+        return empty($this-&gt;_factoryMethod);
+    }
+
+    /**
+     * Returns true if this bean is created by calling a factory bean (as
+     * opposed to a factory class)
+     *
+     * @return boolean
+     */
+    public function isCreatedWithFactoryBean()
+    {
+        return !empty($this-&gt;_factoryBean);
+    }
+
+    public function setProxyClassName($name)
+    {
+        $this-&gt;_proxyClassName = $name;
+    }
+
+    public function getProxyClassName()
+    {
+        return $this-&gt;_proxyClassName;
+    }
+
+    public function hasProxyClass()
+    {
+        return !is_null($this-&gt;_proxyClassName);
+    }
+
+    public function hasInitMethod()
+    {
+        return !is_null($this-&gt;_initMethod);
+    }
+    public function hasDestroyMethod()
+    {
+        return !is_null($this-&gt;_destroyMethod);
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param string $name Bean name.
+     *
+     * @return void
+     */
+    public function __construct($name)
+    {
+        $this-&gt;_name = $name;
+        $soullessString = '';
+        $soullessArray = array();
+        $this-&gt;_class = $soullessString;
+        $this-&gt;_aliases = $soullessArray;
+        $this-&gt;_scope = BeanDefinition::BEAN_SINGLETON;
+        $this-&gt;_factoryMethod = $soullessString;
+        $this-&gt;_factoryBean = $soullessString;
+        $this-&gt;_initMethod = null;
+        $this-&gt;_lookupMethods = $soullessArray;
+        $this-&gt;_destroyMethod = null;
+        $this-&gt;_dependsOn = $soullessArray;
+        $this-&gt;_properties = $soullessArray;
+        $this-&gt;_autowiredProperties = $soullessArray;
+        $this-&gt;_aspects = false;
+        $this-&gt;_constructorArgs = $soullessArray;
+        $this-&gt;_isAbstract = false;
+        $this-&gt;_parent = null;
+        $this-&gt;_proxyClassName = null;
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

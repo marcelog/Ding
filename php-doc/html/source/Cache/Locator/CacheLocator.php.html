@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Cache Locator. This singleton is used througout the ding architecture in
+ * order to find caches for different subsystems.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Cache
+ * @subpackage Locator
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Cache\Locator;
+
+use Ding\Cache\Exception\CacheException;
+use Ding\Cache\Impl\ApcCacheImpl;
+use Ding\Cache\Impl\ZendCacheImpl;
+use Ding\Cache\Impl\FileCacheImpl;
+use Ding\Cache\Impl\MemcachedCacheImpl;
+use Ding\Cache\Impl\DummyCacheImpl;
+
+/**
+ * Cache Locator. This singleton is used througout the ding architecture in
+ * order to find caches for different subsystems.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Cache
+ * @subpackage Locator
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class CacheLocator
+{
+    /**
+     * Default options.
+     * @var array
+     */
+    private static $_options = array(
+    	'proxy' =&gt; array('impl' =&gt; 'dummy'),
+        'bdef' =&gt; array('impl' =&gt; 'dummy'),
+        'beans' =&gt; array('impl' =&gt; 'dummy'),
+    	'autoloader' =&gt; array('impl' =&gt; 'dummy'),
+        'aspect' =&gt; array('impl' =&gt; 'dummy'),
+        'annotations' =&gt; array('impl' =&gt; 'dummy')
+    );
+
+    /**
+     * Factory for cache implementations.
+     *
+     * @param array $options Cache options.
+     *
+     * @throws CacheException
+     * @return ICache
+     */
+    private static function _returnCacheFromImpl($options)
+    {
+        switch ($options['impl'])
+        {
+        case 'file':
+            return FileCacheImpl::getInstance($options);
+        case 'apc':
+            return ApcCacheImpl::getInstance($options);
+        case 'dummy':
+            return DummyCacheImpl::getInstance($options);
+        case 'zend':
+            return ZendCacheImpl::getInstance($options['zend']);
+        case 'memcached':
+            return MemcachedCacheImpl::getInstance($options['memcached']);
+        default:
+            throw new CacheException('Invalid cache impl requested');
+        }
+    }
+
+    /**
+     * The container will call this one, in order to setup options. If any
+     * option is missing, we use our default options as fallback.
+     *
+     * @param array $options Cache options.
+     *
+     * @see CacheLocator::$_options
+     * @return void
+     */
+    public static function configure(array $options)
+    {
+        self::$_options = array_replace_recursive(self::$_options, $options);
+    }
+
+    /**
+     * Returns a cache for auto generated proxy classes.
+	 *
+     * @return ICache
+     */
+    public static function getProxyCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['proxy']);
+    }
+
+    /**
+     * Returns a cache for bean definitions.
+	 *
+     * @return ICache
+     */
+    public static function getDefinitionsCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['bdef']);
+    }
+
+    /**
+     * Returns a cache for beans.
+	 *
+     * @return ICache
+     */
+    public static function getBeansCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['beans']);
+    }
+
+    /**
+     * Returns a cache for annotations.
+	 *
+     * @return ICache
+     */
+    public static function getAnnotationsCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['annotations']);
+    }
+
+    /**
+     * Returns a cache for autoloader.
+	 *
+     * @return ICache
+     */
+    public static function getAutoloaderCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['autoloader']);
+    }
+
+    /**
+     * Returns a cache for aspects.
+	 *
+     * @return ICache
+     */
+    public static function getAspectCacheInstance()
+    {
+        return self::_returnCacheFromImpl(self::$_options['aspect']);
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

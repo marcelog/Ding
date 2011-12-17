@@ -1,0 +1,272 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * This is a bean definition provider used by the container when it's
+ * bootstrapping. Will provide all the basic needed beans.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Provider
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Bean\Provider;
+
+use Ding\Bean\BeanConstructorArgumentDefinition;
+use Ding\Bean\BeanPropertyDefinition;
+use Ding\Bean\BeanDefinition;
+use Ding\Bean\IBeanDefinitionProvider;
+
+/**
+ * This is a bean definition provider used by the container when it's
+ * bootstrapping. Will provide all the basic needed beans.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Provider
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class Core implements IBeanDefinitionProvider
+{
+    /**
+     * Container options.
+     * @var string[]
+     */
+    protected $options;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::get()
+     */
+    public function getBeanDefinition($name)
+    {
+        $bean = null;
+        switch ($name)
+        {
+        case 'dingAutoloaderCache':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
+            $bean-&gt;setFactoryMethod('getAutoloaderCacheInstance');
+            break;
+        case 'dingAnnotationsCache':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
+            $bean-&gt;setFactoryMethod('getAnnotationsCacheInstance');
+            break;
+        case 'dingBeanCache':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
+            $bean-&gt;setFactoryMethod('getBeansCacheInstance');
+            break;
+        case 'dingDefinitionsCache':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
+            $bean-&gt;setFactoryMethod('getDefinitionsCacheInstance');
+            break;
+        case 'dingProxyCache':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
+            $bean-&gt;setFactoryMethod('getProxyCacheInstance');
+            break;
+        case 'dingAspectCache':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
+            $bean-&gt;setFactoryMethod('getAspectCacheInstance');
+            break;
+        case 'dingAspectManager':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Aspect\AspectManager');
+            $bean-&gt;setProperties(array(
+                new BeanPropertyDefinition(
+                	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
+                	'dingAspectCache'
+                )
+            ));
+            break;
+        case 'dingXmlBeanDefinitionProvider':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Provider\Xml');
+            $bean-&gt;setArguments(array(
+                new BeanConstructorArgumentDefinition(
+                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
+                    $this-&gt;options['bdef']['xml']
+                )
+            ));
+            break;
+        case 'dingAnnotationBeanDefinitionProvider':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Provider\Annotation');
+            $bean-&gt;setArguments(array(
+                new BeanConstructorArgumentDefinition(
+                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
+                    $this-&gt;options['bdef']['annotation']
+                )
+            ));
+            $bean-&gt;setProperties(array(
+                new BeanPropertyDefinition(
+                	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
+                	'dingAnnotationsCache'
+                )
+            ));
+            break;
+        case 'dingYamlBeanDefinitionProvider':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Provider\Yaml');
+            $bean-&gt;setArguments(array(
+                new BeanConstructorArgumentDefinition(
+                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
+                    $this-&gt;options['bdef']['yaml']
+                )
+            ));
+            break;
+        case 'dingAspectCallDispatcher':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Aspect\Interceptor\DispatcherImpl');
+            break;
+        case 'dingAnnotationInitDestroyMethodDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationInitDestroyMethodDriver');
+            break;
+        case 'dingAnnotationAspectDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationAspectDriver');
+            break;
+        case 'dingMvcAnnotationDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\MvcAnnotationDriver');
+            break;
+        case 'dingAnnotationRequiredDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationRequiredDriver');
+            break;
+        case 'dingAnnotationResourceDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationResourceDriver');
+            break;
+        case 'dingPropertiesDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\PropertiesDriver');
+            break;
+        case 'dingLifecycleManager':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Lifecycle\BeanLifecycleManager');
+            break;
+        case 'dingMethodInjectionDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\MethodInjectionDriver');
+            break;
+        case 'dingMessageSourceDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\MessageSourceDriver');
+            break;
+        case 'dingReflectionFactory':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Reflection\ReflectionFactory');
+            $bean-&gt;setArguments(array(
+                new BeanConstructorArgumentDefinition(
+                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
+                    isset($this-&gt;options['bdef']['annotation'])
+                )
+            ));
+            $bean-&gt;setProperties(array(
+                new BeanPropertyDefinition(
+                	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
+                	'dingAnnotationsCache'
+                )
+            ));
+            break;
+        case 'dingProxyFactory':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Aspect\Proxy');
+            $bean-&gt;setProperties(array(
+                new BeanPropertyDefinition(
+                	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
+                	'dingProxyCache'
+                )
+            ));
+            break;
+        default:
+            break;
+        }
+        return $bean;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getByClass()
+     */
+    public function getBeanDefinitionByClass($class)
+    {
+        return null;
+    }
+
+    public function __construct($options = array())
+    {
+        $this-&gt;options = $options;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

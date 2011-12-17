@@ -1,0 +1,158 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Advice definition.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Aspect
+ * @subpackage Interceptor
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Aspect\Interceptor;
+
+/**
+ * Advice definition.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Aspect
+ * @subpackage Interceptor
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+class AdviceDefinition
+{
+
+    /**
+     * Holds the name for the method adviced.
+     * @var string
+     */
+    private $_method;
+
+    /**
+     * The interceptor object.
+     * @var object
+     */
+    private $_interceptor;
+
+    /**
+     * Holds the name for the advice method.
+     * @var string
+     */
+    private $_interceptorMethod;
+
+    /**
+     * Returns the interceptor method.
+     *
+     * @return string
+     */
+    public function getInterceptorMethod()
+    {
+        return $this-&gt;_interceptorMethod;
+    }
+
+    /**
+     * Returns the interceptor.
+     *
+     * @return object
+     */
+    public function getInterceptor()
+    {
+        return $this-&gt;_interceptor;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param string $method            Method name.
+     * @param object $interceptor       Interceptor object.
+     * @param string $interceptorMethod Interceptor method name.
+     *
+     * @return void
+     */
+    public function __construct($method, $interceptor, $interceptorMethod)
+    {
+        $this-&gt;_method = $method;
+        $this-&gt;_interceptor = $interceptor;
+        $this-&gt;_interceptorMethod = $interceptorMethod;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

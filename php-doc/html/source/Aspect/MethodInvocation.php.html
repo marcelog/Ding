@@ -1,0 +1,272 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Used as an argument to invoke the advice, so you can have all the details
+ * about the invoked (aspected) method. In other words, your advice will be
+ * invoked with an instance of this class as an argument.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Aspect
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Aspect;
+
+/**
+ * Used as an argument to invoke the advice, so you can have all the details
+ * about the invoked (aspected) method. In other words, your advice will be
+ * invoked with an instance of this class as an argument.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Aspect
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ */
+use Ding\Reflection\IReflectionFactory;
+
+class MethodInvocation
+{
+    /**
+     * Class name for the invoked (and aspected) method.
+     * @var string
+     */
+    private $_class;
+
+    /**
+     * Name for the invoked (and aspected) method.
+     * @var string
+     */
+    private $_method;
+
+    /**
+     * Arguments used to invoke the aspected method.
+     * @var array
+     */
+    private $_args;
+
+    /**
+     * Aspected method result.
+     * @var mixed
+     */
+    private $_result;
+
+    /**
+     * Exception thrown by the target method.
+     */
+    private $_exception;
+
+    /**
+     * ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    private $_reflectionFactory;
+
+    /**
+     * Original invocation.
+     * In the case of a chained aspect call, getArguments() and alike, will
+     * give you information about the calling aspect, and not the method
+     * aspected itself (unless you are the last one in the chain). In order
+     * to access information for the original request
+     * @see MethodInvocation::getOriginalInvocation()
+     * @var MethodInvocation
+     */
+    private $_originalInvocation;
+
+    /**
+     * This invocation will be called onto this object.
+     * @var object
+     */
+    private $_object;
+
+    /**
+     * Returns information about the original invocation to the (aspected)
+     * method. Will return itself as the original invocation if none was set
+     * at construction time.
+     *
+     * @see MethodInvocation::$_originalInvocation
+     *
+     * @return MethodInvocation
+     */
+    public function getOriginalInvocation()
+    {
+        return
+            $this-&gt;_originalInvocation == null
+            ? $this
+            : $this-&gt;_originalInvocation
+        ;
+    }
+
+    /**
+     * Call this one *from* your aspect, in order to proceed with the
+     * execution.
+     *
+     * @todo Performance: Remove new ReflectionMethod here
+     *
+	 * @return void
+     */
+    public function proceed()
+    {
+        $target = $this-&gt;_reflectionFactory-&gt;getMethod($this-&gt;_class, $this-&gt;_method);
+        if (!$target-&gt;isPublic()) {
+            $target-&gt;setAccessible(true);
+        }
+        $this-&gt;_result = $target-&gt;invokeArgs($this-&gt;_object, $this-&gt;_args);
+        return $this-&gt;_result;
+    }
+
+    /**
+     * If the target method throws an exception, you can get it here.
+     *
+	 * @return Exception
+     */
+    public function getException()
+    {
+        return $this-&gt;_exception;
+    }
+
+    /**
+     * Changes (updates) the exception for the execution of the aspected method.
+     *
+     * @param Exception $value
+     *
+     * @return void
+     */
+    public function setException(\Exception $exception)
+    {
+        $this-&gt;_exception = $exception;
+    }
+
+    /**
+     * Returns class name for the executed method.
+     *
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this-&gt;_class;
+    }
+
+    /**
+     * Returns name for the executed method.
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this-&gt;_method;
+    }
+
+    /**
+     * Returns the target object for this method
+     *
+     * @return object
+     */
+    public function getObject()
+    {
+        return $this-&gt;_object;
+    }
+
+    /**
+     * Returns arguments for the executed method.
+     *
+     * @return array
+     */
+    public function getArguments()
+    {
+        return $this-&gt;_args;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param string           $class   Class for the aspected method invoked.
+     * @param string           $method  Aspected method invoked.
+     * @param array            $args    Arguments used to invoke the aspected
+     * method.
+     * @param mixed            $result  Result from the execution of the
+     * aspected method.
+     * @param object           $object  Target invocation object for method.
+     * @param IReflectionFactory $reflectionFactory Reflection Factory to use.
+     * @param MethodInvocation &amp;$invoke In a chained aspect call, this will
+     * be the access to the original (aspected) method call.
+     *
+     * @see MethodInvocation::getOriginalInvocation()
+     * @return void
+     */
+    public function __construct(
+        $class, $method, $args, $object, IReflectionFactory $reflectionFactory,
+        MethodInvocation &amp;$invoke = null
+    ) {
+        $this-&gt;_class = $class;
+        $this-&gt;_method = $method;
+        $this-&gt;_args = $args;
+        $this-&gt;_object = $object;
+        $this-&gt;_originalInvocation = $invoke;
+        $this-&gt;_reflectionFactory = $reflectionFactory;
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

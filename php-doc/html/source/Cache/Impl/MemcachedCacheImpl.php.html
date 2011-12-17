@@ -1,0 +1,183 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Simple memcache implementation that uses memcached extension from php:
+ * http://www.php.net/manual/en/book.memcached.php
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Cache
+ * @subpackage Impl
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Cache\Impl;
+use Ding\Cache\ICache;
+
+/**
+ * Simple memcache implementation that uses memcached extension from php:
+ * http://www.php.net/manual/en/book.memcached.php
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Cache
+ * @subpackage Impl
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class MemcachedCacheImpl implements ICache
+{
+    /**
+     * Holds current instance.
+     * @var MemcachedCacheImpl
+     */
+    private static $_instance = false;
+
+    /**
+     * A Memcached object.
+     * @Memcached
+     */
+    private $_memcached;
+
+    /**
+     * Returns a cached value.
+     *
+     * @param string  $name    Key to look for.
+     * @param boolean &amp;$result True on success, false otherwise.
+     *
+     * @return mixed
+     */
+    public function fetch($name, &amp;$result)
+    {
+        $result = false;
+        $value = $this-&gt;_memcached-&gt;get($name);
+        if ($this-&gt;_memcached-&gt;getResultCode() != \Memcached::RES_SUCCESS) {
+            return false;
+        }
+        $result = true;
+        return $value;
+    }
+
+    /**
+     * Stores a key/value.
+     *
+     * @param string $name  Key to use.
+     * @param mixed  $value Value.
+     *
+     * @return boolean
+     */
+    public function store($name, $value)
+    {
+        return $this-&gt;_memcached-&gt;set($name, $value);
+    }
+
+    /**
+     * Empties the cache.
+     *
+	 * @return boolean
+     */
+    public function flush()
+    {
+        return $this-&gt;_memcached-&gt;flush();
+    }
+
+    /**
+     * Removes a key from the cache.
+     *
+     * @param string $name Key to remove.
+     *
+     * @return boolean
+     */
+    public function remove($name)
+    {
+        return $this-&gt;_memcached-&gt;delete($name);
+    }
+
+    /**
+     * Returns an instance of a cache.
+     *
+     * @param array $options Options for the cache backend.
+     *
+     * @return MemcachedCacheImpl
+     */
+    public static function getInstance($options = array())
+    {
+        if (self::$_instance == false) {
+            self::$_instance = new MemcachedCacheImpl($options);
+        }
+        return self::$_instance;
+    }
+
+    /**
+     * Constructor.
+     *
+	 * @return void
+     */
+    private function __construct(array $options)
+    {
+        $this-&gt;_memcached = new \Memcached();
+        $this-&gt;_memcached-&gt;addServer($options['host'], $options['port']);
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

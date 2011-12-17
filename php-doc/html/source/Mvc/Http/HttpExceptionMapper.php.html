@@ -1,0 +1,165 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * An exception mapper implementation for http requests.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Mvc
+ * @subpackage Http
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Mvc\Http;
+
+use Ding\Logger\ILoggerAware;
+use Ding\Mvc\IMapper;
+use Ding\Mvc\Action;
+
+/**
+ * An exception mapper implementation for http requests.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Mvc
+ * @subpackage Http
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class HttpExceptionMapper implements IMapper, ILoggerAware
+{
+    /**
+     * log4php logger or our own.
+     * @var Logger
+     */
+    private $_logger;
+
+    /**
+     * @var Controller[]
+     */
+    private $_map;
+
+    /**
+     * Sets the map for this mapper.
+     *
+     * @param array[] $map An array containing arrays defined like this:
+     * [0] =&gt; IAction, [1] =&gt; IController
+     *
+     * (non-PHPdoc)
+     * @see Ding\Mvc.IMapper::setMap()
+     *
+     * @return void
+     */
+    public function setMap(array $map)
+    {
+        $this-&gt;_map = $map;
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Logger.ILoggerAware::setLogger()
+     */
+    public function setLogger(\Logger $logger)
+    {
+        $this-&gt;_logger = $logger;
+    }
+    /**
+     * This will map an exception action to a controller. Will look for
+     * an instance of the mapped exception to the thrown exception.
+     *
+     * @param Action $action Original action (exception).
+     *
+     * @return array [0] =&gt; Controller [1] =&gt; Method to call (With
+     * 'Exception' appended to the end of the method name).
+     */
+    public function map(Action $action)
+    {
+        $exception = $action-&gt;getArguments();
+        $exception = $exception['exception'];
+
+        $this-&gt;_logger-&gt;debug('Exception mapper invoked with: ' . $action-&gt;getId());
+
+        // Lookup a controller that can handle this url.
+        foreach ($this-&gt;_map as $map) {
+            $controllerException = $map[0];
+            $controller = $map[1];
+            if (!($exception instanceof $controllerException)) {
+                continue;
+            }
+            return array($controller, str_replace('\\', '_', $controllerException) . 'Exception');
+        }
+        return false;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this-&gt;_map = array();
+        $this-&gt;_baseUrl = '/';
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

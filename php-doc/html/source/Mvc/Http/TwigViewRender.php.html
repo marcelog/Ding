@@ -1,0 +1,126 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Twig view render.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Mvc
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Mvc\Http;
+
+use Ding\Mvc\IViewRender;
+use Ding\Mvc\View;
+
+/**
+ * Twig view render.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Mvc
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ */
+class TwigViewRender implements IViewRender
+{
+    /**
+     * TWIG options.
+     * @var string[]
+     */
+    private $_twigOptions = array();
+
+    /**
+     * Sets TWIG options.
+     *
+     * @param string[] $options TWIG options.
+     *
+     * @return void
+     */
+    public function setTwigOptions(array $options)
+    {
+        $this-&gt;_twigOptions = $options;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Mvc.IViewRender::render()
+     */
+    public function render(View $view)
+    {
+        /**
+         * @todo is there a better way to do this?
+         */
+        global $modelAndView;
+        $modelAndView = $view-&gt;getModelAndView();
+        require_once 'Twig' . DIRECTORY_SEPARATOR . 'Autoloader.php';
+        \Twig_Autoloader::register();
+        $loader = new \Twig_Loader_Filesystem(dirname($view-&gt;getPath()));
+        $twig = new \Twig_Environment($loader, array($this-&gt;_twigOptions));
+        $template = $twig-&gt;loadTemplate(basename($view-&gt;getPath()));
+        echo $template-&gt;render(array('vars' =&gt; $modelAndView-&gt;getModel()));
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

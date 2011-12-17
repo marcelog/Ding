@@ -1,0 +1,301 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * The lifecycle manager for the container.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Lifecycle
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Bean\Lifecycle;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+use Ding\Bean\Lifecycle\IBeforeCreateListener;
+use Ding\Bean\Lifecycle\IAfterCreateListener;
+use Ding\Bean\Lifecycle\IBeforeAssembleListener;
+use Ding\Bean\Lifecycle\IAfterAssembleListener;
+use Ding\Bean\BeanDefinition;
+
+/**
+ * The lifecycle manager for the container.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Lifecycle
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class BeanLifecycleManager
+{
+    /**
+     * Lifecycle handlers for beans.
+     * @var ILifecycleListener
+     */
+    private $_lifecyclers;
+
+    /**
+     * Serialization
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array('_lifecyclers');
+    }
+
+    /**
+     * Adds a lifecycler to the AfterConfig point.
+     *
+     * @param IAfterConfigListener $listener Listener to add
+     *
+     * @return void
+     */
+    public function addAfterConfigListener(IAfterConfigListener $listener)
+    {
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterConfig][] = $listener;
+    }
+
+    /**
+     * Adds a lifecycler to the AfterDefinition point.
+     *
+     * @param IAfterDefinitionListener $listener Listener to add
+     *
+     * @return void
+     */
+    public function addAfterDefinitionListener(IAfterDefinitionListener $listener)
+    {
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterDefinition][] = $listener;
+    }
+
+    /**
+     * Adds a lifecycler to the BeforeCreate point.
+     *
+     * @param IBeforeCreateListener $listener Listener to add
+     *
+     * @return void
+     */
+    public function addBeforeCreateListener(IBeforeCreateListener $listener)
+    {
+        $this-&gt;_lifecyclers[BeanLifecycle::BeforeCreate][] = $listener;
+    }
+
+    /**
+     * Adds a lifecycler to the AfterCreate point.
+     *
+     * @param IAfterCreateListener $listener Listener to add
+     *
+     * @return void
+     */
+    public function addAfterCreateListener(IAfterCreateListener $listener)
+    {
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterCreate][] = $listener;
+    }
+
+    /**
+     * Adds a lifecycler to the BeforeAssemble point.
+     *
+     * @param IBeforeAssembleListener $listener Listener to add
+     *
+     * @return void
+     */
+    public function addBeforeAssembleListener(IBeforeAssembleListener $listener)
+    {
+        $this-&gt;_lifecyclers[BeanLifecycle::BeforeAssemble][] = $listener;
+    }
+
+    /**
+     * Adds a lifecycler to the AfterAssemble point.
+     *
+     * @param IAfterAssembleListener $listener Listener to add
+     *
+     * @return void
+     */
+    public function addAfterAssembleListener(IAfterAssembleListener $listener)
+    {
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterAssemble][] = $listener;
+    }
+
+    /**
+     * Runs the AfterDefinition point of the lifecycle.
+     *
+     * @param string         $beanName Bean name.
+     * @param BeanDefinition $bean     Actual definition.
+     *
+     * @return BeanDefinition
+     */
+    public function afterDefinition(BeanDefinition $bean)
+    {
+        $return = $bean;
+        foreach ($this-&gt;_lifecyclers[BeanLifecycle::AfterDefinition] as $lifecycleListener) {
+            $return = $lifecycleListener-&gt;afterDefinition($return);
+        }
+        return $return;
+    }
+
+    /**
+     * Runs the BeforeCreate point of the lifecycle.
+     *
+     * @param BeanDefinition $beanDefinition Actual definition.
+     *
+     * @return void
+     */
+    public function beforeCreate(BeanDefinition $beanDefinition)
+    {
+        foreach ($this-&gt;_lifecyclers[BeanLifecycle::BeforeCreate] as $lifecycleListener) {
+            $lifecycleListener-&gt;beforeCreate($beanDefinition);
+        }
+    }
+
+    /**
+     * Runs the AfterCreate point of the lifecycle.
+     *
+     * @param string         $beanName Bean name.
+     * @param BeanDefinition $bean     Actual definition.
+     *
+     * @return void
+     */
+    public function afterCreate($bean, BeanDefinition $beanDefinition)
+    {
+        foreach ($this-&gt;_lifecyclers[BeanLifecycle::AfterCreate] as $lifecycleListener) {
+            $lifecycleListener-&gt;afterCreate($bean, $beanDefinition);
+        }
+    }
+
+    /**
+     * Runs the BeforeAssemble point of the lifecycle.
+     *
+     * @param string         $beanName Bean name.
+     * @param BeanDefinition $bean     Actual definition.
+     *
+     * @return BeanDefinition
+     */
+    public function beforeAssemble($bean, BeanDefinition $beanDefinition)
+    {
+        foreach ($this-&gt;_lifecyclers[BeanLifecycle::BeforeAssemble] as $lifecycleListener) {
+            $lifecycleListener-&gt;beforeAssemble($bean, $beanDefinition);
+        }
+    }
+
+    /**
+     * Runs the AfterAssemble point of the lifecycle.
+     *
+     * @param object         $bean           Bean.
+     * @param BeanDefinition $beanDefinition Actual definition.
+     *
+     * @return void
+     */
+    public function afterAssemble($bean, BeanDefinition $beanDefinition)
+    {
+        foreach ($this-&gt;_lifecyclers[BeanLifecycle::AfterAssemble] as $lifecycleListener) {
+            $lifecycleListener-&gt;afterAssemble($bean, $beanDefinition);
+        }
+    }
+
+    /**
+     * Runs the AfterConfig point of the lifecycle.
+     *
+     * @return void
+     */
+    public function afterConfig()
+    {
+        foreach ($this-&gt;_lifecyclers[BeanLifecycle::AfterConfig] as $lifecycleListener) {
+            $lifecycleListener-&gt;afterConfig();
+        }
+    }
+
+/*
+    public function setListeners(array $listeners = array())
+    {
+        $this-&gt;_lifecyclers[BeanLifecycle::BeforeConfig] = $listeners[BeanLifecycle::BeforeConfig];
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterConfig] = $listeners[BeanLifecycle::AfterConfig];
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterDefinition] = $listeners[BeanLifecycle::AfterDefinition];
+        $this-&gt;_lifecyclers[BeanLifecycle::BeforeCreate] = $listeners[BeanLifecycle::BeforeCreate];
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterCreate] = $listeners[BeanLifecycle::AfterCreate];
+        $this-&gt;_lifecyclers[BeanLifecycle::BeforeAssemble] = $listeners[BeanLifecycle::BeforeAssemble];
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterAssemble] = $listeners[BeanLifecycle::AfterAssemble];
+    }
+*/
+    /**
+     * Constructor.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $soullessArray = array();
+        $this-&gt;_lifecyclers = $soullessArray;
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterConfig] = $soullessArray;
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterDefinition] = $soullessArray;
+        $this-&gt;_lifecyclers[BeanLifecycle::BeforeCreate] = $soullessArray;
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterCreate] = $soullessArray;
+        $this-&gt;_lifecyclers[BeanLifecycle::BeforeAssemble] = $soullessArray;
+        $this-&gt;_lifecyclers[BeanLifecycle::AfterAssemble] = $soullessArray;
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,343 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * So... php does not have such a thing.. and here's what it needs to be done
+ * to have a proxy class and any kind of &quot;dynamic class&quot;.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Aspect
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Aspect;
+
+use Ding\Reflection\IReflectionFactoryAware;
+use Ding\Cache\ICache;
+use Ding\Aspect\Interceptor\IDispatcher;
+use Ding\Reflection\IReflectionFactory;
+
+/**
+ * So... php does not have such a thing.. and here's what it needs to be done
+ * to have a proxy class and any kind of &quot;dynamic class&quot;.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Aspect
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * @todo Performance: Remove new MethodInvocation in proxied invocation.
+ */
+class Proxy implements IReflectionFactoryAware
+{
+    /**
+     * A ReflectionFactory implementation
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
+
+    /**
+     * Proxy cache implementation.
+     * @var ICache
+     */
+    protected $cache = false;
+
+    /**
+     * Proxy class template (i.e: the dynamic class)
+     * @var string
+     */
+    protected $proxyTemplate = &lt;&lt;&lt;TEXT
+
+use Ding\Aspect\Interceptor\IDispatcher;
+use Ding\Aspect\MethodInvocation;
+use Ding\Reflection\IReflectionFactory;
+
+final class NEW_NAME extends CLASS_NAME {
+    /**
+     * Holds advice dispatcher.
+     * @var Dispatcher
+     */
+    private static \$_dispatcher = false;
+	private static \$_reflectionFactory = false;
+
+    /**
+	 * Used to recognice proxies along the container.
+     * @var boolean
+     */
+    public static \$iAmADingProxy = true;
+
+    /**
+     * Clone this object.
+     *
+     * @return void
+     */
+    public function __clone()
+    {
+        self::\$_dispatcher = clone self::\$_dispatcher;
+    }
+
+    /**
+     * This is used from the container to set the dispatcher for the aspects.
+     *
+     * @param IDispatcher \$dispatcher Advice dispatcher.
+     *
+     * @return void
+     */
+    public static function setDispatcher(IDispatcher \$dispatcher)
+    {
+        self::\$_dispatcher = \$dispatcher;
+    }
+
+    public static function setReflectionFactory(IReflectionFactory \$reflectionFactory)
+    {
+    	self::\$_reflectionFactory = \$reflectionFactory;
+    }
+    METHODS
+}
+TEXT;
+
+    /**
+     * Method template (i.e: effetively, the proxy methods).
+     * @var string
+     */
+    protected $methodTemplate = &lt;&lt;&lt;TEXT
+    VISIBILITY ADDITIONAL function METHOD_NAME(METHOD_ARGS)
+    {
+        \$invocation = new MethodInvocation(
+            'CLASS_NAME', 'METHOD_NAME', func_get_args(), \$this,
+            self::\$_reflectionFactory
+        );
+        try
+        {
+        	return self::\$_dispatcher-&gt;invoke(\$invocation);
+        } catch (Exception \$exception) {
+            \$invocation-&gt;setException(\$exception);
+        	return self::\$_dispatcher-&gt;invokeException(\$invocation);
+        }
+	}
+TEXT;
+
+    /**
+     * This will return a proxy class source.
+     *
+     * @param string          $newName     Name for the proxy class.
+     * @param ReflectionClass $targetClass Class to be proxied.
+     *
+     * @see Proxy::$proxyTemplate
+     *
+     * @return string
+     */
+    protected function createClass($newName, array $proxyMethods, \ReflectionClass $class)
+    {
+        $src = $this-&gt;proxyTemplate;
+        $src = str_replace('NEW_NAME', $newName, $src);
+        $src = str_replace('CLASS_NAME', $class-&gt;getName(), $src);
+        $methods = array();
+        foreach ($proxyMethods as $method) {
+            if ($class-&gt;hasMethod($method)) {
+                $methods[] = $this-&gt;createMethod($class-&gt;getMethod($method));
+            }
+        }
+        $src = str_replace('METHODS', implode(&quot;\n&quot;, $methods), $src);
+        return $src;
+    }
+
+    /**
+     * This will return a full proxy-method-parameter source.
+     *
+     * @param \ReflectionParameter $parameter The method parameter.
+     *
+     * @see Proxy::$methodTemplate
+     *
+     * @return string
+     */
+    protected function createParameter(\ReflectionParameter $parameter)
+    {
+        $parameterSrc = '';
+        $paramClass = $parameter-&gt;getClass();
+        if ($parameter-&gt;isArray()) {
+            $parameterSrc .= 'array ';
+        } else if ($paramClass) {
+            $parameterSrc .= $paramClass-&gt;getName() . ' ';
+        }
+        if ($parameter-&gt;isPassedByReference()) {
+            $parameterSrc .= ' &amp;';
+        }
+        $parameterSrc .= '$' . $parameter-&gt;getName();
+        if ($parameter-&gt;isOptional()) {
+            $parameterSrc .= '=';
+            if ($parameter-&gt;getDefaultValue() === null) {
+                $parameterSrc .= 'null';
+            } else if ($parameter-&gt;getDefaultValue() === false) {
+                $parameterSrc .= 'false';
+            } else if ($parameter-&gt;getDefaultValue() === true) {
+                $parameterSrc .= 'true';
+            } else if (is_array($parameter-&gt;getDefaultValue())) {
+                $parameterSrc .= 'array()';
+            } else {
+                $parameterSrc .= &quot;'&quot; . $parameter-&gt;getDefaultValue() . &quot;'&quot;;
+            }
+        }
+        return $parameterSrc;
+    }
+
+    /**
+     * This will return a full proxy-method source.
+     *
+     * @param \ReflectionMethod $method The method to be proxied.
+     *
+     * @see Proxy::$methodTemplate
+     *
+     * @return string
+     */
+    protected function createMethod(\ReflectionMethod $method)
+    {
+        $visibility = '';
+        $additional = '';
+        $name = $method-&gt;getName();
+        if ($method-&gt;isPublic()) {
+            $visibility = ' public';
+        } else if ($method-&gt;isProtected()) {
+            $visibility = ' protected';
+        } else if ($method-&gt;isPrivate()) {
+            // useless really. $visibility = ' private';
+            return '';
+        }
+        if ($method-&gt;isStatic()) {
+            // useless really. $additional .= ' static ';
+            return '';
+        }
+        //if ($method-&gt;isAbstract()) {
+            // useless really. $$additional .= ' abstract ';
+            //return '';
+        //}
+        if ($method-&gt;isConstructor()) {
+            $name = '__construct';
+        } else if ($method-&gt;isDestructor()) {
+            $name = '__destruct';
+        }
+        $args = array();
+        foreach ($method-&gt;getParameters() as $parameter) {
+            $args[] = $this-&gt;createParameter($parameter);
+        }
+
+        $src = $this-&gt;methodTemplate;
+        $src = str_replace('VISIBILITY', $visibility, $src);
+        $src = str_replace('ADDITIONAL', $additional, $src);
+        $src = str_replace('METHOD_NAME', $name, $src);
+        $src = str_replace('METHOD_ARGS', implode(',', $args), $src);
+        $src = str_replace(
+        	'CLASS_NAME', $method-&gt;getDeclaringClass()-&gt;getName(), $src
+        );
+        return $src;
+    }
+
+    /**
+     * Sets Proxy cache to use.
+     *
+     * @param ICache $cache
+     *
+     * @return void
+     */
+    public function setCache(ICache $cache)
+    {
+        $this-&gt;cache = $cache;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this-&gt;reflectionFactory = $reflectionFactory;
+    }
+    /**
+     * This will give you the name of a proxy class as a string. The class will
+     * already exist in the vm.
+     *
+     * @return string
+     */
+    public function create($class, IDispatcher $dispatcher)
+    {
+        $subject = $this-&gt;reflectionFactory-&gt;getClass($class);
+        $proxyClassName = 'Proxy' . str_replace('\\', '', $subject-&gt;getName());
+        $cacheKey = $proxyClassName . '.proxy';
+        $result = false;
+        $src = $this-&gt;cache-&gt;fetch($cacheKey, $result);
+        if (!$result) {
+            $src = $this-&gt;createClass(
+                $proxyClassName, $dispatcher-&gt;getMethodsIntercepted(), $subject
+            );
+            $this-&gt;cache-&gt;store($cacheKey, $src);
+        }
+        eval($src);
+        $proxyClassName::setDispatcher($dispatcher);
+        $proxyClassName::setReflectionFactory($this-&gt;reflectionFactory);
+        return $proxyClassName;
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

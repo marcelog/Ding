@@ -1,0 +1,441 @@
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Ding IoC/AoP/DI PHP Framework</title><link rel="stylesheet" href="css/jquery-ui.css" type="text/css"></link><link rel="stylesheet" href="css/docblox/jquery-ui-1.8.16.custom.css" type="text/css"></link><link rel="stylesheet" href="css/jquery.treeview.css" type="text/css"></link><link rel="stylesheet" href="css/theme.css" type="text/css"></link><script type="text/javascript" src="js/jquery-1.4.2.min.js"></script><script type="text/javascript" src="js/jquery-ui-1.8.2.custom.min.js"></script><script type="text/javascript" src="js/jquery.tools.min.js"></script><script type="text/javascript" src="js/jquery.cookie.js"></script><script type="text/javascript" src="js/jquery.treeview.js"></script><script type="text/javascript">
+            $(document).ready(function() {
+                $(".filetree").treeview({
+                    collapsed: true,
+                    persist: "cookie"
+                });
+
+                $("#accordion").accordion({
+                    collapsible: true,
+                    autoHeight:  false,
+                    fillSpace:   true
+                });
+
+                $(".tabs").tabs();
+            });
+        </script></head><body><div xmlns="" id="content">
+<script xmlns:dbx="http://docblox-project.org/xsl/functions">
+
+      function filterElements()
+      {
+        inherited = !$('#show-inherited').hasClass('deselected');
+        public    = !$('#show-public').hasClass('deselected');
+        protected = !$('#show-protected').hasClass('deselected');
+        private   = !$('#show-private').hasClass('deselected');
+
+        $('div.public').each(function(index, val) {
+            $(val).toggle(public && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.protected').each(function(index, val) {
+            $(val).toggle(protected && !($(val).hasClass('inherited_from') && !inherited));
+        });
+        $('div.private').each(function(index, val) {
+            $(val).toggle(private && !($(val).hasClass('inherited_from') && !inherited));
+        });
+      }
+
+      $(document).ready(function() {
+        $('a.gripper').click(function() {
+            $(this).nextAll('div.code-tabs').slideToggle();
+            $(this).children('img').toggle();
+            return false;
+        });
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').css('cursor', 'pointer');
+
+        $('div.method code span.highlight,div.function code span.highlight,div.constant code span.highlight,div.property code span.highlight').click(function() {
+            $(this).parent().nextAll('div.code-tabs').slideToggle();
+            $(this).parent().prevAll('a.gripper').children('img').toggle();
+            return false;
+        });
+
+        $('div.code-tabs').hide();
+        $('a.gripper').show();
+        $('div.code-tabs:empty').prevAll('a.gripper').html('');
+
+        $('#show-public, #show-protected, #show-private, #show-inherited')
+            .css('cursor', 'pointer')
+            .click(function(){
+                $(this).toggleClass('deselected');
+                if ($(this).hasClass('deselected')) {
+                  $(this).fadeTo('fast', '0.4');
+                } else {
+                  $(this).fadeTo('fast', '1.0');
+                }
+                filterElements();
+                return false;
+            });
+        $('#show-protected, #show-private').click();
+
+        // add the sliding behaviour to the file navigation and show it
+        // it is initially hidden for non-JS users.
+        $("#file-nav-box").show().hover(function() {
+            $("#file-nav-container").slideDown(400);
+        }, function() {
+            $("#file-nav-container").slideUp(400);
+        });
+      });
+
+      
+    </script><h1 xmlns:dbx="http://docblox-project.org/xsl/functions" class="file">Aspect/AspectManager.php<a href="source/Aspect/AspectManager.php.html"><img src="images/icons/view_source.png" border="0"></a>
+</h1>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" id="file-nav-box">
+<div id="file-nav-options">
+              Show:
+              <img src="images/icons/visibility_public.png" id="show-public"><img src="images/icons/visibility_protected.png" id="show-protected"><img src="images/icons/visibility_private.png" id="show-private"><span class="attribute" id="show-inherited">inherited</span>
+</div>
+<div id="file-nav-container">
+<ul id="file-nav"><li>
+<a href="#classes"><img src="images/icons/class.png" height="14">
+                          Classes
+                      </a><ul><li><a href="#%5CDing%5CAspect%5CAspectManager">\Ding\Aspect\AspectManager</a></li></ul>
+</li></ul>
+<div style="clear: left;"></div>
+</div>
+<div id="file-nav-tab">
+              Table of Contents
+          </div>
+</div>
+<a xmlns:dbx="http://docblox-project.org/xsl/functions" name="top" class="anchor"></a><div id="file-description">
+<p xmlns:dbx="http://docblox-project.org/xsl/functions" class="short-description">Aspect Manager.</p>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="long-description"><p>PHP Version 5</p></div>
+</div>
+<dl class="file-info">
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Author</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="mailto:marcelog@gmail.com">Marcelo Gornstein</a>
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Category</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">Ding
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">License</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="http://marcelog.github.com/">Apache License 2.0</a>
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Link</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">
+<a href="http://marcelog.github.com/%0ACopyright">2011 Marcelo Gornstein <marcelog@gmail.com>
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</a>
+         
+    </dd>
+<dt xmlns:dbx="http://docblox-project.org/xsl/functions">Package</dt>
+<dd xmlns:dbx="http://docblox-project.org/xsl/functions">Aspect
+         
+    </dd>
+</dl>
+<a name="classes" class="anchor"></a><a xmlns:dbx="http://docblox-project.org/xsl/functions" id="\Ding\Aspect\AspectManager" class="anchor"></a><h2 xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">\Ding\Aspect\AspectManager<div class="to-top"><a href="#top">jump to top</a></div>
+</h2>
+<div xmlns:dbx="http://docblox-project.org/xsl/functions" class="class">
+<small class="package"><b>Package: </b>Aspect</small><p class="short-description">Aspect Manager.</p>
+<div class="long-description"><p>PHP Version 5</p></div>
+<dl class="class-info">
+<dt>Author</dt>
+<dd>
+<a href="mailto:marcelog@gmail.com">Marcelo Gornstein</a>
+         
+    </dd>
+<dt>Category</dt>
+<dd>Ding
+         
+    </dd>
+<dt>License</dt>
+<dd>
+<a href="http://marcelog.github.com/">Apache License 2.0</a>
+         
+    </dd>
+<dt>Link</dt>
+<dd>
+<a href="http://marcelog.github.com/">http://marcelog.github.com/</a>
+         
+    </dd>
+</dl>
+<h3>Properties</h3>
+<div>
+<a id="\Ding\Aspect\AspectManager::$_aspectProviders" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Aspect\IAspectProvider[]
+                 <span class="highlight">$_aspectProviders</span>= ''
+                </code><div class="description">
+<p class="short-description">Aspect definition providers.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_Aspect_IAspectProvider.html#%5CDing%5CAspect%5CIAspectProvider">\Ding\Aspect\IAspectProvider[]</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::$_aspects" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Aspect\AspectDefinition[]
+                 <span class="highlight">$_aspects</span>= 'array()'
+                </code><div class="description">
+<p class="short-description">Holds known aspects. Indexed by name.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition[]</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::$_cache" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Aspect\ICache
+                 <span class="highlight">$_cache</span>= ''
+                </code><div class="description">
+<p class="short-description">Aspect cache to cache aspects and pointcuts.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>\Ding\Aspect\ICache</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::$_pointcutProviders" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Aspect\IPointcutProvider[]
+                 <span class="highlight">$_pointcutProviders</span>= ''
+                </code><div class="description">
+<p class="short-description">Pointcut definition providers.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_Aspect_IPointcutProvider.html#%5CDing%5CAspect%5CIPointcutProvider">\Ding\Aspect\IPointcutProvider[]</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::$_pointcuts" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Aspect\PointcutDefinition[]
+                 <span class="highlight">$_pointcuts</span>= 'array()'
+                </code><div class="description">
+<p class="short-description">Holds known pointcuts. Indexed by name.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_Aspect_PointcutDefinition.html#%5CDing%5CAspect%5CPointcutDefinition">\Ding\Aspect\PointcutDefinition[]</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h3>Methods</h3>
+<div>
+<a id="\Ding\Aspect\AspectManager::__sleep()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__sleep</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          array</code><div class="description"><p class="short_description">Serialization.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>array</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::getAspects()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getAspects</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          <a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition[]</a></code><div class="description"><p class="short_description">Return all known aspects, indexed by name.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition[]</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::getPointcut()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPointcut</span><span class="nb-faded-text">(
+          string $pointcut
+          )
+        </span>
+        :
+          <a href="db_Aspect_PointcutDefinition.html#%5CDing%5CAspect%5CPointcutDefinition">\Ding\Aspect\PointcutDefinition</a></code><div class="description"><p class="short_description">Returns a PointcutDefinition or false if none found.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pointcut</th>
+<td>string</td>
+<td><em><p>Pointcut id or name.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Aspect_PointcutDefinition.html#%5CDing%5CAspect%5CPointcutDefinition">\Ding\Aspect\PointcutDefinition</a></td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::registerAspectProvider()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">registerAspectProvider</span><span class="nb-faded-text">(
+          <a href="db_Aspect_IAspectProvider.html#%5CDing%5CAspect%5CIAspectProvider">\Ding\Aspect\IAspectProvider</a> $provider
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Will register an aspect definition provider in this manager.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$provider</th>
+<td><a href="db_Aspect_IAspectProvider.html#%5CDing%5CAspect%5CIAspectProvider">\Ding\Aspect\IAspectProvider</a></td>
+<td><em><p>Aspect definition provider.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::registerPointcutProvider()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">registerPointcutProvider</span><span class="nb-faded-text">(
+          <a href="db_Aspect_IPointcutProvider.html#%5CDing%5CAspect%5CIPointcutProvider">\Ding\Aspect\IPointcutProvider</a> $provider
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Will register a pointcut definition provider in this manager.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$provider</th>
+<td><a href="db_Aspect_IPointcutProvider.html#%5CDing%5CAspect%5CIPointcutProvider">\Ding\Aspect\IPointcutProvider</a></td>
+<td><em><p>Pointcut definition provider.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::setAspect()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setAspect</span><span class="nb-faded-text">(
+          <a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition</a> $aspect
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds or overwrites the given aspect.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$aspect</th>
+<td><a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition</a></td>
+<td><em><p>Aspect.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::setCache()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setCache</span><span class="nb-faded-text">(
+          <a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a> $cache
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets aspects cache.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cache</th>
+<td><a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::setPointcut()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setPointcut</span><span class="nb-faded-text">(
+          <a href="db_Aspect_PointcutDefinition.html#%5CDing%5CAspect%5CPointcutDefinition">\Ding\Aspect\PointcutDefinition</a> $pointcut
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Adds or overwrites the given pointcut.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$pointcut</th>
+<td><a href="db_Aspect_PointcutDefinition.html#%5CDing%5CAspect%5CPointcutDefinition">\Ding\Aspect\PointcutDefinition</a></td>
+<td><em><p>Pointcut.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+<small xmlns="" class="footer">Documentation was generated by <a href="http://docblox-project.org">DocBlox 0.17.1</a>.
+    </small></body></html>

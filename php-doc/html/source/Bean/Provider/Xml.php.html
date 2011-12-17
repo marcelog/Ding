@@ -1,0 +1,676 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * XML bean factory.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Provider
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Bean\Provider;
+
+use Ding\Logger\ILoggerAware;
+use Ding\Container\IContainerAware;
+use Ding\Aspect\IAspectManagerAware;
+use Ding\Bean\IBeanDefinitionProvider;
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+use Ding\Container\IContainer;
+use Ding\Aspect\PointcutDefinition;
+use Ding\Bean\Lifecycle\AfterConfigListener;
+use Ding\Bean\Factory\Exception\BeanFactoryException;
+use Ding\Bean\BeanConstructorArgumentDefinition;
+use Ding\Bean\BeanDefinition;
+use Ding\Bean\BeanPropertyDefinition;
+use Ding\Aspect\AspectDefinition;
+use Ding\Aspect\AspectManager;
+use Ding\Aspect\IAspectProvider;
+use Ding\Aspect\IPointcutProvider;
+
+/**
+ * XML bean factory.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Driver
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class Xml implements
+    IAfterConfigListener, IAspectProvider, IPointcutProvider,
+    IBeanDefinitionProvider, IAspectManagerAware, IContainerAware, ILoggerAware
+{
+    protected $container;
+    /**
+     * log4php logger or our own.
+     * @var Logger
+     */
+    private $_logger;
+
+    /**
+     * beans.xml file path.
+     * @var string
+     */
+    private $_filename;
+
+    /**
+     * SimpleXML object.
+     * @var SimpleXML[]
+     */
+    private $_simpleXml;
+
+    /**
+     * Bean definition template to clone.
+     * @var BeanDefinition
+     */
+    private $_templateBeanDef;
+
+    /**
+     * Bean property definition template to clone.
+     * @var BeanPropertyDefinition
+     */
+    private $_templatePropDef;
+
+    /**
+     * Bean constructor argument definition template to clone.
+     * @var BeanConstructorArgumentDefinition
+     */
+    private $_templateArgDef;
+
+    /**
+     * Aspect definition template to clone.
+     * @var AspectDefinition
+     */
+    private $_templateAspectDef;
+
+    /**
+     * Pointcut definition template to clone.
+     * @var PointcutDefinition
+     */
+    private $_templatePointcutDef;
+
+    /**
+     * The aspect manager.
+     * @var AspectManager
+     */
+    private $_aspectManager = false;
+
+    /**
+     * Optional directories to search for bean files.
+     * @var string[]
+     */
+    private $_directories = false;
+
+    /**
+     * Dont serialize anything here. The container and the aspect manager have
+     * references to this driver, and because of IContainerAware or IAspectManagerAware
+     * and others, like the methodInjection, some beans and bean definitions will have
+     * a reference to the container, so when serializing these beans/definitions, ultimately
+     * this driver will be try for serialization.
+     *
+     * @return array
+     */
+    public function __sleep()
+    {
+        return array();
+    }
+
+    /**
+     * Gets xml errors.
+     *
+     * @return string
+     */
+    private function _getXmlErrors()
+    {
+        $errors = '';
+        foreach (libxml_get_errors() as $error) {
+            $errors .= $error-&gt;message . &quot;\n&quot;;
+        }
+        return $errors;
+    }
+
+    /**
+     * Initializes SimpleXML Object
+     *
+     * @param string $filename
+     *
+     * @throws BeanFactoryException
+     * @return SimpleXML
+     */
+    private function _loadXml($filename)
+    {
+        $xmls = array();
+        libxml_use_internal_errors(true);
+        if (is_array($filename)) {
+            foreach ($filename as $file) {
+                $result = $this-&gt;_loadXml($file);
+                if ($result !== false) {
+                    foreach ($result as $name =&gt; $xml) {
+                        $xmls[$name] = $xml;
+                    }
+                }
+            }
+            return $xmls;
+        }
+        $contents = false;
+        foreach ($this-&gt;_directories as $directory) {
+            $fullname = $directory . DIRECTORY_SEPARATOR . $filename;
+            if (!file_exists($fullname)) {
+                continue;
+            }
+            $contents = @file_get_contents($fullname);
+        }
+        if ($contents === false) {
+            throw new BeanFactoryException($filename . ' not found in ' . print_r($this-&gt;_directories, true));
+        }
+        $ret = simplexml_load_string($contents);
+        if ($ret === false) {
+            return $ret;
+        }
+        $xmls[$filename] = $ret;
+        foreach ($ret-&gt;xpath(&quot;//import&quot;) as $imported) {
+            $filename = (string)$imported-&gt;attributes()-&gt;resource;
+            foreach ($this-&gt;_loadXml($filename) as $name =&gt; $xml) {
+                $xmls[$name] = $xml;
+            }
+        }
+        return $xmls;
+    }
+
+    /**
+     * Returns an aspect definition.
+     *
+     * @param SimpleXML $simpleXmlAspect Aspect node.
+     *
+     * @throws BeanFactoryException
+     * @return AspectDefinition
+     */
+    private function _loadAspect($simpleXmlAspect)
+    {
+        $aspects = array();
+        $atts = $simpleXmlAspect-&gt;attributes();
+        if (isset($atts-&gt;id)) {
+            $name = (string)$atts-&gt;id;
+        } else {
+            $name = BeanDefinition::generateName('AspectXML');
+        }
+        if (isset($atts-&gt;expression)) {
+            $expression = (string)$atts-&gt;expression;
+        } else {
+            $expression = '';
+        }
+        $aspectBean = (string)$atts-&gt;ref;
+        $type = (string)$atts-&gt;type;
+        if ($type == 'method') {
+            $type = AspectDefinition::ASPECT_METHOD;
+        } else if ($type == 'exception') {
+            $type = AspectDefinition::ASPECT_EXCEPTION;
+        } else {
+            throw new BeanFactoryException('Invalid aspect type');
+        }
+        $pointcuts = array();
+        foreach ($simpleXmlAspect-&gt;pointcut as $pointcut) {
+            $pointcutAtts = $pointcut-&gt;attributes();
+            if (isset($pointcutAtts-&gt;id)) {
+                $pointcutName = (string)$pointcutAtts-&gt;id;
+            } else {
+                $pointcutName = BeanDefinition::generateName('PointcutXML');
+            }
+            if (isset($pointcutAtts-&gt;expression)) {
+                $pointcut = clone $this-&gt;_templatePointcutDef;
+                $pointcut-&gt;setName($pointcutName);
+                $pointcut-&gt;setExpression((string)$pointcutAtts-&gt;expression);
+                $pointcut-&gt;setMethod((string)$pointcutAtts-&gt;method);
+                $this-&gt;_aspectManager-&gt;setPointcut($pointcut);
+                $pointcuts[] = $pointcutName;
+            } else if (isset($pointcutAtts-&gt;{'pointcut-ref'})) {
+                $pointcuts[] = (string)$pointcutAtts-&gt;{'pointcut-ref'};
+            }
+        }
+        $aspect = new AspectDefinition($name, $pointcuts, $type, $aspectBean, $expression);
+        return $aspect;
+    }
+
+    /**
+     * Returns a property definition.
+     *
+     * @param SimpleXML $simpleXmlProperty Property node.
+     *
+     * @throws BeanFactoryException
+     * @return BeanPropertyDefinition
+     */
+    private function _loadProperty($simpleXmlProperty)
+    {
+        $propName = (string)$simpleXmlProperty-&gt;attributes()-&gt;name;
+        if (isset($simpleXmlProperty-&gt;ref)) {
+            $propType = BeanPropertyDefinition::PROPERTY_BEAN;
+            $propValue = (string)$simpleXmlProperty-&gt;ref-&gt;attributes()-&gt;bean;
+        } else if (isset($simpleXmlProperty-&gt;null)) {
+            $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
+            $propValue = null;
+        } else if (isset($simpleXmlProperty-&gt;false)) {
+            $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
+            $propValue = false;
+        } else if (isset($simpleXmlProperty-&gt;true)) {
+            $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
+            $propValue = true;
+        } else if (isset($simpleXmlProperty-&gt;bean)) {
+            $propType = BeanPropertyDefinition::PROPERTY_BEAN;
+            $name = BeanDefinition::generateName('Bean');
+            $simpleXmlProperty-&gt;bean-&gt;addAttribute('id', $name);
+            $propValue = $name;
+        } else if (isset($simpleXmlProperty-&gt;array)) {
+            $propType = BeanPropertyDefinition::PROPERTY_ARRAY;
+            $propValue = array();
+            foreach ($simpleXmlProperty-&gt;array-&gt;entry as $arrayEntry) {
+                if (isset($arrayEntry-&gt;attributes()-&gt;key)) {
+                    $key = (string)$arrayEntry-&gt;attributes()-&gt;key;
+                    $propValue[$key] = $this-&gt;_loadProperty($arrayEntry);
+                } else {
+                    $propValue[] = $this-&gt;_loadProperty($arrayEntry);
+                }
+            }
+        } else if (isset($simpleXmlProperty-&gt;eval)) {
+            $propType = BeanPropertyDefinition::PROPERTY_CODE;
+            $propValue = (string)$simpleXmlProperty-&gt;eval;
+        } else {
+            $propType = BeanPropertyDefinition::PROPERTY_SIMPLE;
+            $propValue = (string)$simpleXmlProperty-&gt;value;
+        }
+        return new BeanPropertyDefinition($propName, $propType, $propValue);
+    }
+
+    /**
+     * Returns a constructor argument definition.
+     *
+     * @param SimpleXML $simpleXmlArg Argument node.
+     *
+     * @throws BeanFactoryException
+     * @return BeanConstructorArgumentDefinition
+     */
+    private function _loadConstructorArg($simpleXmlArg)
+    {
+        if (isset($simpleXmlArg-&gt;ref)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
+            $argValue = (string)$simpleXmlArg-&gt;ref-&gt;attributes()-&gt;bean;
+        } else if (isset($simpleXmlArg-&gt;bean)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
+            $name = BeanDefinition::generateName('Bean');
+            $argValue = $name;
+            $simpleXmlArg-&gt;bean-&gt;addAttribute('id', $name);
+        } else if (isset($simpleXmlArg-&gt;null)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
+            $argValue = null;
+        } else if (isset($simpleXmlArg-&gt;false)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
+            $argValue = false;
+        } else if (isset($simpleXmlArg-&gt;true)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
+            $argValue = true;
+        } else if (isset($simpleXmlArg-&gt;array)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY;
+            $argValue = array();
+            foreach ($simpleXmlArg-&gt;array-&gt;entry as $arrayEntry) {
+                $key = (string)$arrayEntry-&gt;attributes()-&gt;key;
+                $argValue[$key] = $this-&gt;_loadConstructorArg($arrayEntry);
+            }
+        } else if (isset($simpleXmlArg-&gt;eval)) {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_CODE;
+            $argValue = (string)$simpleXmlArg-&gt;eval;
+        } else {
+            $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
+            $argValue = (string)$simpleXmlArg-&gt;value;
+        }
+        return new BeanConstructorArgumentDefinition($argType, $argValue);
+    }
+
+    /**
+     * Returns a bean definition.
+     *
+     * @param string $beanName
+     *
+     * @throws BeanFactoryException
+     * @return BeanDefinition
+     */
+    private function _loadBean($beanName, BeanDefinition $bean = null, $factory)
+    {
+        // This should not be necessary because this driver is also an aspect
+        // provider and as such, the AspectManager would already called
+        // getAspects() which already has this kind of lazy loading.
+        //if (!$this-&gt;_simpleXml) {
+        //    $this-&gt;_load();
+        //}
+        foreach($this-&gt;_simpleXml as $name =&gt; $xml) {
+            $simpleXmlBean = $xml-&gt;xpath(&quot;//bean[@id='$beanName']&quot;);
+            if (!empty($simpleXmlBean)) {
+                break;
+            } else {
+                $simpleXmlBean = $xml-&gt;xpath(&quot;//bean[contains(@name, '$beanName')]&quot;);
+                if (!empty($simpleXmlBean)) {
+                    $name = (string)$simpleXmlBean[0]-&gt;attributes()-&gt;id;
+                    return $this-&gt;_loadBean($name, $bean, $factory);
+                }
+                $simpleXmlBean = $xml-&gt;xpath(&quot;//alias[@alias='$beanName']&quot;);
+                if (!empty($simpleXmlBean)) {
+                    $name = (string)$simpleXmlBean[0]-&gt;attributes()-&gt;name;
+                    return $this-&gt;_loadBean($name, $bean, $factory);
+                }
+            }
+        }
+        if (false == $simpleXmlBean) {
+            return $bean;
+        }
+        // asume valid xml (only one bean with that id)
+        $simpleXmlBean = $simpleXmlBean[0];
+        $bMethods = $bProps = $bAspects = $constructorArgs = array();
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;parent)) {
+            $value = (string)$simpleXmlBean-&gt;attributes()-&gt;parent;
+            $bean = $this-&gt;container-&gt;getBeanDefinition($value);
+            $bean = $bean-&gt;makeChildBean($beanName);
+            $bProps = $bean-&gt;getProperties();
+            $constructorArgs = $bean-&gt;getArguments();
+            $bAspects = $bean-&gt;getAspects();
+            $bMethods = $bean-&gt;getMethodInjections();
+        } else {
+            $bean = clone $this-&gt;_templateBeanDef;
+        }
+        $bean-&gt;setName($beanName);
+        $bean-&gt;setClass((string)$simpleXmlBean-&gt;attributes()-&gt;class);
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;scope)) {
+            $bScope = (string)$simpleXmlBean-&gt;attributes()-&gt;scope;
+            if ($bScope == 'prototype') {
+                $bean-&gt;setScope(BeanDefinition::BEAN_PROTOTYPE);
+            } else if ($bScope == 'singleton') {
+                $bean-&gt;setScope(BeanDefinition::BEAN_SINGLETON);
+            } else {
+                throw new BeanFactoryException('Invalid bean scope: ' . $bScope);
+            }
+        }
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;{'factory-method'})) {
+            $bean-&gt;setFactoryMethod(
+                (string)$simpleXmlBean-&gt;attributes()-&gt;{'factory-method'}
+            );
+        }
+
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;name)) {
+            $aliases = (string)$simpleXmlBean-&gt;attributes()-&gt;name;
+            $aliases = explode(',', $aliases);
+            foreach ($aliases as $alias) {
+                $bean-&gt;addAlias(trim($alias));
+            }
+        }
+
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;{'depends-on'})) {
+            $bean-&gt;setDependsOn(explode(
+            	',',
+                (string)$simpleXmlBean-&gt;attributes()-&gt;{'depends-on'}
+            ));
+        }
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;abstract)) {
+            $value = (string)$simpleXmlBean-&gt;attributes()-&gt;abstract;
+            if ($value == 'true') {
+                $bean-&gt;makeAbstract();
+            }
+        }
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;{'factory-bean'})) {
+            $bean-&gt;setFactoryBean(
+                (string)$simpleXmlBean-&gt;attributes()-&gt;{'factory-bean'}
+            );
+        }
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;{'init-method'})) {
+            $bean-&gt;setInitMethod(
+                (string)$simpleXmlBean-&gt;attributes()-&gt;{'init-method'}
+            );
+        }
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;{'destroy-method'})) {
+            $bean-&gt;setDestroyMethod(
+                (string)$simpleXmlBean-&gt;attributes()-&gt;{'destroy-method'}
+            );
+        }
+        foreach ($simpleXmlBean-&gt;property as $property) {
+            $bProp = $this-&gt;_loadProperty($property);
+            $bProps[$bProp-&gt;getName()] = $bProp;
+        }
+        foreach ($simpleXmlBean-&gt;aspect as $aspect) {
+            $aspectDefinition = $this-&gt;_loadAspect($aspect);
+            $bAspects[] = $aspectDefinition;
+        }
+        foreach ($simpleXmlBean-&gt;{'constructor-arg'} as $arg) {
+            $constructorArgs[] = $this-&gt;_loadConstructorArg($arg);
+        }
+        foreach ($simpleXmlBean-&gt;{'lookup-method'} as $method) {
+            $atts = $method-&gt;attributes();
+            $bMethods[] = array((string)$atts-&gt;name, (string)$atts-&gt;bean);
+        }
+        if (!empty($bProps)) {
+            $bean-&gt;setProperties($bProps);
+        }
+        if (!empty($bAspects)) {
+            $bean-&gt;setAspects($bAspects);
+        }
+        if (!empty($constructorArgs)) {
+            $bean-&gt;setArguments($constructorArgs);
+        }
+        if (!empty($bMethods)) {
+            $bean-&gt;setMethodInjections($bMethods);
+        }
+        return $bean;
+    }
+
+    /**
+     * Initialize SimpleXML.
+     *
+     * @throws BeanFactoryException
+     * @return void
+     */
+    private function _load()
+    {
+        if ($this-&gt;_simpleXml !== false) {
+            return;
+        }
+        $this-&gt;_simpleXml = $this-&gt;_loadXml($this-&gt;_filename);
+        if (empty($this-&gt;_simpleXml)) {
+            throw new BeanFactoryException(
+                'Could not parse: ' . $this-&gt;_filename
+                . ': ' . $this-&gt;_getXmlErrors()
+            );
+        }
+    }
+
+    public function afterConfig()
+    {
+        $this-&gt;_load();
+        foreach($this-&gt;_simpleXml as $xmlName =&gt; $xml) {
+            $simpleXmlBeans = $xml-&gt;xpath(&quot;/beans/bean[@listens-on]&quot;);
+            if (!empty($simpleXmlBeans)) {
+                foreach ($simpleXmlBeans as $bean) {
+                    $events = (string)$bean-&gt;attributes()-&gt;{'listens-on'};
+                    $beanName = (string)$bean-&gt;attributes()-&gt;id;
+                    foreach (explode(',', $events) as $eventName) {
+                        $eventName = trim($eventName);
+                        $this-&gt;container-&gt;eventListen($eventName, $beanName);
+                    }
+                }
+            }
+        }
+    }
+    public function getAspects()
+    {
+        $aspects = array();
+        $this-&gt;_load();
+        foreach($this-&gt;_simpleXml as $xmlName =&gt; $xml) {
+            $simpleXmlAspect = $xml-&gt;xpath(&quot;/beans/aspect&quot;);
+            if (!empty($simpleXmlAspect)) {
+                foreach ($simpleXmlAspect as $aspect) {
+                    $aspects[] = $this-&gt;_loadAspect($aspect);
+                }
+            }
+        }
+        return $aspects;
+    }
+
+    public function getPointcut($name)
+    {
+        foreach($this-&gt;_simpleXml as $xmlName =&gt; $xml) {
+            $simpleXmlPointcut = $xml-&gt;xpath(&quot;//pointcut[@id='$name']&quot;);
+            if (!empty($simpleXmlPointcut)) {
+                $simpleXmlPointcut = $simpleXmlPointcut[0];
+                $pointcutAtts = $simpleXmlPointcut-&gt;attributes();
+                $pointcutName = (string)$pointcutAtts-&gt;id;
+                $pointcut = clone $this-&gt;_templatePointcutDef;
+                $pointcut-&gt;setName($pointcutName);
+                $pointcut-&gt;setExpression((string)$pointcutAtts-&gt;expression);
+                $pointcut-&gt;setMethod((string)$pointcutAtts-&gt;method);
+                return $pointcut;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinition()
+     */
+    public function getBeanDefinition($name)
+    {
+        return $this-&gt;_loadBean($name, null, null);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinitionByClass()
+     */
+    public function getBeanDefinitionByClass($class)
+    {
+        return null;
+        /*
+        $beans = array();
+        $this-&gt;_load();
+        foreach($this-&gt;_simpleXml as $xmlName =&gt; $xml) {
+            $result = $xml-&gt;xpath(&quot;//bean[@class='$name']&quot;);
+            if (!empty($result)) {
+                foreach ($result as $bean) {
+                    $arguments = $bean-&gt;attributes();
+                    if (isset($arguments-&gt;name)) {
+                        $beans[] = $arguments-&gt;name;
+                    }
+                }
+            }
+        }
+        return $beans;
+        */
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IAspectManagerAware::setAspectManager()
+     */
+    public function setAspectManager(AspectManager $aspectManager)
+    {
+        $this-&gt;_aspectManager = $aspectManager;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainerAware::setContainer()
+     */
+    public function setContainer(IContainer $container)
+    {
+        $this-&gt;container = $container;
+    }
+
+    public function setLogger(\Logger $logger)
+    {
+        $this-&gt;_logger = $logger;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param array                      $options
+     * @param \Ding\Aspect\AspectManager $aspectManager
+     *
+     * @return void
+     */
+    public function __construct(array $options)
+    {
+        $this-&gt;_beanDefs = array();
+        $this-&gt;_filename = $options['filename'];
+        $this-&gt;_simpleXml = false;
+        $this-&gt;_directories
+            = isset($options['directories'])
+            ? $options['directories']
+            : array('.');
+        $this-&gt;_templateBeanDef = new BeanDefinition('');
+        $this-&gt;_templatePropDef = new BeanPropertyDefinition('', 0, null);
+        $this-&gt;_templateArgDef = new BeanConstructorArgumentDefinition(0, null);
+        $this-&gt;_templateAspectDef = new AspectDefinition('', '', 0, '', '');
+        $this-&gt;_templatePointcutDef = new PointcutDefinition('', '', '');
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

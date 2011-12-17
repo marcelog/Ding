@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Generic dispatcher.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Mvc
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Mvc;
+
+use Ding\Reflection\IReflectionFactoryAware;
+use Ding\Reflection\IReflectionFactory;
+use Ding\Logger\ILoggerAware;
+use Ding\Mvc\Exception\MvcException;
+
+/**
+ * Generic dispatcher.
+ *
+ * PHP Version 5
+ *
+ * @category Ding
+ * @package  Mvc
+ * @author   Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license  http://marcelog.github.com/ Apache License 2.0
+ * @link     http://marcelog.github.com/
+ */
+abstract class Dispatcher implements ILoggerAware, IReflectionFactoryAware
+{
+    /**
+     * log4php logger or our own.
+     * @var Logger
+     */
+    private $_logger;
+    /**
+     * A ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this-&gt;reflectionFactory = $reflectionFactory;
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Logger.ILoggerAware::setLogger()
+     */
+    public function setLogger(\Logger $logger)
+    {
+        $this-&gt;_logger = $logger;
+    }
+
+    /**
+     * Main action. Will use the action mapper to get a controller that can
+     * handle the given Action, and then the viewresolver to get a View that
+     * can render the returned ModelAndView from the controller.
+     *
+     * @param Action  $action Action to dispatch.
+     *
+     * @throws MvcException
+     * @return void
+     */
+    public function dispatch(Action $action, IMapper $mapper)
+    {
+        $dispatchInfo = $mapper-&gt;map($action);
+        if ($dispatchInfo === false) {
+            throw new MvcException(
+            	'No suitable controller for: ' . $action-&gt;getId()
+            );
+        }
+
+        $controller = $dispatchInfo[0];
+        $actionHandler = $dispatchInfo[1];
+        $this-&gt;_logger-&gt;debug(
+        	'Found mapped controller: '
+            . get_class($controller)
+            . ' with action: '
+            . $actionHandler
+        );
+        if (!method_exists($controller, $actionHandler)) {
+            throw new MvcException('No valid action handler found: ' . $actionHandler);
+        }
+        return $this-&gt;invokeAction($controller, $actionHandler, $action-&gt;getArguments());
+    }
+
+	/**
+     * Calls the specified method from the specifed object using the specified
+     * arguments map.
+     *
+     * @param object $object
+     * @param string $method Method name
+     * @param array $arguments Map of arguments, where key is argument name,
+     * and value is argument value.
+     *
+     * @return mxied
+     */
+    private function invokeAction($object, $method, array $arguments) {
+        $methodInfo = $this-&gt;reflectionFactory-&gt;getMethod(
+            get_class($object), $method
+        );
+        $parameters = $methodInfo-&gt;getParameters();
+        $values = array();
+        $total = count($parameters);
+        for ($i = 0; $i &lt; $total; $i++) {
+            $parameter = array_shift($parameters);
+            $name = $parameter-&gt;getName();
+            if (isset($arguments[$name])) {
+                $values[] = $arguments[$name];
+            } else if ($parameter-&gt;isOptional()) {
+                $values[] = $parameter-&gt;getDefaultValue();
+            } else {
+                $ctl = get_class($object);
+                throw new MvcException(
+                	&quot;Missing required argument: $name for action $ctl:$method&quot;
+                );
+            }
+        }
+        return $methodInfo-&gt;invokeArgs($object, $values);
+    }
+}
+</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

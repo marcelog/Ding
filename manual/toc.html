@@ -68,10 +68,6 @@
     <li><a href="#aop">Aspect Oriented Programming</a></li> 
     <li><a href="#config">Configuring the container</a></li> 
     <li><a href="#mvc">The MVC Implementation</a></li>
-    <li><a href="#helper-error">The ErrorHandler helper</a></li>
-    <li><a href="#helper-shutdown">The ShutdownHandler helper</a></li> 
-    <li><a href="#helper-signal">The SignalHandler helper</a></li> 
-    <li><a href="#helper-timer">The Timer helper</a></li>
     <li><a href="#helper-syslog">The Syslog helper</a></li> 
     <li><a href="#helper-pami">The PAMI helper</a></li> 
     <li><a href="#helper-pagi">The PAGI helper</a></li>
@@ -138,9 +134,8 @@ actually create and modify the bean's behavior.
 </p>
 <p>
 This data is generated, and
-modified by "Drivers". Drivers are listeners of one or more events in the lifecycle
-of the container and the lifecycle of each bean. Currently, Ding supports 3 
-different drivers: "xml", "yaml", and "annotations".
+modified by "Providers". Providers are registered in the container. Currently, Ding supports 3 
+different providers: "xml", "yaml", and "annotations".
 </p>
 <p>
 The first two read and parse a xml/yaml
@@ -148,7 +143,7 @@ file (normally called beans.xml/beans.yaml) and the latter generates metadata fr
 found in each of the classes of the project and their methods.
 </p>
 <p>
- Any number of drivers can be used at any
+ Any number of providers can be used at any
 given time, they are supposed to complement each one's metadata. So for example you may
 use an annotation in your class at the same time that is declared (with the same or
 different features or properties) in the beans.xml/beans.yaml file.
@@ -194,7 +189,7 @@ This metadata includes:
 </p>
 <H4>Examples:</H4>
 <p>
-<u>Generic bean definition (annotations driver)</u>
+<u>Generic bean definition (annotations provider)</u>
 </p>
 <p>
 This is pretty much the same as Java Configuration. You can define a class and
@@ -359,10 +354,10 @@ class SomeBeanProviderClass
 The full example is available <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-annotations">here</a>.
 </p>
 <p>
-<u>Generic bean definition (xml and yaml drivers)</u>
+<u>Generic bean definition (xml and yaml providers)</u>
 </p>
 <p>
-The examples here are based on the xml driver. If you want to take a look at the
+The examples here are based on the xml provider. If you want to take a look at the
 yaml syntax (fully compatible and almost equal to the xml syntax), please take a look at
 <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/yaml">the yaml example</a>
 </p>
@@ -443,8 +438,8 @@ property specifies *the* name of the bean, while the name property specifies the
 </pre>
 <p>
 <ul>
-<li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-xml">XML</a> driver example</li>
-<li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-yaml">YAML</a> driver example</li>
+<li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-xml">XML</a> provider example</li>
+<li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-yaml">YAML</a> provider example</li>
 </ul>
 <H4>Constructor arguments types and metadata</H4>
 <p>
@@ -473,7 +468,9 @@ injection, i.e: a property called 'name' will be injected calling setName()</li>
   are specified explicitely (see below).</li>
 </ul>
 <p>
-The PropertyDriver, is responsible for replacing the ${property} kind of values.<br/>
+The PropertyDriver, is responsible for getting the bean "PropertiesHolder", where
+any number of php ini files can be specified from where to read more properties. It will
+then register these properties in the container.
 Please read <a href="#config">this</a> for the details.
 </p>
 <H4>Examples:</H4>
@@ -607,6 +604,15 @@ Array keys are optional, so you can also do this:
     &lt;/bean&gt;
 &lt;/beans&gt;
 </pre>
+<p>
+You can also use properties to declare bean classes, so you can choose/switch implementation
+at real time:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+    &lt;bean id="beanName" class="${aCustomImplementation}"/&gt;
+&lt;/beans&gt;
+</pre>
 <H4>Inner beans</H4>
 <p>
 You can define beans inside properties and constructor arguments, like this:
@@ -651,7 +657,7 @@ The container will (via AOP) take care of the rest ;)
 </p>
 <H4>Bean inheritance</H4>
 <p>
-Since version 1.1.0, Ding accepts bean inheritance via the 3 drivers, xml, yaml, and annotations.
+Since version 1.1.0, Ding accepts bean inheritance via the 3 providers, xml, yaml, and annotations.
 </p>
 <pre name="code" class="xml">
   &lt;bean id="parentBean" abstract="true"&gt;
@@ -754,6 +760,32 @@ metadata associated with it (and its subparts, like properties, annotations, etc
   <li><u>@DestroyMethod</u>: Has the same effect as declaring a bean with destroy-method in the beans.xml file.</li>
 </ul>
 
+<H4>Handling errors</H4>
+<p>
+The container does a set_error_handler() when it bootstraps. Whenever the phpvm calls this handler with 
+an error (or warning, or notice, or whatever), ding will dispatch the event "dingError", so any bean(s)
+listening for this event will receive it as an <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/Helpers/ErrorHandler/ErrorInfo.php">ErrorInfo</a>.
+</p>
+<p>
+An example is <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ErrorHandler">here.</a>
+</p>
+<H4>Handling signals</H4>
+<p>
+On SAPI's cgi and cli, it might be needed to handle posix signals. The container uses the pcntl extension to catch
+signals SIGQUIT, SIGHUP, SIGINT, SIGCHLD, SIGTERM, SIGUSR1, SIGUSR2 when it bootstraps. Whenever a signal is received,
+ding will dispatch the event "dingSignal", passing as argument the signal number, so any bean(s) listening for this event will receive it.
+</p>
+<p>
+An example is <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SignalHandler">here.</a>
+</p>
+<H4>Handling shutdown</H4>
+<p>
+The container does a register_shutdown_function() when it bootstraps. When the phpvm calls this handler, ding will dispatch the event "dingShutdown", so any bean(s)
+listening for this event will receive it.
+</p>
+<p>
+An example is <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ShutdownHandler">here.</a>
+</p>
 
 <H4>Aware Interfaces</H4>
 <ul>
@@ -763,6 +795,7 @@ metadata associated with it (and its subparts, like properties, annotations, etc
   <li><u>Ding\Bean\IMessageSourceAware</u>: Whenever ding is going to instantiate a bean whose class implements IMessageSourceAware interface, it will inject current instance of the message source (providing i18n capabilities).</li>
   <li><u>Ding\Bean\IResourceLoaderAware</u>: Whenever ding is going to instantiate a bean whose class implements IResourceLoaderAware interface, it will inject the instance of the resource loader in use, which is usually the container itself.</li>
   <li><u>Ding\Logger\ILoggerAware</u>: Whenever ding is going to instantiate a bean whose class implements ILoggerAware interface, it will inject the instance of the logger (log4php) currently in use by the container, so you can log there. The logger will have the name of the class (where '\' are replaced by '.')</li>
+  <li><u>Ding\Reflection\IReflectionFactoryAware</u>: Whenever ding is going to instantiate a bean whose class implements IReflectionFactoryAware interface, it will inject the instance of ReflectionFactory in use, so you can access annotations, etc.</li>
 </ul>
 
 <H4>Extension points</H4>
@@ -772,6 +805,8 @@ there are some predefined "kind" of extension points:
 
 <ul>
   <li>Drivers</li>
+  <li>Bean definition Providers</li>
+  <li>Aspect/Pointcut definition providers</li>
   <li>Helpers</li>
 </ul>
 </p>
@@ -782,7 +817,6 @@ ILifecycleListener and listens on one or more of the container lifecycle events:
 These classes usually reside in the namespace Ding\Bean\Factory\Driver.
 </p>
 <ul>
-  <li><u>BeforeConfig</u></li>
   <li><u>AfterConfig</u></li> 
   <li><u>BeforeDefinition:</u></li>
   <li><u>AfterDefinition</u></li>
@@ -801,7 +835,6 @@ the bean will be registered in the given lifecycle points. See docs/examples/lif
 This will allow you to extend the container functionality as much as you like.
 </p>
 <ul>
-  <li>Ding\Bean\Lifecycle\IBeforeConfigListener</li>
   <li>Ding\Bean\Lifecycle\IAfterConfigListener</li> 
   <li>Ding\Bean\Lifecycle\IBeforeDefinitionListener</li>
   <li>Ding\Bean\Lifecycle\IAfterDefinitionListener</li>
@@ -817,6 +850,18 @@ Helpers reside in the namespace Ding\Helpers. The helpers are usually normal
 beans, lets call them "user space" code (meaning that they
 are not part of Ding's architecture per se, unlike Drivers that are
 active players in the bean creation process).
+</p>
+<H4>Bean Definition Providers</H4>
+<p>
+If you need to provider bean definitions, implement IBeanDefinitionProvider. Whenever
+a bean is created that implements this interface, it is automatically registered as a bean
+definition provider and will be called by the container whenever necessary.
+</p>
+<H4>Aspect/Pointcut Definition Providers</H4>
+<p>
+If you need to provider aspect and pointcuts definitions, implement IAspectProvider and/or
+IPointcutProvider. Whenever a bean is created that implements this interface, it is automatically
+registered by the container into the AspectManager, and will be called whenever necessary.
 </p>
 <H4>ReflectionFactory</H4>
 <p>
@@ -867,7 +912,7 @@ method name "onSomeEvent()" and call it with $entity.
 You can also declare the beans that listen for particular events right in the
 container configuration.
 </p>
-<H4>Using the xml driver</H4>
+<H4>Using the xml provider</H4>
 <pre name="code" class="php">
 &lt;beans&gt;
   &lt;bean id="bean" class="Bean" scope="singleton" listens-on="bean2Created"/&gt;
@@ -876,7 +921,7 @@ container configuration.
 <p>
 The "listens-on" value is a csv string of events, lower camel cased.
 </p>
-<H4>Using the yaml driver</H4>
+<H4>Using the yaml provider</H4>
 <pre name="code" class="php">
 beans: !!map
   bean3:
@@ -888,7 +933,7 @@ beans: !!map
 <p>
 The "listens-on" value is a csv string of events, lower camel cased.
 </p>
-<H4>Using the annotations driver</H4>
+<H4>Using the annotations provider</H4>
 <pre name="code" class="php">
 /**
  * @Configuration
@@ -936,7 +981,15 @@ class Config
     }
 }
 </pre>
-
+<H4>Predefined events in the container</H4>
+<p>
+Ding defines the following events by default:
+<ul>
+  <li>dingError: Triggered whenever php triggers an error, notice, etc.</li>
+  <li>dingShutdown: Triggered when php is shutting down.</li>
+  <li>dingSignal: Available for SAPI's cli and cgi. Triggered when the container catches a posix signal.</li>
+</ul>
+</p>
 <a href="#" class="next-link"><strong>Back</strong></a>
                   <a name="resources" id="resources"></a>
                   <div class="line">
@@ -1112,7 +1165,7 @@ can break or continue the chain by choosing to (or not to) call the proceed() me
   <li><u>Exception</u>: Called when the called method has thrown an exception not catched.</li>
 </ul>
 <p>
-The aspects are declared in the xml driver like this (yaml is supported, please see: docs/examples/yaml for an example):
+The aspects are declared in the xml provider like this (yaml is supported, please see: docs/examples/yaml for an example):
 </p>
 
 <pre name="code" class="xml">
@@ -1231,11 +1284,11 @@ class AspectA
 </pre>
 <H4>Example</H4>
 <ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop">docs/examples/aop</a>: Using the xml driver.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-regex">docs/examples/aop-regex</a>: Using the xml driver and regular expressions.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-global">docs/examples/aop-global</a>: Using the xml driver, regular expressions, and global (shared) pointcuts.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-annotation">docs/examples/aop-annotation</a>: Using the annotations driver.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/yaml">docs/examples/yaml</a>: Using the yaml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop">docs/examples/aop</a>: Using the xml provider.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-regex">docs/examples/aop-regex</a>: Using the xml provider and regular expressions.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-global">docs/examples/aop-global</a>: Using the xml provider, regular expressions, and global (shared) pointcuts.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/aop-annotation">docs/examples/aop-annotation</a>: Using the annotations provider.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/yaml">docs/examples/yaml</a>: Using the yaml provider.</li>
 </ul>
 <a href="#" class="next-link"><strong>Back</strong></a>
                   <a name="config" id="config"></a>
@@ -1259,9 +1312,9 @@ Use the optional property:
 $properties['ding']['log4php.properties'] => './log4php.properties'
 </pre>
 
-<H4>Bean Factory Drivers</H4>
+<H4>Bean Factory Providers</H4>
 <p>
-You may configure any of the bean definition drivers available:
+You may configure any of the bean definition providers available:
 </p>
 <ul>
   <li>xml: Parses the given XML file(s), usually beans.xml and get bean definitions from there. Requires the property 'filename'.</li>
@@ -1269,7 +1322,7 @@ You may configure any of the bean definition drivers available:
   <li>annotation: Extracts bean definitions and other information right from the annotated code. Requires the property 'scanDir'.</li>
 </ul>
 <p>
-These drivers are configured with their own properties:
+These providers are configured with their own properties:
 </p>
 <ul>
   <li>$properties['ding']['factory']['bdef']['xml']</li>
@@ -1291,7 +1344,7 @@ $properties['ding']['factory']['bdef']['annotation'] = array(
 </pre>
 
 <p>
-You can also specify multiple files, for either xml or yaml drivers, like:
+You can also specify multiple files, for either xml or yaml providers, like:
 </p>
 <pre name="code" class="php">
 $properties['ding']['factory']['bdef']['xml'] = array(
@@ -1304,7 +1357,7 @@ $properties['ding']['factory']['bdef']['yaml'] = array(
 </pre>
 
 <p>
-You can also specify multiple search directories (paths), for either xml or yaml drivers, like:<br/>
+You can also specify multiple search directories (paths), for either xml or yaml providers, like:<br/>
 </p>
 <pre name="code" class="php">
 $properties['ding']['factory']['bdef']['yaml'] = array(
@@ -1312,7 +1365,7 @@ $properties['ding']['factory']['bdef']['yaml'] = array(
 )
 </pre>
 <p>
-This will tell the yaml driver (you can also use it with the xml driver) to look for the bean
+This will tell the yaml provider (you can also use it with the xml provider) to look for the bean
 files beans.yaml and otherBeans.yaml in the directories specified. The order of the
 directories is important, so the file used will be the first available one.
 </p>
@@ -1490,25 +1543,6 @@ $properties['ding']['cache']['bdef'] = array(
     'impl' => 'zend', 'zend' => $zendCacheOptions
 )
 </pre>
-<H4>Driver properties</H4>
-<p>
-Some drivers are optional:
-</p>
-<ul>
-  <li>SignalHandler</li>
-  <li>ErrorHandler</li>
-  <li>Shutdown</li>
-  <li>Timezone</li>
-</ul>
-<p>
-You can explicitely tell the container to use them with the following options:
-</p>
-<pre name="code" class="php">
-$options['drivers'] => array('signalhandler' => array())
-$options['drivers'] => array('errorhandler' => array())
-$options['drivers'] => array('shutdown' => array())
-$options['drivers'] => array('timezone' => array())
-</pre>
 <a href="#" class="next-link"><strong>Back</strong></a>
 
                   <a name="mvc" id="mvc"></a>
@@ -1519,22 +1553,22 @@ $options['drivers'] => array('timezone' => array())
                   <div class="hr-1"><hr /></div>
 <H4>Classes</H4>
 <ul>
-<li>Ding\MVC\Action</li>
-<li>Ding\MVC\Dispatcher</li>
-<li>Ding\MVC\ModelAndView</li>
-<li>Ding\MVC\RedirectModelAndView</li>
-<li>Ding\MVC\ForwardModelAndView</li>
-<li>Ding\MVC\View</li>
+<li>Ding\Mvc\Action</li>
+<li>Ding\Mvc\Dispatcher</li>
+<li>Ding\Mvc\ModelAndView</li>
+<li>Ding\Mvc\RedirectModelAndView</li>
+<li>Ding\Mvc\ForwardModelAndView</li>
+<li>Ding\Mvc\View</li>
 </ul>
 <H4>Interfaces</H4>
 <ul>
-<li>Ding\MVC\IMapper</li>
-<li>Ding\MVC\IViewResolver</li>
-<li>Ding\MVC\IViewRender</li>
+<li>Ding\Mvc\IMapper</li>
+<li>Ding\Mvc\IViewResolver</li>
+<li>Ding\Mvc\IViewRender</li>
 </ul>
 <H4>Description</H4>
 <p>
-The MVC implementation of Ding is in the namespace Ding\MVC. The components are:
+The MVC implementation of Ding is in the namespace Ding\Mvc. The components are:
 </p>
 <ul>
   <li><u>Actions</u>: Actions are strings, that uniquely identifies an action (usually triggered with a request) in 
@@ -1556,16 +1590,16 @@ The MVC implementation of Ding is in the namespace Ding\MVC. The components are:
 </ul>
 <H4>HTTP implementation Classes</H4>
 <ul>
-<li>Ding\MVC\Http\HttpAction</li>
-<li>Ding\MVC\Http\HttpDispatcher</li>
-<li>Ding\MVC\Http\HttpExceptionMapper</li>
-<li>Ding\MVC\Http\HttpView</li>
-<li>Ding\MVC\Http\HttpViewResolver</li>
-<li>Ding\MVC\Http\HttpViewRender</li>
-<li>Ding\MVC\Http\TwigViewRender</li>
-<li>Ding\MVC\Http\SmartyViewRender</li>
-<li>Ding\MVC\Http\HttpUrlMapper</li>
-<li>Ding\MVC\Http\HttpFrontController</li>
+<li>Ding\Mvc\Http\HttpAction</li>
+<li>Ding\Mvc\Http\HttpDispatcher</li>
+<li>Ding\Mvc\Http\HttpExceptionMapper</li>
+<li>Ding\Mvc\Http\HttpView</li>
+<li>Ding\Mvc\Http\HttpViewResolver</li>
+<li>Ding\Mvc\Http\HttpViewRender</li>
+<li>Ding\Mvc\Http\TwigViewRender</li>
+<li>Ding\Mvc\Http\SmartyViewRender</li>
+<li>Ding\Mvc\Http\HttpUrlMapper</li>
+<li>Ding\Mvc\Http\HttpFrontController</li>
 </ul>
 <H4>Annotations</H4>
 <ul>
@@ -1615,198 +1649,15 @@ in the container.
 </p>
 <H4>Http Example</H4>
 <ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc">docs/examples/mvc</a>: Using the xml and annotation driver.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-twig">docs/examples/mvc-twig</a>: Using the xml and annotation drivers, with twig as the template engine.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-smarty">docs/examples/mvc-twig</a>: Using the xml and annotation drivers, with smarty as the template engine.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc">docs/examples/mvc</a>: Using the xml and annotation provider.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-twig">docs/examples/mvc-twig</a>: Using the xml and annotation providers, with twig as the template engine.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-smarty">docs/examples/mvc-twig</a>: Using the xml and annotation providers, with smarty as the template engine.</li>
   </ul>
   <a href="#" class="next-link"><strong>Back</strong></a>
 
-                  <a name="helper-error" id="helper-error"></a>
-                  <div class="line">
-                        <h3>9. The ErrorHandler helper</h3>
-                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
-                  </div>
-                  <div class="hr-1"><hr /></div>
-                  <p>
-This helper is used as an error handler by using set_error_handler(). 
-</p>
-<H4>Class</H4>
-<ul>
-<li>Ding\Helpers\ErrorHandler\ErrorHandlerHelper</li>
-</ul>
-<H4>Driver</H4>
-<ul>
-<li>Ding\Bean\Factory\Driver\ErrorHandlerDriver</li>
-</ul>
-
-<H4>Annotations</H4>
-<ul>
-<li>Class level annotation @ErrorHandler</li>
-</ul>
-<H4>Description</H4>
-<p>
-PHP will call the callback registered with set_error_handler().
-The property "errorHandler" of the bean, is a reference to your
-own bean (whose class definition must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/ErrorHandler/IErrorHandler.php">Ding\Helpers\ErrorHandler\IErrorHandler</a>).
-</p>
-<p>
-The driver is the one responsible for getting an
-optional bean from the container, named "ErrorHandler", that should be of class
-"Ding\Helpers\ErrorHandlerHelper". If this bean exists, it will be set as the
-error handler. The helper will in turn, call the handler set via the "errorHandler"
-property. This driver registers at AfterConfig in the Container lifecycle.
-</p>
-<p>
-You need to add an option when instantiating the container:
-</p>
-<pre name="code" class="php">
-$options['drivers'] => array('errorhandler' => array())
-</pre>
-<H4>Example</H4>
-<ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ErrorHandler">docs/examples/ErrorHandler</a>: Using the xml driver.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ErrorHandler/annotated">docs/examples/ErrorHandler/annotated</a>: Using the annotation driver.</li>
-</ul>
-<a href="#" class="next-link"><strong>Back</strong></a>
-                  <a name="helper-shutdown" id="helper-error"></a>
-                  <div class="line">
-                        <h3>10. The ShutdownHandler helper</h3>
-                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
-                  </div>
-                  <div class="hr-1"><hr /></div>
-                  <p>
-This helper is used as a shutdown handler by using register_shutdown_function(). 
-</p>
-<H4>Class</H4>
-<ul>
-<li>Ding\Helpers\ShutdownHandler\ShutdownHandlerHelper</li>
-</ul>
-
-<H4>Driver</H4>
-<ul>
-<li>Ding\Bean\Factory\Driver\ShutdownHandlerDriver</li>
-</ul>
-
-<H4>Annotations</H4>
-<ul>
-<li>Class level annotation @ShutdownHandler</li>
-</ul>
-
-<H4>Description</H4>
-<p>
-PHP will call the callback registered with register_shutdown_function().
-The property "shutdownHandler" of the bean, is a reference to your
-own bean (whose class definition must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/ShutdownHandler/IShutdownHandler.php">Ding\Helpers\ShutdownHandler\IShutdownHandler</a>).
-</p>
-<p>
-The driver is the one responsible for getting an
-optional bean from the container, named "ShutdownHandler", that should be of class
-"Ding\Helpers\ShutdownHandlerHelper". If this bean exists, it will be set as the
-shutdown handler. The helper will in turn, call the handler set via the "shutdownHandler"
-property. This driver registers at AfterConfig in the Container lifecycle.
-</p>
-<p>
-You need to add an option when instantiating the container:
-</p>
-<pre name="code" class="php">
-$options['drivers'] => array('shutdown' => array())
-</pre>
-<H4>Example</H4>
-<ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ShutdownHandler">docs/examples/ShutdownHandler</a>: Using the xml driver.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/ShutdownHandler/annotated">docs/examples/ShutdownHandler/annotated</a>: Using the annotation driver.</li>
-</ul>
-<a href="#" class="next-link"><strong>Back</strong></a>
-                  <a name="helper-signal" id="helper-error"></a>
-                  <div class="line">
-                        <h3>11. The SignalHandler helper</h3>
-                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
-                  </div>
-                  <div class="hr-1"><hr /></div>
-                  <p>
-This helper is used as a signal handler for the signals:
-</p> 
-<ul>
-  <li>SIGQUIT</li>
-  <li>SIGHUP</li>
-  <li>SIGINT</li>
-  <li>SIGCHLD</li>
-  <li>SIGTERM</li>
-  <li>SIGUSR1</li>
-  <li>SIGUSR2</li>
-</ul>
-
-<H4>Class</H4>
-<ul>
-<li>Ding\Helpers\SignalHandler\SignalHandlerHelper</li>
-</ul>
-
-<H4>Driver</H4>
-<ul>
-<li>Ding\Bean\Factory\Driver\SignalHandlerDriver</li>
-</ul>
-<H4>Annotations</H4>
-<ul>
-<li>Class level annotation @SignalHandler</li>
-</ul>
-<H4>Description</H4>
-<p>
-For every signal received, it will invoke a (literally, a) signal handler
-of your choice. You cannot choose which signals to receive, so you must be ready
-to catch any of those. The property "signalHandler" of this bean, is a reference to your
-own bean (whose class definition must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/SignalHandler/ISignalHandler.php">Ding\Helpers\SignalHandler\ISignalHandler</a>).
-</p>
-<p>
-For this handler to work, you need to "declare(ticks=1)" in your php entry point.
-</p>
-<p>
-The driver is the one responsible for getting an
-optional bean from the container, named "SignalHandler", that should be of class
-"Ding\Helpers\SignalHandlerHelper". If this bean exists, it will be set as the
-signal handler. The helper will in turn, call the handler set via the "signalHandler"
-property. This driver registers at AfterConfig in the Container lifecycle.
-</p>
-<p>
-You need to add an option when instantiating the container:
-</p>
-<pre name="code" class="php">
-$options['drivers'] => array('signalhandler' => array())
-</pre>
-
-<H4>Example</H4>
-<ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SignalHandler">docs/examples/SignalHandler</a>: Using the xml driver.</li>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SignalHandler/annotated">docs/examples/SignalHandler/annotated</a>: Using the annotation driver.</li>
-</ul>
-<a href="#" class="next-link"><strong>Back</strong></a>
-                  <a name="helper-timer" id="helper-error"></a>
-                  <div class="line">
-                        <h3>12. The Timer helper</h3>
-                    <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
-                  </div>
-                  <div class="hr-1"><hr /></div>
-                  <p>
-This helper is designed to be a bean of scope prototype, and act as a timer,
-calling your callback every some milliseconds.
- </p>
-<H4>Class</H4>
-<ul>
-<li>Ding\Helpers\Timer\TimerHelper</li>
-</ul>
-<H4>Description</H4>
-<p>
-This bean has the properties "handler", and "milliseconds". Handler is a reference
-to another bean that must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/Timer/ITimerHandler.php">Ding\Helpers\Timer\ITimerHandler</a>. The timer
-can be start()'ed and stop()'ed as needed (see the php-doc api for more details).
-</p>
-<H4>Example</H4>
-<ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TimerHelper">docs/examples/TimerHelper</a>: Using the xml driver.</li>
-</ul>
-<a href="#" class="next-link"><strong>Back</strong></a>
                   <a name="helper-syslog" id="helper-error"></a>
                   <div class="line">
-                        <h3>13. The Syslog helper</h3>
+                        <h3>9. The Syslog helper</h3>
                     <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
                   </div>
                   <div class="hr-1"><hr /></div>
@@ -1825,12 +1676,12 @@ syslog properties "ident", "options", and "facility".
 </p>
 <H4>Example</H4>
 <ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SyslogHelper">docs/examples/SyslogHelper</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/SyslogHelper">docs/examples/SyslogHelper</a>: Using the xml provider.</li>
 </ul>
 <a href="#" class="next-link"><strong>Back</strong></a>
                   <a name="helper-pami" id="helper-error"></a>
                   <div class="line">
-                        <h3>14. The PAMI helper</h3>
+                        <h3>10. The PAMI helper</h3>
                     <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
                   </div>
                   <div class="hr-1"><hr /></div>
@@ -1841,12 +1692,12 @@ choice be called with any asterisk manager events.
  </p>
 <H4>Class</H4>
 <ul>
-<li>Ding\Helpers\PAMI\PamiHelper</li>
+<li>Ding\Helpers\Pami\PamiHelper</li>
 </ul>
 <H4>Description</H4>
 <p>
 This bean has the properties "handler", "host", "port", "username", "password", "readTimeout", and "connectTimeout". Handler is a reference
-to another bean that must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/PAMI/IPamiEventHandler.php">Ding\Helpers\PAMI\IPamiEventHandler. </a>
+to another bean that must implement <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/Pami/IPamiEventHandler.php">Ding\Helpers\Pami\IPamiEventHandler. </a>
 </p>
 <H4>Example</H4>
 <p>
@@ -1856,12 +1707,12 @@ See <a href="https://github.com/marcelog/AsterTrace">AsterTrace.</a>
 Also, you might want to look at this <a href="http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html"> article</a>.
 </p>
 <ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/PAMI">docs/examples/PAMI</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/PAMI">docs/examples/PAMI</a>: Using the xml provider.</li>
 </ul>
 <a href="#" class="next-link"><strong>Back</strong></a>
                   <a name="helper-pagi" id="helper-error"></a>
                   <div class="line">
-                        <h3>15. The PAGI helper</h3>
+                        <h3>11. The PAGI helper</h3>
                     <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
                   </div>
                   <div class="hr-1"><hr /></div>
@@ -1872,28 +1723,28 @@ telephony applications.
  </p>
 <H4>Class</H4>
 <ul>
-<li>Ding\Helpers\PAGI\PagiHelper</li>
+<li>Ding\Helpers\Pagi\PagiHelper</li>
 </ul>
 <H4>Example</H4>
 <ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/PAGI">docs/examples/PAGI</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/PAGI">docs/examples/PAGI</a>: Using the xml provider.</li>
 </ul>
 </p>
 <a href="#" class="next-link"><strong>Back</strong></a>
                   <a name="helper-tcpclient" id="helper-error"></a>
                   <div class="line">
-                        <h3>16. The TCP Client helper</h3>
+                        <h3>12. The TCP Client helper</h3>
                     <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
                   </div>
                   <div class="hr-1"><hr /></div>
 <H4>Class</H4>
 <ul>
-<li>Ding\Helpers\TCP\TCPClientHelper</li>
+<li>Ding\Helpers\Tcp\TcpClientHelper</li>
 </ul>
 <H4>Description</H4>
 <p>
 This helper is intended to help you write tcp clients by just implementing
-the <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/TCP/ITCPClientHandler.php">Ding\Helpers\TCP\ITCPClientHandler</a> interface. You will need to implement the
+the <a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/Tcp/ITcpClientHandler.php">Ding\Helpers\Tcp\ITcpClientHandler</a> interface. You will need to implement the
 following methods:
 </p>
 <ul>
@@ -1926,34 +1777,34 @@ See the php doc API for more details.
 </p>
 <H4>Example</H4>
 <ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPClientHelper">docs/examples/TCPClientHelper</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPClientHelper">docs/examples/TCPClientHelper</a>: Using the xml provider.</li>
 </ul>
 <a href="#" class="next-link"><strong>Back</strong></a>
                   <a name="helper-tcpserver" id="helper-error"></a>
                   <div class="line">
-                        <h3>17. The TCP Server helper</h3>
+                        <h3>13. The TCP Server helper</h3>
                     <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
                   </div>
                   <div class="hr-1"><hr /></div>
 <H4>Class</H4>
 <ul>
-<li>Ding\Helpers\TCP\TCPServerHelper</li>
-<li>Ding\Helpers\TCP\TCPPeer</li>
+<li>Ding\Helpers\Tcp\TcpServerHelper</li>
+<li>Ding\Helpers\Tcp\TcpPeer</li>
 </ul>
 <H4>Description</H4>
 <p>
 Use this helper to create one or more tcp server by just implementing the interface
-<a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/TCP/ITCPServerHandler.php">Ding\Helpers\TCP\ITCPServerHandler</a>. You will need to implement the
+<a href="https://github.com/marcelog/Ding/tree/master/src/mg/Ding/Helpers/Tcp/ITcpServerHandler.php">Ding\Helpers\Tcp\ITcpServerHandler</a>. You will need to implement the
 following methods:
 </p>
 <ul>
   <li>beforeOpen(): Called right before opening the socket.</li>
   <li>beforeListen(): Called right before start listening in the socket for new connections.</li>
   <li>close(): Called right after the server socket has ben closed.</li>
-  <li>handleConnection(): Called when a new connection has been established, will receive a TCPPeer as a client.</li>
+  <li>handleConnection(): Called when a new connection has been established, will receive a TcpPeer as a client.</li>
   <li>handleData(): Called when a client has sent data, will receive a TCPPeer as the client.</li>
   <li>disconnect(): Called when a client disconnects, will receive a TCPPeer as the client.</li>
-  <li>readTimeout(): Called when the read timeout has expired on a client, will receive a TCPPeer as a client.</li>
+  <li>readTimeout(): Called when the read timeout has expired on a client, will receive a TcpPeer as a client.</li>
 </ul>
 
 <p>
@@ -1968,7 +1819,7 @@ The helper itself has some useful method to control its behavior:
   available, control timeouts, etc.</li>
 </ul>
 <p>
-To control a peer, you can call these methods on the TCPPeer:
+To control a peer, you can call these methods on the TcpPeer:
 </p>
 <ul>
 <li>disconnect(): Disconnects the peer.</li>
@@ -1978,7 +1829,7 @@ To control a peer, you can call these methods on the TCPPeer:
 
 <H4>Example</H4>
 <ul>
-  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPServerHelper">docs/examples/TCPServerHelper</a>: Using the xml driver.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/TCPServerHelper">docs/examples/TCPServerHelper</a>: Using the xml provider.</li>
 </ul>
 <a href="#" class="next-link"><strong>Back</strong></a>
 </div>
