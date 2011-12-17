@@ -152,9 +152,9 @@ TEXT;
         $src = str_replace('NEW_NAME', $newName, $src);
         $src = str_replace('CLASS_NAME', $class->getName(), $src);
         $methods = array();
-        foreach ($class->getMethods() as $method) {
-            if (isset($proxyMethods[$method->getName()])) {
-                $methods[] = $this->createMethod($method);
+        foreach ($proxyMethods as $method) {
+            if ($class->hasMethod($method)) {
+                $methods[] = $this->createMethod($class->getMethod($method));
             }
         }
         $src = str_replace('METHODS', implode("\n", $methods), $src);
@@ -265,17 +265,12 @@ TEXT;
         $this->reflectionFactory = $reflectionFactory;
     }
     /**
-     * This will give you a string for a new proxy class.
-     *
-     * @param string      $class                Class to be proxied.
-     * @param array       $proxyMethods         Methods to be proxied.
-     *
-     * @todo Currently, final classes can't be proxied because the proxy class
-     * extends it (this may change in the near future).
+     * This will give you the name of a proxy class as a string. The class will
+     * already exist in the vm.
      *
      * @return string
      */
-    public function create($class, array $proxyMethods = array(), IDispatcher $dispatcher)
+    public function create($class, IDispatcher $dispatcher)
     {
         $subject = $this->reflectionFactory->getClass($class);
         $proxyClassName = 'Proxy' . str_replace('\\', '', $subject->getName());
@@ -283,13 +278,13 @@ TEXT;
         $result = false;
         $src = $this->cache->fetch($cacheKey, $result);
         if (!$result) {
-            $src = $this->createClass($proxyClassName, $proxyMethods, $subject);
+            $src = $this->createClass(
+                $proxyClassName, $dispatcher->getMethodsIntercepted(), $subject
+            );
             $this->cache->store($cacheKey, $src);
         }
         eval($src);
-        if ($dispatcher != null) {
-            $proxyClassName::setDispatcher($dispatcher);
-        }
+        $proxyClassName::setDispatcher($dispatcher);
         $proxyClassName::setReflectionFactory($this->reflectionFactory);
         return $proxyClassName;
     }

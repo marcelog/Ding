@@ -69,6 +69,21 @@ class DispatcherImpl implements IDispatcher, IReflectionFactoryAware
      */
     private $_interceptorClasses;
 
+    public function hasMethodsIntercepted()
+    {
+        return
+            count($this->_methodsExceptionIntercepted) > 0
+            || count($this->_methodsIntercepted) > 0
+        ;
+    }
+
+    public function getMethodsIntercepted()
+    {
+        return array_keys(array_merge(
+            $this->_methodsExceptionIntercepted,
+            $this->_methodsIntercepted
+        ));
+    }
     /**
      * (non-PHPdoc)
      * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()

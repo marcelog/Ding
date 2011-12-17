@@ -307,45 +307,6 @@ class ContainerImpl implements IContainer
         return $value;
     }
 
-    /**
-     * Will inject into the given dispatcher the necessary information to
-     * aspects will be run correctly.
-     *
-     * @param AspectDefinition $aspectDefinition
-     * @param DispatcherImpl $dispatcher
-     * @param \ReflectionClass $rClass
-     * @param array $methods
-     *
-     * @throws BeanFactoryException
-     * @return void
-     */
-    private function _applyAspect(
-        AspectDefinition $aspectDefinition, DispatcherImpl $dispatcher, \ReflectionClass $rClass, array &$methods
-    ) {
-        $aspect = $this->getBean($aspectDefinition->getBeanName());
-        foreach ($aspectDefinition->getPointcuts() as $pointcutName) {
-            $pointcut = $this->_aspectManager->getPointcut($pointcutName);
-            if ($pointcut === false) {
-                throw new BeanFactoryException('Could not find pointcut: ' . $pointcutName);
-            }
-            $expression = $pointcut->getExpression();
-            foreach  ($rClass->getMethods() as $method) {
-                $methodName = $method->getName();
-                if (preg_match('/' . $expression . '/', $methodName) === 0) {
-                    continue;
-                }
-                $methods[$methodName] = '';
-                if (
-                    $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
-                ) {
-                    $dispatcher->addMethodInterceptor($methodName, $aspect, $pointcut->getMethod());
-                } else {
-                    $dispatcher->addExceptionInterceptor($methodName, $aspect, $pointcut->getMethod());
-                }
-            }
-        }
-    }
-
     private function _findRealBeanClass(BeanDefinition $definition)
     {
         if ($definition->hasProxyClass()) {
@@ -403,6 +364,90 @@ class ContainerImpl implements IContainer
         }
     }
 
+    private function _createBeanDependencies(BeanDefinition $definition)
+    {
+        foreach ($definition->getDependsOn() as $depBean) {
+            $this->getBean(trim($depBean));
+        }
+    }
+
+    /**
+     * Will inject into the given dispatcher the necessary information to
+     * aspects will be run correctly.
+     *
+     * @throws BeanFactoryException
+     * @return void
+     */
+    private function _applyAspect(
+        $targetClass, AspectDefinition $aspectDefinition, IDispatcher $dispatcher
+    ) {
+        $rClass = $this->_reflectionFactory->getClass($targetClass);
+        $aspect = $this->getBean($aspectDefinition->getBeanName());
+        foreach ($aspectDefinition->getPointcuts() as $pointcutName) {
+            $pointcut = $this->_aspectManager->getPointcut($pointcutName);
+            if ($pointcut === false) {
+                throw new BeanFactoryException('Could not find pointcut: ' . $pointcutName);
+            }
+            $expression = $pointcut->getExpression();
+            foreach  ($rClass->getMethods() as $method) {
+                $methodName = $method->getName();
+                if (preg_match('/' . $expression . '/', $methodName) === 0) {
+                    continue;
+                }
+                if (
+                    $aspectDefinition->getType() == AspectDefinition::ASPECT_METHOD
+                ) {
+                    $dispatcher->addMethodInterceptor($methodName, $aspect, $pointcut->getMethod());
+                } else {
+                    $dispatcher->addExceptionInterceptor($methodName, $aspect, $pointcut->getMethod());
+                }
+            }
+        }
+    }
+
+    private function _applySpecificAspects(BeanDefinition $definition, IDispatcher $dispatcher)
+    {
+        if ($definition->hasAspects()) {
+            foreach ($definition->getAspects() as $aspect) {
+                $this->_applyAspect($definition->getClass(), $aspect, $dispatcher);
+            }
+        }
+    }
+
+    private function _applyGlobalAspects(BeanDefinition $definition, IDispatcher $dispatcher)
+    {
+        $class = $definition->getClass();
+        $rClass = $this->_reflectionFactory->getClass($class);
+        foreach ($this->_aspectManager->getAspects() as $aspect) {
+            $expression = $aspect->getExpression();
+            if (preg_match('/' . $expression . '/', $class) === 0) {
+                $parentClass = $rClass->getParentClass();
+                while($parentClass !== false) {
+                    if (preg_match('/' . $expression . '/', $parentClass->getName()) > 0) {
+                        $this->_applyAspect($parentClass->getName(), $aspect, $dispatcher);
+                    }
+                    $parentClass = $parentClass->getParentClass();
+                }
+            } else {
+                $this->_applyAspect($class, $aspect, $dispatcher);
+            }
+        }
+    }
+    private function _applyAspects(BeanDefinition $definition)
+    {
+        $class = $definition->getClass();
+        if (empty($class)) {
+            return;
+        }
+        $dispatcher = clone $this->_dispatcherTemplate;
+        $this->_applySpecificAspects($definition, $dispatcher);
+        $this->_applyGlobalAspects($definition, $dispatcher);
+        if ($dispatcher->hasMethodsIntercepted()) {
+            $definition->setProxyClassName(
+                $this->_proxyFactory->create($class, $dispatcher)
+            );
+        }
+    }
     /**
      * This will create a new bean, injecting all properties and applying all
      * aspects.
@@ -410,54 +455,15 @@ class ContainerImpl implements IContainer
      * @throws BeanFactoryException
      * @return object
      */
-    private function _createBean(BeanDefinition $beanDefinition)
+    private function _createBean(BeanDefinition $definition)
     {
-        foreach ($beanDefinition->getDependsOn() as $depBean) {
-            $this->getBean(trim($depBean));
-        }
-        $this->_lifecycleManager->beforeCreate($beanDefinition);
-
-        $beanClass = $beanDefinition->getClass();
-        $rClass = false;
-        if (!empty($beanClass)) {
-            $rClass = $this->_reflectionFactory->getClass($beanClass);
-        }
-        $methods = array();
-        $dispatcher = $this->_dispatcherTemplate !== null ? clone $this->_dispatcherTemplate : null;
-        if ($beanDefinition->hasAspects() && $dispatcher !== null) {
-            /**
-             * @todo the operation of applying an aspect is really expensive!
-             */
-            foreach ($beanDefinition->getAspects() as $aspect) {
-                $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
-            }
-        }
-        if ($rClass !== false && $this->_aspectManager !== null) {
-            foreach ($this->_aspectManager->getAspects() as $aspect) {
-                $expression = $aspect->getExpression();
-                if (preg_match('/' . $expression . '/', $beanClass) === 0) {
-                    $parentClass = $rClass->getParentClass();
-                    while($parentClass !== false) {
-                        if (preg_match('/' . $expression . '/', $parentClass->getName()) > 0) {
-                            $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
-                            break;
-                        }
-                        $parentClass = $parentClass->getParentClass();
-                    }
-                    continue;
-                }
-                $this->_applyAspect($aspect, $dispatcher, $rClass, $methods);
-            }
-            if (!empty($methods)) {
-                $beanDefinition->setProxyClassName(
-                    $this->_proxyFactory->create($beanClass, $methods, $dispatcher)
-                );
-            }
-        }
-        $bean = $this->_instantiate($beanDefinition);
-        $this->assemble($bean, $beanDefinition);
-        $this->_setupInitAndShutdown($bean, $beanDefinition);
-        $this->_lifecycleManager->afterCreate($bean, $beanDefinition);
+        $this->_lifecycleManager->beforeCreate($definition);
+        $this->_createBeanDependencies($definition);
+        $this->_applyAspects($definition);
+        $bean = $this->_instantiate($definition);
+        $this->_assemble($bean, $definition);
+        $this->_setupInitAndShutdown($bean, $definition);
+        $this->_lifecycleManager->afterCreate($bean, $definition);
         return $bean;
     }
 
@@ -480,7 +486,7 @@ class ContainerImpl implements IContainer
      *
      * @return void
      */
-    protected function assemble($bean, BeanDefinition $beanDefinition)
+    private function _assemble($bean, BeanDefinition $beanDefinition)
     {
         $this->_lifecycleManager->beforeAssemble($bean, $beanDefinition);
         foreach ($beanDefinition->getProperties() as $property) {
@@ -825,6 +831,8 @@ class ContainerImpl implements IContainer
 
         // We need a lifecycle manager.
         $this->_lifecycleManager = new BeanLifecycleManager;
+        $this->_dispatcherTemplate = new DispatcherImpl();
+        $this->_aspectManager = new AspectManager();
         $this->_beanDefCache = DummyCacheImpl::getInstance();
         $this->_beanCache = DummyCacheImpl::getInstance();
         $this->registerBeanDefinitionProvider(new Core(self::$_options));

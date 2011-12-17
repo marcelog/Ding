@@ -84,4 +84,17 @@ interface IDispatcher
      * @return void
      */
     public function invoke(MethodInvocation $invocation);
+    /**
+     * Returns all methods as an array of string, that are intercepted by
+     * this dispatcher.
+     *
+	 * @return string[]
+     */
+    public function getMethodsIntercepted();
+    /**
+     * Returns true if this dispatcher has any methods intercepted.
+     *
+     * @return boolean
+     */
+    public function hasMethodsIntercepted();
 }
