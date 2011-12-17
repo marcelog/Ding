@@ -1,13 +1,13 @@
 Changes
 -------
 * More mature code. Lots of internal code & interface cleanups :)
-* The container constructor no longer instantiates its drivers directly.
 * The drivers are all beans now (yeeey!).
 * Xml, Yaml, and Annotation are now "providers" instead of "drivers".
 * ErrorHandler, ShutdownHandler, and SignalHandler are now run by default, but
 you dont need any other configurations. You can hook in them by listening for
 events: "dingError", "dingShutdown", "dingSignal". See the updated examples.
 Note: The signal handler will only be enabled if sapi is cli or cgi.
+* Properties can now be used to declare bean classes.
 * BeforeDefinition in the lifecycle is gone.
 * BeforeConfig in the lifecycle is gone.
 * IBeanDefinitionProvider now replaces IBeforeDefinition.
@@ -27,6 +27,7 @@ registered in the AspectManager.
 * HttpDispatcher will now call the actions with their arguments, as passed from the
 request.
 * PropertiesHelper is now stripped from all logic. PropertiesDriver will do the job now.
+* The container is the one responsible for replacing properties with format ${..}.
 * Integrated drivers into core:
   * LoggerAware
   * AspectManagerAware

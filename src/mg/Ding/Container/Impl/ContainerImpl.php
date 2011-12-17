@@ -196,6 +196,8 @@ class ContainerImpl implements IContainer
      */
     private $_proxyFactory;
 
+    private $_properties;
+
     /**
      * Prevent serialization.
      *
@@ -245,6 +247,9 @@ class ContainerImpl implements IContainer
         foreach ($this->_beanDefinitionProviders as $provider) {
             $beanDefinition = $provider->getBeanDefinition($name);
             if ($beanDefinition) {
+                $beanDefinition->setClass($this->_searchAndReplaceProperties(
+                    $beanDefinition->getClass()
+                ));
                 break;
             }
         }
@@ -260,6 +265,22 @@ class ContainerImpl implements IContainer
         return $beanDefinition;
     }
 
+    private function _searchAndReplaceProperties($value)
+    {
+        if (is_string($value)) {
+            foreach ($this->_properties as $k => $v) {
+                if (strpos($value, $k) !== false) {
+                    if (is_string($v)) {
+                        $value = str_replace($k, $v, $value);
+                    } else {
+                        $value = $v;
+                    }
+                }
+            }
+        }
+        return $value;
+    }
+
     /**
      * Takes care of transforming a scalar value for a property or constructor
      * argument, into a an actual value (i.e: if its a resource://, loading it
@@ -271,11 +292,10 @@ class ContainerImpl implements IContainer
      */
     private function _loadValue($value)
     {
-        if (is_string($value)) {
-            if (strpos($value, 'resource://') === 0) {
-                $value = substr($value, 11);
-                return $this->getResource($value);
-            }
+        $value = $this->_searchAndReplaceProperties($value);
+        if (is_string($value) && strpos($value, 'resource://') === 0) {
+            $value = substr($value, 11);
+            return $this->getResource($value);
         }
         return $value;
     }
@@ -865,6 +885,20 @@ class ContainerImpl implements IContainer
     // @codeCoverageIgnoreEnd
 
     /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainer::registerProperties()
+     */
+    public function registerProperties(array $properties)
+    {
+        foreach ($properties as $key => $value) {
+            if (strncmp($key, 'php.', 4) === 0) {
+                ini_set(substr($key, 4), $value);
+            }
+            $this->_properties['${' . $key . '}'] = $value;
+        }
+    }
+
+    /**
      * Constructor.
      *
      * @param array $options options.
@@ -876,7 +910,6 @@ class ContainerImpl implements IContainer
         // Setup logger.
         $this->_logger = \Logger::getLogger(get_class($this));
         $this->_logDebugEnabled = $this->_logger->isDebugEnabled();
-
         $soullessArray = array();
         $this->_beanAliases = $soullessArray;
         $this->_beanDefs = $soullessArray;
@@ -884,9 +917,11 @@ class ContainerImpl implements IContainer
         $this->_shutdowners = $soullessArray;
         $this->_resources = $soullessArray;
         $this->_eventListeners = $soullessArray;
+        $this->_properties = $soullessArray;
 
         // Merge options with our defaults.
         self::$_options = array_replace_recursive(self::$_options, $options);
+        $this->registerProperties(self::$_options['properties']);
         $sapi = php_sapi_name();
         if ($sapi == 'cgi' || $sapi == 'cli') {
             $handler = array($this, 'signalHandler');

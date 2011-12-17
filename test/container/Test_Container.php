@@ -60,7 +60,8 @@ class Test_Container extends PHPUnit_Framework_TestCase
                         'yaml' => array(
                         	'filename' => 'container.yaml', 'directories' => array(RESOURCES_DIR)
                         )
-                    )
+                    ),
+                    'properties' => array('anImplementation' => 'SomeContainerTestAspectClass')
                 )
             )
         );
@@ -125,6 +126,15 @@ class Test_Container extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('aliasedBean');
         $bean = $container->getBean('alias1');
+    }
+    /**
+     * @test
+     */
+    public function can_override_bean_class_whith_property()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('customImplementationBean');
+        $this->assertTrue($bean instanceof SomeContainerTestAspectClass);
     }
 }
 

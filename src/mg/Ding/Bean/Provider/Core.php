@@ -167,12 +167,6 @@ class Core implements IBeanDefinitionProvider
         case 'dingPropertiesDriver':
             $bean = new BeanDefinition($name);
             $bean->setClass('\Ding\Bean\Factory\Driver\PropertiesDriver');
-            $bean->setArguments(array(
-                new BeanConstructorArgumentDefinition(
-                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
-                    $this->options['properties']
-                )
-            ));
             break;
         case 'dingLifecycleManager':
             $bean = new BeanDefinition($name);

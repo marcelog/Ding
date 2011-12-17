@@ -6,5 +6,6 @@
     <pointcut pointcut-ref="aPointcut" method="invoke"/>
   </aspect>
   <bean id="abstractBean" abstract="true"/>
+  <bean id="customImplementationBean" class="${anImplementation}"/>
   <bean id="aliasedBean" class="SomeContainerTestAspectClass" name="alias1, alias2"/>
 </beans>

@@ -87,6 +87,16 @@ interface IContainer extends IResourceLoader, IMessageSource, IBeanDefinitionPro
     public function registerBeanDefinitionProvider(IBeanDefinitionProvider $provider);
 
     /**
+     * Register new properties in the container, that will replace the value
+     * for bean's constructor arguments, properties, etc. Will also set any
+     * php. properties with ini_set().
+     *
+     * @param string[] $properties
+     *
+     * @return void
+     */
+    public function registerProperties(array $properties);
+    /**
      * Returns a bean.
      *
      * @param string $name Bean name.

@@ -55,7 +55,7 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
  * @link       http://marcelog.github.com/
  */
 class PropertiesDriver
-    implements IAfterDefinitionListener, IContainerAware,
+    implements IContainerAware,
     IBeanDefinitionProvider, IResourceLoaderAware, IAfterConfigListener
 {
     /**
@@ -106,67 +106,6 @@ class PropertiesDriver
     }
 
     /**
-     * Apply (search and replace).
-     *
-     * @param mixed $value Value to replace.
-     *
-     * @return mixed
-     */
-    private function _apply($value)
-    {
-        if (is_string($value)) {
-            foreach ($this->_propertiesNames as $k => $v) {
-                if (strpos($value, $k) !== false) {
-                    if (is_string($v)) {
-                        $value = str_replace($k, $v, $value);
-                    } else {
-                        $value = $v;
-                    }
-                }
-            }
-        }
-        return $value;
-    }
-
-    /**
-     * Recursively, apply filter to property or constructor arguments values.
-     *
-     * @param BeanPropertyDefinition|BeanConstructoruArgumentDefinition $def
-     * @param IContainer $factory Container in use.
-     *
-     * @return void
-     */
-    private function _applyFilter($def)
-    {
-        if (!is_object($def)) {
-            return;
-        }
-        $value = $def->getValue();
-        if (is_array($value)) {
-            foreach ($value as $subDef) {
-                $this->_applyFilter($subDef);
-            }
-        } else if (is_string($value)) {
-            $def->setValue($this->_apply($value));
-        }
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
-     */
-    public function afterDefinition(BeanDefinition $bean)
-    {
-        foreach ($bean->getProperties() as $property) {
-            $this->_applyFilter($property);
-        }
-        foreach ($bean->getArguments() as $argument) {
-            $this->_applyFilter($argument);
-        }
-        return $bean;
-    }
-
-    /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
      */
@@ -180,23 +119,9 @@ class PropertiesDriver
                 $resource = $location;
             }
             $contents = stream_get_contents($resource->getStream());
-            $properties = parse_ini_string($contents, false);
-            $this->loadProperties($properties);
+            $this->_container->registerProperties(parse_ini_string($contents, false));
         }
     }
-    protected function loadProperties(array $properties = array())
-    {
-        foreach (array_keys($properties) as $key) {
-            if (strncmp($key, 'php.', 4) === 0) {
-                ini_set(substr($key, 4), $properties[$key]);
-            }
-            /* Change keys. 'property' becomes ${property} */
-            $propName = '${' . $key . '}';
-            $this->_propertiesNames[$propName] = $properties[$key];
-            $this->_properties[$key] = $properties[$key];
-        }
-    }
-
     /**
      * (non-PHPdoc)
      * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinition()
@@ -218,15 +143,4 @@ class PropertiesDriver
     {
         return null;
     }
-    /**
-     * Constructor.
-     *
-     * @param array $options Optional options.
-     *
-     * @return void
-     */
-    public function __construct(array $options)
-    {
-        $this->loadProperties($options);
-   }
 }

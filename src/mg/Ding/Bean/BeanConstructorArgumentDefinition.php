@@ -91,18 +91,6 @@ class BeanConstructorArgumentDefinition
     }
 
     /**
-     * Changes the value for this constructor argument.
-     *
-     * @param mixed $value Value to set.
-     *
-     * @return void
-     */
-    public function setValue($value)
-    {
-        return $this->_value = $value;
-    }
-
-    /**
      * Returns true if this argument is a reference to another bean.
      *
      * @return boolean
