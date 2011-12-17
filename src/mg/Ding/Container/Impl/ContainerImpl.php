@@ -196,6 +196,12 @@ class ContainerImpl implements IContainer
      */
     private $_proxyFactory;
 
+    /**
+     * Properties configured when instantiating the container and by others,
+     * like when using a PropertiesHolder.
+     *
+     * @var string[]
+     */
     private $_properties;
 
     /**
@@ -265,6 +271,14 @@ class ContainerImpl implements IContainer
         return $beanDefinition;
     }
 
+    /**
+     * Will try to search and replace the properties found in the given
+     * value.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
     private function _searchAndReplaceProperties($value)
     {
         if (is_string($value)) {

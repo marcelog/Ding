@@ -67,5 +67,10 @@ interface IPropertiesHolder
      * @return void
      */
     public function setLocations($locations);
+    /**
+     * Returns all locations where properties files are.
+     *
+     * @return mixed[]
+     */
     public function getLocations();
 }
