@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-  <bean id="entityManager" class="Doctrine\ORM\EntityManager"
-    factory-method="create">
+  <bean id="entityManager" class="Doctrine\ORM\EntityManager" factory-method="create">
     <constructor-arg>
       <value>${doctrine.db}</value>
     </constructor-arg>

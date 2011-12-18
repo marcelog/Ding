@@ -3,9 +3,9 @@
   <bean id="PropertiesHolder" class="Ding\Helpers\Properties\PropertiesHelper" scope="singleton">  
     <property name="locations">  
       <array>
-        <entry key="0"><value>file://${application.config}/doctrine.properties</value></entry>
-        <entry key="1"><value>file://${application.config}/php.properties</value></entry>
-        <entry key="2"><value>file://${application.config}/application.properties</value></entry>
+        <entry><value>file://${application.config}/doctrine.properties</value></entry>
+        <entry><value>file://${application.config}/php.properties</value></entry>
+        <entry><value>file://${application.config}/application.properties</value></entry>
       </array>
     </property>
   </bean>
