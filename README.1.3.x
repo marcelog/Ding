@@ -2,6 +2,7 @@ Changes
 -------
 * More mature code. Lots of internal code & interface cleanups :)
 * The drivers are all beans now (yeeey!).
+* Initial work on web application bookstore for example.
 * Xml, Yaml, and Annotation are now "providers" instead of "drivers".
 * ErrorHandler, ShutdownHandler, and SignalHandler are now run by default, but
 you dont need any other configurations. You can hook in them by listening for

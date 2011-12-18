@@ -16,6 +16,7 @@ Ding is also the winner of the 2011 Binpress programming contest :)
 
 See this article for a complete application example: http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html.
 
+Another (in work) example for a web application can be found in docs/examples/bookstore.
 --------------------------------------------------------------------------------
 Upgrading note
 --------------------------------------------------------------------------------
