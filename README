@@ -212,13 +212,15 @@ drivers.
 MVC
 ===
 The mvc is work in progress, but you can sneak peek it in docs/examples/mvc. 
-You will need a rewrite rule, like: 
+You will need a rewrite rule, like (for lighttpd): 
 
-url.rewrite-once = ( "^/(.*)" => "/example.php" ) // for lighttpd
-
-Apache's mod_rewrite should be pretty much the same thing. The objective is
-to send everything (literally) to 1 file, that is also the '/' of your
-virtualhost.
+  url.rewrite-if-not-file = (
+    ".*\?(.*)$" => "/example.php?$1",
+    "" => "/example.php"
+  )
+  
+For Apache:
+RewriteRule ^(.*)$ /example.php/$1
 
 The example is mapped to /Some/Mapped/Path/MyController/some (hint: try it with
 ?a=b). If you press the button, the form will be submitted and handled by another
