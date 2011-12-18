@@ -159,7 +159,7 @@ class HttpUrlMapper implements IMapper, IContainerAware, ILoggerAware
                     $controllerUrl = $controllerUrl . '/';
                 }
                 $controllerUrlStart = strpos($url, $controllerUrl);
-                if ($controllerUrlStart === false || $controllerUrlStart > 0) {
+                if (!($controllerUrlStart === 0)) {
                     continue;
                 }
                 $start = $controllerUrlStart + strlen($controllerUrl);
@@ -170,10 +170,11 @@ class HttpUrlMapper implements IMapper, IContainerAware, ILoggerAware
                 $action = explode('/', $action);
                 $action = $action[0];
                 if (!is_object($controller)) {
-                    $this->_logger->debug(
-                    	'Found as annotated controller: ' . $controller
-                    );
                     $controller = $this->container->getBean($controller);
+                    $this->_logger->debug(
+                    	"Found as annotated controller: "
+                    	. "$controllerUrl in " . get_class($controller)
+                    );
                 }
                 if (!isset($candidates[$len])) {
                     $candidates[$len] = array();
@@ -184,6 +185,7 @@ class HttpUrlMapper implements IMapper, IContainerAware, ILoggerAware
         if (empty($candidates)) {
             return false;
         }
+        krsort($candidates);
         $controllers = array_shift($candidates);
         return array_shift($controllers);
     }
