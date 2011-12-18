@@ -69,5 +69,6 @@ class Test_HttpSession extends PHPUnit_Framework_TestCase
         $session = HttpSession::getSession();
         $session->setAttribute('foo', 'bar');
         $this->assertEquals($session->getAttribute('foo'), 'bar');
+        $this->assertTrue($session->hasAttribute('foo'));
     }
 }

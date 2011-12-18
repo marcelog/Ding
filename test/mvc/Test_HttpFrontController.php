@@ -304,7 +304,9 @@ class AController2
 
     public function redirectAction()
     {
-     return new RedirectModelAndView('http://www.google.com');
+        return new RedirectModelAndView(
+     		'http://www.google.com', array('arg1' => 'value1')
+        );
     }
 
     public function somethingOtherExceptionAction()
