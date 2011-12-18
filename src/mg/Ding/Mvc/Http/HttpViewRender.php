@@ -27,6 +27,11 @@
  */
 namespace Ding\Mvc\Http;
 
+use Ding\HttpSession\HttpSession;
+
+use Ding\MessageSource\IMessageSource;
+
+use Ding\MessageSource\IMessageSourceAware;
 use Ding\Mvc\IViewRender;
 use Ding\Mvc\View;
 
@@ -41,8 +46,32 @@ use Ding\Mvc\View;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class HttpViewRender implements IViewRender
+class HttpViewRender implements IViewRender, IMessageSourceAware
 {
+    /**
+     * @var IMessageSource
+     */
+    protected $messageSource;
+
+    public function setMessageSource(IMessageSource $messageSource)
+    {
+        $this->messageSource = $messageSource;
+    }
+
+    public function translate($bundle, $message, $arguments = array())
+    {
+        $session = HttpSession::getSession();
+        if (!$session->hasAttribute('LANGUAGE')) {
+            return $this->messageSource->getMessage(
+                $bundle, $message, $arguments
+            );
+        } else {
+            return $this->messageSource->getMessage(
+                $bundle, $message, $arguments, $session->getAttribute('LANGUAGE')
+            );
+        }
+    }
+
     /**
      * (non-PHPdoc)
      * @see Ding\Mvc.IViewRender::render()
