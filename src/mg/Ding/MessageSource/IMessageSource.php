@@ -66,5 +66,5 @@ interface IMessageSource
      * @throws IResourceException
      * @return string
      */
-    public function getMessage($bundle, $message, array $arguments, $locale);
+    public function getMessage($bundle, $message, array $arguments, $locale = 'default');
 }

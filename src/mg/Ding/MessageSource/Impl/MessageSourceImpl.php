@@ -81,7 +81,7 @@ class MessageSourceImpl implements IMessageSource, IResourceLoaderAware
      * (non-PHPdoc)
      * @see Ding\MessageSource.IMessageSource::getMessage()
      */
-    public function getMessage($bundle, $message, array $arguments, $locale)
+    public function getMessage($bundle, $message, array $arguments, $locale = 'default')
     {
         if (!isset($this->_basenames[$bundle][$locale])) {
             $resource = $this->_resourceLoader->getResource(

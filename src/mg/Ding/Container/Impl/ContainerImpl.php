@@ -706,7 +706,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\MessageSource.IMessageSource::getMessage()
      */
-    public function getMessage($bundle, $message, array $arguments, $locale)
+    public function getMessage($bundle, $message, array $arguments, $locale = 'default')
     {
         return
             $this->_messageSource !== false
