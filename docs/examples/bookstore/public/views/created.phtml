@@ -1,8 +1,9 @@
 <?php
 $model = $modelAndView->getModel();
 ?>
-Title: <?php echo $model['title']; ?><br/>
-Description: <?php echo $model['description']; ?><br/>
-ISBN: <?php echo $model['isbn']; ?><br/>
-
-Has been created.
+<?php
+echo $this->translate('books', 'has_been_created', array(
+    $model['title'], $model['description'], $model['isbn']
+));
+?><br/>
+<a href="/"><?php echo $this->translate('books', 'back');?></a>

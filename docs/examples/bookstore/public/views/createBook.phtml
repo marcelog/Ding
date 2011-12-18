@@ -20,7 +20,7 @@ $model = $modelAndView->getModel();
       <td><?php echo isset($model['errors']['isbn']) ? $this->translate('books', $model['errors']['isbn']) : ''?></td>
     </tr>
     <tr>
-      <td><input type="submit" name="createBook" value="Create"/></td>
+      <td><input type="submit" name="createBook" value="<?php echo $this->translate('books', 'create'); ?>"/></td>
     </tr>
   </table>
 </form>
