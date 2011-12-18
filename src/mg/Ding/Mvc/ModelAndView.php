@@ -88,6 +88,15 @@ class ModelAndView
     }
 
     /**
+     * True if this model has no objects.
+     *
+	 * @return boolean
+     */
+    public function isEmpty()
+    {
+        return count($this->_objects) == 0;
+    }
+    /**
      * Constructor.
      *
      * @param string $name    Model-View name.
