@@ -1,0 +1,20 @@
+<table>
+<tr>
+<td><?php echo $this->translate('books', 'title'); ?></td>
+<td><?php echo $this->translate('books', 'description'); ?></td>
+<td><?php echo $this->translate('books', 'isbn'); ?></td>
+</tr>
+<?php
+$books = $modelAndView->getModel();
+foreach ($books as $book) {
+    ?>
+    <tr>
+      <td><?php echo $book['title']; ?></td>
+      <td><?php echo $book['description']; ?></td>
+      <td><?php echo $book['isbn']; ?></td>
+    </tr>
+    <?php
+}
+?>
+</table>
+<a href="/"><?php echo $this->translate('books', 'back');?></a>

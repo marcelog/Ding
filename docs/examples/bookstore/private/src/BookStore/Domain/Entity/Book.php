@@ -32,6 +32,10 @@ class Book
         return $this->id;
     }
 
+    public function getTitle()
+    {
+        return $this->title;
+    }
     public function getIsbn()
     {
         return $this->isbn;

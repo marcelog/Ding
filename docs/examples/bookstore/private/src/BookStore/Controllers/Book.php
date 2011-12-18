@@ -65,6 +65,19 @@ class Book
         ));
     }
 
+    public function listAction()
+    {
+        $books = array();
+        foreach ($this->bookDomainService->getAll() as $book) {
+            $books[] = array(
+                'title' => $book->getTitle(),
+            	'isbn' => $book->getIsbn(),
+            	'description' => $book->getDescription()
+            );
+        }
+        return new ModelAndView('list', $books);
+    }
+
     public function createAction()
     {
         $modelAndView = new ModelAndView('createBook');
