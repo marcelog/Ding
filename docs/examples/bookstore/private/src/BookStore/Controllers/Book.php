@@ -20,33 +20,57 @@ class Book
      */
     protected $bookDomainService;
 
-    private function _validateBookForm($name, $isbn, $errors = array())
+    private function _validateBookForm($title, $description, $isbn)
     {
         $errors = array();
+        if (empty($title)) {
+            $errors['title'] = 'cant_be_empty';
+        }
+        if (empty($description)) {
+            $errors['description'] = 'cant_be_empty';
+        }
+        if (empty($isbn)) {
+            $errors['isbn'] = 'cant_be_empty';
+        }
         if (empty($errors)) {
             if ($this->bookDomainService->getByIsbn($isbn) !== null) {
-                $errors['name'] = 'already_exists';
+                $errors['isbn'] = 'already_exists';
             }
         }
-
+        return $errors;
     }
-    public function doCreateAction($name, $isbn, array $errors = array())
+
+    public function doCreateAction($title, $description, $isbn)
     {
         $arguments = array(
-			'name' => $name, 'isbn' => $isbn, 'errors' => $errors
-        );
-        if (empty($errors)) {
-            if ($this->bookDomainService->getByIsbn($isbn) !== null) {
-                $arguments['errors']['name'] = 'already_exists';
+        	'title' => $title, 'description' => $description, 'isbn' => $isbn
+       	);
+        $arguments['errors'] = $this->_validateBookForm($title, $description, $isbn);
+        if (empty($arguments['errors'])) {
+            try
+            {
+                $this->bookDomainService->create($title, $description, $isbn);
+                return new RedirectModelAndView('/Book/created', $arguments);
+            } catch (\Exception $exception) {
+                $arguments['errors']['system'] = $exception->getMessage();
             }
         }
-        return new ForwardModelAndView('/Book/create', $arguments);
+        return new ModelAndView('createBook', $arguments);
     }
-    public function createAction($name = '', $isbn = '', array $errors = array())
+
+    public function createdAction($title, $description, $isbn)
+    {
+        return new ModelAndView('created', array(
+            'title' => $title, 'description' => $description, 'isbn' => $isbn
+        ));
+    }
+
+    public function createAction()
     {
         $modelAndView = new ModelAndView('createBook');
         return $modelAndView;
     }
+
     public function __construct()
     {
     }

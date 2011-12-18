@@ -9,3 +9,18 @@ This bookstore will use doctrine as its orm, so you should install doctrine2
 if you want to run it.
 
 
+# Create the database:
+$ cd docs/examples/bookstore
+$ doctrine orm:schema:create
+
+Now setup your apache or lighttpd with a virtual host for docs/examples/bookstore.
+You will need a rewrite rule that maps everything not a file to index.php. This
+is an example for lighttpd:
+
+  url.rewrite-if-not-file = (
+    ".*\?(.*)$" => "/index.php?$1",
+    "" => "/index.php"
+  )
+
+For apache, you can use something like this:
+RewriteRule ^(.*)$ /index.php/$1

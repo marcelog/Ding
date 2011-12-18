@@ -2,16 +2,22 @@
 $model = $modelAndView->getModel();
 ?>
 <form method="POST" action="/Book/doCreate" id="createBookForm">
+  <?php echo isset($model['errors']['system']) ? $this->translate('books', $model['errors']['system']) : ''?><br/>
   <table>
     <tr>
-      <td>Name:</td>
-      <td><input type="text" name="name" value="<?php echo isset($model['name']) ? $model['name'] : ''?>"/></td>
-      <td><?php echo isset($model['errors']['name']) ? $this->translate('books', $model['errors']['name'], array()) : ''?></td>
+      <td><?php echo $this->translate('books', 'title'); ?>:</td>
+      <td><input type="text" name="title" value="<?php echo isset($model['title']) ? $model['title'] : ''?>"/></td>
+      <td><?php echo isset($model['errors']['title']) ? $this->translate('books', $model['errors']['title']) : ''?></td>
     </tr>
     <tr>
-      <td>ISBN:</td>
+      <td><?php echo $this->translate('books', 'description'); ?>:</td>
+      <td><input type="text" name="description" value="<?php echo isset($model['description']) ? $model['description'] : ''?>"/></td>
+      <td><?php echo isset($model['errors']['description']) ? $this->translate('books', $model['errors']['description']) : ''?></td>
+    </tr>
+    <tr>
+      <td><?php echo $this->translate('books', 'isbn'); ?>:</td>
       <td><input type="text" name="isbn"value="<?php echo isset($model['isbn']) ? $model['isbn'] : ''?>"/></td>
-      <td><?php echo isset($model['errors']['isbn']) ? $this->translate('books', $model['errors']['isbn'], array()) : ''?></td>
+      <td><?php echo isset($model['errors']['isbn']) ? $this->translate('books', $model['errors']['isbn']) : ''?></td>
     </tr>
     <tr>
       <td><input type="submit" name="createBook" value="Create"/></td>

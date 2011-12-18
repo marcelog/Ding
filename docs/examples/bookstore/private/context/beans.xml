@@ -13,10 +13,5 @@
   <import resource="i18n.xml"/>
   <import resource="mvc.xml"/>
 
-  <bean id="ErrorHandler" class="Ding\Helpers\ErrorHandler\ErrorHandlerHelper" scope="singleton">
-    <property name="errorHandler">
-      <ref bean="errorHandler"/>
-    </property>
-  </bean>
-  <bean id="errorHandler" class="\BookStore\ErrorHandler\ErrorHandler" scope="singleton"/>
+  <bean id="errorHandler" class="\BookStore\ErrorHandler\ErrorHandler" listens-on="dingError"/>
 </beans>

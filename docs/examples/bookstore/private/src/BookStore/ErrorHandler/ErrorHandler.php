@@ -1,11 +1,10 @@
 <?php
 namespace BookStore\ErrorHandler;
 
-use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Logger\ILoggerAware;
 
-class MyErrorHandler implements IErrorHandler, ILoggerAware
+class ErrorHandler implements ILoggerAware
 {
     protected $logger;
 
@@ -14,7 +13,7 @@ class MyErrorHandler implements IErrorHandler, ILoggerAware
         $this->logger = $logger;
     }
 
-    public function handleError(ErrorInfo $error)
+    public function onDingError(ErrorInfo $error)
     {
         $this->logger->error(
         	"This is your custom error handler: " . print_r($error, true)
