@@ -73,11 +73,16 @@ class HttpFrontController
             $newAction->getMethod($action->getMethod());
             self::dispatch($dispatcher, $viewResolver, $newAction, $mapper, $render);
         } else if ($modelAndView instanceof RedirectModelAndView) {
+            header('HTTP/1.1 302 Moved');
+            $location = $modelAndView->getName();
+            if (!$modelAndView->isEmpty()) {
+                $location .= '?' . http_build_query($modelAndView->getModel());
+            }
+            header('Location: ' . $location);
             self::$_logger->debug(
                	'Redirecting ModelAndView: ' . $modelAndView->getName()
+                . " -> $location"
             );
-            header('HTTP/1.1 302 Moved');
-            header('Location: ' . $modelAndView->getName());
         } else if ($modelAndView instanceof ModelAndView) {
             self::$_logger->debug(
                	'Using ModelAndView: ' . $modelAndView->getName()
