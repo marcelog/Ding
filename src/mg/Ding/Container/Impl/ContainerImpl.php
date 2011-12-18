@@ -514,7 +514,7 @@ class ContainerImpl implements IContainer
                 $parentClass = $rClass->getParentClass();
                 while($parentClass !== false) {
                     if (preg_match('/' . $expression . '/', $parentClass->getName()) > 0) {
-                        $this->_applyAspect($parentClass->getName(), $aspect, $dispatcher);
+                        $this->_applyAspect($class, $aspect, $dispatcher);
                     }
                     $parentClass = $parentClass->getParentClass();
                 }
