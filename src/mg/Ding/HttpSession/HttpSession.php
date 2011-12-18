@@ -59,6 +59,17 @@ class HttpSession
     }
 
     /**
+     * Returns true if this session contains this attribute.
+     *
+     * @param string $name
+     *
+     * @return boolean
+     */
+    public function hasAttribute($name)
+    {
+        return isset($_SESSION[$name]);
+    }
+    /**
      * Returns a previously saved session attribute with setAttribute().
      *
      * @param string $name Session attribute name.
