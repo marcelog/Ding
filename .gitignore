@@ -1,0 +1,8 @@
+vendor/*
+.buildpath
+.settings
+.project
+log.log
+build
+bookstore.sqlite
+
