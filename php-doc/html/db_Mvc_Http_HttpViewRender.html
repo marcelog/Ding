@@ -143,6 +143,7 @@ limitations under the License.</a>
 <dl class="class-info">
 <dt>Implements</dt>
 <dd><a href="db_Mvc_IViewRender.html#%5CDing%5CMvc%5CIViewRender">\Ding\Mvc\IViewRender</a></dd>
+<dd><a href="db_MessageSource_IMessageSourceAware.html#%5CDing%5CMessageSource%5CIMessageSourceAware">\Ding\MessageSource\IMessageSourceAware</a></dd>
 <dt>Author</dt>
 <dd>
 <a href="mailto:marcelog@gmail.com">Marcelo Gornstein</a>
@@ -163,6 +164,23 @@ limitations under the License.</a>
          
     </dd>
 </dl>
+<h3>Properties</h3>
+<div>
+<a id="\Ding\Mvc\Http\HttpViewRender::$messageSource" class="anchor"></a><div class="property protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\Ding\MessageSource\IMessageSource
+                 <span class="highlight">$messageSource</span>= ''
+                </code><div class="description">
+<p class="short-description"></p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_MessageSource_IMessageSource.html#%5CDing%5CMessageSource%5CIMessageSource">\Ding\MessageSource\IMessageSource</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+</div>
 <h3>Methods</h3>
 <div>
 <a id="\Ding\Mvc\Http\HttpViewRender::render()" class="anchor"></a><div class="method public">
@@ -212,6 +230,64 @@ limitations under the License.</a>
          
     </dd>
 </dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Mvc\Http\HttpViewRender::setMessageSource()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setMessageSource</span><span class="nb-faded-text">(
+           $messageSource
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$messageSource</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Mvc\Http\HttpViewRender::translate()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">translate</span><span class="nb-faded-text">(
+           $bundle,  $message,  $arguments
+              =
+              array()
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$bundle</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$message</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$arguments</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
 </div>
 <div class="clear"></div>
 </div>

@@ -624,7 +624,7 @@
         <TotalClasses>2</TotalClasses>
         <ConcreteClasses>0</ConcreteClasses>
         <AbstractClasses>2</AbstractClasses>
-        <Ca>3</Ca>
+        <Ca>4</Ca>
         <Ce>0</Ce>
         <A>1</A>
         <I>0</I>
@@ -640,6 +640,7 @@
         <Package>Ding\Container</Package>
         <Package>Ding\Container\Impl</Package>
         <Package>Ding\MessageSource\Impl</Package>
+        <Package>Ding\Mvc\Http</Package>
       </UsedBy>
     </Package>
     <Package name="Ding\MessageSource\Impl">
@@ -726,10 +727,10 @@
         <ConcreteClasses>10</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
-        <Ce>7</Ce>
+        <Ce>8</Ce>
         <A>0</A>
-        <I>0.875</I>
-        <D>0.125</D>
+        <I>0.88888888888889</I>
+        <D>0.11111111111111</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Mvc/Http/HttpAction.php">HttpAction</Class>
@@ -750,6 +751,7 @@
         <Package>Ding\Container\Impl</Package>
         <Package>Ding\HttpSession</Package>
         <Package>Ding\Logger</Package>
+        <Package>Ding\MessageSource</Package>
         <Package>Ding\Mvc</Package>
         <Package>Ding\Mvc\Exception</Package>
       </DependsUpon>

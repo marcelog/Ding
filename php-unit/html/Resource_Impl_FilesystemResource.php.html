@@ -367,7 +367,7 @@
 <span class="lineNum" id="container114"><a name="114"></a><a href="#114" id="line114">     114</a> </span>                :      */                                                                              
 <span class="lineNum" id="container115"><a name="115"></a><a href="#115" id="line115">     115</a> </span>                :     public function getURL()                                                         
 <span class="lineNum" id="container116"><a name="116"></a><a href="#116" id="line116">     116</a> </span>                :     {                                                                                
-<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span><span class="lineCov">             10 :         return self::SCHEME . $this-&gt;filename;                                       </span>
+<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span><span class="lineCov">             11 :         return self::SCHEME . $this-&gt;filename;                                       </span>
 <span class="lineNum" id="container118"><a name="118"></a><a href="#118" id="line118">     118</a> </span>                :     }                                                                                
 <span class="lineNum" id="container119"><a name="119"></a><a href="#119" id="line119">     119</a> </span>                :                                                                                      
 <span class="lineNum" id="container120"><a name="120"></a><a href="#120" id="line120">     120</a> </span>                :     /**                                                                              
@@ -376,16 +376,16 @@
 <span class="lineNum" id="container123"><a name="123"></a><a href="#123" id="line123">     123</a> </span>                :      */                                                                              
 <span class="lineNum" id="container124"><a name="124"></a><a href="#124" id="line124">     124</a> </span>                :     public function getStream()                                                      
 <span class="lineNum" id="container125"><a name="125"></a><a href="#125" id="line125">     125</a> </span>                :     {                                                                                
-<span class="lineNum" id="container126"><a name="126"></a><a href="#126" id="line126">     126</a> </span><span class="lineCov">              6 :         if ($this-&gt;fd === false) {                                                   </span>
-<span class="lineNum" id="container127"><a name="127"></a><a href="#127" id="line127">     127</a> </span><span class="lineCov">              6 :             $this-&gt;fd                                                                </span>
-<span class="lineNum" id="container128"><a name="128"></a><a href="#128" id="line128">     128</a> </span><span class="lineCov">              6 :                 = $this-&gt;context === false                                           </span>
-<span class="lineNum" id="container129"><a name="129"></a><a href="#129" id="line129">     129</a> </span><span class="lineCov">              6 :                 ? @fopen($this-&gt;getURL(), 'r', false)                                </span>
-<span class="lineNum" id="container130"><a name="130"></a><a href="#130" id="line130">     130</a> </span><span class="lineCov">              6 :                 : @fopen($this-&gt;getURL(), 'r', false, $this-&gt;context);               </span>
-<span class="lineNum" id="container131"><a name="131"></a><a href="#131" id="line131">     131</a> </span><span class="lineCov">              6 :             if ($this-&gt;fd === false) {                                               </span>
+<span class="lineNum" id="container126"><a name="126"></a><a href="#126" id="line126">     126</a> </span><span class="lineCov">              7 :         if ($this-&gt;fd === false) {                                                   </span>
+<span class="lineNum" id="container127"><a name="127"></a><a href="#127" id="line127">     127</a> </span><span class="lineCov">              7 :             $this-&gt;fd                                                                </span>
+<span class="lineNum" id="container128"><a name="128"></a><a href="#128" id="line128">     128</a> </span><span class="lineCov">              7 :                 = $this-&gt;context === false                                           </span>
+<span class="lineNum" id="container129"><a name="129"></a><a href="#129" id="line129">     129</a> </span><span class="lineCov">              7 :                 ? @fopen($this-&gt;getURL(), 'r', false)                                </span>
+<span class="lineNum" id="container130"><a name="130"></a><a href="#130" id="line130">     130</a> </span><span class="lineCov">              7 :                 : @fopen($this-&gt;getURL(), 'r', false, $this-&gt;context);               </span>
+<span class="lineNum" id="container131"><a name="131"></a><a href="#131" id="line131">     131</a> </span><span class="lineCov">              7 :             if ($this-&gt;fd === false) {                                               </span>
 <span class="lineNum" id="container132"><a name="132"></a><a href="#132" id="line132">     132</a> </span><span class="lineCov">              1 :                 throw new ResourceException('Could not open: ' . $this-&gt;filename);   </span>
 <span class="lineNum" id="container133"><a name="133"></a><a href="#133" id="line133">     133</a> </span>                :             }                                                                        
-<span class="lineNum" id="container134"><a name="134"></a><a href="#134" id="line134">     134</a> </span><span class="lineCov">              5 :         }                                                                            </span>
-<span class="lineNum" id="container135"><a name="135"></a><a href="#135" id="line135">     135</a> </span><span class="lineCov">              5 :         return $this-&gt;fd;                                                            </span>
+<span class="lineNum" id="container134"><a name="134"></a><a href="#134" id="line134">     134</a> </span><span class="lineCov">              6 :         }                                                                            </span>
+<span class="lineNum" id="container135"><a name="135"></a><a href="#135" id="line135">     135</a> </span><span class="lineCov">              6 :         return $this-&gt;fd;                                                            </span>
 <span class="lineNum" id="container136"><a name="136"></a><a href="#136" id="line136">     136</a> </span>                :     }                                                                                
 <span class="lineNum" id="container137"><a name="137"></a><a href="#137" id="line137">     137</a> </span>                :                                                                                      
 <span class="lineNum" id="container138"><a name="138"></a><a href="#138" id="line138">     138</a> </span>                :     /**                                                                              
@@ -433,7 +433,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sat Dec 17 18:33:38 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sun Dec 18 15:32:29 ART 2011.</td></tr>
     </table>
 
     <br />
@@ -454,38 +454,38 @@
           "footer": ""
         },
         "panel117": {
-          "header": "10 tests cover line 117",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
+          "header": "11 tests cover line 117",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::can_create_relative</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_IncludePath_Resource::can_work_with_and_without_scheme</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li><li class=\"testPassed\">Test_Container::can_get_resource_without_scheme</li></ul>",
           "footer": ""
         },
         "panel126": {
-          "header": "6 tests cover line 126",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "7 tests cover line 126",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel127": {
-          "header": "6 tests cover line 127",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "7 tests cover line 127",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel128": {
-          "header": "6 tests cover line 128",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "7 tests cover line 128",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel129": {
-          "header": "6 tests cover line 129",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "7 tests cover line 129",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel130": {
-          "header": "6 tests cover line 130",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "7 tests cover line 130",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel131": {
-          "header": "6 tests cover line 131",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "7 tests cover line 131",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_Filesystem_Resource::cannot_open_invalid_file</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel132": {
@@ -494,13 +494,13 @@
           "footer": ""
         },
         "panel134": {
-          "header": "5 tests cover line 134",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "6 tests cover line 134",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel135": {
-          "header": "5 tests cover line 135",
-          "body": "<ul><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
+          "header": "6 tests cover line 135",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder</li><li class=\"testPassed\">Test_XML_Filter::can_use_properties_from_holder_string</li><li class=\"testPassed\">Test_Filesystem_Resource::can_open</li><li class=\"testPassed\">Test_i18n::can_resolve_message_with_arguments</li><li class=\"testPassed\">Test_i18n::can_resolve_unknown_message_with_arguments</li></ul>",
           "footer": ""
         },
         "panel144": {

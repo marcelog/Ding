@@ -172,15 +172,15 @@ arguments and properties.</p>
 <h3>Properties</h3>
 <div>
 <a id="\Ding\Helpers\Properties\PropertiesHelper::$locations" class="anchor"></a><div class="property protected">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\string[]
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected">\mixed[]
                  <span class="highlight">$locations</span>= 'array()'
                 </code><div class="description">
-<p class="short-description">Properties.</p></div>
+<p class="short-description">IResource[] or string[]</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>\string[]</dd>
+<dd>\mixed[]</dd>
 </dl>
 </div>
 <div class="clear"></div>
@@ -194,8 +194,26 @@ arguments and properties.</p>
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description"></p></div>
-<div class="code-tabs"></div>
+          \mixed[]</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\mixed[]</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Helpers\Properties.IPropertiesHolder::getLocations()
+         
+    </dd>
+</dl>
+</div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Helpers\Properties\PropertiesHelper::setLocations()" class="anchor"></a><div class="method public">
@@ -204,7 +222,7 @@ arguments and properties.</p>
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description">Set properties files locations.</p></div>
+          void</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -216,9 +234,15 @@ arguments and properties.</p>
 <tr>
 <th>$locations</th>
 <td>\mixed[]</td>
-<td><em><p>locations, can be resources or strings.</p></em></td>
+<td><em><p>Can be strings, or IResources.</p></em></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Helpers\Properties.IPropertiesHolder::setLocations()
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>

@@ -76,7 +76,7 @@
             </div>
           </td>
           <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">63 / 63</td>
+          <td class="coverNumHi">68 / 68</td>
         </tr>
 
         <tr>
@@ -95,14 +95,14 @@
           </td>
           <td class="coverPerHi">100.00%</td>
           <td class="coverNumHi">2 / 2</td>
-          <td class="crap">11</td>
+          <td class="crap">12</td>
           <td class="coverBar">
             <div class="coverBarOutline" title="100.00%">
                 <div class="size chameleon"  style="width:100%" title="100.00%"></div>
             </div>
           </td>
           <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">63 / 63</td>
+          <td class="coverNumHi">68 / 68</td>
         </tr>
 
         <tr>
@@ -120,18 +120,18 @@
           </td>
           <td class="coverPerHi">100.00%</td>
           <td class="coverNumHi">1 / 1</td>
-          <td class="crap">4</td>
+          <td class="crap">5</td>
           <td class="coverBar">
               <div class="coverBarOutline" title="100.00%">
                   <div class="size chameleon"  style="width:100%" title="100.00%"></div>
               </div>
           </td>
           <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">22 / 22</td>
+          <td class="coverNumHi">27 / 27</td>
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#97">handle(array $properties = array()</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#102">handle(array $properties = array()</a></td>
           <td class="coverBar">
             <div class="coverBarOutline" title="100.00%">
                 <div class="size chameleon"  style="width:100%" title="100.00%"></div>
@@ -237,77 +237,82 @@
 <span class="lineNum" id="container73"><a name="73"></a><a href="#73" id="line73">      73</a> </span><span class="lineCov">              1 :             $newAction-&gt;getMethod($action-&gt;getMethod());                                       </span>
 <span class="lineNum" id="container74"><a name="74"></a><a href="#74" id="line74">      74</a> </span><span class="lineCov">              1 :             self::dispatch($dispatcher, $viewResolver, $newAction, $mapper, $render);          </span>
 <span class="lineNum" id="container75"><a name="75"></a><a href="#75" id="line75">      75</a> </span><span class="lineCov">              9 :         } else if ($modelAndView instanceof RedirectModelAndView) {                            </span>
-<span class="lineNum" id="container76"><a name="76"></a><a href="#76" id="line76">      76</a> </span><span class="lineCov">              1 :             self::$_logger-&gt;debug(                                                             </span>
-<span class="lineNum" id="container77"><a name="77"></a><a href="#77" id="line77">      77</a> </span><span class="lineCov">              1 :                    'Redirecting ModelAndView: ' . $modelAndView-&gt;getName()                     </span>
-<span class="lineNum" id="container78"><a name="78"></a><a href="#78" id="line78">      78</a> </span><span class="lineCov">              1 :             );                                                                                 </span>
-<span class="lineNum" id="container79"><a name="79"></a><a href="#79" id="line79">      79</a> </span><span class="lineCov">              1 :             header('HTTP/1.1 302 Moved');                                                      </span>
-<span class="lineNum" id="container80"><a name="80"></a><a href="#80" id="line80">      80</a> </span><span class="lineCov">              1 :             header('Location: ' . $modelAndView-&gt;getName());                                   </span>
-<span class="lineNum" id="container81"><a name="81"></a><a href="#81" id="line81">      81</a> </span><span class="lineCov">              9 :         } else if ($modelAndView instanceof ModelAndView) {                                    </span>
-<span class="lineNum" id="container82"><a name="82"></a><a href="#82" id="line82">      82</a> </span><span class="lineCov">              8 :             self::$_logger-&gt;debug(                                                             </span>
-<span class="lineNum" id="container83"><a name="83"></a><a href="#83" id="line83">      83</a> </span><span class="lineCov">              8 :                    'Using ModelAndView: ' . $modelAndView-&gt;getName()                           </span>
-<span class="lineNum" id="container84"><a name="84"></a><a href="#84" id="line84">      84</a> </span><span class="lineCov">              8 :             );                                                                                 </span>
-<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span><span class="lineCov">              8 :             $view = $viewResolver-&gt;resolve($modelAndView);                                     </span>
-<span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span><span class="lineCov">              8 :             $render-&gt;render($view);                                                            </span>
-<span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span><span class="lineCov">              8 :         }                                                                                      </span>
-<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span><span class="lineCov">              9 :     }                                                                                          </span>
-<span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span>                :     /**                                                                                        
-<span class="lineNum" id="container90"><a name="90"></a><a href="#90" id="line90">      90</a> </span>                :      * Handles the request. This will instantiate the container with the given                 
-<span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span>                :      * properties (via static method configure(), see below). Then it will                     
-<span class="lineNum" id="container92"><a name="92"></a><a href="#92" id="line92">      92</a> </span>                :      * getBean(HttpDispatcher) and call dispatch() on it with an Action created                
-<span class="lineNum" id="container93"><a name="93"></a><a href="#93" id="line93">      93</a> </span>                :      * based on the request uri and method parameters (get, post, etc).                        
-<span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span>                :      *                                                                                         
-<span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span>                :      * @return void                                                                            
-<span class="lineNum" id="container96"><a name="96"></a><a href="#96" id="line96">      96</a> </span>                :      */                                                                                        
-<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span>                :     public static function handle(array $properties = array(), $baseUrl = '/')                 
-<span class="lineNum" id="container98"><a name="98"></a><a href="#98" id="line98">      98</a> </span>                :     {                                                                                          
-<span class="lineNum" id="container99"><a name="99"></a><a href="#99" id="line99">      99</a> </span><span class="lineCov">             12 :         $session = HttpSession::getSession();                                                  </span>
-<span class="lineNum" id="container100"><a name="100"></a><a href="#100" id="line100">     100</a> </span><span class="lineCov">             12 :         $container = ContainerImpl::getInstance($properties);                                  </span>
-<span class="lineNum" id="container101"><a name="101"></a><a href="#101" id="line101">     101</a> </span><span class="lineCov">             12 :         self::$_logger = \Logger::getLogger(__CLASS__);                                        </span>
-<span class="lineNum" id="container102"><a name="102"></a><a href="#102" id="line102">     102</a> </span><span class="lineCov">             12 :         $baseUrlLen = strlen($baseUrl);                                                        </span>
-<span class="lineNum" id="container103"><a name="103"></a><a href="#103" id="line103">     103</a> </span><span class="lineCov">             12 :         ob_start();                                                                            </span>
-<span class="lineNum" id="container104"><a name="104"></a><a href="#104" id="line104">     104</a> </span><span class="lineCov">             12 :         $exceptionMapper = $render = $dispatcher = $viewResolver = false;                      </span>
-<span class="lineNum" id="container105"><a name="105"></a><a href="#105" id="line105">     105</a> </span>                :         try                                                                                    
-<span class="lineNum" id="container106"><a name="106"></a><a href="#106" id="line106">     106</a> </span>                :         {                                                                                      
-<span class="lineNum" id="container107"><a name="107"></a><a href="#107" id="line107">     107</a> </span><span class="lineCov">             12 :             $dispatcher = $container-&gt;getBean('HttpDispatcher');                               </span>
-<span class="lineNum" id="container108"><a name="108"></a><a href="#108" id="line108">     108</a> </span><span class="lineCov">             12 :             $viewResolver = $container-&gt;getBean('HttpViewResolver');                           </span>
-<span class="lineNum" id="container109"><a name="109"></a><a href="#109" id="line109">     109</a> </span><span class="lineCov">             12 :             $exceptionMapper = $container-&gt;getBean('HttpExceptionMapper');                     </span>
-<span class="lineNum" id="container110"><a name="110"></a><a href="#110" id="line110">     110</a> </span><span class="lineCov">             11 :             $render = $container-&gt;getBean('HttpViewRender');                                   </span>
-<span class="lineNum" id="container111"><a name="111"></a><a href="#111" id="line111">     111</a> </span><span class="lineCov">             11 :             $method = strtolower($_SERVER['REQUEST_METHOD']);                                  </span>
-<span class="lineNum" id="container112"><a name="112"></a><a href="#112" id="line112">     112</a> </span><span class="lineCov">             11 :             $url = $_SERVER['REQUEST_URI'];                                                    </span>
-<span class="lineNum" id="container113"><a name="113"></a><a href="#113" id="line113">     113</a> </span><span class="lineCov">             11 :             $urlStart = strpos($url, $baseUrl);                                                </span>
-<span class="lineNum" id="container114"><a name="114"></a><a href="#114" id="line114">     114</a> </span>                :                                                                                                
-<span class="lineNum" id="container115"><a name="115"></a><a href="#115" id="line115">     115</a> </span><span class="lineCov">             11 :             self::$_logger-&gt;debug('Trying to match: ' . $url);                                 </span>
-<span class="lineNum" id="container116"><a name="116"></a><a href="#116" id="line116">     116</a> </span><span class="lineCov">             11 :             if ($urlStart === false || $urlStart &gt; 0) {                                        </span>
-<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span><span class="lineCov">              1 :                 throw new MvcException($url . ' is not a base url.');                          </span>
-<span class="lineNum" id="container118"><a name="118"></a><a href="#118" id="line118">     118</a> </span>                :             }                                                                                  
-<span class="lineNum" id="container119"><a name="119"></a><a href="#119" id="line119">     119</a> </span><span class="lineCov">             10 :             $url = substr($url, $baseUrlLen);                                                  </span>
-<span class="lineNum" id="container120"><a name="120"></a><a href="#120" id="line120">     120</a> </span><span class="lineCov">             10 :             $variables = array();                                                              </span>
-<span class="lineNum" id="container121"><a name="121"></a><a href="#121" id="line121">     121</a> </span><span class="lineCov">             10 :             if (!empty($_GET)) {                                                               </span>
-<span class="lineNum" id="container122"><a name="122"></a><a href="#122" id="line122">     122</a> </span><span class="lineCov">              1 :                 $variables = array_merge($variables, $_GET);                                   </span>
-<span class="lineNum" id="container123"><a name="123"></a><a href="#123" id="line123">     123</a> </span><span class="lineCov">              1 :             }                                                                                  </span>
-<span class="lineNum" id="container124"><a name="124"></a><a href="#124" id="line124">     124</a> </span><span class="lineCov">             10 :             if (!empty($_POST)) {                                                              </span>
-<span class="lineNum" id="container125"><a name="125"></a><a href="#125" id="line125">     125</a> </span><span class="lineCov">              1 :                 $variables = array_merge($variables, $_POST);                                  </span>
-<span class="lineNum" id="container126"><a name="126"></a><a href="#126" id="line126">     126</a> </span><span class="lineCov">              1 :             }                                                                                  </span>
-<span class="lineNum" id="container127"><a name="127"></a><a href="#127" id="line127">     127</a> </span><span class="lineCov">             10 :             $action = new HttpAction($url, $variables);                                        </span>
-<span class="lineNum" id="container128"><a name="128"></a><a href="#128" id="line128">     128</a> </span><span class="lineCov">             10 :             $action-&gt;setMethod($method);                                                       </span>
-<span class="lineNum" id="container129"><a name="129"></a><a href="#129" id="line129">     129</a> </span><span class="lineCov">             10 :             $mapper = $container-&gt;getBean('HttpUrlMapper');                                    </span>
-<span class="lineNum" id="container130"><a name="130"></a><a href="#130" id="line130">     130</a> </span><span class="lineCov">             10 :             self::dispatch($dispatcher, $viewResolver, $action, $mapper, $render);             </span>
-<span class="lineNum" id="container131"><a name="131"></a><a href="#131" id="line131">     131</a> </span><span class="lineCov">             12 :         } catch(\Exception $exception) {                                                       </span>
-<span class="lineNum" id="container132"><a name="132"></a><a href="#132" id="line132">     132</a> </span><span class="lineCov">              4 :             self::$_logger-&gt;debug('Got Exception: ' . $exception);                             </span>
-<span class="lineNum" id="container133"><a name="133"></a><a href="#133" id="line133">     133</a> </span><span class="lineCov">              4 :             ob_end_clean();                                                                    </span>
-<span class="lineNum" id="container134"><a name="134"></a><a href="#134" id="line134">     134</a> </span><span class="lineCov">              4 :             ob_start();                                                                        </span>
-<span class="lineNum" id="container135"><a name="135"></a><a href="#135" id="line135">     135</a> </span><span class="lineCov">              4 :             if ($exceptionMapper === false) {                                                  </span>
-<span class="lineNum" id="container136"><a name="136"></a><a href="#136" id="line136">     136</a> </span><span class="lineCov">              1 :                 header('HTTP/1.1 500 Error.');                                                 </span>
-<span class="lineNum" id="container137"><a name="137"></a><a href="#137" id="line137">     137</a> </span><span class="lineCov">              1 :             } else {                                                                           </span>
-<span class="lineNum" id="container138"><a name="138"></a><a href="#138" id="line138">     138</a> </span><span class="lineCov">              3 :                 $action = new HttpAction(                                                      </span>
-<span class="lineNum" id="container139"><a name="139"></a><a href="#139" id="line139">     139</a> </span><span class="lineCov">              3 :                     get_class($exception), array('exception' =&gt; $exception)                    </span>
-<span class="lineNum" id="container140"><a name="140"></a><a href="#140" id="line140">     140</a> </span><span class="lineCov">              3 :                 );                                                                             </span>
-<span class="lineNum" id="container141"><a name="141"></a><a href="#141" id="line141">     141</a> </span><span class="lineCov">              3 :                 self::dispatch($dispatcher, $viewResolver, $action, $exceptionMapper, $render);</span>
-<span class="lineNum" id="container142"><a name="142"></a><a href="#142" id="line142">     142</a> </span>                :             }                                                                                  
-<span class="lineNum" id="container143"><a name="143"></a><a href="#143" id="line143">     143</a> </span>                :         }                                                                                      
-<span class="lineNum" id="container144"><a name="144"></a><a href="#144" id="line144">     144</a> </span><span class="lineCov">             10 :         ob_end_flush();                                                                        </span>
-<span class="lineNum" id="container145"><a name="145"></a><a href="#145" id="line145">     145</a> </span><span class="lineCov">             10 :     }                                                                                          </span>
-<span class="lineNum" id="container146"><a name="146"></a><a href="#146" id="line146">     146</a> </span>                : }                                                                                              
+<span class="lineNum" id="container76"><a name="76"></a><a href="#76" id="line76">      76</a> </span><span class="lineCov">              1 :             header('HTTP/1.1 302 Moved');                                                      </span>
+<span class="lineNum" id="container77"><a name="77"></a><a href="#77" id="line77">      77</a> </span><span class="lineCov">              1 :             $location = $modelAndView-&gt;getName();                                              </span>
+<span class="lineNum" id="container78"><a name="78"></a><a href="#78" id="line78">      78</a> </span><span class="lineCov">              1 :             if (!$modelAndView-&gt;isEmpty()) {                                                   </span>
+<span class="lineNum" id="container79"><a name="79"></a><a href="#79" id="line79">      79</a> </span><span class="lineCov">              1 :                 $location .= '?' . http_build_query($modelAndView-&gt;getModel());                </span>
+<span class="lineNum" id="container80"><a name="80"></a><a href="#80" id="line80">      80</a> </span><span class="lineCov">              1 :             }                                                                                  </span>
+<span class="lineNum" id="container81"><a name="81"></a><a href="#81" id="line81">      81</a> </span><span class="lineCov">              1 :             header('Location: ' . $location);                                                  </span>
+<span class="lineNum" id="container82"><a name="82"></a><a href="#82" id="line82">      82</a> </span><span class="lineCov">              1 :             self::$_logger-&gt;debug(                                                             </span>
+<span class="lineNum" id="container83"><a name="83"></a><a href="#83" id="line83">      83</a> </span><span class="lineCov">              1 :                    'Redirecting ModelAndView: ' . $modelAndView-&gt;getName()                     </span>
+<span class="lineNum" id="container84"><a name="84"></a><a href="#84" id="line84">      84</a> </span><span class="lineCov">              1 :                 . &quot; -&gt; $location&quot;                                                              </span>
+<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span><span class="lineCov">              1 :             );                                                                                 </span>
+<span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span><span class="lineCov">              9 :         } else if ($modelAndView instanceof ModelAndView) {                                    </span>
+<span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span><span class="lineCov">              8 :             self::$_logger-&gt;debug(                                                             </span>
+<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span><span class="lineCov">              8 :                    'Using ModelAndView: ' . $modelAndView-&gt;getName()                           </span>
+<span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span><span class="lineCov">              8 :             );                                                                                 </span>
+<span class="lineNum" id="container90"><a name="90"></a><a href="#90" id="line90">      90</a> </span><span class="lineCov">              8 :             $view = $viewResolver-&gt;resolve($modelAndView);                                     </span>
+<span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span><span class="lineCov">              8 :             $render-&gt;render($view);                                                            </span>
+<span class="lineNum" id="container92"><a name="92"></a><a href="#92" id="line92">      92</a> </span><span class="lineCov">              8 :         }                                                                                      </span>
+<span class="lineNum" id="container93"><a name="93"></a><a href="#93" id="line93">      93</a> </span><span class="lineCov">              9 :     }                                                                                          </span>
+<span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span>                :     /**                                                                                        
+<span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span>                :      * Handles the request. This will instantiate the container with the given                 
+<span class="lineNum" id="container96"><a name="96"></a><a href="#96" id="line96">      96</a> </span>                :      * properties (via static method configure(), see below). Then it will                     
+<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span>                :      * getBean(HttpDispatcher) and call dispatch() on it with an Action created                
+<span class="lineNum" id="container98"><a name="98"></a><a href="#98" id="line98">      98</a> </span>                :      * based on the request uri and method parameters (get, post, etc).                        
+<span class="lineNum" id="container99"><a name="99"></a><a href="#99" id="line99">      99</a> </span>                :      *                                                                                         
+<span class="lineNum" id="container100"><a name="100"></a><a href="#100" id="line100">     100</a> </span>                :      * @return void                                                                            
+<span class="lineNum" id="container101"><a name="101"></a><a href="#101" id="line101">     101</a> </span>                :      */                                                                                        
+<span class="lineNum" id="container102"><a name="102"></a><a href="#102" id="line102">     102</a> </span>                :     public static function handle(array $properties = array(), $baseUrl = '/')                 
+<span class="lineNum" id="container103"><a name="103"></a><a href="#103" id="line103">     103</a> </span>                :     {                                                                                          
+<span class="lineNum" id="container104"><a name="104"></a><a href="#104" id="line104">     104</a> </span><span class="lineCov">             12 :         $session = HttpSession::getSession();                                                  </span>
+<span class="lineNum" id="container105"><a name="105"></a><a href="#105" id="line105">     105</a> </span><span class="lineCov">             12 :         $container = ContainerImpl::getInstance($properties);                                  </span>
+<span class="lineNum" id="container106"><a name="106"></a><a href="#106" id="line106">     106</a> </span><span class="lineCov">             12 :         self::$_logger = \Logger::getLogger(__CLASS__);                                        </span>
+<span class="lineNum" id="container107"><a name="107"></a><a href="#107" id="line107">     107</a> </span><span class="lineCov">             12 :         $baseUrlLen = strlen($baseUrl);                                                        </span>
+<span class="lineNum" id="container108"><a name="108"></a><a href="#108" id="line108">     108</a> </span><span class="lineCov">             12 :         ob_start();                                                                            </span>
+<span class="lineNum" id="container109"><a name="109"></a><a href="#109" id="line109">     109</a> </span><span class="lineCov">             12 :         $exceptionMapper = $render = $dispatcher = $viewResolver = false;                      </span>
+<span class="lineNum" id="container110"><a name="110"></a><a href="#110" id="line110">     110</a> </span>                :         try                                                                                    
+<span class="lineNum" id="container111"><a name="111"></a><a href="#111" id="line111">     111</a> </span>                :         {                                                                                      
+<span class="lineNum" id="container112"><a name="112"></a><a href="#112" id="line112">     112</a> </span><span class="lineCov">             12 :             $dispatcher = $container-&gt;getBean('HttpDispatcher');                               </span>
+<span class="lineNum" id="container113"><a name="113"></a><a href="#113" id="line113">     113</a> </span><span class="lineCov">             12 :             $viewResolver = $container-&gt;getBean('HttpViewResolver');                           </span>
+<span class="lineNum" id="container114"><a name="114"></a><a href="#114" id="line114">     114</a> </span><span class="lineCov">             12 :             $exceptionMapper = $container-&gt;getBean('HttpExceptionMapper');                     </span>
+<span class="lineNum" id="container115"><a name="115"></a><a href="#115" id="line115">     115</a> </span><span class="lineCov">             11 :             $render = $container-&gt;getBean('HttpViewRender');                                   </span>
+<span class="lineNum" id="container116"><a name="116"></a><a href="#116" id="line116">     116</a> </span><span class="lineCov">             11 :             $method = strtolower($_SERVER['REQUEST_METHOD']);                                  </span>
+<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span><span class="lineCov">             11 :             $url = $_SERVER['REQUEST_URI'];                                                    </span>
+<span class="lineNum" id="container118"><a name="118"></a><a href="#118" id="line118">     118</a> </span><span class="lineCov">             11 :             $urlStart = strpos($url, $baseUrl);                                                </span>
+<span class="lineNum" id="container119"><a name="119"></a><a href="#119" id="line119">     119</a> </span>                :                                                                                                
+<span class="lineNum" id="container120"><a name="120"></a><a href="#120" id="line120">     120</a> </span><span class="lineCov">             11 :             self::$_logger-&gt;debug('Trying to match: ' . $url);                                 </span>
+<span class="lineNum" id="container121"><a name="121"></a><a href="#121" id="line121">     121</a> </span><span class="lineCov">             11 :             if ($urlStart === false || $urlStart &gt; 0) {                                        </span>
+<span class="lineNum" id="container122"><a name="122"></a><a href="#122" id="line122">     122</a> </span><span class="lineCov">              1 :                 throw new MvcException($url . ' is not a base url.');                          </span>
+<span class="lineNum" id="container123"><a name="123"></a><a href="#123" id="line123">     123</a> </span>                :             }                                                                                  
+<span class="lineNum" id="container124"><a name="124"></a><a href="#124" id="line124">     124</a> </span><span class="lineCov">             10 :             $url = substr($url, $baseUrlLen);                                                  </span>
+<span class="lineNum" id="container125"><a name="125"></a><a href="#125" id="line125">     125</a> </span><span class="lineCov">             10 :             $variables = array();                                                              </span>
+<span class="lineNum" id="container126"><a name="126"></a><a href="#126" id="line126">     126</a> </span><span class="lineCov">             10 :             if (!empty($_GET)) {                                                               </span>
+<span class="lineNum" id="container127"><a name="127"></a><a href="#127" id="line127">     127</a> </span><span class="lineCov">              1 :                 $variables = array_merge($variables, $_GET);                                   </span>
+<span class="lineNum" id="container128"><a name="128"></a><a href="#128" id="line128">     128</a> </span><span class="lineCov">              1 :             }                                                                                  </span>
+<span class="lineNum" id="container129"><a name="129"></a><a href="#129" id="line129">     129</a> </span><span class="lineCov">             10 :             if (!empty($_POST)) {                                                              </span>
+<span class="lineNum" id="container130"><a name="130"></a><a href="#130" id="line130">     130</a> </span><span class="lineCov">              1 :                 $variables = array_merge($variables, $_POST);                                  </span>
+<span class="lineNum" id="container131"><a name="131"></a><a href="#131" id="line131">     131</a> </span><span class="lineCov">              1 :             }                                                                                  </span>
+<span class="lineNum" id="container132"><a name="132"></a><a href="#132" id="line132">     132</a> </span><span class="lineCov">             10 :             $action = new HttpAction($url, $variables);                                        </span>
+<span class="lineNum" id="container133"><a name="133"></a><a href="#133" id="line133">     133</a> </span><span class="lineCov">             10 :             $action-&gt;setMethod($method);                                                       </span>
+<span class="lineNum" id="container134"><a name="134"></a><a href="#134" id="line134">     134</a> </span><span class="lineCov">             10 :             $mapper = $container-&gt;getBean('HttpUrlMapper');                                    </span>
+<span class="lineNum" id="container135"><a name="135"></a><a href="#135" id="line135">     135</a> </span><span class="lineCov">             10 :             self::dispatch($dispatcher, $viewResolver, $action, $mapper, $render);             </span>
+<span class="lineNum" id="container136"><a name="136"></a><a href="#136" id="line136">     136</a> </span><span class="lineCov">             12 :         } catch(\Exception $exception) {                                                       </span>
+<span class="lineNum" id="container137"><a name="137"></a><a href="#137" id="line137">     137</a> </span><span class="lineCov">              4 :             self::$_logger-&gt;debug('Got Exception: ' . $exception);                             </span>
+<span class="lineNum" id="container138"><a name="138"></a><a href="#138" id="line138">     138</a> </span><span class="lineCov">              4 :             ob_end_clean();                                                                    </span>
+<span class="lineNum" id="container139"><a name="139"></a><a href="#139" id="line139">     139</a> </span><span class="lineCov">              4 :             ob_start();                                                                        </span>
+<span class="lineNum" id="container140"><a name="140"></a><a href="#140" id="line140">     140</a> </span><span class="lineCov">              4 :             if ($exceptionMapper === false) {                                                  </span>
+<span class="lineNum" id="container141"><a name="141"></a><a href="#141" id="line141">     141</a> </span><span class="lineCov">              1 :                 header('HTTP/1.1 500 Error.');                                                 </span>
+<span class="lineNum" id="container142"><a name="142"></a><a href="#142" id="line142">     142</a> </span><span class="lineCov">              1 :             } else {                                                                           </span>
+<span class="lineNum" id="container143"><a name="143"></a><a href="#143" id="line143">     143</a> </span><span class="lineCov">              3 :                 $action = new HttpAction(                                                      </span>
+<span class="lineNum" id="container144"><a name="144"></a><a href="#144" id="line144">     144</a> </span><span class="lineCov">              3 :                     get_class($exception), array('exception' =&gt; $exception)                    </span>
+<span class="lineNum" id="container145"><a name="145"></a><a href="#145" id="line145">     145</a> </span><span class="lineCov">              3 :                 );                                                                             </span>
+<span class="lineNum" id="container146"><a name="146"></a><a href="#146" id="line146">     146</a> </span><span class="lineCov">              3 :                 self::dispatch($dispatcher, $viewResolver, $action, $exceptionMapper, $render);</span>
+<span class="lineNum" id="container147"><a name="147"></a><a href="#147" id="line147">     147</a> </span>                :             }                                                                                  
+<span class="lineNum" id="container148"><a name="148"></a><a href="#148" id="line148">     148</a> </span>                :         }                                                                                      
+<span class="lineNum" id="container149"><a name="149"></a><a href="#149" id="line149">     149</a> </span><span class="lineCov">             10 :         ob_end_flush();                                                                        </span>
+<span class="lineNum" id="container150"><a name="150"></a><a href="#150" id="line150">     150</a> </span><span class="lineCov">             10 :     }                                                                                          </span>
+<span class="lineNum" id="container151"><a name="151"></a><a href="#151" id="line151">     151</a> </span>                : }                                                                                              
 
 </pre>
         </td>
@@ -316,7 +321,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sat Dec 17 18:33:38 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sun Dec 18 15:32:29 ART 2011.</td></tr>
     </table>
 
     <br />
@@ -397,33 +402,33 @@
           "footer": ""
         },
         "panel81": {
-          "header": "9 tests cover line 81",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "header": "1 test covers line 81",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li></ul>",
           "footer": ""
         },
         "panel82": {
-          "header": "8 tests cover line 82",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "header": "1 test covers line 82",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li></ul>",
           "footer": ""
         },
         "panel83": {
-          "header": "8 tests cover line 83",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "header": "1 test covers line 83",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li></ul>",
           "footer": ""
         },
         "panel84": {
-          "header": "8 tests cover line 84",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "header": "1 test covers line 84",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li></ul>",
           "footer": ""
         },
         "panel85": {
-          "header": "8 tests cover line 85",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "header": "1 test covers line 85",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li></ul>",
           "footer": ""
         },
         "panel86": {
-          "header": "8 tests cover line 86",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "header": "9 tests cover line 86",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
           "footer": ""
         },
         "panel87": {
@@ -432,37 +437,47 @@
           "footer": ""
         },
         "panel88": {
-          "header": "9 tests cover line 88",
+          "header": "8 tests cover line 88",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "footer": ""
+        },
+        "panel89": {
+          "header": "8 tests cover line 89",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "footer": ""
+        },
+        "panel90": {
+          "header": "8 tests cover line 90",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "footer": ""
+        },
+        "panel91": {
+          "header": "8 tests cover line 91",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "footer": ""
+        },
+        "panel92": {
+          "header": "8 tests cover line 92",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
+          "footer": ""
+        },
+        "panel93": {
+          "header": "9 tests cover line 93",
           "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li></ul>",
-          "footer": ""
-        },
-        "panel99": {
-          "header": "12 tests cover line 99",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
-          "footer": ""
-        },
-        "panel100": {
-          "header": "12 tests cover line 100",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
-          "footer": ""
-        },
-        "panel101": {
-          "header": "12 tests cover line 101",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
-          "footer": ""
-        },
-        "panel102": {
-          "header": "12 tests cover line 102",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
-          "footer": ""
-        },
-        "panel103": {
-          "header": "12 tests cover line 103",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
         "panel104": {
           "header": "12 tests cover line 104",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "footer": ""
+        },
+        "panel105": {
+          "header": "12 tests cover line 105",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "footer": ""
+        },
+        "panel106": {
+          "header": "12 tests cover line 106",
           "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
@@ -481,24 +496,19 @@
           "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
-        "panel110": {
-          "header": "11 tests cover line 110",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
-          "footer": ""
-        },
-        "panel111": {
-          "header": "11 tests cover line 111",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
-          "footer": ""
-        },
         "panel112": {
-          "header": "11 tests cover line 112",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
+          "header": "12 tests cover line 112",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
         "panel113": {
-          "header": "11 tests cover line 113",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
+          "header": "12 tests cover line 113",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "footer": ""
+        },
+        "panel114": {
+          "header": "12 tests cover line 114",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
         "panel115": {
@@ -512,33 +522,28 @@
           "footer": ""
         },
         "panel117": {
-          "header": "1 test covers line 117",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
+          "header": "11 tests cover line 117",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
           "footer": ""
         },
-        "panel119": {
-          "header": "10 tests cover line 119",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
+        "panel118": {
+          "header": "11 tests cover line 118",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
           "footer": ""
         },
         "panel120": {
-          "header": "10 tests cover line 120",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
+          "header": "11 tests cover line 120",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
           "footer": ""
         },
         "panel121": {
-          "header": "10 tests cover line 121",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
+          "header": "11 tests cover line 121",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
           "footer": ""
         },
         "panel122": {
           "header": "1 test covers line 122",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li></ul>",
-          "footer": ""
-        },
-        "panel123": {
-          "header": "1 test covers line 123",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li></ul>",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
           "footer": ""
         },
         "panel124": {
@@ -547,23 +552,23 @@
           "footer": ""
         },
         "panel125": {
-          "header": "1 test covers line 125",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li></ul>",
+          "header": "10 tests cover line 125",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
           "footer": ""
         },
         "panel126": {
-          "header": "1 test covers line 126",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li></ul>",
+          "header": "10 tests cover line 126",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
           "footer": ""
         },
         "panel127": {
-          "header": "10 tests cover line 127",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
+          "header": "1 test covers line 127",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li></ul>",
           "footer": ""
         },
         "panel128": {
-          "header": "10 tests cover line 128",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
+          "header": "1 test covers line 128",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li></ul>",
           "footer": ""
         },
         "panel129": {
@@ -572,72 +577,97 @@
           "footer": ""
         },
         "panel130": {
-          "header": "10 tests cover line 130",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
+          "header": "1 test covers line 130",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li></ul>",
           "footer": ""
         },
         "panel131": {
-          "header": "12 tests cover line 131",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "header": "1 test covers line 131",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li></ul>",
           "footer": ""
         },
         "panel132": {
-          "header": "4 tests cover line 132",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "header": "10 tests cover line 132",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
           "footer": ""
         },
         "panel133": {
-          "header": "4 tests cover line 133",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "header": "10 tests cover line 133",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
           "footer": ""
         },
         "panel134": {
-          "header": "4 tests cover line 134",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "header": "10 tests cover line 134",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
           "footer": ""
         },
         "panel135": {
-          "header": "4 tests cover line 135",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "header": "10 tests cover line 135",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li></ul>",
           "footer": ""
         },
         "panel136": {
-          "header": "1 test covers line 136",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "header": "12 tests cover line 136",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
         "panel137": {
-          "header": "1 test covers line 137",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "header": "4 tests cover line 137",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
         "panel138": {
-          "header": "3 tests cover line 138",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
+          "header": "4 tests cover line 138",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
         "panel139": {
-          "header": "3 tests cover line 139",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
+          "header": "4 tests cover line 139",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
         "panel140": {
-          "header": "3 tests cover line 140",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
+          "header": "4 tests cover line 140",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },
         "panel141": {
-          "header": "3 tests cover line 141",
+          "header": "1 test covers line 141",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "footer": ""
+        },
+        "panel142": {
+          "header": "1 test covers line 142",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "footer": ""
+        },
+        "panel143": {
+          "header": "3 tests cover line 143",
           "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
           "footer": ""
         },
         "panel144": {
-          "header": "10 tests cover line 144",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "header": "3 tests cover line 144",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
           "footer": ""
         },
         "panel145": {
-          "header": "10 tests cover line 145",
+          "header": "3 tests cover line 145",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
+          "footer": ""
+        },
+        "panel146": {
+          "header": "3 tests cover line 146",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li></ul>",
+          "footer": ""
+        },
+        "panel149": {
+          "header": "10 tests cover line 149",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
+          "footer": ""
+        },
+        "panel150": {
+          "header": "10 tests cover line 150",
           "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li></ul>",
           "footer": ""
         },

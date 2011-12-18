@@ -396,13 +396,16 @@ limitations under the License.</a>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Container\Impl\ContainerImpl::$_properties" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
                  <span class="highlight">$_properties</span>= ''
-                </code><div class="description"></div>
+                </code><div class="description">
+<p class="short-description">Properties configured when instantiating the container and by others,
+like when using a PropertiesHolder.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>n/a</dd>
+<dd>\string[]</dd>
 </dl>
 </div>
 <div class="clear"></div>
@@ -1000,12 +1003,14 @@ first).</p></div>
 </div>
 <a id="\Ding\Container\Impl\ContainerImpl::_searchAndReplaceProperties()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_searchAndReplaceProperties</span><span class="nb-faded-text">(
-           $value
+          string $value
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description"></p></div>
+          string</code><div class="description"><p class="short_description">Will try to search and replace the properties found in the given
+value.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -1014,8 +1019,18 @@ first).</p></div>
 </tr></thead>
 <tr>
 <th>$value</th>
-<td></td>
+<td>string</td>
 <td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td></td>
 </tr>
 </table>
 </div>
@@ -1394,6 +1409,8 @@ getBean() yet), replace it with this one.</p></div>
 <a id="\Ding\Container\Impl\ContainerImpl::getMessage()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getMessage</span><span class="nb-faded-text">(
            $bundle,  $message,  $arguments,  $locale
+              =
+              'default'
           )
         </span>
         :

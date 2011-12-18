@@ -1125,7 +1125,7 @@ A <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/MessageSourc
 <pre name="code" class="php">
 interface IMessageSource
 {
-    public function getMessage($bundle, $message, array $arguments, $locale);
+    public function getMessage($bundle, $message, array $arguments, $locale = 'default');
 }
 </pre>
 <p>
@@ -1134,7 +1134,15 @@ The container implements this interface, so you can call
 <pre name="code" class="php">
 echo $container->getMessage('products', 'message.example', array('anArgument'), 'en_US');
 </pre> 
-
+<p>
+Or:
+</p>
+<pre name="code" class="php">
+echo $container->getMessage('products', 'message.example', array('anArgument'));
+</pre> 
+<p>
+And the messages will be looked for in the products_default.properties file.
+</p>
 <H4>IMessageSourceAware</H4>
 <p>
 Each bean that implements the <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/MessageSource/IMessageSourceAware.php">IMessageSourceAware</a> interface, will be autoinjected with 

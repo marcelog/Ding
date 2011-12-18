@@ -81,23 +81,24 @@ namespace Ding\Helpers\Properties;
 class PropertiesHelper implements IPropertiesHolder
 {
     /**
-     * Properties.
-     * @var string[]
+     * IResource[] or string[]
+     * @var mixed[]
      */
     protected $locations = array();
 
     /**
-     * Set properties files locations.
-     *
-     * @param mixed[] $locations locations, can be resources or strings.
-     *
-     * @return void
+     * (non-PHPdoc)
+     * @see Ding\Helpers\Properties.IPropertiesHolder::setLocations()
      */
     public function setLocations($locations)
     {
         $this-&gt;locations = $locations;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Helpers\Properties.IPropertiesHolder::getLocations()
+     */
     public function getLocations()
     {
         return $this-&gt;locations;

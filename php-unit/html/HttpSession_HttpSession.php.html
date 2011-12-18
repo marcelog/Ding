@@ -68,7 +68,7 @@
             </div>
           </td>
           <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">5 / 5</td>
+          <td class="coverNumHi">6 / 6</td>
           <td class="crap"><acronym title="Change Risk Anti-Patterns (CRAP) Index">CRAP</acronym></td>
           <td class="coverBar">
             <div class="coverBarOutline" title="100.00%">
@@ -76,7 +76,7 @@
             </div>
           </td>
           <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">13 / 13</td>
+          <td class="coverNumHi">14 / 14</td>
         </tr>
 
         <tr>
@@ -94,15 +94,15 @@
             </div>
           </td>
           <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">5 / 5</td>
-          <td class="crap">7</td>
+          <td class="coverNumHi">6 / 6</td>
+          <td class="crap">8</td>
           <td class="coverBar">
             <div class="coverBarOutline" title="100.00%">
                 <div class="size chameleon"  style="width:100%" title="100.00%"></div>
             </div>
           </td>
           <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">13 / 13</td>
+          <td class="coverNumHi">14 / 14</td>
         </tr>
 
         <tr>
@@ -125,7 +125,26 @@
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#68">getAttribute($name)</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#68">hasAttribute($name)</a></td>
+          <td class="coverBar">
+            <div class="coverBarOutline" title="100.00%">
+                <div class="size chameleon"  style="width:100%" title="100.00%"></div>
+            </div>
+          </td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">1 / 1</td>
+          <td class="crap">1</td>
+          <td class="coverBar">
+              <div class="coverBarOutline" title="100.00%">
+                  <div class="size chameleon"  style="width:100%" title="100.00%"></div>
+              </div>
+          </td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">1 / 1</td>
+        </tr>
+
+        <tr>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#79">getAttribute($name)</a></td>
           <td class="coverBar">
             <div class="coverBarOutline" title="100.00%">
                 <div class="size chameleon"  style="width:100%" title="100.00%"></div>
@@ -144,7 +163,7 @@
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#84">setAttribute($name, $value)</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#95">setAttribute($name, $value)</a></td>
           <td class="coverBar">
             <div class="coverBarOutline" title="100.00%">
                 <div class="size chameleon"  style="width:100%" title="100.00%"></div>
@@ -163,7 +182,7 @@
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#94">getSession()</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#105">getSession()</a></td>
           <td class="coverBar">
             <div class="coverBarOutline" title="100.00%">
                 <div class="size chameleon"  style="width:100%" title="100.00%"></div>
@@ -182,7 +201,7 @@
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#107">__construct()</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#118">__construct()</a></td>
           <td class="coverBar">
             <div class="coverBarOutline" title="100.00%">
                 <div class="size chameleon"  style="width:100%" title="100.00%"></div>
@@ -274,55 +293,66 @@
 <span class="lineNum" id="container59"><a name="59"></a><a href="#59" id="line59">      59</a> </span><span class="lineCov">              1 :     }                                                                      </span>
 <span class="lineNum" id="container60"><a name="60"></a><a href="#60" id="line60">      60</a> </span>                :                                                                            
 <span class="lineNum" id="container61"><a name="61"></a><a href="#61" id="line61">      61</a> </span>                :     /**                                                                    
-<span class="lineNum" id="container62"><a name="62"></a><a href="#62" id="line62">      62</a> </span>                :      * Returns a previously saved session attribute with setAttribute().   
+<span class="lineNum" id="container62"><a name="62"></a><a href="#62" id="line62">      62</a> </span>                :      * Returns true if this session contains this attribute.               
 <span class="lineNum" id="container63"><a name="63"></a><a href="#63" id="line63">      63</a> </span>                :      *                                                                     
-<span class="lineNum" id="container64"><a name="64"></a><a href="#64" id="line64">      64</a> </span>                :      * @param string $name Session attribute name.                         
+<span class="lineNum" id="container64"><a name="64"></a><a href="#64" id="line64">      64</a> </span>                :      * @param string $name                                                 
 <span class="lineNum" id="container65"><a name="65"></a><a href="#65" id="line65">      65</a> </span>                :      *                                                                     
-<span class="lineNum" id="container66"><a name="66"></a><a href="#66" id="line66">      66</a> </span>                :      * @return mixed                                                       
+<span class="lineNum" id="container66"><a name="66"></a><a href="#66" id="line66">      66</a> </span>                :      * @return boolean                                                     
 <span class="lineNum" id="container67"><a name="67"></a><a href="#67" id="line67">      67</a> </span>                :      */                                                                    
-<span class="lineNum" id="container68"><a name="68"></a><a href="#68" id="line68">      68</a> </span>                :     public function getAttribute($name)                                    
+<span class="lineNum" id="container68"><a name="68"></a><a href="#68" id="line68">      68</a> </span>                :     public function hasAttribute($name)                                    
 <span class="lineNum" id="container69"><a name="69"></a><a href="#69" id="line69">      69</a> </span>                :     {                                                                      
-<span class="lineNum" id="container70"><a name="70"></a><a href="#70" id="line70">      70</a> </span><span class="lineCov">              2 :         if (isset($_SESSION[$name])) {                                     </span>
-<span class="lineNum" id="container71"><a name="71"></a><a href="#71" id="line71">      71</a> </span><span class="lineCov">              1 :             return $_SESSION[$name];                                       </span>
-<span class="lineNum" id="container72"><a name="72"></a><a href="#72" id="line72">      72</a> </span>                :         }                                                                  
-<span class="lineNum" id="container73"><a name="73"></a><a href="#73" id="line73">      73</a> </span><span class="lineCov">              1 :         return false;                                                      </span>
-<span class="lineNum" id="container74"><a name="74"></a><a href="#74" id="line74">      74</a> </span>                :     }                                                                      
-<span class="lineNum" id="container75"><a name="75"></a><a href="#75" id="line75">      75</a> </span>                :                                                                            
-<span class="lineNum" id="container76"><a name="76"></a><a href="#76" id="line76">      76</a> </span>                :     /**                                                                    
-<span class="lineNum" id="container77"><a name="77"></a><a href="#77" id="line77">      77</a> </span>                :      * Saves an attribute to the session.                                  
-<span class="lineNum" id="container78"><a name="78"></a><a href="#78" id="line78">      78</a> </span>                :      *                                                                     
-<span class="lineNum" id="container79"><a name="79"></a><a href="#79" id="line79">      79</a> </span>                :      * @param string $name  Session attribute name.                        
-<span class="lineNum" id="container80"><a name="80"></a><a href="#80" id="line80">      80</a> </span>                :      * @param mixed  $value Value.                                         
-<span class="lineNum" id="container81"><a name="81"></a><a href="#81" id="line81">      81</a> </span>                :      *                                                                     
-<span class="lineNum" id="container82"><a name="82"></a><a href="#82" id="line82">      82</a> </span>                :      * @return void                                                        
-<span class="lineNum" id="container83"><a name="83"></a><a href="#83" id="line83">      83</a> </span>                :      */                                                                    
-<span class="lineNum" id="container84"><a name="84"></a><a href="#84" id="line84">      84</a> </span>                :     public function setAttribute($name, $value)                            
-<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span>                :     {                                                                      
-<span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span><span class="lineCov">              1 :         $_SESSION[$name] = $value;                                         </span>
-<span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span><span class="lineCov">              1 :     }                                                                      </span>
-<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span>                :                                                                            
-<span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span>                :     /**                                                                    
-<span class="lineNum" id="container90"><a name="90"></a><a href="#90" id="line90">      90</a> </span>                :      * Returns an instance of a session facade.                            
-<span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span>                :      *                                                                     
-<span class="lineNum" id="container92"><a name="92"></a><a href="#92" id="line92">      92</a> </span>                :      * @return HttpSession                                                 
-<span class="lineNum" id="container93"><a name="93"></a><a href="#93" id="line93">      93</a> </span>                :      */                                                                    
-<span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span>                :     public static function getSession()                                    
-<span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span>                :     {                                                                      
-<span class="lineNum" id="container96"><a name="96"></a><a href="#96" id="line96">      96</a> </span><span class="lineCov">             15 :         if (self::$_instance === false) {                                  </span>
-<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span><span class="lineCov">             15 :             self::$_instance = new HttpSession();                          </span>
-<span class="lineNum" id="container98"><a name="98"></a><a href="#98" id="line98">      98</a> </span><span class="lineCov">             15 :         }                                                                  </span>
-<span class="lineNum" id="container99"><a name="99"></a><a href="#99" id="line99">      99</a> </span><span class="lineCov">             15 :         return self::$_instance;                                           </span>
-<span class="lineNum" id="container100"><a name="100"></a><a href="#100" id="line100">     100</a> </span>                :     }                                                                      
-<span class="lineNum" id="container101"><a name="101"></a><a href="#101" id="line101">     101</a> </span>                :                                                                            
-<span class="lineNum" id="container102"><a name="102"></a><a href="#102" id="line102">     102</a> </span>                :     /**                                                                    
-<span class="lineNum" id="container103"><a name="103"></a><a href="#103" id="line103">     103</a> </span>                :      * Constructor.                                                        
-<span class="lineNum" id="container104"><a name="104"></a><a href="#104" id="line104">     104</a> </span>                :      *                                                                     
-<span class="lineNum" id="container105"><a name="105"></a><a href="#105" id="line105">     105</a> </span>                :      * @return void                                                        
-<span class="lineNum" id="container106"><a name="106"></a><a href="#106" id="line106">     106</a> </span>                :      */                                                                    
-<span class="lineNum" id="container107"><a name="107"></a><a href="#107" id="line107">     107</a> </span>                :     protected function __construct()                                       
-<span class="lineNum" id="container108"><a name="108"></a><a href="#108" id="line108">     108</a> </span>                :     {                                                                      
-<span class="lineNum" id="container109"><a name="109"></a><a href="#109" id="line109">     109</a> </span><span class="lineCov">             15 :         @session_start();                                                  </span>
-<span class="lineNum" id="container110"><a name="110"></a><a href="#110" id="line110">     110</a> </span><span class="lineCov">             15 :     }                                                                      </span>
+<span class="lineNum" id="container70"><a name="70"></a><a href="#70" id="line70">      70</a> </span><span class="lineCov">              2 :         return isset($_SESSION[$name]);                                    </span>
+<span class="lineNum" id="container71"><a name="71"></a><a href="#71" id="line71">      71</a> </span>                :     }                                                                      
+<span class="lineNum" id="container72"><a name="72"></a><a href="#72" id="line72">      72</a> </span>                :     /**                                                                    
+<span class="lineNum" id="container73"><a name="73"></a><a href="#73" id="line73">      73</a> </span>                :      * Returns a previously saved session attribute with setAttribute().   
+<span class="lineNum" id="container74"><a name="74"></a><a href="#74" id="line74">      74</a> </span>                :      *                                                                     
+<span class="lineNum" id="container75"><a name="75"></a><a href="#75" id="line75">      75</a> </span>                :      * @param string $name Session attribute name.                         
+<span class="lineNum" id="container76"><a name="76"></a><a href="#76" id="line76">      76</a> </span>                :      *                                                                     
+<span class="lineNum" id="container77"><a name="77"></a><a href="#77" id="line77">      77</a> </span>                :      * @return mixed                                                       
+<span class="lineNum" id="container78"><a name="78"></a><a href="#78" id="line78">      78</a> </span>                :      */                                                                    
+<span class="lineNum" id="container79"><a name="79"></a><a href="#79" id="line79">      79</a> </span>                :     public function getAttribute($name)                                    
+<span class="lineNum" id="container80"><a name="80"></a><a href="#80" id="line80">      80</a> </span>                :     {                                                                      
+<span class="lineNum" id="container81"><a name="81"></a><a href="#81" id="line81">      81</a> </span><span class="lineCov">              3 :         if (isset($_SESSION[$name])) {                                     </span>
+<span class="lineNum" id="container82"><a name="82"></a><a href="#82" id="line82">      82</a> </span><span class="lineCov">              2 :             return $_SESSION[$name];                                       </span>
+<span class="lineNum" id="container83"><a name="83"></a><a href="#83" id="line83">      83</a> </span>                :         }                                                                  
+<span class="lineNum" id="container84"><a name="84"></a><a href="#84" id="line84">      84</a> </span><span class="lineCov">              1 :         return false;                                                      </span>
+<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span>                :     }                                                                      
+<span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span>                :                                                                            
+<span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span>                :     /**                                                                    
+<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span>                :      * Saves an attribute to the session.                                  
+<span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span>                :      *                                                                     
+<span class="lineNum" id="container90"><a name="90"></a><a href="#90" id="line90">      90</a> </span>                :      * @param string $name  Session attribute name.                        
+<span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span>                :      * @param mixed  $value Value.                                         
+<span class="lineNum" id="container92"><a name="92"></a><a href="#92" id="line92">      92</a> </span>                :      *                                                                     
+<span class="lineNum" id="container93"><a name="93"></a><a href="#93" id="line93">      93</a> </span>                :      * @return void                                                        
+<span class="lineNum" id="container94"><a name="94"></a><a href="#94" id="line94">      94</a> </span>                :      */                                                                    
+<span class="lineNum" id="container95"><a name="95"></a><a href="#95" id="line95">      95</a> </span>                :     public function setAttribute($name, $value)                            
+<span class="lineNum" id="container96"><a name="96"></a><a href="#96" id="line96">      96</a> </span>                :     {                                                                      
+<span class="lineNum" id="container97"><a name="97"></a><a href="#97" id="line97">      97</a> </span><span class="lineCov">              2 :         $_SESSION[$name] = $value;                                         </span>
+<span class="lineNum" id="container98"><a name="98"></a><a href="#98" id="line98">      98</a> </span><span class="lineCov">              2 :     }                                                                      </span>
+<span class="lineNum" id="container99"><a name="99"></a><a href="#99" id="line99">      99</a> </span>                :                                                                            
+<span class="lineNum" id="container100"><a name="100"></a><a href="#100" id="line100">     100</a> </span>                :     /**                                                                    
+<span class="lineNum" id="container101"><a name="101"></a><a href="#101" id="line101">     101</a> </span>                :      * Returns an instance of a session facade.                            
+<span class="lineNum" id="container102"><a name="102"></a><a href="#102" id="line102">     102</a> </span>                :      *                                                                     
+<span class="lineNum" id="container103"><a name="103"></a><a href="#103" id="line103">     103</a> </span>                :      * @return HttpSession                                                 
+<span class="lineNum" id="container104"><a name="104"></a><a href="#104" id="line104">     104</a> </span>                :      */                                                                    
+<span class="lineNum" id="container105"><a name="105"></a><a href="#105" id="line105">     105</a> </span>                :     public static function getSession()                                    
+<span class="lineNum" id="container106"><a name="106"></a><a href="#106" id="line106">     106</a> </span>                :     {                                                                      
+<span class="lineNum" id="container107"><a name="107"></a><a href="#107" id="line107">     107</a> </span><span class="lineCov">             16 :         if (self::$_instance === false) {                                  </span>
+<span class="lineNum" id="container108"><a name="108"></a><a href="#108" id="line108">     108</a> </span><span class="lineCov">             16 :             self::$_instance = new HttpSession();                          </span>
+<span class="lineNum" id="container109"><a name="109"></a><a href="#109" id="line109">     109</a> </span><span class="lineCov">             16 :         }                                                                  </span>
+<span class="lineNum" id="container110"><a name="110"></a><a href="#110" id="line110">     110</a> </span><span class="lineCov">             16 :         return self::$_instance;                                           </span>
+<span class="lineNum" id="container111"><a name="111"></a><a href="#111" id="line111">     111</a> </span>                :     }                                                                      
+<span class="lineNum" id="container112"><a name="112"></a><a href="#112" id="line112">     112</a> </span>                :                                                                            
+<span class="lineNum" id="container113"><a name="113"></a><a href="#113" id="line113">     113</a> </span>                :     /**                                                                    
+<span class="lineNum" id="container114"><a name="114"></a><a href="#114" id="line114">     114</a> </span>                :      * Constructor.                                                        
+<span class="lineNum" id="container115"><a name="115"></a><a href="#115" id="line115">     115</a> </span>                :      *                                                                     
+<span class="lineNum" id="container116"><a name="116"></a><a href="#116" id="line116">     116</a> </span>                :      * @return void                                                        
+<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span>                :      */                                                                    
+<span class="lineNum" id="container118"><a name="118"></a><a href="#118" id="line118">     118</a> </span>                :     protected function __construct()                                       
+<span class="lineNum" id="container119"><a name="119"></a><a href="#119" id="line119">     119</a> </span>                :     {                                                                      
+<span class="lineNum" id="container120"><a name="120"></a><a href="#120" id="line120">     120</a> </span><span class="lineCov">             16 :         @session_start();                                                  </span>
+<span class="lineNum" id="container121"><a name="121"></a><a href="#121" id="line121">     121</a> </span><span class="lineCov">             16 :     }                                                                      </span>
 
 </pre>
         </td>
@@ -331,7 +361,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sat Dec 17 18:33:38 ART 2011.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 1.1.1</a> using <a href="http://www.php.net/" target="_top">PHP 5.3.3</a> and PHPUnit 3.6.4 at Sun Dec 18 15:32:29 ART 2011.</td></tr>
     </table>
 
     <br />
@@ -353,57 +383,62 @@
         },
         "panel70": {
           "header": "2 tests cover line 70",
-          "body": "<ul><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
           "footer": ""
         },
-        "panel71": {
-          "header": "1 test covers line 71",
-          "body": "<ul><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+        "panel81": {
+          "header": "3 tests cover line 81",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
           "footer": ""
         },
-        "panel73": {
-          "header": "1 test covers line 73",
+        "panel82": {
+          "header": "2 tests cover line 82",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "footer": ""
+        },
+        "panel84": {
+          "header": "1 test covers line 84",
           "body": "<ul><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li></ul>",
           "footer": ""
         },
-        "panel86": {
-          "header": "1 test covers line 86",
-          "body": "<ul><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
-          "footer": ""
-        },
-        "panel87": {
-          "header": "1 test covers line 87",
-          "body": "<ul><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
-          "footer": ""
-        },
-        "panel96": {
-          "header": "15 tests cover line 96",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
-          "footer": ""
-        },
         "panel97": {
-          "header": "15 tests cover line 97",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "header": "2 tests cover line 97",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
           "footer": ""
         },
         "panel98": {
-          "header": "15 tests cover line 98",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "header": "2 tests cover line 98",
+          "body": "<ul><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
           "footer": ""
         },
-        "panel99": {
-          "header": "15 tests cover line 99",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+        "panel107": {
+          "header": "16 tests cover line 107",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "footer": ""
+        },
+        "panel108": {
+          "header": "16 tests cover line 108",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
           "footer": ""
         },
         "panel109": {
-          "header": "15 tests cover line 109",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "header": "16 tests cover line 109",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
           "footer": ""
         },
         "panel110": {
-          "header": "15 tests cover line 110",
-          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "header": "16 tests cover line 110",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "footer": ""
+        },
+        "panel120": {
+          "header": "16 tests cover line 120",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
+          "footer": ""
+        },
+        "panel121": {
+          "header": "16 tests cover line 121",
+          "body": "<ul><li class=\"testPassed\">Test_HttpFrontController::can_accept_get_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_accept_post_arguments</li><li class=\"testPassed\">Test_HttpFrontController::can_forward</li><li class=\"testPassed\">Test_HttpFrontController::can_redirect</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_default_action</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_twig</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_smarty</li><li class=\"testPassed\">Test_HttpFrontController::can_dispatch_and_render_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_uncatched_exceptions</li><li class=\"testPassed\">Test_HttpFrontController::cannot_handle_invalid_base_url</li><li class=\"testPassed\">Test_HttpFrontController::can_handle_uncatched_exceptions_with_no_exception_mapper</li><li class=\"testPassed\">Test_HttpView::can_render_and_translate</li><li class=\"testPassed\">Test_HttpSession::can_use_session</li><li class=\"testPassed\">Test_HttpSession::can_return_false_on_invalid_attribute</li><li class=\"testPassed\">Test_HttpSession::can_use_attributes</li></ul>",
           "footer": ""
         },
       "dummy": ""

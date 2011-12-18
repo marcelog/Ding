@@ -232,6 +232,12 @@ class ContainerImpl implements IContainer
      */
     private $_proxyFactory;
 
+    /**
+     * Properties configured when instantiating the container and by others,
+     * like when using a PropertiesHolder.
+     *
+     * @var string[]
+     */
     private $_properties;
 
     /**
@@ -301,6 +307,14 @@ class ContainerImpl implements IContainer
         return $beanDefinition;
     }
 
+    /**
+     * Will try to search and replace the properties found in the given
+     * value.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
     private function _searchAndReplaceProperties($value)
     {
         if (is_string($value)) {
@@ -310,6 +324,9 @@ class ContainerImpl implements IContainer
                         $value = str_replace($k, $v, $value);
                     } else {
                         $value = $v;
+                        // Assigned value is not a string, so we cant use
+                        // strpos anymore on it (i.e: cant continue replacing)
+                        break;
                     }
                 }
             }
@@ -725,7 +742,7 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\MessageSource.IMessageSource::getMessage()
      */
-    public function getMessage($bundle, $message, array $arguments, $locale)
+    public function getMessage($bundle, $message, array $arguments, $locale = 'default')
     {
         return
             $this-&gt;_messageSource !== false

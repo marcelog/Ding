@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<pmd version="1.2.0" timestamp="2011-12-17T18:39:27-03:00">
+<pmd version="1.2.0" timestamp="2011-12-18T15:39:23-03:00">
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/Interceptor/DispatcherImpl.php">
     <violation beginline="70" endline="70" rule="UnusedPrivateField" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedprivatefield" priority="3">
       Avoid unused private fields such as '$_interceptorClasses'.
@@ -238,40 +238,40 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/Impl/ContainerImpl.php">
-    <violation beginline="67" endline="974" rule="TooManyFields" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanyfields" class="ContainerImpl" priority="3">
+    <violation beginline="67" endline="991" rule="TooManyFields" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanyfields" class="ContainerImpl" priority="3">
       Too many fields
     </violation>
-    <violation beginline="67" endline="974" rule="TooManyMethods" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="ContainerImpl" priority="3">
+    <violation beginline="67" endline="991" rule="TooManyMethods" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#toomanymethods" class="ContainerImpl" priority="3">
       This class has too many methods, consider refactoring it.
     </violation>
-    <violation beginline="67" endline="974" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ContainerImpl" priority="3">
+    <violation beginline="67" endline="991" rule="ExcessiveClassComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#excessiveclasscomplexity" class="ContainerImpl" priority="3">
       The class ContainerImpl has an overall complexity of 119 which is very high. The configured complexity threshold is 50.
     </violation>
-    <violation beginline="218" endline="218" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="224" endline="224" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$beanDefinition'.
     </violation>
-    <violation beginline="241" endline="241" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="247" endline="247" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$result'.
     </violation>
-    <violation beginline="616" endline="616" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="633" endline="633" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$result'.
     </violation>
-    <violation beginline="785" endline="834" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="fillAware" priority="3">
+    <violation beginline="802" endline="851" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="ContainerImpl" method="fillAware" priority="3">
       The method fillAware() has a Cyclomatic Complexity of 16.
     </violation>
-    <violation beginline="785" endline="834" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="fillAware" priority="3">
+    <violation beginline="802" endline="851" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Container\Impl" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="ContainerImpl" method="fillAware" priority="3">
       The method fillAware() has an NPath complexity of 32768.
     </violation>
-    <violation beginline="882" endline="882" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="899" endline="899" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$msg'.
     </violation>
-    <violation beginline="954" endline="954" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="971" endline="971" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$xmlDriver'.
     </violation>
-    <violation beginline="957" endline="957" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="974" endline="974" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$yamlDriver'.
     </violation>
-    <violation beginline="965" endline="965" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="982" endline="982" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$anDriver'.
     </violation>
   </file>
@@ -328,16 +328,16 @@
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Mvc/Http/HttpFrontController.php">
-    <violation beginline="99" endline="99" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
+    <violation beginline="104" endline="104" rule="UnusedLocalVariable" ruleset="Unused Code Rules" externalInfoUrl="http://phpmd.org/rules/unusedcode.html#unusedlocalvariable" priority="3">
       Avoid unused local variables such as '$session'.
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Mvc/Http/HttpUrlMapper.php">
-    <violation beginline="125" endline="189" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Mvc\Http" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="HttpUrlMapper" method="map" priority="3">
-      The method map() has a Cyclomatic Complexity of 14.
+    <violation beginline="125" endline="191" rule="CyclomaticComplexity" ruleset="Code Size Rules" package="Ding\Mvc\Http" externalInfoUrl="http://phpmd.org/rules/codesize.html#cyclomaticcomplexity" class="HttpUrlMapper" method="map" priority="3">
+      The method map() has a Cyclomatic Complexity of 13.
     </violation>
-    <violation beginline="125" endline="189" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Mvc\Http" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="HttpUrlMapper" method="map" priority="3">
-      The method map() has an NPath complexity of 1560.
+    <violation beginline="125" endline="191" rule="NPathComplexity" ruleset="Code Size Rules" package="Ding\Mvc\Http" externalInfoUrl="http://phpmd.org/rules/codesize.html#npathcomplexity" class="HttpUrlMapper" method="map" priority="3">
+      The method map() has an NPath complexity of 1048.
     </violation>
   </file>
   <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/ReflectionFactory.php">
