@@ -19,7 +19,6 @@ class Book extends AbstractService
     {
         $entity = new BookEntity($title, $isbn, $description);
         $this->entityManager->persist($entity);
-        $this->entityManager->flush();
     }
 
     public function getByIsbn($isbn)
