@@ -288,8 +288,10 @@ class ContainerImpl implements IContainer
                         $value = str_replace($k, $v, $value);
                     } else {
                         $value = $v;
+                        // Assigned value is not a string, so we cant use
+                        // strpos anymore on it (i.e: cant continue replacing)
+                        break;
                     }
-                    break;
                 }
             }
         }
