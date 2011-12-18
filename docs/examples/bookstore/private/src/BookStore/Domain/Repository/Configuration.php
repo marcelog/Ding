@@ -15,7 +15,7 @@ class Configuration
 
     protected function getRepository($name)
     {
-        return $this->entityManager->getRepository("\\BookStore\\Domain\\Entity\\$name");
+        return $this->entityManager->getRepository("\BookStore\Domain\Entity\\$name");
     }
 
     /** @Bean */
