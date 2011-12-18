@@ -289,6 +289,7 @@ class ContainerImpl implements IContainer
                     } else {
                         $value = $v;
                     }
+                    break;
                 }
             }
         }
