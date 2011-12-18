@@ -1,0 +1,11 @@
+NOTE: This is a work in progress. The idea is to show you how to create a 
+complete ding application (in this case, a web application, but all you'll see
+can also be applied to a console application). 
+
+Currently, the mvc has some limitations, but the core point is to show how to
+use the container to use DI and AOP quite easily.
+
+This bookstore will use doctrine as its orm, so you should install doctrine2
+if you want to run it.
+
+
