@@ -89,13 +89,10 @@ class Autoloader
      */
     private static function _resolve($class)
     {
+        $classFile = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
         foreach (self::$_includePath as $path) {
-            $file
-                = $path
-                . DIRECTORY_SEPARATOR
-                . str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php'
-            ;
-            if (file_exists($file)) {
+            $file = realpath("$path/$classFile");
+            if ($file && file_exists($file)) {
                 return $file;
             }
         }
