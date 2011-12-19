@@ -67,7 +67,7 @@ class FileCacheImpl implements ICache
     public function fetch($name, &$result)
     {
         $result = false;
-        $filename = $this->_directory . $name;
+        $filename = $this->_directory . $this->_sanitize($name);
         if (!@file_exists($filename)) {
             return false;
         }
@@ -75,6 +75,19 @@ class FileCacheImpl implements ICache
         $data = @file_get_contents($filename);
         $data = unserialize($data);
         return $data;
+    }
+
+    /**
+     * Converts a cache key name into a string that can be saved into a
+     * filesystem.
+     *
+     * @param string $name
+     *
+     * @return string
+     */
+    private function _sanitize($name)
+    {
+        return str_replace('\\', '_', $name);
     }
 
     /**
@@ -88,6 +101,7 @@ class FileCacheImpl implements ICache
     public function store($name, $value)
     {
         $value = serialize($value);
+        $name = $this->_sanitize($name);
         return @file_put_contents($this->_directory . $name, $value);
     }
 
