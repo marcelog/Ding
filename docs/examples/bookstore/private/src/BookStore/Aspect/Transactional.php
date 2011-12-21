@@ -11,7 +11,6 @@ class Transactional implements ILoggerAware
 {
     /**
      * @Resource
-     * @Required
      */
     protected $entityManager;
     protected static $count = 0;

@@ -14,7 +14,6 @@ use Ding\MessageSource\IMessageSourceAware;
 class Book
 {
     /**
-     * @Required
      * @Resource
      * @var \BookStore\Domain\Service
      */

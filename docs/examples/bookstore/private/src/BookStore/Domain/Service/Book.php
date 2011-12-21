@@ -10,7 +10,6 @@ class Book extends AbstractService
 {
     /**
      * @Resource
-     * @Required
      * @var \BookStore\Domain\Repository\Book
      */
     protected $bookRepository;

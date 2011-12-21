@@ -8,7 +8,6 @@ class Configuration
 {
     /**
      * @Resource
-     * @Required
      * @var \Doctrine\ORM\EntityManager
      */
     protected $entityManager;

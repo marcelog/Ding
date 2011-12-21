@@ -8,7 +8,6 @@ class AbstractService
 {
     /**
      * @Resource
-     * @Required
      * @var \Doctrine\ORM\EntityManager
      */
     protected $entityManager;
