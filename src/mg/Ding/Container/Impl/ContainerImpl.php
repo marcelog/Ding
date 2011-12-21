@@ -950,7 +950,6 @@ class ContainerImpl implements IContainer
         set_error_handler(array($this, 'errorHandler'));
         register_shutdown_function(array($this, 'shutdownHandler'));
 
-        // We need a lifecycle manager.
         $this->_lifecycleManager = new BeanLifecycleManager;
         $this->_dispatcherTemplate = new DispatcherImpl();
         $this->_aspectManager = new AspectManager();
