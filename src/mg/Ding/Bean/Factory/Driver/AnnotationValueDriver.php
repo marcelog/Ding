@@ -1,6 +1,6 @@
 <?php
 /**
- * This driver will search for @Resource setter methods.
+ * This driver will search for @Value
  *
  * PHP Version 5
  *
@@ -28,6 +28,8 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Bean\BeanConstructorArgumentDefinition;
+
 use Ding\Logger\ILoggerAware;
 
 use Ding\Reflection\IReflectionFactory;
@@ -53,7 +55,7 @@ use Ding\Bean\BeanAnnotationDefinition;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationResourceDriver
+class AnnotationValueDriver
     implements IAfterDefinitionListener, IContainerAware, IReflectionFactoryAware
 {
     /**
@@ -98,27 +100,15 @@ class AnnotationResourceDriver
         }
         $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
         $properties = $bean->getProperties();
-        foreach ($annotations as $method => $methodAnnotations) {
-            if (strpos($method, 'set') !== 0 || $method == 'class') {
-                continue;
-            }
-            $propName = lcfirst(substr($method, 3));
-            foreach ($methodAnnotations as $annotation) {
-                if ($annotation->getName() == 'Resource') {
-                    $properties[$propName] = new BeanPropertyDefinition(
-                        $propName, BeanPropertyDefinition::PROPERTY_BEAN, $propName
-                    );
-                }
-            }
-        }
         foreach ($annotations['class']['properties'] as $property => $propertyAnnotations) {
             foreach ($propertyAnnotations as $annotation) {
-
-
-                if ($annotation->getName() == 'Resource') {
-                    $properties[$property] = new BeanPropertyDefinition(
-                        $property, BeanPropertyDefinition::PROPERTY_BEAN, $property
-                    );
+                if ($annotation->getName() == 'Value') {
+                    $args = $annotation->getArguments();
+                    if (isset($args['value'])) {
+                        $properties[$property] = new BeanPropertyDefinition(
+                            $property, BeanPropertyDefinition::PROPERTY_SIMPLE, $args['value']
+                        );
+                    }
                 }
             }
         }

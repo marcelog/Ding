@@ -8,4 +8,9 @@
   <bean id="abstractBean" abstract="true"/>
   <bean id="customImplementationBean" class="${anImplementation}"/>
   <bean id="aliasedBean" class="SomeContainerTestAspectClass" name="alias1, alias2"/>
+  <bean id="beanWithUnknownProperty" class="SomeContainerTestAspectClass">
+    <property name="inexistant"><value>value</value></property>
+  </bean>
+  <bean id="invalidFactory" class="AnInvalidFactory"/>
+  <bean id="cantCreate" factory-bean="invalidFactory" factory-method="invalidMethod"/>
 </beans>

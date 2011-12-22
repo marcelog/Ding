@@ -136,6 +136,26 @@ class Test_Container extends PHPUnit_Framework_TestCase
         $bean = $container->getBean('customImplementationBean');
         $this->assertTrue($bean instanceof SomeContainerTestAspectClass);
     }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_inject_property_if_dont_know_how()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('beanWithUnknownProperty');
+    }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_create_bean_if_factory_method_returns_non_object()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('cantCreate');
+    }
 }
 
 class SomeContainerTestBeanClass
@@ -146,4 +166,12 @@ class SomeContainerTestBeanClass
 class SomeContainerTestAspectClass
 {
 
+}
+
+class AnInvalidFactory
+{
+    public function invalidMethod()
+    {
+        return null;
+    }
 }

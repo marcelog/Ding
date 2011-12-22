@@ -55,7 +55,8 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
                         'annotation' => array(
                         	'scanDir' => array(realpath(__DIR__))
                         )
-                    )
+                    ),
+                    'properties' => array('aProperty' => 'aValue')
                 )
             )
         );
@@ -160,8 +161,8 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('injectedBean');
         $this->assertTrue($bean->aSimplePrototypeBean instanceof ClassSimpleAnnotation);
-        $this->assertTrue($bean->getPrivateProperty() instanceof ClassSimpleAnnotation);
-        $this->assertTrue($bean->somethingElse instanceof ClassSimpleAnnotation);
+        $this->assertTrue($bean->getASimpleSingletonBean() instanceof ClassSimpleAnnotation);
+        $this->assertTrue($bean->somethingElse instanceof ASimpleDestroyInitClass);
     }
 
     /**
@@ -261,6 +262,16 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     {
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBeanDefinitionByClass('aliasedBean');
+    }
+
+    /**
+     * @test
+     */
+    public function can_inject_property_string()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aValueAnnotationClass');
+        $this->assertEquals($bean->getMyValue(), "aValue/somethingelse");
     }
 }
 
@@ -441,7 +452,7 @@ class ClassSimpleAnnotation2
     private $aSimpleSingletonBean = null;
     public $somethingElse = null;
 
-    public function getPrivateProperty()
+    public function getASimpleSingletonBean()
     {
         return $this->aSimpleSingletonBean;
     }
@@ -449,7 +460,7 @@ class ClassSimpleAnnotation2
     /**
      * @Resource
      */
-    public function setASimpleSingletonBean($value)
+    public function setASimpleInitMethodClass($value)
     {
         $this->somethingElse = $value;
     }
@@ -580,4 +591,20 @@ abstract class UnnamedParent extends AnotherParent
 class ChildBeanAnnotated extends UnnamedParent
 {
 
+}
+
+/**
+ * @Component(name="aValueAnnotationClass")
+ */
+class AValueAnnotationClass
+{
+    /**
+     * @Value(value="${aProperty}/somethingelse")
+     */
+    private $_myValue;
+
+    public function getMyValue()
+    {
+        return $this->_myValue;
+    }
 }

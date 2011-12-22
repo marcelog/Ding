@@ -167,8 +167,8 @@ class Test_IoC_Annotation_Cache_ZF extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('injectedBean');
         $this->assertTrue($bean->aSimplePrototypeBean instanceof ClassSimpleAnnotation);
-        $this->assertTrue($bean->getPrivateProperty() instanceof ClassSimpleAnnotation);
-        $this->assertTrue($bean->somethingElse instanceof ClassSimpleAnnotation);
+        $this->assertTrue($bean->getASimpleSingletonBean() instanceof ClassSimpleAnnotation);
+        $this->assertTrue($bean->somethingElse instanceof ASimpleDestroyInitClass);
     }
 
     /**

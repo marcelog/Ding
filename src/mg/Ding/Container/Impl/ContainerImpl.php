@@ -559,6 +559,11 @@ class ContainerImpl implements IContainer
         $this->_createBeanDependencies($definition);
         $this->_applyAspects($definition);
         $bean = $this->_instantiate($definition);
+        if (!is_object($bean)) {
+            throw new BeanFactoryException(
+            	'Could not instantiate ' . $definition->getName()
+            );
+        }
         $this->_assemble($bean, $definition);
         $this->_setupInitAndShutdown($bean, $definition);
         $this->_lifecycleManager->afterCreate($bean, $definition);
@@ -584,6 +589,49 @@ class ContainerImpl implements IContainer
             $this->registerShutdownMethod($bean, $destroyMethod);
         }
     }
+
+    /**
+     * Tries to inject by looking up set* methods.
+     *
+     * @param object $bean
+     * @param string $name
+     * @param string $value
+     *
+     * @return boolean
+     */
+    private function _setterInject($bean, $name, $value)
+    {
+        $methodName = 'set' . ucfirst($name);
+        $rClass = $this->_reflectionFactory->getClass(get_class($bean));
+        if ($rClass->hasMethod($methodName)) {
+            $bean->$methodName($value);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Tries to inject by looking up a property by name.
+     *
+     * @param object $bean
+     * @param string $name
+     * @param string $value
+     *
+     * @return boolean
+     */
+    private function _propertyInject($bean, $name, $value)
+    {
+        $rClass = $this->_reflectionFactory->getClass(get_class($bean));
+        if ($rClass->hasProperty($name)) {
+             $rProperty = $rClass->getProperty($name);
+             if (!$rProperty->isPublic()) {
+                $rProperty->setAccessible(true);
+             }
+            $rProperty->setValue($bean, $value);
+            return true;
+        }
+        return false;
+    }
     /**
      * Assembles a bean (setter injection)
      *
@@ -597,11 +645,14 @@ class ContainerImpl implements IContainer
         $this->_lifecycleManager->beforeAssemble($bean, $beanDefinition);
         foreach ($beanDefinition->getProperties() as $property) {
             $propertyName = $property->getName();
-            $methodName = 'set' . ucfirst($propertyName);
-            $rClass = $this->_reflectionFactory->getClass($beanDefinition->getClass());
-            if ($rClass->hasMethod($methodName)) {
-                $bean->$methodName($this->_getValueFromDefinition($property));
+            $propertyValue = $this->_getValueFromDefinition($property);
+            if (
+                $this->_setterInject($bean, $propertyName, $propertyValue)
+                || $this->_propertyInject($bean, $propertyName, $propertyValue)
+            ) {
+                continue;
             }
+            throw new BeanFactoryException("Dont know how to inject: $propertyName");
         }
         $this->fillAware($beanDefinition, $bean);
         $this->_lifecycleManager->afterAssemble($bean, $beanDefinition);
@@ -821,6 +872,7 @@ class ContainerImpl implements IContainer
         if ($rClass->implementsInterface('Ding\Aspect\IAspectManagerAware')) {
             $bean->setAspectManager($this->_aspectManager);
         }
+
         if ($rClass->implementsInterface('Ding\Bean\IBeanDefinitionProvider')) {
             $this->registerBeanDefinitionProvider($bean);
         }
@@ -978,7 +1030,8 @@ class ContainerImpl implements IContainer
 
         // All set, continue.
         if (isset(self::$_options['bdef']['annotation'])) {
-            $anDriver = $this->getBean('dingAnnotationBeanDefinitionProvider');
+            $this->getBean('dingAnnotationBeanDefinitionProvider');
+            $this->getBean('dingAnnotationValueDriver');
             $this->getBean('dingAnnotationAspectDriver');
             $this->getBean('dingAnnotationResourceDriver');
             $this->getBean('dingAnnotationInitDestroyMethodDriver');
