@@ -190,8 +190,7 @@ class ReflectionFactory implements IReflectionFactory
         if (isset($this->_annotatedClasses[$class])) {
             return $this->_annotatedClasses[$class];
         }
-        $cacheKeyPfx = str_replace('\\', '_', $class);
-        $cacheKey = $cacheKeyPfx . '.classannotations';
+        $cacheKey = $class . '.classannotations';
         $result = false;
         $annotations = $this->_cache->fetch($cacheKey, $result);
         if ($result === true) {
