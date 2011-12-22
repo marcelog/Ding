@@ -534,9 +534,6 @@ class ContainerImpl implements IContainer
     private function _applyAspects(BeanDefinition $definition)
     {
         $class = $definition->getClass();
-        if (empty($class)) {
-            return;
-        }
         $dispatcher = clone $this->_dispatcherTemplate;
         $this->_applySpecificAspects($definition, $dispatcher);
         $this->_applyGlobalAspects($definition, $dispatcher);

@@ -71,9 +71,6 @@ class AnnotationInitDestroyMethodDriver implements IAfterDefinitionListener, IRe
     public function afterDefinition(BeanDefinition $bean)
     {
         $beanClass = $bean->getClass();
-        if (empty($beanClass)) {
-            return $bean;
-        }
         $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
         if (isset($annotations['class']['InitMethod'])) {
             $arguments = $annotations['class']['InitMethod']->getArguments();

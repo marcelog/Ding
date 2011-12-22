@@ -579,7 +579,7 @@ class BeanDefinition
         $this->_name = $name;
         $soullessString = '';
         $soullessArray = array();
-        $this->_class = $soullessString;
+        $this->_class = 'stdclass';
         $this->_aliases = $soullessArray;
         $this->_scope = BeanDefinition::BEAN_SINGLETON;
         $this->_factoryMethod = $soullessString;

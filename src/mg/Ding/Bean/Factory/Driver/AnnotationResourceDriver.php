@@ -93,9 +93,6 @@ class AnnotationResourceDriver
     public function afterDefinition(BeanDefinition $bean)
     {
         $beanClass = $bean->getClass();
-        if (empty($beanClass)) {
-            return $bean;
-        }
         $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
         $properties = $bean->getProperties();
         foreach ($annotations as $method => $methodAnnotations) {

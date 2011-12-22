@@ -188,7 +188,8 @@ class Annotation
      */
     private function _loadBean($name, $factoryBean, $factoryMethod, $annotations, $factory)
     {
-        $def = $this->_getBeanDefinition($name, '', $annotations, $factory);
+        // a @Bean in @Configuration, does not specify class
+        $def = $this->_getBeanDefinition($name, 'stdclass', $annotations, $factory);
         $def->setFactoryBean($factoryBean);
         $def->setFactoryMethod($factoryMethod);
         return $def;
@@ -206,19 +207,17 @@ class Annotation
     private function _getBeanDefinition($name, $class, $annotations, $factory)
     {
         $def = null;
-        if (!empty($class)) {
-            $parent = $this->reflectionFactory->getClass($class)->getParentClass();
-            while($parent !== false)
-            {
-                $parentAnnotations = $this->reflectionFactory->getClassAnnotations($parent->getName());
-                if (isset($parentAnnotations['class']['Component'])) {
-                    $parentNameBean = $this->getName($parentAnnotations['class']['Component']->getArguments());
-                    $def = $this->_getBeanDefinition($parentNameBean, $parent->getName(), $parentAnnotations['class'], $factory);
-                    break;
-                }
-                $parent = $this->reflectionFactory->getClass($parent->getName())->getParentClass();
-            };
-        }
+        $parent = $this->reflectionFactory->getClass($class)->getParentClass();
+        while($parent !== false)
+        {
+            $parentAnnotations = $this->reflectionFactory->getClassAnnotations($parent->getName());
+            if (isset($parentAnnotations['class']['Component'])) {
+                $parentNameBean = $this->getName($parentAnnotations['class']['Component']->getArguments());
+                $def = $this->_getBeanDefinition($parentNameBean, $parent->getName(), $parentAnnotations['class'], $factory);
+                break;
+            }
+            $parent = $this->reflectionFactory->getClass($parent->getName())->getParentClass();
+        };
         if ($def === null) {
             $def = new BeanDefinition('dummy');
         }
