@@ -35,7 +35,6 @@ use Ding\Aspect\IAspectManagerAware;
 use Ding\Bean\IBeanDefinitionProvider;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Container\IContainer;
 use Ding\Aspect\AspectManager;
 use Ding\Aspect\AspectDefinition;
@@ -146,33 +145,32 @@ class AnnotationAspectDriver
     public function afterConfig()
     {
         // Create aspects and pointcuts.
-        $aspects = $this->reflectionFactory->getClassesByAnnotation('Aspect');
-        foreach ($aspects as $name) {
-            $annotations = $this->reflectionFactory->getClassAnnotations($name);
-            foreach ($annotations as $key => $annotation) {
-                if ($key == 'class') {
-                    continue;
+        $aspectClasses = $this->reflectionFactory->getClassesByAnnotation('aspect');
+        foreach ($aspectClasses as $aspectClass) {
+            $rClass = $this->reflectionFactory->getClass($aspectClass);
+            foreach ($rClass->getMethods() as $rMethod) {
+                $methodName = $rMethod->getName();
+                $annotations = $this->reflectionFactory->getMethodAnnotations($aspectClass, $methodName);
+                if ($annotations->contains('methodinterceptor')) {
+                    foreach ($annotations->getAnnotations('methodinterceptor') as $annotation) {
+                        $classExpression = $annotation->getOptionSingleValue('class-expression');
+                        $expression = $annotation->getOptionSingleValue('expression');
+                        $this->_newAspect(
+                            $aspectClass, $classExpression, $expression, $methodName, AspectDefinition::ASPECT_METHOD
+                        );
+
+                    }
                 }
-                if (isset($annotation['MethodInterceptor'])) {
-                    $arguments = $annotation['MethodInterceptor']->getArguments();
-                    $classExpression = $arguments['class-expression'];
-                    $expression = $arguments['expression'];
-                    $method = $key;
-                    $this->_newAspect(
-                        $name, $classExpression, $expression, $method, AspectDefinition::ASPECT_METHOD
-                    );
-                }
-                if (isset($annotation['ExceptionInterceptor'])) {
-                    $arguments = $annotation['ExceptionInterceptor']->getArguments();
-                    $classExpression = $arguments['class-expression'];
-                    $expression = $arguments['expression'];
-                    $method = $key;
-                    $this->_newAspect(
-                        $name, $classExpression, $expression, $method, AspectDefinition::ASPECT_EXCEPTION
-                    );
+                if ($annotations->contains('exceptioninterceptor')) {
+                    foreach ($annotations->getAnnotations('exceptioninterceptor') as $annotation) {
+                        $classExpression = $annotation->getOptionSingleValue('class-expression');
+                        $expression = $annotation->getOptionSingleValue('expression');
+                        $this->_newAspect(
+                            $aspectClass, $classExpression, $expression, $methodName, AspectDefinition::ASPECT_EXCEPTION
+                        );
+                    }
                 }
             }
         }
     }
-
 }

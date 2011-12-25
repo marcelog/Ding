@@ -33,7 +33,6 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Reflection\IReflectionFactory;
 
 /**
@@ -70,23 +69,22 @@ class AnnotationRequiredDriver implements IAfterDefinitionListener, IReflectionF
      */
     public function afterDefinition(BeanDefinition $bean)
     {
-        $beanClass = $bean->getClass();
-        $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
+        $class = $bean->getClass();
+        $rClass = $this->reflectionFactory->getClass($class);
+        $annotations = $this->reflectionFactory->getClassAnnotations($class);
         $props = $bean->getProperties();
-        foreach ($annotations as $method => $annotations) {
-            if ($method == 'class') {
+        foreach ($rClass->getMethods() as $rMethod) {
+            $methodName = $rMethod->getName();
+            if (strpos($methodName, 'set') !== 0) {
                 continue;
             }
-            if (strpos($method, 'set') !== 0) {
+            $annotations = $this->reflectionFactory->getMethodAnnotations($class, $methodName);
+            if (!$annotations->contains('required')) {
                 continue;
             }
-            $propName = lcfirst(substr($method, 3));
-            foreach ($annotations as $annotation) {
-                if ($annotation->getName() == 'Required') {
-                    if (!isset($props[$propName])) {
-                        throw new BeanFactoryException('Missing @Required property: ' . $method);
-                    }
-                }
+            $propName = lcfirst(substr($methodName, 3));
+            if (!isset($props[$propName])) {
+                throw new BeanFactoryException('Missing @Required property: ' . $methodName);
             }
         }
         return $bean;

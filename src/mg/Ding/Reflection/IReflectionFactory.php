@@ -49,14 +49,6 @@ interface IReflectionFactory
      */
     public function getClassesFromCode($code);
     /**
-     * Parses all annotations in the given text.
-     *
-     * @param string $text
-     *
-     * @return BeanAnnotationDefinition[]
-     */
-    public function getAnnotations($text);
-    /**
      * Returns all classes annotated with the given annotation.
      *
      * @param string $annotation Annotation name.
@@ -69,9 +61,27 @@ interface IReflectionFactory
      *
      * @param string $class Class name.
      *
-     * @return string[]
+     * @return Ding\Annotation\Collection
      */
     public function getClassAnnotations($class);
+    /**
+     * Returns all annotations for the given method.
+     *
+     * @param string $class Class name.
+     * @param string $method Method name.
+     *
+     * @return Ding\Annotation\Collection
+     */
+    public function getMethodAnnotations($class, $method);
+    /**
+     * Returns all annotations for the given property.
+     *
+     * @param string $class Class name.
+     * @param string $property Property name.
+     *
+     * @return Ding\Annotation\Collection
+     */
+    public function getPropertyAnnotations($class, $property);
     /**
      * Returns a (cached) reflection class.
      *
@@ -88,7 +98,17 @@ interface IReflectionFactory
      * @param string $method Method name.
      *
      * @throws ReflectionException
-     * @return ReflectionClass
+     * @return ReflectionMethod
      */
     public function getMethod($class, $method);
+    /**
+     * Returns a (cached) reflection class property.
+     *
+     * @param string $class  Class name.
+     * @param string $property Property name.
+     *
+     * @throws ReflectionException
+     * @return ReflectionProperty
+     */
+    public function getProperty($class, $property);
 }

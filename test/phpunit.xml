@@ -105,6 +105,9 @@
     <testsuite name="i18n">
       <directory suffix=".php">i18n</directory>
     </testsuite>
+    <testsuite name="Annotation">
+      <directory suffix=".php">annotation</directory>
+    </testsuite>
     <testsuite name="Container">
       <directory suffix=".php">container</directory>
     </testsuite>

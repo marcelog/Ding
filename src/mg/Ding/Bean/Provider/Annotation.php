@@ -29,6 +29,10 @@
  */
 namespace Ding\Bean\Provider;
 
+use Ding\Annotation\Collection;
+use Ding\Annotation\Annotation as AnnotationDefinition;
+use Ding\Logger\ILoggerAware;
+
 use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Container\IContainerAware;
 use Ding\Bean\IBeanDefinitionProvider;
@@ -36,7 +40,6 @@ use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Container\IContainer;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
-use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Reflection\IReflectionFactory;
 use Ding\Bean\Factory\Exception\BeanFactoryException;
 
@@ -55,7 +58,7 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
  */
 class Annotation
     implements IAfterConfigListener, IBeanDefinitionProvider,
-    IContainerAware, IReflectionFactoryAware
+    IContainerAware, IReflectionFactoryAware, ILoggerAware
 {
     protected $container;
 
@@ -93,7 +96,9 @@ class Annotation
      * Definitions for config beans.
      * @var BeanDefinition[]
      */
-    private $_configBeansDefinitions = array();
+    private $_beanDefinitions = array();
+    private $_myBeanNames = array();
+
     /**
      * Container.
      * @var IContainer
@@ -105,6 +110,8 @@ class Annotation
      * @var IReflectionFactory
      */
     protected $reflectionFactory;
+
+    private $_logger;
 
     /**
      * (non-PHPdoc)
@@ -176,100 +183,77 @@ class Annotation
         }
     }
 
-    /**
-     * Loads a bean definition from the given annotations.
-     *
-     * @param string                     $name          Candidate name.
-     * @param string                     $factoryBean   Factory bean name.
-     * @param string                     $factoryMethod Factory bean method.
-     * @param BeanAnnotationDefinition[] $annotations   Annotations with data.
-     *
-     * @return BeanDefinition
-     */
-    private function _loadBean($name, $factoryBean, $factoryMethod, $annotations, $factory)
+    public function setLogger(\Logger $logger)
     {
-        // a @Bean in @Configuration, does not specify class
-        $def = $this->_getBeanDefinition($name, 'stdclass', $annotations, $factory);
-        $def->setFactoryBean($factoryBean);
-        $def->setFactoryMethod($factoryMethod);
-        return $def;
+        $this->_logger = $logger;
     }
 
     /**
      * Creates a bean definition from the given annotations.
      *
-     * @param string                     $name          Bean name.
-     * @param string                     $class         Bean class.
-     * @param BeanAnnotationDefinition[] $annotations   Annotations with data.
+     * @param string $name Bean name.
+     * @param string $class Bean class.
+     * @param Collection $annotations Annotations with data.
      *
      * @return BeanDefinition
      */
-    private function _getBeanDefinition($name, $class, $annotations, $factory)
+    private function _getBeanDefinition($name, $class, Collection $annotations)
     {
         $def = null;
-        $parent = $this->reflectionFactory->getClass($class)->getParentClass();
-        while($parent !== false)
+        $parentRefClass = $this->reflectionFactory->getClass($class)->getParentClass();
+        while($parentRefClass !== false)
         {
-            $parentAnnotations = $this->reflectionFactory->getClassAnnotations($parent->getName());
-            if (isset($parentAnnotations['class']['Component'])) {
-                $parentNameBean = $this->getName($parentAnnotations['class']['Component']->getArguments());
-                $def = $this->_getBeanDefinition($parentNameBean, $parent->getName(), $parentAnnotations['class'], $factory);
+            $parentAnnotations = $this->reflectionFactory->getClassAnnotations($parentRefClass->getName());
+            if ($parentAnnotations->contains('component')) {
+                $annotation = $parentAnnotations->getSingleAnnotation('component');
+                $parentNameBean = $this->getOrCreateName($annotation);
+                $def = $this->_getBeanDefinition($parentNameBean, $parentRefClass->getName(), $parentAnnotations);
                 break;
             }
-            $parent = $this->reflectionFactory->getClass($parent->getName())->getParentClass();
+            $parentRefClass = $this->reflectionFactory->getClass($parentRefClass->getName())->getParentClass();
         };
         if ($def === null) {
             $def = new BeanDefinition('dummy');
         }
         $def->setClass($class);
-        if (isset($annotations['Component'])) {
-            $beanAnnotation = $annotations['Component'];
-        } else {
-            // Only @Bean can override name and class arguments
-            $beanAnnotation = $annotations['Bean'];
-            $overrideName = $beanAnnotation->getArguments();
-            if (!empty($overrideName)) {
-                if (isset($overrideName['name'])) {
-                    $name = $overrideName['name'];
-                }
-                if (isset($overrideName['class'])) {
-                    $def->setClass($overrideName['class']);
-                }
+        if ($annotations->contains('component')) {
+            $beanAnnotation = $annotations->getSingleAnnotation('component');
+        } else if ($annotations->contains('bean')) {
+            $beanAnnotation = $annotations->getSingleAnnotation('bean');
+            if ($beanAnnotation->hasOption('class')) {
+                $def->setClass($beanAnnotation->getOptionSingleValue('class'));
             }
         }
-
-        $args = $beanAnnotation->getArguments();
-        if (isset($args['name'])) {
-            if (is_array($args['name'])) {
-                $alias = $args['name'];
-                foreach ($alias as $newAlias) {
-                    $def->addAlias($newAlias);
-                }
+        if ($beanAnnotation->hasOption('name')) {
+            $names = $beanAnnotation->getOptionValues('name');
+            foreach ($names as $alias) {
+                $def->addAlias($alias);
             }
         }
         $def->setName($name);
-        if (isset($annotations['Scope'])) {
-            $args = $annotations['Scope']->getArguments();
-            if (isset($args['value'])) {
-                if ($args['value'] == 'singleton') {
+        if ($annotations->contains('scope')) {
+            $annotation = $annotations->getSingleAnnotation('scope');
+            if ($annotation->hasOption('value')) {
+                $scope = $annotation->getOptionSingleValue('value');
+                if ($scope == 'singleton') {
                     $def->setScope(BeanDefinition::BEAN_SINGLETON);
-                } else if ($args['value'] == 'prototype') {
+                } else if ($scope == 'prototype') {
                     $def->setScope(BeanDefinition::BEAN_PROTOTYPE);
                 } else {
-                    throw new BeanFactoryException('Invalid bean scope: ' . $args['value']);
+                    throw new BeanFactoryException("Invalid bean scope: $scope");
                 }
             }
         }
-        if (isset($annotations['InitMethod'])) {
-            $args = $annotations['InitMethod']->getArguments();
-            if (isset($args['method'])) {
-                $def->setInitMethod($args['method']);
+        if ($annotations->contains('initmethod')) {
+            $annotation = $annotations->getSingleAnnotation('initmethod');
+            if ($annotation->hasOption('method')) {
+                $def->setInitMethod($annotation->getOptionSingleValue('method'));
             }
         }
-        if (isset($annotations['DestroyMethod'])) {
-            $args = $annotations['DestroyMethod']->getArguments();
-            if (isset($args['method'])) {
-                $def->setDestroyMethod($args['method']);
+        if ($annotations->contains('destroymethod')) {
+            $annotation = $annotations->getSingleAnnotation('destroymethod');
+            if ($annotation->hasOption('method')) {
+                $def->setDestroyMethod($annotation->getOptionSingleValue('method'));
             }
         }
         return $def;
@@ -283,50 +267,32 @@ class Annotation
         foreach ($this->_scanDirs as $dir) {
             $this->_scan($dir);
         }
-        $configClasses = $this->reflectionFactory->getClassesByAnnotation('Configuration');
-        foreach ($configClasses as $configClass) {
-            $configBeanName = $configClass . 'DingConfigClass';
-            $this->_configClasses[$configClass] = $configBeanName;
-            $def = false;
-            try
-            {
-                $def = $this->_container->getBeanDefinition($configBeanName);
-            } catch (BeanFactoryException $exception) {
-                $def = new BeanDefinition($configBeanName);
-                $def->setClass($configClass);
-                $def->setScope(BeanDefinition::BEAN_SINGLETON);
-                $this->_configBeansDefinitions[$configBeanName] = $def;
-            }
-            $annotations = $this->reflectionFactory->getClassAnnotations($configClass);
-            array_shift($annotations);
-            foreach ($annotations as  $method => $annotatedBean) {
-                $this->registerEventsFor($annotatedBean, $configClass, $this->_container);
-            }
-        }
-        foreach ($this->reflectionFactory->getClassesByAnnotation('Component') as $component) {
-            $annotations = $this->reflectionFactory->getClassAnnotations($component);
-            $this->registerEventsFor($annotations['class'], $component, $this->_container);
-        }
-    }
+        $configClasses = $this->reflectionFactory->getClassesByAnnotation('configuration');
+        foreach ($configClasses as $class) {
+            $configBeanName = $class . 'DingConfigClass';
+            $this->_configClasses[$class] = $configBeanName;
+            $def = new BeanDefinition($configBeanName);
+            $def->setClass($class);
+            $this->_configBeansDefinitions[$configBeanName] = $def;
+            $this->_configBeansDefinitions[$configBeanName] = $this->_container->getBeanDefinition($configBeanName);
+            $rClass = $this->reflectionFactory->getClass($class);
+            $classAnnotations = $this->reflectionFactory->getClassAnnotations($class);
 
-    /**
-     * Checks if the given name is the name of the bean contained in $candidateName.
-     * $candidateName is the argument name for a given bean, which can be an array
-     * or a string.
-     *
-     * @param string[]|string $candidateName Array of names or string.
-     * @param string          $name          The name to test for.
-     *
-     * @return boolean
-     */
-    protected function isBean($candidateName, $name)
-    {
-        if (is_array($candidateName) && in_array($name, $candidateName)) {
-            return true;
-        } else if($candidateName == $name) {
-            return true;
+            $this->registerEventsFor($classAnnotations, $configBeanName, $class);
+            foreach ($rClass->getMethods() as $method) {
+                $methodName = $method->getName();
+                $annotations = $this->reflectionFactory->getMethodAnnotations($class, $methodName);
+                if ($annotations->contains('bean')) {
+                    $beanName = $this->getOrCreateName($annotations->getSingleAnnotation('bean'));
+                    $this->registerEventsFor($annotations, $beanName, $class);
+                }
+            }
         }
-        return false;
+        foreach ($this->reflectionFactory->getClassesByAnnotation('component') as $component) {
+            $annotations = $this->reflectionFactory->getClassAnnotations($component);
+            $beanName = $this->getOrCreateName($annotations->getSingleAnnotation('component'));
+            $this->registerEventsFor($annotations, $beanName, $component);
+        }
     }
 
     /**
@@ -334,47 +300,38 @@ class Annotation
      * a name will be dynamically generated. If it is an array, the first element
      * is selected.
      *
-     * @param string[] $annotatedBean Bean annotations.
+     * @param Annotation $annotation Bean annotation (@Bean, @Component, etc)
      *
      * @return string
      */
-    protected function getName(array $annotatedBean)
+    protected function getOrCreateName(AnnotationDefinition $annotation)
     {
-        if (!isset($annotatedBean['name'])) {
-            $beanName = BeanDefinition::generateName('Bean');
-        } else if (is_array($annotatedBean['name'])) {
-            $beanName = array_shift($annotatedBean['name']);
-        } else {
-            $beanName = $annotatedBean['name'];
+        if ($annotation->hasOption('name')) {
+            return $annotation->getOptionSingleValue('name');
         }
-        return $beanName;
+        return BeanDefinition::generateName('Bean');
     }
 
     /**
      * Looks for @ListensOn and register the bean as an event listener. Since
      * this is an "early" discovery of a bean, a BeanDefinition is generated.
      *
-     * @param string[]     $annotatedBean Bean annotations
-     * @param string       $class         Class name
-     * listener
+     * @param Collection $annotations Bean Annotations (for classes or methods)
+     * @param string $beanName The target bean name.
+     * @param string $class The bean class
      *
      * @return void
      */
-    protected function registerEventsFor(array $annotatedBean, $class, $factory)
+    protected function registerEventsFor(Collection $annotations, $beanName, $class)
     {
-        if (isset($annotatedBean['ListensOn'])) {
-            $beanName = $this->getName($annotatedBean);
-            $def = $this->_getBeanDefinition($beanName, $class, $annotatedBean, $factory);
+        if ($annotations->contains('listenson')) {
+            $def = $this->_getBeanDefinition($beanName, $class, $annotations);
             $this->_configBeansDefinitions[$beanName] = $def;
-            $beanAnnotation = $annotatedBean['ListensOn'];
-            $args = $beanAnnotation->getArguments();
-            $events = $args['value'];
-            if (!is_array($events)) {
-                $events = explode(',', $events);
-            }
-            foreach ($events as $eventName) {
-                $eventName = trim($eventName);
-                $factory->eventListen($eventName, $beanName);
+            $annotation = $annotations->getSingleAnnotation('listenson');
+            foreach ($annotation->getOptionValues('value') as $eventCsv) {
+                foreach (explode(',', $eventCsv) as $eventName) {
+                    $this->_container->eventListen($eventName, $beanName);
+                }
             }
         }
     }
@@ -393,42 +350,38 @@ class Annotation
             if (empty($this->_configBeans[$configBeanName])) {
                 $this->_configBeans[$configBeanName] = array();
             }
-            foreach (
-                $this->reflectionFactory->getClassAnnotations($configClass) as $method => $annotations
-            ) {
-                if ($method == 'class') {
-                    continue;
+            $rClass = $this->reflectionFactory->getClass($configClass);
+            foreach ($rClass->getMethods() as $method) {
+                $methodName = $method->getName();
+                $annotations = $this->reflectionFactory->getMethodAnnotations($configClass, $methodName);
+                if ($annotations->contains('bean')) {
+                    $annotation = $annotations->getSingleAnnotation('bean');
+                    if ($annotation->hasOption('name')) {
+                        $beanNames = $annotation->getOptionValues('name');
+                    } else {
+                        $beanNames = array($methodName);
+                    }
+                    if (in_array($name, $beanNames)) {
+                        $bean = $this->_getBeanDefinition($name, 'stdclass', $annotations);
+                        $bean->setFactoryBean($configBeanName);
+                        $bean->setFactoryMethod($methodName);
+                        $this->_configBeansDefinitions[$name] = $bean;
+                        return $bean;
+                    }
                 }
-                if (isset($annotations['Bean'])) {
-                    $beanAnnotation = $annotations['Bean'];
-                    $args = $beanAnnotation->getArguments();
-                    if (!isset($args['name'])) {
-                        $args['name'] = $method;
-                    }
-                    if ($this->isBean($args['name'], $name)) {
-                        $bean = $this->_loadBean($args['name'], $configBeanName, $method, $annotations, $this->_container);
-                        $this->_configBeans[$configBeanName][$name] = $bean;
-                    }
-                    if ($bean !== null) {
-                        break;
-                    }
-                }
-            }
-            if ($bean !== null) {
-                break;
             }
         }
         // The bean might not be defined in a @Configuration, but with
         // @Component
-        if ($bean === null) {
-            $components = $this->reflectionFactory->getClassesByAnnotation('Component');
-            foreach ($components as $component) {
-                $annotations = $this->reflectionFactory->getClassAnnotations($component);
-                $args = $annotations['class']['Component']->getArguments();
-                if (isset($args['name'])) {
-                    if ($this->isBean($args['name'], $name)) {
-                        $bean = $this->_getBeanDefinition($args['name'], $component, $annotations['class'], $this->_container);
-                        break;
+        $components = $this->reflectionFactory->getClassesByAnnotation('component');
+        foreach ($components as $component) {
+            $annotations = $this->reflectionFactory->getClassAnnotations($component);
+            if ($annotations->contains('component')) {
+                $annotation = $annotations->getSingleAnnotation('component');
+                if ($annotation->hasOption('name')) {
+                    $beanNames = $annotation->getOptionValues('name');
+                    if (in_array($name, $beanNames)) {
+                        return $this->_getBeanDefinition($name, $component, $annotations);
                     }
                 }
             }
@@ -470,6 +423,7 @@ class Annotation
     {
         $this->_scanDirs = $options['scanDir'];
         $this->_configClasses = array();
+        $this->_beanDefinitions = array();
         $this->_configBeans = array();
         $classes = get_declared_classes();
         self::$_knownClasses = array_combine($classes, $classes);

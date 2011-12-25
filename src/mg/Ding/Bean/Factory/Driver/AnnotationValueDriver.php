@@ -29,9 +29,7 @@
 namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\BeanConstructorArgumentDefinition;
-
 use Ding\Logger\ILoggerAware;
-
 use Ding\Reflection\IReflectionFactory;
 use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Container\IContainerAware;
@@ -41,7 +39,6 @@ use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\BeanAnnotationDefinition;
 
 /**
  * This driver will search for @Resource setter methods.
@@ -94,22 +91,43 @@ class AnnotationValueDriver
      */
     public function afterDefinition(BeanDefinition $bean)
     {
-        $beanClass = $bean->getClass();
-        $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
         $properties = $bean->getProperties();
-        foreach ($annotations['class']['properties'] as $property => $propertyAnnotations) {
-            foreach ($propertyAnnotations as $annotation) {
-                if ($annotation->getName() == 'Value') {
-                    $args = $annotation->getArguments();
-                    if (isset($args['value'])) {
-                        $properties[$property] = new BeanPropertyDefinition(
-                            $property, BeanPropertyDefinition::PROPERTY_SIMPLE, $args['value']
-                        );
-                    }
+        $class = $bean->getClass();
+        $rClass = $this->reflectionFactory->getClass($class);
+        foreach ($rClass->getProperties() as $rProperty) {
+            $propertyName = $rProperty->getName();
+            $annotations = $this->reflectionFactory->getPropertyAnnotations($class, $propertyName);
+            if ($annotations->contains('value')) {
+                $annotation = $annotations->getSingleAnnotation('value');
+                if ($annotation->hasOption('value')) {
+                    $value = $annotation->getOptionSingleValue('value');
+                    $properties[$propertyName] = new BeanPropertyDefinition(
+                        $propertyName, BeanPropertyDefinition::PROPERTY_SIMPLE, $value
+                    );
                 }
             }
         }
         $bean->setProperties($properties);
+        if ($bean->isCreatedWithFactoryBean()) {
+            $factoryMethod = $bean->getFactoryMethod();
+            $factoryBean = $bean->getFactoryBean();
+            $def = $this->_container->getBeanDefinition($factoryBean);
+            $annotations = $this->reflectionFactory->getMethodAnnotations($def->getClass(), $factoryMethod);
+            $constructorArguments = $bean->getArguments();
+            if ($annotations->contains('value')) {
+                foreach ($annotations->getAnnotations('value') as $annotation) {
+                    if ($annotation->hasOption('value')) {
+                        foreach ($annotation->getOptionValues('value') as $value) {
+                            $constructorArguments[] = new BeanConstructorArgumentDefinition(
+                                BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
+                                $value
+                            );
+                        }
+                    }
+                }
+            }
+            $bean->setArguments($constructorArguments);
+        }
         return $bean;
     }
 }

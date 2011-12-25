@@ -34,7 +34,6 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\BeanAnnotationDefinition;
 
 /**
  * This driver will search for @InitMethod and @DestroyMethod.
@@ -70,18 +69,18 @@ class AnnotationInitDestroyMethodDriver implements IAfterDefinitionListener, IRe
      */
     public function afterDefinition(BeanDefinition $bean)
     {
-        $beanClass = $bean->getClass();
-        $annotations = $this->reflectionFactory->getClassAnnotations($beanClass);
-        if (isset($annotations['class']['InitMethod'])) {
-            $arguments = $annotations['class']['InitMethod']->getArguments();
-            if (isset($arguments['method'])) {
-                $bean->setInitMethod($arguments['method']);
+        $class = $bean->getClass();
+        $annotations = $this->reflectionFactory->getClassAnnotations($class);
+        if ($annotations->contains('initmethod')) {
+            $annotation = $annotations->getSingleAnnotation('initmethod');
+            if ($annotation->hasOption('method')) {
+                $bean->setInitMethod($annotation->getOptionSingleValue('method'));
             }
         }
-        if (isset($annotations['class']['DestroyMethod'])) {
-            $arguments = $annotations['class']['DestroyMethod']->getArguments();
-            if (isset($arguments['method'])) {
-                $bean->setDestroyMethod($arguments['method']);
+        if ($annotations->contains('destroymethod')) {
+            $annotation = $annotations->getSingleAnnotation('destroymethod');
+            if ($annotation->hasOption('method')) {
+                $bean->setDestroyMethod($annotation->getOptionSingleValue('method'));
             }
         }
         return $bean;

@@ -145,42 +145,37 @@ class HttpUrlMapper implements IMapper, IContainerAware, ILoggerAware
         $try = array_merge($this->_map, self::$_annotatedControllers);
         $candidates = array();
         foreach ($try as $map) {
-            $urls = $map[0];
-            if (!is_array($urls)) {
-                $urls = array($urls);
-            }
+            $controllerUrl = $map[0];
             $controller = $map[1];
-            foreach ($urls as $controllerUrl) {
-                if ($controllerUrl[0] != '/') {
-                    $controllerUrl = '/' . $controllerUrl;
-                }
-                $len = strlen($controllerUrl);
-                if ($controllerUrl[$len - 1] != '/') {
-                    $controllerUrl = $controllerUrl . '/';
-                }
-                $controllerUrlStart = strpos($url, $controllerUrl);
-                if (!($controllerUrlStart === 0)) {
-                    continue;
-                }
-                $start = $controllerUrlStart + strlen($controllerUrl);
-                $action = substr($url, $start);
-                if ($action === false) {
-                    $action = 'Main';
-                }
-                $action = explode('/', $action);
-                $action = $action[0];
-                if (!is_object($controller)) {
-                    $controller = $this->container->getBean($controller);
-                    $this->_logger->debug(
-                    	"Found as annotated controller: "
-                    	. "$controllerUrl in " . get_class($controller)
-                    );
-                }
-                if (!isset($candidates[$len])) {
-                    $candidates[$len] = array();
-                }
-                $candidates[$len][] = array($controller, $action . 'Action');
+            if ($controllerUrl[0] != '/') {
+                $controllerUrl = '/' . $controllerUrl;
             }
+            $len = strlen($controllerUrl);
+            if ($controllerUrl[$len - 1] != '/') {
+                $controllerUrl = $controllerUrl . '/';
+            }
+            $controllerUrlStart = strpos($url, $controllerUrl);
+            if (!($controllerUrlStart === 0)) {
+                continue;
+            }
+            $start = $controllerUrlStart + strlen($controllerUrl);
+            $action = substr($url, $start);
+            if ($action === false) {
+                $action = 'Main';
+            }
+            $action = explode('/', $action);
+            $action = $action[0];
+            if (!is_object($controller)) {
+                $controller = $this->container->getBean($controller);
+                $this->_logger->debug(
+                	"Found as annotated controller: "
+                	. "$controllerUrl in " . get_class($controller)
+                );
+            }
+            if (!isset($candidates[$len])) {
+                $candidates[$len] = array();
+            }
+            $candidates[$len][] = array($controller, $action . 'Action');
         }
         if (empty($candidates)) {
             return false;

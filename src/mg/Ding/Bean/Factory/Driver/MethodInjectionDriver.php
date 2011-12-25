@@ -29,7 +29,6 @@
 namespace Ding\Bean\Factory\Driver;
 
 use Ding\Bean\IBeanDefinitionProvider;
-
 use Ding\Aspect\IAspectManagerAware;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Container\IContainerAware;
@@ -40,7 +39,6 @@ use Ding\Aspect\AspectManager;
 use Ding\Aspect\MethodInvocation;
 use Ding\Aspect\AspectDefinition;
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\BeanAnnotationDefinition;
 
 /**
  * An "inner" class. This is the aspect that runs when the method is called.

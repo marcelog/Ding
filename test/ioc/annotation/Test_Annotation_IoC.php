@@ -267,11 +267,22 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function can_inject_property_string()
+    public function can_at_value_property()
     {
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('aValueAnnotationClass');
         $this->assertEquals($bean->getMyValue(), "aValue/somethingelse");
+    }
+
+    /**
+     * @test
+     */
+    public function can_at_value_constructor_args_in_at_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aBeanWithConstructorArgs');
+        $this->assertEquals($bean->a, 'value1');
+        $this->assertEquals($bean->b, 'value2');
     }
 }
 
@@ -415,11 +426,31 @@ class ClassSimpleAnnotationConfiguration
     {
         return new ClassSimpleAnnotation();
     }
+    /**
+     * @Bean
+     * @Value(value="value1")
+     * @Value(value="value2")
+     */
+    public function aBeanWithConstructorArgs($a, $b)
+    {
+        return new BeanWithConstructorArgs($a, $b);
+    }
     public function __construct()
     {
     }
 }
 
+class BeanWithConstructorArgs
+{
+    public $a;
+    public $b;
+
+    public function __construct($a, $b)
+    {
+        $this->a = $a;
+        $this->b = $b;
+    }
+}
 class ClassSimpleAnnotation
 {
     private $_something;

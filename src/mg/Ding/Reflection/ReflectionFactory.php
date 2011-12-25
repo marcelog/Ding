@@ -27,8 +27,9 @@
  */
 namespace Ding\Reflection;
 
+use Ding\Annotation\Collection;
+use Ding\Annotation\Parser;
 use Ding\Cache\ICache;
-use Ding\Bean\BeanAnnotationDefinition;
 
 /**
  * Internal reflection manager.
@@ -54,6 +55,8 @@ class ReflectionFactory implements IReflectionFactory
      * @var string[]
      */
     private $_annotatedClasses = array();
+    private $_annotatedMethods = array();
+    private $_annotatedProperties = array();
 
     /**
      * A map where the key is the annotations, and the value is an array with
@@ -68,6 +71,8 @@ class ReflectionFactory implements IReflectionFactory
      */
     private $_reflectionMethods = array();
 
+    private $_reflectionProperties = array();
+
     /**
      * Wether to use annotations or not.
      * @var boolean
@@ -79,6 +84,13 @@ class ReflectionFactory implements IReflectionFactory
      * @var ICache
      */
     private $_cache = false;
+
+    private $_annotationParser;
+
+    public function setAnnotationParser(Parser $parser)
+    {
+        $this->_annotationParser = $parser;
+    }
 
     /**
      * (non-PHPdoc)
@@ -114,50 +126,6 @@ class ReflectionFactory implements IReflectionFactory
 
     /**
      * (non-PHPdoc)
-     * @see Ding\Reflection.IReflectionFactory::getAnnotations()
-     */
-    public function getAnnotations($text)
-    {
-        $ret = array();
-        if (preg_match_all('/@([^@\n\r\t]*)/', $text, $matches) > 0) {
-            foreach ($matches[1] as $annotation) {
-                $argsStart = strpos($annotation, '(');
-                $arguments = array();
-                if ($argsStart !== false) {
-                    $argsEnd = strrpos($annotation, ')');
-                    $argsLength = $argsEnd - $argsStart - 1;
-                    $name = trim(substr($annotation, 0, $argsStart));
-                    $args = trim(substr($annotation, $argsStart + 1, $argsLength));
-                    $argsN = preg_match_all(
-                    	'/([^=,]*)=[\s]*([\s]*"[^"]+"|\{[^\{\}]+\}|[^,"]*[\s]*)/', $args, $matches
-                    );
-                    if ($argsN > 0)
-                    {
-                        for ($i = 0; $i < $argsN; $i++) {
-                            $key = trim($matches[1][$i]);
-                            $value = str_replace('"', '', trim($matches[2][$i]));
-                            if (strpos($value, '{') === 0) {
-                                $value = substr($value, 1, -1);
-                                $value = explode(',', $value);
-                                foreach ($value as $k => $v) {
-                                    $value[$k] = trim($v);
-                                }
-                            }
-                            $arguments[$key] = $value;
-                        }
-                    }
-                } else {
-                    preg_match('/([a-zA-Z0-9]+)/', $annotation, $matches);
-                    $name = $matches[1];
-                }
-                $ret[] = new BeanAnnotationDefinition($name, $arguments);
-            }
-        }
-        return $ret;
-    }
-
-    /**
-     * (non-PHPdoc)
      * @see Ding\Reflection.IReflectionFactory::getClassesByAnnotation()
      */
     public function getClassesByAnnotation($annotation)
@@ -180,6 +148,65 @@ class ReflectionFactory implements IReflectionFactory
 
     /**
      * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getMethodAnnotations()
+     */
+    public function getMethodAnnotations($class, $method)
+    {
+        if (!$this->_withAnnotations) {
+            return array();
+        }
+        $key = $class . $method;
+        if (isset($this->_annotatedMethods[$key])) {
+            return $this->_annotatedMethods[$key];
+        }
+        $cacheKey = $key . '.methodannotations';
+        $result = false;
+        $annotations = $this->_cache->fetch($cacheKey, $result);
+        if ($result === true) {
+            $this->_annotatedMethods[$key] = $annotations;
+            return $annotations;
+        }
+        $rMethod = $this->getMethod($class, $method);
+        return $this->_annotationParser->parse($rMethod->getDocComment());
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getPropertyAnnotations()
+     */
+    public function getPropertyAnnotations($class, $property)
+    {
+        if (!$this->_withAnnotations) {
+            return array();
+        }
+        $key = $class . $property;
+        if (isset($this->_annotatedProperties[$key])) {
+            return $this->_annotatedProperties[$key];
+        }
+        $cacheKey = $key . '.propertyannotations';
+        $result = false;
+        $annotations = $this->_cache->fetch($cacheKey, $result);
+        if ($result === true) {
+            $this->_annotatedProperties[$key] = $annotations;
+            return $annotations;
+        }
+        $rProperty = $this->getProperty($class, $property);
+        return $this->_annotationParser->parse($rProperty->getDocComment());
+    }
+
+    private function _populateClassesPerAnnotations($class, Collection $annotations)
+    {
+        foreach ($annotations->getAll() as $name => $annotation) {
+            if (!isset($this->_classesAnnotated[$name])) {
+                $this->_classesAnnotated[$name] = array();
+            }
+            $this->_classesAnnotated[$name][$class] = $class;
+            $cacheKeyA = $name . '.classbyannotations';
+            $this->_cache->store($cacheKeyA, $this->_classesAnnotated[$name]);
+        }
+    }
+    /**
+     * (non-PHPdoc)
      * @see Ding\Reflection.IReflectionFactory::getClassAnnotations()
      */
     public function getClassAnnotations($class)
@@ -199,38 +226,11 @@ class ReflectionFactory implements IReflectionFactory
         }
         $this->_annotatedClasses[$class] = array();
         $rClass = $this->getClass($class);
-        $ret = array();
-        $ret['class'] = array();
-        $ret['class']['properties'] = array();
-        foreach ($this->getAnnotations($rClass->getDocComment()) as $annotation) {
-            $name = $annotation->getName();
-            $ret['class'][$name] = $annotation;
-            if (!isset($this->_classesAnnotated[$name])) {
-                $this->_classesAnnotated[$name] = array();
-            }
-            $this->_classesAnnotated[$name][$class] = $class;
-            $cacheKeyA = $name . '.classbyannotations';
-            $this->_cache->store($cacheKeyA, $this->_classesAnnotated[$name]);
-        }
-        foreach ($rClass->getProperties() as $property) {
-            $propertyName = $property->getName();
-            $ret['class']['properties'][$propertyName] = array();
-            foreach ($this->getAnnotations($property->getDocComment()) as $annotation) {
-                $name = $annotation->getName();
-                $ret['class']['properties'][$propertyName][$name] = $annotation;
-            }
-        }
-        foreach ($rClass->getMethods() as $method) {
-            $methodName = $method->getName();
-            $ret[$methodName] = array();
-            foreach ($this->getAnnotations($method->getDocComment()) as $annotation) {
-                $name = $annotation->getName();
-                $ret[$methodName][$name] = $annotation;
-            }
-        }
-        $this->_annotatedClasses[$class] = $ret;
-        $this->_cache->store($cacheKey, $ret);
-        return $ret;
+        $annotations = $this->_annotationParser->parse($rClass->getDocComment());
+        $this->_populateClassesPerAnnotations($class, $annotations);
+        $this->_annotatedClasses[$class] = $annotations;
+        $this->_cache->store($cacheKey, $annotations);
+        return $annotations;
     }
 
     /**
@@ -244,16 +244,6 @@ class ReflectionFactory implements IReflectionFactory
         }
         $this->_reflectionClasses[$class] = new \ReflectionClass($class);
         return $this->_reflectionClasses[$class];
-    }
-
-    public function __construct($withAnnotations)
-    {
-        $this->_withAnnotations = $withAnnotations;
-    }
-
-    public function setCache(ICache $cache)
-    {
-        $this->_cache = $cache;
     }
 
     /**
@@ -271,4 +261,31 @@ class ReflectionFactory implements IReflectionFactory
         $this->_reflectionMethods[$class][$method] = new \ReflectionMethod($class, $method);
         return $this->_reflectionMethods[$class][$method];
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getProperty()
+     */
+    public function getProperty($class, $property)
+    {
+        if (isset($this->_reflectionProperties[$class][$property])) {
+            return $this->_reflectionProperties[$class][$property];
+        }
+        if (!isset($this->_reflectionProperties[$class])) {
+            $this->_reflectionProperties[$class] = array();
+        }
+        $this->_reflectionProperties[$class][$property] = new \ReflectionProperty($class, $property);
+        return $this->_reflectionProperties[$class][$property];
+    }
+
+    public function setCache(ICache $cache)
+    {
+        $this->_cache = $cache;
+    }
+
+    public function __construct($withAnnotations)
+    {
+        $this->_withAnnotations = $withAnnotations;
+    }
+
 }

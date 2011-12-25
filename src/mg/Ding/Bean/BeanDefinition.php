@@ -27,8 +27,6 @@
  */
 namespace Ding\Bean;
 
-use Ding\Bean\BeanAnnotationDefinition;
-
 /**
  * Bean Definition.
  *
@@ -115,12 +113,6 @@ class BeanDefinition
      * @var string
      */
     private $_destroyMethod;
-
-    /**
-     * Annotations for this bean methods.
-     * @var BeanAnnotationDefinition[]
-     */
-    private $_methodAnnotations;
 
     /**
      * Dependency beans literally specified in the configuration.

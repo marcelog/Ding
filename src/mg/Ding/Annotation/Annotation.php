@@ -5,7 +5,7 @@
  * PHP Version 5
  *
  * @category Ding
- * @package  Bean
+ * @package  Annotation
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
@@ -25,7 +25,9 @@
  * limitations under the License.
  *
  */
-namespace Ding\Bean;
+namespace Ding\Annotation;
+
+use Ding\Annotation\Exception\AnnotationException;
 
 /**
  * A definition for an annotation.
@@ -33,12 +35,12 @@ namespace Ding\Bean;
  * PHP Version 5
  *
  * @category Ding
- * @package  Bean
+ * @package  Annotation
  * @author   Marcelo Gornstein <marcelog@gmail.com>
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class BeanAnnotationDefinition
+class Annotation
 {
     /**
      * Annotation name.
@@ -47,10 +49,15 @@ class BeanAnnotationDefinition
     private $_name;
 
     /**
-     * Annotation arguments.
+     * Annotation options.
      * @var array
      */
-    private $_args;
+    private $_options;
+
+    public function __sleep()
+    {
+        return array('_name', '_options');
+    }
 
     /**
      * Returns annotation name.
@@ -62,27 +69,49 @@ class BeanAnnotationDefinition
         return $this->_name;
     }
 
-    /**
-     * Returns arguments for this annotation.
-     *
-     * @return array
-     */
-    public function getArguments()
+    public function getOptionValues($name)
     {
-        return $this->_args;
+        if (!$this->hasOption($name)) {
+            throw new AnnotationException("Unknown option: $name");
+        }
+        return $this->_options[$name];
     }
 
+    public function getOptions()
+    {
+        return $this->_options;
+    }
+
+    public function addOption($name, $value)
+    {
+        $name = strtolower($name);
+        if (!$this->hasOption($name)) {
+            $this->_options[$name] = array();
+        }
+        $this->_options[$name][] = $value;
+    }
+
+    public function hasOption($name)
+    {
+        $name = strtolower($name);
+        return isset($this->_options[$name]);
+    }
+
+    public function getOptionSingleValue($name)
+    {
+        $values = $this->getOptionValues($name);
+        return array_shift($values);
+    }
     /**
      * Constructor.
      *
      * @param string $name Annotation name.
-     * @param array  $args Annotation arguments.
      *
      * @return void
      */
-    public function __construct($name, $args)
+    public function __construct($name)
     {
-        $this->_name = $name;
-        $this->_args = $args;
+        $this->_name = strtolower($name);
+        $this->_options = array();
     }
 }
