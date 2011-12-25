@@ -91,7 +91,7 @@ class SomeClass implements IResourceLoaderAware
 // Here you configure the container, its subcomponents, drivers, etc.
 $properties = array(
     'ding' => array(
-        'log4php.properties' => './log4php.properties',
+        'log4php.properties' => __DIR__ . '/../log4php.properties',
         'factory' => array(
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
                 'annotation' => array('scanDir' => array(__DIR__))

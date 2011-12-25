@@ -68,22 +68,13 @@ use Ding\Container\Impl\ContainerImpl;
 // Here you configure the container, its subcomponents, drivers, etc.
 $properties = array(
     'ding' => array(
-        'log4php.properties' => './log4php.properties',
+        'log4php.properties' => __DIR__ . '/../log4php.properties',
         'factory' => array(
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
                 'xml' => array('filename' => 'beans.xml'),
                 'annotation' => array('scanDir' => array(realpath(__DIR__)))
             ),
         ),
-        // You can configure the cache for the bean definition, the beans, and the proxy definitions.
-        // Other available implementations: zend, file, dummy, and memcached.
-    	'cache' => array(
-            'proxy' => array('impl' => 'dummy'),
-            'bdef' => array('impl' => 'dummy'),
-        	'bean' => array('impl' => 'dummy'),
-//            'bdef' => array('impl' => 'dummy'),
-        	'annotations' => array('impl' => 'dummy')
-        )
     )
 );
 $container = ContainerImpl::getInstance($properties);

@@ -59,19 +59,13 @@ try
     $memcachedOptions = array('host' => '127.0.0.1', 'port' => 11211);
     $properties = array(
         'ding' => array(
-            'log4php.properties' => './log4php.properties',
+            'log4php.properties' => __DIR__ . '/../log4php.properties',
             'factory' => array(
                'bdef' => array(
                 	'xml' => array('filename' => 'beans.xml'),
                     'annotation' => array('scanDir' => array(realpath(__DIR__)))
                 ),
             ),
-    		'cache' => array(
-    			'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/cache/proxy'),
-                'aspect' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/cache/aspect'),
-            	'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/cache/bdef'),
-              	'beans' => array('impl' => 'dummy')
-            )
         )
     );
     $a = ContainerImpl::getInstance($properties);

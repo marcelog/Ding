@@ -27,11 +27,19 @@ declare(ticks=1);
  * limitations under the License.
  *
  */
+ini_set(
+    'include_path',
+    implode(
+        PATH_SEPARATOR,
+        array(
+            implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
+            ini_get('include_path'),
+        )
+    )
+);
+
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
-
-require_once 'PAMI/Autoloader/Autoloader.php';
-\PAMI\Autoloader\Autoloader::register();
 
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Helpers\Pami\IPamiEventHandler;
@@ -53,7 +61,7 @@ class MyPamiHandler implements IPamiEventHandler
 
 $properties = array(
     'ding' => array(
-        'log4php.properties' => './log4php.properties',
+        'log4php.properties' => __DIR__ . '/../log4php.properties',
         'factory' => array(
             'bdef' => array('xml' => array('filename' => 'beans.xml')),
             'properties' => array(
@@ -65,11 +73,6 @@ $properties = array(
                 'ami.read_timeout' => $argv[6]
             )
         ),
-        'cache' => array(
-            'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
-            'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
-            'beans' => array('impl' => 'dummy')
-        )
     )
 );
 $a = ContainerImpl::getInstance($properties);

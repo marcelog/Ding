@@ -291,7 +291,7 @@ try
     $memcachedOptions = array('host' => '127.0.0.1', 'port' => 11211);
     $properties = array(
         'ding' => array(
-            'log4php.properties' => './log4php.properties',
+            'log4php.properties' => __DIR__ . '/../log4php.properties',
             'factory' => array(
                 'properties' => array('configDir' => __DIR__),
                'bdef' => array(

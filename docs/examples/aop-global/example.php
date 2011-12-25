@@ -116,7 +116,7 @@ try
 {
     $properties = array(
         'ding' => array(
-            'log4php.properties' => './log4php.properties',
+            'log4php.properties' => __DIR__ . '/../log4php.properties',
             'factory' => array(
                 'bdef' => array(
                 	'xml' => array('filename' => 'beans.xml'),

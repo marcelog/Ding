@@ -70,10 +70,12 @@ class SomeBeanProviderClass
      * @Scope(value=prototype)
      * @InitMethod(method=aMethod)
      * @DestroyMethod(method=bMethod)
+     * @Value(value="arg1")
+     * @Value(value="arg2")
      */
-    public function someBean()
+    public function someBean($arg1, $arg2)
     {
-        $ret = new MyBean($this->dependency);
+        $ret = new MyBean($this->dependency, $arg1, $arg2);
         $ret->setSomeProperty('hello world');
         return $ret;
     }
@@ -92,6 +94,8 @@ class MyBean
 {
     private $_someProperty;
     private $_dependency;
+    private $_arg1;
+    private $_arg2;
 
     public function aMethod()
     {
@@ -117,9 +121,11 @@ class MyBean
     {
         return $this->_dependency;
     }
-    public function __construct($dependency)
+    public function __construct($dependency, $arg1, $arg2)
     {
         $this->_dependency = $dependency;
+        $this->_arg1 = $arg1;
+        $this->_arg2 = $arg2;
     }
 }
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
@@ -130,24 +136,16 @@ use Ding\Reflection\ReflectionFactory;
 // Here you configure the container, its subcomponents, drivers, etc.
 $properties = array(
     'ding' => array(
-        'log4php.properties' => './log4php.properties',
+        'log4php.properties' => __DIR__ . '/../log4php.properties',
         'factory' => array(
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
                 'annotation' => array('scanDir' => array(realpath(__DIR__)))
             ),
         ),
-        // You can configure the cache for the bean definition, the beans, and the proxy definitions.
-        // Other available implementations: zend, file, dummy, and memcached.
-    	'cache' => array(
-            'proxy' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/proxy'),
-            'bdef' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/bdef'),
-            'annotations' => array('impl' => 'file', 'directory' => '/tmp/Ding/cache/annotations'),
-        	'beans' => array('impl' => 'dummy')
-        )
     )
 );
 $container = ContainerImpl::getInstance($properties);
 $bean = $container->getBean('someBeanRenamed');
+var_dump($bean);
 var_dump($bean->getSomeProperty());
 var_dump($bean->getDependency());
-var_dump(ReflectionFactory::getClassesByAnnotation('author'));

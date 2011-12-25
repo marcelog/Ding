@@ -41,10 +41,10 @@ ini_set(
     implode(
         PATH_SEPARATOR,
         array(
-            DOCTRINE_LIB_PATH,
-            __DIR__ .'/entities',
             __DIR__ .DIRECTORY_SEPARATOR
             .implode(DIRECTORY_SEPARATOR, array('..', '..', '..', 'src', 'mg')),
+            DOCTRINE_LIB_PATH,
+            __DIR__ .'/entities',
             ini_get('include_path'),
             ))
         );
@@ -84,7 +84,7 @@ try
 	 );
     $dingProperties = array(
         'ding' => array(
-            'log4php.properties' => './log4php.properties',
+            'log4php.properties' => __DIR__ . '/../log4php.properties',
     		'factory' => array(
                 'bdef' => array(
                 	'xml' => array('filename' => 'beans.xml', 'directories' => array(__DIR__)),

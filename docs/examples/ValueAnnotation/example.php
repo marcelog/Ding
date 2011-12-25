@@ -65,6 +65,22 @@ class ABean
     }
 }
 
+/**
+ * @Configuration
+ */
+class MyConfigClass
+{
+    /**
+     * @Bean
+     * @Value(value=${asd}/a)
+     * @Value(value=${asd}/b)
+     */
+    public function myOtherBeanName($a, $b)
+    {
+        return new ABean($a, $b);
+    }
+}
+
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\Container\Impl\ContainerImpl;
@@ -72,7 +88,7 @@ use Ding\Container\Impl\ContainerImpl;
 // Here you configure the container, its subcomponents, drivers, etc.
 $properties = array(
     'ding' => array(
-        'log4php.properties' => './log4php.properties',
+        'log4php.properties' => __DIR__ . '/../log4php.properties',
         'factory' => array(
             'bdef' => array( // Both of these drivers are optional. They are both included just for the thrill of it.
                 'annotation' => array('scanDir' => array(realpath(__DIR__)))
@@ -83,5 +99,7 @@ $properties = array(
 );
 $container = ContainerImpl::getInstance($properties);
 $bean = $container->getBean('myBeanName');
+var_dump($bean);
+$bean = $container->getBean('myOtherBeanName');
 var_dump($bean);
 
