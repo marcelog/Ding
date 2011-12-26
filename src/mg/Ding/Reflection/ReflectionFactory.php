@@ -46,16 +46,23 @@ class ReflectionFactory implements IReflectionFactory
 {
     /**
      * Cache reflection classes instantiated so far.
-     * @var ReflectionClass[]
+     * @var \ReflectionClass[]
      */
     private $_reflectionClasses = array();
     /**
-     * A map where the key is the class, and the value is an array with the
-     * 'class annotations and its annotated methods.
+     * A map where the key is the class name.
      * @var string[]
      */
     private $_annotatedClasses = array();
+    /**
+     * A map where the key is the method name.
+     * @var string[]
+     */
     private $_annotatedMethods = array();
+    /**
+     * A map where the key is the property name.
+     * @var string[]
+     */
     private $_annotatedProperties = array();
 
     /**
@@ -67,10 +74,14 @@ class ReflectionFactory implements IReflectionFactory
 
     /**
      * Reflection methods, indexed by class.
-     * @var string[]
+     * @var \ReflectionMethod[]
      */
     private $_reflectionMethods = array();
 
+    /**
+     * Reflection properties, indexed by class.
+     * @var \ReflectionProperty[]
+     */
     private $_reflectionProperties = array();
 
     /**
@@ -85,8 +96,19 @@ class ReflectionFactory implements IReflectionFactory
      */
     private $_cache = false;
 
+    /**
+     * The annotation parser used to get annotations from code blocks.
+     * @var Parser
+     */
     private $_annotationParser;
 
+    /**
+     * To inject the annotation parser.
+     *
+     * @param Parser $parser
+     *
+     * @return void
+     */
     public function setAnnotationParser(Parser $parser)
     {
         $this->_annotationParser = $parser;
@@ -283,6 +305,15 @@ class ReflectionFactory implements IReflectionFactory
         return $annotations;
     }
 
+    /**
+     * This one will populate the map indexed by annotations names, so we can
+     * then get all classes with a particular annotation name.
+     *
+     * @param string $class A class name.
+     * @param Collection $annotations The annotations to index.
+     *
+     * @return void
+     */
     private function _populateClassesPerAnnotations($class, Collection $annotations)
     {
         foreach ($annotations->getAll() as $name => $annotation) {
@@ -367,6 +398,13 @@ class ReflectionFactory implements IReflectionFactory
         return $this->_reflectionProperties[$class][$property];
     }
 
+    /**
+     * To inject the annotations cache.
+     *
+     * @param ICache $cache
+     *
+     * @return void
+     */
     public function setCache(ICache $cache)
     {
         $this->_cache = $cache;
