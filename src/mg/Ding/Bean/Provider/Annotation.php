@@ -58,7 +58,7 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
  */
 class Annotation
     implements IAfterConfigListener, IBeanDefinitionProvider,
-    IContainerAware, IReflectionFactoryAware, ILoggerAware
+    IContainerAware, IReflectionFactoryAware
 {
     protected $container;
 
@@ -67,12 +67,6 @@ class Annotation
      * @var string[]
      */
     private $_scanDirs;
-
-    /**
-     * Known classes.
-     * @var string[]
-     */
-    private static $_knownClasses = false;
 
     /**
      * @Configuration annotated classes.
@@ -97,7 +91,6 @@ class Annotation
      * @var BeanDefinition[]
      */
     private $_beanDefinitions = array();
-    private $_myBeanNames = array();
 
     /**
      * Container.
@@ -111,8 +104,6 @@ class Annotation
      */
     protected $reflectionFactory;
 
-    private $_logger;
-
     /**
      * (non-PHPdoc)
      * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
@@ -120,23 +111,6 @@ class Annotation
     public function setReflectionFactory(IReflectionFactory $reflectionFactory)
     {
         $this->reflectionFactory = $reflectionFactory;
-    }
-
-    /**
-     * Returns true if the given filesystem entry is interesting to scan.
-     *
-     * @param string $dirEntry Filesystem entry.
-     */
-    private function _isScannable($dirEntry)
-    {
-        $extensionPos = strrpos($dirEntry, '.');
-        if ($extensionPos === false) {
-            return false;
-        }
-        if (substr($dirEntry, $extensionPos, 4) != '.php') {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -148,44 +122,19 @@ class Annotation
      */
     private function _scan($dir)
     {
-        $result = false;
-        $cacheKey = str_replace('\\', '_', str_replace('/', '_', $dir)) . '.knownclasses';
-        $knownClasses = $this->_cache->fetch($cacheKey, $result);
-        if ($result === true) {
-            self::$_knownClasses = array_merge_recursive(self::$_knownClasses, $knownClasses);
-            foreach ($knownClasses as $class => $v) {
-                $result = false;
-                $file = $this->_cache->fetch(str_replace('\\', '_', $class) . '.include_file', $result);
-                if ($result === true) {
-                    include_once $file;
-                }
-            }
-            return;
-        }
-        foreach (scandir($dir) as $dirEntry) {
-            if ($dirEntry == '.' || $dirEntry == '..') {
-                continue;
-            }
-            $dirEntry = $dir . DIRECTORY_SEPARATOR . $dirEntry;
-            if (is_dir($dirEntry)) {
-                $this->_scan($dirEntry);
-            } else if(is_file($dirEntry) && $this->_isScannable($dirEntry)) {
-                $classes = $this->reflectionFactory->getClassesFromCode(@file_get_contents($dirEntry));
-                include_once $dirEntry;
-                foreach ($classes as $aNewClass) {
-                    self::$_knownClasses[$aNewClass] = $this->reflectionFactory->getClassAnnotations($aNewClass);
-                    $classes = array_combine($classes, $classes);
-                    $include_files[$aNewClass] = $dirEntry;
-                    $this->_cache->store(str_replace('\\', '_', $aNewClass) . '.include_file', $dirEntry);
-                }
-                $this->_cache->store($cacheKey, $classes);
+        $classesPerFile = $this->reflectionFactory->getClassesFromDirectory($dir);
+		/*
+		 * First include the file so we can actually get the doc comment (by
+         * calling \ReflectionClass::getDocComment()). This will allow us to
+         * actually get the annotations, and we also need this so we can
+         * know about @Configuration and @ListensOn earlier on.
+         */
+        foreach ($classesPerFile as $file => $classes) {
+            include_once $file;
+            foreach ($classes as $class) {
+                $this->reflectionFactory->getClassAnnotations($class);
             }
         }
-    }
-
-    public function setLogger(\Logger $logger)
-    {
-        $this->_logger = $logger;
     }
 
     /**
@@ -273,8 +222,8 @@ class Annotation
             $this->_configClasses[$class] = $configBeanName;
             $def = new BeanDefinition($configBeanName);
             $def->setClass($class);
-            $this->_configBeansDefinitions[$configBeanName] = $def;
-            $this->_configBeansDefinitions[$configBeanName] = $this->_container->getBeanDefinition($configBeanName);
+            $this->_beanDefinitions[$configBeanName] = $def;
+            $this->_beanDefinitions[$configBeanName] = $this->_container->getBeanDefinition($configBeanName);
             $rClass = $this->reflectionFactory->getClass($class);
             $classAnnotations = $this->reflectionFactory->getClassAnnotations($class);
 
@@ -326,7 +275,7 @@ class Annotation
     {
         if ($annotations->contains('listenson')) {
             $def = $this->_getBeanDefinition($beanName, $class, $annotations);
-            $this->_configBeansDefinitions[$beanName] = $def;
+            $this->_beanDefinitions[$beanName] = $def;
             $annotation = $annotations->getSingleAnnotation('listenson');
             foreach ($annotation->getOptionValues('value') as $eventCsv) {
                 foreach (explode(',', $eventCsv) as $eventName) {
@@ -343,8 +292,8 @@ class Annotation
     public function getBeanDefinition($name)
     {
         $bean = null;
-        if (isset($this->_configBeansDefinitions[$name])) {
-            return $this->_configBeansDefinitions[$name];
+        if (isset($this->_beanDefinitions[$name])) {
+            return $this->_beanDefinitions[$name];
         }
         foreach ($this->_configClasses as $configClass => $configBeanName) {
             if (empty($this->_configBeans[$configBeanName])) {
@@ -365,7 +314,7 @@ class Annotation
                         $bean = $this->_getBeanDefinition($name, 'stdclass', $annotations);
                         $bean->setFactoryBean($configBeanName);
                         $bean->setFactoryMethod($methodName);
-                        $this->_configBeansDefinitions[$name] = $bean;
+                        $this->_beanDefinitions[$name] = $bean;
                         return $bean;
                     }
                 }
@@ -425,8 +374,5 @@ class Annotation
         $this->_configClasses = array();
         $this->_beanDefinitions = array();
         $this->_configBeans = array();
-        $classes = get_declared_classes();
-        self::$_knownClasses = array_combine($classes, $classes);
-
     }
 }

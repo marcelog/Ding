@@ -49,6 +49,22 @@ interface IReflectionFactory
      */
     public function getClassesFromCode($code);
     /**
+     * Returns all php classes found in a given filename.
+     *
+     * @param string $file Filename.
+     *
+     * @return string[]
+     */
+    public function getClassesFromFile($file);
+    /**
+     * Returns all php classes found in a given directory (recursively).
+     *
+     * @param string $path Directory to scan.
+     *
+     * @return string[]
+     */
+    public function getClassesFromDirectory($dir);
+    /**
      * Returns all classes annotated with the given annotation.
      *
      * @param string $annotation Annotation name.

@@ -122,6 +122,91 @@ class ReflectionFactory implements IReflectionFactory
             }
         }
         return $classes;
+   }
+    /**
+     * Returns all files elegible for scanning for classes.
+     *
+     * @param string $path Absolute path to a directory or filename.
+     *
+     * @return string[]
+     */
+    private function _getCandidateFilesForClassScanning($path)
+    {
+        $cacheKey = "$path.candidatefiles";
+        $result = false;
+        $files = $this->_cache->fetch($cacheKey, $result);
+        if ($result === true) {
+            return $files;
+        }
+        $files = array();
+        if (is_dir($path)) {
+            foreach (scandir($path) as $entry) {
+                if ($entry == '.' || $entry == '..') {
+                    continue;
+                }
+                $entry = "$path/$entry";
+                foreach ($this->_getCandidateFilesForClassScanning($entry) as $file) {
+                    $files[] = $file;
+                }
+            }
+        } else if ($this->_isScannable($path)) {
+            $files[] = realpath($path);
+        }
+        $this->_cache->store($cacheKey, $files);
+        return $files;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getClassesFromFile()
+     */
+    public function getClassesFromFile($file)
+    {
+        $cacheKey = "$file.classesinfile";
+        $result = false;
+        $classes = $this->_cache->fetch($cacheKey, $result);
+        if ($result === true) {
+            return $classes;
+        }
+        $classes = $this->getClassesFromCode(@file_get_contents($file));
+        $this->_cache->store($cacheKey, $classes);
+        return $classes;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getClassesFromDirectory()
+     */
+    public function getClassesFromDirectory($dir)
+    {
+        $cacheKey = "$dir.classesindir";
+        $result = false;
+        $classes = $this->_cache->fetch($cacheKey, $result);
+        if ($result === true) {
+            return $classes;
+        }
+        $classes = array();
+        foreach ($this->_getCandidateFilesForClassScanning($dir) as $file) {
+            $classes[$file] = $this->getClassesFromFile($file);
+        }
+        $this->_cache->store($cacheKey, $classes);
+        return $classes;
+    }
+    /**
+     * Returns true if the given filesystem entry is interesting to scan.
+     *
+     * @param string $path Filesystem entry.
+     */
+    private function _isScannable($path)
+    {
+        $extensionPos = strrpos($path, '.');
+        if ($extensionPos === false) {
+            return false;
+        }
+        if (substr($path, $extensionPos, 4) != '.php') {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -140,8 +225,8 @@ class ReflectionFactory implements IReflectionFactory
         $result = false;
         $classes = $this->_cache->fetch($cacheKey, $result);
         if ($result === true) {
-            $this->_classesAnnotated[$annotation] = $classes;
-            return $classes;
+            $this->_classesAnnotated[$annotation] = $classes[$annotation];
+            return $this->_classesAnnotated[$annotation];
         }
         return array();
     }
@@ -167,7 +252,9 @@ class ReflectionFactory implements IReflectionFactory
             return $annotations;
         }
         $rMethod = $this->getMethod($class, $method);
-        return $this->_annotationParser->parse($rMethod->getDocComment());
+        $annotations = $this->_annotationParser->parse($rMethod->getDocComment());
+        $this->_cache->store($cacheKey, $annotations);
+        return $annotations;
     }
 
     /**
@@ -191,18 +278,20 @@ class ReflectionFactory implements IReflectionFactory
             return $annotations;
         }
         $rProperty = $this->getProperty($class, $property);
-        return $this->_annotationParser->parse($rProperty->getDocComment());
+        $annotations = $this->_annotationParser->parse($rProperty->getDocComment());
+        $this->_cache->store($cacheKey, $annotations);
+        return $annotations;
     }
 
     private function _populateClassesPerAnnotations($class, Collection $annotations)
     {
         foreach ($annotations->getAll() as $name => $annotation) {
+            $cacheKey = $name . '.classbyannotations';
             if (!isset($this->_classesAnnotated[$name])) {
                 $this->_classesAnnotated[$name] = array();
             }
             $this->_classesAnnotated[$name][$class] = $class;
-            $cacheKeyA = $name . '.classbyannotations';
-            $this->_cache->store($cacheKeyA, $this->_classesAnnotated[$name]);
+            $this->_cache->store($cacheKey, $this->_classesAnnotated);
         }
     }
     /**
