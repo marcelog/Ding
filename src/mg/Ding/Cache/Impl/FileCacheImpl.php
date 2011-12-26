@@ -87,7 +87,7 @@ class FileCacheImpl implements ICache
      */
     private function _sanitize($name)
     {
-        return str_replace('\\', '_', $name);
+        return str_replace('/', '_', str_replace('\\', '_', $name));
     }
 
     /**
