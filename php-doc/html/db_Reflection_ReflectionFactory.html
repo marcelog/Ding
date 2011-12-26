@@ -169,8 +169,7 @@ limitations under the License.</a>
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
                  <span class="highlight">$_annotatedClasses</span>= 'array()'
                 </code><div class="description">
-<p class="short-description">A map where the key is the class, and the value is an array with the
-'class annotations and its annotated methods.</p></div>
+<p class="short-description">A map where the key is the class name.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
@@ -181,37 +180,43 @@ limitations under the License.</a>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::$_annotatedMethods" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
                  <span class="highlight">$_annotatedMethods</span>= 'array()'
-                </code><div class="description"></div>
+                </code><div class="description">
+<p class="short-description">A map where the key is the method name.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>n/a</dd>
+<dd>\string[]</dd>
 </dl>
 </div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::$_annotatedProperties" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
                  <span class="highlight">$_annotatedProperties</span>= 'array()'
-                </code><div class="description"></div>
+                </code><div class="description">
+<p class="short-description">A map where the key is the property name.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>n/a</dd>
+<dd>\string[]</dd>
 </dl>
 </div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::$_annotationParser" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Annotation\Parser
                  <span class="highlight">$_annotationParser</span>= ''
-                </code><div class="description"></div>
+                </code><div class="description">
+<p class="short-description">The annotation parser used to get annotations from code blocks.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>n/a</dd>
+<dd><a href="db_Annotation_Parser.html#%5CDing%5CAnnotation%5CParser">\Ding\Annotation\Parser</a></dd>
 </dl>
 </div>
 <div class="clear"></div>
@@ -246,7 +251,7 @@ all the classes (not their methods) with this annotation.</p></div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::$_reflectionClasses" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Reflection\ReflectionClass[]
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\ReflectionClass[]
                  <span class="highlight">$_reflectionClasses</span>= 'array()'
                 </code><div class="description">
 <p class="short-description">Cache reflection classes instantiated so far.</p></div>
@@ -254,13 +259,13 @@ all the classes (not their methods) with this annotation.</p></div>
 <div class="long-description"></div>
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>\Ding\Reflection\ReflectionClass[]</dd>
+<dd><a href="http://php.net/manual/en/class.reflectionclass.php">\ReflectionClass[]</a></dd>
 </dl>
 </div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::$_reflectionMethods" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\ReflectionMethod[]
                  <span class="highlight">$_reflectionMethods</span>= 'array()'
                 </code><div class="description">
 <p class="short-description">Reflection methods, indexed by class.</p></div>
@@ -268,19 +273,21 @@ all the classes (not their methods) with this annotation.</p></div>
 <div class="long-description"></div>
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>\string[]</dd>
+<dd><a href="http://php.net/manual/en/class.reflectionmethod.php">\ReflectionMethod[]</a></dd>
 </dl>
 </div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::$_reflectionProperties" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\ReflectionProperty[]
                  <span class="highlight">$_reflectionProperties</span>= 'array()'
-                </code><div class="description"></div>
+                </code><div class="description">
+<p class="short-description">Reflection properties, indexed by class.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
-<dd>n/a</dd>
+<dd><a href="http://php.net/manual/en/class.reflectionproperty.php">\ReflectionProperty[]</a></dd>
 </dl>
 </div>
 <div class="clear"></div>
@@ -385,12 +392,14 @@ all the classes (not their methods) with this annotation.</p></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::_populateClassesPerAnnotations()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_populateClassesPerAnnotations</span><span class="nb-faded-text">(
-           $class,  $annotations
+          string $class, <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a> $annotations
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description"></p></div>
+          void</code><div class="description"><p class="short_description">This one will populate the map indexed by annotations names, so we can
+then get all classes with a particular annotation name.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -399,13 +408,13 @@ all the classes (not their methods) with this annotation.</p></div>
 </tr></thead>
 <tr>
 <th>$class</th>
-<td></td>
-<td><em></em></td>
+<td>string</td>
+<td><em><p>A class name.</p></em></td>
 </tr>
 <tr>
 <th>$annotations</th>
-<td></td>
-<td><em></em></td>
+<td><a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></td>
+<td><em><p>The annotations to index.</p></em></td>
 </tr>
 </table>
 </div>
@@ -863,12 +872,13 @@ all the classes (not their methods) with this annotation.</p></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::setAnnotationParser()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setAnnotationParser</span><span class="nb-faded-text">(
-           $parser
+          <a href="db_Annotation_Parser.html#%5CDing%5CAnnotation%5CParser">\Ding\Annotation\Parser</a> $parser
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description"></p></div>
+          void</code><div class="description"><p class="short_description">To inject the annotation parser.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -877,7 +887,7 @@ all the classes (not their methods) with this annotation.</p></div>
 </tr></thead>
 <tr>
 <th>$parser</th>
-<td></td>
+<td><a href="db_Annotation_Parser.html#%5CDing%5CAnnotation%5CParser">\Ding\Annotation\Parser</a></td>
 <td><em></em></td>
 </tr>
 </table>
@@ -886,12 +896,13 @@ all the classes (not their methods) with this annotation.</p></div>
 </div>
 <a id="\Ding\Reflection\ReflectionFactory::setCache()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setCache</span><span class="nb-faded-text">(
-           $cache
+          <a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a> $cache
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description"></p></div>
+          void</code><div class="description"><p class="short_description">To inject the annotations cache.</p></div>
 <div class="code-tabs">
+<div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
 <thead><tr>
 <th>Name</th>
@@ -900,7 +911,7 @@ all the classes (not their methods) with this annotation.</p></div>
 </tr></thead>
 <tr>
 <th>$cache</th>
-<td></td>
+<td><a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a></td>
 <td><em></em></td>
 </tr>
 </table>

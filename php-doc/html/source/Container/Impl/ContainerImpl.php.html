@@ -1063,6 +1063,7 @@ class ContainerImpl implements IContainer
 
         // All set, continue.
         if (isset(self::$_options['bdef']['annotation'])) {
+            $this-&gt;getBean('dingAnnotationDiscovererDriver');
             $this-&gt;getBean('dingAnnotationBeanDefinitionProvider');
             $this-&gt;getBean('dingAnnotationValueDriver');
             $this-&gt;getBean('dingAnnotationAspectDriver');

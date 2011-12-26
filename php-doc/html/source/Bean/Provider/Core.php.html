@@ -204,6 +204,16 @@ class Core implements IBeanDefinitionProvider
             $bean = new BeanDefinition($name);
             $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationRequiredDriver');
             break;
+        case 'dingAnnotationDiscovererDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver');
+            $bean-&gt;setArguments(array(
+                new BeanConstructorArgumentDefinition(
+                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
+                    $this-&gt;options['bdef']['annotation']['scanDir']
+                )
+            ));
+            break;
         case 'dingAnnotationResourceDriver':
             $bean = new BeanDefinition($name);
             $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationResourceDriver');

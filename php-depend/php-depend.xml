@@ -161,8 +161,8 @@
     </Package>
     <Package name="Ding\Bean\Factory\Driver">
       <Stats>
-        <TotalClasses>10</TotalClasses>
-        <ConcreteClasses>10</ConcreteClasses>
+        <TotalClasses>11</TotalClasses>
+        <ConcreteClasses>11</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
         <Ce>9</Ce>
@@ -172,6 +172,7 @@
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationAspectDriver.php">AnnotationAspectDriver</Class>
+        <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationDiscovererDriver.php">AnnotationDiscovererDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationInitDestroyMethodDriver.php">AnnotationInitDestroyMethodDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationRequiredDriver.php">AnnotationRequiredDriver</Class>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationResourceDriver.php">AnnotationResourceDriver</Class>
