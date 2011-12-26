@@ -63,7 +63,7 @@ class Test_IoC_Annotation_Cache_ZF extends PHPUnit_Framework_TestCase
                 'cache' => array(
     				'proxy' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
                 	'aspect' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
-                    'autoloader' => array('impl' => 'dummy', 'zend' => $zendCacheOptions),
+                    'autoloader' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
         			'annotations' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
                		'bdef' => array('impl' => 'zend', 'zend' => $zendCacheOptions),
               		'beans' => array('impl' => 'dummy')

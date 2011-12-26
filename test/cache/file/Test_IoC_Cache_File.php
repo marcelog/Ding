@@ -57,7 +57,7 @@ class Test_IoC_Cache_File extends PHPUnit_Framework_TestCase
                 'cache' => array(
     				'proxy' => array('impl' => 'file', 'directory' => $cachedir),
                 	'aspect' => array('impl' => 'file', 'directory' => $cachedir),
-                    'autoloader' => array('impl' => 'dummy', 'directory' => $cachedir),
+                    'autoloader' => array('impl' => 'file', 'directory' => $cachedir),
             		'bdef' => array('impl' => 'file', 'directory' => $cachedir),
         			'annotations' => array('impl' => 'file', 'directory' => $cachedir),
               		'beans' => array('impl' => 'dummy')
