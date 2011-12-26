@@ -114,30 +114,6 @@ class Annotation
     }
 
     /**
-     * Recursively scans a directory looking for annotated classes.
-     *
-     * @param string $dir Directory to scan.
-     *
-     * @return void
-     */
-    private function _scan($dir)
-    {
-        $classesPerFile = $this->reflectionFactory->getClassesFromDirectory($dir);
-		/*
-		 * First include the file so we can actually get the doc comment (by
-         * calling \ReflectionClass::getDocComment()). This will allow us to
-         * actually get the annotations, and we also need this so we can
-         * know about @Configuration and @ListensOn earlier on.
-         */
-        foreach ($classesPerFile as $file => $classes) {
-            include_once $file;
-            foreach ($classes as $class) {
-                $this->reflectionFactory->getClassAnnotations($class);
-            }
-        }
-    }
-
-    /**
      * Creates a bean definition from the given annotations.
      *
      * @param string $name Bean name.
@@ -213,9 +189,6 @@ class Annotation
      */
     public function afterConfig()
     {
-        foreach ($this->_scanDirs as $dir) {
-            $this->_scan($dir);
-        }
         $configClasses = $this->reflectionFactory->getClassesByAnnotation('configuration');
         foreach ($configClasses as $class) {
             $configBeanName = $class . 'DingConfigClass';
