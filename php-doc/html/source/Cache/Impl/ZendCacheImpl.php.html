@@ -93,7 +93,13 @@ class ZendCacheImpl implements ICache
 
     private function _transform($name)
     {
-        return str_replace('-', '_', str_replace('.', '_', str_replace('\\', '_', $name)));
+        return
+            str_replace('-', '_',
+            str_replace('.', '_',
+            str_replace('\\', '_',
+            str_replace('/', '_',
+            $name
+        ))));
     }
 
     /**

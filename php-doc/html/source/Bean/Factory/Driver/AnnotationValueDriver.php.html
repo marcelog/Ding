@@ -1,0 +1,177 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * This driver will search for @Value
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Bean\Factory\Driver;
+
+use Ding\Bean\BeanConstructorArgumentDefinition;
+use Ding\Logger\ILoggerAware;
+use Ding\Reflection\IReflectionFactory;
+use Ding\Reflection\IReflectionFactoryAware;
+use Ding\Container\IContainerAware;
+use Ding\Container\IContainer;
+use Ding\Bean\Factory\Exception\BeanFactoryException;
+use Ding\Bean\BeanPropertyDefinition;
+use Ding\Bean\Lifecycle\IAfterDefinitionListener;
+use Ding\Bean\Lifecycle\IAfterCreateListener;
+use Ding\Bean\BeanDefinition;
+
+/**
+ * This driver will search for @Resource setter methods.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Bean
+ * @subpackage Factory.Driver
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class AnnotationValueDriver
+    implements IAfterDefinitionListener, IContainerAware, IReflectionFactoryAware
+{
+    /**
+     * Container.
+     * @var IContainer
+     */
+    private $_container;
+
+    /**
+     * A ReflectionFactory implementation.
+     * @var IReflectionFactory
+     */
+    protected $reflectionFactory;
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this-&gt;reflectionFactory = $reflectionFactory;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Container.IContainerAware::setContainer()
+     */
+    public function setContainer(IContainer $container)
+    {
+        $this-&gt;_container = $container;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
+     */
+    public function afterDefinition(BeanDefinition $bean)
+    {
+        $properties = $bean-&gt;getProperties();
+        $class = $bean-&gt;getClass();
+        $rClass = $this-&gt;reflectionFactory-&gt;getClass($class);
+        foreach ($rClass-&gt;getProperties() as $rProperty) {
+            $propertyName = $rProperty-&gt;getName();
+            $annotations = $this-&gt;reflectionFactory-&gt;getPropertyAnnotations($class, $propertyName);
+            if ($annotations-&gt;contains('value')) {
+                $annotation = $annotations-&gt;getSingleAnnotation('value');
+                if ($annotation-&gt;hasOption('value')) {
+                    $value = $annotation-&gt;getOptionSingleValue('value');
+                    $properties[$propertyName] = new BeanPropertyDefinition(
+                        $propertyName, BeanPropertyDefinition::PROPERTY_SIMPLE, $value
+                    );
+                }
+            }
+        }
+        $bean-&gt;setProperties($properties);
+        if ($bean-&gt;isCreatedWithFactoryBean()) {
+            $factoryMethod = $bean-&gt;getFactoryMethod();
+            $factoryBean = $bean-&gt;getFactoryBean();
+            $def = $this-&gt;_container-&gt;getBeanDefinition($factoryBean);
+            $annotations = $this-&gt;reflectionFactory-&gt;getMethodAnnotations($def-&gt;getClass(), $factoryMethod);
+            $constructorArguments = $bean-&gt;getArguments();
+            if ($annotations-&gt;contains('value')) {
+                foreach ($annotations-&gt;getAnnotations('value') as $annotation) {
+                    if ($annotation-&gt;hasOption('value')) {
+                        foreach ($annotation-&gt;getOptionValues('value') as $value) {
+                            $constructorArguments[] = new BeanConstructorArgumentDefinition(
+                                BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
+                                $value
+                            );
+                        }
+                    }
+                }
+            }
+            $bean-&gt;setArguments($constructorArguments);
+        }
+        return $bean;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

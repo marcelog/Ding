@@ -1,0 +1,135 @@
+<html>
+    <head>
+        <script
+            type="text/javascript"
+            src="../../js/jquery-1.4.2.min.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shCore.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushJScript.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushPhp.js">
+        </script>
+        <script
+            type="text/javascript"
+            src="../../syntax_highlighter/scripts/shBrushXml.js">
+        </script>
+        <link
+            href="../../syntax_highlighter/styles/shCore.css" rel="stylesheet"
+            type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shCoreEclipse.css"
+            rel="stylesheet" type="text/css"
+        />
+        <link
+            href="../../syntax_highlighter/styles/shThemeWordpress.css"
+            rel="stylesheet" type="text/css"
+        />
+    </head>
+    <body>
+        <pre class="brush: php">&lt;?php
+/**
+ * Annotation parser.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Annotation
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ *
+ * Copyright 2011 Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+namespace Ding\Annotation;
+
+/**
+ * Annotation parser.
+ *
+ * PHP Version 5
+ *
+ * @category   Ding
+ * @package    Annotation
+ * @author     Marcelo Gornstein &lt;marcelog@gmail.com&gt;
+ * @license    http://marcelog.github.com/ Apache License 2.0
+ * @link       http://marcelog.github.com/
+ */
+class Parser
+{
+    private function _parseOptions($options)
+    {
+        $total = preg_match_all(
+    		'/([^=,]*)=[\s]*([\s]*&quot;[^&quot;]+&quot;|\{[^\{\}]+\}|[^,&quot;]*[\s]*)/', $options, $matches
+        );
+        $options = array();
+        if ($total &gt; 0) {
+            for ($i = 0; $i &lt; $total; $i++) {
+                $key = trim($matches[1][$i]);
+                $value = str_replace('&quot;', '', trim($matches[2][$i]));
+                $options[$key] = array();
+                if (strpos($value, '{') === 0) {
+                    $value = substr($value, 1, -1);
+                    $value = explode(',', $value);
+                    foreach ($value as $k =&gt; $v) {
+                        $options[$key][] = trim($v);
+                    }
+                } else {
+                    $options[$key][] = $value;
+                }
+            }
+        }
+        return $options;
+    }
+
+    public function parse($text)
+    {
+        $ret = new Collection();
+        if (preg_match_all('/@([^@\n\r\t]*)/', $text, $globalMatches) &gt; 0) {
+            foreach ($globalMatches[1] as $annotationText) {
+                preg_match('/([a-zA-Z0-9]+)/', $annotationText, $localMatches);
+                $annotation = new Annotation($localMatches[1]);
+                $optsStart = strpos($annotationText, '(');
+                if ($optsStart !== false) {
+                    $optsEnd = strrpos($annotationText, ')');
+                    $optsLength = $optsEnd - $optsStart - 1;
+                    $opts = trim(substr($annotationText, $optsStart + 1, $optsLength));
+                    foreach ($this-&gt;_parseOptions($opts) as $key =&gt; $values) {
+                        foreach ($values as $value) {
+                            $annotation-&gt;addOption($key, $value);
+                        }
+                    }
+                }
+                $ret-&gt;add($annotation);
+            }
+        }
+        return $ret;
+    }
+}</pre>
+        <script type="text/javascript">
+             SyntaxHighlighter.all()
+             jQuery('.gutter div').each(function(key, data){
+                jQuery(data).prepend('<a name="L'+jQuery(data).text()+'"/>');
+             });
+        </script>
+    </body>
+</html>

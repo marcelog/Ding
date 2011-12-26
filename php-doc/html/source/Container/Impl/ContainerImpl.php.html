@@ -550,7 +550,7 @@ class ContainerImpl implements IContainer
                 $parentClass = $rClass-&gt;getParentClass();
                 while($parentClass !== false) {
                     if (preg_match('/' . $expression . '/', $parentClass-&gt;getName()) &gt; 0) {
-                        $this-&gt;_applyAspect($parentClass-&gt;getName(), $aspect, $dispatcher);
+                        $this-&gt;_applyAspect($class, $aspect, $dispatcher);
                     }
                     $parentClass = $parentClass-&gt;getParentClass();
                 }
@@ -570,9 +570,6 @@ class ContainerImpl implements IContainer
     private function _applyAspects(BeanDefinition $definition)
     {
         $class = $definition-&gt;getClass();
-        if (empty($class)) {
-            return;
-        }
         $dispatcher = clone $this-&gt;_dispatcherTemplate;
         $this-&gt;_applySpecificAspects($definition, $dispatcher);
         $this-&gt;_applyGlobalAspects($definition, $dispatcher);
@@ -595,6 +592,11 @@ class ContainerImpl implements IContainer
         $this-&gt;_createBeanDependencies($definition);
         $this-&gt;_applyAspects($definition);
         $bean = $this-&gt;_instantiate($definition);
+        if (!is_object($bean)) {
+            throw new BeanFactoryException(
+            	'Could not instantiate ' . $definition-&gt;getName()
+            );
+        }
         $this-&gt;_assemble($bean, $definition);
         $this-&gt;_setupInitAndShutdown($bean, $definition);
         $this-&gt;_lifecycleManager-&gt;afterCreate($bean, $definition);
@@ -620,6 +622,49 @@ class ContainerImpl implements IContainer
             $this-&gt;registerShutdownMethod($bean, $destroyMethod);
         }
     }
+
+    /**
+     * Tries to inject by looking up set* methods.
+     *
+     * @param object $bean
+     * @param string $name
+     * @param string $value
+     *
+     * @return boolean
+     */
+    private function _setterInject($bean, $name, $value)
+    {
+        $methodName = 'set' . ucfirst($name);
+        $rClass = $this-&gt;_reflectionFactory-&gt;getClass(get_class($bean));
+        if ($rClass-&gt;hasMethod($methodName)) {
+            $bean-&gt;$methodName($value);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Tries to inject by looking up a property by name.
+     *
+     * @param object $bean
+     * @param string $name
+     * @param string $value
+     *
+     * @return boolean
+     */
+    private function _propertyInject($bean, $name, $value)
+    {
+        $rClass = $this-&gt;_reflectionFactory-&gt;getClass(get_class($bean));
+        if ($rClass-&gt;hasProperty($name)) {
+             $rProperty = $rClass-&gt;getProperty($name);
+             if (!$rProperty-&gt;isPublic()) {
+                $rProperty-&gt;setAccessible(true);
+             }
+            $rProperty-&gt;setValue($bean, $value);
+            return true;
+        }
+        return false;
+    }
     /**
      * Assembles a bean (setter injection)
      *
@@ -633,11 +678,14 @@ class ContainerImpl implements IContainer
         $this-&gt;_lifecycleManager-&gt;beforeAssemble($bean, $beanDefinition);
         foreach ($beanDefinition-&gt;getProperties() as $property) {
             $propertyName = $property-&gt;getName();
-            $methodName = 'set' . ucfirst($propertyName);
-            $rClass = $this-&gt;_reflectionFactory-&gt;getClass($beanDefinition-&gt;getClass());
-            if ($rClass-&gt;hasMethod($methodName)) {
-                $bean-&gt;$methodName($this-&gt;_getValueFromDefinition($property));
+            $propertyValue = $this-&gt;_getValueFromDefinition($property);
+            if (
+                $this-&gt;_setterInject($bean, $propertyName, $propertyValue)
+                || $this-&gt;_propertyInject($bean, $propertyName, $propertyValue)
+            ) {
+                continue;
             }
+            throw new BeanFactoryException(&quot;Dont know how to inject: $propertyName&quot;);
         }
         $this-&gt;fillAware($beanDefinition, $bean);
         $this-&gt;_lifecycleManager-&gt;afterAssemble($bean, $beanDefinition);
@@ -857,6 +905,7 @@ class ContainerImpl implements IContainer
         if ($rClass-&gt;implementsInterface('Ding\Aspect\IAspectManagerAware')) {
             $bean-&gt;setAspectManager($this-&gt;_aspectManager);
         }
+
         if ($rClass-&gt;implementsInterface('Ding\Bean\IBeanDefinitionProvider')) {
             $this-&gt;registerBeanDefinitionProvider($bean);
         }
@@ -986,7 +1035,6 @@ class ContainerImpl implements IContainer
         set_error_handler(array($this, 'errorHandler'));
         register_shutdown_function(array($this, 'shutdownHandler'));
 
-        // We need a lifecycle manager.
         $this-&gt;_lifecycleManager = new BeanLifecycleManager;
         $this-&gt;_dispatcherTemplate = new DispatcherImpl();
         $this-&gt;_aspectManager = new AspectManager();
@@ -1015,7 +1063,8 @@ class ContainerImpl implements IContainer
 
         // All set, continue.
         if (isset(self::$_options['bdef']['annotation'])) {
-            $anDriver = $this-&gt;getBean('dingAnnotationBeanDefinitionProvider');
+            $this-&gt;getBean('dingAnnotationBeanDefinitionProvider');
+            $this-&gt;getBean('dingAnnotationValueDriver');
             $this-&gt;getBean('dingAnnotationAspectDriver');
             $this-&gt;getBean('dingAnnotationResourceDriver');
             $this-&gt;getBean('dingAnnotationInitDestroyMethodDriver');

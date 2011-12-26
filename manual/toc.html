@@ -323,9 +323,23 @@ class SomeBeanProviderClass
         $ret->setSomeProperty('hello world');
         return $ret;
     }
+    
+    /**
+     * @Bean
+     * @Value(value=${aProperty})
+     * @Value(value=${anotherProperty})
+     */
+    public function aBeanWithConstructorArguments($arg1, $arg2)
+    {
+        return new Something($arg1, $arg2);
+    }
 }
 </pre>
-
+<p>
+Notice how to inject constructor arguments for beans that come from a @Configuration
+class. The bean named "aBeanWithConstructorArguments" has been annotated with 2
+constructor arguments (the @Value annotations), specified in order of appearance.
+</p>
 <p>
 DI between configuration classes can also be achieved. I.e: annotate a property
 of a configuration class with @Resource. This will tell the container to look for
@@ -613,6 +627,25 @@ at real time:
     &lt;bean id="beanName" class="${aCustomImplementation}"/&gt;
 &lt;/beans&gt;
 </pre>
+<p>
+When using annotations, you can also inject the container properties into the bean properties:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component(name="myBeanName")
+ */
+class MyBean
+{
+    /**
+     * @Value(value="${user.property}/asd")
+     */
+    protected $someProperty;
+}
+</pre>
+<p>
+Suppose we defined "user.property" to be "myValue", then in this example, the property
+"someProperty" will be injected with "myValue/asd".
+</p>
 <H4>Inner beans</H4>
 <p>
 You can define beans inside properties and constructor arguments, like this:

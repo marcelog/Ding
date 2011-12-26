@@ -105,6 +105,10 @@ class Core implements IBeanDefinitionProvider
             $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
             $bean-&gt;setFactoryMethod('getAutoloaderCacheInstance');
             break;
+        case 'dingAnnotationParser':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Annotation\Parser');
+            break;
         case 'dingAnnotationsCache':
             $bean = new BeanDefinition($name);
             $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
@@ -184,6 +188,10 @@ class Core implements IBeanDefinitionProvider
             $bean = new BeanDefinition($name);
             $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationInitDestroyMethodDriver');
             break;
+        case 'dingAnnotationValueDriver':
+            $bean = new BeanDefinition($name);
+            $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationValueDriver');
+            break;
         case 'dingAnnotationAspectDriver':
             $bean = new BeanDefinition($name);
             $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationAspectDriver');
@@ -229,6 +237,10 @@ class Core implements IBeanDefinitionProvider
                 new BeanPropertyDefinition(
                 	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
                 	'dingAnnotationsCache'
+                ),
+                new BeanPropertyDefinition(
+                	'annotationParser', BeanPropertyDefinition::PROPERTY_BEAN,
+                	'dingAnnotationParser'
                 )
             ));
             break;

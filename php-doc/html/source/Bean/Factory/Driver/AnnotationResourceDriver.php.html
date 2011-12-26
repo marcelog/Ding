@@ -64,6 +64,7 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Logger\ILoggerAware;
 use Ding\Reflection\IReflectionFactory;
 use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Container\IContainerAware;
@@ -73,7 +74,6 @@ use Ding\Bean\BeanPropertyDefinition;
 use Ding\Bean\Lifecycle\IAfterDefinitionListener;
 use Ding\Bean\Lifecycle\IAfterCreateListener;
 use Ding\Bean\BeanDefinition;
-use Ding\Bean\BeanAnnotationDefinition;
 
 /**
  * This driver will search for @Resource setter methods.
@@ -88,8 +88,7 @@ use Ding\Bean\BeanAnnotationDefinition;
  * @link       http://marcelog.github.com/
  */
 class AnnotationResourceDriver
-    implements IAfterDefinitionListener, IAfterCreateListener,
-    IContainerAware, IReflectionFactoryAware
+    implements IAfterDefinitionListener, IContainerAware, IReflectionFactoryAware
 {
     /**
      * Container.
@@ -120,26 +119,6 @@ class AnnotationResourceDriver
     {
         $this-&gt;_container = $container;
     }
-    public function afterCreate($bean, BeanDefinition $beanDefinition)
-    {
-        $class = $beanDefinition-&gt;getClass();
-        if (!empty($class)) {
-            $rClass = $this-&gt;reflectionFactory-&gt;getClass($class);
-            foreach ($beanDefinition-&gt;getAutowiredProperties() as $property) {
-                $name = $property-&gt;getName();
-                $value = $this-&gt;_container-&gt;getBean($name);
-                $rProperty = $rClass-&gt;getProperty($name);
-                if (!$rProperty-&gt;isPublic()) {
-                    $rProperty-&gt;setAccessible(true);
-                    $rProperty-&gt;setValue($bean, $value);
-                    $rProperty-&gt;setAccessible(false);
-                } else {
-                    $rProperty-&gt;setValue($bean, $value);
-                }
-            }
-        }
-        return $bean;
-    }
 
     /**
      * (non-PHPdoc)
@@ -147,40 +126,35 @@ class AnnotationResourceDriver
      */
     public function afterDefinition(BeanDefinition $bean)
     {
-        $beanClass = $bean-&gt;getClass();
-        if (empty($beanClass)) {
-            return $bean;
-        }
-        $annotations = $this-&gt;reflectionFactory-&gt;getClassAnnotations($beanClass);
+        $class = $bean-&gt;getClass();
+        $rClass = $this-&gt;reflectionFactory-&gt;getClass($class);
         $properties = $bean-&gt;getProperties();
-        foreach ($annotations as $method =&gt; $methodAnnotations) {
-            if ($method == 'class') {
+        $a = \Logger::getLogger(__CLASS__);
+        foreach ($rClass-&gt;getMethods() as $method) {
+            $methodName = $method-&gt;getName();
+            if (strpos($methodName, 'set') !== 0) {
                 continue;
             }
-            if (strpos($method, 'set') !== 0) {
+            $annotations = $this-&gt;reflectionFactory-&gt;getMethodAnnotations($class, $methodName);
+            if (!$annotations-&gt;contains('resource')) {
                 continue;
             }
-            $propName = lcfirst(substr($method, 3));
-            foreach ($methodAnnotations as $annotation) {
-                if ($annotation-&gt;getName() == 'Resource') {
-                    $properties[$propName] = new BeanPropertyDefinition(
-                        $propName, BeanPropertyDefinition::PROPERTY_BEAN, $propName
-                    );
-                }
+            $propName = lcfirst(substr($methodName, 3));
+            $properties[$propName] = new BeanPropertyDefinition(
+                $propName, BeanPropertyDefinition::PROPERTY_BEAN, $propName
+            );
+        }
+        foreach ($rClass-&gt;getProperties() as $property) {
+            $propertyName = $property-&gt;getName();
+            $annotations = $this-&gt;reflectionFactory-&gt;getPropertyAnnotations($class, $propertyName);
+            if (!$annotations-&gt;contains('resource')) {
+                continue;
             }
+            $properties[$propertyName] = new BeanPropertyDefinition(
+                $propertyName, BeanPropertyDefinition::PROPERTY_BEAN, $propertyName
+            );
         }
         $bean-&gt;setProperties($properties);
-        $properties = array();
-        foreach ($annotations['class']['properties'] as $property =&gt; $propertyAnnotations) {
-            foreach ($propertyAnnotations as $annotation) {
-                if ($annotation-&gt;getName() == 'Resource') {
-                    $properties[$property] = new BeanPropertyDefinition(
-                        $property, BeanPropertyDefinition::PROPERTY_BEAN, $property
-                    );
-                }
-            }
-        }
-        $bean-&gt;setAutowiredProperties($properties);
         return $bean;
     }
 }</pre>

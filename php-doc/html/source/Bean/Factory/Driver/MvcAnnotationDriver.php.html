@@ -70,7 +70,6 @@ use Ding\Mvc\Http\HttpUrlMapper;
 use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Bean\BeanDefinition;
 use Ding\Container\IContainer;
-use Ding\Bean\BeanAnnotationDefinition;
 use Ding\Reflection\IReflectionFactory;
 
 /**
@@ -148,21 +147,23 @@ class MvcAnnotationDriver
      */
     public function afterConfig()
     {
-        foreach ($this-&gt;reflectionFactory-&gt;getClassesByAnnotation('Controller') as $controller) {
+        foreach ($this-&gt;reflectionFactory-&gt;getClassesByAnnotation('controller') as $controller) {
             $name = BeanDefinition::generateName('Controller');
             $beanDef = new BeanDefinition($name);
             $beanDef-&gt;setClass($controller);
-            $url = $this-&gt;reflectionFactory-&gt;getClassAnnotations($controller);
-            if (!isset($url['class']['RequestMapping'])) {
+            $annotations = $this-&gt;reflectionFactory-&gt;getClassAnnotations($controller);
+            if (!$annotations-&gt;contains('requestmapping')) {
                 continue;
             }
-            $url = $url['class']['RequestMapping']-&gt;getArguments();
-            if (!isset($url['url'])) {
-                continue;
-            }
-            $url = $url['url'];
+            $requestMappings = $annotations-&gt;getAnnotations('requestmapping');
             $this-&gt;_beans[$name] = $beanDef;
-            HttpUrlMapper::addAnnotatedController($url, $name);
+            foreach ($requestMappings as $map) {
+                if ($map-&gt;hasOption('url')) {
+                    foreach ($map-&gt;getOptionValues('url') as $url) {
+                        HttpUrlMapper::addAnnotatedController($url, $name);
+                    }
+                }
+            }
         }
     }
 }</pre>

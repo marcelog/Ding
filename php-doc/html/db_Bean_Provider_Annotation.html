@@ -174,6 +174,20 @@ the class (of the bean, of course).</p>
 </dl>
 <h3>Properties</h3>
 <div>
+<a id="\Ding\Bean\Provider\Annotation::$_beanDefinitions" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Bean\BeanDefinition[]
+                 <span class="highlight">$_beanDefinitions</span>= 'array()'
+                </code><div class="description">
+<p class="short-description">Definitions for config beans.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_Bean_BeanDefinition.html#%5CDing%5CBean%5CBeanDefinition">\Ding\Bean\BeanDefinition[]</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Provider\Annotation::$_cache" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Bean\Provider\ICache
                  <span class="highlight">$_cache</span>= 'false'
@@ -206,20 +220,6 @@ the class (of the bean, of course).</p>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Ding\Bean\Provider\Annotation::$_configBeansDefinitions" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Bean\BeanDefinition[]
-                 <span class="highlight">$_configBeansDefinitions</span>= 'array()'
-                </code><div class="description">
-<p class="short-description">Definitions for config beans.</p></div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
-<dt>Type</dt>
-<dd><a href="db_Bean_BeanDefinition.html#%5CDing%5CBean%5CBeanDefinition">\Ding\Bean\BeanDefinition[]</a></dd>
-</dl>
-</div>
-<div class="clear"></div>
-</div>
 <a id="\Ding\Bean\Provider\Annotation::$_configClasses" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
                  <span class="highlight">$_configClasses</span>= 'false'
@@ -248,20 +248,6 @@ the class (of the bean, of course).</p>
 <strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd><a href="db_Container_IContainer.html#%5CDing%5CContainer%5CIContainer">\Ding\Container\IContainer</a></dd>
-</dl>
-</div>
-<div class="clear"></div>
-</div>
-<a id="\Ding\Bean\Provider\Annotation::$_knownClasses" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
-                 <span class="highlight">$_knownClasses</span>= 'false'
-                </code><div class="description">
-<span class="attribute">static</span><p class="short-description">Known classes.</p></div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
-<dt>Type</dt>
-<dd>\string[]</dd>
 </dl>
 </div>
 <div class="clear"></div>
@@ -335,7 +321,7 @@ the class (of the bean, of course).</p>
 </div>
 <a id="\Ding\Bean\Provider\Annotation::_getBeanDefinition()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_getBeanDefinition</span><span class="nb-faded-text">(
-          string $name, string $class, <a href="db_Bean_BeanAnnotationDefinition.html#%5CDing%5CBean%5CBeanAnnotationDefinition">\Ding\Bean\BeanAnnotationDefinition[]</a> $annotations,  $factory
+          string $name, string $class, <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a> $annotations
           )
         </span>
         :
@@ -360,91 +346,8 @@ the class (of the bean, of course).</p>
 </tr>
 <tr>
 <th>$annotations</th>
-<td><a href="db_Bean_BeanAnnotationDefinition.html#%5CDing%5CBean%5CBeanAnnotationDefinition">\Ding\Bean\BeanAnnotationDefinition[]</a></td>
+<td><a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></td>
 <td><em><p>Annotations with data.</p></em></td>
-</tr>
-<tr>
-<th>$factory</th>
-<td></td>
-<td><em></em></td>
-</tr>
-</table>
-<strong>Returns</strong><table class="argument-info">
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td><a href="db_Bean_BeanDefinition.html#%5CDing%5CBean%5CBeanDefinition">\Ding\Bean\BeanDefinition</a></td>
-<td></td>
-</tr>
-</table>
-</div>
-<div class="clear"></div>
-</div>
-<a id="\Ding\Bean\Provider\Annotation::_isScannable()" class="anchor"></a><div class="method private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_isScannable</span><span class="nb-faded-text">(
-          string $dirEntry
-          )
-        </span>
-        :
-          void</code><div class="description"><p class="short_description">Returns true if the given filesystem entry is interesting to scan.</p></div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Parameters</strong><table class="argument-info">
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<th>$dirEntry</th>
-<td>string</td>
-<td><em><p>Filesystem entry.</p></em></td>
-</tr>
-</table>
-</div>
-<div class="clear"></div>
-</div>
-<a id="\Ding\Bean\Provider\Annotation::_loadBean()" class="anchor"></a><div class="method private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_loadBean</span><span class="nb-faded-text">(
-          string $name, string $factoryBean, string $factoryMethod, <a href="db_Bean_BeanAnnotationDefinition.html#%5CDing%5CBean%5CBeanAnnotationDefinition">\Ding\Bean\BeanAnnotationDefinition[]</a> $annotations,  $factory
-          )
-        </span>
-        :
-          <a href="db_Bean_BeanDefinition.html#%5CDing%5CBean%5CBeanDefinition">\Ding\Bean\BeanDefinition</a></code><div class="description"><p class="short_description">Loads a bean definition from the given annotations.</p></div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Parameters</strong><table class="argument-info">
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<th>$name</th>
-<td>string</td>
-<td><em><p>Candidate name.</p></em></td>
-</tr>
-<tr>
-<th>$factoryBean</th>
-<td>string</td>
-<td><em><p>Factory bean name.</p></em></td>
-</tr>
-<tr>
-<th>$factoryMethod</th>
-<td>string</td>
-<td><em><p>Factory bean method.</p></em></td>
-</tr>
-<tr>
-<th>$annotations</th>
-<td><a href="db_Bean_BeanAnnotationDefinition.html#%5CDing%5CBean%5CBeanAnnotationDefinition">\Ding\Bean\BeanAnnotationDefinition[]</a></td>
-<td><em><p>Annotations with data.</p></em></td>
-</tr>
-<tr>
-<th>$factory</th>
-<td></td>
-<td><em></em></td>
 </tr>
 </table>
 <strong>Returns</strong><table class="argument-info">
@@ -582,9 +485,9 @@ the class (of the bean, of course).</p>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Ding\Bean\Provider\Annotation::getName()" class="anchor"></a><div class="method protected">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">getName</span><span class="nb-faded-text">(
-          \string[] $annotatedBean
+<a id="\Ding\Bean\Provider\Annotation::getOrCreateName()" class="anchor"></a><div class="method protected">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">getOrCreateName</span><span class="nb-faded-text">(
+          <a href="db_Bean_Provider_Annotation.html#%5CDing%5CBean%5CProvider%5CAnnotation">\Ding\Bean\Provider\Annotation</a> $annotation
           )
         </span>
         :
@@ -600,9 +503,10 @@ is selected.</p></div>
 <th>Description</th>
 </tr></thead>
 <tr>
-<th>$annotatedBean</th>
-<td>\string[]</td>
-<td><em><p>Bean annotations.</p></em></td>
+<th>$annotation</th>
+<td><a href="db_Bean_Provider_Annotation.html#%5CDing%5CBean%5CProvider%5CAnnotation">\Ding\Bean\Provider\Annotation</a></td>
+<td><em><p>Bean annotation (@Bean, @Component, etc)</p>
+</em></td>
 </tr>
 </table>
 <strong>Returns</strong><table class="argument-info">
@@ -612,46 +516,6 @@ is selected.</p></div>
 </tr></thead>
 <tr>
 <td>string</td>
-<td></td>
-</tr>
-</table>
-</div>
-<div class="clear"></div>
-</div>
-<a id="\Ding\Bean\Provider\Annotation::isBean()" class="anchor"></a><div class="method protected">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">isBean</span><span class="nb-faded-text">(
-          \string[] | string $candidateName, string $name
-          )
-        </span>
-        :
-          boolean</code><div class="description"><p class="short_description">Checks if the given name is the name of the bean contained in $candidateName.</p></div>
-<div class="code-tabs">
-<div class="long-description"><p>$candidateName is the argument name for a given bean, which can be an array
-or a string.</p></div>
-<strong>Parameters</strong><table class="argument-info">
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<th>$candidateName</th>
-<td>\string[] | string</td>
-<td><em><p>Array of names or string.</p></em></td>
-</tr>
-<tr>
-<th>$name</th>
-<td>string</td>
-<td><em><p>The name to test for.</p></em></td>
-</tr>
-</table>
-<strong>Returns</strong><table class="argument-info">
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td>boolean</td>
 <td></td>
 </tr>
 </table>
@@ -660,7 +524,7 @@ or a string.</p></div>
 </div>
 <a id="\Ding\Bean\Provider\Annotation::registerEventsFor()" class="anchor"></a><div class="method protected">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">registerEventsFor</span><span class="nb-faded-text">(
-          \string[] $annotatedBean, string $class,  $factory
+          <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a> $annotations, string $beanName, string $class
           )
         </span>
         :
@@ -675,19 +539,20 @@ this is an "early" discovery of a bean, a BeanDefinition is generated.</p></div>
 <th>Description</th>
 </tr></thead>
 <tr>
-<th>$annotatedBean</th>
-<td>\string[]</td>
-<td><em><p>Bean annotations</p></em></td>
+<th>$annotations</th>
+<td><a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></td>
+<td><em><p>Bean Annotations (for classes or methods)</p>
+</em></td>
+</tr>
+<tr>
+<th>$beanName</th>
+<td>string</td>
+<td><em><p>The target bean name.</p></em></td>
 </tr>
 <tr>
 <th>$class</th>
 <td>string</td>
-<td><em><p>Class name listener</p></em></td>
-</tr>
-<tr>
-<th>$factory</th>
-<td></td>
-<td><em></em></td>
+<td><em><p>The bean class</p></em></td>
 </tr>
 </table>
 </div>

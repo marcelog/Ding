@@ -180,6 +180,42 @@ limitations under the License.</a>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Reflection\ReflectionFactory::$_annotatedMethods" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+                 <span class="highlight">$_annotatedMethods</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::$_annotatedProperties" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+                 <span class="highlight">$_annotatedProperties</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::$_annotationParser" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+                 <span class="highlight">$_annotationParser</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Reflection\ReflectionFactory::$_cache" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Cache\ICache
                  <span class="highlight">$_cache</span>= 'false'
@@ -237,6 +273,18 @@ all the classes (not their methods) with this annotation.</p></div>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Reflection\ReflectionFactory::$_reflectionProperties" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+                 <span class="highlight">$_reflectionProperties</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Reflection\ReflectionFactory::$_withAnnotations" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">boolean
                  <span class="highlight">$_withAnnotations</span>= 'false'
@@ -277,13 +325,13 @@ all the classes (not their methods) with this annotation.</p></div>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Ding\Reflection\ReflectionFactory::getAnnotations()" class="anchor"></a><div class="method public">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getAnnotations</span><span class="nb-faded-text">(
-          string $text
+<a id="\Ding\Reflection\ReflectionFactory::_getCandidateFilesForClassScanning()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_getCandidateFilesForClassScanning</span><span class="nb-faded-text">(
+          string $path
           )
         </span>
         :
-          \Ding\Reflection\BeanAnnotationDefinition[]</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+          \string[]</code><div class="description"><p class="short_description">Returns all files elegible for scanning for classes.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -293,9 +341,9 @@ all the classes (not their methods) with this annotation.</p></div>
 <th>Description</th>
 </tr></thead>
 <tr>
-<th>$text</th>
+<th>$path</th>
 <td>string</td>
-<td><em></em></td>
+<td><em><p>Absolute path to a directory or filename.</p></em></td>
 </tr>
 </table>
 <strong>Returns</strong><table class="argument-info">
@@ -304,16 +352,62 @@ all the classes (not their methods) with this annotation.</p></div>
 <th>Description</th>
 </tr></thead>
 <tr>
-<td>\Ding\Reflection\BeanAnnotationDefinition[]</td>
+<td>\string[]</td>
 <td></td>
 </tr>
 </table>
-<strong>Details</strong><dl class="function-info">
-<dt>See</dt>
-<dd>\Ding\Reflection.IReflectionFactory::getAnnotations()
-         
-    </dd>
-</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::_isScannable()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_isScannable</span><span class="nb-faded-text">(
+          string $path
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Returns true if the given filesystem entry is interesting to scan.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Filesystem entry.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::_populateClassesPerAnnotations()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_populateClassesPerAnnotations</span><span class="nb-faded-text">(
+           $class,  $annotations
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$annotations</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
 </div>
 <div class="clear"></div>
 </div>
@@ -373,7 +467,7 @@ all the classes (not their methods) with this annotation.</p></div>
           )
         </span>
         :
-          \string[]</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+          <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -394,7 +488,7 @@ all the classes (not their methods) with this annotation.</p></div>
 <th>Description</th>
 </tr></thead>
 <tr>
-<td>\string[]</td>
+<td><a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></td>
 <td></td>
 </tr>
 </table>
@@ -487,13 +581,93 @@ all the classes (not their methods) with this annotation.</p></div>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Reflection\ReflectionFactory::getClassesFromDirectory()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getClassesFromDirectory</span><span class="nb-faded-text">(
+           $dir
+          )
+        </span>
+        :
+          \string[]</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$dir</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string[]</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Reflection.IReflectionFactory::getClassesFromDirectory()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::getClassesFromFile()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getClassesFromFile</span><span class="nb-faded-text">(
+          string $file
+          )
+        </span>
+        :
+          \string[]</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td>string</td>
+<td><em><p>Filename.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string[]</td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Reflection.IReflectionFactory::getClassesFromFile()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Reflection\ReflectionFactory::getMethod()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getMethod</span><span class="nb-faded-text">(
           string $class, string $method
           )
         </span>
         :
-          \Ding\Reflection\ReflectionClass</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+          \Ding\Reflection\ReflectionMethod</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -519,7 +693,7 @@ all the classes (not their methods) with this annotation.</p></div>
 <th>Description</th>
 </tr></thead>
 <tr>
-<td>\Ding\Reflection\ReflectionClass</td>
+<td>\Ding\Reflection\ReflectionMethod</td>
 <td></td>
 </tr>
 </table>
@@ -539,6 +713,174 @@ all the classes (not their methods) with this annotation.</p></div>
          
     </dd>
 </dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::getMethodAnnotations()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getMethodAnnotations</span><span class="nb-faded-text">(
+          string $class, string $method
+          )
+        </span>
+        :
+          <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string</td>
+<td><em><p>Class name.</p></em></td>
+</tr>
+<tr>
+<th>$method</th>
+<td>string</td>
+<td><em><p>Method name.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Reflection.IReflectionFactory::getMethodAnnotations()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::getProperty()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getProperty</span><span class="nb-faded-text">(
+          string $class, string $property
+          )
+        </span>
+        :
+          \Ding\Reflection\ReflectionProperty</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string</td>
+<td><em><p>Class name.</p></em></td>
+</tr>
+<tr>
+<th>$property</th>
+<td>string</td>
+<td><em><p>Property name.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\Ding\Reflection\ReflectionProperty</td>
+<td></td>
+</tr>
+</table>
+<strong>Throws</strong><table class="argument-info">
+<thead><tr>
+<th>Exception</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\Ding\Reflection\ReflectionException</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Reflection.IReflectionFactory::getProperty()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::getPropertyAnnotations()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPropertyAnnotations</span><span class="nb-faded-text">(
+          string $class, string $property
+          )
+        </span>
+        :
+          <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string</td>
+<td><em><p>Class name.</p></em></td>
+</tr>
+<tr>
+<th>$property</th>
+<td>string</td>
+<td><em><p>Property name.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></td>
+<td></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Reflection.IReflectionFactory::getPropertyAnnotations()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Reflection\ReflectionFactory::setAnnotationParser()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setAnnotationParser</span><span class="nb-faded-text">(
+           $parser
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$parser</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
 </div>
 <div class="clear"></div>
 </div>

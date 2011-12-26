@@ -1,28 +1,28 @@
 phploc 1.6.4 by Sebastian Bergmann.
 
-Directories:                                         32
-Files:                                              102
+Directories:                                         34
+Files:                                              106
 
-Lines of Code (LOC):                              14502
+Lines of Code (LOC):                              14924
   Cyclomatic Complexity / Lines of Code:           0.09
-Comment Lines of Code (CLOC):                      8318
-Non-Comment Lines of Code (NCLOC):                 6184
+Comment Lines of Code (CLOC):                      8523
+Non-Comment Lines of Code (NCLOC):                 6401
 
-Namespaces:                                          33
+Namespaces:                                          35
 Interfaces:                                          31
-Classes:                                             71
-  Abstract:                                           3 (4.23%)
-  Concrete:                                          68 (95.77%)
-  Average Class Length (NCLOC):                      88
-Methods:                                            511
+Classes:                                             75
+  Abstract:                                           3 (4.00%)
+  Concrete:                                          72 (96.00%)
+  Average Class Length (NCLOC):                      86
+Methods:                                            536
   Scope:
-    Non-Static:                                     479 (93.74%)
-    Static:                                          32 (6.26%)
+    Non-Static:                                     505 (94.22%)
+    Static:                                          31 (5.78%)
   Visibility:
-    Public:                                         394 (77.10%)
-    Non-Public:                                     117 (22.90%)
+    Public:                                         413 (77.05%)
+    Non-Public:                                     123 (22.95%)
   Average Method Length (NCLOC):                     12
-  Cyclomatic Complexity / Number of Methods:       2.09
+  Cyclomatic Complexity / Number of Methods:       2.06
 
 Anonymous Functions:                                  0
 Functions:                                            0

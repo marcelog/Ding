@@ -63,8 +63,6 @@
  */
 namespace Ding\Bean;
 
-use Ding\Bean\BeanAnnotationDefinition;
-
 /**
  * Bean Definition.
  *
@@ -117,12 +115,6 @@ class BeanDefinition
     private $_properties;
 
     /**
-     * Properties to be autowired (no setters).
-     * @var BeanPropertyDefinition[]
-     */
-    private $_autowiredProperties;
-
-    /**
      * Aspects mapped to this bean.
      * @var string[]
      */
@@ -157,12 +149,6 @@ class BeanDefinition
      * @var string
      */
     private $_destroyMethod;
-
-    /**
-     * Annotations for this bean methods.
-     * @var BeanAnnotationDefinition[]
-     */
-    private $_methodAnnotations;
 
     /**
      * Dependency beans literally specified in the configuration.
@@ -406,28 +392,6 @@ class BeanDefinition
     }
 
     /**
-     * Sets new autowired properties for this bean.
-     *
-     * @param BeanPropertyDefinition[] $properties New autowired properties.
-     *
-     * @return void
-     */
-    public function setAutowiredProperties(array $autowiredProperties)
-    {
-        $this-&gt;_autowiredProperties = $autowiredProperties;
-    }
-
-    /**
-     * Returns autowired properties for this bean.
-     *
-     * @return BeanPropertyDefinition[]
-     */
-    public function getAutowiredProperties()
-    {
-        return $this-&gt;_autowiredProperties;
-    }
-
-    /**
      * Sets new arguments for this bean.
      *
      * @param BeanConstructorDefinition[] $arguments New arguments.
@@ -643,7 +607,7 @@ class BeanDefinition
         $this-&gt;_name = $name;
         $soullessString = '';
         $soullessArray = array();
-        $this-&gt;_class = $soullessString;
+        $this-&gt;_class = 'stdclass';
         $this-&gt;_aliases = $soullessArray;
         $this-&gt;_scope = BeanDefinition::BEAN_SINGLETON;
         $this-&gt;_factoryMethod = $soullessString;
@@ -653,7 +617,6 @@ class BeanDefinition
         $this-&gt;_destroyMethod = null;
         $this-&gt;_dependsOn = $soullessArray;
         $this-&gt;_properties = $soullessArray;
-        $this-&gt;_autowiredProperties = $soullessArray;
         $this-&gt;_aspects = false;
         $this-&gt;_constructorArgs = $soullessArray;
         $this-&gt;_isAbstract = false;

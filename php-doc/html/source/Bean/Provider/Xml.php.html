@@ -432,7 +432,9 @@ class Xml implements
             $bean = clone $this-&gt;_templateBeanDef;
         }
         $bean-&gt;setName($beanName);
-        $bean-&gt;setClass((string)$simpleXmlBean-&gt;attributes()-&gt;class);
+        if (isset($simpleXmlBean-&gt;attributes()-&gt;class)) {
+            $bean-&gt;setClass((string)$simpleXmlBean-&gt;attributes()-&gt;class);
+        }
         if (isset($simpleXmlBean-&gt;attributes()-&gt;scope)) {
             $bScope = (string)$simpleXmlBean-&gt;attributes()-&gt;scope;
             if ($bScope == 'prototype') {
