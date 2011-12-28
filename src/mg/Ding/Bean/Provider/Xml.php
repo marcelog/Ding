@@ -342,7 +342,12 @@ class Xml implements
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
             $argValue = (string)$simpleXmlArg->value;
         }
-        return new BeanConstructorArgumentDefinition($argType, $argValue);
+        if (isset($simpleXmlArg->attributes()->name)) {
+            $argName = (string)$simpleXmlArg->attributes()->name;
+        } else {
+            $argName = false;
+        }
+        return new BeanConstructorArgumentDefinition($argType, $argValue, $argName);
     }
 
     /**
@@ -355,12 +360,6 @@ class Xml implements
      */
     private function _loadBean($beanName, BeanDefinition $bean = null, $factory)
     {
-        // This should not be necessary because this driver is also an aspect
-        // provider and as such, the AspectManager would already called
-        // getAspects() which already has this kind of lazy loading.
-        //if (!$this->_simpleXml) {
-        //    $this->_load();
-        //}
         foreach($this->_simpleXml as $name => $xml) {
             $simpleXmlBean = $xml->xpath("//bean[@id='$beanName']");
             if (!empty($simpleXmlBean)) {

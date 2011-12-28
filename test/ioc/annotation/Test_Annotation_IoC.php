@@ -284,6 +284,28 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->a, 'value1');
         $this->assertEquals($bean->b, 'value2');
     }
+    /**
+     * @test
+     */
+    public function can_set_constructor_arguments_by_name()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aBeanWithConstructorArgumentNames');
+        $this->assertEquals($bean->arg1, 'value1');
+        $this->assertEquals($bean->arg2, 'value2');
+        $this->assertEquals($bean->arg3, 'value3');
+    }
+    /**
+     * @test
+     */
+    public function can_set_constructor_arguments_by_name_in_at_configuration()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aBeanWithConstructorArgumentsInAtConf');
+        $this->assertEquals($bean->arg1, 'value1');
+        $this->assertEquals($bean->arg2, 'value2');
+        $this->assertEquals($bean->arg3, 'value3');
+    }
 }
 
 /**
@@ -434,6 +456,16 @@ class ClassSimpleAnnotationConfiguration
     public function aBeanWithConstructorArgs($a, $b)
     {
         return new BeanWithConstructorArgs($a, $b);
+    }
+    /**
+     * @Bean
+     * @Value(name="arg1", value="value1")
+     * @Value(name="arg2", value="value2")
+     * @Value(name="arg3", value="value3")
+     */
+    public function aBeanWithConstructorArgumentsInAtConf($arg2, $arg3, $arg1)
+    {
+        return new ABeanAnnotatedWithConstructorArgumentNames($arg3, $arg1, $arg2);
     }
     public function __construct()
     {
@@ -637,5 +669,26 @@ class AValueAnnotationClass
     public function getMyValue()
     {
         return $this->_myValue;
+    }
+}
+
+/**
+ * @Component(name="aBeanWithConstructorArgumentNames")
+ */
+class ABeanAnnotatedWithConstructorArgumentNames
+{
+    public $arg1;
+    public $arg2;
+    public $arg3;
+    /**
+     * @Value(name="arg1", value="value1")
+     * @Value(name="arg2", value="value2")
+     * @Value(name="arg3", value="value3")
+     */
+    public function __construct($arg3, $arg1, $arg2)
+    {
+        $this->arg1 = $arg1;
+        $this->arg2 = $arg2;
+        $this->arg3 = $arg3;
     }
 }

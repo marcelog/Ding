@@ -94,4 +94,9 @@
       <property name="someProperty"><value>inheritedValue</value></property>
     </bean>
     <bean id="childBean" class="ChildBean" parent="parentBean"/>
+    <bean id="aBeanWithConstructorArgumentNames" class="ABeanWithConstructorArgumentNames">
+      <constructor-arg name="arg1"><value>value1</value></constructor-arg>
+      <constructor-arg name="arg2"><value>value2</value></constructor-arg>
+      <constructor-arg name="arg3"><value>value3</value></constructor-arg>
+    </bean>
 </beans>

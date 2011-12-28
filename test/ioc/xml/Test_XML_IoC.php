@@ -388,6 +388,18 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBeanDefinitionByClass('aliasedBean');
     }
+
+    /**
+     * @test
+     */
+    public function can_set_constructor_arguments_by_name()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aBeanWithConstructorArgumentNames');
+        $this->assertEquals($bean->arg1, 'value1');
+        $this->assertEquals($bean->arg2, 'value2');
+        $this->assertEquals($bean->arg3, 'value3');
+    }
 }
 
 class ClassSimpleXML
@@ -663,5 +675,18 @@ class ChildBean
     public function setSomeProperty($value)
     {
         $this->someProperty = $value;
+    }
+}
+
+class ABeanWithConstructorArgumentNames
+{
+    public $arg1;
+    public $arg2;
+    public $arg3;
+    public function __construct($arg3, $arg1, $arg2)
+    {
+        $this->arg1 = $arg1;
+        $this->arg2 = $arg2;
+        $this->arg3 = $arg3;
     }
 }

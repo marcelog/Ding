@@ -280,7 +280,7 @@ class Yaml implements
      * @throws BeanFactoryException
      * @return BeanConstructorArgumentDefinition
      */
-    private function _loadConstructorArg($value, $yamlFilename)
+    private function _loadConstructorArg($name, $value, $yamlFilename)
     {
         if (is_array($value)) {
             if (isset($value['ref'])) {
@@ -298,14 +298,19 @@ class Yaml implements
                 $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY;
                 $argValue = array();
                 foreach ($value as $key => $inValue) {
-                    $argValue[$key] = $this->_loadConstructorArg($inValue, $yamlFilename);
+                    $argValue[$key] = $this->_loadConstructorArg(false, $inValue, $yamlFilename);
                 }
             }
         } else {
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
             $argValue = $value;
         }
-        return new BeanConstructorArgumentDefinition($argType, $argValue);
+        if (is_string($name)) {
+            $argName = $name;
+        } else {
+            $argName = false;
+        }
+        return new BeanConstructorArgumentDefinition($argType, $argValue, $argName);
     }
 
     /**
@@ -318,12 +323,6 @@ class Yaml implements
      */
     private function _loadBean($beanName, BeanDefinition $bean = null, $factory)
     {
-        // This should not be necessary because this driver is also an aspect
-        // provider and as such, the AspectManager would already called
-        // getAspects() which already has this kind of lazy loading.
-        //if (!$this->_yamlFiles) {
-        //    $this->_load();
-        //}
         $beanDef = false;
         if (isset($this->_beanAliases[$beanName])) {
             return $this->_loadBean($this->_beanAliases[$beanName], $bean, $factory);
@@ -390,8 +389,8 @@ class Yaml implements
             }
         }
         if (isset($beanDef['constructor-args'])) {
-            foreach ($beanDef['constructor-args'] as $arg) {
-                $constructorArgs[] = $this->_loadConstructorArg($arg, $yamlFilename);
+            foreach ($beanDef['constructor-args'] as $name => $arg) {
+                $constructorArgs[] = $this->_loadConstructorArg($name, $arg, $yamlFilename);
             }
         }
 

@@ -71,6 +71,12 @@ class BeanConstructorArgumentDefinition
     private $_type;
 
     /**
+     * Optional argument name.
+     * @var string
+     */
+    private $_name;
+
+    /**
      * Returns value for this argument. This is a bean name (string) in the
      * case of an argument of type bean. If this argument is an array, the
      * value is a BeanConstructorArgument[] where the key of the array is the
@@ -120,6 +126,15 @@ class BeanConstructorArgumentDefinition
         return $this->_type == self::BEAN_CONSTRUCTOR_ARRAY;
     }
 
+    public function hasName()
+    {
+        return $this->_name !== false;
+    }
+
+    public function getName()
+    {
+        return $this->_name;
+    }
     /**
      * Constructor.
      *
@@ -128,8 +143,9 @@ class BeanConstructorArgumentDefinition
      *
      * @return void
      */
-    public function __construct($type, $value)
+    public function __construct($type, $value, $name = false)
     {
+        $this->_name = $name;
         $this->_type = $type;
         $this->_value = $value;
     }

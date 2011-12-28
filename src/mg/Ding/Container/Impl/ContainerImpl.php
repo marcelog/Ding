@@ -356,7 +356,13 @@ class ContainerImpl implements IContainer
     {
         $args = array();
         foreach ($definition->getArguments() as $argument) {
-            $args[] = $this->_getValueFromDefinition($argument);
+            $value = $this->_getValueFromDefinition($argument);
+            if ($argument->hasName()) {
+                $name = $argument->getName();
+                $args[$name] = $value;
+            } else {
+                $args[] = $value;
+            }
         }
         return $args;
     }
@@ -370,16 +376,21 @@ class ContainerImpl implements IContainer
      */
     private function _instantiateByConstructor(BeanDefinition $definition)
     {
-        $args = $this->_getConstructorValuesForDefinition($definition);
         $class = $definition->getClass();
         if ($definition->hasProxyClass()) {
             $class = $definition->getProxyClassName();
         }
         $rClass = $this->_reflectionFactory->getClass($class);
-        if (empty($args)) {
-            return $rClass->newInstanceArgs();
+        $factoryMethod = $rClass->getConstructor();
+        if ($factoryMethod !== null) {
+            $args = $this->_sortArgsWithNames($definition, $factoryMethod);
+            if (empty($args)) {
+                return $rClass->newInstanceArgs();
+            } else {
+                return $rClass->newInstanceArgs($args);
+            }
         } else {
-            return $rClass->newInstanceArgs($args);
+            return $rClass->newInstanceArgs();
         }
     }
 
@@ -392,11 +403,12 @@ class ContainerImpl implements IContainer
      */
     private function _instantiateByFactoryClass(BeanDefinition $definition)
     {
-        $args = $this->_getConstructorValuesForDefinition($definition);
-        return forward_static_call_array(
-            array($definition->getClass(), $definition->getFactoryMethod()),
-            $args
-        );
+        $class = $definition->getClass();
+        $rClass = $this->_reflectionFactory->getClass($class);
+        $factoryMethodName = $definition->getFactoryMethod();
+        $factoryMethod = $rClass->getMethod($factoryMethodName);
+        $args = $this->_sortArgsWithNames($definition, $factoryMethod);
+        return forward_static_call_array(array($class, $factoryMethodName), $args);
     }
 
     /**
@@ -408,11 +420,28 @@ class ContainerImpl implements IContainer
      */
     private function _instantiateByFactoryBean(BeanDefinition $definition)
     {
-        $args = $this->_getConstructorValuesForDefinition($definition);
         $factoryBean = $this->getBean($definition->getFactoryBean());
         $refObject = new \ReflectionObject($factoryBean);
         $factoryMethod = $refObject->getMethod($definition->getFactoryMethod());
+        $args = $this->_sortArgsWithNames($definition, $factoryMethod);
         return $factoryMethod->invokeArgs($factoryBean, $args);
+    }
+
+    private function _sortArgsWithNames(BeanDefinition $definition, \ReflectionMethod $rMethod)
+    {
+        $args = $this->_getConstructorValuesForDefinition($definition);
+        $callArgs = array();
+        foreach ($rMethod->getParameters() as $parameter) {
+            $parameterName = $parameter->getName();
+            if (isset($args[$parameterName])) {
+                $callArgs[] = $args[$parameterName];
+                unset($args[$parameterName]);
+            }
+        }
+        foreach ($args as $value) {
+            $callArgs[] = $value;
+        }
+        return $callArgs;
     }
 
     /**

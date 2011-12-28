@@ -72,10 +72,10 @@ class MyConfigClass
 {
     /**
      * @Bean
-     * @Value(value=${asd}/a)
-     * @Value(value=${asd}/b)
+     * @Value(name=a, value=${asd}/a)
+     * @Value(name=b, value=${asd}/b)
      */
-    public function myOtherBeanName($a, $b)
+    public function myOtherBeanName($b, $a)
     {
         return new ABean($a, $b);
     }

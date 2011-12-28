@@ -136,6 +136,13 @@ beans: !!map
       - value1
       - value2
       - value3
+  aBeanWithConstructorArgumentNames:
+    class: AYamlBeanWithConstructorArgumentNames
+    constructor-args:
+      arg1: value1
+      arg2: value2
+      arg3: value3
+
   aSimpleSetArgBean2:
     class: ClassSimpleYAML12
     scope: singleton
