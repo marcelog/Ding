@@ -646,6 +646,57 @@ class MyBean
 Suppose we defined "user.property" to be "myValue", then in this example, the property
 "someProperty" will be injected with "myValue/asd".
 </p>
+<H4>Using names in constructor arguments</H4>
+<p>
+Since 1.3.6 its possible to specify a name for a constructor argument, like:
+</p>
+<pre name="code" class="php">
+/**
+ * Example with @Component beans.
+ * @Component
+ */
+class MyComponent
+{
+    /**
+     * @Value(name="arg1", value=${arg1}"
+     * @Value(name="arg2", value=${arg2}"
+     * @Value(name="arg3", value=${arg3}"
+     */
+    public function __construct($arg1, $arg2, $arg3)
+    {
+    }
+}
+
+/**
+ * Example with @Bean methods.
+ * @Configuration
+ */
+class MyConfiguration
+{
+    /**
+     * @Value(name="arg1", value=${arg1}"
+     * @Value(name="arg2", value=${arg2}"
+     * @Value(name="arg3", value=${arg3}"
+     */
+    public function myBean($arg1, $arg2, $arg3)
+    {
+        return new MyComponent($arg1, $arg2, $arg3)
+    }
+}
+</pre>
+<p>
+In Xml:
+</p>
+<pre name="code" class="xml">
+&lt;bean id="myBean" class="MyComponent"&gt;
+  &lt;constructor-arg name="arg1"&gt;&lt;value&gt;${arg1}&lt;/value&gt;&lt;/constructor-arg&gt;
+  &lt;constructor-arg name="arg2"&gt;&lt;value&gt;${arg2}&lt;/value&gt;&lt;/constructor-arg&gt;
+  &lt;constructor-arg name="arg3"&gt;&lt;value&gt;${arg3}&lt;/value&gt;&lt;/constructor-arg&gt;
+&lt;/bean&gt;
+</pre>
+<p>
+In Yaml it's more natural, just give the key names for constructor argument a name.
+</p>
 <H4>Inner beans</H4>
 <p>
 You can define beans inside properties and constructor arguments, like this:
