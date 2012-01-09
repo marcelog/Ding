@@ -76,6 +76,7 @@ class Test_Event extends PHPUnit_Framework_TestCase
         $this->assertTrue(EventBean::$eventDetected);
         $this->assertTrue(EventBean3::$eventDetected);
         $this->assertTrue(EventBean4::$eventDetected);
+        $this->assertTrue(ParentThatListensForEvent::$eventDetected);
     }
 }
 
@@ -132,4 +133,26 @@ class EventBeanConfig
     {
         return new EventBean4;
     }
+}
+
+/**
+ * @Component
+ * @ListensOn(value="beanCreated")
+ */
+abstract class ParentThatListensForEvent
+{
+    public static $eventDetected = false;
+
+    public function onBeanCreated($data)
+    {
+        self::$eventDetected = true;
+    }
+}
+
+/**
+ * @Component(name="aChildBeanThatListensForEvents")
+ * @ListensOn(value="beanCreated")
+ */
+class AChildThatListensForEvent extends ParentThatListensForEvent
+{
 }

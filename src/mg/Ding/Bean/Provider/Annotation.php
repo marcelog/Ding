@@ -31,8 +31,6 @@ namespace Ding\Bean\Provider;
 
 use Ding\Annotation\Collection;
 use Ding\Annotation\Annotation as AnnotationDefinition;
-use Ding\Logger\ILoggerAware;
-
 use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Container\IContainerAware;
 use Ding\Bean\IBeanDefinitionProvider;
@@ -140,6 +138,12 @@ class Annotation
         if ($def === null) {
             $def = new BeanDefinition('dummy');
         }
+        $rClass = $this->reflectionFactory->getClass($class);
+        if ($rClass->isAbstract()) {
+            $def->makeAbstract();
+        } else {
+            $def->makeConcrete();
+        }
         $def->setClass($class);
         if ($annotations->contains('component')) {
             $beanAnnotation = $annotations->getSingleAnnotation('component');
@@ -205,8 +209,14 @@ class Annotation
                 $methodName = $method->getName();
                 $annotations = $this->reflectionFactory->getMethodAnnotations($class, $methodName);
                 if ($annotations->contains('bean')) {
-                    $beanName = $this->getOrCreateName($annotations->getSingleAnnotation('bean'));
-                    $this->registerEventsFor($annotations, $beanName, $class);
+                    $beanAnnotation = $annotations->getSingleAnnotation('bean');
+                    if ($beanAnnotation->hasOption('class')) {
+                        $beanClass = $beanAnnotation->getOptionSingleValue('class');
+                    } else {
+                        $beanClass = 'stdclass';
+                    }
+                    $beanName = $this->getOrCreateName($beanAnnotation);
+                    $this->registerEventsFor($annotations, $beanName, $beanClass);
                 }
             }
         }
@@ -234,6 +244,19 @@ class Annotation
         return BeanDefinition::generateName('Bean');
     }
 
+    private function _isListeningForEvents($class)
+    {
+        $rClass = $this->reflectionFactory->getClass($class);
+        do {
+            $class = $rClass->getName();
+            $annotations = $this->reflectionFactory->getClassAnnotations($class);
+            if ($annotations->contains('listenson')) {
+                return true;
+            }
+            $rClass = $rClass->getParentClass();
+        } while($rClass);
+    }
+
     /**
      * Looks for @ListensOn and register the bean as an event listener. Since
      * this is an "early" discovery of a bean, a BeanDefinition is generated.
@@ -246,9 +269,25 @@ class Annotation
      */
     protected function registerEventsFor(Collection $annotations, $beanName, $class)
     {
+        if (!$this->_isListeningForEvents($class) && !$annotations->contains('listenson')) {
+            return;
+        }
+        $def = $this->_getBeanDefinition($beanName, $class, $annotations);
+        $this->_beanDefinitions[$beanName] = $def;
+        if (!$def->isAbstract()) {
+            $this->_registerEventsForBeanName($annotations, $beanName);
+            $rClass = $this->reflectionFactory->getClass($class)->getParentClass();
+            while($rClass) {
+                $annotations = $this->reflectionFactory->getClassAnnotations($rClass->getName());
+                $this->_registerEventsForBeanName($annotations, $beanName);
+                $rClass = $rClass->getParentClass();
+            }
+        }
+    }
+
+    private function _registerEventsForBeanName(Collection $annotations, $beanName)
+    {
         if ($annotations->contains('listenson')) {
-            $def = $this->_getBeanDefinition($beanName, $class, $annotations);
-            $this->_beanDefinitions[$beanName] = $def;
             $annotation = $annotations->getSingleAnnotation('listenson');
             foreach ($annotation->getOptionValues('value') as $eventCsv) {
                 foreach (explode(',', $eventCsv) as $eventName) {
@@ -257,7 +296,6 @@ class Annotation
             }
         }
     }
-
     /**
      * (non-PHPdoc)
      * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinition()
