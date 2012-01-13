@@ -147,6 +147,8 @@ class Annotation
         $def->setClass($class);
         if ($annotations->contains('component')) {
             $beanAnnotation = $annotations->getSingleAnnotation('component');
+        if ($annotations->contains('configuration')) {
+            $beanAnnotation = $annotations->getSingleAnnotation('configuration');
         } else if ($annotations->contains('bean')) {
             $beanAnnotation = $annotations->getSingleAnnotation('bean');
             if ($beanAnnotation->hasOption('class')) {
