@@ -306,6 +306,18 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->arg2, 'value2');
         $this->assertEquals($bean->arg3, 'value3');
     }
+
+    /**
+     * @test
+     */
+    public function can_declare_beans_inside_components()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('beanDeclaredInMethod');
+        $this->assertTrue($bean instanceof AClassForABeanFromAMethod);
+    }
+
+
 }
 
 /**
@@ -672,6 +684,26 @@ class AValueAnnotationClass
     }
 }
 
+
+class AClassForABeanFromAMethod
+{
+}
+
+/**
+ * @Component
+ * @Scope(value=singleton)
+ */
+class AComponentConfigurationClass
+{
+    /**
+     * @Bean
+     */
+    public function beanDeclaredInMethod()
+    {
+        return new AClassForABeanFromAMethod();
+    }
+}
+
 /**
  * @Component(name="aBeanWithConstructorArgumentNames")
  */
@@ -692,3 +724,4 @@ class ABeanAnnotatedWithConstructorArgumentNames
         $this->arg3 = $arg3;
     }
 }
+

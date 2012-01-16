@@ -72,6 +72,17 @@ class MyBean
 class MyDependency
 {
 
+    /**
+     * @Bean
+     */
+    public function beanDeclaredInMethod()
+    {
+        return new AClassForABeanFromAMethod();
+    }
+}
+
+class AClassForABeanFromAMethod
+{
 }
 
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
@@ -100,3 +111,6 @@ $properties = array(
 $container = ContainerImpl::getInstance($properties);
 $bean = $container->getBean('myBean');
 var_dump($bean);
+$bean = $container->getBean('beanDeclaredInMethod');
+var_dump($bean);
+
