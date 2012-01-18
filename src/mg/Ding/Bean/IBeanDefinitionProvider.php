@@ -73,4 +73,6 @@ interface IBeanDefinitionProvider
      * @return string[]
      */
     public function getBeanDefinitionByClass($class);
+
+    public function getBeansListeningOn($eventName);
 }

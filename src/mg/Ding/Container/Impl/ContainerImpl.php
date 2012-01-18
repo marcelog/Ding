@@ -820,16 +820,30 @@ class ContainerImpl implements IContainer
 
     /**
      * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        if (isset($this->_eventListeners[$eventName])) {
+            return $this->_eventListeners[$eventName];
+        }
+        return array();
+    }
+
+    /**
+     * (non-PHPdoc)
      * @see Ding\Container.IContainer::eventDispatch()
      */
     public function eventDispatch($eventName, $data = null)
     {
+        $listeners = $this->getBeansListeningOn($eventName);
+        foreach ($this->_beanDefinitionProviders as $provider) {
+            $listeners = array_merge($listeners, $provider->getBeansListeningOn($eventName));
+        }
         $eventName = 'on' . ucfirst($eventName);
-        if (isset($this->_eventListeners[$eventName])) {
-            foreach ($this->_eventListeners[$eventName] as $beanName) {
-                $bean = $this->getBean($beanName);
-                $bean->$eventName($data);
-            }
+        foreach ($listeners as $beanName) {
+            $bean = $this->getBean($beanName);
+            $bean->$eventName($data);
         }
     }
 
@@ -842,7 +856,6 @@ class ContainerImpl implements IContainer
         if (!isset($this->_eventListeners[$eventName])) {
             $this->_eventListeners[$eventName] = array();
         }
-        $eventName = 'on' . ucfirst($eventName);
         $this->_eventListeners[$eventName][] = $beanName;
     }
 

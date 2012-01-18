@@ -134,6 +134,16 @@ class PropertiesDriver
         }
         return null;
     }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        return array();
+    }
+
     /**
      * (non-PHPdoc)
      * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinitionByClass()

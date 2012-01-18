@@ -155,6 +155,15 @@ class MethodInjectionDriver
     }
     /**
      * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        return array();
+    }
+
+    /**
+     * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
      */
     public function afterDefinition(BeanDefinition $bean)

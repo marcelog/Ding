@@ -129,6 +129,7 @@ class Yaml implements
      */
     private $_beanAliases = array();
 
+    private $_knownBeansPerEvent = array();
     /**
      * Serialization.
      *
@@ -452,6 +453,17 @@ class Yaml implements
         }
         return false;
     }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        if (isset($this->_knownBeansPerEvent[$eventName])) {
+            return $this->_knownBeansPerEvent[$eventName];
+        }
+        return array();
+    }
     public function afterConfig()
     {
         $this->_load();
@@ -478,7 +490,10 @@ class Yaml implements
                         $events = $beanDef['listens-on'];
                         foreach (explode(',', $events) as $eventName) {
                             $eventName = trim($eventName);
-                            $this->container->eventListen($eventName, $beanName);
+                            if (!isset($this->_knownBeansPerEvent[$eventName])) {
+                                $this->_knownBeansPerEvent[$eventName] = array();
+                            }
+                            $this->_knownBeansPerEvent[$eventName][] = $beanName;
                         }
                     }
                 }

@@ -91,6 +91,14 @@ class MvcAnnotationDriver
             return $this->_beans[$name];
         }
     }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        return array();
+    }
 
     /**
      * (non-PHPdoc)

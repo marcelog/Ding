@@ -72,10 +72,12 @@ class Test_Event extends PHPUnit_Framework_TestCase
     public function can_trigger_events()
     {
         $container = \Ding\Container\Impl\ContainerImpl::getInstance($this->_properties);
+        $container->eventListen('beanCreated', 'aBeanPragmaticallyListeningForEvents');
         $bean = $container->getBean('eventBean2');
         $this->assertTrue(EventBean::$eventDetected);
         $this->assertTrue(EventBean3::$eventDetected);
         $this->assertTrue(EventBean4::$eventDetected);
+        $this->assertTrue(EventBean5::$eventDetected);
         $this->assertTrue(ParentThatListensForEvent::$eventDetected);
     }
 }
@@ -95,6 +97,14 @@ class EventBean2 implements \Ding\Container\IContainerAware
 }
 
 class EventBean4
+{
+    public static $eventDetected = false;
+    public function onBeanCreated($data = null)
+    {
+        self::$eventDetected = true;
+    }
+}
+class EventBean5
 {
     public static $eventDetected = false;
     public function onBeanCreated($data = null)

@@ -140,6 +140,10 @@ class ClassLifecycleAware implements
         return $bean;
     }
 
+    public function getBeansListeningOn($eventName)
+    {
+        return array();
+    }
     public function getBeanDefinition($name)
     {
         if ($name == 'aSimpleLifecycleAwareBean2') {

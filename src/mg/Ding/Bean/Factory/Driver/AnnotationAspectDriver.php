@@ -115,6 +115,15 @@ class AnnotationAspectDriver
     {
 
     }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        return array();
+    }
+
     private function _newAspect($aspectClass, $classExpression, $expression, $method, $type)
     {
         // Create bean.

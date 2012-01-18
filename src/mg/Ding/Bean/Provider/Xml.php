@@ -121,6 +121,7 @@ class Xml implements
      * @var string[]
      */
     private $_directories = false;
+    private $_knownBeansPerEvent = array();
 
     /**
      * Dont serialize anything here. The container and the aspect manager have
@@ -499,6 +500,22 @@ class Xml implements
         }
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        if (isset($this->_knownBeansPerEvent[$eventName])) {
+            return $this->_knownBeansPerEvent[$eventName];
+        }
+        return array();
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
+     */
     public function afterConfig()
     {
         $this->_load();
@@ -510,12 +527,19 @@ class Xml implements
                     $beanName = (string)$bean->attributes()->id;
                     foreach (explode(',', $events) as $eventName) {
                         $eventName = trim($eventName);
-                        $this->container->eventListen($eventName, $beanName);
+                        if (!isset($this->_knownBeansPerEvent[$eventName])) {
+                            $this->_knownBeansPerEvent[$eventName] = array();
+                        }
+                        $this->_knownBeansPerEvent[$eventName][] = $beanName;
                     }
                 }
             }
         }
     }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IAspectProvider::getAspects()
+     */
     public function getAspects()
     {
         $aspects = array();
@@ -531,6 +555,10 @@ class Xml implements
         return $aspects;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IPointcutProvider::getPointcut()
+     */
     public function getPointcut($name)
     {
         foreach($this->_simpleXml as $xmlName => $xml) {
