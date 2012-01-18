@@ -104,6 +104,7 @@ class FileCacheImpl implements ICache
     {
         $result = false;
         $filename = $this-&gt;_directory . $this-&gt;_sanitize($name);
+        clearstatcache(false, $filename);
         if (!@file_exists($filename)) {
             return false;
         }

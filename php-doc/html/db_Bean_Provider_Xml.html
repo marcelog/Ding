@@ -217,6 +217,18 @@ limitations under the License.</a>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Bean\Provider\Xml::$_knownBeansPerEvent" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+                 <span class="highlight">$_knownBeansPerEvent</span>= 'array()'
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Provider\Xml::$_logger" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Bean\Provider\Logger
                  <span class="highlight">$_logger</span>= ''
@@ -662,8 +674,16 @@ this driver will be try for serialization.</p></div>
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description"></p></div>
-<div class="code-tabs"></div>
+          void</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
+         
+    </dd>
+</dl>
+</div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Bean\Provider\Xml::getAspects()" class="anchor"></a><div class="method public">
@@ -672,7 +692,7 @@ this driver will be try for serialization.</p></div>
           )
         </span>
         :
-          <a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition[]</a></code><div class="description"><p class="short_description">Returns all aspects known to this provider.</p></div>
+          <a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition[]</a></code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Returns</strong><table class="argument-info">
@@ -685,6 +705,12 @@ this driver will be try for serialization.</p></div>
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Aspect.IAspectProvider::getAspects()
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>
@@ -768,13 +794,43 @@ this driver will be try for serialization.</p></div>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Bean\Provider\Xml::getBeansListeningOn()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getBeansListeningOn</span><span class="nb-faded-text">(
+           $eventName
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$eventName</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+         
+    </dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Provider\Xml::getPointcut()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getPointcut</span><span class="nb-faded-text">(
           string $name
           )
         </span>
         :
-          <a href="db_Aspect_PointcutDefinition.html#%5CDing%5CAspect%5CPointcutDefinition">\Ding\Aspect\PointcutDefinition</a></code><div class="description"><p class="short_description">Returns the pointcut definition identified by name, or false.</p></div>
+          <a href="db_Aspect_PointcutDefinition.html#%5CDing%5CAspect%5CPointcutDefinition">\Ding\Aspect\PointcutDefinition</a></code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -799,6 +855,12 @@ this driver will be try for serialization.</p></div>
 <td></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Aspect.IPointcutProvider::getPointcut()
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>

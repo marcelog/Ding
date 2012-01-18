@@ -392,7 +392,13 @@ class ContainerImpl implements IContainer
     {
         $args = array();
         foreach ($definition-&gt;getArguments() as $argument) {
-            $args[] = $this-&gt;_getValueFromDefinition($argument);
+            $value = $this-&gt;_getValueFromDefinition($argument);
+            if ($argument-&gt;hasName()) {
+                $name = $argument-&gt;getName();
+                $args[$name] = $value;
+            } else {
+                $args[] = $value;
+            }
         }
         return $args;
     }
@@ -406,16 +412,21 @@ class ContainerImpl implements IContainer
      */
     private function _instantiateByConstructor(BeanDefinition $definition)
     {
-        $args = $this-&gt;_getConstructorValuesForDefinition($definition);
         $class = $definition-&gt;getClass();
         if ($definition-&gt;hasProxyClass()) {
             $class = $definition-&gt;getProxyClassName();
         }
         $rClass = $this-&gt;_reflectionFactory-&gt;getClass($class);
-        if (empty($args)) {
-            return $rClass-&gt;newInstanceArgs();
+        $factoryMethod = $rClass-&gt;getConstructor();
+        if ($factoryMethod !== null) {
+            $args = $this-&gt;_sortArgsWithNames($definition, $factoryMethod);
+            if (empty($args)) {
+                return $rClass-&gt;newInstanceArgs();
+            } else {
+                return $rClass-&gt;newInstanceArgs($args);
+            }
         } else {
-            return $rClass-&gt;newInstanceArgs($args);
+            return $rClass-&gt;newInstanceArgs();
         }
     }
 
@@ -428,11 +439,12 @@ class ContainerImpl implements IContainer
      */
     private function _instantiateByFactoryClass(BeanDefinition $definition)
     {
-        $args = $this-&gt;_getConstructorValuesForDefinition($definition);
-        return forward_static_call_array(
-            array($definition-&gt;getClass(), $definition-&gt;getFactoryMethod()),
-            $args
-        );
+        $class = $definition-&gt;getClass();
+        $rClass = $this-&gt;_reflectionFactory-&gt;getClass($class);
+        $factoryMethodName = $definition-&gt;getFactoryMethod();
+        $factoryMethod = $rClass-&gt;getMethod($factoryMethodName);
+        $args = $this-&gt;_sortArgsWithNames($definition, $factoryMethod);
+        return forward_static_call_array(array($class, $factoryMethodName), $args);
     }
 
     /**
@@ -444,11 +456,28 @@ class ContainerImpl implements IContainer
      */
     private function _instantiateByFactoryBean(BeanDefinition $definition)
     {
-        $args = $this-&gt;_getConstructorValuesForDefinition($definition);
         $factoryBean = $this-&gt;getBean($definition-&gt;getFactoryBean());
         $refObject = new \ReflectionObject($factoryBean);
         $factoryMethod = $refObject-&gt;getMethod($definition-&gt;getFactoryMethod());
+        $args = $this-&gt;_sortArgsWithNames($definition, $factoryMethod);
         return $factoryMethod-&gt;invokeArgs($factoryBean, $args);
+    }
+
+    private function _sortArgsWithNames(BeanDefinition $definition, \ReflectionMethod $rMethod)
+    {
+        $args = $this-&gt;_getConstructorValuesForDefinition($definition);
+        $callArgs = array();
+        foreach ($rMethod-&gt;getParameters() as $parameter) {
+            $parameterName = $parameter-&gt;getName();
+            if (isset($args[$parameterName])) {
+                $callArgs[] = $args[$parameterName];
+                unset($args[$parameterName]);
+            }
+        }
+        foreach ($args as $value) {
+            $callArgs[] = $value;
+        }
+        return $callArgs;
     }
 
     /**
@@ -827,16 +856,30 @@ class ContainerImpl implements IContainer
 
     /**
      * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        if (isset($this-&gt;_eventListeners[$eventName])) {
+            return $this-&gt;_eventListeners[$eventName];
+        }
+        return array();
+    }
+
+    /**
+     * (non-PHPdoc)
      * @see Ding\Container.IContainer::eventDispatch()
      */
     public function eventDispatch($eventName, $data = null)
     {
+        $listeners = $this-&gt;getBeansListeningOn($eventName);
+        foreach ($this-&gt;_beanDefinitionProviders as $provider) {
+            $listeners = array_merge($listeners, $provider-&gt;getBeansListeningOn($eventName));
+        }
         $eventName = 'on' . ucfirst($eventName);
-        if (isset($this-&gt;_eventListeners[$eventName])) {
-            foreach ($this-&gt;_eventListeners[$eventName] as $beanName) {
-                $bean = $this-&gt;getBean($beanName);
-                $bean-&gt;$eventName($data);
-            }
+        foreach ($listeners as $beanName) {
+            $bean = $this-&gt;getBean($beanName);
+            $bean-&gt;$eventName($data);
         }
     }
 
@@ -849,7 +892,6 @@ class ContainerImpl implements IContainer
         if (!isset($this-&gt;_eventListeners[$eventName])) {
             $this-&gt;_eventListeners[$eventName] = array();
         }
-        $eventName = 'on' . ucfirst($eventName);
         $this-&gt;_eventListeners[$eventName][] = $beanName;
     }
 

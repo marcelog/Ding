@@ -203,6 +203,9 @@ with @Bean, will become the factory bean and factory method for the bean named
 "someBean". See docs/examples/ConfigurationAnnotation. (JSR-330)
 </p>
 <p>
+@Bean can also be used inside methods of @Component's.
+</p>
+<p>
 This behavior can be overriden if you use the argument name= in the @Bean
 annotation, like:<br/>
 <br/>
@@ -283,6 +286,24 @@ class MyBean
 <p>
 The full example is available <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/alias-annotations">here</a>.
 </p>
+<p>
+Since 1.3.8: You can also declare beans inside methods of components:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component(name={name1, name2, name3})
+ */
+class MyBean
+{
+    /**
+     * @Bean
+     */
+    public function myBean()
+    {
+        return new ABean();
+    }
+}
+</pre>
 <p>
 @Required Use this one in your setter methods (i.e: setSomething()) and this
 will tell the container to throw an exception if this property isnt configured

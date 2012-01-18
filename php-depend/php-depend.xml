@@ -6,11 +6,11 @@
         <TotalClasses>3</TotalClasses>
         <ConcreteClasses>3</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
-        <Ca>2</Ca>
+        <Ca>3</Ca>
         <Ce>1</Ce>
         <A>0</A>
-        <I>0.33333333333333</I>
-        <D>0.66666666666667</D>
+        <I>0.25</I>
+        <D>0.75</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Annotation/Annotation.php">Annotation</Class>
@@ -22,6 +22,7 @@
         <Package>Ding\Annotation\Exception</Package>
       </DependsUpon>
       <UsedBy>
+        <Package>Ding\Bean\Factory\Driver</Package>
         <Package>Ding\Bean\Provider</Package>
         <Package>Ding\Reflection</Package>
       </UsedBy>
@@ -165,7 +166,7 @@
         <ConcreteClasses>11</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>0</Ca>
-        <Ce>9</Ce>
+        <Ce>10</Ce>
         <A>0</A>
         <I>1</I>
         <D>0</D>
@@ -186,6 +187,7 @@
       <AbstractClasses/>
       <DependsUpon>
         <Package></Package>
+        <Package>Ding\Annotation</Package>
         <Package>Ding\Aspect</Package>
         <Package>Ding\Bean</Package>
         <Package>Ding\Bean\Factory\Exception</Package>

@@ -64,6 +64,7 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Annotation\Collection;
 use Ding\Bean\BeanConstructorArgumentDefinition;
 use Ding\Logger\ILoggerAware;
 use Ding\Reflection\IReflectionFactory;
@@ -121,6 +122,27 @@ class AnnotationValueDriver
         $this-&gt;_container = $container;
     }
 
+    private function _applyToConstructor(Collection $annotations, BeanDefinition $bean)
+    {
+        $constructorArguments = $bean-&gt;getArguments();
+        if ($annotations-&gt;contains('value')) {
+            foreach ($annotations-&gt;getAnnotations('value') as $annotation) {
+                if ($annotation-&gt;hasOption('value')) {
+                    foreach ($annotation-&gt;getOptionValues('value') as $value) {
+                        $argName = false;
+                        if ($annotation-&gt;hasOption('name')) {
+                            $argName = $annotation-&gt;getOptionSingleValue('name');
+                        }
+                        $constructorArguments[] = new BeanConstructorArgumentDefinition(
+                            BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
+                            $value, $argName
+                        );
+                    }
+                }
+            }
+        }
+        $bean-&gt;setArguments($constructorArguments);
+    }
     /**
      * (non-PHPdoc)
      * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
@@ -148,21 +170,20 @@ class AnnotationValueDriver
             $factoryMethod = $bean-&gt;getFactoryMethod();
             $factoryBean = $bean-&gt;getFactoryBean();
             $def = $this-&gt;_container-&gt;getBeanDefinition($factoryBean);
-            $annotations = $this-&gt;reflectionFactory-&gt;getMethodAnnotations($def-&gt;getClass(), $factoryMethod);
-            $constructorArguments = $bean-&gt;getArguments();
-            if ($annotations-&gt;contains('value')) {
-                foreach ($annotations-&gt;getAnnotations('value') as $annotation) {
-                    if ($annotation-&gt;hasOption('value')) {
-                        foreach ($annotation-&gt;getOptionValues('value') as $value) {
-                            $constructorArguments[] = new BeanConstructorArgumentDefinition(
-                                BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
-                                $value
-                            );
-                        }
-                    }
-                }
+            $annotations = $this-&gt;reflectionFactory-&gt;getMethodAnnotations(
+                $def-&gt;getClass(), $factoryMethod
+            );
+            $this-&gt;_applyToConstructor($annotations, $bean);
+        } else if ($bean-&gt;isCreatedByConstructor()) {
+            $class = $bean-&gt;getClass();
+            $rClass = $this-&gt;reflectionFactory-&gt;getClass($bean-&gt;getClass());
+            $rMethod = $rClass-&gt;getConstructor();
+            if ($rMethod) {
+                $annotations = $this-&gt;reflectionFactory-&gt;getMethodAnnotations(
+                    $class, $rMethod-&gt;getName()
+                );
+                $this-&gt;_applyToConstructor($annotations, $bean);
             }
-            $bean-&gt;setArguments($constructorArguments);
         }
         return $bean;
     }

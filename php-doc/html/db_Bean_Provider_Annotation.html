@@ -252,6 +252,62 @@ the class (of the bean, of course).</p>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Bean\Provider\Annotation::$_knownBeans" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
+                 <span class="highlight">$_knownBeans</span>= 'array()'
+                </code><div class="description">
+<p class="short-description">All known beans, indexed by name.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>\string[]</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::$_knownBeansByClass" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
+                 <span class="highlight">$_knownBeansByClass</span>= 'array()'
+                </code><div class="description">
+<p class="short-description">Maps beans from their classes.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>\string[]</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::$_knownBeansPerEvent" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
+                 <span class="highlight">$_knownBeansPerEvent</span>= 'array()'
+                </code><div class="description">
+<p class="short-description">All beans (names) listening for events will be here.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>\string[]</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::$_knownClassesWithValidBeanAnnotations" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
+                 <span class="highlight">$_knownClassesWithValidBeanAnnotations</span>= 'array()'
+                </code><div class="description">
+<p class="short-description">This one helps map a bean with a its parent class bean definition.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>\string[]</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Provider\Annotation::$_scanDirs" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
                  <span class="highlight">$_scanDirs</span>= ''
@@ -260,6 +316,20 @@ the class (of the bean, of course).</p>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>\string[]</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::$_validBeanAnnotations" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
+                 <span class="highlight">$_validBeanAnnotations</span>= 'array('bean''
+                </code><div class="description">
+<p class="short-description">Valid bean annotations.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Default value</strong><code>array('bean'</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd>\string[]</dd>
 </dl>
@@ -319,9 +389,122 @@ the class (of the bean, of course).</p>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Bean\Provider\Annotation::_addBean()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_addBean</span><span class="nb-faded-text">(
+          string $class, string $key, <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a> $annotations, string $overrideWithName
+              =
+              false, string $fBean
+              =
+              false, string $fMethod
+              =
+              false
+          )
+        </span>
+        :
+          string</code><div class="description"><p class="short_description">Adds a bean to $_knownBeans;</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string</td>
+<td><em><p>The class for this bean</p></em></td>
+</tr>
+<tr>
+<th>$key</th>
+<td>string</td>
+<td><em><p>Where this bean has been chosen from (i.e: component, configuration, bean, etc)</p>
+</em></td>
+</tr>
+<tr>
+<th>$annotations</th>
+<td><a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></td>
+<td><em><p>Annotations for this bean</p></em></td>
+</tr>
+<tr>
+<th>$overrideWithName</th>
+<td>string</td>
+<td><em><p>Override this bean name with this one</p></em></td>
+</tr>
+<tr>
+<th>$fBean</th>
+<td>string</td>
+<td><em><p>An optional factory bean</p></em></td>
+</tr>
+<tr>
+<th>$fMethod</th>
+<td>string</td>
+<td><em><p>An optional factory method</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>string</td>
+<td>The name of the bean recently added</td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::_getAllNames()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_getAllNames</span><span class="nb-faded-text">(
+          <a href="db_Annotation_Annotation.html#%5CDing%5CAnnotation%5CAnnotation">\Ding\Annotation\Annotation</a> $beanAnnotation, string $overrideWithName
+              =
+              false
+          )
+        </span>
+        :
+          \string[]</code><div class="description"><p class="short_description">Returns all possible names for a bean. If none are found in the bean
+annotation, the optional $overrideWithName will be chosen. If not, one
+will be generated.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$beanAnnotation</th>
+<td><a href="db_Annotation_Annotation.html#%5CDing%5CAnnotation%5CAnnotation">\Ding\Annotation\Annotation</a></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$overrideWithName</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string[]</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Provider\Annotation::_getBeanDefinition()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_getBeanDefinition</span><span class="nb-faded-text">(
-          string $name, string $class, <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a> $annotations
+          string $name, string $class, <a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a> $annotations,  $fBean
+              =
+              false,  $fMethod
+              =
+              false
           )
         </span>
         :
@@ -349,6 +532,16 @@ the class (of the bean, of course).</p>
 <td><a href="db_Annotation_Collection.html#%5CDing%5CAnnotation%5CCollection">\Ding\Annotation\Collection</a></td>
 <td><em><p>Annotations with data.</p></em></td>
 </tr>
+<tr>
+<th>$fBean</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$fMethod</th>
+<td></td>
+<td><em></em></td>
+</tr>
 </table>
 <strong>Returns</strong><table class="argument-info">
 <thead><tr>
@@ -358,6 +551,99 @@ the class (of the bean, of course).</p>
 <tr>
 <td><a href="db_Bean_BeanDefinition.html#%5CDing%5CBean%5CBeanDefinition">\Ding\Bean\BeanDefinition</a></td>
 <td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::_getParentBeanDefinition()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_getParentBeanDefinition</span><span class="nb-faded-text">(
+          string $class
+          )
+        </span>
+        :
+          <a href="db_Bean_BeanDefinition.html#%5CDing%5CBean%5CBeanDefinition">\Ding\Bean\BeanDefinition</a> | null</code><div class="description"><p class="short_description">Returns the bean definition for a parent class of a class (if found). If
+the parent class has a valid bean annotation (see $_knownBeans) it will
+be returned.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$class</th>
+<td>string</td>
+<td><em></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>
+<a href="db_Bean_BeanDefinition.html#%5CDing%5CBean%5CBeanDefinition">\Ding\Bean\BeanDefinition</a> | null</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::_registerEventsForBeanName()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_registerEventsForBeanName</span><span class="nb-faded-text">(
+           $annotations,  $beanName
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$annotations</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$beanName</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::_traverseConfigClassesAndRegisterForEvents()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_traverseConfigClassesAndRegisterForEvents</span><span class="nb-faded-text">(
+           $key,  $configClasses
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$key</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$configClasses</th>
+<td></td>
+<td><em></em></td>
 </tr>
 </table>
 </div>
@@ -461,15 +747,13 @@ the class (of the bean, of course).</p>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Ding\Bean\Provider\Annotation::getOrCreateName()" class="anchor"></a><div class="method protected">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_protected.png" style="margin-right: 5px" alt="protected"><span class="highlight">getOrCreateName</span><span class="nb-faded-text">(
-          <a href="db_Bean_Provider_Annotation.html#%5CDing%5CBean%5CProvider%5CAnnotation">\Ding\Bean\Provider\Annotation</a> $annotation
+<a id="\Ding\Bean\Provider\Annotation::getBeansListeningOn()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getBeansListeningOn</span><span class="nb-faded-text">(
+           $eventName
           )
         </span>
         :
-          string</code><div class="description"><p class="short_description">Returns a bean name. If the annotations dont have the 'name' attribute,
-a name will be dynamically generated. If it is an array, the first element
-is selected.</p></div>
+          void</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -479,22 +763,17 @@ is selected.</p></div>
 <th>Description</th>
 </tr></thead>
 <tr>
-<th>$annotation</th>
-<td><a href="db_Bean_Provider_Annotation.html#%5CDing%5CBean%5CProvider%5CAnnotation">\Ding\Bean\Provider\Annotation</a></td>
-<td><em><p>Bean annotation (@Bean, @Component, etc)</p>
-</em></td>
-</tr>
-</table>
-<strong>Returns</strong><table class="argument-info">
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td>string</td>
+<th>$eventName</th>
 <td></td>
+<td><em></em></td>
 </tr>
 </table>
+<strong>Details</strong><dl class="function-info">
+<dt>See</dt>
+<dd>\Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+         
+    </dd>
+</dl>
 </div>
 <div class="clear"></div>
 </div>

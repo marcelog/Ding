@@ -222,6 +222,20 @@ limitations under the License.</a>
 </div>
 <h3>Properties</h3>
 <div>
+<a id="\Ding\Bean\BeanConstructorArgumentDefinition::$_name" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">string
+                 <span class="highlight">$_name</span>= ''
+                </code><div class="description">
+<p class="short-description">Optional argument name.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>string</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\BeanConstructorArgumentDefinition::$_type" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">integer
                  <span class="highlight">$_type</span>= ''
@@ -258,7 +272,9 @@ name of the key for the target array.</p></div>
 <div>
 <a id="\Ding\Bean\BeanConstructorArgumentDefinition::__construct()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">__construct</span><span class="nb-faded-text">(
-          integer $type, mixed $value
+          integer $type, mixed $value,  $name
+              =
+              false
           )
         </span>
         :
@@ -281,8 +297,23 @@ name of the key for the target array.</p></div>
 <td>mixed</td>
 <td><em><p>Argument value.</p></em></td>
 </tr>
+<tr>
+<th>$name</th>
+<td></td>
+<td><em></em></td>
+</tr>
 </table>
 </div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\BeanConstructorArgumentDefinition::getName()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getName</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Bean\BeanConstructorArgumentDefinition::getValue()" class="anchor"></a><div class="method public">
@@ -306,6 +337,16 @@ case of an argument of type bean.</p></div>
 </tr>
 </table>
 </div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\BeanConstructorArgumentDefinition::hasName()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">hasName</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Bean\BeanConstructorArgumentDefinition::isArray()" class="anchor"></a><div class="method public">

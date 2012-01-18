@@ -157,6 +157,7 @@ class Xml implements
      * @var string[]
      */
     private $_directories = false;
+    private $_knownBeansPerEvent = array();
 
     /**
      * Dont serialize anything here. The container and the aspect manager have
@@ -378,7 +379,12 @@ class Xml implements
             $argType = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE;
             $argValue = (string)$simpleXmlArg-&gt;value;
         }
-        return new BeanConstructorArgumentDefinition($argType, $argValue);
+        if (isset($simpleXmlArg-&gt;attributes()-&gt;name)) {
+            $argName = (string)$simpleXmlArg-&gt;attributes()-&gt;name;
+        } else {
+            $argName = false;
+        }
+        return new BeanConstructorArgumentDefinition($argType, $argValue, $argName);
     }
 
     /**
@@ -391,12 +397,6 @@ class Xml implements
      */
     private function _loadBean($beanName, BeanDefinition $bean = null, $factory)
     {
-        // This should not be necessary because this driver is also an aspect
-        // provider and as such, the AspectManager would already called
-        // getAspects() which already has this kind of lazy loading.
-        //if (!$this-&gt;_simpleXml) {
-        //    $this-&gt;_load();
-        //}
         foreach($this-&gt;_simpleXml as $name =&gt; $xml) {
             $simpleXmlBean = $xml-&gt;xpath(&quot;//bean[@id='$beanName']&quot;);
             if (!empty($simpleXmlBean)) {
@@ -536,6 +536,22 @@ class Xml implements
         }
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        if (isset($this-&gt;_knownBeansPerEvent[$eventName])) {
+            return $this-&gt;_knownBeansPerEvent[$eventName];
+        }
+        return array();
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
+     */
     public function afterConfig()
     {
         $this-&gt;_load();
@@ -547,12 +563,19 @@ class Xml implements
                     $beanName = (string)$bean-&gt;attributes()-&gt;id;
                     foreach (explode(',', $events) as $eventName) {
                         $eventName = trim($eventName);
-                        $this-&gt;container-&gt;eventListen($eventName, $beanName);
+                        if (!isset($this-&gt;_knownBeansPerEvent[$eventName])) {
+                            $this-&gt;_knownBeansPerEvent[$eventName] = array();
+                        }
+                        $this-&gt;_knownBeansPerEvent[$eventName][] = $beanName;
                     }
                 }
             }
         }
     }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IAspectProvider::getAspects()
+     */
     public function getAspects()
     {
         $aspects = array();
@@ -568,6 +591,10 @@ class Xml implements
         return $aspects;
     }
 
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IPointcutProvider::getPointcut()
+     */
     public function getPointcut($name)
     {
         foreach($this-&gt;_simpleXml as $xmlName =&gt; $xml) {
