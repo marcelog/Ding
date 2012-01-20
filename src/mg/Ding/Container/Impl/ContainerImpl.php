@@ -234,17 +234,15 @@ class ContainerImpl implements IContainer
      */
     public function getBeanDefinition($name)
     {
-        $beanName = $name . '.beandef';
         if (isset($this->_beanAliases[$name])) {
             $name = $this->_beanAliases[$name];
         }
         if (isset($this->_beanDefs[$name])) {
             return $this->_beanDefs[$name];
         }
-
         $beanDefinition = null;
         if ($this->_beanDefCache !== null) {
-            $beanDefinition = $this->_beanDefCache->fetch($beanName, $result);
+            $beanDefinition = $this->_beanDefCache->fetch($name, $result);
         }
         if ($beanDefinition) {
             $this->_beanDefs[$name] = $beanDefinition;
@@ -263,8 +261,8 @@ class ContainerImpl implements IContainer
             throw new BeanFactoryException('Unknown bean: ' . $name);
         }
         $beanDefinition = $this->_lifecycleManager->afterDefinition($beanDefinition);
-        $this->_beanDefs[$beanName] = $beanDefinition;
-        $this->_beanDefCache->store($beanName, $beanDefinition);
+        $this->_beanDefs[$name] = $beanDefinition;
+        $this->_beanDefCache->store($name, $beanDefinition);
         foreach ($beanDefinition->getAliases() as $alias) {
             $this->_beanAliases[$alias] = $name;
         }
