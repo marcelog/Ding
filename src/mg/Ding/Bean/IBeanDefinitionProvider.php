@@ -74,5 +74,12 @@ interface IBeanDefinitionProvider
      */
     public function getBeanDefinitionByClass($class);
 
+    /**
+     * Returns all names of the beans listening for the given event.
+     *
+     * @param string $eventName The event name.
+     *
+     * @return string[]
+     */
     public function getBeansListeningOn($eventName);
 }
