@@ -162,6 +162,15 @@ class BeanDefinition
     }
 
     /**
+     * This is needed when creating a child bean.
+     *
+     * @return void
+     */
+    public function clearAliases()
+    {
+        $this->_aliases = array();
+    }
+    /**
      * Add an alias to this bean.
      *
      * @param string $name New alias for this bean.
@@ -498,6 +507,7 @@ class BeanDefinition
         $bean = serialize($this);
         $bean = unserialize($bean);
         $bean->setName($childName);
+        $bean->clearAliases();
         $bean->makeConcrete();
         return $bean;
     }
