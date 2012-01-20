@@ -176,7 +176,9 @@ class Annotation
     {
         $def = $this->_getParentBeanDefinition($class);
         if ($def === null) {
-            $def = new BeanDefinition('dummy');
+            $def = new BeanDefinition($name);
+        } else {
+            $def = $def->makeChildBean($name);
         }
         if ($fBean) {
             $def->setFactoryBean($fBean);
