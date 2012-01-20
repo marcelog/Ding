@@ -63,12 +63,6 @@ class Autoloader
     private static $_cache = false;
 
     /**
-     * Include path.
-     * @var string[]
-     */
-    private static $_includePath;
-
-    /**
      * Sets the autoloader cache to be used.
      *
      * @param ICache $cache Autoloader cache to use.
@@ -90,11 +84,9 @@ class Autoloader
     private static function _resolve($class)
     {
         $classFile = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
-        foreach (self::$_includePath as $path) {
-            $file = realpath("$path/$classFile");
-            if ($file && file_exists($file)) {
-                return $file;
-            }
+        $file = stream_resolve_include_path($classFile);
+        if ($file && file_exists($file)) {
+            return $file;
         }
         return false;
     }
@@ -142,7 +134,6 @@ class Autoloader
             DIRECTORY_SEPARATOR,
             array(__DIR__, '..', '..')
         );
-        self::$_includePath = explode(PATH_SEPARATOR, ini_get('include_path'));
         return spl_autoload_register('\Ding\Autoloader\Autoloader::load');
     }
 }
