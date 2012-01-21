@@ -176,6 +176,10 @@ class AnnotationDiscovererDriver
      */
     public function afterConfig()
     {
+    }
+
+    public function parse()
+    {
         foreach ($this->_directories as $dir) {
             $classesPerFile = $this->_getClassesFromDirectory($dir);
             foreach ($classesPerFile as $file => $classes) {

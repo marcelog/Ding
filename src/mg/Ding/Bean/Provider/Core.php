@@ -122,6 +122,7 @@ class Core implements IBeanDefinitionProvider
                     $this->options['bdef']['annotation']
                 )
             ));
+            $bean->setInitMethod('init');
             $bean->setProperties(array(
                 new BeanPropertyDefinition(
                 	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
@@ -172,6 +173,7 @@ class Core implements IBeanDefinitionProvider
                 	'dingAnnotationsCache'
                 )
             ));
+            $bean->setInitMethod('parse');
             $bean->setArguments(array(
                 new BeanConstructorArgumentDefinition(
                     BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,

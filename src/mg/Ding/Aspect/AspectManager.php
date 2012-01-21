@@ -27,6 +27,8 @@
  */
 namespace Ding\Aspect;
 
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+
 /**
  * Aspect Manager.
  *
@@ -38,7 +40,7 @@ namespace Ding\Aspect;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class AspectManager
+class AspectManager implements IAfterConfigListener
 {
     /**
      * Holds known aspects. Indexed by name.
@@ -62,13 +64,13 @@ class AspectManager
      * Aspect definition providers.
      * @var IAspectProvider[]
      */
-    private $_aspectProviders;
+    private $_aspectProviders = array();
 
     /**
      * Pointcut definition providers.
      * @var IPointcutProvider[]
      */
-    private $_pointcutProviders;
+    private $_pointcutProviders = array();
 
     /**
      * Serialization.
@@ -77,7 +79,7 @@ class AspectManager
      */
     public function __sleep()
     {
-        return array();
+        return array('_aspects', '_pointcuts');
     }
 
     /**
@@ -92,6 +94,7 @@ class AspectManager
         $name = $aspect->getName();
         $this->_aspects[$name] = $aspect;
         $this->_cache->store('AspectManagerAspect' . $name, $aspect);
+        $this->_cache->store('Aspects', $this->_aspects);
     }
 
     /**
@@ -115,6 +118,10 @@ class AspectManager
      */
     public function getAspects()
     {
+        $value = $this->_cache->fetch('Aspects', $result);
+        if ($result) {
+            $this->_aspects = $value;
+        }
         return $this->_aspects;
     }
 
@@ -148,6 +155,17 @@ class AspectManager
         return false;
     }
 
+    public function afterConfig()
+    {
+        $aspects = $this->getAspects();
+        if (empty($aspects)) {
+            foreach ($this->_aspectProviders as $provider) {
+                foreach ($provider->getAspects() as $aspect) {
+                    $this->setAspect($aspect);
+                }
+            }
+        }
+    }
     /**
      * Will register an aspect definition provider in this manager.
      *
@@ -158,9 +176,6 @@ class AspectManager
     public function registerAspectProvider(IAspectProvider $provider)
     {
         $this->_aspectProviders[] = $provider;
-        foreach ($provider->getAspects() as $aspect) {
-            $this->setAspect($aspect);
-        }
     }
 
     /**

@@ -1041,6 +1041,7 @@ class ContainerImpl implements IContainer
         $this->_lifecycleManager = new BeanLifecycleManager;
         $this->_dispatcherTemplate = new DispatcherImpl();
         $this->_aspectManager = new AspectManager();
+        $this->_aspectManager->setCache(DummyCacheImpl::getInstance());
         $this->_beanDefCache = DummyCacheImpl::getInstance();
         $this->_beanCache = DummyCacheImpl::getInstance();
         $this->registerBeanDefinitionProvider(new Core(self::$_options));
@@ -1069,7 +1070,6 @@ class ContainerImpl implements IContainer
             $this->getBean('dingAnnotationDiscovererDriver');
             $this->getBean('dingAnnotationBeanDefinitionProvider');
             $this->getBean('dingAnnotationValueDriver');
-            $this->getBean('dingAnnotationAspectDriver');
             $this->getBean('dingAnnotationResourceDriver');
             $this->getBean('dingAnnotationInitDestroyMethodDriver');
             $this->getBean('dingAnnotationRequiredDriver');
