@@ -46,14 +46,17 @@ class Parser
         'since', 'tutorial', 'version', 'package',
         'subpackage', 'name', 'global', 'param',
         'return', 'staticvar', 'category', 'staticVar',
-        'static', 'var', 'throws', 'inheritdoc',
+        'static', 'throws', 'inheritdoc',
         'inheritDoc', 'license', 'todo', 'deprecated',
         'deprec', 'author', 'property' , 'method' ,
         'abstract', 'exception', 'magic' , 'api' ,
         'final', 'filesource', 'throw' , 'uses' ,
         'usedby', 'private' , 'Annotation' , 'override' ,
         'codeCoverageIgnoreStart' , 'codeCoverageIgnoreEnd' ,
-        'Required' , 'Attribute' , 'Attributes' ,
+        'Attribute' , 'Attributes' , 'Entity', 'Table', 'Column',
+        'ManyToMany', 'OneToMany', 'ManyToOne', 'OneToOne', 'Index',
+        'JoinColumn', 'InheritanceType', 'DiscriminatorMap',
+        'DiscriminatorColumn', 'Id', 'GeneratedValue', 'HasLifeCycleCallbacks',
         'Target' , 'SuppressWarnings'
     );
     private function _parseOptions($options)
