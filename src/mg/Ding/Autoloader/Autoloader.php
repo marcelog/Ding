@@ -27,10 +27,6 @@
  */
 namespace Ding\Autoloader;
 
-// Check for log4php.
-use Ding\Cache\Impl\DummyCacheImpl;
-use Ding\Cache\ICache;
-
 /**
  * Ding autoloader, you will surely need this.
  *
@@ -45,53 +41,6 @@ use Ding\Cache\ICache;
 class Autoloader
 {
     /**
-     * log4php logger or own dummy instance.
-     * @var Logger
-     */
-    private static $_logger;
-
-    /**
-     * Holds current realpath.
-     * @var string
-     */
-    private static $_myPath;
-
-    /**
-     * Autoloader cache.
-     * @var ICache
-     */
-    private static $_cache = false;
-
-    /**
-     * Sets the autoloader cache to be used.
-     *
-     * @param ICache $cache Autoloader cache to use.
-     *
-     * @return void
-     */
-    public static function setCache(ICache $cache)
-    {
-        self::$_cache = $cache;
-    }
-
-    /**
-     * Resolves a class name to a filesystem entry. False if none found.
-     *
-     * @param string $class Class name.
-     *
-     * @return string
-     */
-    private static function _resolve($class)
-    {
-        $classFile = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
-        $file = stream_resolve_include_path($classFile);
-        if ($file && file_exists($file)) {
-            return $file;
-        }
-        return false;
-    }
-
-    /**
      * Called by php to load a given class. Returns true if the class was
      * successfully loaded.
      *
@@ -99,25 +48,13 @@ class Autoloader
      */
     public static function load($class)
     {
-        $cacheKey = $class . '.autoloader';
-        if (self::$_cache !== false) {
-            $result = false;
-            $file = self::$_cache->fetch($cacheKey, $result);
-            if ($result === false) {
-                $file = self::_resolve($class);
-                if ($file === false) {
-                    return false;
-                }
-                self::$_cache->store($cacheKey, $file);
-            }
-        } else {
-            $file = self::_resolve($class);
-            if ($file === false) {
-               return false;
-            }
+        $classFile = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
+        $file = stream_resolve_include_path($classFile);
+        if ($file && file_exists($file)) {
+            require_once $file;
+            return true;
         }
-        include_once $file;
-        return true;
+        return false;
     }
 
     /**
@@ -129,11 +66,6 @@ class Autoloader
      */
     public static function register()
     {
-        self::$_cache = false;
-        self::$_myPath = implode(
-            DIRECTORY_SEPARATOR,
-            array(__DIR__, '..', '..')
-        );
         return spl_autoload_register('\Ding\Autoloader\Autoloader::load');
     }
 }

@@ -56,7 +56,6 @@ class Test_Cache_Dummy extends PHPUnit_Framework_TestCase
                 'cache' => array(
     				'proxy' => array('impl' => 'dummy'),
                 	'aspect' => array('impl' => 'dummy'),
-                    'autoloader' => array('impl' => 'dummy'),
             		'bdef' => array('impl' => 'dummy'),
         			'annotations' => array('impl' => 'dummy'),
               		'beans' => array('impl' => 'dummy')
@@ -79,8 +78,6 @@ class Test_Cache_Dummy extends PHPUnit_Framework_TestCase
         $cache = CacheLocator::getDefinitionsCacheInstance();
         $cache->flush();
         $cache = CacheLocator::getAnnotationsCacheInstance();
-        $cache->flush();
-        $cache = CacheLocator::getAutoloaderCacheInstance();
         $cache->flush();
         $cache = CacheLocator::getBeansCacheInstance();
         $cache->flush();

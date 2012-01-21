@@ -90,7 +90,6 @@ $properties = array(
         // Other available implementations: zend, file, dummy, and memcached.
     	'cache' => array(
             'proxy' => array('impl' => 'dummy'),
-        	'autoloader' => array('impl' => 'dummy'),
             'bdef' => array('impl' => 'dummy'),
             'beans' => array('impl' => 'dummy')
         )

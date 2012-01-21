@@ -145,7 +145,6 @@ $properties = array(
             'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
             'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
             'beans' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans'),
-        	'autoloader' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans')
         )
     )
 );

@@ -55,7 +55,6 @@ class Test_IoC_Cache_APC extends PHPUnit_Framework_TestCase
                 'cache' => array(
     				'proxy' => array('impl' => 'apc'),
                 	'aspect' => array('impl' => 'apc'),
-                    'autoloader' => array('impl' => 'apc'),
             		'bdef' => array('impl' => 'apc'),
                     'annotations' => array('impl' => 'apc'),
               		'beans' => array('impl' => 'dummy')
@@ -78,8 +77,6 @@ class Test_IoC_Cache_APC extends PHPUnit_Framework_TestCase
         $cache = CacheLocator::getDefinitionsCacheInstance();
         $cache->flush();
         $cache = CacheLocator::getAnnotationsCacheInstance();
-        $cache->flush();
-        $cache = CacheLocator::getAutoloaderCacheInstance();
         $cache->flush();
         $cache = CacheLocator::getBeansCacheInstance();
         $cache->flush();

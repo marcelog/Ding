@@ -53,7 +53,6 @@ class Test_IoC_Annotation extends PHPUnit_Framework_TestCase
                 'cache' => array(
     				'proxy' => array('impl' => 'apc'),
                 	'aspect' => array('impl' => 'apc'),
-                    'autoloader' => array('impl' => 'apc'),
             		'bdef' => array('impl' => 'apc'),
                     'annotations' => array('impl' => 'apc'),
               		'beans' => array('impl' => 'dummy')

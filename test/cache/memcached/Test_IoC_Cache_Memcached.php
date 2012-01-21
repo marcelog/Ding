@@ -56,7 +56,6 @@ class Test_IoC_Cache_Memcached extends PHPUnit_Framework_TestCase
                 'cache' => array(
     				'proxy' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
                 	'aspect' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
-                    'autoloader' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
             		'bdef' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
         			'annotations' => array('impl' => 'memcached', 'memcached' => $memcachedOptions),
               		'beans' => array('impl' => 'dummy')
@@ -79,8 +78,6 @@ class Test_IoC_Cache_Memcached extends PHPUnit_Framework_TestCase
         $cache = CacheLocator::getDefinitionsCacheInstance();
         $cache->flush();
         $cache = CacheLocator::getAnnotationsCacheInstance();
-        $cache->flush();
-        $cache = CacheLocator::getAutoloaderCacheInstance();
         $cache->flush();
         $cache = CacheLocator::getBeansCacheInstance();
         $cache->flush();

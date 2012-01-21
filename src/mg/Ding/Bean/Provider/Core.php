@@ -64,11 +64,6 @@ class Core implements IBeanDefinitionProvider
         $bean = null;
         switch ($name)
         {
-        case 'dingAutoloaderCache':
-            $bean = new BeanDefinition($name);
-            $bean->setClass('\Ding\Cache\Locator\CacheLocator');
-            $bean->setFactoryMethod('getAutoloaderCacheInstance');
-            break;
         case 'dingAnnotationParser':
             $bean = new BeanDefinition($name);
             $bean->setClass('\Ding\Annotation\Parser');
