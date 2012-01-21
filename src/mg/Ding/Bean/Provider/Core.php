@@ -171,6 +171,12 @@ class Core implements IBeanDefinitionProvider
         case 'dingAnnotationDiscovererDriver':
             $bean = new BeanDefinition($name);
             $bean->setClass('\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver');
+            $bean->setProperties(array(
+                new BeanPropertyDefinition(
+                	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
+                	'dingAnnotationsCache'
+                )
+            ));
             $bean->setArguments(array(
                 new BeanConstructorArgumentDefinition(
                     BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,
