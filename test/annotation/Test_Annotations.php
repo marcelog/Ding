@@ -104,13 +104,13 @@ TEXT;
     {
         $text = <<<TEXT
 /**
- * @Annotation(name=value)
+ * @Something(name=value)
  */
 TEXT;
         $container = ContainerImpl::getInstance($this->_properties);
         $parser = $container->getBean('dingAnnotationParser');
         $annotations = $parser->parse($text);
-        $annotation = $annotations->getSingleAnnotation('annotation');
+        $annotation = $annotations->getSingleAnnotation('something');
         $value = $annotation->getOptionValues('unknown');
     }
 
