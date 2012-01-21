@@ -833,6 +833,9 @@ class ContainerImpl implements IContainer
      */
     public function eventDispatch($eventName, $data = null)
     {
+        if ($this->_logDebugEnabled) {
+            $this->_logger->debug("Dispatching event: $eventName");
+        }
         $listeners = $this->getBeansListeningOn($eventName);
         foreach ($this->_beanDefinitionProviders as $provider) {
             $listeners = array_merge($listeners, $provider->getBeansListeningOn($eventName));
