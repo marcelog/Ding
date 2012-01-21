@@ -118,10 +118,6 @@ class AspectManager implements IAfterConfigListener
      */
     public function getAspects()
     {
-        $value = $this->_cache->fetch('Aspects', $result);
-        if ($result) {
-            $this->_aspects = $value;
-        }
         return $this->_aspects;
     }
 
