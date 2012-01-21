@@ -141,6 +141,8 @@ limitations under the License.</a>
 <small class="package"><b>Package: </b>Aspect</small><p class="short-description">Aspect Manager.</p>
 <div class="long-description"><p>PHP Version 5</p></div>
 <dl class="class-info">
+<dt>Implements</dt>
+<dd><a href="db_Bean_Lifecycle_IAfterConfigListener.html#%5CDing%5CBean%5CLifecycle%5CIAfterConfigListener">\Ding\Bean\Lifecycle\IAfterConfigListener</a></dd>
 <dt>Author</dt>
 <dd>
 <a href="mailto:marcelog@gmail.com">Marcelo Gornstein</a>
@@ -165,12 +167,12 @@ limitations under the License.</a>
 <div>
 <a id="\Ding\Aspect\AspectManager::$_aspectProviders" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Aspect\IAspectProvider[]
-                 <span class="highlight">$_aspectProviders</span>= ''
+                 <span class="highlight">$_aspectProviders</span>= 'array()'
                 </code><div class="description">
 <p class="short-description">Aspect definition providers.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
-<strong>Details</strong><dl class="property-info">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd><a href="db_Aspect_IAspectProvider.html#%5CDing%5CAspect%5CIAspectProvider">\Ding\Aspect\IAspectProvider[]</a></dd>
 </dl>
@@ -207,12 +209,12 @@ limitations under the License.</a>
 </div>
 <a id="\Ding\Aspect\AspectManager::$_pointcutProviders" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Aspect\IPointcutProvider[]
-                 <span class="highlight">$_pointcutProviders</span>= ''
+                 <span class="highlight">$_pointcutProviders</span>= 'array()'
                 </code><div class="description">
 <p class="short-description">Pointcut definition providers.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
-<strong>Details</strong><dl class="property-info">
+<strong>Default value</strong><code>array()</code><strong>Details</strong><dl class="property-info">
 <dt>Type</dt>
 <dd><a href="db_Aspect_IPointcutProvider.html#%5CDing%5CAspect%5CIPointcutProvider">\Ding\Aspect\IPointcutProvider[]</a></dd>
 </dl>
@@ -256,6 +258,16 @@ limitations under the License.</a>
 </tr>
 </table>
 </div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Aspect\AspectManager::afterConfig()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">afterConfig</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Aspect\AspectManager::getAspects()" class="anchor"></a><div class="method public">

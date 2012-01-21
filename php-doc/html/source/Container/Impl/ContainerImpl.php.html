@@ -270,17 +270,15 @@ class ContainerImpl implements IContainer
      */
     public function getBeanDefinition($name)
     {
-        $beanName = $name . '.beandef';
         if (isset($this-&gt;_beanAliases[$name])) {
             $name = $this-&gt;_beanAliases[$name];
         }
         if (isset($this-&gt;_beanDefs[$name])) {
             return $this-&gt;_beanDefs[$name];
         }
-
         $beanDefinition = null;
         if ($this-&gt;_beanDefCache !== null) {
-            $beanDefinition = $this-&gt;_beanDefCache-&gt;fetch($beanName, $result);
+            $beanDefinition = $this-&gt;_beanDefCache-&gt;fetch($name, $result);
         }
         if ($beanDefinition) {
             $this-&gt;_beanDefs[$name] = $beanDefinition;
@@ -299,8 +297,8 @@ class ContainerImpl implements IContainer
             throw new BeanFactoryException('Unknown bean: ' . $name);
         }
         $beanDefinition = $this-&gt;_lifecycleManager-&gt;afterDefinition($beanDefinition);
-        $this-&gt;_beanDefs[$beanName] = $beanDefinition;
-        $this-&gt;_beanDefCache-&gt;store($beanName, $beanDefinition);
+        $this-&gt;_beanDefs[$name] = $beanDefinition;
+        $this-&gt;_beanDefCache-&gt;store($name, $beanDefinition);
         foreach ($beanDefinition-&gt;getAliases() as $alias) {
             $this-&gt;_beanAliases[$alias] = $name;
         }
@@ -767,7 +765,6 @@ class ContainerImpl implements IContainer
             if (isset($properties['ding']['cache'])) {
                 CacheLocator::configure($properties['ding']['cache']);
             }
-            \Ding\Autoloader\Autoloader::setCache(CacheLocator::getAutoloaderCacheInstance());
             if (isset($properties['ding']['log4php.properties'])) {
                 \Logger::configure($properties['ding']['log4php.properties']);
             }
@@ -872,6 +869,9 @@ class ContainerImpl implements IContainer
      */
     public function eventDispatch($eventName, $data = null)
     {
+        if ($this-&gt;_logDebugEnabled) {
+            $this-&gt;_logger-&gt;debug(&quot;Dispatching event: $eventName&quot;);
+        }
         $listeners = $this-&gt;getBeansListeningOn($eventName);
         foreach ($this-&gt;_beanDefinitionProviders as $provider) {
             $listeners = array_merge($listeners, $provider-&gt;getBeansListeningOn($eventName));
@@ -1080,6 +1080,7 @@ class ContainerImpl implements IContainer
         $this-&gt;_lifecycleManager = new BeanLifecycleManager;
         $this-&gt;_dispatcherTemplate = new DispatcherImpl();
         $this-&gt;_aspectManager = new AspectManager();
+        $this-&gt;_aspectManager-&gt;setCache(DummyCacheImpl::getInstance());
         $this-&gt;_beanDefCache = DummyCacheImpl::getInstance();
         $this-&gt;_beanCache = DummyCacheImpl::getInstance();
         $this-&gt;registerBeanDefinitionProvider(new Core(self::$_options));
@@ -1108,7 +1109,6 @@ class ContainerImpl implements IContainer
             $this-&gt;getBean('dingAnnotationDiscovererDriver');
             $this-&gt;getBean('dingAnnotationBeanDefinitionProvider');
             $this-&gt;getBean('dingAnnotationValueDriver');
-            $this-&gt;getBean('dingAnnotationAspectDriver');
             $this-&gt;getBean('dingAnnotationResourceDriver');
             $this-&gt;getBean('dingAnnotationInitDestroyMethodDriver');
             $this-&gt;getBean('dingAnnotationRequiredDriver');

@@ -107,10 +107,10 @@
 <td align="right">3</td>
 <td align="right">4</td>
 <td align="right">4</td>
-<td align="right">3</td>
+<td align="right">4</td>
 <td align="right">0.42857142857143</td>
-<td align="right">0.42857142857143</td>
-<td align="right">0.14285714285714</td>
+<td align="right">0.5</td>
+<td align="right">0.071428571428571</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a></td>
@@ -128,11 +128,11 @@
 <td align="right">1</td>
 <td align="right">0</td>
 <td align="right">1</td>
-<td align="right">1</td>
-<td align="right">1</td>
 <td align="right">0</td>
-<td align="right">0.5</td>
-<td align="right">0.5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CBean">Ding\Bean</a></td>
@@ -147,11 +147,11 @@
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a></td>
-<td align="right">11</td>
-<td align="right">0</td>
-<td align="right">11</td>
+<td align="right">10</td>
 <td align="right">0</td>
 <td align="right">10</td>
+<td align="right">0</td>
+<td align="right">11</td>
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -172,11 +172,11 @@
 <td align="right">9</td>
 <td align="right">7</td>
 <td align="right">2</td>
-<td align="right">3</td>
+<td align="right">4</td>
 <td align="right">1</td>
 <td align="right">0.77777777777778</td>
-<td align="right">0.25</td>
-<td align="right">0.027777777777778</td>
+<td align="right">0.2</td>
+<td align="right">0.022222222222222</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CBean%5CProvider">Ding\Bean\Provider</a></td>
@@ -250,10 +250,10 @@
 <td align="right">0</td>
 <td align="right">1</td>
 <td align="right">1</td>
-<td align="right">14</td>
+<td align="right">13</td>
 <td align="right">0</td>
-<td align="right">0.93333333333333</td>
-<td align="right">0.066666666666667</td>
+<td align="right">0.92857142857143</td>
+<td align="right">0.071428571428571</td>
 </tr>
 <tr>
 <td align="left"><a href="#PKDing%5CException">Ding\Exception</a></td>
@@ -543,13 +543,13 @@
 <td>
 <a href="#EXafferent">Afferent Couplings</a>: 4</td>
 <td>
-<a href="#EXefferent">Efferent Couplings</a>: 3</td>
+<a href="#EXefferent">Efferent Couplings</a>: 4</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 0.42857142857143</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.42857142857143</td>
+<a href="#EXinstability">Instability</a>: 0.5</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.14285714285714</td>
+<a href="#EXdistance">Distance</a>: 0.071428571428571</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -567,7 +567,7 @@
 <a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a><br><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CBean%5CProvider">Ding\Bean\Provider</a><br><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br>
 </td>
 <td valign="top" width="25%">
-<a href="#PK"></a><br><a href="#PKDing%5CCache">Ding\Cache</a><br><a href="#PKDing%5CReflection">Ding\Reflection</a><br>
+<a href="#PK"></a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CCache">Ding\Cache</a><br><a href="#PKDing%5CReflection">Ding\Reflection</a><br>
 </td>
 </tr>
 </table>
@@ -607,15 +607,15 @@
 <h3><a name="PKDing%5CAutoloader">Ding\Autoloader</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 1</td>
+<a href="#EXafferent">Afferent Couplings</a>: 0</td>
 <td>
-<a href="#EXefferent">Efferent Couplings</a>: 1</td>
+<a href="#EXefferent">Efferent Couplings</a>: 0</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 0</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.5</td>
+<a href="#EXinstability">Instability</a>: 0</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.5</td>
+<a href="#EXdistance">Distance</a>: 1</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -628,12 +628,8 @@
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">Autoloader<br>
 </td>
-<td valign="top" width="25%">
-<a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br>
-</td>
-<td valign="top" width="25%">
-<a href="#PKDing%5CCache">Ding\Cache</a><br>
-</td>
+<td valign="top" width="25%"><i>None</i></td>
+<td valign="top" width="25%"><i>None</i></td>
 </tr>
 </table>
 <h3><a name="PKDing%5CBean">Ding\Bean</a></h3>
@@ -672,7 +668,7 @@
 <td>
 <a href="#EXafferent">Afferent Couplings</a>: 0</td>
 <td>
-<a href="#EXefferent">Efferent Couplings</a>: 10</td>
+<a href="#EXefferent">Efferent Couplings</a>: 11</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 0</td>
 <td>
@@ -689,11 +685,11 @@
 </tr>
 <tr>
 <td valign="top" width="25%"><i>None</i></td>
-<td valign="top" width="25%">AnnotationAspectDriver<br>AnnotationDiscovererDriver<br>AnnotationInitDestroyMethodDriver<br>AnnotationRequiredDriver<br>AnnotationResourceDriver<br>AnnotationValueDriver<br>MessageSourceDriver<br>MethodInjectionAspect<br>MethodInjectionDriver<br>MvcAnnotationDriver<br>PropertiesDriver<br>
+<td valign="top" width="25%">AnnotationDiscovererDriver<br>AnnotationInitDestroyMethodDriver<br>AnnotationRequiredDriver<br>AnnotationResourceDriver<br>AnnotationValueDriver<br>MessageSourceDriver<br>MethodInjectionAspect<br>MethodInjectionDriver<br>MvcAnnotationDriver<br>PropertiesDriver<br>
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
-<a href="#PK"></a><br><a href="#PKDing%5CAnnotation">Ding\Annotation</a><br><a href="#PKDing%5CAspect">Ding\Aspect</a><br><a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CMvc%5CHttp">Ding\Mvc\Http</a><br><a href="#PKDing%5CReflection">Ding\Reflection</a><br><a href="#PKDing%5CResource">Ding\Resource</a><br>
+<a href="#PK"></a><br><a href="#PKDing%5CAnnotation">Ding\Annotation</a><br><a href="#PKDing%5CAspect">Ding\Aspect</a><br><a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CCache">Ding\Cache</a><br><a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CMvc%5CHttp">Ding\Mvc\Http</a><br><a href="#PKDing%5CReflection">Ding\Reflection</a><br><a href="#PKDing%5CResource">Ding\Resource</a><br>
 </td>
 </tr>
 </table>
@@ -732,15 +728,15 @@
 <h3><a name="PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a></h3>
 <table width="100%"><tr>
 <td>
-<a href="#EXafferent">Afferent Couplings</a>: 3</td>
+<a href="#EXafferent">Afferent Couplings</a>: 4</td>
 <td>
 <a href="#EXefferent">Efferent Couplings</a>: 1</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 0.77777777777778</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.25</td>
+<a href="#EXinstability">Instability</a>: 0.2</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.027777777777778</td>
+<a href="#EXdistance">Distance</a>: 0.022222222222222</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -755,7 +751,7 @@
 <td valign="top" width="25%">BeanLifecycle<br>BeanLifecycleManager<br>
 </td>
 <td valign="top" width="25%">
-<a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CBean%5CProvider">Ding\Bean\Provider</a><br><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br>
+<a href="#PKDing%5CAspect">Ding\Aspect</a><br><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CBean%5CProvider">Ding\Bean\Provider</a><br><a href="#PKDing%5CContainer%5CImpl">Ding\Container\Impl</a><br>
 </td>
 <td valign="top" width="25%">
 <a href="#PKDing%5CBean">Ding\Bean</a><br>
@@ -851,7 +847,7 @@
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 <td valign="top" width="25%">
-<a href="#PKDing%5CAspect">Ding\Aspect</a><br><a href="#PKDing%5CAutoloader">Ding\Autoloader</a><br><a href="#PKDing%5CBean%5CProvider">Ding\Bean\Provider</a><br><a href="#PKDing%5CCache%5CImpl">Ding\Cache\Impl</a><br><a href="#PKDing%5CReflection">Ding\Reflection</a><br>
+<a href="#PKDing%5CAspect">Ding\Aspect</a><br><a href="#PKDing%5CBean%5CFactory%5CDriver">Ding\Bean\Factory\Driver</a><br><a href="#PKDing%5CBean%5CProvider">Ding\Bean\Provider</a><br><a href="#PKDing%5CCache%5CImpl">Ding\Cache\Impl</a><br><a href="#PKDing%5CReflection">Ding\Reflection</a><br>
 </td>
 <td valign="top" width="25%"><i>None</i></td>
 </tr>
@@ -957,13 +953,13 @@
 <td>
 <a href="#EXafferent">Afferent Couplings</a>: 1</td>
 <td>
-<a href="#EXefferent">Efferent Couplings</a>: 14</td>
+<a href="#EXefferent">Efferent Couplings</a>: 13</td>
 <td>
 <a href="#EXabstractness">Abstractness</a>: 0</td>
 <td>
-<a href="#EXinstability">Instability</a>: 0.93333333333333</td>
+<a href="#EXinstability">Instability</a>: 0.92857142857143</td>
 <td>
-<a href="#EXdistance">Distance</a>: 0.066666666666667</td>
+<a href="#EXdistance">Distance</a>: 0.071428571428571</td>
 </tr></table>
 <table width="100%" class="details">
 <tr>
@@ -980,7 +976,7 @@
 <a href="#PKDing%5CMvc%5CHttp">Ding\Mvc\Http</a><br>
 </td>
 <td valign="top" width="25%">
-<a href="#PK"></a><br><a href="#PKDing%5CAspect">Ding\Aspect</a><br><a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a><br><a href="#PKDing%5CAutoloader">Ding\Autoloader</a><br><a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CBean%5CProvider">Ding\Bean\Provider</a><br><a href="#PKDing%5CCache%5CImpl">Ding\Cache\Impl</a><br><a href="#PKDing%5CCache%5CLocator">Ding\Cache\Locator</a><br><a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CHelpers%5CErrorHandler">Ding\Helpers\ErrorHandler</a><br><a href="#PKDing%5CMessageSource">Ding\MessageSource</a><br><a href="#PKDing%5CResource%5CImpl">Ding\Resource\Impl</a><br>
+<a href="#PK"></a><br><a href="#PKDing%5CAspect">Ding\Aspect</a><br><a href="#PKDing%5CAspect%5CInterceptor">Ding\Aspect\Interceptor</a><br><a href="#PKDing%5CBean">Ding\Bean</a><br><a href="#PKDing%5CBean%5CFactory%5CException">Ding\Bean\Factory\Exception</a><br><a href="#PKDing%5CBean%5CLifecycle">Ding\Bean\Lifecycle</a><br><a href="#PKDing%5CBean%5CProvider">Ding\Bean\Provider</a><br><a href="#PKDing%5CCache%5CImpl">Ding\Cache\Impl</a><br><a href="#PKDing%5CCache%5CLocator">Ding\Cache\Locator</a><br><a href="#PKDing%5CContainer">Ding\Container</a><br><a href="#PKDing%5CHelpers%5CErrorHandler">Ding\Helpers\ErrorHandler</a><br><a href="#PKDing%5CMessageSource">Ding\MessageSource</a><br><a href="#PKDing%5CResource%5CImpl">Ding\Resource\Impl</a><br>
 </td>
 </tr>
 </table>

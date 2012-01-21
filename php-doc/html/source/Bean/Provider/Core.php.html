@@ -100,11 +100,6 @@ class Core implements IBeanDefinitionProvider
         $bean = null;
         switch ($name)
         {
-        case 'dingAutoloaderCache':
-            $bean = new BeanDefinition($name);
-            $bean-&gt;setClass('\Ding\Cache\Locator\CacheLocator');
-            $bean-&gt;setFactoryMethod('getAutoloaderCacheInstance');
-            break;
         case 'dingAnnotationParser':
             $bean = new BeanDefinition($name);
             $bean-&gt;setClass('\Ding\Annotation\Parser');
@@ -163,6 +158,7 @@ class Core implements IBeanDefinitionProvider
                     $this-&gt;options['bdef']['annotation']
                 )
             ));
+            $bean-&gt;setInitMethod('init');
             $bean-&gt;setProperties(array(
                 new BeanPropertyDefinition(
                 	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
@@ -207,6 +203,13 @@ class Core implements IBeanDefinitionProvider
         case 'dingAnnotationDiscovererDriver':
             $bean = new BeanDefinition($name);
             $bean-&gt;setClass('\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver');
+            $bean-&gt;setProperties(array(
+                new BeanPropertyDefinition(
+                	'cache', BeanPropertyDefinition::PROPERTY_BEAN,
+                	'dingAnnotationsCache'
+                )
+            ));
+            $bean-&gt;setInitMethod('parse');
             $bean-&gt;setArguments(array(
                 new BeanConstructorArgumentDefinition(
                     BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_VALUE,

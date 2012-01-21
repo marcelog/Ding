@@ -1571,8 +1571,6 @@ When the properties holder is loaded, the property will complete the path for th
 The cache subsystems use $properties['ding']['cache']. The subsystems are:
 </p>
 <ul>
-  <li><u>autoloader</u>: In order to avoid resolving the ding's class names to
-  a filesystem entry every time, a cache is used.</li>
   <li><u>proxy</u>: To cache proxy definitions: its expensive to create proxies
   because php lacks this hability, so we have to actually generate code. This code
   can be cached.</li>
@@ -1592,7 +1590,6 @@ The resulting properties needed to configure each one of the cache subsystems:
 </p>
 
 <ul>
-  <li>$properties['ding']['cache']['autoloader']</li>
   <li>$properties['ding']['cache']['proxy']</li>
   <li>$properties['ding']['cache']['bdef']</li>
   <li>$properties['ding']['cache']['beans']</li>
@@ -1625,10 +1622,6 @@ $properties['ding']['cache']['bdef'] = array(
 )
 
 $properties['ding']['cache']['proxy'] = array(
-    'impl' => 'apc'
-)
-
-$properties['ding']['cache']['autoloader'] = array(
     'impl' => 'apc'
 )
 

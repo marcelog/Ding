@@ -63,6 +63,8 @@
  */
 namespace Ding\Aspect;
 
+use Ding\Bean\Lifecycle\IAfterConfigListener;
+
 /**
  * Aspect Manager.
  *
@@ -74,7 +76,7 @@ namespace Ding\Aspect;
  * @license  http://marcelog.github.com/ Apache License 2.0
  * @link     http://marcelog.github.com/
  */
-class AspectManager
+class AspectManager implements IAfterConfigListener
 {
     /**
      * Holds known aspects. Indexed by name.
@@ -98,13 +100,13 @@ class AspectManager
      * Aspect definition providers.
      * @var IAspectProvider[]
      */
-    private $_aspectProviders;
+    private $_aspectProviders = array();
 
     /**
      * Pointcut definition providers.
      * @var IPointcutProvider[]
      */
-    private $_pointcutProviders;
+    private $_pointcutProviders = array();
 
     /**
      * Serialization.
@@ -113,7 +115,7 @@ class AspectManager
      */
     public function __sleep()
     {
-        return array();
+        return array('_aspects', '_pointcuts');
     }
 
     /**
@@ -128,6 +130,7 @@ class AspectManager
         $name = $aspect-&gt;getName();
         $this-&gt;_aspects[$name] = $aspect;
         $this-&gt;_cache-&gt;store('AspectManagerAspect' . $name, $aspect);
+        $this-&gt;_cache-&gt;store('Aspects', $this-&gt;_aspects);
     }
 
     /**
@@ -184,6 +187,17 @@ class AspectManager
         return false;
     }
 
+    public function afterConfig()
+    {
+        $aspects = $this-&gt;getAspects();
+        if (empty($aspects)) {
+            foreach ($this-&gt;_aspectProviders as $provider) {
+                foreach ($provider-&gt;getAspects() as $aspect) {
+                    $this-&gt;setAspect($aspect);
+                }
+            }
+        }
+    }
     /**
      * Will register an aspect definition provider in this manager.
      *
@@ -194,9 +208,6 @@ class AspectManager
     public function registerAspectProvider(IAspectProvider $provider)
     {
         $this-&gt;_aspectProviders[] = $provider;
-        foreach ($provider-&gt;getAspects() as $aspect) {
-            $this-&gt;setAspect($aspect);
-        }
     }
 
     /**

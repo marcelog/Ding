@@ -170,6 +170,20 @@ limitations under the License.</a>
 </dl>
 <h3>Properties</h3>
 <div>
+<a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::$_cache" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Cache\ICache
+                 <span class="highlight">$_cache</span>= ''
+                </code><div class="description">
+<p class="short-description">Annotations cache.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd><a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a></dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::$_reflectionFactory" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Reflection\IReflectionFactory
                  <span class="highlight">$_reflectionFactory</span>= ''
@@ -210,6 +224,110 @@ limitations under the License.</a>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::_getCandidateFilesForClassScanning()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_getCandidateFilesForClassScanning</span><span class="nb-faded-text">(
+          string $path
+          )
+        </span>
+        :
+          \string[]</code><div class="description"><p class="short_description">Returns all files elegible for scanning for classes.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Absolute path to a directory or filename.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string[]</td>
+<td></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::_getClassesFromDirectory()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_getClassesFromDirectory</span><span class="nb-faded-text">(
+           $dir
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$dir</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::_getClassesFromFile()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_getClassesFromFile</span><span class="nb-faded-text">(
+           $file
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$file</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::_isScannable()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_isScannable</span><span class="nb-faded-text">(
+          string $path
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Returns true if the given filesystem entry is interesting to scan.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$path</th>
+<td>string</td>
+<td><em><p>Filesystem entry.</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::afterConfig()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">afterConfig</span><span class="nb-faded-text">(
           
@@ -225,6 +343,40 @@ limitations under the License.</a>
          
     </dd>
 </dl>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::parse()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">parse</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Factory\Driver\AnnotationDiscovererDriver::setCache()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setCache</span><span class="nb-faded-text">(
+          <a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a> $cache
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Sets annotations cache.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$cache</th>
+<td><a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a></td>
+<td><em></em></td>
+</tr>
+</table>
 </div>
 <div class="clear"></div>
 </div>

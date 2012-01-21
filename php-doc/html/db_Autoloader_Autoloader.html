@@ -161,103 +161,8 @@ limitations under the License.</a>
          
     </dd>
 </dl>
-<h3>Properties</h3>
-<div>
-<a id="\Ding\Autoloader\Autoloader::$_cache" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Cache\ICache
-                 <span class="highlight">$_cache</span>= 'false'
-                </code><div class="description">
-<span class="attribute">static</span><p class="short-description">Autoloader cache.</p></div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Default value</strong><code>false</code><strong>Details</strong><dl class="property-info">
-<dt>Type</dt>
-<dd><a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a></dd>
-</dl>
-</div>
-<div class="clear"></div>
-</div>
-<a id="\Ding\Autoloader\Autoloader::$_includePath" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\string[]
-                 <span class="highlight">$_includePath</span>= ''
-                </code><div class="description">
-<span class="attribute">static</span><p class="short-description">Include path.</p></div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Details</strong><dl class="property-info">
-<dt>Type</dt>
-<dd>\string[]</dd>
-</dl>
-</div>
-<div class="clear"></div>
-</div>
-<a id="\Ding\Autoloader\Autoloader::$_logger" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Autoloader\Logger
-                 <span class="highlight">$_logger</span>= ''
-                </code><div class="description">
-<span class="attribute">static</span><p class="short-description">log4php logger or own dummy instance.</p></div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Details</strong><dl class="property-info">
-<dt>Type</dt>
-<dd>\Ding\Autoloader\Logger</dd>
-</dl>
-</div>
-<div class="clear"></div>
-</div>
-<a id="\Ding\Autoloader\Autoloader::$_myPath" class="anchor"></a><div class="property private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">string
-                 <span class="highlight">$_myPath</span>= ''
-                </code><div class="description">
-<span class="attribute">static</span><p class="short-description">Holds current realpath.</p></div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Details</strong><dl class="property-info">
-<dt>Type</dt>
-<dd>string</dd>
-</dl>
-</div>
-<div class="clear"></div>
-</div>
-</div>
 <h3>Methods</h3>
 <div>
-<a id="\Ding\Autoloader\Autoloader::_resolve()" class="anchor"></a><div class="method private">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_resolve</span><span class="nb-faded-text">(
-          string $class
-          )
-        </span>
-        :
-          string</code><div class="description">
-<span class="attribute">static</span><p class="short_description">Resolves a class name to a filesystem entry. False if none found.</p>
-</div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Parameters</strong><table class="argument-info">
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<th>$class</th>
-<td>string</td>
-<td><em><p>Class name.</p></em></td>
-</tr>
-</table>
-<strong>Returns</strong><table class="argument-info">
-<thead><tr>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<td>string</td>
-<td></td>
-</tr>
-</table>
-</div>
-<div class="clear"></div>
-</div>
 <a id="\Ding\Autoloader\Autoloader::load()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">load</span><span class="nb-faded-text">(
            $class
@@ -322,32 +227,6 @@ successfully loaded.</p>
          
     </dd>
 </dl>
-</div>
-<div class="clear"></div>
-</div>
-<a id="\Ding\Autoloader\Autoloader::setCache()" class="anchor"></a><div class="method public">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setCache</span><span class="nb-faded-text">(
-          <a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a> $cache
-          )
-        </span>
-        :
-          void</code><div class="description">
-<span class="attribute">static</span><p class="short_description">Sets the autoloader cache to be used.</p>
-</div>
-<div class="code-tabs">
-<div class="long-description"></div>
-<strong>Parameters</strong><table class="argument-info">
-<thead><tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr></thead>
-<tr>
-<th>$cache</th>
-<td><a href="db_Cache_ICache.html#%5CDing%5CCache%5CICache">\Ding\Cache\ICache</a></td>
-<td><em><p>Autoloader cache to use.</p></em></td>
-</tr>
-</table>
 </div>
 <div class="clear"></div>
 </div>

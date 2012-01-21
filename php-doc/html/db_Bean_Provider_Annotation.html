@@ -148,10 +148,11 @@ the class (of the bean, of course).</p>
 <div class="long-description"><p>PHP Version 5</p></div>
 <dl class="class-info">
 <dt>Implements</dt>
-<dd><a href="db_Bean_Lifecycle_IAfterConfigListener.html#%5CDing%5CBean%5CLifecycle%5CIAfterConfigListener">\Ding\Bean\Lifecycle\IAfterConfigListener</a></dd>
 <dd><a href="db_Bean_IBeanDefinitionProvider.html#%5CDing%5CBean%5CIBeanDefinitionProvider">\Ding\Bean\IBeanDefinitionProvider</a></dd>
 <dd><a href="db_Container_IContainerAware.html#%5CDing%5CContainer%5CIContainerAware">\Ding\Container\IContainerAware</a></dd>
 <dd><a href="db_Reflection_IReflectionFactoryAware.html#%5CDing%5CReflection%5CIReflectionFactoryAware">\Ding\Reflection\IReflectionFactoryAware</a></dd>
+<dd><a href="db_Aspect_IAspectManagerAware.html#%5CDing%5CAspect%5CIAspectManagerAware">\Ding\Aspect\IAspectManagerAware</a></dd>
+<dd><a href="db_Aspect_IAspectProvider.html#%5CDing%5CAspect%5CIAspectProvider">\Ding\Aspect\IAspectProvider</a></dd>
 <dt>Author</dt>
 <dd>
 <a href="mailto:marcelog@gmail.com">Marcelo Gornstein</a>
@@ -174,6 +175,18 @@ the class (of the bean, of course).</p>
 </dl>
 <h3>Properties</h3>
 <div>
+<a id="\Ding\Bean\Provider\Annotation::$_aspectManager" class="anchor"></a><div class="property private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">
+                 <span class="highlight">$_aspectManager</span>= ''
+                </code><div class="description"></div>
+<div class="code-tabs">
+<strong>Details</strong><dl class="property-info">
+<dt>Type</dt>
+<dd>n/a</dd>
+</dl>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Provider\Annotation::$_beanDefinitions" class="anchor"></a><div class="property private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/property.png" alt="Property"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private">\Ding\Bean\BeanDefinition[]
                  <span class="highlight">$_beanDefinitions</span>= 'array()'
@@ -593,6 +606,49 @@ be returned.</p></div>
 </div>
 <div class="clear"></div>
 </div>
+<a id="\Ding\Bean\Provider\Annotation::_newAspect()" class="anchor"></a><div class="method private">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_newAspect</span><span class="nb-faded-text">(
+           $aspectBean,  $classExpression,  $expression,  $method,  $type
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs">
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$aspectBean</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$classExpression</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$expression</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$method</th>
+<td></td>
+<td><em></em></td>
+</tr>
+<tr>
+<th>$type</th>
+<td></td>
+<td><em></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
 <a id="\Ding\Bean\Provider\Annotation::_registerEventsForBeanName()" class="anchor"></a><div class="method private">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_private.png" style="margin-right: 5px" alt="private"><span class="highlight">_registerEventsForBeanName</span><span class="nb-faded-text">(
            $annotations,  $beanName
@@ -649,21 +705,25 @@ be returned.</p></div>
 </div>
 <div class="clear"></div>
 </div>
-<a id="\Ding\Bean\Provider\Annotation::afterConfig()" class="anchor"></a><div class="method public">
-<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">afterConfig</span><span class="nb-faded-text">(
+<a id="\Ding\Bean\Provider\Annotation::getAspects()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getAspects</span><span class="nb-faded-text">(
           
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+          <a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition[]</a></code><div class="description"><p class="short_description">Returns all aspects known to this provider.</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
-<strong>Details</strong><dl class="function-info">
-<dt>See</dt>
-<dd>\Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
-         
-    </dd>
-</dl>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td><a href="db_Aspect_AspectDefinition.html#%5CDing%5CAspect%5CAspectDefinition">\Ding\Aspect\AspectDefinition[]</a></td>
+<td></td>
+</tr>
+</table>
 </div>
 <div class="clear"></div>
 </div>
@@ -749,11 +809,11 @@ be returned.</p></div>
 </div>
 <a id="\Ding\Bean\Provider\Annotation::getBeansListeningOn()" class="anchor"></a><div class="method public">
 <a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">getBeansListeningOn</span><span class="nb-faded-text">(
-           $eventName
+          string $eventName
           )
         </span>
         :
-          void</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
+          \string[]</code><div class="description"><p class="short_description">(non-PHPdoc)</p></div>
 <div class="code-tabs">
 <div class="long-description"></div>
 <strong>Parameters</strong><table class="argument-info">
@@ -764,8 +824,18 @@ be returned.</p></div>
 </tr></thead>
 <tr>
 <th>$eventName</th>
+<td>string</td>
+<td><em><p>The event name.</p></em></td>
+</tr>
+</table>
+<strong>Returns</strong><table class="argument-info">
+<thead><tr>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<td>\string[]</td>
 <td></td>
-<td><em></em></td>
 </tr>
 </table>
 <strong>Details</strong><dl class="function-info">
@@ -775,6 +845,16 @@ be returned.</p></div>
     </dd>
 </dl>
 </div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::init()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">init</span><span class="nb-faded-text">(
+          
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description"></p></div>
+<div class="code-tabs"></div>
 <div class="clear"></div>
 </div>
 <a id="\Ding\Bean\Provider\Annotation::registerEventsFor()" class="anchor"></a><div class="method protected">
@@ -808,6 +888,30 @@ this is an "early" discovery of a bean, a BeanDefinition is generated.</p></div>
 <th>$class</th>
 <td>string</td>
 <td><em><p>The bean class</p></em></td>
+</tr>
+</table>
+</div>
+<div class="clear"></div>
+</div>
+<a id="\Ding\Bean\Provider\Annotation::setAspectManager()" class="anchor"></a><div class="method public">
+<a href="#" class="gripper"><img src="images/icons/arrow_right.png"><img src="images/icons/arrow_down.png" style="display: none;"></a><code><img src="images/icons/method.png" alt="method"><img src="images/icons/visibility_public.png" style="margin-right: 5px" alt="public"><span class="highlight">setAspectManager</span><span class="nb-faded-text">(
+          <a href="db_Aspect_AspectManager.html#%5CDing%5CAspect%5CAspectManager">\Ding\Aspect\AspectManager</a> $aspectManager
+          )
+        </span>
+        :
+          void</code><div class="description"><p class="short_description">Called by the container to inject the aspect manager.</p></div>
+<div class="code-tabs">
+<div class="long-description"></div>
+<strong>Parameters</strong><table class="argument-info">
+<thead><tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr></thead>
+<tr>
+<th>$aspectManager</th>
+<td><a href="db_Aspect_AspectManager.html#%5CDing%5CAspect%5CAspectManager">\Ding\Aspect\AspectManager</a></td>
+<td><em><p>Aspect Manager instance.</p></em></td>
 </tr>
 </table>
 </div>

@@ -95,7 +95,6 @@ class CacheLocator
     	'proxy' =&gt; array('impl' =&gt; 'dummy'),
         'bdef' =&gt; array('impl' =&gt; 'dummy'),
         'beans' =&gt; array('impl' =&gt; 'dummy'),
-    	'autoloader' =&gt; array('impl' =&gt; 'dummy'),
         'aspect' =&gt; array('impl' =&gt; 'dummy'),
         'annotations' =&gt; array('impl' =&gt; 'dummy')
     );
@@ -179,16 +178,6 @@ class CacheLocator
     public static function getAnnotationsCacheInstance()
     {
         return self::_returnCacheFromImpl(self::$_options['annotations']);
-    }
-
-    /**
-     * Returns a cache for autoloader.
-	 *
-     * @return ICache
-     */
-    public static function getAutoloaderCacheInstance()
-    {
-        return self::_returnCacheFromImpl(self::$_options['autoloader']);
     }
 
     /**

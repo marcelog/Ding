@@ -40,19 +40,20 @@
   <error line="37" column="1" severity="error" message="@author tag comment indented incorrectly; expected 3 spaces but found 5" source="PEAR.Commenting.ClassComment.TagIndent"/>
   <error line="38" column="1" severity="error" message="@license tag comment indented incorrectly; expected 2 spaces but found 4" source="PEAR.Commenting.ClassComment.TagIndent"/>
   <error line="39" column="1" severity="error" message="@link tag comment indented incorrectly; expected 5 spaces but found 7" source="PEAR.Commenting.ClassComment.TagIndent"/>
-  <error line="43" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="46" column="1" severity="error" message="Multi-line function call not indented correctly; expected 12 spaces but found 6" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="46" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="46" column="7" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 6" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="68" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="79" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="62" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="65" column="1" severity="error" message="Multi-line function call not indented correctly; expected 12 spaces but found 6" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="65" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="65" column="7" severity="error" message="Line indented incorrectly; expected at least 8 spaces, found 6" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="87" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="101" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/AspectDefinition.php">
   <error line="135" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/AspectManager.php">
-  <error line="134" column="89" severity="warning" message="Line exceeds 85 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="181" column="1" severity="error" message="Missing comment for param &quot;$cache&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="137" column="89" severity="warning" message="Line exceeds 85 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="154" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="192" column="1" severity="error" message="Missing comment for param &quot;$cache&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Aspect/IAspectManagerAware.php">
  </file>
@@ -123,8 +124,8 @@
   <error line="274" column="5" severity="error" message="Doc comment for &quot;$dispatcher&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Autoloader/Autoloader.php">
-  <error line="102" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="124" column="16" severity="error" message="Line indented incorrectly; expected at least 16 spaces, found 15" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="43" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="54" column="13" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/BeanConstructorArgumentDefinition.php">
   <error line="129" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
@@ -132,62 +133,29 @@
   <error line="142" column="1" severity="error" message="Doc comment for &quot;$name&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/BeanDefinition.php">
-  <error line="479" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="538" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="543" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="488" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
   <error line="548" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
   <error line="553" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="557" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="558" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="563" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="567" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/BeanPropertyDefinition.php">
  </file>
- <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationAspectDriver.php">
-  <error line="81" column="5" severity="error" message="Doc comment for &quot;$reflectionFactory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="83" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="84" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="90" column="5" severity="error" message="Doc comment for &quot;$container&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="92" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="93" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="98" column="5" severity="error" message="Doc comment for &quot;$name&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="100" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="101" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="110" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="112" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="113" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="118" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="120" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="121" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="127" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="127" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="134" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="145" column="12" severity="error" message="You must use &quot;/**&quot; style comments for a function comment" source="PEAR.Commenting.FunctionComment.WrongStyle"/>
-  <error line="152" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="153" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="162" column="106" severity="warning" message="Line exceeds 85 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="164" column="97" severity="warning" message="Line exceeds 85 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="165" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="166" column="87" severity="warning" message="Line exceeds 85 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="168" column="118" severity="warning" message="Line exceeds 85 characters; contains 117 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="174" column="100" severity="warning" message="Line exceeds 85 characters; contains 99 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="175" column="98" severity="warning" message="Line exceeds 85 characters; contains 97 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="176" column="87" severity="warning" message="Line exceeds 85 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="178" column="121" severity="warning" message="Line exceeds 85 characters; contains 120 characters" source="Generic.Files.LineLength.TooLong"/>
- </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationDiscovererDriver.php">
-  <error line="56" column="5" severity="error" message="Doc comment for &quot;$reflectionFactory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="58" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="59" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="66" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="67" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="71" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="72" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="72" column="4" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 3" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="73" column="1" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 5" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="74" column="1" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 11" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="75" column="1" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 11" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="76" column="1" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 11" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="77" column="1" severity="error" message="Line indented incorrectly; expected at least 12 spaces, found 11" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="87" column="12" severity="error" message="You must use &quot;/**&quot; style comments for a function comment" source="PEAR.Commenting.FunctionComment.WrongStyle"/>
+  <error line="67" column="1" severity="error" message="Missing comment for param &quot;$cache&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="76" column="5" severity="error" message="Doc comment for &quot;$reflectionFactory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="78" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="79" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="107" column="87" severity="warning" message="Line exceeds 85 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="118" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="127" column="9" severity="error" message="File is being conditionally included; use &quot;include_once&quot; instead" source="PEAR.Files.IncludingFile.UseIncludeOnce"/>
+  <error line="141" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="160" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="175" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="176" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="181" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="193" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Driver/AnnotationInitDestroyMethodDriver.php">
   <error line="50" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -322,7 +290,6 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Factory/Exception/BeanFactoryException.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/IBeanDefinitionProvider.php">
-  <error line="77" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/IBeanNameAware.php">
  </file>
@@ -396,115 +363,135 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Lifecycle/ILifecycleListener.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Provider/Annotation.php">
-  <error line="134" column="5" severity="error" message="Doc comment for &quot;$reflectionFactory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="136" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="137" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="148" column="1" severity="error" message="Missing comment for param &quot;$class&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="155" column="9" severity="error" message="Expected &quot;while (...) {\n&quot;; found &quot;while(...)\n        {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="155" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="160" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="170" column="1" severity="error" message="The comments for parameters $name (1) and $class (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="171" column="1" severity="error" message="The variable names for parameters $class (2) and $annotations (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="171" column="1" severity="error" message="The comments for parameters $class (2) and $annotations (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="171" column="1" severity="error" message="Doc comment for &quot;$fBean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="171" column="1" severity="error" message="Doc comment for &quot;$fMethod&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="175" column="114" severity="warning" message="Line exceeds 85 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="194" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="241" column="1" severity="error" message="Missing comment for param &quot;$beanAnnotation&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="242" column="1" severity="error" message="The variable names for parameters $beanAnnotation (1) and $overrideWithName (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="242" column="1" severity="error" message="The comments for parameters $beanAnnotation (1) and $overrideWithName (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="242" column="1" severity="error" message="Missing comment for param &quot;$overrideWithName&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="246" column="99" severity="warning" message="Line exceeds 85 characters; contains 98 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="261" column="1" severity="warning" message="Line exceeds 85 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="261" column="1" severity="error" message="The comments for parameters $class (1) and $key (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="262" column="1" severity="error" message="The variable names for parameters $key (2) and $annotations (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="262" column="1" severity="error" message="The comments for parameters $key (2) and $annotations (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="263" column="1" severity="error" message="The variable names for parameters $annotations (3) and $overrideWithName (4) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="263" column="1" severity="error" message="The comments for parameters $annotations (3) and $overrideWithName (4) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="264" column="1" severity="error" message="The comments for parameters $overrideWithName (4) and $fBean (5) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="265" column="1" severity="error" message="The comments for parameters $fBean (5) and $fMethod (6) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="269" column="119" severity="warning" message="Line exceeds 85 characters; contains 118 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="274" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="283" column="13" severity="error" message="You must use &quot;/**&quot; style comments for a function comment" source="PEAR.Commenting.FunctionComment.WrongStyle"/>
-  <error line="283" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="291" column="114" severity="warning" message="Line exceeds 85 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="294" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="298" column="123" severity="warning" message="Line exceeds 85 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="305" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="306" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="329" column="1" severity="error" message="The variable names for parameters $annotations (1) and $beanName (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="329" column="1" severity="error" message="The comments for parameters $annotations (1) and $beanName (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="330" column="1" severity="error" message="The comments for parameters $beanName (2) and $class (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="341" column="9" severity="error" message="Expected &quot;while (...) {\n&quot;; found &quot;while(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="341" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="343" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="348" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="362" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="364" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="365" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="373" column="5" severity="error" message="Doc comment for &quot;$name&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="375" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="376" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="388" column="97" severity="warning" message="Line exceeds 85 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="394" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="396" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="397" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="406" column="5" severity="error" message="Doc comment for &quot;$container&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="408" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="409" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="415" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="423" column="1" severity="error" message="Superfluous doc comment at position 2" source="PEAR.Commenting.FunctionComment.ExtraParamComment"/>
+  <error line="136" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="140" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="145" column="5" severity="error" message="Doc comment for &quot;$reflectionFactory&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="147" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="148" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="159" column="1" severity="error" message="Missing comment for param &quot;$class&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="166" column="9" severity="error" message="Expected &quot;while (...) {\n&quot;; found &quot;while(...)\n        {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="166" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="171" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="181" column="1" severity="error" message="The comments for parameters $name (1) and $class (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="182" column="1" severity="error" message="The variable names for parameters $class (2) and $annotations (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="182" column="1" severity="error" message="The comments for parameters $class (2) and $annotations (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="182" column="1" severity="error" message="Doc comment for &quot;$fBean&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="182" column="1" severity="error" message="Doc comment for &quot;$fMethod&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="186" column="114" severity="warning" message="Line exceeds 85 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="207" column="90" severity="warning" message="Line exceeds 85 characters; contains 89 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="254" column="1" severity="error" message="Missing comment for param &quot;$beanAnnotation&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="255" column="1" severity="error" message="The variable names for parameters $beanAnnotation (1) and $overrideWithName (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="255" column="1" severity="error" message="The comments for parameters $beanAnnotation (1) and $overrideWithName (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="255" column="1" severity="error" message="Missing comment for param &quot;$overrideWithName&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="259" column="99" severity="warning" message="Line exceeds 85 characters; contains 98 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="274" column="1" severity="warning" message="Line exceeds 85 characters; contains 105 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="274" column="1" severity="error" message="The comments for parameters $class (1) and $key (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="275" column="1" severity="error" message="The variable names for parameters $key (2) and $annotations (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="275" column="1" severity="error" message="The comments for parameters $key (2) and $annotations (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="276" column="1" severity="error" message="The variable names for parameters $annotations (3) and $overrideWithName (4) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="276" column="1" severity="error" message="The comments for parameters $annotations (3) and $overrideWithName (4) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="277" column="1" severity="error" message="The comments for parameters $overrideWithName (4) and $fBean (5) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="278" column="1" severity="error" message="The comments for parameters $fBean (5) and $fMethod (6) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="282" column="119" severity="warning" message="Line exceeds 85 characters; contains 118 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="287" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="296" column="13" severity="error" message="You must use &quot;/**&quot; style comments for a function comment" source="PEAR.Commenting.FunctionComment.WrongStyle"/>
+  <error line="296" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="304" column="114" severity="warning" message="Line exceeds 85 characters; contains 113 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="307" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="311" column="123" severity="warning" message="Line exceeds 85 characters; contains 122 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="317" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="333" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="342" column="110" severity="warning" message="Line exceeds 85 characters; contains 109 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="344" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="345" column="102" severity="warning" message="Line exceeds 85 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="346" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="348" column="119" severity="warning" message="Line exceeds 85 characters; contains 118 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="354" column="104" severity="warning" message="Line exceeds 85 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="355" column="102" severity="warning" message="Line exceeds 85 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="356" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="358" column="122" severity="warning" message="Line exceeds 85 characters; contains 121 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="368" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="368" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="370" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="386" column="1" severity="error" message="The variable names for parameters $annotations (1) and $beanName (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="386" column="1" severity="error" message="The comments for parameters $annotations (1) and $beanName (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="387" column="1" severity="error" message="The comments for parameters $beanName (2) and $class (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="398" column="9" severity="error" message="Expected &quot;while (...) {\n&quot;; found &quot;while(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="398" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="400" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="405" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="419" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="421" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="422" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="430" column="5" severity="error" message="Doc comment for &quot;$name&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="432" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="433" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="445" column="97" severity="warning" message="Line exceeds 85 characters; contains 96 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="451" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="453" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="454" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="463" column="5" severity="error" message="Doc comment for &quot;$container&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="465" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="466" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="472" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="480" column="1" severity="error" message="Superfluous doc comment at position 2" source="PEAR.Commenting.FunctionComment.ExtraParamComment"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Provider/Core.php">
   <error line="58" column="5" severity="error" message="Doc comment for &quot;$name&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
   <error line="60" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
   <error line="61" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="104" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="106" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="106" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="107" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="107" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="109" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="114" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="119" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="124" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="129" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="130" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="132" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="132" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="133" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="133" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="135" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="140" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="145" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="153" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="174" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="179" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="204" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="209" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="210" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="212" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="212" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="213" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="213" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="99" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="101" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="101" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="102" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="102" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="104" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="109" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="114" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="119" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="124" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="126" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="128" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="128" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="129" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="129" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="131" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="136" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="141" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="149" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="170" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="172" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="172" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="173" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="173" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="175" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="177" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="182" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="207" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="212" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="213" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="215" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="215" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
   <error line="216" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
   <error line="216" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="217" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="217" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="219" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="224" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="226" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="226" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="227" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="227" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="229" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="237" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="239" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="240" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="246" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="248" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="249" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="255" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="219" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="219" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="220" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="220" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="222" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="227" column="20" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="229" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="229" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="230" column="1" severity="error" message="Multi-line function call not indented correctly; expected 20 spaces but found 17" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="230" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="232" column="14" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="240" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="242" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="243" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="249" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="251" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="252" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="258" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Bean/Provider/Xml.php">
   <error line="128" column="1" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
@@ -646,13 +633,11 @@
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Cache/Locator/CacheLocator.php">
   <error line="59" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="62" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="110" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="120" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="130" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="140" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="150" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="160" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="109" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="119" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="129" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="139" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="149" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Container/IContainer.php">
   <error line="64" column="1" severity="error" message="Last parameter comment requires a blank newline after it" source="PEAR.Commenting.FunctionComment.SpacingAfterParams"/>
@@ -665,87 +650,86 @@
   <error line="217" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
   <error line="219" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
   <error line="220" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="256" column="34" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
-  <error line="258" column="18" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
-  <error line="278" column="1" severity="error" message="Missing comment for param &quot;$value&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="324" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="325" column="1" severity="error" message="Missing comment for param &quot;$what&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="351" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="373" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="400" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="417" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="430" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
-  <error line="430" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="450" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="465" column="5" severity="error" message="Doc comment for &quot;$definition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="477" column="5" severity="error" message="Doc comment for &quot;$targetClass&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="477" column="5" severity="error" message="Doc comment for &quot;$aspectDefinition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="477" column="5" severity="error" message="Doc comment for &quot;$dispatcher&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="492" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="495" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach  (...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="501" column="1" severity="error" message="Each line in a multi-line IF statement must begin with a boolean operator" source="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean"/>
-  <error line="503" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="505" column="104" severity="warning" message="Line exceeds 85 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="514" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="515" column="1" severity="error" message="The variable names for parameters $definition (1) and $dispatcher (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="515" column="1" severity="error" message="Missing comment for param &quot;$dispatcher&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="519" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="531" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="532" column="1" severity="error" message="The variable names for parameters $definition (1) and $dispatcher (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="532" column="1" severity="error" message="Missing comment for param &quot;$dispatcher&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="536" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="544" column="17" severity="error" message="Expected &quot;while (...) {\n&quot;; found &quot;while(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="545" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="559" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="575" column="5" severity="error" message="Doc comment for &quot;$definition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="590" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="590" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="602" column="1" severity="error" message="Missing comment for param &quot;$bean&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="603" column="1" severity="error" message="The variable names for parameters $bean (1) and $definition (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="603" column="1" severity="error" message="The comments for parameters $bean (1) and $definition (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="603" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="622" column="1" severity="error" message="Missing comment for param &quot;$bean&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="623" column="1" severity="error" message="Missing comment for param &quot;$name&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="624" column="1" severity="error" message="The comments for parameters $name (2) and $value (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="624" column="1" severity="error" message="Missing comment for param &quot;$value&quot; at position 3" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="642" column="1" severity="error" message="Missing comment for param &quot;$bean&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="643" column="1" severity="error" message="Missing comment for param &quot;$name&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="644" column="1" severity="error" message="The comments for parameters $name (2) and $value (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="644" column="1" severity="error" message="Missing comment for param &quot;$value&quot; at position 3" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="653" column="14" severity="error" message="Line indented incorrectly; expected 12 spaces, found 13" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
-  <error line="664" column="1" severity="error" message="Missing comment for param &quot;$bean&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="665" column="1" severity="error" message="The variable names for parameters $bean (1) and $beanDefinition (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="665" column="1" severity="error" message="The comments for parameters $bean (1) and $beanDefinition (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="665" column="1" severity="error" message="Missing comment for param &quot;$beanDefinition&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="676" column="1" severity="error" message="Each line in a multi-line IF statement must begin with a boolean operator" source="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean"/>
-  <error line="701" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
-  <error line="701" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
-  <error line="734" column="95" severity="warning" message="Line exceeds 85 characters; contains 94 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="738" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="773" column="1" severity="error" message="Extra newline(s) found before function comment short description" source="PEAR.Commenting.FunctionComment.SpacingBeforeShort"/>
-  <error line="775" column="1" severity="error" message="Missing comment for param &quot;$messageSource&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="775" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="776" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="782" column="5" severity="error" message="Doc comment for &quot;$bundle&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="782" column="5" severity="error" message="Doc comment for &quot;$message&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="782" column="5" severity="error" message="Doc comment for &quot;$arguments&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="782" column="5" severity="error" message="Doc comment for &quot;$locale&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="784" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="785" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="786" column="89" severity="warning" message="Line exceeds 85 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="790" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="791" column="15" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
-  <error line="794" column="5" severity="error" message="Doc comment for &quot;$location&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="794" column="5" severity="error" message="Doc comment for &quot;$context&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="796" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="797" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="821" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="823" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="824" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="833" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="833" column="5" severity="error" message="Doc comment for &quot;$data&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="835" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="836" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="254" column="34" severity="error" message="Opening parenthesis of a multi-line function call must be the last content on the line" source="PEAR.Functions.FunctionCallSignature.ContentAfterOpenBracket"/>
+  <error line="256" column="18" severity="error" message="Closing parenthesis of a multi-line function call must be on a line by itself" source="PEAR.Functions.FunctionCallSignature.CloseBracketLine"/>
+  <error line="276" column="1" severity="error" message="Missing comment for param &quot;$value&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="322" column="1" severity="error" message="Line indented incorrectly; expected at least 4 spaces, found 2" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="323" column="1" severity="error" message="Missing comment for param &quot;$what&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="349" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="371" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="398" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="415" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="428" column="13" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="428" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="448" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="463" column="5" severity="error" message="Doc comment for &quot;$definition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="475" column="5" severity="error" message="Doc comment for &quot;$targetClass&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="475" column="5" severity="error" message="Doc comment for &quot;$aspectDefinition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="475" column="5" severity="error" message="Doc comment for &quot;$dispatcher&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="490" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="493" column="13" severity="error" message="Expected &quot;foreach (...) {\n&quot;; found &quot;foreach  (...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="499" column="1" severity="error" message="Each line in a multi-line IF statement must begin with a boolean operator" source="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean"/>
+  <error line="501" column="101" severity="warning" message="Line exceeds 85 characters; contains 100 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="503" column="104" severity="warning" message="Line exceeds 85 characters; contains 103 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="512" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="513" column="1" severity="error" message="The variable names for parameters $definition (1) and $dispatcher (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="513" column="1" severity="error" message="Missing comment for param &quot;$dispatcher&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="517" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="529" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="530" column="1" severity="error" message="The variable names for parameters $definition (1) and $dispatcher (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="530" column="1" severity="error" message="Missing comment for param &quot;$dispatcher&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="534" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="542" column="17" severity="error" message="Expected &quot;while (...) {\n&quot;; found &quot;while(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
+  <error line="543" column="92" severity="warning" message="Line exceeds 85 characters; contains 91 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="557" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="573" column="5" severity="error" message="Doc comment for &quot;$definition&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="588" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="588" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="600" column="1" severity="error" message="Missing comment for param &quot;$bean&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="601" column="1" severity="error" message="The variable names for parameters $bean (1) and $definition (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="601" column="1" severity="error" message="The comments for parameters $bean (1) and $definition (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="601" column="1" severity="error" message="Missing comment for param &quot;$definition&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="620" column="1" severity="error" message="Missing comment for param &quot;$bean&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="621" column="1" severity="error" message="Missing comment for param &quot;$name&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="622" column="1" severity="error" message="The comments for parameters $name (2) and $value (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="622" column="1" severity="error" message="Missing comment for param &quot;$value&quot; at position 3" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="640" column="1" severity="error" message="Missing comment for param &quot;$bean&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="641" column="1" severity="error" message="Missing comment for param &quot;$name&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="642" column="1" severity="error" message="The comments for parameters $name (2) and $value (3) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="642" column="1" severity="error" message="Missing comment for param &quot;$value&quot; at position 3" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="651" column="14" severity="error" message="Line indented incorrectly; expected 12 spaces, found 13" source="PEAR.WhiteSpace.ScopeIndent.Incorrect"/>
+  <error line="662" column="1" severity="error" message="Missing comment for param &quot;$bean&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="663" column="1" severity="error" message="The variable names for parameters $bean (1) and $beanDefinition (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="663" column="1" severity="error" message="The comments for parameters $bean (1) and $beanDefinition (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="663" column="1" severity="error" message="Missing comment for param &quot;$beanDefinition&quot; at position 2" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="674" column="1" severity="error" message="Each line in a multi-line IF statement must begin with a boolean operator" source="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean"/>
+  <error line="699" column="1" severity="error" message="Multi-line function call not indented correctly; expected 16 spaces but found 13" source="PEAR.Functions.FunctionCallSignature.Indent"/>
+  <error line="699" column="1" severity="error" message="Spaces must be used to indent lines; tabs are not allowed" source="Generic.WhiteSpace.DisallowTabIndent.TabsUsed"/>
+  <error line="735" column="91" severity="warning" message="Line exceeds 85 characters; contains 90 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="770" column="1" severity="error" message="Extra newline(s) found before function comment short description" source="PEAR.Commenting.FunctionComment.SpacingBeforeShort"/>
+  <error line="772" column="1" severity="error" message="Missing comment for param &quot;$messageSource&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="772" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="773" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="779" column="5" severity="error" message="Doc comment for &quot;$bundle&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="779" column="5" severity="error" message="Doc comment for &quot;$message&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="779" column="5" severity="error" message="Doc comment for &quot;$arguments&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="779" column="5" severity="error" message="Doc comment for &quot;$locale&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="781" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="782" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="783" column="89" severity="warning" message="Line exceeds 85 characters; contains 88 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="787" column="88" severity="warning" message="Line exceeds 85 characters; contains 87 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="788" column="15" severity="error" message="TRUE, FALSE and NULL must be lowercase; expected &quot;null&quot; but found &quot;NULL&quot;" source="Generic.PHP.LowerCaseConstant.Found"/>
+  <error line="791" column="5" severity="error" message="Doc comment for &quot;$location&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="791" column="5" severity="error" message="Doc comment for &quot;$context&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="793" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="794" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="818" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="820" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="821" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="830" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="830" column="5" severity="error" message="Doc comment for &quot;$data&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="832" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="833" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
   <error line="841" column="94" severity="warning" message="Line exceeds 85 characters; contains 93 characters" source="Generic.Files.LineLength.TooLong"/>
   <error line="850" column="5" severity="error" message="Doc comment for &quot;$eventName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
   <error line="850" column="5" severity="error" message="Doc comment for &quot;$beanName&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
@@ -990,66 +974,46 @@
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Mvc/View.php">
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/IReflectionFactory.php">
-  <error line="44" column="1" severity="warning" message="Line exceeds 85 characters; contains 104 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="62" column="1" severity="error" message="Doc comment for var $path does not match actual variable name $dir at position 1" source="PEAR.Commenting.FunctionComment.ParamNameNoMatch"/>
-  <error line="87" column="1" severity="error" message="The comments for parameters $class (1) and $method (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="96" column="1" severity="error" message="The comments for parameters $class (1) and $property (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="124" column="1" severity="error" message="The comments for parameters $class (1) and $property (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="63" column="1" severity="error" message="The comments for parameters $class (1) and $method (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="72" column="1" severity="error" message="The comments for parameters $class (1) and $property (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="100" column="1" severity="error" message="The comments for parameters $class (1) and $property (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/IReflectionFactoryAware.php">
   <error line="43" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Reflection/ReflectionFactory.php">
   <error line="108" column="1" severity="error" message="Missing comment for param &quot;$parser&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="117" column="5" severity="error" message="Doc comment for &quot;$code&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="119" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="120" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="123" column="9" severity="warning" message="Line exceeds 85 characters; contains 121 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="130" column="1" severity="error" message="Each line in a multi-line IF statement must begin with a boolean operator" source="PEAR.ControlStructures.MultiLineCondition.StartWithBoolean"/>
-  <error line="135" column="96" severity="warning" message="Line exceeds 85 characters; contains 95 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="138" column="17" severity="warning" message="Inline control structures are discouraged" source="Generic.ControlStructures.InlineControlStructure.Discouraged"/>
-  <error line="140" column="17" severity="error" message="Expected &quot;for (...) {\n&quot;; found &quot;for(...) {\n&quot;" source="PEAR.ControlStructures.ControlSignature"/>
-  <error line="141" column="25" severity="warning" message="Inline control structures are discouraged" source="Generic.ControlStructures.InlineControlStructure.Discouraged"/>
-  <error line="147" column="4" severity="error" message="Closing brace indented incorrectly; expected 4 spaces, found 3" source="PEAR.WhiteSpace.ScopeClosingBrace.Indent"/>
-  <error line="170" column="87" severity="warning" message="Line exceeds 85 characters; contains 86 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="181" column="5" severity="error" message="Doc comment for &quot;$file&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="183" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="184" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="198" column="5" severity="error" message="Doc comment for &quot;$dir&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="200" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="201" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="221" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="234" column="5" severity="error" message="Doc comment for &quot;$annotation&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="236" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="237" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="256" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="256" column="5" severity="error" message="Doc comment for &quot;$method&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="258" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="259" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="282" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="282" column="5" severity="error" message="Doc comment for &quot;$property&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="284" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="285" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="313" column="1" severity="error" message="The variable names for parameters $class (1) and $annotations (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
-  <error line="313" column="1" severity="error" message="The comments for parameters $class (1) and $annotations (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
-  <error line="328" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="330" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="331" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="356" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="358" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="359" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="369" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="369" column="5" severity="error" message="Doc comment for &quot;$method&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="371" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="372" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="381" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="385" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="385" column="5" severity="error" message="Doc comment for &quot;$property&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
-  <error line="387" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
-  <error line="388" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
-  <error line="397" column="102" severity="warning" message="Line exceeds 85 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
-  <error line="404" column="1" severity="error" message="Missing comment for param &quot;$cache&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
-  <error line="413" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
+  <error line="116" column="5" severity="error" message="Doc comment for &quot;$annotation&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="118" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="119" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="138" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="138" column="5" severity="error" message="Doc comment for &quot;$method&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="140" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="141" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="164" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="164" column="5" severity="error" message="Doc comment for &quot;$property&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="166" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="167" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="195" column="1" severity="error" message="The variable names for parameters $class (1) and $annotations (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterNamesNotAligned"/>
+  <error line="195" column="1" severity="error" message="The comments for parameters $class (1) and $annotations (2) do not align" source="PEAR.Commenting.FunctionComment.ParameterCommentsNotAligned"/>
+  <error line="210" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="212" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="213" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="238" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="240" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="241" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="251" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="251" column="5" severity="error" message="Doc comment for &quot;$method&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="253" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="254" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="263" column="93" severity="warning" message="Line exceeds 85 characters; contains 92 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="267" column="5" severity="error" message="Doc comment for &quot;$class&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="267" column="5" severity="error" message="Doc comment for &quot;$property&quot; missing" source="PEAR.Commenting.FunctionComment.MissingParamTag"/>
+  <error line="269" column="1" severity="error" message="There must be exactly one blank line before the tags in function comment" source="PEAR.Commenting.FunctionComment.SpacingBeforeTags"/>
+  <error line="270" column="1" severity="error" message="Missing @return tag in function comment" source="PEAR.Commenting.FunctionComment.MissingReturn"/>
+  <error line="279" column="102" severity="warning" message="Line exceeds 85 characters; contains 101 characters" source="Generic.Files.LineLength.TooLong"/>
+  <error line="286" column="1" severity="error" message="Missing comment for param &quot;$cache&quot; at position 1" source="PEAR.Commenting.FunctionComment.MissingParamComment"/>
+  <error line="295" column="12" severity="error" message="Missing function doc comment" source="PEAR.Commenting.FunctionComment.Missing"/>
  </file>
  <file name="/export/users/marcelog/src/sts/Ding/src/mg/Ding/Resource/Exception/ResourceException.php">
  </file>

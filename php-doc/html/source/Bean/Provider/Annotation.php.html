@@ -65,12 +65,16 @@
  */
 namespace Ding\Bean\Provider;
 
+use Ding\Aspect\AspectDefinition;
+use Ding\Aspect\PointcutDefinition;
+use Ding\Aspect\AspectManager;
+use Ding\Aspect\IAspectProvider;
+use Ding\Aspect\IAspectManagerAware;
 use Ding\Annotation\Collection;
 use Ding\Annotation\Annotation as AnnotationDefinition;
 use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Container\IContainerAware;
 use Ding\Bean\IBeanDefinitionProvider;
-use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Container\IContainer;
 use Ding\Bean\BeanDefinition;
 use Ding\Bean\BeanPropertyDefinition;
@@ -91,8 +95,8 @@ use Ding\Bean\Factory\Exception\BeanFactoryException;
  * @link       http://marcelog.github.com/
  */
 class Annotation
-    implements IAfterConfigListener, IBeanDefinitionProvider,
-    IContainerAware, IReflectionFactoryAware
+    implements IBeanDefinitionProvider,
+    IContainerAware, IReflectionFactoryAware, IAspectManagerAware, IAspectProvider
 {
     protected $container;
 
@@ -165,7 +169,14 @@ class Annotation
      * Valid bean annotations.
      * @var string[]
      */
-    private $_validBeanAnnotations = array('bean', 'component', 'configuration');
+    private $_validBeanAnnotations = array('bean', 'component', 'configuration', 'aspect');
+
+    private $_aspectManager;
+
+    public function setAspectManager(AspectManager $aspectManager)
+    {
+        $this-&gt;_aspectManager = $aspectManager;
+    }
 
     /**
      * (non-PHPdoc)
@@ -212,7 +223,9 @@ class Annotation
     {
         $def = $this-&gt;_getParentBeanDefinition($class);
         if ($def === null) {
-            $def = new BeanDefinition('dummy');
+            $def = new BeanDefinition($name);
+        } else {
+            $def = $def-&gt;makeChildBean($name);
         }
         if ($fBean) {
             $def-&gt;setFactoryBean($fBean);
@@ -336,11 +349,8 @@ class Annotation
             }
         }
     }
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.ILifecycleListener::afterConfig()
-     */
-    public function afterConfig()
+
+    public function init()
     {
         foreach ($this-&gt;_validBeanAnnotations as $beanAnnotationName) {
             $this-&gt;_traverseConfigClassesAndRegisterForEvents(
@@ -355,6 +365,53 @@ class Annotation
             $annotations = $data[3];
             $this-&gt;registerEventsFor($annotations, $leadName, $class);
         }
+    }
+    public function getAspects()
+    {
+        $ret = array();
+        $aspectClasses = $this-&gt;reflectionFactory-&gt;getClassesByAnnotation('aspect');
+        foreach ($aspectClasses as $aspectClass) {
+            foreach ($this-&gt;_knownBeansByClass[$aspectClass] as $beanName) {
+                $rClass = $this-&gt;reflectionFactory-&gt;getClass($aspectClass);
+                foreach ($rClass-&gt;getMethods() as $rMethod) {
+                    $methodName = $rMethod-&gt;getName();
+                    $annotations = $this-&gt;reflectionFactory-&gt;getMethodAnnotations($aspectClass, $methodName);
+                    if ($annotations-&gt;contains('methodinterceptor')) {
+                        foreach ($annotations-&gt;getAnnotations('methodinterceptor') as $annotation) {
+                            $classExpression = $annotation-&gt;getOptionSingleValue('class-expression');
+                            $expression = $annotation-&gt;getOptionSingleValue('expression');
+                            $ret[] = $this-&gt;_newAspect(
+                                $beanName, $classExpression, $expression, $methodName, AspectDefinition::ASPECT_METHOD
+                            );
+
+                        }
+                    }
+                    if ($annotations-&gt;contains('exceptioninterceptor')) {
+                        foreach ($annotations-&gt;getAnnotations('exceptioninterceptor') as $annotation) {
+                            $classExpression = $annotation-&gt;getOptionSingleValue('class-expression');
+                            $expression = $annotation-&gt;getOptionSingleValue('expression');
+                            $ret[] = $this-&gt;_newAspect(
+                                $beanName, $classExpression, $expression, $methodName, AspectDefinition::ASPECT_EXCEPTION
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        return $ret;
+    }
+
+    private function _newAspect($aspectBean, $classExpression, $expression, $method, $type)
+    {
+        $pointcutName = BeanDefinition::generateName('PointcutAnnotationAspectDriver');
+        $pointcutDef = new PointcutDefinition($pointcutName, $expression, $method);
+        $aspectName = BeanDefinition::generateName('AnnotationAspected');
+        $aspectDef = new AspectDefinition(
+            $aspectName, array($pointcutName), $type,
+            $aspectBean, $classExpression
+        );
+        $this-&gt;_aspectManager-&gt;setPointcut($pointcutDef);
+        return $aspectDef;
     }
 
     /**

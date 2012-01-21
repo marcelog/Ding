@@ -76,6 +76,25 @@ namespace Ding\Annotation;
  */
 class Parser
 {
+    protected static $ignoredAnnotations = array(
+        'access', 'author', 'copyright', 'deprecated',
+        'example', 'ignore', 'internal', 'link', 'see',
+        'since', 'tutorial', 'version', 'package',
+        'subpackage', 'name', 'global', 'param',
+        'return', 'staticvar', 'category', 'staticVar',
+        'static', 'throws', 'inheritdoc',
+        'inheritDoc', 'license', 'todo', 'deprecated',
+        'deprec', 'author', 'property' , 'method' ,
+        'abstract', 'exception', 'magic' , 'api' ,
+        'final', 'filesource', 'throw' , 'uses' ,
+        'usedby', 'private' , 'Annotation' , 'override' ,
+        'codeCoverageIgnoreStart' , 'codeCoverageIgnoreEnd' ,
+        'Attribute' , 'Attributes' , 'Entity', 'Table', 'Column',
+        'ManyToMany', 'OneToMany', 'ManyToOne', 'OneToOne', 'Index',
+        'JoinColumn', 'InheritanceType', 'DiscriminatorMap',
+        'DiscriminatorColumn', 'Id', 'GeneratedValue', 'HasLifeCycleCallbacks',
+        'Target' , 'SuppressWarnings'
+    );
     private function _parseOptions($options)
     {
         $total = preg_match_all(
@@ -107,6 +126,9 @@ class Parser
         if (preg_match_all('/@([^@\n\r\t]*)/', $text, $globalMatches) &gt; 0) {
             foreach ($globalMatches[1] as $annotationText) {
                 preg_match('/([a-zA-Z0-9]+)/', $annotationText, $localMatches);
+                if (in_array($localMatches[1], self::$ignoredAnnotations)) {
+                    continue;
+                }
                 $annotation = new Annotation($localMatches[1]);
                 $optsStart = strpos($annotationText, '(');
                 if ($optsStart !== false) {
