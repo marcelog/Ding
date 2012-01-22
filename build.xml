@@ -11,7 +11,7 @@
   </target>
 
   <target name="phpdepend">
-    <exec command="${phing} _phpdepend"/>
+    <exec command="${phing} _phpdepend" passthru="true"/>
   </target>
   <target name="_phpdepend">
     <mkdir dir="${phpdepend.output.xml.dir}"/>
@@ -29,7 +29,7 @@
   </target>
 
   <target name="phpcs">
-    <exec command="${phing} _phpcs"/>
+    <exec command="${phing} _phpcs" passthru="true"/>
   </target>
   <target name="_phpcs">
     <mkdir dir="${phpcs.output.xml.dir}"/>
@@ -47,7 +47,7 @@
   </target>
 
   <target name="phpunit">
-    <exec command="${phing} _phpunit"/>
+    <exec command="${phing} _phpunit" passthru="true"/>
   </target>
   <target name="_phpunit">
     <mkdir dir="${phpunit.output.xml.dir}"/>
@@ -65,7 +65,7 @@
   </target>
 
   <target name="phpmd">
-    <exec command="${phing} _phpmd"/>
+    <exec command="${phing} _phpmd" passthru="true"/>
   </target>
   <target name="_phpmd">
     <mkdir dir="${phpmd.output.xml.dir}"/>
@@ -83,7 +83,7 @@
   </target>
 
   <target name="phpcpd">
-    <exec command="${phing} _phpcpd"/>
+    <exec command="${phing} _phpcpd" passthru="true"/>
   </target>
   <target name="_phpcpd">
     <mkdir dir="${phpcpd.output.xml.dir}"/>
@@ -101,7 +101,7 @@
   </target>
 
   <target name="phpdoc">
-    <exec command="${phing} _phpdoc"/>
+    <exec command="${phing} _phpdoc" passthru="true"/>
   </target>
   <target name="_phpdoc">
     <mkdir dir="${phpdoc.output.html.dir}"/>
@@ -113,7 +113,7 @@
   </target>
 
   <target name="phploc">
-    <exec command="${phing} _phploc"/>
+    <exec command="${phing} _phploc" passthru="true"/>
   </target>
   <target name="_phploc">
     <mkdir dir="${phploc.output.html.dir}"/>
@@ -125,7 +125,7 @@
   </target>
 
   <target name="package">
-    <exec command="${phing} _package"/>
+    <exec command="${phing} _package" passthru="true"/>
   </target>
   <target name="_package">
     <mkdir dir="${package.output.dir}"/>
