@@ -1,7 +1,7 @@
 <project name="Ding" default="all" basedir=".">
   <property file="./build.properties"/>
 
-  <target name="prepare" depends="_clean">
+  <target name="prepare" depends="clean">
     <mkdir dir="${dir.output}"/>
     <mkdir dir="${dir.tmp}"/>
   </target>
