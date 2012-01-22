@@ -1,18 +1,12 @@
 <project name="Ding" default="all" basedir=".">
   <property file="./build.properties"/>
 
-  <target name="prepare">
-    <exec command="${phing} _prepare"/>
-  </target>
-  <target name="_prepare" depends="_clean">
+  <target name="prepare" depends="_clean">
     <mkdir dir="${dir.output}"/>
     <mkdir dir="${dir.tmp}"/>
   </target>
 
   <target name="clean">
-    <exec command="${phing} _clean"/>
-  </target>
-  <target name="_clean">
 	<delete dir="${dir.output}"/>
   </target>
 
