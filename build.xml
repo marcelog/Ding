@@ -211,6 +211,10 @@
       passthru="true"
     />
     <exec
+      command="${pear.exec} install --alldeps pear.phing.info/phing"
+      passthru="true"
+    />
+    <exec
       command="${pear.exec} install --alldeps pear-smarty.googlecode.com/svn/smarty"
       passthru="true"
     />
