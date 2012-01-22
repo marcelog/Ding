@@ -1,16 +1,25 @@
 <project name="Ding" default="all" basedir=".">
   <property file="./build.properties"/>
 
-  <target name="prepare" depends="clean">
+  <target name="prepare">
+    <exec command="${phing} _prepare"/>
+  </target>
+  <target name="_prepare" depends="_clean">
     <mkdir dir="${dir.output}"/>
     <mkdir dir="${dir.tmp}"/>
   </target>
 
   <target name="clean">
+    <exec command="${phing} _clean"/>
+  </target>
+  <target name="_clean">
 	<delete dir="${dir.output}"/>
   </target>
 
   <target name="phpdepend">
+    <exec command="${phing} _phpdepend"/>
+  </target>
+  <target name="_phpdepend">
     <mkdir dir="${phpdepend.output.xml.dir}"/>
     <mkdir dir="${phpdepend.output.html.dir}"/>
     <exec
@@ -26,6 +35,9 @@
   </target>
 
   <target name="phpcs">
+    <exec command="${phing} _phpcs"/>
+  </target>
+  <target name="_phpcs">
     <mkdir dir="${phpcs.output.xml.dir}"/>
     <mkdir dir="${phpcs.output.html.dir}"/>
     <exec
@@ -41,6 +53,9 @@
   </target>
 
   <target name="phpunit">
+    <exec command="${phing} _phpunit"/>
+  </target>
+  <target name="_phpunit">
     <mkdir dir="${phpunit.output.xml.dir}"/>
     <mkdir dir="${phpunit.output.html.dir}"/>
     <exec
@@ -56,6 +71,9 @@
   </target>
 
   <target name="phpmd">
+    <exec command="${phing} _phpmd"/>
+  </target>
+  <target name="_phpmd">
     <mkdir dir="${phpmd.output.xml.dir}"/>
     <mkdir dir="${phpmd.output.html.dir}"/>
     <exec
@@ -71,6 +89,9 @@
   </target>
 
   <target name="phpcpd">
+    <exec command="${phing} _phpcpd"/>
+  </target>
+  <target name="_phpcpd">
     <mkdir dir="${phpcpd.output.xml.dir}"/>
     <mkdir dir="${phpcpd.output.html.dir}"/>
     <exec
@@ -86,6 +107,9 @@
   </target>
 
   <target name="phpdoc">
+    <exec command="${phing} _phpdoc"/>
+  </target>
+  <target name="_phpdoc">
     <mkdir dir="${phpdoc.output.html.dir}"/>
     <exec
       command="${phpdoc.exec} ${phpdoc.args}"
@@ -95,6 +119,9 @@
   </target>
 
   <target name="phploc">
+    <exec command="${phing} _phploc"/>
+  </target>
+  <target name="_phploc">
     <mkdir dir="${phploc.output.html.dir}"/>
     <exec
       command="${phploc.exec} ${phploc.args} > ${phploc.output.html.file}"
@@ -104,6 +131,9 @@
   </target>
 
   <target name="package">
+    <exec command="${phing} _package"/>
+  </target>
+  <target name="_package">
     <mkdir dir="${package.output.dir}"/>
     <exec
       command="${genphar.exec} ${genphar.args}"
@@ -224,8 +254,8 @@
     <delete dir="${dir.vendor}"/>
   </target>
 
-  <target name="all" depends="clean, prepare, package, report"/>
-  <target name="build" depends="prepare, test"/>
-  <target name="test" depends="prepare, phpunit"/>
-  <target name="report" depends="build, phploc, phpdoc, phpdepend, phpcs, phpmd, phpcpd"/>
+  <target name="all" depends="_clean, _prepare, _package, report"/>
+  <target name="build" depends="_prepare, test"/>
+  <target name="test" depends="_prepare, _phpunit"/>
+  <target name="report" depends="build, _phploc, _phpdoc, _phpdepend, _phpcs, _phpmd, _phpcpd"/>
 </project>
