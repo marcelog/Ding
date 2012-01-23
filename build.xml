@@ -131,6 +131,10 @@
   <target name="_package">
     <mkdir dir="${package.output.dir}"/>
     <exec
+      command="${pear.exec} channel-discover pear.marcelog.name"
+      dir="${project.basedir}" passthru="true"
+    />
+    <exec
       command="${genphar.exec} ${genphar.args}"
       dir="${project.basedir}"
       passthru="true"
