@@ -87,7 +87,6 @@ class MvcAnnotationDriver
      */
     public function afterConfig()
     {
-        $logger = \Logger::getLogger('aas');
         foreach ($this->reflectionFactory->getClassesByAnnotation('controller') as $controller) {
             foreach ($this->_container->getBeansByClass($controller) as $name) {
                 $annotations = $this->reflectionFactory->getClassAnnotations($controller);
