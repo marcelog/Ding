@@ -218,11 +218,13 @@ class ContainerImpl implements IContainer
      * (non-PHPdoc)
      * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinitionByClass()
      */
-    public function getBeanDefinitionByClass($class)
+    public function getBeansByClass($class)
     {
+        $ret = array();
         foreach ($this->_beanDefinitionProviders as $provider) {
-            $beanDefinition = $provider->getBeanDefinitionByClass($class);
+            $ret = array_merge($ret, $provider->getBeansByClass($class));
         }
+        return $ret;
     }
     /**
      * Returns a bean definition.

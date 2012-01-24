@@ -158,9 +158,9 @@ class ClassLifecycleAware implements
      * (non-PHPdoc)
      * @see Ding\Bean.IBeanDefinitionProvider::getByClass()
      */
-    public function getBeanDefinitionByClass($class)
+    public function getBeansByClass($class)
     {
-
+        return array();
     }
 
     public function afterDefinition(BeanDefinition $bean)

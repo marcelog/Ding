@@ -133,7 +133,7 @@ class Annotation
      * Valid bean annotations.
      * @var string[]
      */
-    private $_validBeanAnnotations = array('bean', 'component', 'configuration', 'aspect');
+    private $_validBeanAnnotations = array('controller', 'bean', 'component', 'configuration', 'aspect');
 
     private $_aspectManager;
 
@@ -452,12 +452,12 @@ class Annotation
      * (non-PHPdoc)
      * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinitionByClass()
      */
-    public function getBeanDefinitionByClass($class)
+    public function getBeansByClass($class)
     {
         if (isset($this->_knownBeansByClass[$class])) {
             return $this->_knownBeansByClass[$class];
         }
-        return null;
+        return array();
     }
 
     /**

@@ -149,9 +149,9 @@ class MethodInjectionDriver
      * (non-PHPdoc)
      * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinitionByClass()
      */
-    public function getBeanDefinitionByClass($class)
+    public function getBeansByClass($class)
     {
-        return null;
+        return array();
     }
     /**
      * (non-PHPdoc)

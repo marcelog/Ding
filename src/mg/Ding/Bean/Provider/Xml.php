@@ -590,9 +590,9 @@ class Xml implements
      * (non-PHPdoc)
      * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinitionByClass()
      */
-    public function getBeanDefinitionByClass($class)
+    public function getBeansByClass($class)
     {
-        return null;
+        return array();
         /*
         $beans = array();
         $this->_load();

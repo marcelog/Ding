@@ -72,7 +72,7 @@ interface IBeanDefinitionProvider
      *
      * @return string[]
      */
-    public function getBeanDefinitionByClass($class);
+    public function getBeansByClass($class);
 
     /**
      * Returns all names of the beans listening for the given event.

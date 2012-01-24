@@ -527,9 +527,9 @@ class Yaml implements
      * (non-PHPdoc)
      * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinitionByClass()
      */
-    public function getBeanDefinitionByClass($class)
+    public function getBeansByClass($class)
     {
-        return null;
+        return array();
     }
 
     /**

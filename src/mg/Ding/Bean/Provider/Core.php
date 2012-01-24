@@ -250,9 +250,9 @@ class Core implements IBeanDefinitionProvider
      * (non-PHPdoc)
      * @see Ding\Bean.IBeanDefinitionProvider::getByClass()
      */
-    public function getBeanDefinitionByClass($class)
+    public function getBeansByClass($class)
     {
-        return null;
+        return array();
     }
 
     public function __construct($options = array())

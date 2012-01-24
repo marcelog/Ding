@@ -48,11 +48,8 @@ use Ding\Reflection\IReflectionFactory;
  * @link       http://marcelog.github.com/
  */
 class MvcAnnotationDriver
-    implements IAfterConfigListener, IContainerAware,
-    IBeanDefinitionProvider, IReflectionFactoryAware
+    implements IAfterConfigListener, IContainerAware, IReflectionFactoryAware
 {
-    private $_beans = array();
-
     /**
      * Container.
      * @var IContainer
@@ -80,35 +77,6 @@ class MvcAnnotationDriver
     {
         $this->_container = $container;
     }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinition()
-     */
-    public function getBeanDefinition($name)
-    {
-        if (isset($this->_beans[$name])) {
-            return $this->_beans[$name];
-        }
-    }
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
-     */
-    public function getBeansListeningOn($eventName)
-    {
-        return array();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean.IBeanDefinitionProvider::getBeanDefinitionByClass()
-     */
-    public function getBeanDefinitionByClass($class)
-    {
-        return null;
-    }
-
     /**
      * Will call HttpUrlMapper::addAnnotatedController to add new mappings
      * from the @Controller annotated classes. Also, creates a new bean
@@ -119,20 +87,19 @@ class MvcAnnotationDriver
      */
     public function afterConfig()
     {
+        $logger = \Logger::getLogger('aas');
         foreach ($this->reflectionFactory->getClassesByAnnotation('controller') as $controller) {
-            $name = BeanDefinition::generateName('Controller');
-            $beanDef = new BeanDefinition($name);
-            $beanDef->setClass($controller);
-            $annotations = $this->reflectionFactory->getClassAnnotations($controller);
-            if (!$annotations->contains('requestmapping')) {
-                continue;
-            }
-            $requestMappings = $annotations->getAnnotations('requestmapping');
-            $this->_beans[$name] = $beanDef;
-            foreach ($requestMappings as $map) {
-                if ($map->hasOption('url')) {
-                    foreach ($map->getOptionValues('url') as $url) {
-                        HttpUrlMapper::addAnnotatedController($url, $name);
+            foreach ($this->_container->getBeansByClass($controller) as $name) {
+                $annotations = $this->reflectionFactory->getClassAnnotations($controller);
+                if (!$annotations->contains('requestmapping')) {
+                    continue;
+                }
+                $requestMappings = $annotations->getAnnotations('requestmapping');
+                foreach ($requestMappings as $map) {
+                    if ($map->hasOption('url')) {
+                        foreach ($map->getOptionValues('url') as $url) {
+                            HttpUrlMapper::addAnnotatedController($url, $name);
+                        }
                     }
                 }
             }
