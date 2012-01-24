@@ -7,8 +7,6 @@
 
   <target name="clean">
 	<delete dir="${dir.output}"/>
-	<delete file="${dir.src}/Ding-*.tgz"/>
-	<delete file="${dir.src}/package.xml"/>
   </target>
 
   <target name="phpdepend">
@@ -108,7 +106,7 @@
     <mkdir dir="${phpdoc.output.html.dir}"/>
     <exec
       command="${phpdoc.exec} ${phpdoc.args}"
-      dir="${project.basedir}/src/mg/Ding"
+      dir="${project.basedir}"
       passthru="true"
     />
   </target>

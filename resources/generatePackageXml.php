@@ -1,13 +1,18 @@
+<?php
+$name = $argv[1];
+$summary = $argv[2];
+$description = $argv[3];
+$version = $argv[4];
+$src = realpath(__DIR__ . "/../src/mg/$name");
+$installPath = "/$name";
+
+?>
 <?xml version="1.0" encoding="UTF-8"?>
 <package packagerversion="1.9.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
- <name>Ding</name>
+ <name><?php echo $name; ?></name>
  <channel>pear.marcelog.name</channel>
- <summary>AOP/DI Container</summary>
- <description>DI ( Dependency Injection: Setter, Constructor, Method), AOP ( Aspect Oriented Programming ), Events support, x
-ml, yaml, and annotations (including some JSR 250 and JSR 330, like @Configuration and @Bean ala java configuration) , lightwe
-ight, simple, and quick MVC ( Model View Controller ), syslog, tcp client and server, with non blocking sockets, timers, and c
-ustom error, signal, and exception handling, PAGI Integration (for asterisk gateway interface or agi), PAMI Integration (for a
-sterisk management). Needs PHP 5.3, very similar to seasar, spring ( java ) . Can be deployed as a PHAR file.</description>
+ <summary><?php echo $summary; ?></summary>
+ <description><?php echo $description; ?></description>
  <lead>
   <name>Marcelo Gornstein</name>
   <user>marcelog</user>
@@ -17,24 +22,23 @@ sterisk management). Needs PHP 5.3, very similar to seasar, spring ( java ) . Ca
  <date><?php echo date('Y-m-d'); ?></date>
  <time><?php echo date('H:m:i'); ?></time>
  <version>
-   <release><?php echo $argv[1]; ?></release>
-   <api><?php echo $argv[1]; ?></api>
+   <release><?php echo $version; ?></release>
+   <api><?php echo $version; ?></api>
  </version>
  <stability>
   <release>stable</release>
   <api>stable</api>
  </stability>
  <license uri="http://www.apache.org/licenses/">Apache</license>
- <notes>
-Supports bean inheritance, via normal OOP and explicit definitions in xml/yaml. Can apply global aspects to parent classes.
- </notes>
+ <notes>None</notes>
  <contents>
-  <dir baseinstalldir="/Ding" name="<?php echo realpath(__DIR__ . '/../src/mg/Ding'); ?>/">
+  <dir baseinstalldir="<?php echo $installPath; ?>" name="<?php echo $src; ?>/">
 <?php
 
 function dumpFileInfo($realPath, $pearPath) {
+    global $installPath;
 ?>
-<file baseinstalldir="/Ding" md5sum="<?php echo md5_file($realPath); ?>" name="<?php echo $pearPath; ?>" role="php" />
+<file baseinstalldir="<?php echo $installPath; ?>" md5sum="<?php echo md5_file($realPath); ?>" name="<?php echo $pearPath; ?>" role="php" />
 <?php
 }
 
@@ -56,7 +60,7 @@ function generateFileInfo($realPath, $pearPath) {
         }
     }
 }
-generateFileInfo(realpath(__DIR__ . '/../src/mg/Ding'), '');
+generateFileInfo($src, '');
 ?>
   </dir>
  </contents>
