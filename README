@@ -44,6 +44,11 @@ Notes about the source:
 it's because they're actually 2 different comments: one for the file, and one
 for the class.
 --------------------------------------------------------------------------------
+CI Server
+---------
+Take a look at the Jenkins CI Server (http://ci.marcelog.name/) to check out the
+docs, metrics, and pear and phar packages available.
+--------------------------------------------------------------------------------
 Available via PEAR
 ------------------
 You can now easily install Ding by issuing:
