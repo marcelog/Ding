@@ -80,4 +80,60 @@ class Test_Reflection extends PHPUnit_Framework_TestCase
         $result = $reflectionFactory->getClassesByAnnotation('link');
         $this->assertTrue(empty($result));
     }
+
+    /**
+     * @test
+     */
+    public function can_return_all_ancestors_and_interfaces()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $reflectionFactory = $container->getBean('dingReflectionFactory');
+        $this->assertEquals(
+            $reflectionFactory->getClassAncestorsAndInterfaces('ReflectionTestC'), array(
+            	'ReflectionTestB', 'ReflectionTestA',
+                'ReflectionInterfaceTestC', 'ReflectionInterfaceTestA',
+                'ReflectionInterfaceTestB', 'ReflectionInterfaceTestD'
+            )
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function can_return_all_ancestors()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $reflectionFactory = $container->getBean('dingReflectionFactory');
+        $this->assertEquals($reflectionFactory->getClassAncestors('ReflectionTestC'), array('ReflectionTestB', 'ReflectionTestA'));
+    }
+}
+
+interface ReflectionInterfaceTestA
+{
+
+}
+interface ReflectionInterfaceTestB extends ReflectionInterfaceTestA
+{
+
+}
+interface ReflectionInterfaceTestC extends ReflectionInterfaceTestB
+{
+
+}
+interface ReflectionInterfaceTestD
+{
+
+}
+class ReflectionTestA implements ReflectionInterfaceTestC, ReflectionInterfaceTestD
+{
+}
+
+class ReflectionTestB extends ReflectionTestA
+{
+
+}
+
+class ReflectionTestC extends ReflectionTestB
+{
+
 }

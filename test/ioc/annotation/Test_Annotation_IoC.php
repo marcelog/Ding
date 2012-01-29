@@ -261,7 +261,12 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     public function can_get_by_class()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBeansByClass('aliasedBean');
+        $beans = $container->getBeansByClass('ClassSimpleAnnotation');
+        $this->assertEquals($beans, array(
+        	'aSimpleInitMethodBean', 'aSimpleDestroyMethodBean',
+        	'aSimpleSingletonBean', 'renamedBean', 'aSimplePrototypeBean',
+        	'invalidScopeBean'
+        ));
     }
 
     /**

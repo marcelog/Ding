@@ -103,4 +103,23 @@ interface IReflectionFactory
      * @return ReflectionProperty
      */
     public function getProperty($class, $property);
+
+    /**
+     * Returns all ancestors for the given class name.
+     *
+     * @param string $class
+     *
+     * @return string[]
+     */
+    public function getClassAncestors($class);
+
+    /**
+     * Returns all ancestors and all implemented interfaces for the given
+     * class name.
+     *
+     * @param string $class
+     *
+     * @return string[]
+     */
+    public function getClassAncestorsAndInterfaces($class);
 }

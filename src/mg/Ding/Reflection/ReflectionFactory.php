@@ -281,6 +281,31 @@ class ReflectionFactory implements IReflectionFactory
     }
 
     /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getClassAncestors()
+     */
+    public function getClassAncestors($class)
+    {
+        $ret = array();
+        $rClass = $this->getClass($class);
+        while($rClass = $rClass->getParentClass()) {
+            $ret[] = $rClass->getName();
+        }
+        return $ret;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactory::getClassAncestorsAndInterfaces()
+     */
+    public function getClassAncestorsAndInterfaces($class)
+    {
+        $ret = array();
+        $ret = $this->getClassAncestors($class);
+        $ret = array_merge($ret, $this->getClass($class)->getInterfaceNames());
+        return $ret;
+    }
+    /**
      * To inject the annotations cache.
      *
      * @param ICache $cache

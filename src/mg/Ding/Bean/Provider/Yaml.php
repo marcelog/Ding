@@ -129,7 +129,14 @@ class Yaml implements
      */
     private $_beanAliases = array();
 
+    /**
+     * Maps beans from their classes.
+     * @var string[]
+     */
+    private $_knownBeansByClass = array();
+
     private $_knownBeansPerEvent = array();
+
     /**
      * Serialization.
      *
@@ -479,6 +486,13 @@ class Yaml implements
             }
             if (isset($yaml['beans'])) {
                 foreach ($yaml['beans'] as $beanName => $beanDef) {
+                    if (isset($beanDef['class'])) {
+                        $class = $beanDef['class'];
+                        if (!isset($this->_knownBeansByClass[$class])) {
+                            $this->_knownBeansByClass[$class] = array();
+                        }
+                        $this->_knownBeansByClass[$class][] = $beanName;
+                    }
                     if (isset($beanDef['name'])) {
                         $aliases = explode(',', $beanDef['name']);
                         foreach ($aliases as $alias) {
@@ -529,6 +543,9 @@ class Yaml implements
      */
     public function getBeansByClass($class)
     {
+        if (isset($this->_knownBeansByClass[$class])) {
+            return $this->_knownBeansByClass[$class];
+        }
         return array();
     }
 

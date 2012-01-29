@@ -386,7 +386,8 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
     public function can_get_by_class()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBeansByClass('aliasedBean');
+        $beans = $container->getBeansByClass('ClassSimpleXML');
+        $this->assertEquals($beans, array('invalidScopeBean', 'aSimpleSingletonBean', 'aSimplePrototypeBean'));
     }
 
     /**

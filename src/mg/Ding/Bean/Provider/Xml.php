@@ -592,23 +592,20 @@ class Xml implements
      */
     public function getBeansByClass($class)
     {
-        return array();
-        /*
         $beans = array();
         $this->_load();
         foreach($this->_simpleXml as $xmlName => $xml) {
-            $result = $xml->xpath("//bean[@class='$name']");
+            $result = $xml->xpath("//bean[@class='$class']");
             if (!empty($result)) {
                 foreach ($result as $bean) {
                     $arguments = $bean->attributes();
-                    if (isset($arguments->name)) {
-                        $beans[] = $arguments->name;
+                    if (isset($arguments->id)) {
+                        $beans[] = $arguments->id;
                     }
                 }
             }
         }
         return $beans;
-        */
     }
 
     /**
