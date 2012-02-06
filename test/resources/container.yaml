@@ -1,1 +1,3 @@
 beans:
+  unusedBean:
+    class: ${customImplementation}

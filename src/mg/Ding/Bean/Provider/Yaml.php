@@ -28,6 +28,8 @@
  */
 namespace Ding\Bean\Provider;
 
+use Ding\Reflection\IReflectionFactory;
+use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Logger\ILoggerAware;
 use Ding\Aspect\IAspectManagerAware;
 use Ding\Container\IContainerAware;
@@ -59,7 +61,7 @@ use Ding\Aspect\IPointcutProvider;
 class Yaml implements
     IAfterConfigListener, IAspectProvider,
     IPointcutProvider, IBeanDefinitionProvider, IAspectManagerAware, IContainerAware,
-    ILoggerAware
+    ILoggerAware, IReflectionFactoryAware
 {
     protected $container;
 
@@ -136,6 +138,11 @@ class Yaml implements
     private $_knownBeansByClass = array();
 
     private $_knownBeansPerEvent = array();
+
+    /**
+     * @var IReflectionFactory
+     */
+    private $_reflectionFactory;
 
     /**
      * Serialization.
@@ -322,18 +329,141 @@ class Yaml implements
     }
 
     /**
-     * Returns a bean definition.
-     *
-     * @param string $beanName
+     * Initialize YAML contents.
      *
      * @throws BeanFactoryException
-     * @return BeanDefinition
+     * @return void
      */
-    private function _loadBean($beanName, BeanDefinition $bean = null, $factory)
+    private function _load()
+    {
+        if ($this->_yamlFiles !== false) {
+            return;
+        }
+        $this->_yamlFiles = $this->_loadYaml($this->_filename);
+        if (empty($this->_yamlFiles)) {
+            throw new BeanFactoryException('Could not parse: ' . $this->_filename);
+        }
+    }
+
+    public function getPointcut($name)
+    {
+        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
+            if (isset($yaml['pointcuts'][$name])) {
+                $pointcutDef = clone $this->_templatePointcutDef;
+                $pointcutDef->setName($name);
+                $pointcutDef->setExpression($yaml['pointcuts'][$name]['expression']);
+                $pointcutDef->setMethod($yaml['pointcuts'][$name]['method']);
+                return $pointcutDef;
+            }
+        }
+        return false;
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        if (isset($this->_knownBeansPerEvent[$eventName])) {
+            return $this->_knownBeansPerEvent[$eventName];
+        }
+        return array();
+    }
+
+    private function _addBeanToKnownByClass($class, $name)
+    {
+        if (strpos($class, "\${") !== false) {
+            return;
+        }
+        if (!isset($this->_knownBeansByClass[$class])) {
+            $this->_knownBeansByClass[$class] = array();
+        }
+        $this->_knownBeansByClass[$class][] = $name;
+        // Load any parent classes
+        $rClass = $this->_reflectionFactory->getClass($class);
+        $parentClass = $rClass->getParentClass();
+        while ($parentClass) {
+            $parentClassName = $parentClass->getName();
+            $this->_knownBeansByClass[$parentClassName][] = $name;
+            $parentClass = $parentClass->getParentClass();
+        }
+
+        // Load any interfaces
+        foreach ($rClass->getInterfaces() as $name => $rInterface) {
+            $this->_knownBeansByClass[$name][] = $name;
+        }
+    }
+
+    public function afterConfig()
+    {
+        $this->_load();
+        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
+            if (isset($yaml['alias'])) {
+                foreach ($yaml['alias'] as $beanName => $aliases) {
+                    $aliases = explode(',', $aliases);
+                    foreach ($aliases as $alias) {
+                        $alias = trim($alias);
+                        $this->_beanAliases[$alias] = $beanName;
+                    }
+                }
+            }
+            if (isset($yaml['beans'])) {
+                foreach ($yaml['beans'] as $beanName => $beanDef) {
+                    if (isset($beanDef['class'])) {
+                        $class = $beanDef['class'];
+                        if (isset($beanDef['factory-method'])) {
+                            // Skip beans that specify class as their factory class
+                            if (isset($beanDef['factory-bean'])) {
+                                $this->_addBeanToKnownByClass($class, $beanName);
+                            }
+                        } else {
+                            $this->_addBeanToKnownByClass($class, $beanName);
+                        }
+                    }
+                    if (isset($beanDef['name'])) {
+                        $aliases = explode(',', $beanDef['name']);
+                        foreach ($aliases as $alias) {
+                            $alias = trim($alias);
+                            $this->_beanAliases[$alias] = $beanName;
+                        }
+                    }
+                    if (isset($beanDef['listens-on'])) {
+                        $events = $beanDef['listens-on'];
+                        foreach (explode(',', $events) as $eventName) {
+                            $eventName = trim($eventName);
+                            if (!isset($this->_knownBeansPerEvent[$eventName])) {
+                                $this->_knownBeansPerEvent[$eventName] = array();
+                            }
+                            $this->_knownBeansPerEvent[$eventName][] = $beanName;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public function getAspects()
+    {
+        $aspects = array();
+        $this->_load();
+        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
+            if (isset($yaml['aspects'])) {
+                foreach ($yaml['aspects'] as $aspect) {
+                    $aspects[] = $this->_loadAspect($aspect);
+                }
+            }
+        }
+        return $aspects;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinition()
+     */
+    public function getBeanDefinition($beanName)
     {
         $beanDef = false;
         if (isset($this->_beanAliases[$beanName])) {
-            return $this->_loadBean($this->_beanAliases[$beanName], $bean, $factory);
+            return $this->getBeanDefinition($this->_beanAliases[$beanName]);
         }
         foreach($this->_yamlFiles as $yamlFilename => $yaml) {
             if (isset($yaml['beans'][$beanName])) {
@@ -342,7 +472,7 @@ class Yaml implements
             }
         }
         if (false == $beanDef) {
-            return $bean;
+            return null;
         }
         $bMethods = $bProps = $bAspects = $constructorArgs = array();
         if (isset($beanDef['parent'])) {
@@ -431,113 +561,6 @@ class Yaml implements
     }
 
     /**
-     * Initialize YAML contents.
-     *
-     * @throws BeanFactoryException
-     * @return void
-     */
-    private function _load()
-    {
-        if ($this->_yamlFiles !== false) {
-            return;
-        }
-        $this->_yamlFiles = $this->_loadYaml($this->_filename);
-        if (empty($this->_yamlFiles)) {
-            throw new BeanFactoryException('Could not parse: ' . $this->_filename);
-        }
-    }
-
-    public function getPointcut($name)
-    {
-        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
-            if (isset($yaml['pointcuts'][$name])) {
-                $pointcutDef = clone $this->_templatePointcutDef;
-                $pointcutDef->setName($name);
-                $pointcutDef->setExpression($yaml['pointcuts'][$name]['expression']);
-                $pointcutDef->setMethod($yaml['pointcuts'][$name]['method']);
-                return $pointcutDef;
-            }
-        }
-        return false;
-    }
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
-     */
-    public function getBeansListeningOn($eventName)
-    {
-        if (isset($this->_knownBeansPerEvent[$eventName])) {
-            return $this->_knownBeansPerEvent[$eventName];
-        }
-        return array();
-    }
-    public function afterConfig()
-    {
-        $this->_load();
-        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
-            if (isset($yaml['alias'])) {
-                foreach ($yaml['alias'] as $beanName => $aliases) {
-                    $aliases = explode(',', $aliases);
-                    foreach ($aliases as $alias) {
-                        $alias = trim($alias);
-                        $this->_beanAliases[$alias] = $beanName;
-                    }
-                }
-            }
-            if (isset($yaml['beans'])) {
-                foreach ($yaml['beans'] as $beanName => $beanDef) {
-                    if (isset($beanDef['class'])) {
-                        $class = $beanDef['class'];
-                        if (!isset($this->_knownBeansByClass[$class])) {
-                            $this->_knownBeansByClass[$class] = array();
-                        }
-                        $this->_knownBeansByClass[$class][] = $beanName;
-                    }
-                    if (isset($beanDef['name'])) {
-                        $aliases = explode(',', $beanDef['name']);
-                        foreach ($aliases as $alias) {
-                            $alias = trim($alias);
-                            $this->_beanAliases[$alias] = $beanName;
-                        }
-                    }
-                    if (isset($beanDef['listens-on'])) {
-                        $events = $beanDef['listens-on'];
-                        foreach (explode(',', $events) as $eventName) {
-                            $eventName = trim($eventName);
-                            if (!isset($this->_knownBeansPerEvent[$eventName])) {
-                                $this->_knownBeansPerEvent[$eventName] = array();
-                            }
-                            $this->_knownBeansPerEvent[$eventName][] = $beanName;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    public function getAspects()
-    {
-        $aspects = array();
-        $this->_load();
-        foreach($this->_yamlFiles as $yamlFilename => $yaml) {
-            if (isset($yaml['aspects'])) {
-                foreach ($yaml['aspects'] as $aspect) {
-                    $aspects[] = $this->_loadAspect($aspect);
-                }
-            }
-        }
-        return $aspects;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinition()
-     */
-    public function getBeanDefinition($name)
-    {
-        return $this->_loadBean($name, null, null);
-    }
-
-    /**
      * (non-PHPdoc)
      * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinitionByClass()
      */
@@ -574,6 +597,16 @@ class Yaml implements
     public function setLogger(\Logger $logger)
     {
         $this->_logger = $logger;
+    }
+
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->_reflectionFactory = $reflectionFactory;
     }
 
     /**

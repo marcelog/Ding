@@ -681,3 +681,13 @@ class AYamlBeanWithConstructorArgumentNames
         $this->arg3 = $arg3;
     }
 }
+
+class DependencyBean
+{
+
+}
+
+class AspectBean
+{
+
+}

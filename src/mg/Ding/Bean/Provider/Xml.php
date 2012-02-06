@@ -28,6 +28,8 @@
  */
 namespace Ding\Bean\Provider;
 
+use Ding\Reflection\IReflectionFactory;
+use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Logger\ILoggerAware;
 use Ding\Container\IContainerAware;
 use Ding\Aspect\IAspectManagerAware;
@@ -59,7 +61,8 @@ use Ding\Aspect\IPointcutProvider;
  */
 class Xml implements
     IAfterConfigListener, IAspectProvider, IPointcutProvider,
-    IBeanDefinitionProvider, IAspectManagerAware, IContainerAware, ILoggerAware
+    IBeanDefinitionProvider, IAspectManagerAware, IContainerAware, ILoggerAware,
+    IReflectionFactoryAware
 {
     protected $container;
     /**
@@ -122,6 +125,10 @@ class Xml implements
      */
     private $_directories = false;
     private $_knownBeansPerEvent = array();
+    /**
+     * @var IReflectionFactory
+     */
+    private $_reflectionFactory;
 
     /**
      * Dont serialize anything here. The container and the aspect manager have
@@ -352,34 +359,166 @@ class Xml implements
     }
 
     /**
-     * Returns a bean definition.
-     *
-     * @param string $beanName
+     * Initialize SimpleXML.
      *
      * @throws BeanFactoryException
-     * @return BeanDefinition
+     * @return void
      */
-    private function _loadBean($beanName, BeanDefinition $bean = null, $factory)
+    private function _load()
     {
+        if ($this->_simpleXml !== false) {
+            return;
+        }
+        $this->_simpleXml = $this->_loadXml($this->_filename);
+        if (empty($this->_simpleXml)) {
+            throw new BeanFactoryException(
+                'Could not parse: ' . $this->_filename
+                . ': ' . $this->_getXmlErrors()
+            );
+        }
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
+     */
+    public function getBeansListeningOn($eventName)
+    {
+        if (isset($this->_knownBeansPerEvent[$eventName])) {
+            return $this->_knownBeansPerEvent[$eventName];
+        }
+        return array();
+    }
+
+    private function _addBeanToKnownByClass($class, $name)
+    {
+        if (strpos($class, "\${") !== false) {
+            return;
+        }
+        if (!isset($this->_knownBeansByClass[$class])) {
+            $this->_knownBeansByClass[$class] = array();
+        }
+        $this->_knownBeansByClass[$class][] = $name;
+        // Load any parent classes
+        $rClass = $this->_reflectionFactory->getClass($class);
+        $parentClass = $rClass->getParentClass();
+        while ($parentClass) {
+            $parentClassName = $parentClass->getName();
+            $this->_knownBeansByClass[$parentClassName][] = $name;
+            $parentClass = $parentClass->getParentClass();
+        }
+
+        // Load any interfaces
+        foreach ($rClass->getInterfaces() as $name => $rInterface) {
+            $this->_knownBeansByClass[$name][] = $name;
+        }
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
+     */
+    public function afterConfig()
+    {
+        $this->_load();
+        foreach($this->_simpleXml as $xmlName => $xml) {
+            $simpleXmlBeans = $xml->xpath("/beans/bean");
+            if (!empty($simpleXmlBeans)) {
+                foreach ($simpleXmlBeans as $bean) {
+                    // Skip anonymous beans
+                    if (isset($bean->attributes()->class) && isset($bean->attributes()->id)) {
+                        $class = (string)$bean->attributes()->class;
+                        $name = (string)$bean->attributes()->id;
+                        if (isset($bean->attributes()->{'factory-method'})) {
+                            // Skip beans that specify class as their factory class
+                            if (isset($bean->attributes()->{'factory-bean'})) {
+                                $this->_addBeanToKnownByClass($class, $name);
+                            }
+                        } else {
+                            $this->_addBeanToKnownByClass($class, $name);
+                        }
+                    }
+                    if (isset($bean->attributes()->{'listens-on'})) {
+                        $events = (string)$bean->attributes()->{'listens-on'};
+                        $beanName = (string)$bean->attributes()->id;
+                        foreach (explode(',', $events) as $eventName) {
+                            $eventName = trim($eventName);
+                            if (!isset($this->_knownBeansPerEvent[$eventName])) {
+                                $this->_knownBeansPerEvent[$eventName] = array();
+                            }
+                            $this->_knownBeansPerEvent[$eventName][] = $beanName;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IAspectProvider::getAspects()
+     */
+    public function getAspects()
+    {
+        $aspects = array();
+        $this->_load();
+        foreach($this->_simpleXml as $xmlName => $xml) {
+            $simpleXmlAspect = $xml->xpath("/beans/aspect");
+            if (!empty($simpleXmlAspect)) {
+                foreach ($simpleXmlAspect as $aspect) {
+                    $aspects[] = $this->_loadAspect($aspect);
+                }
+            }
+        }
+        return $aspects;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IPointcutProvider::getPointcut()
+     */
+    public function getPointcut($name)
+    {
+        foreach($this->_simpleXml as $xmlName => $xml) {
+            $simpleXmlPointcut = $xml->xpath("//pointcut[@id='$name']");
+            if (!empty($simpleXmlPointcut)) {
+                $simpleXmlPointcut = $simpleXmlPointcut[0];
+                $pointcutAtts = $simpleXmlPointcut->attributes();
+                $pointcutName = (string)$pointcutAtts->id;
+                $pointcut = clone $this->_templatePointcutDef;
+                $pointcut->setName($pointcutName);
+                $pointcut->setExpression((string)$pointcutAtts->expression);
+                $pointcut->setMethod((string)$pointcutAtts->method);
+                return $pointcut;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinition()
+     */
+    public function getBeanDefinition($beanName)
+    {
+        $simpleXmlBean = false;
         foreach($this->_simpleXml as $name => $xml) {
             $simpleXmlBean = $xml->xpath("//bean[@id='$beanName']");
-            if (!empty($simpleXmlBean)) {
-                break;
-            } else {
+            if (empty($simpleXmlBean)) {
                 $simpleXmlBean = $xml->xpath("//bean[contains(@name, '$beanName')]");
                 if (!empty($simpleXmlBean)) {
                     $name = (string)$simpleXmlBean[0]->attributes()->id;
-                    return $this->_loadBean($name, $bean, $factory);
+                    return $this->getBeanDefinition($name);
                 }
                 $simpleXmlBean = $xml->xpath("//alias[@alias='$beanName']");
                 if (!empty($simpleXmlBean)) {
                     $name = (string)$simpleXmlBean[0]->attributes()->name;
-                    return $this->_loadBean($name, $bean, $factory);
+                    return $this->getBeanDefinition($name);
                 }
+            } else {
+                break;
             }
         }
-        if (false == $simpleXmlBean) {
-            return $bean;
+        if (empty($simpleXmlBean)) {
+            return null;
         }
         // asume valid xml (only one bean with that id)
         $simpleXmlBean = $simpleXmlBean[0];
@@ -481,131 +620,15 @@ class Xml implements
     }
 
     /**
-     * Initialize SimpleXML.
-     *
-     * @throws BeanFactoryException
-     * @return void
-     */
-    private function _load()
-    {
-        if ($this->_simpleXml !== false) {
-            return;
-        }
-        $this->_simpleXml = $this->_loadXml($this->_filename);
-        if (empty($this->_simpleXml)) {
-            throw new BeanFactoryException(
-                'Could not parse: ' . $this->_filename
-                . ': ' . $this->_getXmlErrors()
-            );
-        }
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean.IBeanDefinitionProvider::getBeansListeningOn()
-     */
-    public function getBeansListeningOn($eventName)
-    {
-        if (isset($this->_knownBeansPerEvent[$eventName])) {
-            return $this->_knownBeansPerEvent[$eventName];
-        }
-        return array();
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
-     */
-    public function afterConfig()
-    {
-        $this->_load();
-        foreach($this->_simpleXml as $xmlName => $xml) {
-            $simpleXmlBeans = $xml->xpath("/beans/bean[@listens-on]");
-            if (!empty($simpleXmlBeans)) {
-                foreach ($simpleXmlBeans as $bean) {
-                    $events = (string)$bean->attributes()->{'listens-on'};
-                    $beanName = (string)$bean->attributes()->id;
-                    foreach (explode(',', $events) as $eventName) {
-                        $eventName = trim($eventName);
-                        if (!isset($this->_knownBeansPerEvent[$eventName])) {
-                            $this->_knownBeansPerEvent[$eventName] = array();
-                        }
-                        $this->_knownBeansPerEvent[$eventName][] = $beanName;
-                    }
-                }
-            }
-        }
-    }
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Aspect.IAspectProvider::getAspects()
-     */
-    public function getAspects()
-    {
-        $aspects = array();
-        $this->_load();
-        foreach($this->_simpleXml as $xmlName => $xml) {
-            $simpleXmlAspect = $xml->xpath("/beans/aspect");
-            if (!empty($simpleXmlAspect)) {
-                foreach ($simpleXmlAspect as $aspect) {
-                    $aspects[] = $this->_loadAspect($aspect);
-                }
-            }
-        }
-        return $aspects;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Aspect.IPointcutProvider::getPointcut()
-     */
-    public function getPointcut($name)
-    {
-        foreach($this->_simpleXml as $xmlName => $xml) {
-            $simpleXmlPointcut = $xml->xpath("//pointcut[@id='$name']");
-            if (!empty($simpleXmlPointcut)) {
-                $simpleXmlPointcut = $simpleXmlPointcut[0];
-                $pointcutAtts = $simpleXmlPointcut->attributes();
-                $pointcutName = (string)$pointcutAtts->id;
-                $pointcut = clone $this->_templatePointcutDef;
-                $pointcut->setName($pointcutName);
-                $pointcut->setExpression((string)$pointcutAtts->expression);
-                $pointcut->setMethod((string)$pointcutAtts->method);
-                return $pointcut;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinition()
-     */
-    public function getBeanDefinition($name)
-    {
-        return $this->_loadBean($name, null, null);
-    }
-
-    /**
      * (non-PHPdoc)
      * @see Ding\Aspect.IBeanDefinitionProvider::getBeanDefinitionByClass()
      */
     public function getBeansByClass($class)
     {
-        $beans = array();
-        $this->_load();
-        foreach($this->_simpleXml as $xmlName => $xml) {
-            $result = $xml->xpath("//bean[@class='$class']");
-            if (!empty($result)) {
-                foreach ($result as $bean) {
-                    $arguments = $bean->attributes();
-                    if (isset($arguments->id)) {
-                        $beans[] = $arguments->id;
-                    }
-                }
-            }
+        if (isset($this->_knownBeansByClass[$class])) {
+            return $this->_knownBeansByClass[$class];
         }
-        return $beans;
+        return array();
     }
 
     /**
@@ -629,6 +652,15 @@ class Xml implements
     public function setLogger(\Logger $logger)
     {
         $this->_logger = $logger;
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->_reflectionFactory = $reflectionFactory;
     }
 
     /**

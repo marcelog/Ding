@@ -268,7 +268,7 @@ class Annotation
     }
 
     /**
-     * Adds a bean to $_knownBeans;
+     * Adds a bean to $_knownBeans.
      *
      * @param string $class The class for this bean
      * @param string $key Where this bean has been chosen from (i.e: component, configuration, bean, etc)
@@ -284,13 +284,35 @@ class Annotation
         $annotation = $annotations->getSingleAnnotation($key);
         $names = $this->_getAllNames($annotation, $overrideWithName);
         $leadName = $names[0];
+        $this->_addBeanToKnownByClass($class, $leadName);
         $this->_knownBeans[$leadName] = array($names, $class, $key, $annotations, $fBean, $fMethod);
-        $this->_knownBeansByClass[$class][] = $leadName;
+
         // Dont let @Bean methods interfere with bean parentship.
         if (!$fBean) {
             $this->_knownClassesWithValidBeanAnnotations[$class] = $leadName;
         }
         return $leadName;
+    }
+
+    private function _addBeanToKnownByClass($class, $name)
+    {
+        if (!isset($this->_knownBeansByClass[$class])) {
+            $this->_knownBeansByClass[$class] = array();
+        }
+        $this->_knownBeansByClass[$class][] = $name;
+        // Load any parent classes
+        $rClass = $this->reflectionFactory->getClass($class);
+        $parentClass = $rClass->getParentClass();
+        while ($parentClass) {
+            $parentClassName = $parentClass->getName();
+            $this->_knownBeansByClass[$parentClassName][] = $name;
+            $parentClass = $parentClass->getParentClass();
+        }
+
+        // Load any interfaces
+        foreach ($rClass->getInterfaces() as $name => $rInterface) {
+            $this->_knownBeansByClass[$name][] = $name;
+        }
     }
 
     private function _traverseConfigClassesAndRegisterForEvents($key, array $configClasses)
