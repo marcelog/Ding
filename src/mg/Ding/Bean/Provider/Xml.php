@@ -409,8 +409,8 @@ class Xml implements
         }
 
         // Load any interfaces
-        foreach ($rClass->getInterfaces() as $name => $rInterface) {
-            $this->_knownBeansByClass[$name][] = $name;
+        foreach ($rClass->getInterfaces() as $interfaceName => $rInterface) {
+            $this->_knownBeansByClass[$interfaceName][] = $name;
         }
     }
     /**
