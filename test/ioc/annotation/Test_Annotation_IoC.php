@@ -168,6 +168,17 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_at_resource_with_name()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('injectedBean');
+        $this->assertTrue($bean->injectedWithName instanceof ClassSimpleAnnotation);
+        $this->assertTrue($bean->injectedWithNameAndSetter instanceof ClassSimpleAnnotation);
+    }
+
+    /**
+     * @test
+     */
     public function can_at_required()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -527,6 +538,12 @@ class ClassSimpleAnnotation2
     public $aSimplePrototypeBean = null;
 
     /**
+     * @Resource(name="aSimplePrototypeBean")
+     */
+    public $injectedWithName = null;
+    public $injectedWithNameAndSetter = null;
+
+    /**
      * @Resource
      */
     private $aSimpleSingletonBean = null;
@@ -543,6 +560,14 @@ class ClassSimpleAnnotation2
     public function setASimpleInitMethodClass($value)
     {
         $this->somethingElse = $value;
+    }
+
+    /**
+     * @Resource(name="aSimplePrototypeBean")
+     */
+    public function setAnotherStuff($value)
+    {
+        $this->injectedWithNameAndSetter = $value;
     }
 
     public function __construct()

@@ -43,11 +43,25 @@ class MyDependency
 }
 
 /**
- * This is our bean.
+ * @Component(name="myBeanDependency")
+ */
+class AnotherDependency
+{
+}
+
+/**
+ * This is our bean. Note how @Resource is used with and without
+ * the name argument.
  */
 class MyBean
 {
     private $_someProperty;
+
+    /**
+     * @Resource(name="myBeanDependency")
+     */
+    protected $anotherDependency;
+    protected $yetAnotherDependency;
 
     /**
      * @Resource
@@ -55,6 +69,14 @@ class MyBean
     public function setDependency($value)
     {
         $this->_someProperty = $value;
+    }
+
+    /**
+     * @Resource(name="myBeanDependency")
+     */
+    public function setMyOtherDependency($value)
+    {
+        $this->yetAnotherDependency = $value;
     }
 
     public function getDependency()
@@ -91,4 +113,4 @@ $properties = array(
 );
 $container = ContainerImpl::getInstance($properties);
 $bean = $container->getBean('myBeanName');
-var_dump($bean->getDependency());
+var_dump($bean);

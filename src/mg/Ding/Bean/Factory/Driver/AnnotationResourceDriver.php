@@ -103,8 +103,13 @@ class AnnotationResourceDriver
                 continue;
             }
             $propName = lcfirst(substr($methodName, 3));
+            $name = $propName;
+            $annotation = $annotations->getSingleAnnotation('resource');
+            if ($annotation->hasOption('name')) {
+                $name = $annotation->getOptionSingleValue('name');
+            }
             $properties[$propName] = new BeanPropertyDefinition(
-                $propName, BeanPropertyDefinition::PROPERTY_BEAN, $propName
+                $propName, BeanPropertyDefinition::PROPERTY_BEAN, $name
             );
         }
         foreach ($rClass->getProperties() as $property) {
@@ -113,8 +118,13 @@ class AnnotationResourceDriver
             if (!$annotations->contains('resource')) {
                 continue;
             }
+            $annotation = $annotations->getSingleAnnotation('resource');
+            $name = $propertyName;
+            if ($annotation->hasOption('name')) {
+                $name = $annotation->getOptionSingleValue('name');
+            }
             $properties[$propertyName] = new BeanPropertyDefinition(
-                $propertyName, BeanPropertyDefinition::PROPERTY_BEAN, $propertyName
+                $propertyName, BeanPropertyDefinition::PROPERTY_BEAN, $name
             );
         }
         $bean->setProperties($properties);
