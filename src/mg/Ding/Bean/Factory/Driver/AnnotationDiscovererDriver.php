@@ -123,9 +123,9 @@ class AnnotationDiscovererDriver
         if ($result === true) {
             return $classes;
         }
-        $classes = get_declared_classes();
+        $classes = array_merge(get_declared_classes(), get_declared_interfaces());
         require_once $file;
-        $newClasses = array_diff(get_declared_classes(), $classes);
+        $newClasses = array_diff(array_merge(get_declared_classes(), get_declared_interfaces()), $classes);
         if (empty($newClasses)) {
             foreach ($classes as $class) {
                 $rClass = $this->_reflectionFactory->getClass($class);
