@@ -93,7 +93,6 @@ class AnnotationResourceDriver
         $class = $bean->getClass();
         $rClass = $this->reflectionFactory->getClass($class);
         $properties = $bean->getProperties();
-        $a = \Logger::getLogger(__CLASS__);
         foreach ($rClass->getMethods() as $method) {
             $methodName = $method->getName();
             if (strpos($methodName, 'set') !== 0) {
