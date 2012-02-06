@@ -28,7 +28,6 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
-use Ding\Bean\Lifecycle\IAfterConfigListener;
 use Ding\Reflection\IReflectionFactory;
 use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Cache\ICache;
@@ -46,8 +45,7 @@ use Ding\Cache\ICache;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationDiscovererDriver
-    implements IAfterConfigListener, IReflectionFactoryAware
+class AnnotationDiscovererDriver implements IReflectionFactoryAware
 {
     /**
      * A ReflectionFactory implementation.
@@ -168,14 +166,6 @@ class AnnotationDiscovererDriver
             return false;
         }
         return true;
-    }
-
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.IAfterConfigListener::afterConfig()
-     */
-    public function afterConfig()
-    {
     }
 
     public function parse()
