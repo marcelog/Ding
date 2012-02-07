@@ -28,6 +28,9 @@
  */
 namespace Ding\Bean\Factory\Driver;
 
+use Ding\Bean\BeanConstructorArgumentDefinition;
+
+use Ding\Annotation\Collection;
 use Ding\Annotation\Annotation;
 use Ding\Bean\Factory\Exception\AutowireException;
 use Ding\Bean\BeanPropertyDefinition;
@@ -67,7 +70,7 @@ class AnnotationAutowiredDriver
 
     private function _autowire($name, Annotation $annotation, $class = null)
     {
-        $properties = array();
+        $ret = false;
         $required = true;
         if ($annotation->hasOption('required')) {
             $required = $annotation->getOptionSinglevalue('required') == 'true';
@@ -82,16 +85,14 @@ class AnnotationAutowiredDriver
         $isArray = strpos(substr($class, -2), "[]") !== false;
         if ($isArray) {
             $class = substr($class, 0, -2);
-            $propertyType = BeanPropertyDefinition::PROPERTY_ARRAY;
-        } else {
-            $propertyType = BeanPropertyDefinition::PROPERTY_BEAN;
+            $ret = array();
         }
         $candidates = $this->_container->getBeansByClass($class);
         if (empty($candidates)) {
             if ($required) {
                 throw new AutowireException($name, $class, "Did not find any candidates for autowiring");
             } else {
-                return $properties;
+                return array();
             }
         }
         if (!$isArray && count($candidates) > 1) {
@@ -101,25 +102,38 @@ class AnnotationAutowiredDriver
         if ($isArray) {
             $propertyValue = array();
             foreach ($candidates as $value) {
+                $ret[] = $value;
+            }
+        } else {
+            $ret = array_shift($candidates);
+        }
+        return $ret;
+    }
+
+    private function _arrayToBeanProperties($name, $beanNames)
+    {
+        $ret = array();
+        $propertyName = $name;
+        if (is_array($beanNames)) {
+            $propertyType = BeanPropertyDefinition::PROPERTY_ARRAY;
+            $propertyValue = array();
+            foreach ($beanNames as $value) {
                 $propertyValue[] = new BeanPropertyDefinition(
-                    $name, BeanPropertyDefinition::PROPERTY_BEAN, $value
+                    $value, BeanPropertyDefinition::PROPERTY_BEAN, $value
                 );
             }
         } else {
-            $propertyValue = array_shift($candidates);
+            $propertyValue = $beanNames;
+            $propertyType = BeanPropertyDefinition::PROPERTY_BEAN;
         }
-        $properties[$name] = new BeanPropertyDefinition(
-            $name, $propertyType, $propertyValue
+        $ret[$propertyName] = new BeanPropertyDefinition(
+            $propertyName, $propertyType, $propertyValue
         );
-        return $properties;
+        return $ret;
     }
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
-     */
-    public function afterDefinition(BeanDefinition $bean)
-    {
 
+    private function _injectProperties(BeanDefinition $bean)
+    {
         $class = $bean->getClass();
         $rClass = $this->_reflectionFactory->getClass($class);
         $properties = $bean->getProperties();
@@ -130,13 +144,26 @@ class AnnotationAutowiredDriver
                 continue;
             }
             $annotation = $annotations->getSingleAnnotation('autowired');
-            $newProperties = $this->_autowire($propertyName, $annotation);
+            $newProperties = $this->_arrayToBeanProperties(
+                $propertyName, $this->_autowire($propertyName, $annotation)
+            );
             $properties = array_merge($properties, $newProperties);
         }
+        $bean->setProperties($properties);
+    }
+
+    private function _injectMethods(BeanDefinition $bean)
+    {
+        $class = $bean->getClass();
+        $rClass = $this->_reflectionFactory->getClass($class);
+        $properties = $bean->getProperties();
         foreach ($rClass->getMethods() as $method) {
             $methodName = $method->getName();
             $annotations = $this->_reflectionFactory->getMethodAnnotations($class, $methodName);
-            if (!$annotations->contains('autowired')) {
+            if (!$annotations->contains('autowired')
+                || $annotations->contains('bean')
+                || $method->isConstructor()
+            ) {
                 continue;
             }
             $annotation = $annotations->getSingleAnnotation('autowired');
@@ -153,10 +180,80 @@ class AnnotationAutowiredDriver
             if ($type !== null) {
                 $type = $type->getName();
             }
-            $newProperties = $this->_autowire($methodName, $annotation, $type);
+            $newProperties = $this->_arrayToBeanProperties(
+                $methodName, $this->_autowire($methodName, $annotation, $type)
+            );
             $properties = array_merge($properties, $newProperties);
         }
         $bean->setProperties($properties);
+    }
+
+    private function _applyToConstructor(\ReflectionMethod $rMethod, Collection $annotations, BeanDefinition $bean)
+    {
+        $constructorArguments = $bean->getArguments();
+        if (!$annotations->contains('autowired')) {
+            return;
+        }
+        $annotation = $annotations->getSingleAnnotation('autowired');
+        foreach ($rMethod->getParameters() as $parameter) {
+            $parameterName = $parameter->getName();
+            $type = $parameter->getClass();
+            if ($type === null) {
+                continue;
+            }
+            $type = $type->getName();
+            $newArgs = $this->_autowire($parameterName, $annotation, $type);
+            if (is_array($newArgs)) {
+                $values = array();
+                foreach ($newArgs as $arg) {
+                    $values = new BeanConstructorArgumentDefinition(
+                        BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN, $arg, $parameterName
+                    );
+                }
+                $constructorArguments[$parameterName] = new BeanConstructorArgumentDefinition(
+                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY, $values, $parameterName
+                );
+            } else {
+                $constructorArguments[$parameterName] = new BeanConstructorArgumentDefinition(
+                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN, $newArgs, $parameterName
+                );
+            }
+        }
+        $bean->setArguments($constructorArguments);
+    }
+
+    private function _injectConstructorArguments(BeanDefinition $bean)
+    {
+        if ($bean->isCreatedWithFactoryBean()) {
+            $factoryMethod = $bean->getFactoryMethod();
+            $factoryBean = $bean->getFactoryBean();
+            $def = $this->_container->getBeanDefinition($factoryBean);
+            $class = $def->getClass();
+            $rMethod = $this->_reflectionFactory->getMethod($class, $factoryMethod);
+            $annotations = $this->_reflectionFactory->getMethodAnnotations($class, $factoryMethod);
+            $this->_applyToConstructor($rMethod, $annotations, $bean);
+        } else if ($bean->isCreatedByConstructor()) {
+            $class = $bean->getClass();
+            $rClass = $this->_reflectionFactory->getClass($class);
+            $rMethod = $rClass->getConstructor();
+            if ($rMethod) {
+                $annotations = $this->_reflectionFactory->getMethodAnnotations(
+                    $class, $rMethod->getName()
+                );
+                $this->_applyToConstructor($rMethod, $annotations, $bean);
+            }
+        }
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Bean\Lifecycle.IAfterDefinitionListener::afterDefinition()
+     */
+    public function afterDefinition(BeanDefinition $bean)
+    {
+        $this->_injectProperties($bean);
+        $this->_injectMethods($bean);
+        $this->_injectConstructorArguments($bean);
         return $bean;
     }
 

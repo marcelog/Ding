@@ -480,6 +480,28 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('autowire10');
     }
+
+    /**
+     * @test
+     */
+    public function can_autowire_single_candidate_in_constructor_and_skip_nontyped_args()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire11');
+        $this->assertTrue($bean->a instanceof AutowiredComponentsExtendThisSingle);
+        $this->assertEquals($bean->b, "asd");
+    }
+
+    /**
+     * @test
+     */
+    public function can_autowire_single_candidate_in_constructor_and_skip_nontyped_args_in_bean_methods()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowired12');
+        $this->assertTrue($bean->a instanceof AutowiredComponentsExtendThisSingle);
+        $this->assertEquals($bean->b, "asd");
+    }
 }
 
 /**
@@ -641,6 +663,17 @@ class ClassSimpleAnnotationConfiguration
     {
         return new ABeanAnnotatedWithConstructorArgumentNames($arg3, $arg1, $arg2);
     }
+
+    /**
+     * @Autowired
+     * @Bean
+     * @Value(name="b", value="asd")
+     */
+    public function autowired12(AutowiredComponentsExtendThisSingle $a, $b)
+    {
+        return new AutowiredProperty11($a, $b);
+    }
+
     public function __construct()
     {
     }
@@ -1119,5 +1152,24 @@ class AutowiredProperty10
     public function injected($a, $b)
     {
         $this->property = $a;
+    }
+}
+
+/**
+ * @Component(name="autowire11")
+ */
+class AutowiredProperty11
+{
+    public $a;
+    public $b;
+
+    /**
+     * @Autowired
+     * @Value(name="b", value="asd")
+     */
+    public function __construct(AutowiredComponentsExtendThisSingle $a, $b)
+    {
+        $this->a = $a;
+        $this->b = $b;
     }
 }
