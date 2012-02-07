@@ -104,6 +104,30 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_at_singleton()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('atSingleton');
+        $bean2 = $container->getBean('atSingleton');
+
+        $this->assertEquals($bean::$instances, 1);
+    }
+
+    /**
+     * @test
+     */
+    public function can_at_prototype()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('atPrototype');
+        $bean2 = $container->getBean('atPrototype');
+
+        $this->assertEquals($bean::$instances, 2);
+    }
+
+    /**
+     * @test
+     */
     public function can_prototype()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -755,3 +779,30 @@ class ABeanAnnotatedWithConstructorArgumentNames
     }
 }
 
+/**
+ * @Component(name="atSingleton")
+ * @Singleton
+ */
+class ClassSingletonAnnotated
+{
+    public static $instances = 0;
+
+    public function __construct()
+    {
+        self::$instances++;
+    }
+}
+
+/**
+ * @Component(name="atPrototype")
+ * @Prototype
+ */
+class ClassPrototypeAnnotated
+{
+    public static $instances = 0;
+
+    public function __construct()
+    {
+        self::$instances++;
+    }
+}

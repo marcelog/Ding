@@ -230,6 +230,10 @@ class Annotation
                     throw new BeanFactoryException("Invalid bean scope: $scope");
                 }
             }
+        } else if ($annotations->contains('singleton')) {
+            $def->setScope(BeanDefinition::BEAN_SINGLETON);
+        } else if ($annotations->contains('prototype')) {
+            $def->setScope(BeanDefinition::BEAN_PROTOTYPE);
         }
         if ($annotations->contains('initmethod')) {
             $annotation = $annotations->getSingleAnnotation('initmethod');
