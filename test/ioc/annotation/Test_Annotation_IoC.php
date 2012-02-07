@@ -167,6 +167,29 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_at_postconstruct()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('postConstructBean');
+        $this->assertTrue($bean->something);
+    }
+
+    /**
+     * @test
+     */
+    public function can_at_predestroy()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('preDestroyBean');
+         // XXX bad... unset() does not work because ContainerImpl is a singleton
+         // and holds a reference to itself, so the destructor is never called.
+        $container->__destruct();
+        $this->assertNull($bean->something);
+    }
+
+    /**
+     * @test
+     */
     public function can_destroy_method()
     {
         $container = ContainerImpl::getInstance($this->_properties);
@@ -804,5 +827,37 @@ class ClassPrototypeAnnotated
     public function __construct()
     {
         self::$instances++;
+    }
+}
+
+/**
+ * @Component(name="postConstructBean")
+ */
+class AnnotatedWithPostConstruct
+{
+    public $something = false;
+
+    /**
+     * @PostConstruct
+     */
+    public function something()
+    {
+        $this->something = true;
+    }
+}
+
+/**
+ * @Component(name="preDestroyBean")
+ */
+class AnnotatedWithPreDestroy
+{
+    public $something = true;
+
+    /**
+     * @PreDestroy
+     */
+    public function something()
+    {
+        $this->something = null;
     }
 }
