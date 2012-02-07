@@ -637,6 +637,25 @@ class ContainerImpl implements IContainer
     }
 
     /**
+     * Tries to inject by looking up a method of the given name.
+     *
+     * @param object $bean
+     * @param string $name
+     * @param string $value
+     *
+     * @return boolean
+     */
+    private function _nonSetterMethodInject($bean, $name, $value)
+    {
+        $rClass = $this->_reflectionFactory->getClass(get_class($bean));
+        if ($rClass->hasMethod($name)) {
+            $bean->$name($value);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Tries to inject by looking up a property by name.
      *
      * @param object $bean
@@ -675,6 +694,7 @@ class ContainerImpl implements IContainer
             if (
                 $this->_setterInject($bean, $propertyName, $propertyValue)
                 || $this->_propertyInject($bean, $propertyName, $propertyValue)
+                || $this->_nonSetterMethodInject($bean, $propertyName, $propertyValue)
             ) {
                 continue;
             }

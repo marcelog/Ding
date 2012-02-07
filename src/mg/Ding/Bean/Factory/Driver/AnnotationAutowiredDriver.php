@@ -65,14 +65,20 @@ class AnnotationAutowiredDriver
      */
     private $_container;
 
-    private function _autowire($name, Annotation $annotation)
+    private function _autowire($name, Annotation $annotation, $class = null)
     {
         $properties = array();
         $required = true;
         if ($annotation->hasOption('required')) {
             $required = $annotation->getOptionSinglevalue('required') == 'true';
         }
-        $class = $annotation->getOptionSingleValue('type');
+        if (!$annotation->hasOption('type')) {
+            if ($class === null) {
+                throw new AutowireException($name, 'Unknown', "Missing type= specification");
+            }
+        } else {
+            $class = $annotation->getOptionSingleValue('type');
+        }
         $isArray = strpos(substr($class, -2), "[]") !== false;
         if ($isArray) {
             $class = substr($class, 0, -2);
@@ -124,10 +130,30 @@ class AnnotationAutowiredDriver
                 continue;
             }
             $annotation = $annotations->getSingleAnnotation('autowired');
-            if (!$annotation->hasOption('type')) {
-                throw new AutowireException($propertyName, 'Unknown', "Missing type= specification");
-            }
             $newProperties = $this->_autowire($propertyName, $annotation);
+            $properties = array_merge($properties, $newProperties);
+        }
+        foreach ($rClass->getMethods() as $method) {
+            $methodName = $method->getName();
+            $annotations = $this->_reflectionFactory->getMethodAnnotations($class, $methodName);
+            if (!$annotations->contains('autowired')) {
+                continue;
+            }
+            $annotation = $annotations->getSingleAnnotation('autowired');
+            // Just 1 arg now. Multiple arguments need support in the container side.
+            $parameters = $method->getParameters();
+            if (empty($parameters)) {
+                throw new AutowireException($methodName, $methodName, 'Nothing to autowire (no arguments in method)');
+            }
+            if (count($parameters) > 1) {
+                throw new AutowireException($methodName, $methodName, 'Multiple arguments are not yet supported');
+            }
+            $type = array_shift($parameters);
+            $type = $type->getClass();
+            if ($type !== null) {
+                $type = $type->getName();
+            }
+            $newProperties = $this->_autowire($methodName, $annotation, $type);
             $properties = array_merge($properties, $newProperties);
         }
         $bean->setProperties($properties);

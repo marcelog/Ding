@@ -434,11 +434,51 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function can_autowire_single_candidates()
+    public function can_autowire_single_candidate()
     {
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('autowire6');
         $this->assertTrue($bean->property instanceof AnAutowireCandidate3);
+    }
+
+    /**
+     * @test
+     */
+    public function can_autowire_single_candidate_in_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire7');
+        $this->assertTrue($bean->property instanceof AnAutowireCandidate3);
+    }
+
+    /**
+     * @test
+     */
+    public function can_autowire_arrays_on_multiple_candidates_in_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire8');
+        $this->assertEquals(count($bean->property), 2);
+        $this->assertTrue($bean->property[0] instanceof AnAutowireCandidate);
+        $this->assertTrue($bean->property[1] instanceof AnAutowireCandidate2);
+    }
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     */
+    public function cannot_autowire_empty_arguments_in_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire9');
+    }
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     */
+    public function cannot_autowire_multiple_arguments_in_method()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire10');
     }
 }
 
@@ -1018,4 +1058,66 @@ class AutowiredProperty6
     public $property;
 }
 
+/**
+ * @Component(name="autowire7")
+ */
+class AutowiredProperty7
+{
+    public $property;
 
+    /**
+     * @Autowired
+     */
+    public function injected(AutowiredComponentsExtendThisSingle $a)
+    {
+        $this->property = $a;
+    }
+}
+
+/**
+ * @Component(name="autowire8")
+ */
+class AutowiredProperty8
+{
+    public $property;
+
+    /**
+     * @Autowired(type="AutowiredComponentsExtendThis[]")
+     */
+    public function injected(array $a)
+    {
+        $this->property = $a;
+    }
+}
+
+/**
+ * @Component(name="autowire9")
+ */
+class AutowiredProperty9
+{
+    public $property;
+
+    /**
+     * @Autowired(type="AutowiredComponentsExtendThis[]")
+     */
+    public function injected()
+    {
+        $this->property = $a;
+    }
+}
+
+/**
+ * @Component(name="autowire10")
+ */
+class AutowiredProperty10
+{
+    public $property;
+
+    /**
+     * @Autowired(type="AutowiredComponentsExtendThis")
+     */
+    public function injected($a, $b)
+    {
+        $this->property = $a;
+    }
+}
