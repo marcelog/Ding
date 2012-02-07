@@ -185,6 +185,10 @@ class Core implements IBeanDefinitionProvider
             $bean = new BeanDefinition($name);
             $bean->setClass('\Ding\Bean\Factory\Driver\AnnotationResourceDriver');
             break;
+        case 'dingAnnotationAutowiredDriver':
+            $bean = new BeanDefinition($name);
+            $bean->setClass('\Ding\Bean\Factory\Driver\AnnotationAutowiredDriver');
+            break;
         case 'dingPropertiesDriver':
             $bean = new BeanDefinition($name);
             $bean->setClass('\Ding\Bean\Factory\Driver\PropertiesDriver');

@@ -380,7 +380,66 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $this->assertTrue($bean instanceof AClassForABeanFromAMethod);
     }
 
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     */
+    public function cannot_autowire_properties_without_type()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire1');
+    }
 
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     */
+    public function cannot_autowire_properties_with_unknown_type()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire2');
+    }
+
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     */
+    public function cannot_autowire_non_array_properties_with_many_candidates()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire3');
+    }
+
+    /**
+     * @test
+     */
+    public function can_ignore_non_required_autowired_properties_if_cant_autowire()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire4');
+    }
+
+    /**
+     * @test
+     */
+    public function can_autowire_arrays_on_multiple_candidates()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire5');
+        $this->assertEquals(count($bean->property), 2);
+        $this->assertTrue($bean->property[0] instanceof AnAutowireCandidate);
+        $this->assertTrue($bean->property[1] instanceof AnAutowireCandidate2);
+    }
+
+    /**
+     * @test
+     */
+    public function can_autowire_single_candidates()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire6');
+        $this->assertTrue($bean->property instanceof AnAutowireCandidate3);
+    }
 }
 
 /**
@@ -861,3 +920,102 @@ class AnnotatedWithPreDestroy
         $this->something = null;
     }
 }
+
+interface AutowiredComponentsExtendThis
+{
+
+}
+
+interface AutowiredComponentsExtendThisSingle
+{
+
+}
+
+/**
+ * @Component
+ */
+class AnAutowireCandidate implements AutowiredComponentsExtendThis
+{
+}
+
+/**
+ * @Component
+ */
+class AnAutowireCandidate2 implements AutowiredComponentsExtendThis
+{
+}
+
+/**
+ * @Component
+ */
+class AnAutowireCandidate3 implements AutowiredComponentsExtendThisSingle
+{
+}
+
+/**
+ * @Component(name="autowire1")
+ */
+class AutowiredProperty1
+{
+    /**
+     * @Autowired
+     */
+    protected $property;
+}
+
+/**
+ * @Component(name="autowire2")
+ */
+class AutowiredProperty2
+{
+    /**
+     * @Autowired(type="UnexistantType")
+     */
+    protected $property;
+}
+
+/**
+ * @Component(name="autowire3")
+ */
+class AutowiredProperty3
+{
+    /**
+     * @Autowired(type="AutowiredComponentsExtendThis")
+     */
+    protected $property;
+}
+
+/**
+ * @Component(name="autowire4")
+ */
+class AutowiredProperty4
+{
+    /**
+     * @Autowired(type="UnexistantType", required="false")
+     */
+    protected $property;
+}
+
+/**
+ * @Component(name="autowire5")
+ */
+class AutowiredProperty5
+{
+    /**
+     * @Autowired(type="AutowiredComponentsExtendThis[]")
+     */
+    public $property;
+}
+
+/**
+ * @Component(name="autowire6")
+ */
+class AutowiredProperty6
+{
+    /**
+     * @Autowired(type="AutowiredComponentsExtendThisSingle")
+     */
+    public $property;
+}
+
+
