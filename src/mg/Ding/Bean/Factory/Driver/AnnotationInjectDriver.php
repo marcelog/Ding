@@ -68,7 +68,7 @@ class AnnotationInjectDriver
      */
     private $_container;
 
-    private function _inject($name, Annotation $annotation, $class = null)
+    private function _inject($name, Annotation $annotation, $class = null, Annotation $named = null)
     {
         $ret = false;
         $required = true;
@@ -96,18 +96,33 @@ class AnnotationInjectDriver
             }
         }
         if (!$isArray && count($candidates) > 1) {
-            $foundPrimary = false;
-            $beans = $candidates;
-            foreach ($beans as $beanName) {
-                $beanCandidateDef = $this->_container->getBeanDefinition($beanName);
-                if ($beanCandidateDef->isPrimaryCandidate()) {
-                    if ($foundPrimary) {
-                        throw new InjectByTypeException(
-                            $name, $class, "Too many (primary) candidates for injecting by type"
-                        );
+            $preferredName = null;
+            if ($named !== null) {
+                if (!$named->hasOption('name')) {
+                    throw new InjectByTypeException($name, 'Unknown', "@Named needs the name= specification");
+                }
+                $preferredName = $named->getOptionSingleValue('name');
+            }
+            if ($preferredName !== null) {
+                if (in_array($preferredName, $candidates)) {
+                    $candidates = array($preferredName);
+                } else {
+                    throw new InjectByTypeException($name, 'Unknown', "Specified bean name in @Named not found");
+                }
+            } else {
+                $foundPrimary = false;
+                $beans = $candidates;
+                foreach ($beans as $beanName) {
+                    $beanCandidateDef = $this->_container->getBeanDefinition($beanName);
+                    if ($beanCandidateDef->isPrimaryCandidate()) {
+                        if ($foundPrimary) {
+                            throw new InjectByTypeException(
+                                $name, $class, "Too many (primary) candidates for injecting by type"
+                            );
+                        }
+                        $foundPrimary = true;
+                        $candidates = array($beanName);
                     }
-                    $foundPrimary = true;
-                    $candidates = array($beanName);
                 }
             }
             if (count($candidates) > 1) {
@@ -175,9 +190,13 @@ class AnnotationInjectDriver
             if (!$annotations->contains('inject')) {
                 continue;
             }
+            $namedAnnotation = null;
+            if ($annotations->contains('named')) {
+                $namedAnnotation = $annotations->getSingleAnnotation('named');
+            }
             $annotation = $annotations->getSingleAnnotation('inject');
             $newProperties = $this->_arrayToBeanProperties(
-                $propertyName, $this->_inject($propertyName, $annotation)
+                $propertyName, $this->_inject($propertyName, $annotation, null, $namedAnnotation)
             );
             $properties = array_merge($properties, $newProperties);
         }
@@ -199,6 +218,10 @@ class AnnotationInjectDriver
                 continue;
             }
             $annotation = $annotations->getSingleAnnotation('inject');
+            $namedAnnotation = null;
+            if ($annotations->contains('named')) {
+                $namedAnnotation = $annotations->getSingleAnnotation('named');
+            }
             // Just 1 arg now. Multiple arguments need support in the container side.
             $parameters = $method->getParameters();
             if (empty($parameters)) {
@@ -213,20 +236,20 @@ class AnnotationInjectDriver
                 $type = $type->getName();
             }
             $newProperties = $this->_arrayToBeanProperties(
-                $methodName, $this->_inject($methodName, $annotation, $type)
+                $methodName, $this->_inject($methodName, $annotation, $type, $namedAnnotation)
             );
             $properties = array_merge($properties, $newProperties);
         }
         $bean->setProperties($properties);
     }
 
-    private function _applyToConstructor(\ReflectionMethod $rMethod, Collection $annotations, BeanDefinition $bean)
+    private function _applyToConstructor(\ReflectionMethod $rMethod, Collection $beanAnnotations, BeanDefinition $bean)
     {
         $constructorArguments = $bean->getArguments();
-        if (!$annotations->contains('inject')) {
+        if (!$beanAnnotations->contains('inject')) {
             return;
         }
-        $annotations = $annotations->getAnnotations('inject');
+        $annotations = $beanAnnotations->getAnnotations('inject');
         foreach ($annotations as $annotation) {
             if ($annotation->hasOption('type')) {
                 if (!$annotation->hasOption('name')) {
@@ -243,7 +266,18 @@ class AnnotationInjectDriver
                 }
                 $name = $annotation->getOptionSingleValue('name');
                 $type = $annotation->getOptionSingleValue('type');
-                $newArgs = $this->_inject($name, $annotation, $type);
+                $namedAnnotation = null;
+                if ($beanAnnotations->contains('named')) {
+                    foreach ($beanAnnotations->getAnnotations('named') as $namedAnnotationCandidate) {
+                        if ($namedAnnotationCandidate->hasOption('arg')) {
+                            $target = $namedAnnotationCandidate->getOptionSingleValue('arg');
+                            if ($target == $name) {
+                                $namedAnnotation = $namedAnnotationCandidate;
+                            }
+                        }
+                    }
+                }
+                $newArgs = $this->_inject($name, $annotation, $type, $namedAnnotation);
                 $constructorArguments = array_merge(
                     $constructorArguments,
                     $this->_arrayToConstructorArguments($name, $newArgs)
@@ -256,10 +290,22 @@ class AnnotationInjectDriver
                         continue;
                     }
                     $type = $type->getName();
-                    $newArgs = $this->_inject($parameterName, $annotation, $type);
+                    $namedAnnotation = null;
+                    if ($beanAnnotations->contains('named')) {
+                        foreach ($beanAnnotations->getAnnotations('named') as $namedAnnotationCandidate) {
+                            if ($namedAnnotationCandidate->hasOption('arg')) {
+                                $target = $namedAnnotationCandidate->getOptionSingleValue('arg');
+                                if ($target == $parameterName) {
+                                    $namedAnnotation = $namedAnnotationCandidate;
+                                }
+                            }
+                        }
+                    }
+
+                    $newArgs = $this->_inject($parameterName, $annotation, $type, $namedAnnotation);
                     $constructorArguments = array_merge(
                         $constructorArguments,
-                        $this->_arrayToConstructorArguments($parameterName, $newArgs)
+                        $this->_arrayToConstructorArguments($parameterName, $newArgs, $namedAnnotation)
                     );
                 }
             }

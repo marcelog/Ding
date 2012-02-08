@@ -615,6 +615,61 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $container->eventDispatch('inexistantEvent', 'blah');
     }
+
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
+     */
+    public function cannot_at_inject_multiple_primary_candidates_without_complete_name()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('inject20');
+    }
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
+     */
+    public function cannot_at_inject_multiple_primary_candidates_with_inexistant_named_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('inject21');
+    }
+    /**
+     * @test
+     */
+    public function can_at_inject_and_choose_with_at_named_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('inject22');
+        $this->assertTrue($bean->property instanceof AnInjectCandidate);
+    }
+    /**
+     * @test
+     */
+    public function can_at_inject_methods_and_choose_with_at_named_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('inject23');
+        $this->assertTrue($bean->property instanceof AnInjectCandidate);
+    }
+    /**
+     * @test
+     */
+    public function can_at_inject_constructor_and_choose_with_at_named_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('inject24');
+        $this->assertTrue($bean->property instanceof AnInjectCandidate);
+    }
+    /**
+     * @test
+     */
+    public function can_at_inject_specific_type_and_name_in_constructor_and_choose_with_at_named_bean()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('inject25');
+        $this->assertTrue($bean->property instanceof AnInjectCandidate);
+    }
 }
 
 /**
@@ -1118,7 +1173,7 @@ interface InjectComponentsExtendThisSingle
 }
 
 /**
- * @Component
+ * @Component(name="chooseThisWithNamed")
  */
 class AnInjectCandidate implements InjectComponentsExtendThis
 {
@@ -1465,4 +1520,91 @@ class InjectProperty19
 	 * @Inject(type="MultipleXmlInjectComponentsWithPrimaryExtendThis")
      */
     public $property;
+}
+
+/**
+ * @Component(name="inject20")
+ */
+class InjectProperty20
+{
+    /**
+	 * @Inject(type="InjectComponentsExtendThis")
+	 * @Named
+     */
+    public $property;
+}
+
+/**
+ * @Component(name="inject21")
+ */
+class InjectProperty21
+{
+    /**
+	 * @Inject(type="InjectComponentsExtendThis")
+	 * @Named(name="inexistantBean")
+     */
+    public $property;
+}
+
+/**
+ * @Component(name="inject22")
+ */
+class InjectProperty22
+{
+    /**
+	 * @Inject(type="InjectComponentsExtendThis")
+	 * @Named(name="chooseThisWithNamed")
+     */
+    public $property;
+}
+
+/**
+ * @Component(name="inject23")
+ */
+class InjectProperty23
+{
+    public $property;
+
+    /**
+     * @Inject(type="InjectComponentsExtendThis")
+     * @Named(name="chooseThisWithNamed")
+     */
+    public function injected($a)
+    {
+        $this->property = $a;
+    }
+}
+
+/**
+ * @Component(name="inject24")
+ */
+class InjectProperty24
+{
+    public $property;
+
+    /**
+     * @Inject
+     * @Named(name="chooseThisWithNamed", arg="a")
+     */
+    public function __construct(InjectComponentsExtendThis $a)
+    {
+        $this->property = $a;
+    }
+}
+
+/**
+ * @Component(name="inject25")
+ */
+class InjectProperty25
+{
+    public $property;
+
+    /**
+     * @Inject(name="a", type="InjectComponentsExtendThis")
+     * @Named(name="chooseThisWithNamed", arg="a")
+     */
+    public function __construct($a)
+    {
+        $this->property = $a;
+    }
 }
