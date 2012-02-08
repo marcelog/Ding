@@ -152,10 +152,6 @@ class Core implements IBeanDefinitionProvider
             $bean = new BeanDefinition($name);
             $bean->setClass('\Ding\Bean\Factory\Driver\AnnotationValueDriver');
             break;
-        case 'dingAnnotationAspectDriver':
-            $bean = new BeanDefinition($name);
-            $bean->setClass('\Ding\Bean\Factory\Driver\AnnotationAspectDriver');
-            break;
         case 'dingMvcAnnotationDriver':
             $bean = new BeanDefinition($name);
             $bean->setClass('\Ding\Bean\Factory\Driver\MvcAnnotationDriver');
