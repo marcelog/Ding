@@ -90,7 +90,7 @@ class AnnotationInjectDriver
         $candidates = $this->_container->getBeansByClass($class);
         if (empty($candidates)) {
             if ($required) {
-                throw new InjectByTypeException($name, $class, "Did not find any candidates for autowiring");
+                throw new InjectByTypeException($name, $class, "Did not find any candidates for injecting by type");
             } else {
                 return array();
             }
@@ -103,7 +103,7 @@ class AnnotationInjectDriver
                 if ($beanCandidateDef->isPrimaryCandidate()) {
                     if ($foundPrimary) {
                         throw new InjectByTypeException(
-                            $name, $class, "Too many (primary) candidates for autowiring"
+                            $name, $class, "Too many (primary) candidates for injecting by type"
                         );
                     }
                     $foundPrimary = true;
@@ -111,7 +111,7 @@ class AnnotationInjectDriver
                 }
             }
             if (count($candidates) > 1) {
-                throw new InjectByTypeException($name, $class, "Too many candidates for autowiring");
+                throw new InjectByTypeException($name, $class, "Too many candidates for injecting by type");
             }
         }
 

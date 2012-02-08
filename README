@@ -100,7 +100,7 @@ definitions.
 * @Component (used in classes, supports same annotations as @Bean)
 * @Required
 * @Resource
-* @Autowired
+* @Inject
 * @Singleton
 * @Prototype
 * @Scope
