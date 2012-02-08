@@ -96,7 +96,23 @@ class AnnotationAutowiredDriver
             }
         }
         if (!$isArray && count($candidates) > 1) {
-            throw new AutowireException($name, $class, "Too many candidates for autowiring");
+            $foundPrimary = false;
+            $beans = $candidates;
+            foreach ($beans as $beanName) {
+                $beanCandidateDef = $this->_container->getBeanDefinition($beanName);
+                if ($beanCandidateDef->isPrimaryCandidate()) {
+                    if ($foundPrimary) {
+                        throw new AutowireException(
+                            $name, $class, "Too many (primary) candidates for autowiring"
+                        );
+                    }
+                    $foundPrimary = true;
+                    $candidates = array($beanName);
+                }
+            }
+            if (count($candidates) > 1) {
+                throw new AutowireException($name, $class, "Too many candidates for autowiring");
+            }
         }
 
         if ($isArray) {

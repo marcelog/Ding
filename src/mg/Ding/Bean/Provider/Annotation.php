@@ -133,7 +133,9 @@ class Annotation
      * Valid bean annotations.
      * @var string[]
      */
-    private $_validBeanAnnotations = array('controller', 'bean', 'component', 'configuration', 'aspect');
+    private $_validBeanAnnotations = array(
+    	'controller', 'bean', 'component', 'configuration', 'aspect', 'named'
+    );
 
     private $_aspectManager;
 
@@ -234,6 +236,15 @@ class Annotation
             $def->setScope(BeanDefinition::BEAN_SINGLETON);
         } else if ($annotations->contains('prototype')) {
             $def->setScope(BeanDefinition::BEAN_PROTOTYPE);
+        }
+        $isPrimary = $annotations->contains('primary');
+        if (!$isPrimary) {
+            if ($beanAnnotation->hasOption('primary')) {
+                $isPrimary = $beanAnnotation->getOptionSingleValue('primary') == 'true';
+            }
+        }
+        if ($isPrimary) {
+            $def->markAsPrimaryCandidate();
         }
         if ($annotations->contains('initmethod')) {
             $annotation = $annotations->getSingleAnnotation('initmethod');

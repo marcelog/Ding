@@ -152,6 +152,33 @@ class BeanDefinition
     private $_proxyClassName;
 
     /**
+     * When wiring by type, this will mark this bean definition as the primary
+     * source when multiple candidates are found.
+     * @var boolean;
+     */
+    private $_isPrimaryCandidate;
+
+    /**
+     * Mark this bean definition as primary candidate when multiple candidates
+     * are found for wiring by type.
+     *
+	 * @return void
+     */
+    public function markAsPrimaryCandidate()
+    {
+        $this->_isPrimaryCandidate = true;
+    }
+    /**
+     * True if this bean definition is the primary candidate when wiring by type.
+     *
+     * @return boolean
+     */
+    public function isPrimaryCandidate()
+    {
+        return $this->_isPrimaryCandidate;
+    }
+
+    /**
      * Aliases for this bean.
      *
      * @return string[]
@@ -596,5 +623,6 @@ class BeanDefinition
         $this->_isAbstract = false;
         $this->_parent = null;
         $this->_proxyClassName = null;
+        $this->_isPrimaryCandidate = false;
     }
 }

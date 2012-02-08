@@ -499,6 +499,13 @@ class Yaml implements
                 throw new BeanFactoryException('Invalid bean scope: ' . $beanDef['scope']);
             }
         }
+        if (isset($beanDef['primary'])) {
+            $primary = $beanDef['primary'];
+            if ($primary == 'true') {
+                $bean->markAsPrimaryCandidate();
+            }
+        }
+
         if (isset($beanDef['factory-method'])) {
             $bean->setFactoryMethod($beanDef['factory-method']);
         }

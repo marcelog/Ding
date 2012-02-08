@@ -561,7 +561,12 @@ class Xml implements
                 $bean->addAlias(trim($alias));
             }
         }
-
+        if (isset($simpleXmlBean->attributes()->primary)) {
+            $primary = (string)$simpleXmlBean->attributes()->primary;
+            if ($primary == 'true') {
+                $bean->markAsPrimaryCandidate();
+            }
+        }
         if (isset($simpleXmlBean->attributes()->{'depends-on'})) {
             $bean->setDependsOn(explode(
             	',',

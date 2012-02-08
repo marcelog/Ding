@@ -533,6 +533,71 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('autowire15');
     }
+    /**
+     * @test
+     */
+    public function can_at_named_components()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('aNamedComponent');
+        $this->assertTrue($bean instanceof NamedComponent);
+        $this->assertTrue($bean->property instanceof DependencyOfNamedComponent);
+    }
+    /**
+     * @test
+     */
+    public function can_at_primary_components()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire16');
+        $this->assertTrue($bean->property instanceof AutowiredPrimaryComponent);
+    }
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     */
+    public function cannot_autowire_multiple_primary_candidates()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire17');
+    }
+    /**
+     * @test
+     */
+    public function can_at_bean_methods()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire18');
+        $this->assertTrue($bean->property instanceof ASimpleDestroyInitClass);
+    }
+
+    /**
+     * @test
+     */
+    public function can_define_primary_beans_in_xml()
+    {
+        $properties = $this->_properties;
+        $properties['ding']['factory']['bdef']['xml'] = array(
+        	'filename' => 'autowire.xml', 'directories' => array(RESOURCES_DIR)
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('autowire19');
+        $this->assertTrue($bean->property instanceof AnXmlAutowireCandidate);
+    }
+
+    /**
+     * @test
+     */
+    public function can_define_primary_beans_in_yaml()
+    {
+        $properties = $this->_properties;
+        $properties['ding']['factory']['bdef']['yaml'] = array(
+        	'filename' => 'autowire.yaml', 'directories' => array(RESOURCES_DIR)
+        );
+        $container = ContainerImpl::getInstance($properties);
+        $bean = $container->getBean('autowire19');
+        $this->assertTrue($bean->property instanceof AnXmlAutowireCandidate);
+    }
 }
 
 /**
@@ -585,7 +650,7 @@ class ClassSimpleAnnotationConfiguration
         return new Some_UnderScore_Class;
     }
     /**
-     * @Bean(class=ASimpleDestroyInitClass)
+     * @Bean(class=ASimpleDestroyInitClass, primary="true")
      * @Scope(value=singleton)
      */
     public function aSimpleDestroyMethodClass()
@@ -1254,4 +1319,133 @@ class AutowiredProperty15
     {
         $this->a = $a;
     }
+}
+
+/**
+ * @Named
+ */
+class DependencyOfNamedComponent
+{
+}
+/**
+ * @Named(name="aNamedComponent")
+ */
+class NamedComponent
+{
+    /**
+     * @Autowired(type="DependencyOfNamedComponent")
+     */
+    public $property;
+}
+
+interface AutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+
+/**
+ * @Component
+ * @Primary
+ */
+class AutowiredPrimaryComponent implements AutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+/**
+ * @Component
+ */
+class AutowiredNonPrimaryComponent implements AutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+
+/**
+ * @Component(name="autowire16")
+ */
+class AutowiredProperty16
+{
+    public $property;
+
+    /**
+     * @Autowired(type="AutowiredComponentsWithPrimaryExtendThis")
+     */
+    public function injected($a)
+    {
+        $this->property = $a;
+    }
+}
+
+interface MultipleAutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+
+/**
+ * @Component
+ * @Primary
+ */
+class AutowiredPrimaryComponent2 implements MultipleAutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+
+/**
+ * @Component
+ * @Primary
+ */
+class AutowiredPrimaryComponent3 implements MultipleAutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+
+/**
+ * @Component(name="autowire17")
+ */
+class AutowiredProperty17
+{
+    public $property;
+
+    /**
+     * @Autowired(type="MultipleAutowiredComponentsWithPrimaryExtendThis")
+     */
+    public function injected($a)
+    {
+        $this->property = $a;
+    }
+}
+
+/**
+ * @Component(name="autowire18")
+ */
+class AutowiredProperty18
+{
+    /**
+	 * @Autowired(type="ASimpleDestroyInitClass")
+     */
+    public $property;
+}
+
+interface MultipleXmlAutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+
+class AnXmlAutowireCandidate implements MultipleXmlAutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+
+class AnXmlAutowireCandidate2 implements MultipleXmlAutowiredComponentsWithPrimaryExtendThis
+{
+
+}
+/**
+ * @Component(name="autowire19")
+ */
+class AutowiredProperty19
+{
+    /**
+	 * @Autowired(type="MultipleXmlAutowiredComponentsWithPrimaryExtendThis")
+     */
+    public $property;
 }
