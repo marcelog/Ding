@@ -13,6 +13,7 @@
             "homepage": "http://marcelog.github.com"
         }
     ],
+    "version": "1.5.0",
     "repositories": {
         "pear.apache.org": {
             "pear": {
