@@ -160,7 +160,7 @@ This metadata includes:
   <li><u>Name:</u>Mandatory. The bean's name.</li>
   <li><u>Class:</u>Mandatory. The bean's full class name (including namespace, like A\B\Foo.</li>
   <li><u>Scope:</u>Mandatory. The bean's scope. This informs the container how to handle
-  the lifecycle of this bean.</li>
+  the lifecycle of this bean. The scope is singleton by default.</li>
   <li><u>Annotations:</u>Optional. All class-level annotations. Annotations have their
   own metadata. (see below).</li>
   <li><u>Init method:</u>Optional. You may declare an optional method to call right after the bean
@@ -220,22 +220,36 @@ For every of the @Bean annotated methods, you should also specify:
 @Scope(value=xxx) Where xxx is one of prototype or singleton.
 </p>
 <p>
+@Singleton same as @Scope(value="singleton"). This is the default scope for beans.
+</p>
+<p>
+@Prototype same as @Scope(value="prototype")
+</p>
+<p>
 @InitMethod(method=xxx) Where xxx is the method to call to initialize the bean.
+</p>
+<p>
+@PostConstruct: Using this annotation in a method is equivalent to @InitMethod(method="xxx")
 </p>
 <p>
 @DestroyMethod(method=xxx) Where xxx is the method to call to destroy the bean on
 container shutdown.
 </p>
 <p>
+@PreDestroy: Using this annotation in a method is equivalent to @DestroyMethod(method="xxx")
+</p>
+<p>
 @Component: Ding also supports @Component annotation. If you annotate a class with this
 annotation, it will become a bean without needing to specify a @Configuration class. Example:
+</p>
+<p>
+@Named: At the class level, this annotation is an alias for @Component.
 </p>
 <pre name="code" class="php">
 /**
  * This is our bean.
  * @Component(name=myBean)
  * @InitMethod(method=init)
- * @DestroyMethod(method=destroy)
  * @Scope(value=singleton)
  */
 class MyBean
@@ -249,6 +263,9 @@ class MyBean
     {
         echo "init\n";
     }
+    /**
+     * @PreDestroy
+     */
     public function destroy()
     {
         echo "destroy\n";
@@ -261,7 +278,7 @@ class MyBean
 
 /**
  * @Component(name=myDependency)
- * @Scope(value=singleton)
+ * @Singleton
  */
 class MyDependency
 {
@@ -310,16 +327,45 @@ will tell the container to throw an exception if this property isnt configured
 when instantiating the bean. (JSR-330)
 </p>
 <p>
-@Resource Use it in setters AND/OR properties to resolve the injected dependency by name. So
+@Resource: Use it in setters AND/OR properties to resolve the injected dependency by name. So
 for example, the method setDependency() will resolve to a bean named "dependency".
 (JSR-250). 
 </p>
+<p>
+Since 1.5.0: @Resource can also accept an optional name to indicate the name of the bean to be 
+injected: 
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class MyBean
+{
+    /**
+     * @Resource(name="aBeanName")
+     */
+    protected $property;
+    
+    /**
+     * @Resource(name="aBeanName")
+     */
+    public function anotherDependency($value)
+    {
+    }
+}
+</pre>
+
 <pre name="code" class="php">
 /**
  * @Configuration
  */
 class SomeBeanProviderClass
 {
+    /**
+     * @Resource
+     */
+    protected $dependency;
+    
     /**
      * @Bean
      * @Scope(value='singleton')
@@ -846,6 +892,292 @@ Full examples:
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/inheritance-annotations">Annotations</a></li>
 </ul>
 </p>
+<H4>Wiring By Type</H4>
+<p>
+The annotations driver supports the @Inject annotation, that can be used in properties, methods, and constructor
+arguments.
+</p>
+<p>
+The full example is available <a href="https://github.com/marcelog/Ding/tree/master/docs/examples/InjectAnnotation">here</a>.
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject(type="IUserRepository")
+     */
+    protected $repository;
+}
+</pre>
+<p>
+Since php has dynamic typing, you have to specify a class name (or interface) in the "type" argument of the
+annotation. In this case, if a bean that implements IUserRepository is found, it will be injected.
+</p>
+<p>
+If multiple beans are found (or none at all), an InjectByTypeException is thrown, because Ding wont be able to
+choose between any of them. You can specify a bean as a "primary" candidate to avoid throwing this exception and
+tell the container which is the preferred bean to choose:
+</p>
+<pre name="code" class="php">
+interface IUserRepository
+{
+}
+
+/**
+ * @Component
+ * @Primary
+ */
+class AUserRepository implements IUserRepository
+{
+}
+
+/**
+ * @Component
+ */
+class AnotherUserRepository implements IUserRepository
+{
+}
+
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject(type="IUserRepository")
+     */
+    protected $repository;
+}
+</pre>
+<p>
+In this case, the bean of class AUserRepository will be chosen to be injected into the UserService bean.
+You can also use @Primary for @Bean methods, and can also specify it as @Bean(primary="true").
+</p>
+<p>
+If you are using xml:
+</p>
+<pre name="code" class="xml">
+&lt;beans&gt;
+  &lt;bean id="aUserRepository" class="AUserRepository" primary="true"/&gt;
+  &lt;bean id="anotherUserRepository" class="AUserRepository"/&gt;
+&lt;/beans&gt;
+</pre>
+<p>
+If you are using yaml:
+</p>
+<pre name="code" class="php">
+beans:
+  aUserRepository:
+    class: AUserRepository
+    primary: true
+  anotherUserRepository:
+    class: AnotherUserRepository
+</pre>
+<p>
+You can also specify a bean name to be chosen when multiple candidates are available, by using
+the @Named annotation, for properties and methods:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject(type="IUserRepository")
+     * @Named(name="iPrefferThisBeanImplementation")
+     */
+    protected $repository;
+}
+</pre>
+<p>
+If you want to inject ALL beans of a given type, just specify the "type" as an array, like:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject(type="IUserRepository[]")
+     */
+    protected $repositories;
+}
+</pre>
+<p>
+In this case, all instances will be injected as an array of beans.
+</p>
+<p>
+By default, all injected by type properties are required, so an InjectByTypeException will be thrown if no
+candidates are found to inject. If you dont mind not having anything to inject, you can specify
+"required=false":
+</p>
+<pre name="code" class="php">
+interface IUserRepository
+{
+}
+
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject(type="IUserRepository[]", required="false")
+     */
+    protected $repositories;
+}
+</pre>
+<p>
+So if no candidates are found, no exception will be thrown.
+</p>
+<p>
+You can also use @Inject in methods. You can use any method name you like:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+    protected $repositories;
+
+    /**
+     * @Inject(type="IUserRepository[]")
+     */
+    public function initializeRepositories(array $repositories)
+    {
+        $this->repositories = $repositories; 
+    }
+}
+</pre>
+<p>
+Since php does not allow you to specify an array of objects for a given class, you need
+to set the parameter type as "array", and specify the type of the objects to be injected in
+the "type" argument of the Inject annotation. But if you want to inject a single object,
+this will suffice:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+    protected $repository;
+
+    /**
+     * @Inject
+     */
+    public function setRepository(IUserRepository $repository)
+    {
+        $this->repository = $repository; 
+    }
+}
+</pre>
+<p>
+@Inject can also be used in constructors:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject
+     */
+    public function __construct(IUserRepository $userRepository, IScheduleRepository, $scheduleRepository)
+    {
+    }
+}
+</pre>
+<p>
+If one of the constructor arguments has no defined type, it will be not eligible for injection by type, and will be skipped.
+In this case, you can mix it with @Value:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject
+     * @Value(name="otherArgument", value="${user.property}")
+     */
+    public function __construct(IUserRepository $repository, $otherArgument)
+    {
+    }
+}
+</pre>
+<p>
+If you need to mix array AND scalar constructor injection with @Inject:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject
+     * @Inject(name="otherArgument", type="IUserRepository[]")
+     */
+    public function __construct(IUserRepository $repository, $otherArgument)
+    {
+    }
+}
+</pre>
+<p>
+To use @Named in constructor arguments, you need to specify the name of the parameter you are referring
+to. In the following example, the container will try to inject a IUserRepository component into the $repository
+argument. If multiple candidates are found, the @Named will choose make the container choose the bean with the name
+"preferredBeanName" for the argument $repository:
+</p>
+<pre name="code" class="php">
+/**
+ * @Component
+ */
+class UserService
+{
+/**
+ * @Component
+ */
+class UserService
+{
+    /**
+     * @Inject(name="repository", type="IUserRepository")
+     * @Named(name="preferredBeanName", arg="repository")
+     */
+    public function __construct($repository)
+    {
+    }
+}
+</pre>
+<p>
+You can also annotate @Bean methods:
+</p>
+<pre name="code" class="php">
+/**
+ * @Configuration
+ */
+class ServicesConfiguration
+{
+    /**
+     * @Inject
+     * @Bean
+     * @Value(name="otherArgument", value="${user.property}")
+     */
+    public function userService(IUserRepository $repository, $otherArgument)
+    {
+        return new UserService($repository, $otherArgument);
+    }
+}
+</pre>
 <H4>Annotations metadata</H4>
 <ul>
   <li><u>Name:</u>The name of the annotation (i.e: @InitMethod).
@@ -859,11 +1191,6 @@ Full examples:
 The container is a factory of beans. It constructs an instance of a bean using the
 metadata associated with it (and its subparts, like properties, annotations, etc).
 </p>
-<H4>Container managed annotations</H4>
-<ul>
-  <li><u>@InitMethod</u>: Has the same effect as declaring a bean with init-method in the beans.xml file.</li>
-  <li><u>@DestroyMethod</u>: Has the same effect as declaring a bean with destroy-method in the beans.xml file.</li>
-</ul>
 
 <H4>Handling errors</H4>
 <p>

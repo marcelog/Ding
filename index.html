@@ -84,7 +84,7 @@ for web applications.
 </ul>
 <H3>Current Version</u></H3>
 <p>
-1.4.1 (If you are updating from 1.1.x please see <a href="https://github.com/marcelog/Ding/blob/master/README.1.3.x">README.1.3.x</a> before upgrading to be sure about how it might affect you).
+1.5.0 (If you are updating from 1.1.x please see <a href="https://github.com/marcelog/Ding/blob/master/README.1.3.x">README.1.3.x</a> before upgrading to be sure about how it might affect you).
 </p>
 <H3>Features</u></H3>
 <p>
@@ -93,7 +93,15 @@ for web applications.
   <li>Supports XML, YAML, and annotations as bean definitions providers.</li>
   <li>Lightweight, easy of use, and useful.</li>
   <li>Loosed-couple, just use what you need and nothing more.</li>
-  <li>Some JSR-250 and JSR-330 annotations.</li>
+  <li>JSR-250: @PostConstruct, @PreDestroy, @Resouce, @Configuration</li>
+  <li>JSR-330: @Named, @Inject, @Singleton</li>
+  <li>Spring specific: @Primary, @Value, @Scope, @Component, @Aspect, @Required, @Bean, @Controller, @RequestMapping</li>
+  <li>Own specific: @Prototype, @InitMethod, @DestroyMethod, @ListensOn, @MethodInterceptor, @ExceptionInterceptor</li>
+  <li>Aware interfaces: <u>IContainerAware, IMessageSourceAware, IResourceLoaderAware, IBeanNameAware, IAspectManagerAware, ILoggerAware</u></li>
+  <li>Bean inheritance through normal OOP or xml/yaml declarations.</li>
+  <li>Bean aliasing for xml, yaml, and annotations.</li>
+  <li>Extensions in the lifecycle: AfterDefinition, BeforeCreate, AfterCreate, BeforeAssemble, AfterAssemble</li>
+  <li>Extensions for providing your own definitions: IBeanDefinitionProvider, IAspectProvider, IPointcutProvider</li>
   <li>Resources through php streams.</li>
   <li>Setter Injection (For arrays, scalar values, php code, and references to other beans).</li>
   <li>Constructor Injection (For the same data types as above).</li>
@@ -106,12 +114,7 @@ for web applications.
   <li>Annotations used by helpers and the container (i.e: @InitMethod, @DestroyMethod, @Controller, etc).</li>
   <li>Can cache proxies and bean definitions with Zend_Cache, Memcached, Filesystem, and APC.</li>
   <li>Integration with PAMI and PAGI. So you can make asterisk (telephony) applications via agi and ami.</li>
-  <li>Aware interfaces: <u>IContainerAware, IMessageSourceAware, IResourceLoaderAware, IBeanNameAware, IAspectManagerAware, ILoggerAware</u></li>
-  <li>Extensions in the lifecycle: AfterDefinition, BeforeCreate, AfterCreate, BeforeAssemble, AfterAssemble</li>
-  <li>Extensions for providing your own definitions: IBeanDefinitionProvider, IAspectProvider, IPointcutProvider</li>
   <li>Helpers: Syslog, TCPServer, TCPClient, etc.</li>
-  <li>Since 1.1.0: Bean inheritance through normal OOP or xml/yaml declarations.</li>
-  <li>Since 1.1.2: Bean aliasing for xml, yaml, and annotations.</li>
   <li>Error Handling, Signal Handling, Shutdown Handling, all via events.</li>
 </ul>
 </p>
