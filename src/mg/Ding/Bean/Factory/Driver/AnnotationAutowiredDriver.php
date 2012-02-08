@@ -110,10 +110,29 @@ class AnnotationAutowiredDriver
         return $ret;
     }
 
+    private function _arrayToConstructorArguments($name, $beanNames)
+    {
+        $ret = array();
+        $type = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN;
+        $value = $beanNames;
+        if (is_array($beanNames)) {
+            $value = array();
+            $type = BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY;
+            foreach ($beanNames as $arg) {
+                $value[] = new BeanConstructorArgumentDefinition(
+                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN, $arg, $name
+                );
+            }
+        }
+        $ret[$name] = new BeanConstructorArgumentDefinition($type, $value, $name);
+        return $ret;
+    }
     private function _arrayToBeanProperties($name, $beanNames)
     {
         $ret = array();
         $propertyName = $name;
+        $propertyValue = $beanNames;
+        $propertyType = BeanPropertyDefinition::PROPERTY_BEAN;
         if (is_array($beanNames)) {
             $propertyType = BeanPropertyDefinition::PROPERTY_ARRAY;
             $propertyValue = array();
@@ -122,9 +141,6 @@ class AnnotationAutowiredDriver
                     $value, BeanPropertyDefinition::PROPERTY_BEAN, $value
                 );
             }
-        } else {
-            $propertyValue = $beanNames;
-            $propertyType = BeanPropertyDefinition::PROPERTY_BEAN;
         }
         $ret[$propertyName] = new BeanPropertyDefinition(
             $propertyName, $propertyType, $propertyValue
@@ -194,29 +210,42 @@ class AnnotationAutowiredDriver
         if (!$annotations->contains('autowired')) {
             return;
         }
-        $annotation = $annotations->getSingleAnnotation('autowired');
-        foreach ($rMethod->getParameters() as $parameter) {
-            $parameterName = $parameter->getName();
-            $type = $parameter->getClass();
-            if ($type === null) {
-                continue;
-            }
-            $type = $type->getName();
-            $newArgs = $this->_autowire($parameterName, $annotation, $type);
-            if (is_array($newArgs)) {
-                $values = array();
-                foreach ($newArgs as $arg) {
-                    $values = new BeanConstructorArgumentDefinition(
-                        BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN, $arg, $parameterName
+        $annotations = $annotations->getAnnotations('autowired');
+        foreach ($annotations as $annotation) {
+            if ($annotation->hasOption('type')) {
+                if (!$annotation->hasOption('name')) {
+                    throw new AutowireException(
+                    	'constructor', 'Unknown', 'Cant specify type without name'
                     );
                 }
-                $constructorArguments[$parameterName] = new BeanConstructorArgumentDefinition(
-                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_ARRAY, $values, $parameterName
+            }
+            if ($annotation->hasOption('name')) {
+                if (!$annotation->hasOption('type')) {
+                    throw new AutowireException(
+                    	'constructor', 'Unknown', 'Cant specify name without type'
+                    );
+                }
+                $name = $annotation->getOptionSingleValue('name');
+                $type = $annotation->getOptionSingleValue('type');
+                $newArgs = $this->_autowire($name, $annotation, $type);
+                $constructorArguments = array_merge(
+                    $constructorArguments,
+                    $this->_arrayToConstructorArguments($name, $newArgs)
                 );
             } else {
-                $constructorArguments[$parameterName] = new BeanConstructorArgumentDefinition(
-                    BeanConstructorArgumentDefinition::BEAN_CONSTRUCTOR_BEAN, $newArgs, $parameterName
-                );
+                foreach ($rMethod->getParameters() as $parameter) {
+                    $parameterName = $parameter->getName();
+                    $type = $parameter->getClass();
+                    if ($type === null) {
+                        continue;
+                    }
+                    $type = $type->getName();
+                    $newArgs = $this->_autowire($parameterName, $annotation, $type);
+                    $constructorArguments = array_merge(
+                        $constructorArguments,
+                        $this->_arrayToConstructorArguments($parameterName, $newArgs)
+                    );
+                }
             }
         }
         $bean->setArguments($constructorArguments);

@@ -498,9 +498,40 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     public function can_autowire_single_candidate_in_constructor_and_skip_nontyped_args_in_bean_methods()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowired12');
+        $bean = $container->getBean('autowire11');
         $this->assertTrue($bean->a instanceof AutowiredComponentsExtendThisSingle);
         $this->assertEquals($bean->b, "asd");
+    }
+
+    /**
+     * @test
+     */
+    public function can_autowire_constructor_arguments_specifying_name_and_type()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire13');
+        $this->assertEquals(count($bean->a), 2);
+        $this->assertTrue($bean->a[0] instanceof AutowiredComponentsExtendThis);
+        $this->assertTrue($bean->a[1] instanceof AutowiredComponentsExtendThis);
+        $this->assertTrue($bean->b instanceof AutowiredComponentsExtendThisSingle);
+    }
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     */
+    public function cannot_autowire_constructors_with_name_and_no_type()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire14');
+    }
+    /**
+     * @test
+     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     */
+    public function cannot_autowire_constructors_with_type_and_no_name()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('autowire15');
     }
 }
 
@@ -1171,5 +1202,56 @@ class AutowiredProperty11
     {
         $this->a = $a;
         $this->b = $b;
+    }
+}
+
+/**
+ * @Component(name="autowire13")
+ */
+class AutowiredProperty13
+{
+    public $a;
+    public $b;
+
+    /**
+     * @Autowired(name="a", type="AutowiredComponentsExtendThis[]")
+     * @Autowired(name="b", type="AutowiredComponentsExtendThisSingle")
+     */
+    public function __construct($a, $b)
+    {
+        $this->a = $a;
+        $this->b = $b;
+    }
+}
+
+/**
+ * @Component(name="autowire14")
+ */
+class AutowiredProperty14
+{
+    public $a;
+
+    /**
+     * @Autowired(name="a")
+     */
+    public function __construct($a)
+    {
+        $this->a = $a;
+    }
+}
+
+/**
+ * @Component(name="autowire15")
+ */
+class AutowiredProperty15
+{
+    public $a;
+
+    /**
+     * @Autowired(type="a")
+     */
+    public function __construct($a)
+    {
+        $this->a = $a;
     }
 }

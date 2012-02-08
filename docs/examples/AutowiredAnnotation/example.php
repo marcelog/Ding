@@ -136,15 +136,18 @@ class InjectedWithConstructor
 {
     private $_some;
     private $_some2;
+    private $_some3;
 
     /**
      * @Autowired
+     * @Autowired(name="asd", type="AutowiredByType2")
      * @Value(name="asd", value="a")
      */
     public function __construct(AutowiredByType $blah, $asd, AutowiredByType2 $blah2, array $a = array())
     {
         $this->_some = $blah;
         $this->_some2 = $blah2;
+        $this->_some3 = $asd;
     }
 }
 
@@ -177,5 +180,5 @@ var_dump($bean);
 $bean = $container->getBean('beanDeclaredInMethod');
 var_dump($bean);
 
-var_dump($container->getBean('injectedWithConstructor'));
 var_dump($container->getBean('newBean'));
+var_dump($container->getBean('injectedWithConstructor'));
