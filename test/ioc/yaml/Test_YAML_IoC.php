@@ -379,8 +379,17 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
     public function can_get_by_class()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $beans = $container->getBeansByClass('ClassSimpleYAML');
+        $beans = $container->getBeansByClass('ParentClass');
         $this->assertEquals($beans, array('aSimpleSingletonBean', 'aSimplePrototypeBean', 'invalidScopeBean'));
+    }
+    /**
+     * @test
+     */
+    public function can_get_by_class_returns_empty_if_none_found()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $beans = $container->getBeansByClass('NotExistant');
+        $this->assertEquals($beans, array());
     }
     /**
      * @test
@@ -393,9 +402,24 @@ class Test_YAML_IoC extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->arg2, 'value2');
         $this->assertEquals($bean->arg3, 'value3');
     }
+
+    /**
+     * @test
+     */
+    public function can_trigger_events_without_listeners()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $container->eventDispatch('inexistantEvent', 'blah');
+    }
 }
 
-class ClassSimpleYAML
+
+class ParentClass
+{
+
+}
+
+class ClassSimpleYAML extends ParentClass
 {
     private $_something;
 

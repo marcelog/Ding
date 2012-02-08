@@ -389,7 +389,15 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $beans = $container->getBeansByClass('ClassSimpleXML');
         $this->assertEquals($beans, array('invalidScopeBean', 'aSimpleSingletonBean', 'aSimplePrototypeBean'));
     }
-
+    /**
+     * @test
+     */
+    public function can_get_by_class_returns_empty_if_none_found()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $beans = $container->getBeansByClass('NotExistant');
+        $this->assertEquals($beans, array());
+    }
     /**
      * @test
      */
@@ -400,6 +408,15 @@ class Test_XML_IoC extends PHPUnit_Framework_TestCase
         $this->assertEquals($bean->arg1, 'value1');
         $this->assertEquals($bean->arg2, 'value2');
         $this->assertEquals($bean->arg3, 'value3');
+    }
+
+    /**
+     * @test
+     */
+    public function can_trigger_events_without_listeners()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $container->eventDispatch('inexistantEvent', 'blah');
     }
 }
 

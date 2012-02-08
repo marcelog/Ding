@@ -326,7 +326,15 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         	'invalidScopeBean'
         ));
     }
-
+    /**
+     * @test
+     */
+    public function can_get_by_class_returns_empty_if_none_found()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $beans = $container->getBeansByClass('NotExistant');
+        $this->assertEquals($beans, array());
+    }
     /**
      * @test
      */
@@ -597,6 +605,15 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($properties);
         $bean = $container->getBean('autowire19');
         $this->assertTrue($bean->property instanceof AnXmlAutowireCandidate);
+    }
+
+    /**
+     * @test
+     */
+    public function can_trigger_events_without_listeners()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $container->eventDispatch('inexistantEvent', 'blah');
     }
 }
 
