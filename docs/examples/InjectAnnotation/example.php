@@ -44,14 +44,14 @@ interface SomeInterface
 /**
  * @Component
  */
-class AutowiredByType implements SomeInterface
+class InjectByType implements SomeInterface
 {
 }
 
 /**
  * @Component
  */
-class AutowiredByType2 implements SomeInterface
+class InjectByType2 implements SomeInterface
 {
 }
 
@@ -99,14 +99,14 @@ class MyDependency
 class AClassForABeanFromAMethod
 {
     /**
-     * @Autowired(type="SomeInterface[]", required="true")
+     * @Inject(type="SomeInterface[]", required="true")
      * @var pepe
      */
     protected $property;
     protected $property2;
 
     /**
-     * @Autowired(type="SomeInterface[]")
+     * @Inject(type="SomeInterface[]")
      */
     public function aha(array $a)
     {
@@ -121,10 +121,10 @@ class Config
 {
     /**
      * @Bean(class="InjectedWithConstructor")
-     * @Autowired
+     * @Inject
      * @Value(name="asd", value="a")
      */
-    public function newBean(AutowiredByType $blah, $asd, AutowiredByType2 $blah2, array $a = array())
+    public function newBean(InjectByType $blah, $asd, InjectByType2 $blah2, array $a = array())
     {
         return new InjectedWithConstructor($blah, $asd, $blah2, $a);
     }
@@ -139,11 +139,11 @@ class InjectedWithConstructor
     private $_some3;
 
     /**
-     * @Autowired
-     * @Autowired(name="asd", type="AutowiredByType2")
+     * @Inject
+     * @Inject(name="asd", type="InjectByType2")
      * @Value(name="asd", value="a")
      */
-    public function __construct(AutowiredByType $blah, $asd, AutowiredByType2 $blah2, array $a = array())
+    public function __construct(InjectByType $blah, $asd, InjectByType2 $blah2, array $a = array())
     {
         $this->_some = $blah;
         $this->_some2 = $blah2;

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans>
-  <bean id="autowireCandidate1" class="AnXmlAutowireCandidate" primary="true"/>
-  <bean id="autowireCandidate2" class="AnXmlAutowireCandidate2"/>
-</beans>

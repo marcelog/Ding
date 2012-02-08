@@ -1096,7 +1096,7 @@ class ContainerImpl implements IContainer
             $this->getBean('dingAnnotationBeanDefinitionProvider');
             $this->getBean('dingAnnotationValueDriver');
             $this->getBean('dingAnnotationResourceDriver');
-            $this->getBean('dingAnnotationAutowiredDriver');
+            $this->getBean('dingAnnotationInjectDriver');
             $this->getBean('dingAnnotationInitDestroyMethodDriver');
             $this->getBean('dingAnnotationRequiredDriver');
             $this->getBean('dingMvcAnnotationDriver');

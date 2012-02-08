@@ -1,6 +1,6 @@
 <?php
 /**
- * Thrown when autowiring cant be done.
+ * Thrown when injection by type cant be done.
  *
  * PHP Version 5
  *
@@ -29,7 +29,7 @@
 namespace Ding\Bean\Factory\Exception;
 
 /**
- * Thrown when autowiring cant be done.
+ * Thrown when injection by type cant be done.
  *
  * PHP Version 5
  *
@@ -40,10 +40,10 @@ namespace Ding\Bean\Factory\Exception;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AutowireException extends BeanFactoryException
+class InjectByTypeException extends BeanFactoryException
 {
     public function __construct($propertyName, $propertyType, $message)
     {
-        parent::__construct("Cant autowire $propertyName ($propertyType): $message");
+        parent::__construct("Cant inject by type $propertyName ($propertyType): $message");
     }
 }

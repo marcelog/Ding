@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+  <bean id="injectCandidate1" class="AnXmlInjectCandidate" primary="true"/>
+  <bean id="injectCandidate2" class="AnXmlInjectCandidate2"/>
+</beans>

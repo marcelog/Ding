@@ -1,0 +1,6 @@
+beans:
+  injectCandidate1:
+    class: AnXmlInjectCandidate
+    primary: true
+  injectCandidate2:
+    class: AnXmlInjectCandidate2

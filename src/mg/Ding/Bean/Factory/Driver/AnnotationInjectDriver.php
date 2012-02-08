@@ -32,7 +32,7 @@ use Ding\Bean\BeanConstructorArgumentDefinition;
 
 use Ding\Annotation\Collection;
 use Ding\Annotation\Annotation;
-use Ding\Bean\Factory\Exception\AutowireException;
+use Ding\Bean\Factory\Exception\InjectByTypeException;
 use Ding\Bean\BeanPropertyDefinition;
 use Ding\Container\IContainerAware;
 use Ding\Container\IContainer;
@@ -54,7 +54,7 @@ use Ding\Reflection\IReflectionFactoryAware;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class AnnotationAutowiredDriver
+class AnnotationInjectDriver
     implements IAfterDefinitionListener, IReflectionFactoryAware, IContainerAware
 {
     /**
@@ -68,7 +68,7 @@ class AnnotationAutowiredDriver
      */
     private $_container;
 
-    private function _autowire($name, Annotation $annotation, $class = null)
+    private function _inject($name, Annotation $annotation, $class = null)
     {
         $ret = false;
         $required = true;
@@ -77,7 +77,7 @@ class AnnotationAutowiredDriver
         }
         if (!$annotation->hasOption('type')) {
             if ($class === null) {
-                throw new AutowireException($name, 'Unknown', "Missing type= specification");
+                throw new InjectByTypeException($name, 'Unknown', "Missing type= specification");
             }
         } else {
             $class = $annotation->getOptionSingleValue('type');
@@ -90,7 +90,7 @@ class AnnotationAutowiredDriver
         $candidates = $this->_container->getBeansByClass($class);
         if (empty($candidates)) {
             if ($required) {
-                throw new AutowireException($name, $class, "Did not find any candidates for autowiring");
+                throw new InjectByTypeException($name, $class, "Did not find any candidates for autowiring");
             } else {
                 return array();
             }
@@ -102,7 +102,7 @@ class AnnotationAutowiredDriver
                 $beanCandidateDef = $this->_container->getBeanDefinition($beanName);
                 if ($beanCandidateDef->isPrimaryCandidate()) {
                     if ($foundPrimary) {
-                        throw new AutowireException(
+                        throw new InjectByTypeException(
                             $name, $class, "Too many (primary) candidates for autowiring"
                         );
                     }
@@ -111,7 +111,7 @@ class AnnotationAutowiredDriver
                 }
             }
             if (count($candidates) > 1) {
-                throw new AutowireException($name, $class, "Too many candidates for autowiring");
+                throw new InjectByTypeException($name, $class, "Too many candidates for autowiring");
             }
         }
 
@@ -172,12 +172,12 @@ class AnnotationAutowiredDriver
         foreach ($rClass->getProperties() as $property) {
             $propertyName = $property->getName();
             $annotations = $this->_reflectionFactory->getPropertyAnnotations($class, $propertyName);
-            if (!$annotations->contains('autowired')) {
+            if (!$annotations->contains('inject')) {
                 continue;
             }
-            $annotation = $annotations->getSingleAnnotation('autowired');
+            $annotation = $annotations->getSingleAnnotation('inject');
             $newProperties = $this->_arrayToBeanProperties(
-                $propertyName, $this->_autowire($propertyName, $annotation)
+                $propertyName, $this->_inject($propertyName, $annotation)
             );
             $properties = array_merge($properties, $newProperties);
         }
@@ -192,20 +192,20 @@ class AnnotationAutowiredDriver
         foreach ($rClass->getMethods() as $method) {
             $methodName = $method->getName();
             $annotations = $this->_reflectionFactory->getMethodAnnotations($class, $methodName);
-            if (!$annotations->contains('autowired')
+            if (!$annotations->contains('inject')
                 || $annotations->contains('bean')
                 || $method->isConstructor()
             ) {
                 continue;
             }
-            $annotation = $annotations->getSingleAnnotation('autowired');
+            $annotation = $annotations->getSingleAnnotation('inject');
             // Just 1 arg now. Multiple arguments need support in the container side.
             $parameters = $method->getParameters();
             if (empty($parameters)) {
-                throw new AutowireException($methodName, $methodName, 'Nothing to autowire (no arguments in method)');
+                throw new InjectByTypeException($methodName, $methodName, 'Nothing to inject (no arguments in method)');
             }
             if (count($parameters) > 1) {
-                throw new AutowireException($methodName, $methodName, 'Multiple arguments are not yet supported');
+                throw new InjectByTypeException($methodName, $methodName, 'Multiple arguments are not yet supported');
             }
             $type = array_shift($parameters);
             $type = $type->getClass();
@@ -213,7 +213,7 @@ class AnnotationAutowiredDriver
                 $type = $type->getName();
             }
             $newProperties = $this->_arrayToBeanProperties(
-                $methodName, $this->_autowire($methodName, $annotation, $type)
+                $methodName, $this->_inject($methodName, $annotation, $type)
             );
             $properties = array_merge($properties, $newProperties);
         }
@@ -223,27 +223,27 @@ class AnnotationAutowiredDriver
     private function _applyToConstructor(\ReflectionMethod $rMethod, Collection $annotations, BeanDefinition $bean)
     {
         $constructorArguments = $bean->getArguments();
-        if (!$annotations->contains('autowired')) {
+        if (!$annotations->contains('inject')) {
             return;
         }
-        $annotations = $annotations->getAnnotations('autowired');
+        $annotations = $annotations->getAnnotations('inject');
         foreach ($annotations as $annotation) {
             if ($annotation->hasOption('type')) {
                 if (!$annotation->hasOption('name')) {
-                    throw new AutowireException(
+                    throw new InjectByTypeException(
                     	'constructor', 'Unknown', 'Cant specify type without name'
                     );
                 }
             }
             if ($annotation->hasOption('name')) {
                 if (!$annotation->hasOption('type')) {
-                    throw new AutowireException(
+                    throw new InjectByTypeException(
                     	'constructor', 'Unknown', 'Cant specify name without type'
                     );
                 }
                 $name = $annotation->getOptionSingleValue('name');
                 $type = $annotation->getOptionSingleValue('type');
-                $newArgs = $this->_autowire($name, $annotation, $type);
+                $newArgs = $this->_inject($name, $annotation, $type);
                 $constructorArguments = array_merge(
                     $constructorArguments,
                     $this->_arrayToConstructorArguments($name, $newArgs)
@@ -256,7 +256,7 @@ class AnnotationAutowiredDriver
                         continue;
                     }
                     $type = $type->getName();
-                    $newArgs = $this->_autowire($parameterName, $annotation, $type);
+                    $newArgs = $this->_inject($parameterName, $annotation, $type);
                     $constructorArguments = array_merge(
                         $constructorArguments,
                         $this->_arrayToConstructorArguments($parameterName, $newArgs)

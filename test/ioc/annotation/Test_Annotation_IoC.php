@@ -390,156 +390,156 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
      */
-    public function cannot_autowire_properties_without_type()
+    public function cannot_at_inject_properties_without_type()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire1');
+        $bean = $container->getBean('inject1');
     }
 
     /**
      * @test
-     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
      */
-    public function cannot_autowire_properties_with_unknown_type()
+    public function cannot_at_inject_properties_with_unknown_type()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire2');
+        $bean = $container->getBean('inject2');
     }
 
     /**
      * @test
-     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
      */
-    public function cannot_autowire_non_array_properties_with_many_candidates()
+    public function cannot_at_inject_non_array_properties_with_many_candidates()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire3');
-    }
-
-    /**
-     * @test
-     */
-    public function can_ignore_non_required_autowired_properties_if_cant_autowire()
-    {
-        $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire4');
+        $bean = $container->getBean('inject3');
     }
 
     /**
      * @test
      */
-    public function can_autowire_arrays_on_multiple_candidates()
+    public function can_ignore_non_required_at_inject_properties_if_cant_inject()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire5');
+        $bean = $container->getBean('inject4');
+    }
+
+    /**
+     * @test
+     */
+    public function can_at_inject_arrays_on_multiple_candidates()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('inject5');
         $this->assertEquals(count($bean->property), 2);
-        $this->assertTrue($bean->property[0] instanceof AnAutowireCandidate);
-        $this->assertTrue($bean->property[1] instanceof AnAutowireCandidate2);
+        $this->assertTrue($bean->property[0] instanceof AnInjectCandidate);
+        $this->assertTrue($bean->property[1] instanceof AnInjectCandidate2);
     }
 
     /**
      * @test
      */
-    public function can_autowire_single_candidate()
+    public function can_at_inject_single_candidate()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire6');
-        $this->assertTrue($bean->property instanceof AnAutowireCandidate3);
+        $bean = $container->getBean('inject6');
+        $this->assertTrue($bean->property instanceof AnInjectCandidate3);
     }
 
     /**
      * @test
      */
-    public function can_autowire_single_candidate_in_method()
+    public function can_at_inject_single_candidate_in_method()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire7');
-        $this->assertTrue($bean->property instanceof AnAutowireCandidate3);
+        $bean = $container->getBean('inject7');
+        $this->assertTrue($bean->property instanceof AnInjectCandidate3);
     }
 
     /**
      * @test
      */
-    public function can_autowire_arrays_on_multiple_candidates_in_method()
+    public function can_at_inject_arrays_on_multiple_candidates_in_method()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire8');
+        $bean = $container->getBean('inject8');
         $this->assertEquals(count($bean->property), 2);
-        $this->assertTrue($bean->property[0] instanceof AnAutowireCandidate);
-        $this->assertTrue($bean->property[1] instanceof AnAutowireCandidate2);
+        $this->assertTrue($bean->property[0] instanceof AnInjectCandidate);
+        $this->assertTrue($bean->property[1] instanceof AnInjectCandidate2);
     }
     /**
      * @test
-     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
      */
-    public function cannot_autowire_empty_arguments_in_method()
+    public function cannot_at_inject_empty_arguments_in_method()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire9');
+        $bean = $container->getBean('inject9');
     }
     /**
      * @test
-     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
      */
-    public function cannot_autowire_multiple_arguments_in_method()
+    public function cannot_at_inject_multiple_arguments_in_method()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire10');
+        $bean = $container->getBean('inject10');
     }
 
     /**
      * @test
      */
-    public function can_autowire_single_candidate_in_constructor_and_skip_nontyped_args()
+    public function can_at_inject_single_candidate_in_constructor_and_skip_nontyped_args()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire11');
-        $this->assertTrue($bean->a instanceof AutowiredComponentsExtendThisSingle);
+        $bean = $container->getBean('inject11');
+        $this->assertTrue($bean->a instanceof InjectComponentsExtendThisSingle);
         $this->assertEquals($bean->b, "asd");
     }
 
     /**
      * @test
      */
-    public function can_autowire_single_candidate_in_constructor_and_skip_nontyped_args_in_bean_methods()
+    public function can_at_inject_single_candidate_in_constructor_and_skip_nontyped_args_in_bean_methods()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire11');
-        $this->assertTrue($bean->a instanceof AutowiredComponentsExtendThisSingle);
+        $bean = $container->getBean('inject11');
+        $this->assertTrue($bean->a instanceof InjectComponentsExtendThisSingle);
         $this->assertEquals($bean->b, "asd");
     }
 
     /**
      * @test
      */
-    public function can_autowire_constructor_arguments_specifying_name_and_type()
+    public function can_at_inject_constructor_arguments_specifying_name_and_type()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire13');
+        $bean = $container->getBean('inject13');
         $this->assertEquals(count($bean->a), 2);
-        $this->assertTrue($bean->a[0] instanceof AutowiredComponentsExtendThis);
-        $this->assertTrue($bean->a[1] instanceof AutowiredComponentsExtendThis);
-        $this->assertTrue($bean->b instanceof AutowiredComponentsExtendThisSingle);
+        $this->assertTrue($bean->a[0] instanceof InjectComponentsExtendThis);
+        $this->assertTrue($bean->a[1] instanceof InjectComponentsExtendThis);
+        $this->assertTrue($bean->b instanceof InjectComponentsExtendThisSingle);
     }
     /**
      * @test
-     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
      */
-    public function cannot_autowire_constructors_with_name_and_no_type()
+    public function cannot_at_inject_constructors_with_name_and_no_type()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire14');
+        $bean = $container->getBean('inject14');
     }
     /**
      * @test
-     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
      */
-    public function cannot_autowire_constructors_with_type_and_no_name()
+    public function cannot_at_inject_constructors_with_type_and_no_name()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire15');
+        $bean = $container->getBean('inject15');
     }
     /**
      * @test
@@ -557,17 +557,17 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     public function can_at_primary_components()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire16');
-        $this->assertTrue($bean->property instanceof AutowiredPrimaryComponent);
+        $bean = $container->getBean('inject16');
+        $this->assertTrue($bean->property instanceof InjectPrimaryComponent);
     }
     /**
      * @test
-     * @expectedException \Ding\Bean\Factory\Exception\AutowireException
+     * @expectedException \Ding\Bean\Factory\Exception\InjectByTypeException
      */
-    public function cannot_autowire_multiple_primary_candidates()
+    public function cannot_at_inject_multiple_primary_candidates()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire17');
+        $bean = $container->getBean('inject17');
     }
     /**
      * @test
@@ -575,7 +575,7 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     public function can_at_bean_methods()
     {
         $container = ContainerImpl::getInstance($this->_properties);
-        $bean = $container->getBean('autowire18');
+        $bean = $container->getBean('inject18');
         $this->assertTrue($bean->property instanceof ASimpleDestroyInitClass);
     }
 
@@ -586,11 +586,11 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     {
         $properties = $this->_properties;
         $properties['ding']['factory']['bdef']['xml'] = array(
-        	'filename' => 'autowire.xml', 'directories' => array(RESOURCES_DIR)
+        	'filename' => 'inject.xml', 'directories' => array(RESOURCES_DIR)
         );
         $container = ContainerImpl::getInstance($properties);
-        $bean = $container->getBean('autowire19');
-        $this->assertTrue($bean->property instanceof AnXmlAutowireCandidate);
+        $bean = $container->getBean('inject19');
+        $this->assertTrue($bean->property instanceof AnXmlInjectCandidate);
     }
 
     /**
@@ -600,11 +600,11 @@ class Test_Annotation_IoC extends PHPUnit_Framework_TestCase
     {
         $properties = $this->_properties;
         $properties['ding']['factory']['bdef']['yaml'] = array(
-        	'filename' => 'autowire.yaml', 'directories' => array(RESOURCES_DIR)
+        	'filename' => 'inject.yaml', 'directories' => array(RESOURCES_DIR)
         );
         $container = ContainerImpl::getInstance($properties);
-        $bean = $container->getBean('autowire19');
-        $this->assertTrue($bean->property instanceof AnXmlAutowireCandidate);
+        $bean = $container->getBean('inject19');
+        $this->assertTrue($bean->property instanceof AnXmlInjectCandidate);
     }
 
     /**
@@ -778,13 +778,13 @@ class ClassSimpleAnnotationConfiguration
     }
 
     /**
-     * @Autowired
+     * @Inject
      * @Bean
      * @Value(name="b", value="asd")
      */
-    public function autowired12(AutowiredComponentsExtendThisSingle $a, $b)
+    public function inject12(InjectComponentsExtendThisSingle $a, $b)
     {
-        return new AutowiredProperty11($a, $b);
+        return new InjectProperty11($a, $b);
     }
 
     public function __construct()
@@ -1107,12 +1107,12 @@ class AnnotatedWithPreDestroy
     }
 }
 
-interface AutowiredComponentsExtendThis
+interface InjectComponentsExtendThis
 {
 
 }
 
-interface AutowiredComponentsExtendThisSingle
+interface InjectComponentsExtendThisSingle
 {
 
 }
@@ -1120,115 +1120,115 @@ interface AutowiredComponentsExtendThisSingle
 /**
  * @Component
  */
-class AnAutowireCandidate implements AutowiredComponentsExtendThis
-{
-}
-
-/**
- * @Component
- */
-class AnAutowireCandidate2 implements AutowiredComponentsExtendThis
+class AnInjectCandidate implements InjectComponentsExtendThis
 {
 }
 
 /**
  * @Component
  */
-class AnAutowireCandidate3 implements AutowiredComponentsExtendThisSingle
+class AnInjectCandidate2 implements InjectComponentsExtendThis
 {
 }
 
 /**
- * @Component(name="autowire1")
+ * @Component
  */
-class AutowiredProperty1
+class AnInjectCandidate3 implements InjectComponentsExtendThisSingle
+{
+}
+
+/**
+ * @Component(name="inject1")
+ */
+class InjectProperty1
 {
     /**
-     * @Autowired
+     * @Inject
      */
     protected $property;
 }
 
 /**
- * @Component(name="autowire2")
+ * @Component(name="inject2")
  */
-class AutowiredProperty2
+class InjectProperty2
 {
     /**
-     * @Autowired(type="UnexistantType")
+     * @Inject(type="UnexistantType")
      */
     protected $property;
 }
 
 /**
- * @Component(name="autowire3")
+ * @Component(name="inject3")
  */
-class AutowiredProperty3
+class InjectProperty3
 {
     /**
-     * @Autowired(type="AutowiredComponentsExtendThis")
+     * @Inject(type="InjectComponentsExtendThis")
      */
     protected $property;
 }
 
 /**
- * @Component(name="autowire4")
+ * @Component(name="inject4")
  */
-class AutowiredProperty4
+class InjectProperty4
 {
     /**
-     * @Autowired(type="UnexistantType", required="false")
+     * @Inject(type="UnexistantType", required="false")
      */
     protected $property;
 }
 
 /**
- * @Component(name="autowire5")
+ * @Component(name="inject5")
  */
-class AutowiredProperty5
+class InjectProperty5
 {
     /**
-     * @Autowired(type="AutowiredComponentsExtendThis[]")
+     * @Inject(type="InjectComponentsExtendThis[]")
      */
     public $property;
 }
 
 /**
- * @Component(name="autowire6")
+ * @Component(name="inject6")
  */
-class AutowiredProperty6
+class InjectProperty6
 {
     /**
-     * @Autowired(type="AutowiredComponentsExtendThisSingle")
+     * @Inject(type="InjectComponentsExtendThisSingle")
      */
     public $property;
 }
 
 /**
- * @Component(name="autowire7")
+ * @Component(name="inject7")
  */
-class AutowiredProperty7
+class InjectProperty7
 {
     public $property;
 
     /**
-     * @Autowired
+     * @Inject
      */
-    public function injected(AutowiredComponentsExtendThisSingle $a)
+    public function injected(InjectComponentsExtendThisSingle $a)
     {
         $this->property = $a;
     }
 }
 
 /**
- * @Component(name="autowire8")
+ * @Component(name="inject8")
  */
-class AutowiredProperty8
+class InjectProperty8
 {
     public $property;
 
     /**
-     * @Autowired(type="AutowiredComponentsExtendThis[]")
+     * @Inject(type="InjectComponentsExtendThis[]")
      */
     public function injected(array $a)
     {
@@ -1237,14 +1237,14 @@ class AutowiredProperty8
 }
 
 /**
- * @Component(name="autowire9")
+ * @Component(name="inject9")
  */
-class AutowiredProperty9
+class InjectProperty9
 {
     public $property;
 
     /**
-     * @Autowired(type="AutowiredComponentsExtendThis[]")
+     * @Inject(type="InjectComponentsExtendThis[]")
      */
     public function injected()
     {
@@ -1253,14 +1253,14 @@ class AutowiredProperty9
 }
 
 /**
- * @Component(name="autowire10")
+ * @Component(name="inject10")
  */
-class AutowiredProperty10
+class InjectProperty10
 {
     public $property;
 
     /**
-     * @Autowired(type="AutowiredComponentsExtendThis")
+     * @Inject(type="InjectComponentsExtendThis")
      */
     public function injected($a, $b)
     {
@@ -1269,18 +1269,18 @@ class AutowiredProperty10
 }
 
 /**
- * @Component(name="autowire11")
+ * @Component(name="inject11")
  */
-class AutowiredProperty11
+class InjectProperty11
 {
     public $a;
     public $b;
 
     /**
-     * @Autowired
+     * @Inject
      * @Value(name="b", value="asd")
      */
-    public function __construct(AutowiredComponentsExtendThisSingle $a, $b)
+    public function __construct(InjectComponentsExtendThisSingle $a, $b)
     {
         $this->a = $a;
         $this->b = $b;
@@ -1288,16 +1288,16 @@ class AutowiredProperty11
 }
 
 /**
- * @Component(name="autowire13")
+ * @Component(name="inject13")
  */
-class AutowiredProperty13
+class InjectProperty13
 {
     public $a;
     public $b;
 
     /**
-     * @Autowired(name="a", type="AutowiredComponentsExtendThis[]")
-     * @Autowired(name="b", type="AutowiredComponentsExtendThisSingle")
+     * @Inject(name="a", type="InjectComponentsExtendThis[]")
+     * @Inject(name="b", type="InjectComponentsExtendThisSingle")
      */
     public function __construct($a, $b)
     {
@@ -1307,14 +1307,14 @@ class AutowiredProperty13
 }
 
 /**
- * @Component(name="autowire14")
+ * @Component(name="inject14")
  */
-class AutowiredProperty14
+class InjectProperty14
 {
     public $a;
 
     /**
-     * @Autowired(name="a")
+     * @Inject(name="a")
      */
     public function __construct($a)
     {
@@ -1323,14 +1323,14 @@ class AutowiredProperty14
 }
 
 /**
- * @Component(name="autowire15")
+ * @Component(name="inject15")
  */
-class AutowiredProperty15
+class InjectProperty15
 {
     public $a;
 
     /**
-     * @Autowired(type="a")
+     * @Inject(type="a")
      */
     public function __construct($a)
     {
@@ -1350,12 +1350,12 @@ class DependencyOfNamedComponent
 class NamedComponent
 {
     /**
-     * @Autowired(type="DependencyOfNamedComponent")
+     * @Inject(type="DependencyOfNamedComponent")
      */
     public $property;
 }
 
-interface AutowiredComponentsWithPrimaryExtendThis
+interface InjectComponentsWithPrimaryExtendThis
 {
 
 }
@@ -1364,27 +1364,27 @@ interface AutowiredComponentsWithPrimaryExtendThis
  * @Component
  * @Primary
  */
-class AutowiredPrimaryComponent implements AutowiredComponentsWithPrimaryExtendThis
+class InjectPrimaryComponent implements InjectComponentsWithPrimaryExtendThis
 {
 
 }
 /**
  * @Component
  */
-class AutowiredNonPrimaryComponent implements AutowiredComponentsWithPrimaryExtendThis
+class InjectNonPrimaryComponent implements InjectComponentsWithPrimaryExtendThis
 {
 
 }
 
 /**
- * @Component(name="autowire16")
+ * @Component(name="inject16")
  */
-class AutowiredProperty16
+class InjectProperty16
 {
     public $property;
 
     /**
-     * @Autowired(type="AutowiredComponentsWithPrimaryExtendThis")
+     * @Inject(type="InjectComponentsWithPrimaryExtendThis")
      */
     public function injected($a)
     {
@@ -1392,7 +1392,7 @@ class AutowiredProperty16
     }
 }
 
-interface MultipleAutowiredComponentsWithPrimaryExtendThis
+interface MultipleInjectComponentsWithPrimaryExtendThis
 {
 
 }
@@ -1401,7 +1401,7 @@ interface MultipleAutowiredComponentsWithPrimaryExtendThis
  * @Component
  * @Primary
  */
-class AutowiredPrimaryComponent2 implements MultipleAutowiredComponentsWithPrimaryExtendThis
+class InjectPrimaryComponent2 implements MultipleInjectComponentsWithPrimaryExtendThis
 {
 
 }
@@ -1410,20 +1410,20 @@ class AutowiredPrimaryComponent2 implements MultipleAutowiredComponentsWithPrima
  * @Component
  * @Primary
  */
-class AutowiredPrimaryComponent3 implements MultipleAutowiredComponentsWithPrimaryExtendThis
+class InjectPrimaryComponent3 implements MultipleInjectComponentsWithPrimaryExtendThis
 {
 
 }
 
 /**
- * @Component(name="autowire17")
+ * @Component(name="inject17")
  */
-class AutowiredProperty17
+class InjectProperty17
 {
     public $property;
 
     /**
-     * @Autowired(type="MultipleAutowiredComponentsWithPrimaryExtendThis")
+     * @Inject(type="MultipleInjectComponentsWithPrimaryExtendThis")
      */
     public function injected($a)
     {
@@ -1432,37 +1432,37 @@ class AutowiredProperty17
 }
 
 /**
- * @Component(name="autowire18")
+ * @Component(name="inject18")
  */
-class AutowiredProperty18
+class InjectProperty18
 {
     /**
-	 * @Autowired(type="ASimpleDestroyInitClass")
+	 * @Inject(type="ASimpleDestroyInitClass")
      */
     public $property;
 }
 
-interface MultipleXmlAutowiredComponentsWithPrimaryExtendThis
+interface MultipleXmlInjectComponentsWithPrimaryExtendThis
 {
 
 }
 
-class AnXmlAutowireCandidate implements MultipleXmlAutowiredComponentsWithPrimaryExtendThis
+class AnXmlInjectCandidate implements MultipleXmlInjectComponentsWithPrimaryExtendThis
 {
 
 }
 
-class AnXmlAutowireCandidate2 implements MultipleXmlAutowiredComponentsWithPrimaryExtendThis
+class AnXmlInjectCandidate2 implements MultipleXmlInjectComponentsWithPrimaryExtendThis
 {
 
 }
 /**
- * @Component(name="autowire19")
+ * @Component(name="inject19")
  */
-class AutowiredProperty19
+class InjectProperty19
 {
     /**
-	 * @Autowired(type="MultipleXmlAutowiredComponentsWithPrimaryExtendThis")
+	 * @Inject(type="MultipleXmlInjectComponentsWithPrimaryExtendThis")
      */
     public $property;
 }
