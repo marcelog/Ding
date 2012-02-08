@@ -1,0 +1,6 @@
+beans:
+  autowireCandidate1:
+    class: AnXmlAutowireCandidate
+    primary: true
+  autowireCandidate2:
+    class: AnXmlAutowireCandidate2
