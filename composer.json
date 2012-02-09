@@ -1,7 +1,7 @@
 {
     "name": "marcelog/Ding",
     "type": "framework",
-    "description": "PHP Dependency Injection, Aspect Oriented Programming, MVC",
+    "description": "PHP Dependency Injection based on Spring(tm), with Aspect Oriented Programming, MVC",
     "keywords": ["dependency", "injection", "di", "aop", "aspect", "event", "mvc", "tcp", "container", "bean", "jsr", "spring", "xml", "yaml", "annotation"],
     "homepage": "http://marcelog.github.com/Ding",
     "target_dir": "Ding",
@@ -13,7 +13,6 @@
             "homepage": "http://marcelog.github.com"
         }
     ],
-    "version": "1.5.0",
     "repositories": {
         "pear.apache.org": {
             "pear": {
