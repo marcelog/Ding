@@ -25,9 +25,9 @@ If you are upgrading from <= 1.1 to 1.3, please see README.1.3.x.
 
 --------------------------------------------------------------------------------
 Supported Dependency Injection annotations:
- * JSR-250: @PostConstruct, @PreDestroy, @Resouce, @Configuration
+ * JSR-250: @PostConstruct, @PreDestroy, @Resouce
  * JSR-330: @Inject, @Named, @Singleton
- * Spring specific: @Primary, @Value, @Scope, @Component, @Aspect, @Required, @Bean, @Controller, @RequestMapping
+ * Spring specific: @Configuration, @Primary, @Value, @Scope, @Component, @Aspect, @Required, @Bean, @Controller, @RequestMapping
  * Own specific: @Prototype, @InitMethod, @DestroyMethod, @ListensOn, @MethodInterceptor, @ExceptionInterceptor
 --------------------------------------------------------------------------------
 Please see inside docs/examples for code samples. A good place to start are
