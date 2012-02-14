@@ -100,6 +100,8 @@ Remember that using annotations is completely optional. Not using them will
 benefit performance. Annotations CAN be cached. Use the 'annotations' cache with
 any of the implementations below ;)
 
+See this: http://marcelog.github.com/articles/ding_component_bean_annotations.html
+
 * @Configuration and @Bean just like Java Configuration. So you dont even need
 a beans.xml (@Scope, @InitMethod, @DestroyMethod) for this annotated bean
 definitions.
