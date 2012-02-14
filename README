@@ -15,6 +15,7 @@ Ding is also the winner of the 2011 Binpress programming contest :)
 See these articles for a complete application example:
  * http://marcelog.github.com/articles/php_applications_with_doctrine2_orm_and_ding_di_container.html
  * http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html
+ * Some more articles can be found here http://marcelog.github.com/articles/articles.html
 
 Another (in work) example for a web application can be found in docs/examples/bookstore.
 --------------------------------------------------------------------------------
