@@ -222,6 +222,9 @@ The container natively supports events. This means that you can register beans
 asynchronously trigger (dispatch) these events along some data object. The container
 will then instantiate the needed beans (the listeners) and notify them. Please
 see docs/examples/events for an example using xml, yaml, and annotations.
+
+You can also see this article about working with events:
+http://marcelog.github.com/articles/ding_event_listen_dispatch_bean.html
 --------------------------------------------------------------------------------
 AOP
 ===
