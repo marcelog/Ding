@@ -17,4 +17,10 @@
       <pointcut expression="methodInvocation" method="invoke"/>
     </aspect>
   </bean>
+  <bean id="aspectBean4" class="ClassSimpleAOPDispatcherAspect4"/>
+  <bean id="methodInvocationOverridingArguments" class="ClassSimpleAOPMethodInvocationTest2">
+    <aspect ref="aspectBean4" type="method">
+      <pointcut expression="methodInvocation" method="invoke"/>
+    </aspect>
+  </bean>
 </beans>

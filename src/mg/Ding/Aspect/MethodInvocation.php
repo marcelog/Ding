@@ -118,9 +118,8 @@ class MethodInvocation
 
     /**
      * Call this one *from* your aspect, in order to proceed with the
-     * execution.
-     *
-     * @todo Performance: Remove new ReflectionMethod here
+     * execution. If you pass any arguments to this method, they will override
+     * the original arguments when proceeding to the call.
      *
 	 * @return void
      */
@@ -130,7 +129,11 @@ class MethodInvocation
         if (!$target->isPublic()) {
             $target->setAccessible(true);
         }
-        $this->_result = $target->invokeArgs($this->_object, $this->_args);
+        $arguments = func_get_args();
+        if (empty($arguments)) {
+            $arguments = $this->_args;
+        }
+        $this->_result = $target->invokeArgs($this->_object, $arguments);
         return $this->_result;
     }
 

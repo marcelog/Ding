@@ -80,6 +80,16 @@ class Test_Dispatcher extends PHPUnit_Framework_TestCase
 
     /**
      * @test
+     */
+    public function can_properly_set_method_invocation_arguments()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('methodInvocationOverridingArguments');
+        $invocation = $bean->methodInvocation('2');
+        $this->assertEquals($invocation, '99');
+    }
+    /**
+     * @test
      * @expectedException InvalidArgumentException
      */
     public function can_throw_exception_when_no_exception_interceptors()
@@ -128,5 +138,20 @@ class ClassSimpleAOPMethodInvocationTest
     public function methodInvocation()
     {
         return;
+    }
+}
+
+class ClassSimpleAOPDispatcherAspect4
+{
+    public function invoke(MethodInvocation $invocation)
+    {
+        return $invocation->proceed(99);
+    }
+}
+class ClassSimpleAOPMethodInvocationTest2
+{
+    public function methodInvocation($num)
+    {
+        return $num;
     }
 }
