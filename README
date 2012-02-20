@@ -69,8 +69,8 @@ You can now easily install Ding by issuing:
 or
 
 
-# pear install marcelog/Ding-1.5.0
-just replace 1.5.0 by the release version you'd like to install :)
+# pear install marcelog/Ding-1.5.1
+just replace 1.5.1 by the release version you'd like to install :)
 See: http://pear.marcelog.name/
 
 Note: A version 1.2.x was erroneously released because of a misconfiguration of
@@ -241,6 +241,8 @@ drivers.
 
 * Can apply aspects to parent classes
 
+See this article for more information: 
+http://marcelog.github.com/articles/ding_php_aop_aspect_oriented_programming.html
 --------------------------------------------------------------------------------
 MVC
 ===
