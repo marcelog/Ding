@@ -1601,11 +1601,18 @@ interface IMessageSourceAware
                     <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
                   </div>
                   <div class="hr-1"><hr /></div>
+<p>
+This article has a little background on AOP using Ding: <a href="http://marcelog.github.com/articles/ding_php_aop_aspect_oriented_programming.html">here</a>
+</p>
                   <p>
 Ding has an implementation of the interceptor pattern, which is used to bring
 aop in the framework. Currently, there are 2 available kind of interceptors, both
 of them will call all aspects in a chained fashion. Either of those chained aspects
 can break or continue the chain by choosing to (or not to) call the proceed() method.
+</p>
+<p>
+Since 1.5.1 the proceed() method supports arguments. All the arguments passed to proceed() will
+override the arguments used to call the original method.
 </p>
 <ul>
   <li><u>Method</u>: Called when the method is called.</li>
@@ -1717,7 +1724,7 @@ class AspectA
         try
         {
             echo "Before: " . $invocation->getOriginalInvocation() . "\n";
-            $invocation->proceed(array('b', 'c', 'd'));
+            $invocation->proceed('b', 'c', 'd');
             echo "After\n";
         } catch(Exception $e) {
             echo "Move along, nothing happened here.. \n";
