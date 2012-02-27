@@ -12,5 +12,11 @@
     <property name="inexistant"><value>value</value></property>
   </bean>
   <bean id="invalidFactory" class="AnInvalidFactory"/>
+  <bean id="cyclicDependency1" class="CyclicDependencyClass">
+    <constructor-arg><ref bean="cyclicDependency2"/></constructor-arg>
+  </bean>
+  <bean id="cyclicDependency2" class="CyclicDependencyClass">
+    <constructor-arg><ref bean="cyclicDependency1"/></constructor-arg>
+  </bean>
   <bean id="cantCreate" factory-bean="invalidFactory" factory-method="invalidMethod"/>
 </beans>

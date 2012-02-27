@@ -156,6 +156,16 @@ class Test_Container extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $bean = $container->getBean('cantCreate');
     }
+
+    /**
+     * @test
+     * @expectedException Ding\Bean\Factory\Exception\BeanFactoryException
+     */
+    public function cannot_create_with_cyclic_dependencies()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $bean = $container->getBean('cyclicDependency1');
+    }
 }
 
 class SomeContainerTestBeanClass
@@ -168,6 +178,14 @@ class SomeContainerTestAspectClass
 
 }
 
+class CyclicDependencyClass
+{
+    public $arg;
+    public function __construct(CyclicDependencyClass $arg)
+    {
+        $this->arg = $arg;
+    }
+}
 class AnInvalidFactory
 {
     public function invalidMethod()

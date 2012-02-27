@@ -205,6 +205,13 @@ class ContainerImpl implements IContainer
     private $_properties;
 
     /**
+     * Horrible state keeper for getBeanDefinition() to avoid following cyclic
+     * dependencies.
+     * @var string[]
+     */
+    private $_definitionsInProcess = array();
+
+    /**
      * Prevent serialization.
      *
      * @return array
@@ -581,11 +588,19 @@ class ContainerImpl implements IContainer
      */
     private function _createBean(BeanDefinition $definition)
     {
+        $name = $definition->getName();
+        if (isset($this->_definitionsInProcess[$name])) {
+            throw new BeanFactoryException(
+            	"Cyclic dependency found for: $name"
+            );
+        }
+        $this->_definitionsInProcess[$name] = '';
         $this->_lifecycleManager->beforeCreate($definition);
         $this->_createBeanDependencies($definition);
         $this->_applyAspects($definition);
         $bean = $this->_instantiate($definition);
         if (!is_object($bean)) {
+            unset($this->_definitionsInProcess[$name]);
             throw new BeanFactoryException(
             	'Could not instantiate ' . $definition->getName()
             );
@@ -593,6 +608,7 @@ class ContainerImpl implements IContainer
         $this->_assemble($bean, $definition);
         $this->_setupInitAndShutdown($bean, $definition);
         $this->_lifecycleManager->afterCreate($bean, $definition);
+        unset($this->_definitionsInProcess[$name]);
         return $bean;
     }
 
