@@ -258,7 +258,7 @@ For Apache:
 RewriteRule ^(.*)$ /example.php/$1
 
 The example is mapped to /Some/Mapped/Path/MyController/some (hint: try it with
-?a=b). If you press the button, the form will be submitted and handled by another
+?optional=value). If you press the button, the form will be submitted and handled by another
 action that will print the same data, but now for the post instead of the
 initial get.
 
