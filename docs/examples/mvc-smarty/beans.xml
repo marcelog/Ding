@@ -3,11 +3,5 @@
 	<import resource="mvc.xml"/>
 	<import resource="controllers.xml"/>
 	
-	<bean id="ErrorHandler" class="Ding\Helpers\ErrorHandler\ErrorHandlerHelper" scope="singleton">
-		<property name="errorHandler">
-			<ref bean="MyErrorHandler"/>
-		</property>
-	</bean>
-	
-	<bean id="MyErrorHandler" class="MyErrorHandler" scope="singleton"/>
+	<bean id="MyErrorHandler" class="MyErrorHandler" listens-on="dingError"/>
 </beans>

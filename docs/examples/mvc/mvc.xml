@@ -4,14 +4,14 @@
 	
 	<bean id="HttpUrlMapper" class="Ding\Mvc\Http\HttpUrlMapper" scope="singleton">
 		<property name="map">
-        	<array>
-        		<entry key="0">
-	        		<array>
-	        			<entry key="0"><array><entry><value>/MyController</value></entry></array></entry>
-	        			<entry key="1"><ref bean="MyController"/></entry>
-	        		</array>
-        		</entry>
-        	</array>
+            <array>
+                <entry key="0">
+                    <array>
+                        <entry key="0"><value>/MyController</value></entry>
+                        <entry key="1"><ref bean="MyController"/></entry>
+                    </array>
+                </entry>
+            </array>
 		</property>
 	</bean>
 

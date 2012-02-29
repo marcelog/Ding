@@ -43,7 +43,6 @@ require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
 use Ding\HttpSession\HttpSession;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
-use Ding\Helpers\ErrorHandler\IErrorHandler;
 use Ding\Mvc\ModelAndView;
 use Ding\Mvc\ForwardModelAndView;
 use Ding\Mvc\RedirectModelAndView;
@@ -61,11 +60,10 @@ class AnException extends \Exception
 
 class MyController
 {
-    public function _ExceptionException()
+    public function _ExceptionException($exception)
     {
-        $arguments = func_get_args();
         $modelAndView = new ModelAndView('exception');
-        $modelAndView->add(array('exception' => $arguments['exception']));
+        $modelAndView->add(array('exception' => $exception->getMessage()));
         return $modelAndView;
     }
 
@@ -118,9 +116,9 @@ class MyController
     }
 }
 
-class MyErrorHandler implements IErrorHandler
+class MyErrorHandler
 {
-    public function handleError(ErrorInfo $error)
+    public function onDingError($error)
     {
         echo "This is your custom error handler: " . print_r($error, true);
     }
