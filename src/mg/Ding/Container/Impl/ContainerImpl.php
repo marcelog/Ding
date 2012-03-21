@@ -227,10 +227,16 @@ class ContainerImpl implements IContainer
      */
     public function getBeansByClass($class)
     {
+        $cacheKey = "$class.knownByClass";
+        $ret = $this->_beanDefCache->fetch($cacheKey, $result);
+        if ($result === true) {
+            return $ret;
+        }
         $ret = array();
         foreach ($this->_beanDefinitionProviders as $provider) {
             $ret = array_merge($ret, $provider->getBeansByClass($class));
         }
+        $this->_beanDefCache->store($cacheKey, $ret);
         return $ret;
     }
     /**
