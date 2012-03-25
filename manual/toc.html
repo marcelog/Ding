@@ -2006,12 +2006,14 @@ $properties['ding']['cache']['bdef'] = array(
 <li>Ding\Mvc\RedirectModelAndView</li>
 <li>Ding\Mvc\ForwardModelAndView</li>
 <li>Ding\Mvc\View</li>
+<li>Ding\Mvc\Htt</li>
 </ul>
 <H4>Interfaces</H4>
 <ul>
 <li>Ding\Mvc\IMapper</li>
 <li>Ding\Mvc\IViewResolver</li>
 <li>Ding\Mvc\IViewRender</li>
+<li>Ding\Mvc\IHandlerInterceptor</li>
 </ul>
 <H4>Description</H4>
 <p>
@@ -2034,6 +2036,9 @@ The MVC implementation of Ding is in the namespace Ding\Mvc. The components are:
   to somewhere else (i.e: http 302 header).</li>
   <li><u>ViewResolver</u>: The ViewResolver knows how to get a ViewResolver based on the given View name from the ModelAndView object.</li>
   <li><u>View</u>: Views are in charge of rendering the ModelAndView in a proper way for the actor that triggered the request.</li>
+  <li><u>Interceptor</u>: Classes that implement IHandlerInterceptor can be used as pre and post interceptors. The dispatcher will
+  chain calls to preHandle() and postHandle(). Returning false or a ModelAndView will interrupt the chain, while returning true will
+  continue executing it.</li>
 </ul>
 <H4>HTTP implementation Classes</H4>
 <ul>
@@ -2047,6 +2052,7 @@ The MVC implementation of Ding is in the namespace Ding\Mvc. The components are:
 <li>Ding\Mvc\Http\SmartyViewRender</li>
 <li>Ding\Mvc\Http\HttpUrlMapper</li>
 <li>Ding\Mvc\Http\HttpFrontController</li>
+<li>Ding\Mvc\Http\HttpInterceptor</li>
 </ul>
 <H4>Annotations</H4>
 <ul>
@@ -2078,6 +2084,7 @@ In the case of http, the following components exist:
   <li><u>HttpUrlMapper</u>: Maps an uri and its method to a controller.</li>
   <li><u>HttpFrontController</u>: This is intended to be instantiated and called from your own entry point, will load the
   container and also, invoke the dispatcher and completely handle the request.</li>
+  <li><u>HttpInterceptor</u>: This class can be extended, thus quickly creating pre and post dispatch interceptors.</li>
 </ul>
 <p>
 A special setup is required in the web server. You need to forward ALL uri's (at least the ones you're interested
@@ -2099,6 +2106,7 @@ in the container.
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc">docs/examples/mvc</a>: Using the xml and annotation provider.</li>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-twig">docs/examples/mvc-twig</a>: Using the xml and annotation providers, with twig as the template engine.</li>
   <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-smarty">docs/examples/mvc-twig</a>: Using the xml and annotation providers, with smarty as the template engine.</li>
+  <li><a href="https://github.com/marcelog/Ding/tree/master/docs/examples/mvc-interceptors">docs/examples/mvc-interceptors</a>: Pre and Post dispatch interceptors example.</li>
   </ul>
   <a href="#" class="next-link"><strong>Back</strong></a>
 
