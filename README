@@ -69,8 +69,8 @@ You can now easily install Ding by issuing:
 or
 
 
-# pear install marcelog/Ding-1.5.1
-just replace 1.5.1 by the release version you'd like to install :)
+# pear install marcelog/Ding-1.6.0
+just replace 1.6.0 by the release version you'd like to install :)
 See: http://pear.marcelog.name/
 
 Note: A version 1.2.x was erroneously released because of a misconfiguration of
@@ -284,6 +284,18 @@ them in beans.xml file. see docs/examples/mvc/annotatedController
 
 You can also use Twig to render the views. see docs/examples/mvc-twig
 You can also use Smarty to render the views. see docs/examples/mvc-smarty
+
+Pre And Post Dispatch Interceptors
+----------------------------------
+You can hook before dispatching a request to a controller and also after. A
+dispatcher will chain all preHandle() and postHandle() from all the 
+IHandlerInterceptor you configure.
+
+A preHandle() interceptor returning true will continue the chain execution. To
+stop the chained execution, false can be returned, and also a ModelAndView
+(thus, triggering redirects, view renders, etc).
+
+You can find an example in docs/examples/mvc-interceptors
 --------------------------------------------------------------------------------
 TCPClient
 =========

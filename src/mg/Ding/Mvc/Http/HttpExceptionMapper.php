@@ -31,6 +31,7 @@ namespace Ding\Mvc\Http;
 use Ding\Logger\ILoggerAware;
 use Ding\Mvc\IMapper;
 use Ding\Mvc\Action;
+use Ding\Mvc\DispatchInfo;
 
 /**
  * An exception mapper implementation for http requests.
@@ -103,7 +104,10 @@ class HttpExceptionMapper implements IMapper, ILoggerAware
             if (!($exception instanceof $controllerException)) {
                 continue;
             }
-            return array($controller, str_replace('\\', '_', $controllerException) . 'Exception');
+            return new DispatchInfo(
+                $action, $controller,
+                str_replace('\\', '_', $controllerException) . 'Exception'
+            );
         }
         return false;
     }

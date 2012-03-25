@@ -31,6 +31,7 @@ use Ding\Reflection\IReflectionFactoryAware;
 use Ding\Reflection\IReflectionFactory;
 use Ding\Logger\ILoggerAware;
 use Ding\Mvc\Exception\MvcException;
+use Ding\Mvc\DispatchInfo;
 
 /**
  * Generic dispatcher.
@@ -57,21 +58,9 @@ abstract class Dispatcher implements ILoggerAware, IReflectionFactoryAware
     protected $reflectionFactory;
 
     /**
-     * (non-PHPdoc)
-     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     * @var IHandlerInterceptor[]
      */
-    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
-    {
-        $this->reflectionFactory = $reflectionFactory;
-    }
-    /**
-     * (non-PHPdoc)
-     * @see Ding\Logger.ILoggerAware::setLogger()
-     */
-    public function setLogger(\Logger $logger)
-    {
-        $this->_logger = $logger;
-    }
+    private $_interceptors = array();
 
     /**
      * Main action. Will use the action mapper to get a controller that can
@@ -83,27 +72,36 @@ abstract class Dispatcher implements ILoggerAware, IReflectionFactoryAware
      * @throws MvcException
      * @return void
      */
-    public function dispatch(Action $action, IMapper $mapper)
+    public function dispatch(DispatchInfo $dispatchInfo)
     {
-        $dispatchInfo = $mapper->map($action);
-        if ($dispatchInfo === false) {
-            throw new MvcException(
-            	'No suitable controller for: ' . $action->getId()
-            );
-        }
-
-        $controller = $dispatchInfo[0];
-        $actionHandler = $dispatchInfo[1];
-        $this->_logger->debug(
-        	'Found mapped controller: '
-            . get_class($controller)
-            . ' with action: '
-            . $actionHandler
-        );
+        $controller = $dispatchInfo->handler;
+        $actionHandler = $dispatchInfo->method;
+        $action = $dispatchInfo->action;
         if (!method_exists($controller, $actionHandler)) {
             throw new MvcException('No valid action handler found: ' . $actionHandler);
         }
-        return $this->invokeAction($controller, $actionHandler, $action->getArguments());
+        $interceptors = $dispatchInfo->interceptors;
+        $filtersPassed = true;
+        $result = false;
+        foreach ($interceptors as $interceptor) {
+            $this->_logger->debug("Running pre filter: " . get_class($interceptor));
+            $result = $interceptor->preHandle($action, $controller);
+            if ($result === false) {
+                $filtersPassed = false;
+                $this->_logger->debug("Filter returned false, stopping dispatch");
+                break;
+            } else if ($result instanceof ModelAndView) {
+                return $result;
+            }
+        }
+        if ($filtersPassed) {
+            $result = $this->invokeAction($controller, $actionHandler, $action->getArguments());
+            foreach ($interceptors as $interceptor) {
+                $this->_logger->debug("Running post filter: " . get_class($interceptor));
+                $interceptor->postHandle($action, $controller);
+            }
+        }
+        return $result;
     }
 
 	/**
@@ -117,7 +115,8 @@ abstract class Dispatcher implements ILoggerAware, IReflectionFactoryAware
      *
      * @return mxied
      */
-    private function invokeAction($object, $method, array $arguments) {
+    private function invokeAction($object, $method, array $arguments)
+    {
         $methodInfo = $this->reflectionFactory->getMethod(
             get_class($object), $method
         );
@@ -139,5 +138,22 @@ abstract class Dispatcher implements ILoggerAware, IReflectionFactoryAware
             }
         }
         return $methodInfo->invokeArgs($object, $values);
+    }
+
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Reflection.IReflectionFactoryAware::setReflectionFactory()
+     */
+    public function setReflectionFactory(IReflectionFactory $reflectionFactory)
+    {
+        $this->reflectionFactory = $reflectionFactory;
+    }
+    /**
+     * (non-PHPdoc)
+     * @see Ding\Logger.ILoggerAware::setLogger()
+     */
+    public function setLogger(\Logger $logger)
+    {
+        $this->_logger = $logger;
     }
 }

@@ -28,6 +28,7 @@
  */
 namespace Ding\Mvc\Http;
 
+use Ding\Mvc\DispatchInfo;
 use Ding\Logger\ILoggerAware;
 use Ding\Container\IContainer;
 use Ding\Container\IContainerAware;
@@ -119,12 +120,11 @@ class HttpUrlMapper implements IMapper, IContainerAware, ILoggerAware
      * @param Action $action Original action (coming from the frontcontroller,
      * the full url).
      *
-     * @return array [0] => Controller [1] => Method to call (With
-     * 'Action' appended to the end of the method name).
+     * @return DispatchInfo
      */
-    public function map(Action $action)
+    public function map(Action $actionObject)
     {
-        $url = $action->getId();
+        $url = $actionObject->getId();
         // Add a slash to the beginning is none is found after removing the
         // base url.
         if ($url[0] != '/') {
@@ -147,6 +147,10 @@ class HttpUrlMapper implements IMapper, IContainerAware, ILoggerAware
         foreach ($try as $map) {
             $controllerUrl = $map[0];
             $controller = $map[1];
+            $interceptors = array();
+            if (isset($map[2])) {
+                $interceptors = $map[2];
+            }
             if ($controllerUrl[0] != '/') {
                 $controllerUrl = '/' . $controllerUrl;
             }
@@ -175,7 +179,9 @@ class HttpUrlMapper implements IMapper, IContainerAware, ILoggerAware
             if (!isset($candidates[$len])) {
                 $candidates[$len] = array();
             }
-            $candidates[$len][] = array($controller, $action . 'Action');
+            $candidates[$len][] = new DispatchInfo(
+                $actionObject, $controller, $action . 'Action', $interceptors
+            );
         }
         if (empty($candidates)) {
             return false;

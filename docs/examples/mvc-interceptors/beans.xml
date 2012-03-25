@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<import resource="mvc.xml"/>
+	<import resource="controllers.xml"/>
+	
+	<bean id="MyErrorHandler" class="MyErrorHandler" listens-on="dingError"/>
+</beans>

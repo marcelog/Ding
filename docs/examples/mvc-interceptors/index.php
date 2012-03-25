@@ -29,6 +29,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Mandatory stuff to bootstrap ding. (START)
 ////////////////////////////////////////////////////////////////////////////////
+use Ding\Mvc\Action;
+use Ding\Mvc\Http\HttpInterceptor;
 ini_set(
     'include_path',
     implode(
@@ -41,7 +43,6 @@ ini_set(
 );
 require_once 'Ding/Autoloader/Autoloader.php'; // Include ding autoloader.
 \Ding\Autoloader\Autoloader::register(); // Call autoloader register for ding autoloader.
-require_once __DIR__ . '/annotatedControllers/someControllers.php';
 use Ding\HttpSession\HttpSession;
 use Ding\Helpers\ErrorHandler\ErrorInfo;
 use Ding\Mvc\ModelAndView;
@@ -59,6 +60,17 @@ class AnException extends \Exception
 {
 }
 
+class MyInterceptor extends HttpInterceptor
+{
+    public function preHandle(Action $action, $handler)
+    {
+        $arguments = $action->getArguments();
+        if (!isset($arguments['optional'])) {
+            return new RedirectModelAndView('http://github.com/marcelog/Ding');
+        }
+        return true;
+    }
+}
 class MyController
 {
     public function _ExceptionException($exception)
@@ -132,10 +144,9 @@ $properties = array(
             ),
         ),
         'cache' => array(
-            'proxy' => array('impl' => 'file', 'directory' => __DIR__ . "/cache"),
-            'aspect' => array('impl' => 'file', 'directory' => __DIR__ . "/cache"),
-            'bdef' => array('impl' => 'file', 'directory' => __DIR__ . "/cache"),
-        	'annotations' => array('impl' => 'file', 'directory' => __DIR__ . "/cache"),
+            'proxy' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/proxy'),
+            'bdef' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/bdef'),
+            'beans' => array('impl' => 'dummy', 'directory' => '/tmp/Ding/beans'),
         )
     )
 );

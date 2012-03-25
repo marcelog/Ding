@@ -64,7 +64,20 @@ class HttpFrontController
         IMapper $mapper,
         IViewRender $render
     ) {
-        $modelAndView = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        if ($dispatchInfo === false) {
+            throw new MvcException(
+            	'No suitable controller for: ' . $action->getId()
+            );
+        }
+        $controller = $dispatchInfo->handler;
+        $actionHandler = $dispatchInfo->method;
+
+        self::$_logger->debug(
+        	'Found mapped controller: ' . get_class($controller)
+            . ' with action: ' . $actionHandler
+        );
+        $modelAndView = $dispatcher->dispatch($dispatchInfo);
         if ($modelAndView instanceof ForwardModelAndView) {
             self::$_logger->debug(
               	'Forwarding ModelAndView: ' . $modelAndView->getName()
@@ -101,12 +114,15 @@ class HttpFrontController
      */
     public static function handle(array $properties = array(), $baseUrl = '/')
     {
+        $exceptionThrown = null;
+        $filtersPassed = true;
         $session = HttpSession::getSession();
         $container = ContainerImpl::getInstance($properties);
         self::$_logger = \Logger::getLogger(__CLASS__);
         $baseUrlLen = strlen($baseUrl);
         ob_start();
         $exceptionMapper = $render = $dispatcher = $viewResolver = false;
+        $interceptors = array();
         try
         {
             $dispatcher = $container->getBean('HttpDispatcher');
@@ -134,6 +150,7 @@ class HttpFrontController
             $mapper = $container->getBean('HttpUrlMapper');
             self::dispatch($dispatcher, $viewResolver, $action, $mapper, $render);
         } catch(\Exception $exception) {
+            $exceptionThrown = $exception;
             self::$_logger->debug('Got Exception: ' . $exception);
             ob_end_clean();
             ob_start();
@@ -148,4 +165,5 @@ class HttpFrontController
         }
         ob_end_flush();
     }
+
 }

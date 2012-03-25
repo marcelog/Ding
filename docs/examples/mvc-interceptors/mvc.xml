@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="HttpDispatcher" class="Ding\Mvc\Http\HttpDispatcher"/>
+	<bean id="HttpUrlMapper" class="Ding\Mvc\Http\HttpUrlMapper" scope="singleton">
+		<property name="map">
+            <array>
+                <entry key="0">
+                    <array>
+                        <entry key="0"><value>/MyController</value></entry>
+                        <entry key="1"><ref bean="MyController"/></entry>
+                        <entry key="2"><array>
+                            <entry><ref bean="interceptor1"/></entry>
+                        </array></entry>
+                    </array>
+                </entry>
+            </array>
+		</property>
+	</bean>
+
+    <bean id="interceptor1" class="MyInterceptor"/>
+	<bean id="HttpViewResolver" class="Ding\Mvc\Http\HttpViewResolver" scope="singleton">
+		<property name="viewPrefix"><value>view.</value></property>
+		<property name="viewSuffix"><value>.html</value></property>
+		<property name="viewPath"><value>./views</value></property>
+	</bean>
+
+    <bean id="HttpViewRender" class="Ding\Mvc\Http\HttpViewRender" scope="singleton"/>
+    
+	<bean id="HttpExceptionMapper" class="Ding\Mvc\Http\HttpExceptionMapper" scope="singleton">
+		<property name="map">
+        	<array>
+        	   <entry key="0">
+        	       <array>
+                       <entry key="0"><value>\Exception</value></entry>
+		               <entry key="1"><ref bean="MyController"/></entry>
+        	       </array>
+        	   </entry>
+        	</array>
+		</property>
+	</bean>
+</beans>

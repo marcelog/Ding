@@ -26,6 +26,10 @@
  * limitations under the License.
  *
  */
+use Ding\Mvc\Action;
+use Ding\Mvc\Http\HttpInterceptor;
+use Ding\Mvc\Http\HttpFrontController;
+use Ding\Mvc\DispatchInfo;
 use Ding\Mvc\Http\HttpAction;
 use Ding\Container\Impl\ContainerImpl;
 use Ding\Mvc\ModelAndView;
@@ -63,13 +67,60 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function can_dispatch_with_pre_and_post_interceptors()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $dispatcher = $container->getBean('HttpDispatcher');
+        $mapper = $container->getBean('HttpUrlMapper');
+        $action = new HttpAction('/MyInterceptedController/something');
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
+        $this->assertTrue($model instanceof ModelAndView);
+        $this->assertEquals($model->getName(), 'blah');
+    }
+
+    /**
+     * @test
+     */
+    public function can_interrupt_dispatch_chain_with_false()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $dispatcher = $container->getBean('HttpDispatcher');
+        $mapper = $container->getBean('HttpUrlMapper');
+        $action = new HttpAction('/MyInterruptedInterceptedController/something');
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
+        $this->assertFalse($model);
+        $this->assertTrue(MyInterceptor3::$boolean);
+        $this->assertFalse(MyInterceptor4::$boolean);
+    }
+
+    /**
+     * @test
+     */
+    public function can_interrupt_dispatch_chain_with_modelandview()
+    {
+        $container = ContainerImpl::getInstance($this->_properties);
+        $dispatcher = $container->getBean('HttpDispatcher');
+        $mapper = $container->getBean('HttpUrlMapper');
+        $action = new HttpAction('/MyMAVInterruptedInterceptedController/something');
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
+        $this->assertTrue($model instanceof ModelAndView);
+        $this->assertEquals($model->getName(), 'main');
+    }
+
+    /**
+     * @test
+     */
     public function can_dispatch()
     {
         $container = ContainerImpl::getInstance($this->_properties);
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
         $action = new HttpAction('/MyController/something');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
         $this->assertTrue($model instanceof ModelAndView);
         $this->assertEquals($model->getName(), 'blah');
     }
@@ -82,8 +133,10 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
+        $handler = $container->getBean('myController');
         $action = new HttpAction('/MyController');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
         $this->assertTrue($model instanceof ModelAndView);
         $this->assertEquals($model->getName(), 'main');
     }
@@ -96,8 +149,10 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
+        $handler = $container->getBean('myController');
         $action = new HttpAction('/MyController/someOptionalArguments', array('arg1' => 'value'));
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
         $this->assertTrue($model instanceof ModelAndView);
         $this->assertEquals($model->getName(), 'main');
         $this->assertEquals(AController::$optionalValue, 'optionalValue');
@@ -112,8 +167,10 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
+        $handler = $container->getBean('myController');
         $action = new HttpAction('MyControllerNoSlash/something');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
         $this->assertTrue($model instanceof ModelAndView);
         $this->assertEquals($model->getName(), 'blah');
     }
@@ -127,13 +184,14 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $container = ContainerImpl::getInstance($this->_properties);
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
+        $handler = $container->getBean('myController');
         $action = new HttpAction('/MyController/somethingInvalid');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
     }
 
     /**
      * @test
-     * @expectedException Ding\Mvc\Exception\MvcException
      */
     public function cannot_dispatch_to_invalid_controller()
     {
@@ -141,7 +199,8 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
         $action = new HttpAction('/MyControllerInvalid/something');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $this->assertFalse($dispatchInfo);
     }
 
     /**
@@ -164,7 +223,8 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
         $action = new HttpAction('/MyAnnotatedController/something');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
         $this->assertTrue($model instanceof ModelAndView);
         $this->assertEquals($model->getName(), 'blah');
     }
@@ -178,7 +238,8 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
         $action = new HttpAction('/MyController/withRequiredArgument');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
     }
 
     /**
@@ -201,11 +262,13 @@ class Test_HttpDispatcher extends PHPUnit_Framework_TestCase
         $dispatcher = $container->getBean('HttpDispatcher');
         $mapper = $container->getBean('HttpUrlMapper');
         $action = new HttpAction('/MyAnnotatedController1/something');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
         $this->assertTrue($model instanceof ModelAndView);
         $this->assertEquals($model->getName(), 'blah');
         $action = new HttpAction('/MyAnnotatedController2/something');
-        $model = $dispatcher->dispatch($action, $mapper);
+        $dispatchInfo = $mapper->map($action);
+        $model = $dispatcher->dispatch($dispatchInfo);
         $this->assertTrue($model instanceof ModelAndView);
         $this->assertEquals($model->getName(), 'blah');
     }
@@ -276,4 +339,62 @@ class UnMappedAnnotatedController
 class UnMappedURLAnnotatedController
 {
 
+}
+
+class MyInterceptor3 extends HttpInterceptor
+{
+    public static $boolean = false;
+
+    public function preHandle(Action $action, $handler)
+    {
+        self::$boolean = true;
+        return false;
+    }
+
+    public function postHandle(Action $action, $handler)
+    {
+        return true;
+    }
+}
+
+class MyInterceptor4 extends HttpInterceptor
+{
+    public static $boolean = false;
+
+    public function preHandle(Action $action, $handler)
+    {
+        self::$boolean = true;
+        return true;
+    }
+
+    public function postHandle(Action $action, $handler)
+    {
+        return true;
+    }
+}
+
+class MyInterceptor5 extends HttpInterceptor
+{
+    public function preHandle(Action $action, $handler)
+    {
+        return new ModelAndView('main');
+    }
+
+    public function postHandle(Action $action, $handler)
+    {
+        return true;
+    }
+}
+
+class MyInterceptor6 extends HttpInterceptor
+{
+    public function preHandle(Action $action, $handler)
+    {
+        return false;
+    }
+
+    public function postHandle(Action $action, $handler)
+    {
+        return true;
+    }
 }
