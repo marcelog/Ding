@@ -67,13 +67,6 @@ use Ding\MessageSource\IMessageSource;
 class ContainerImpl implements IContainer
 {
     /**
-     * Signals to handle.
-     * @var array
-     */
-    private $_signals = array(
-        SIGQUIT, SIGHUP, SIGINT, SIGCHLD, SIGTERM, SIGUSR1, SIGUSR2
-    );
-    /**
      * Logger.
      * @var Logger
      */
@@ -1076,11 +1069,14 @@ class ContainerImpl implements IContainer
         $this->registerProperties(self::$_options['properties']);
         $sapi = php_sapi_name();
         if ($sapi == 'cgi' || $sapi == 'cli') {
+            $signals = array(
+                SIGQUIT, SIGHUP, SIGINT, SIGCHLD, SIGTERM, SIGUSR1, SIGUSR2
+            );
             $handler = array($this, 'signalHandler');
-            foreach ($this->_signals as $signal) {
+            foreach ($signals as $signal) {
                 pcntl_signal($signal, $handler);
             }
-            pcntl_sigprocmask(SIG_UNBLOCK, $this->_signals);
+            pcntl_sigprocmask(SIG_UNBLOCK, $signals);
         }
         set_error_handler(array($this, 'errorHandler'));
         register_shutdown_function(array($this, 'shutdownHandler'));
