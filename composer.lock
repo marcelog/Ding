@@ -1,9 +1,14 @@
 {
-    "hash": "c469bddff05a83eaa5322e11fee17626",
+    "hash": "e278dac4af1944a492f72b6af0b2649d",
     "packages": [
-        {
-            "package": "Apache_log4php",
-            "version": "2.1.0"
-        }
+
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": [
+
     ]
 }

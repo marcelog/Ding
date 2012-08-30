@@ -1,30 +1,24 @@
 {
-    "name": "marcelog/Ding",
-    "type": "framework",
-    "description": "PHP Dependency Injection based on Spring(tm), with Aspect Oriented Programming, MVC",
-    "keywords": ["dependency", "injection", "di", "aop", "aspect", "event", "mvc", "tcp", "container", "bean", "jsr", "spring", "xml", "yaml", "annotation"],
-    "homepage": "http://marcelog.github.com/Ding",
-    "target_dir": "Ding",
-    "license": "Apache2",
-    "authors": [
-        {
-            "name": "Marcelo Gornstein",
-            "email": "marcelog@gmail.com",
-            "homepage": "http://marcelog.github.com"
-        }
-    ],
-    "repositories": {
-        "pear.apache.org": {
-            "pear": {
-                "url": "pear.apache.org/log4php"
-            }
-        }
-    },
-    "require": {
-        "php": ">=5.3.3",
-        "Apache_log4php": "=2.1.0"
-    },
-    "autoload": {
-        "psr-0": { "": "src/mg/Ding" }
+  "name": "marcelog/ding",
+  "type": "framework",
+  "description": "PHP Dependency Injection based on Spring(tm), with Aspect Oriented Programming, MVC",
+  "keywords": ["dependency", "injection", "di", "aop", "aspect", "event", "mvc", "tcp", "container", "bean", "jsr", "spring", "xml", "yaml", "annotation"],
+  "homepage": "http://marcelog.github.com/Ding",
+  "license": "Apache2",
+  "authors": [
+    {
+      "name": "Marcelo Gornstein",
+      "email": "marcelog@gmail.com",
+      "homepage": "http://marcelog.github.com",
+      "role": "Developer"
     }
+  ],
+  "autoload": {
+    "psr-0": {
+      "Ding": "src/mg"
+    }
+  },
+  "require": {
+    "php": ">=5.3.3"
+  }
 }
