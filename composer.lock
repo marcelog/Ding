@@ -1,7 +1,10 @@
 {
-    "hash": "e278dac4af1944a492f72b6af0b2649d",
+    "hash": "2265fe393e25eaf0de856317998344d4",
     "packages": [
-
+        {
+            "package": "pear-pear.apache.org/log4php/Apache_log4php",
+            "version": "2.2.1"
+        }
     ],
     "packages-dev": null,
     "aliases": [
