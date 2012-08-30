@@ -1,8 +1,5 @@
 Introduction
 ============
-This framework is a very young project, started on 12/16/2010 because of the
-lack of spring-alike frameworks for php. 
-
 Please contact me if you have any comments, doubts, or any kind of feedback.
 Send an email to: marcelog@gmail.com
 
@@ -17,38 +14,18 @@ See these articles for a complete application example:
  * http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html
  * Some more articles can be found here http://marcelog.github.com/articles/articles.html
 
-Another (in work) example for a web application can be found in docs/examples/bookstore.
+Please see inside docs/examples for code samples. A good place to start are
+the "basic", "aop", "quickstart", "doctrine", and "mvc" examples.
 --------------------------------------------------------------------------------
 Upgrading note
 --------------------------------------------------------------------------------
 If you are upgrading from <= 1.1 to 1.3, please see README.1.3.x.
-
 --------------------------------------------------------------------------------
 Supported Dependency Injection annotations:
  * JSR-250: @PostConstruct, @PreDestroy, @Resouce
  * JSR-330: @Inject, @Named, @Singleton
  * Spring specific: @Configuration, @Primary, @Value, @Scope, @Component, @Aspect, @Required, @Bean, @Controller, @RequestMapping
  * Own specific: @Prototype, @InitMethod, @DestroyMethod, @ListensOn, @MethodInterceptor, @ExceptionInterceptor
---------------------------------------------------------------------------------
-Please see inside docs/examples for code samples. A good place to start are
-the "basic", "aop", "quickstart", "doctrine", and "mvc" examples.
-
-PAMI: docs/examples/pami (PHP Asterisk Manager Interface, at
-https://github.com/marcelog/PAMI, is an oop implementation for asterisk manager
-interface, designed to interact and manage asterisk in an event-driven fashion).
-
-PAGI: docs/examples/pagi (PHP Asterisk Gateway Interface, at
-https://github.com/marcelog/PAGI, is an oop implementation for asterisk gateway
-interface, designed to make agi -telephony- applications very easy).
---------------------------------------------------------------------------------
-
-Notes about the source:
-
-* Expect changes and be patience, the work will get done.
-
-* If you're wondering why the first comment of each source file is repeated,
-it's because they're actually 2 different comments: one for the file, and one
-for the class.
 --------------------------------------------------------------------------------
 INSTALLATION
 ------------
@@ -60,6 +37,20 @@ CI Server
 Take a look at the Jenkins CI Server (http://ci.marcelog.name/) to check out the
 docs, metrics, and pear and phar packages available.
 --------------------------------------------------------------------------------
+Available via Composer
+----------------------
+Just add the package "marcelog/ding":
+{
+    "require": {
+        "marcelog/ding": "dev-master"
+    }
+}
+
+Note that since log4php is a dependency and does not have a composer
+installation available, you will need to add it to your own composer.json file.
+
+Packagist URL: http://packagist.org/packages/marcelog/ding
+-------------------------------------------------------------------------------
 Available via PEAR
 ------------------
 You can now easily install Ding by issuing:
@@ -81,12 +72,8 @@ the latest version.
 --------------------------------------------------------------------------------
 PHAR File
 =========
-Ding can also be used as a phar file. See docs/examples/basic-with-phar. To 
-generate the phar you can use the task "package" from the phing build.xml file or
-manually run resources/generatePhar.php from the top of the source directory.
-
-You have to add the directory that contains the phar file to the include file
-and you should be set.
+Just go to the Jenkins server at http://ci.marcelog.name and grab the latest
+phar distribution from the Ding job.
 --------------------------------------------------------------------------------
 Supported bean definitions providers
 ====================================
