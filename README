@@ -382,10 +382,6 @@ Integration with other frameworks
 =================================
 See our doctrine2 integration:
 https://github.com/marcelog/Ding/tree/master/docs/examples/doctrine
-
-See the pami example: https://github.com/marcelog/Ding/tree/master/docs/examples/pami
-
-See the pagi example: https://github.com/marcelog/Ding/tree/master/docs/examples/pagi
 --------------------------------------------------------------------------------
 Developers
 ==========
@@ -400,9 +396,6 @@ to run ding tests and metrics.
 --------------------------------------------------------------------------------
 Debugging, logging
 ==================
-
-NOTE: log4php is NOW A REQUIREMENT. The dummy logger is gone.
-
 You need log4php (http://logging.apache.org/log4php/).
 Just make sure you copy it to the include_path and Ding will pick it up from there.
 
@@ -420,11 +413,8 @@ all the cache subsytems. Otherwise, use memcached or file.
 * Do not use annotations at all. Only use the XML or even better, YAML.
 * If you are using annotations (good for you! just dont abuse ;)) use the
 annotations cache with apc or memcached or file (in that order).
-* Do not include the driver you wont be using (like SignalHandler, ErrorHandler,
-Shutdown, etc).
 * Do not abuse the aop feature.
 --------------------------------------------------------------------------------
-
  Collaborators:
  ============
 agvstin | agu.gutierrez@gmail.com
