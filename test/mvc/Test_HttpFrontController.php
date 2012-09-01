@@ -50,9 +50,19 @@ if (!defined('OUTPUT_TEST')) {
 class Test_HttpFrontController extends PHPUnit_Framework_TestCase
 {
     private $_properties = array();
-
+    private $smartyCompile;
+    private $smartyCache;
+    private $twigCache;
+    
     public function setUp()
     {
+        $tmp = getenv('TMPDIR');
+        $this->smartyCompile = "$tmp/smartycompile";
+        $this->smartyCache = "$tmp/smartycache";
+        $this->twigCache = "$tmp/twig";
+        @mkdir($this->smartyCompile, 0750, true);
+        @mkdir($this->smartyCache, 0750, true);
+        @mkdir($this->twigCache, 0750, true);
         $this->_properties = array(
             'ding' => array(
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
@@ -61,13 +71,13 @@ class Test_HttpFrontController extends PHPUnit_Framework_TestCase
                         'twig.debug' => false,
                         'twig.charset' => 'utf-8',
                         'twig.base_template_class' => 'Twig_Template',
-                        'twig.cache' => '/tmp/Ding/twigcache',
+                        'twig.cache' => $this->twigCache,
                         'twig.auto_reload' => true,
                         'twig.strict_variables' => false,
                         'twig.autoescape' => 0,
-                        'smarty.compile_dir' => '/tmp/Ding/smartycompile/',
-                		'smarty.config_dir' => '/tmp/Ding/',
-                    	'smarty.cache_dir' => '/tmp/Ding/smartycache/',
+                        'smarty.compile_dir' => $this->smartyCompile,
+                		'smarty.config_dir' => $this->smartyCache,
+                    	'smarty.cache_dir' => $this->smartyCache,
                 		'smarty.debugging' => false,
                 		'prefix' => RESOURCES_DIR
                     ),
@@ -194,9 +204,9 @@ class Test_HttpFrontController extends PHPUnit_Framework_TestCase
                 'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
                 'factory' => array(
                     'properties' => array(
-                        'smarty.compile_dir' => '/tmp/Ding/smartycompile/',
-                		'smarty.config_dir' => '/tmp/Ding/',
-                    	'smarty.cache_dir' => '/tmp/Ding/smartycache/',
+                        'smarty.compile_dir' => $this->smartyCompile,
+                		'smarty.config_dir' => $this->smartyCache,
+                    	'smarty.cache_dir' => $this->smartyCache,
                 		'smarty.debugging' => false,
                 		'prefix' => RESOURCES_DIR
                     ),
