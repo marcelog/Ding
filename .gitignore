@@ -5,4 +5,5 @@ vendor/*
 log.log
 build
 bookstore.sqlite
+resources/php.ini
 
