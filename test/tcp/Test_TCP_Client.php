@@ -105,7 +105,8 @@ class Test_Tcp_Client extends PHPUnit_Framework_TestCase
         while (MyClientHandler::$time < 1) {
             usleep(1000);
         }
-        $this->assertEquals(MyClientHandler::$time - $start, 10);
+        $length = MyClientHandler::$time - $start;
+        $this->assertTrue($length >= 10 && $length <= 15);
     }
 
     /**
@@ -147,7 +148,8 @@ class Test_Tcp_Client extends PHPUnit_Framework_TestCase
         while (MyClientHandler::$time < 1) {
             usleep(1000);
         }
-        $this->assertEquals(MyClientHandler::$time - $start, 10);
+        $length = MyClientHandler::$time - $start;
+        $this->assertTrue($length >= 10 && $length <= 15);
     }
     /**
      * @test
