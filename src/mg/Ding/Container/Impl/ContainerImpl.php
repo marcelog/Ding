@@ -1068,15 +1068,17 @@ class ContainerImpl implements IContainer
         self::$_options = array_replace_recursive(self::$_options, $options);
         $this->registerProperties(self::$_options['properties']);
         $sapi = php_sapi_name();
-        if ($sapi == 'cgi' || $sapi == 'cli') {
-            $signals = array(
-                SIGQUIT, SIGHUP, SIGINT, SIGCHLD, SIGTERM, SIGUSR1, SIGUSR2
-            );
-            $handler = array($this, 'signalHandler');
-            foreach ($signals as $signal) {
-                pcntl_signal($signal, $handler);
+        if (strtoupper(substr(PHP_OS,0,3)) !== 'WIN'){
+            if ($sapi == 'cgi' || $sapi == 'cli') {
+                $signals = array(
+                    SIGQUIT, SIGHUP, SIGINT, SIGCHLD, SIGTERM, SIGUSR1, SIGUSR2
+                );
+                $handler = array($this, 'signalHandler');
+                foreach ($signals as $signal) {
+                    pcntl_signal($signal, $handler);
+                }
+                pcntl_sigprocmask(SIG_UNBLOCK, $signals);
             }
-            pcntl_sigprocmask(SIG_UNBLOCK, $signals);
         }
         set_error_handler(array($this, 'errorHandler'));
         register_shutdown_function(array($this, 'shutdownHandler'));
