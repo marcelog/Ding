@@ -40,7 +40,7 @@ namespace Ding\HttpSession;
  * @license    http://marcelog.github.com/ Apache License 2.0
  * @link       http://marcelog.github.com/
  */
-class HttpSession
+class HttpSession implements IHttpSession
 {
     /**
      * Current instance.
