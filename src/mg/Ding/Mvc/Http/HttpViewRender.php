@@ -34,6 +34,9 @@ use Ding\MessageSource\IMessageSource;
 use Ding\MessageSource\IMessageSourceAware;
 use Ding\Mvc\IViewRender;
 use Ding\Mvc\View;
+use Ding\Container\Impl\ContainerImpl;
+use Ding\HttpSession\Exception\HttpSessionException;
+use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 /**
  * Http view render.
@@ -60,16 +63,25 @@ class HttpViewRender implements IViewRender, IMessageSourceAware
 
     public function translate($bundle, $message, $arguments = array())
     {
-        $session = HttpSession::getSession();
-        if (!$session->hasAttribute('LANGUAGE')) {
-            return $this->messageSource->getMessage(
-                $bundle, $message, $arguments
-            );
-        } else {
-            return $this->messageSource->getMessage(
-                $bundle, $message, $arguments, $session->getAttribute('LANGUAGE')
-            );
-        }
+		$container = ContainerImpl::getInstance();		
+		try {
+			$session = $container->getBean('SessionHandler');			
+		} catch(BeanFactoryException $e) {			
+			$session = HttpSession::getSession();		
+		}	
+		
+		if (!method_exists($session, "getSession") || !method_exists($session, "getAttribute") )
+			throw new HttpSessionException("Session Handler must implement IHttpSession Interface");
+
+		if (!$session->hasAttribute('LANGUAGE')) {
+			return $this->messageSource->getMessage(
+				$bundle, $message, $arguments
+			);
+		} else {
+			return $this->messageSource->getMessage(
+				$bundle, $message, $arguments, $session->getAttribute('LANGUAGE')
+			);
+		}		
     }
 
     /**
