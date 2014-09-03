@@ -3,7 +3,6 @@ namespace Ding\HttpSession;
 
 interface IHttpSession
 {
-
     public function destroy();
 
     public function hasAttribute($name);
@@ -12,5 +11,5 @@ interface IHttpSession
 
     public function setAttribute($name, $value);
 
-    public static function getSession();	
+    public function getSession();	
 }

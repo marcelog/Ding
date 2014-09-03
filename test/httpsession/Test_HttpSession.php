@@ -27,7 +27,7 @@
  *
  */
 
-use Ding\HttpSession\HttpSession;
+use Ding\Container\Impl\ContainerImpl;
 
 /**
  * This class will test the HttpSession.
@@ -43,13 +43,30 @@ use Ding\HttpSession\HttpSession;
  */
 class Test_HttpSession extends PHPUnit_Framework_TestCase
 {
+    private $_properties = array();
+
+    public function setUp()
+    {
+        $this->_properties = array(
+            'ding' => array(
+                'log4php.properties' => RESOURCES_DIR . DIRECTORY_SEPARATOR . 'log4php.properties',
+                'factory' => array(
+                    'bdef' => array(
+                        'xml' => array('filename' => 'sesionHandler.xml', 'directories' => array(RESOURCES_DIR))
+                    )
+                )
+            )
+        );
+    }
+
     /**
      * @test
      */
     public function can_use_session()
     {
-        $session = HttpSession::getSession();
-        $session->destroy();
+        $container = ContainerImpl::getInstance($this->_properties);
+        $session = $container->getBean("SesionHandler");
+        $session->destroy();        
     }
 
     /**
@@ -57,7 +74,8 @@ class Test_HttpSession extends PHPUnit_Framework_TestCase
      */
     public function can_return_false_on_invalid_attribute()
     {
-        $session = HttpSession::getSession();
+        $container = ContainerImpl::getInstance($this->_properties);
+        $session = $container->getBean("SesionHandler");
         $this->assertFalse($session->getAttribute('notexistant'));
     }
 
@@ -66,7 +84,8 @@ class Test_HttpSession extends PHPUnit_Framework_TestCase
      */
     public function can_use_attributes()
     {
-        $session = HttpSession::getSession();
+        $container = ContainerImpl::getInstance($this->_properties);
+        $session = $container->getBean("SesionHandler");
         $session->setAttribute('foo', 'bar');
         $this->assertEquals($session->getAttribute('foo'), 'bar');
         $this->assertTrue($session->hasAttribute('foo'));

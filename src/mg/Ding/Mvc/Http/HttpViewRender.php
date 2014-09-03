@@ -27,16 +27,12 @@
  */
 namespace Ding\Mvc\Http;
 
-use Ding\HttpSession\HttpSession;
-
 use Ding\MessageSource\IMessageSource;
 
 use Ding\MessageSource\IMessageSourceAware;
 use Ding\Mvc\IViewRender;
 use Ding\Mvc\View;
 use Ding\Container\Impl\ContainerImpl;
-use Ding\HttpSession\Exception\HttpSessionException;
-use Ding\Bean\Factory\Exception\BeanFactoryException;
 
 /**
  * Http view render.
@@ -63,16 +59,9 @@ class HttpViewRender implements IViewRender, IMessageSourceAware
 
     public function translate($bundle, $message, $arguments = array())
     {
-		$container = ContainerImpl::getInstance();		
-		try {
-			$session = $container->getBean('SessionHandler');			
-		} catch(BeanFactoryException $e) {			
-			$session = HttpSession::getSession();		
-		}	
+        $container = ContainerImpl::getInstance();		
+        $session = $container->getBean('SessionHandler');			
 		
-		if (!method_exists($session, "getSession") || !method_exists($session, "getAttribute") )
-			throw new HttpSessionException("Session Handler must implement IHttpSession Interface");
-
 		if (!$session->hasAttribute('LANGUAGE')) {
 			return $this->messageSource->getMessage(
 				$bundle, $message, $arguments
