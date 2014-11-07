@@ -25,6 +25,6 @@
   },
   "require": {
     "php": ">=5.3.3",
-    "pear-log4php/Apache_log4php": ">=2.1.0"
+    "apache/log4php": "2.3.0"
   }
 }
