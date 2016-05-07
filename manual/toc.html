@@ -49,7 +49,20 @@
             <div class="mod simple">
               <span class="top"><span class="tl"></span><span class="tr"></span></span>
               <div class="inner set-height-1">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- blog2 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6947936742546167"
+     data-ad-slot="2769853059"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
                 <h2>Ding</h2>
+<a href="https://twitter.com/share" class="twitter-share-button" data-via="mgornstein" data-size="large" data-related="mgornstein">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
                 <ul class="tab-title">
                     <li><a href="/Ding/index.html">About</a></li>
                     <li><a href="install.html">Installation</a></li>
@@ -60,19 +73,19 @@
                 </ul>
                 <div id="tab-content-4" class="tab-content tab-content-extra">
                     <ol class="number-list">
-    <li><a href="#about">About this manual</a></li> 
-    <li><a href="#ioc">The beans, the container, Inversion Of Control, and Dependency Injection</a></li> 
-    <li><a href="#events">Events and event driven programming support</a></li> 
+    <li><a href="#about">About this manual</a></li>
+    <li><a href="#ioc">The beans, the container, Inversion Of Control, and Dependency Injection</a></li>
+    <li><a href="#events">Events and event driven programming support</a></li>
     <li><a href="#resources">Using Resources</a></li>
-    <li><a href="#i18n">Internationalization (i18n) support</a></li> 
-    <li><a href="#aop">Aspect Oriented Programming</a></li> 
-    <li><a href="#config">Configuring the container</a></li> 
+    <li><a href="#i18n">Internationalization (i18n) support</a></li>
+    <li><a href="#aop">Aspect Oriented Programming</a></li>
+    <li><a href="#config">Configuring the container</a></li>
     <li><a href="#mvc">The MVC Implementation</a></li>
-    <li><a href="#helper-syslog">The Syslog helper</a></li> 
-    <li><a href="#helper-pami">The PAMI helper</a></li> 
+    <li><a href="#helper-syslog">The Syslog helper</a></li>
+    <li><a href="#helper-pami">The PAMI helper</a></li>
     <li><a href="#helper-pagi">The PAGI helper</a></li>
-    <li><a href="#helper-tcpclient">The TCP Client helper</a></li> 
-    <li><a href="#helper-tcpserver">The TCP Server helper</a></li> 
+    <li><a href="#helper-tcpclient">The TCP Client helper</a></li>
+    <li><a href="#helper-tcpserver">The TCP Server helper</a></li>
                   </ol>
                     <a name="about" id="about"></a>
                   <div class="line">
@@ -92,7 +105,16 @@ books, and tutorials. Also, having some knowledge or experience using the Spring
 Seasar, or Sean is not required, but useful when using Ding.
 </p>
                     <a href="#" class="next-link"><strong>Back</strong></a>
-                    <a name="ioc" id="ioc"></a>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- blog1 -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6947936742546167"
+     data-ad-slot="6142121850"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>                    <a name="ioc" id="ioc"></a>
                   <div class="line">
                         <h3>2. The beans, the container, Inversion Of Control, and Dependency Injection</h3>
                     <!-- <a href="#" class="next-link"><strong>Next</strong></a> -->
@@ -104,7 +126,7 @@ A Bean is just an object. We call it bean because this particular object obeys s
 rules and this rules and the bean's lifecycle are managed entirely by what is called
 a container.
 </p>
-<p> 
+<p>
 In the java world, a bean is a POJO (Plan Old Java Object), meaning that
 virtually any concrete class definition is a bean. Since the latter also
 applies in the php world, we should say that a bean is a "POPO"
@@ -128,13 +150,13 @@ be destroyed). The container provides the following options as scopes:
 </p>
 <H4>Bean metadata</H4>
 <p>
-For each managed bean by the container, exists a bean definition, which 
+For each managed bean by the container, exists a bean definition, which
 composes all the metadata needed by the container and its extensions to
 actually create and modify the bean's behavior.
 </p>
 <p>
 This data is generated, and
-modified by "Providers". Providers are registered in the container. Currently, Ding supports 3 
+modified by "Providers". Providers are registered in the container. Currently, Ding supports 3
 different providers: "xml", "yaml", and "annotations".
 </p>
 <p>
@@ -180,8 +202,8 @@ This metadata includes:
   <li><u>Factory Class:</u>Optional. If specified, informs the container to call
   a static method (see Factory Method) of the given class to create the bean
   instead of using the constructor.</li>
-  <li><u>Factory Bean:</u>Optional. Same as factory class, but will use a method for 
-  the given bean.</li> 
+  <li><u>Factory Bean:</u>Optional. Same as factory class, but will use a method for
+  the given bean.</li>
   <li><u>Abstract:</u>Since 1.1.0. False by default. Specifies a bean as concrete or abstract. Abstract beans cant be instantiated.</li>
   <li><u>Parent:</u>Since 1.1.0. Optional. The name of parent bean, if any.</li>
   <li><u>Aliases:</u>Since 1.1.2. Optional. An array of strings, with the aliases known for this bean.</li>
@@ -336,11 +358,11 @@ when instantiating the bean. (JSR-330)
 <p>
 @Resource: Use it in setters AND/OR properties to resolve the injected dependency by name. So
 for example, the method setDependency() will resolve to a bean named "dependency".
-(JSR-250). 
+(JSR-250).
 </p>
 <p>
-Since 1.5.0: @Resource can also accept an optional name to indicate the name of the bean to be 
-injected: 
+Since 1.5.0: @Resource can also accept an optional name to indicate the name of the bean to be
+injected:
 </p>
 <pre name="code" class="php">
 /**
@@ -352,7 +374,7 @@ class MyBean
      * @Resource(name="aBeanName")
      */
     protected $property;
-    
+
     /**
      * @Resource(name="aBeanName")
      */
@@ -372,7 +394,7 @@ class SomeBeanProviderClass
      * @Resource
      */
     protected $dependency;
-    
+
     /**
      * @Bean
      * @Scope(value='singleton')
@@ -397,7 +419,7 @@ class SomeBeanProviderClass
         $ret->setSomeProperty('hello world');
         return $ret;
     }
-    
+
     /**
      * @Bean
      * @Value(value=${aProperty})
@@ -1058,7 +1080,7 @@ class UserService
      */
     public function initializeRepositories(array $repositories)
     {
-        $this->repositories = $repositories; 
+        $this->repositories = $repositories;
     }
 }
 </pre>
@@ -1081,7 +1103,7 @@ class UserService
      */
     public function setRepository(IUserRepository $repository)
     {
-        $this->repository = $repository; 
+        $this->repository = $repository;
     }
 }
 </pre>
@@ -1201,7 +1223,7 @@ metadata associated with it (and its subparts, like properties, annotations, etc
 
 <H4>Handling errors</H4>
 <p>
-The container does a set_error_handler() when it bootstraps. Whenever the phpvm calls this handler with 
+The container does a set_error_handler() when it bootstraps. Whenever the phpvm calls this handler with
 an error (or warning, or notice, or whatever), ding will dispatch the event "dingError", so any bean(s)
 listening for this event will receive it as an <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/Helpers/ErrorHandler/ErrorInfo.php">ErrorInfo</a>.
 </p>
@@ -1256,7 +1278,7 @@ ILifecycleListener and listens on one or more of the container lifecycle events:
 These classes usually reside in the namespace Ding\Bean\Factory\Driver.
 </p>
 <ul>
-  <li><u>AfterConfig</u></li> 
+  <li><u>AfterConfig</u></li>
   <li><u>BeforeDefinition:</u></li>
   <li><u>AfterDefinition</u></li>
   <li><u>BeforeCreate</u></li>
@@ -1267,14 +1289,14 @@ These classes usually reside in the namespace Ding\Bean\Factory\Driver.
 <p>
 Each lifecycle event triggers a chain of the lifecyclers for that particular
 event, so the order is important.
-</p> 
+</p>
 <p>
-Just like an aware interface, whenever ding instantiates a bean of a class that implements any of: 
+Just like an aware interface, whenever ding instantiates a bean of a class that implements any of:
 the bean will be registered in the given lifecycle points. See docs/examples/lifecycle.
 This will allow you to extend the container functionality as much as you like.
 </p>
 <ul>
-  <li>Ding\Bean\Lifecycle\IAfterConfigListener</li> 
+  <li>Ding\Bean\Lifecycle\IAfterConfigListener</li>
   <li>Ding\Bean\Lifecycle\IBeforeDefinitionListener</li>
   <li>Ding\Bean\Lifecycle\IAfterDefinitionListener</li>
   <li>Ding\Bean\Lifecycle\IBeforeCreateListener</li>
@@ -1305,7 +1327,7 @@ registered by the container into the AspectManager, and will be called whenever 
 <H4>ReflectionFactory</H4>
 <p>
 The namespace Ding\Reflection contains ReflectionFactory. This factory is
-used throughout the container and its extension points. 
+used throughout the container and its extension points.
 </p>
 <a href="#" class="next-link"><strong>Back</strong></a>
 
@@ -1320,7 +1342,7 @@ Events are supported by the container itself. This means that you can register
 as many events and as many listeners per events as you need. This is useful so you can
 decouple your code a little more (i.e: updating some entity would trigger accounting
 events, that are listened to by some other beans that may be responsible to propagate
-this events to other systems). 
+this events to other systems).
 </p>
 <p>
 The container supports triggering and listening for events, via 2 methods:
@@ -1342,7 +1364,7 @@ And then you can trigger it (also programatically) with:
 $container->eventDispatch('someEvent', $entity);
 </pre>
 <p>
-The event is a string (as you can see), and also the handler is passed with a 
+The event is a string (as you can see), and also the handler is passed with a
 bean name (also a string). These handlers will only be instantiated when needed (i.e:
 the event has been triggered). The convention is that the container will look for a
 method name "onSomeEvent()" and call it with $entity.
@@ -1572,19 +1594,19 @@ The container implements this interface, so you can call
 </p>
 <pre name="code" class="php">
 echo $container->getMessage('products', 'message.example', array('anArgument'), 'en_US');
-</pre> 
+</pre>
 <p>
 Or:
 </p>
 <pre name="code" class="php">
 echo $container->getMessage('products', 'message.example', array('anArgument'));
-</pre> 
+</pre>
 <p>
 And the messages will be looked for in the products_default.properties file.
 </p>
 <H4>IMessageSourceAware</H4>
 <p>
-Each bean that implements the <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/MessageSource/IMessageSourceAware.php">IMessageSourceAware</a> interface, will be autoinjected with 
+Each bean that implements the <a href="https://github.com/marcelog/Ding/blob/master/src/mg/Ding/MessageSource/IMessageSourceAware.php">IMessageSourceAware</a> interface, will be autoinjected with
 the message source in use (the container).
 </p>
 <pre name="code" class="php">
@@ -1592,7 +1614,7 @@ interface IMessageSourceAware
 {
     public function setMessageSource(IMessageSource $messageSource);
 }
-</pre> 
+</pre>
 <a href="#" class="next-link"><strong>Back</strong></a>
 
                   <a name="aop" id="aop"></a>
@@ -2020,7 +2042,7 @@ $properties['ding']['cache']['bdef'] = array(
 The MVC implementation of Ding is in the namespace Ding\Mvc. The components are:
 </p>
 <ul>
-  <li><u>Actions</u>: Actions are strings, that uniquely identifies an action (usually triggered with a request) in 
+  <li><u>Actions</u>: Actions are strings, that uniquely identifies an action (usually triggered with a request) in
   your software. Actions can have arguments, which are nothing more than key/value
   pairs.</li>
   <li><u>Mapper</u>: The mapper knows and returns the controller that can handle the given Action name.</li>
@@ -2032,7 +2054,7 @@ The MVC implementation of Ding is in the namespace Ding\Mvc. The components are:
   <li><u>HttpViewRender</u>: The view is processed by php via include_once.</li>
   <li><u>ForwardModelAndView</u>: This is a special ModelAndView that has the meaning of calling again the
   dispatcher with a new given action and new or same arguments.</li>
-  <li><u>RedirectModelAndView</u>: This is a special ModelAndView that has the meaning of redirecting the request 
+  <li><u>RedirectModelAndView</u>: This is a special ModelAndView that has the meaning of redirecting the request
   to somewhere else (i.e: http 302 header).</li>
   <li><u>ViewResolver</u>: The ViewResolver knows how to get a ViewResolver based on the given View name from the ModelAndView object.</li>
   <li><u>View</u>: Views are in charge of rendering the ModelAndView in a proper way for the actor that triggered the request.</li>
@@ -2142,7 +2164,7 @@ syslog properties "ident", "options", and "facility".
                   <div class="hr-1"><hr /></div>
                   <p>
 This helper is designed to be a bean of scope singleton that uses the
-<a href="https://marcelog.github.com/PAMI">PAMI framework</a> to let a listener of your 
+<a href="https://marcelog.github.com/PAMI">PAMI framework</a> to let a listener of your
 choice be called with any asterisk manager events.
  </p>
 <H4>Class</H4>
@@ -2221,7 +2243,7 @@ The helper itself has some useful method to control its behavior:
   <li>read(): Reads data from the server (usually used from the data() method above).</li>
   <li>write(): Sends data to the server.</li>
   <li>close(): Closes the connection.</li>
-  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper 
+  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper
   uses register_tick_function() to achieve this. If you dont want to declare(ticks=1), you need
   to call this method from your own main loop. It will select() the socket, check for data
   available, control timeouts, etc.</li>
@@ -2268,7 +2290,7 @@ The helper itself has some useful method to control its behavior:
 <ul>
   <li>open(): Opens the server socket.</li>
   <li>close(): Closes the server socket.</li>
-  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper 
+  <li>process(): This is supposed to be called automatically if you declare(ticks=1). The helper
   uses register_tick_function() to achieve this. If you dont want to declare(ticks=1), you need
   to call this method from your own main loop. It will select() the socket, check for data
   available, control timeouts, etc.</li>
@@ -2296,6 +2318,25 @@ To control a peer, you can call these methods on the TcpPeer:
             <div class="mod simple">
               <span class="top"><span class="tl"></span><span class="tr"></span></span>
               <div class="inner set-height-1">
+<p>
+If you liked this software (and feel generous), you can make a donation:
+</p>
+<p>
+<a href='https://pledgie.com/campaigns/30947'><img alt='Click here to lend your support to: General and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/30947.png?skin_name=chrome' border='0' ></a>
+</p>
+                <div class="google-ads">
+                    <script type="text/javascript">
+                    google_ad_client = "ca-pub-6947936742546167";
+                    /* 9 */
+                    google_ad_slot = "8617829895";
+                    google_ad_width = 250;
+                    google_ad_height = 250;
+                    //-->
+                    </script>
+                    <script type="text/javascript"
+                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                    </script>
+                </div>
                 <h2>Software</h2>
                 <div class="hr-1"><hr /></div>
                 <ul class="simple-list">
@@ -2315,19 +2356,7 @@ To control a peer, you can call these methods on the TcpPeer:
 ">
 <input type="image" src="https://www.paypalobjects.com/WEBSCR-640-20110306-1/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/WEBSCR-640-20110306-1/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>                <div class="google-ads">
-                                        <script type="text/javascript">
-                    google_ad_client = "ca-pub-6947936742546167";
-                    /* 9 */
-                    google_ad_slot = "8617829895";
-                    google_ad_width = 250;
-                    google_ad_height = 250;
-                    //-->
-                    </script>
-                    <script type="text/javascript"
-                    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-                    </script>
-                </div>
+</form>
               </div>
               <span class="bottom"><span class="bl"></span><span class="br"></span></span>
             </div>
