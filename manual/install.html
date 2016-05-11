@@ -59,7 +59,7 @@
             <div class="mod simple">
               <span class="top"><span class="tl"></span><span class="tr"></span></span>
               <div class="inner set-height-1">
-                <h2>Ding</h2>
+                <h2>Ding: Dependency Injection in your PHP Applications</h2>
 <a href="https://twitter.com/share" class="twitter-share-button" data-via="mgornstein" data-size="large" data-related="mgornstein">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
@@ -73,7 +73,8 @@
                 </ul>
                 <div id="tab-content" class="tab-content">
     <p>
-<B>Note:</B>: See <a href="http://marcelog.github.com/articles/ding_how_to_install_configure_tutorial_introduction.html">this</a> article for an indepth look of how to install.
+<B>Note:</B>: See <a href="http://marcelog.github.com/articles/ding_how_to_install_configure_tutorial_introduction.html">"<b>Installing and using the Ding DI Container
+</b>"</a> for an in depth look of how to install.
     </p>
     <h3>Requirements</h3>
     <p>
@@ -87,18 +88,7 @@
 <p>
 Just add the package "marcelog/ding":
 </p>
-<pre name="code" class="php">
-{
-    "require": {
-        "marcelog/ding": "dev-master"
-    },
-    "repositories": [
-    {
-      "type": "pear",
-      "url": "http://pear.apache.org/log4php/"
-    }]
-}
-</pre>
+<script src="https://gist.github.com/marcelog/7a313310199447149f2d829e3e92e130.js"></script>
 <p>
 Packagist URL: <a href="http://packagist.org/packages/marcelog/ding">http://packagist.org/packages/marcelog/ding</a>
 </p>
@@ -106,14 +96,7 @@ Packagist URL: <a href="http://packagist.org/packages/marcelog/ding">http://pack
     <p>
 You can now easily install Ding by issuing:
 </p>
-<pre name="code" class="php">
-pear channel-discover pear.marcelog.name
-pear install marcelog/Ding
-
-or
-
-pear install marcelog/Ding-1.6.1
-</pre>
+<script src="https://gist.github.com/marcelog/d3854d67a175e059551b7bd4785e156c.js"></script>
 <p>
 just replace 1.6.1 by the release version you'd like to install :) <br/>
 See: <a href="http://pear.marcelog.name/">http://pear.marcelog.name/</a><br/><br/>
