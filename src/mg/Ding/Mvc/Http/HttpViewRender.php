@@ -27,13 +27,12 @@
  */
 namespace Ding\Mvc\Http;
 
-use Ding\HttpSession\HttpSession;
-
 use Ding\MessageSource\IMessageSource;
 
 use Ding\MessageSource\IMessageSourceAware;
 use Ding\Mvc\IViewRender;
 use Ding\Mvc\View;
+use Ding\Container\Impl\ContainerImpl;
 
 /**
  * Http view render.
@@ -60,16 +59,18 @@ class HttpViewRender implements IViewRender, IMessageSourceAware
 
     public function translate($bundle, $message, $arguments = array())
     {
-        $session = HttpSession::getSession();
-        if (!$session->hasAttribute('LANGUAGE')) {
-            return $this->messageSource->getMessage(
-                $bundle, $message, $arguments
-            );
-        } else {
-            return $this->messageSource->getMessage(
-                $bundle, $message, $arguments, $session->getAttribute('LANGUAGE')
-            );
-        }
+        $container = ContainerImpl::getInstance();		
+        $session = $container->getBean('SessionHandler');			
+		
+		if (!$session->hasAttribute('LANGUAGE')) {
+			return $this->messageSource->getMessage(
+				$bundle, $message, $arguments
+			);
+		} else {
+			return $this->messageSource->getMessage(
+				$bundle, $message, $arguments, $session->getAttribute('LANGUAGE')
+			);
+		}		
     }
 
     /**

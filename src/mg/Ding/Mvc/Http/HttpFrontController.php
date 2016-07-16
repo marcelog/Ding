@@ -29,7 +29,6 @@
 namespace Ding\Mvc\Http;
 
 use Ding\Mvc\IViewRender;
-use Ding\HttpSession\HttpSession;
 use Ding\Mvc\IMapper;
 use Ding\Mvc\Exception\MvcException;
 use Ding\Mvc\ModelAndView;
@@ -116,7 +115,6 @@ class HttpFrontController
     {
         $exceptionThrown = null;
         $filtersPassed = true;
-        $session = HttpSession::getSession();
         $container = ContainerImpl::getInstance($properties);
         self::$_logger = \Logger::getLogger(__CLASS__);
         $baseUrlLen = strlen($baseUrl);
@@ -129,6 +127,8 @@ class HttpFrontController
             $viewResolver = $container->getBean('HttpViewResolver');
             $exceptionMapper = $container->getBean('HttpExceptionMapper');
             $render = $container->getBean('HttpViewRender');
+            $session = $container->getBean('SessionHandler');
+            	
             $method = strtolower($_SERVER['REQUEST_METHOD']);
             $url = $_SERVER['REQUEST_URI'];
             $urlStart = strpos($url, $baseUrl);
